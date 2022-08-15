@@ -7,10 +7,9 @@
     tools:context=".LoginActivity">
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/editTextPassword"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginTop="48dp"
         android:layout_marginBottom="24dp"
         android:ems="10"
         android:hint="Enter password"
@@ -18,8 +17,7 @@
         android:textColor="@android:color/darker_gray"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button"
@@ -50,16 +48,16 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/editTextUsername"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="Enter password"
+        android:hint="Enter username"
         android:inputType="textPersonName"
         android:textColor="@android:color/darker_gray"
         android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -70,7 +68,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
+        app:layout_constraintBottom_toTopOf="@+id/editTextUsername"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/cardView2">
