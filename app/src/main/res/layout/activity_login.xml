@@ -15,12 +15,12 @@
         android:hint="Enter password"
         android:inputType="textPassword"
         android:textColor="@android:color/darker_gray"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/LoginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/LoginButton"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="128dp"
@@ -29,12 +29,12 @@
         android:backgroundTint="@color/TG_blue"
         android:text="Login"
         app:cornerRadius="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/RegisterButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/RegisterButton"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="128dp"
