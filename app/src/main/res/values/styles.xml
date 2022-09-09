@@ -4,4 +4,7 @@
         <item name="android:background">@color/black_overlay</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
     </style>
+    <style name="poppinsfontstyle" parent="@android:style/TextAppearance.Small">
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
 </resources>
