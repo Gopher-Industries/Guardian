@@ -96,6 +96,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:srcCompat="@drawable/Shapes" />
+        app:srcCompat="@drawable/shapes1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

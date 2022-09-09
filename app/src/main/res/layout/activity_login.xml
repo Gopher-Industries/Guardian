@@ -21,28 +21,32 @@
 
     <Button
         android:id="@+id/LoginButton"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
         android:layout_marginStart="128dp"
         android:layout_marginEnd="128dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/TG_blue"
+        android:fontFamily="@font/poppins_bold"
         android:text="Login"
-        app:cornerRadius="0dp"
+        android:textAllCaps="false"
+        app:cornerRadius="24dp"
         app:layout_constraintBottom_toTopOf="@+id/RegisterButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/RegisterButton"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
         android:layout_marginStart="128dp"
         android:layout_marginEnd="128dp"
         android:layout_marginBottom="64dp"
         android:backgroundTint="@color/TG_blue"
+        android:fontFamily="@font/poppins_bold"
         android:text="Register"
-        app:cornerRadius="0dp"
+        android:textAllCaps="false"
+        app:cornerRadius="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
