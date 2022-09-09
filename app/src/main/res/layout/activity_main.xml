@@ -44,19 +44,19 @@
         android:id="@+id/ageCareSplash"
         android:layout_width="123dp"
         android:layout_height="125dp"
+        android:contentDescription="agecare"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.392"
-        app:srcCompat="@drawable/agedcare_icon" />
+        app:srcCompat="@drawable/fbc_agedcare_icon_" />
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/headerCard"
         android:layout_width="400dp"
         android:layout_height="200dp"
-        android:scaletype="fitXY"
         android:translationY="-30dp"
         android:translationZ="-1dp"
         app:cardBackgroundColor="@color/TG_blue"
@@ -72,6 +72,7 @@
         android:id="@+id/imageViewLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="logo"
         android:translationZ="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,13 +103,15 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="shapes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/Shapes" />
+        app:srcCompat="@drawable/shapes"
+        tools:ignore="ImageContrastCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
