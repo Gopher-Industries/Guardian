@@ -6,13 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
-    <ImageView
-        android:id="@+id/imageView8"
+    <ImageButton
+        android:id="@+id/NewPatientButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/dataentry"
-        tools:layout_editor_absoluteX="68dp"
-        tools:layout_editor_absoluteY="236dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:srcCompat="@drawable/dataentry" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
