@@ -8,4 +8,7 @@
         <item name="android:windowFullscreen">true</item>
         <item name="textAppearanceButton">@color/white</item>
     </style>
+    <style name="poppinsfontstyle" parent="@android:style/TextAppearance.Small">
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
 </resources>
