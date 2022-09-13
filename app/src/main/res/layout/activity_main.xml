@@ -17,6 +17,7 @@
         android:fontFamily="@font/poppins_bold"
         android:text="Get started"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:cornerRadius="24dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"
