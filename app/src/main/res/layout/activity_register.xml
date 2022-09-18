@@ -44,31 +44,35 @@
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/createAccountButton"
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/TG_blue"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Create Account"
-            app:cornerRadius="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/backToLoginButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:id="@+id/createAccountButton"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/TG_blue"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Create Account"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:cornerRadius="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/backToLoginButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/backToLoginButton"
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="-50dp"
-            android:backgroundTint="@color/TG_blue"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Back to Login"
-            app:cornerRadius="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:id="@+id/backToLoginButton"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="-50dp"
+        android:backgroundTint="@color/TG_blue"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Back to Login"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:cornerRadius="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"

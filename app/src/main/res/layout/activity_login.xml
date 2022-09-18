@@ -8,16 +8,21 @@
 
     <EditText
         android:id="@+id/editTextPassword"
-        android:layout_width="wrap_content"
+        style="@style/Widget.AppCompat.EditText"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="24dp"
+        android:background="@drawable/edit_text_border"
         android:ems="10"
         android:hint="Enter password"
         android:inputType="textPassword"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintBottom_toTopOf="@+id/LoginButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="0.972" />
 
     <Button
         android:id="@+id/LoginButton"
@@ -30,6 +35,7 @@
         android:fontFamily="@font/poppins_bold"
         android:text="Login"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         app:cornerRadius="24dp"
         app:layout_constraintBottom_toTopOf="@+id/RegisterButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +52,7 @@
         android:fontFamily="@font/poppins_bold"
         android:text="Register"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         app:cornerRadius="24dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,9 +60,10 @@
 
     <EditText
         android:id="@+id/editTextUsername"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/edit_text_border"
         android:ems="10"
         android:hint="Enter username"
         android:inputType="textPersonName"

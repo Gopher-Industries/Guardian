@@ -1,7 +1,14 @@
 <resources>
 
-    <style name="Widget.Theme.TeamGuardians.ButtonBar.Fullscreen" parent="">
+    <style name="Widget.Theme.TeamGuardians.ButtonBar.Fullscreen" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@color/black_overlay</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="textAppearanceButton">@color/white</item>
+    </style>
+    <style name="poppinsfontstyle" parent="@android:style/TextAppearance.Small">
+        <item name="android:fontFamily">@font/poppins</item>
     </style>
 </resources>
