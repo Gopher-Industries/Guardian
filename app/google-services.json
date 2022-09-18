@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "82295290581",
+    "firebase_url": "https://testtg-b99cd-default-rtdb.firebaseio.com",
+    "project_id": "testtg-b99cd",
+    "storage_bucket": "testtg-b99cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82295290581:android:757e86b71783113c37405c",
+        "android_client_info": {
+          "package_name": "com.example.tg_patient_profile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "82295290581-6noglbikcbcdepktlhh8evlb445ev29c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpfOlpsT9zfGyOZf68RTgtMiQsn6GHT6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "82295290581-6noglbikcbcdepktlhh8evlb445ev29c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
