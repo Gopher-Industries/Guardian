@@ -4,71 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
-
-        <EditText
-            android:id="@+id/registerEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:ems="10"
-            android:hint="Enter email address"
-            android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/registerPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/registerPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:ems="10"
-            android:hint="Enter password"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/registerConfirm"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/registerConfirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:ems="10"
-            android:hint="Confirm password"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/createAccountButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent" />
+    tools:context=".MainActivity">
 
         <Button
-            android:id="@+id/createAccountButton"
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/TG_blue"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Create Account"
-            app:cornerRadius="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/backToLoginButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/backToLoginButton"
-            android:layout_width="200dp"
-            android:layout_height="60dp"
+            android:id="@+id/getStartedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="-50dp"
+            android:width="200dp"
+            android:height="60dp"
             android:backgroundTint="@color/TG_blue"
             android:fontFamily="@font/poppins_bold"
-            android:text="Back to Login"
+            android:text="Get started"
+            android:textAllCaps="false"
+            android:textStyle="bold"
             app:cornerRadius="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView6"
+            app:layout_constraintBottom_toTopOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/patientProfileButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-110dp"
+        android:width="200dp"
+        android:height="60dp"
+        android:backgroundTint="@color/TG_blue"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Patient Profile List"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:cornerRadius="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="45dp"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc vel. Cursus euismod quis viverra nibh cras pulvinar mattis nunc sed."
+            app:layout_constraintBottom_toTopOf="@+id/getStartedButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -91,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Account Creation"
+                    android:text="Welcome to Patient checker"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +97,19 @@
         </androidx.cardview.widget.CardView>
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/imageView2"
+            android:layout_width="123dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintVertical_bias="0.496"
+            app:srcCompat="@drawable/fbc_agedcare_icon_" />
+
+        <ImageView
+            android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
