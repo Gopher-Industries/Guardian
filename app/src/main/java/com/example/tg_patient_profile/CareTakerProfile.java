@@ -1,8 +1,8 @@
-package com.example.teamguardians;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.tg_patient_profile;
 
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class CareTakerProfile extends AppCompatActivity {
 

@@ -13,14 +13,16 @@
         android:label=""
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TG_Patient_Profile"
+        android:theme="@style/Theme.TeamGuardians"
         tools:targetApi="31">
         <activity
             android:name=".PatientProfileList"
-            android:name=".CareTakerProfile"
             android:exported="false" />
         <activity
             android:name=".NewPatientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CareTakerProfile"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
@@ -30,9 +32,6 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HomeActivity"
             android:exported="false" />
         <activity
             android:name=".AddActivity"
