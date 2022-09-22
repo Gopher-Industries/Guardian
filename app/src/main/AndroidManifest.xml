@@ -46,6 +46,18 @@
             </intent-filter>
         </activity>
 
+        <!-- These are here only for UI testing -->
+        <activity
+            android:name=".Careplan1"
+            android:exported="true" />
+        <activity
+            android:name=".Careplan2"
+            android:exported="true" />
+        <activity
+            android:name=".Careplan3"
+            android:exported="true" />
+
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
