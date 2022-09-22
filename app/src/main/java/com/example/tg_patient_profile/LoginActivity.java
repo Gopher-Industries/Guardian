@@ -1,16 +1,11 @@
-package com.example.teamguardians;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.app.Application;
-import com.google.android.material.color.DynamicColors;
+package com.example.tg_patient_profile;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
