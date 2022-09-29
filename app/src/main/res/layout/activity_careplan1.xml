@@ -56,7 +56,7 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="16dp"
         android:text="Care Plan"
         android:textColor="@color/black"
         android:textSize="18dp"
@@ -255,7 +255,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/careplan1NextButton"
+        android:id="@+id/careplanNextButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
