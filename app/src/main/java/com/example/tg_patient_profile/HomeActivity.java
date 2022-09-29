@@ -19,6 +19,8 @@ public class HomeActivity extends AppCompatActivity {
         Button careplan2 = findViewById(R.id.careplan2);
         Button careplan3 = findViewById(R.id.careplan3);
         ImageButton newPatientButton = findViewById(R.id.NewPatientButton);
+        Button button6 = findViewById(R.id.button6);
+        Button button7 = findViewById(R.id.button7);
 
         careplan1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +48,20 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent newPatientIntent = new Intent(HomeActivity.this, NewPatientActivity.class);
                 startActivity(newPatientIntent);
+            }
+        });
+        button6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent dataforviewIntent = new Intent(HomeActivity.this, DataforviewActivity.class);
+                startActivity(dataforviewIntent);
+            }
+        });
+        button7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent dataforview2Intent = new Intent(HomeActivity.this, Dataforview2Activity.class);
+                startActivity(dataforview2Intent);
             }
         });
     }

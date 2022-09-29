@@ -21,7 +21,7 @@ public class Careplan3 extends AppCompatActivity {
         careplan3NextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Careplan3.this, "Next screen", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Careplan3.this, "Next screen not implemented yet", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -21,12 +21,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="220dp"
         android:layout_marginTop="-40dp"
-        android:layout_marginBottom="170dp"
         app:cardBackgroundColor="@color/TG_blue"
         app:cardCornerRadius="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/careplan3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -66,8 +64,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
-        android:layout_marginTop="16dp"
         android:text="test for viewing careplan1"
+        app:layout_constraintBottom_toTopOf="@+id/careplan2"
         app:layout_constraintStart_toEndOf="@+id/NewPatientButton"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
@@ -76,8 +74,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="20dp"
         android:text="test for viewing careplan2"
+        app:layout_constraintBottom_toTopOf="@+id/careplan3"
+        app:layout_constraintEnd_toEndOf="@+id/careplan1"
         app:layout_constraintStart_toEndOf="@+id/NewPatientButton"
         app:layout_constraintTop_toBottomOf="@+id/careplan1" />
 
@@ -85,12 +84,28 @@
         android:id="@+id/careplan3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginBottom="332dp"
         android:text="test for viewing careplan3"
+        app:layout_constraintBottom_toTopOf="@+id/button6"
+        app:layout_constraintEnd_toEndOf="@+id/careplan2"
+        app:layout_constraintTop_toBottomOf="@+id/careplan2" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test button for viewing dataforview"
+        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintEnd_toEndOf="@+id/careplan3"
+        app:layout_constraintTop_toBottomOf="@+id/careplan3" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test button for viewing dataforview2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/careplan2"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintEnd_toEndOf="@+id/button6"
+        app:layout_constraintTop_toBottomOf="@+id/button6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
