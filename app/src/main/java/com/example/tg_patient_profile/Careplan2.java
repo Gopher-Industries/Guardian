@@ -14,8 +14,8 @@ public class Careplan2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_careplan2);
 
-        Button careplan2PreviousButton = findViewById(R.id.careplan2PreviousButton);
-        Button careplan2NextButton = findViewById(R.id.careplan2NextButton);
+        Button careplan2PreviousButton = findViewById(R.id.careplanPreviousButton);
+        Button careplan2NextButton = findViewById(R.id.careplanNextButton);
 
         careplan2PreviousButton.setOnClickListener(new View.OnClickListener() {
             @Override

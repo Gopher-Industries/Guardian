@@ -255,7 +255,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/careplan2NextButton"
+        android:id="@+id/careplanNextButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

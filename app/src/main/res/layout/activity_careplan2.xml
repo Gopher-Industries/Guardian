@@ -202,12 +202,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NA"
-        app:layout_constraintBottom_toTopOf="@+id/careplan2PreviousButton"
+        app:layout_constraintBottom_toTopOf="@+id/careplanPreviousButton"
         app:layout_constraintStart_toStartOf="@+id/checkBox4"
         app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
 
     <Button
-        android:id="@+id/careplan2PreviousButton"
+        android:id="@+id/careplanPreviousButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -217,12 +217,12 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/careplan2NextButton"
+        app:layout_constraintEnd_toStartOf="@+id/careplanNextButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/careplan2NextButton"
+        android:id="@+id/careplanNextButton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -234,6 +234,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/careplan2PreviousButton" />
+        app:layout_constraintStart_toEndOf="@+id/careplanPreviousButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
