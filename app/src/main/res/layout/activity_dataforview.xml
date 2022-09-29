@@ -66,11 +66,12 @@
     </androidx.cardview.widget.CardView>
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="519dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="132dp">
+        app:layout_constraintTop_toBottomOf="@+id/headerCard">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,7 +80,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/textView16"
@@ -97,366 +98,239 @@
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
                 <TextView
                     android:id="@+id/textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-black"
                     android:text="Age-cared planning region name"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName13"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName13" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName12"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName13"
+                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
                 <TextView
                     android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-black"
                     android:text="Activities of daily living"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName12"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName12" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName11"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName12"
+                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
                 <TextView
                     android:id="@+id/textView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-black"
                     android:text="Admission type"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName11"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName11" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName10"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName11"
+                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-black"
                     android:text="Age group"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/textView13"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName10" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName9"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName10"
+                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-black"
                     android:text="BEH"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/textView12"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName9" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName8"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName9"
+                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-black"
                     android:text="Care type"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/textView11"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName8" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName7"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName8"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-black"
                     android:text="Complex health care score"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/textView10"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName6"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName7"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-black"
                     android:text="Country of birth"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName6"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName5"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName6"
+                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-black"
                     android:text="Reason for departure"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/textView8"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName5"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-black"
                     android:text="Reason for discharge"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/textView2"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName2"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-black"
                     android:text="First admission"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/textView5"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName3"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
                 <TextView
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
                     android:fontFamily="sans-serif-black"
                     android:text="Homecare level"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/textView6"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 
                 <EditText
                     android:id="@+id/editTextTextPersonName4"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="10dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
+                    app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
                 <Button
                     android:id="@+id/button2"
@@ -466,11 +340,10 @@
                     android:text="Next"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textFontWeight="1100"
                     app:cornerRadius="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -482,7 +355,8 @@
         android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
 
         <Button
             android:id="@+id/button"
@@ -494,7 +368,8 @@
             android:text="General practitioner"
             android:textColor="@android:color/darker_gray"
             android:textSize="10sp"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:layout_width="130dp"
@@ -506,7 +381,8 @@
             android:textColor="@android:color/darker_gray"
             android:textSize="10sp"
             app:layout_constraintEnd_toStartOf="@+id/button5"
-            app:layout_constraintStart_toEndOf="@+id/button" />
+            app:layout_constraintStart_toEndOf="@+id/button"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/button5"
@@ -517,7 +393,8 @@
             android:text="Health and welfare det."
             android:textColor="@color/TG_blue"
             android:textSize="10sp"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

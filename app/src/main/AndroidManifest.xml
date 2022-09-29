@@ -49,13 +49,19 @@
         <!-- These are here only for UI testing -->
         <activity
             android:name=".Careplan1"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Careplan2"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Careplan3"
-            android:exported="true" />
+            android:exported="false" />
+        <activity
+            android:name=".DataforviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Dataforview2Activity"
+            android:exported="false" />
 
 
         <meta-data
