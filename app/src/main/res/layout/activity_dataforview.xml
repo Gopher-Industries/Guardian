@@ -69,6 +69,11 @@
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="519dp"
+        android:fadeScrollbars="false"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarFadeDuration="50000"
+        android:scrollbarSize="8dp"
+        android:scrollbarThumbVertical="@color/TG_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerCard">
