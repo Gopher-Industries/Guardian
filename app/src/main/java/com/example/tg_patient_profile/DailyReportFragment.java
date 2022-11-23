@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 /**
@@ -20,13 +22,17 @@ import android.widget.TextView;
  * Use the {@link DailyReportFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DailyReportFragment extends Fragment {
+public class DailyReportFragment extends Fragment{
 
     private TextView progressTextCountTV;
     private EditText progressEditText;
     private ImageView expandArrowImageView;
+    private ScrollView dailyReportScrollView;
     IArrowClick arrowClick;
     Boolean expanded = false;
+    private int scrolledDistance = 0;
+    DailyReportScrollVariable scrolled;
+    int var = 0;
 
     public ImageView getExpandArrowImageView() {
         return expandArrowImageView;
@@ -82,6 +88,7 @@ public class DailyReportFragment extends Fragment {
         progressEditText.addTextChangedListener(mTextEditorWatcher);
         progressTextCountTV = (TextView) view.findViewById(R.id.progressTextCount);
         expandArrowImageView = (ImageView) view.findViewById(R.id.dailyReportArrow);
+        dailyReportScrollView = (ScrollView) view.findViewById(R.id.dailyReportScrollView);
 
         expandArrowImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,15 +98,30 @@ public class DailyReportFragment extends Fragment {
                 expanded = !expanded;
 
                 if (expanded) {
-                    expandArrowImageView.setImageResource(R.drawable.arrow_up);
-                } else {
                     expandArrowImageView.setImageResource(R.drawable.arrow_down);
+                } else {
+                    expandArrowImageView.setImageResource(R.drawable.arrow_up);
+                }
+            }
+        });
+
+        dailyReportScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                if (dailyReportScrollView.getScrollY() != 0) {
+                    if (DailyReportScrollVariable.getInstance().getScroll() && dailyReportScrollView.getScrollY() <= 10) {
+                        DailyReportScrollVariable.getInstance().setScroll(false);
+
+                    } else if (!DailyReportScrollVariable.getInstance().getScroll() && dailyReportScrollView.getScrollY() > 10) {
+                        var = 100;
+                        DailyReportScrollVariable.getInstance().setScroll(true);
+                    }
                 }
             }
         });
     }
 
-    public void setInterface(IArrowClick arrowClick) {
+    public void setClickInterface(IArrowClick arrowClick) {
         this.arrowClick = arrowClick;
     }
 }

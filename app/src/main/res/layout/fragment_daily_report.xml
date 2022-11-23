@@ -2,87 +2,181 @@
 
 
     <!-- TODO: Update blank fragment layout -->
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:background="@drawable/rounded_bg"
-        android:fillViewport="true"
-        tools:context=".DailyReportFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dailyReportScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_bg"
+    android:fillViewport="true"
+    tools:context=".DailyReportFragment">
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/dailyReportArrow"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:onClick="dailyReportExpand"
+            android:src="@drawable/arrow_down" />
+
+        <TextView
+            android:id="@+id/textView19"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginLeft="20sp"
+            android:text="ID"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/dailyReportArrow"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:onClick="dailyReportExpand"
-                android:src="@drawable/arrow_down" />
+        <EditText
+            android:id="@+id/emailTextarea"
+            android:layout_width="359dp"
+            android:layout_height="44dp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="5sp"
+            android:background="@drawable/rectangle"
+            android:inputType="text|textMultiLine"
+            android:maxLength="500"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20sp"
-                android:text="ID"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="10sp"
+            android:text="Progress Notes"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/emailTextarea"
-                android:layout_width="359dp"
-                android:layout_height="44dp"
-                android:layout_marginLeft="20sp"
-                android:layout_marginTop="5sp"
-                android:background="@drawable/rectangle"
-                android:inputType="text|textMultiLine"
-                android:maxLength="500"
-                android:textSize="14sp" />
+        <EditText
+            android:id="@+id/progressNotesTextarea"
+            android:layout_width="357dp"
+            android:layout_height="163dp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="5sp"
+            android:background="@drawable/rectangle"
+            android:inputType="text|textMultiLine"
+            android:maxLength="500"
+            android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20sp"
-                android:layout_marginTop="10sp"
-                android:text="Progress Notes"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="20sp"
+            android:text="Current Status"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/progressNotesTextarea"
-                android:layout_width="357dp"
-                android:layout_height="163dp"
-                android:layout_marginLeft="20sp"
-                android:layout_marginTop="5sp"
-                android:background="@drawable/rectangle"
-                android:inputType="text|textMultiLine"
-                android:maxLength="500"
-                android:textSize="14sp" />
+        <TextView
+            android:id="@+id/progressTextCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30sp"
+            android:text="0/500"
+            android:textAlignment="viewEnd" />
 
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20sp"
-                android:layout_marginTop="20sp"
-                android:text="Current Status"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
 
-            <TextView
-                android:id="@+id/progressTextCount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30sp"
-                android:text="0/500"
-                android:textAlignment="viewEnd" />
+        <Button
+            android:id="@+id/button17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
 
-        </LinearLayout>
-    </ScrollView>
+        <Button
+            android:id="@+id/button21"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
 
-<!--</FrameLayout>-->
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/button14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+    </LinearLayout>
+</ScrollView>
