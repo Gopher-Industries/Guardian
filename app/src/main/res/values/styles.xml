@@ -11,4 +11,11 @@
     <style name="poppinsfontstyle" parent="@android:style/TextAppearance.Small">
         <item name="android:fontFamily">@font/poppins</item>
     </style>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
 </resources>
