@@ -6,17 +6,107 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+
     <ImageButton
         android:id="@+id/NewPatientButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="76dp"
         android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
         app:srcCompat="@drawable/dataentry" />
 
+    <ImageButton
+        android:id="@+id/DailyReportButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/EditPatientDataButton"
+        app:layout_constraintStart_toEndOf="@+id/NewPatientButton"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:srcCompat="@drawable/daily_report" />
+
+    <ImageButton
+        android:id="@+id/EditPatientDataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:srcCompat="@drawable/edit_patient_data" />
+
+    <ImageButton
+        android:id="@+id/PatientListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NewPatientButton"
+        app:srcCompat="@drawable/patient_list" />
+
+    <ImageButton
+        android:id="@+id/ViewActivityDataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/AssociateRadarButton"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toEndOf="@+id/PatientListButton"
+        app:layout_constraintTop_toBottomOf="@+id/DailyReportButton"
+        app:srcCompat="@drawable/view_activity_data" />
+
+    <ImageButton
+        android:id="@+id/NewUserButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PatientListButton"
+        app:srcCompat="@drawable/new_user" />
+
+    <ImageButton
+        android:id="@+id/SettingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/SignOutButton"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toEndOf="@+id/NewUserButton"
+        app:layout_constraintTop_toBottomOf="@+id/ViewActivityDataButton"
+        app:srcCompat="@drawable/settings" />
+
+    <ImageButton
+        android:id="@+id/SignOutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AssociateRadarButton"
+        app:srcCompat="@drawable/sign_out" />
+
+    <ImageButton
+        android:id="@+id/AssociateRadarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="24dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EditPatientDataButton"
+        app:srcCompat="@drawable/associate_radar" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -39,8 +129,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Welcome ***user***"
+                android:text="Welcome ***usert***"
                 android:textColor="@color/white"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,62 +141,15 @@
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="54dp"
                 app:layout_constraintBottom_toTopOf="@+id/textView3"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/profile_avatar_women" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
-    <Button
-        android:id="@+id/careplan1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="41dp"
-        android:text="test for viewing careplan1"
-        app:layout_constraintBottom_toTopOf="@+id/careplan2"
-        app:layout_constraintStart_toEndOf="@+id/NewPatientButton"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
-
-    <Button
-        android:id="@+id/careplan2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:text="test for viewing careplan2"
-        app:layout_constraintBottom_toTopOf="@+id/careplan3"
-        app:layout_constraintEnd_toEndOf="@+id/careplan1"
-        app:layout_constraintStart_toEndOf="@+id/NewPatientButton"
-        app:layout_constraintTop_toBottomOf="@+id/careplan1" />
-
-    <Button
-        android:id="@+id/careplan3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test for viewing careplan3"
-        app:layout_constraintBottom_toTopOf="@+id/button6"
-        app:layout_constraintEnd_toEndOf="@+id/careplan2"
-        app:layout_constraintTop_toBottomOf="@+id/careplan2" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test button for viewing dataforview"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
-        app:layout_constraintEnd_toEndOf="@+id/careplan3"
-        app:layout_constraintTop_toBottomOf="@+id/careplan3" />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test button for viewing dataforview2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/button6"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

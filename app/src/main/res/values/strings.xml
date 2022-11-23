@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">TG_Patient_Profile</string>
+    <string name="ek_img_content">ExportKit Image</string>
+    <string name="welcome__marilyn___string">Welcome, Marilyn !</string>
+    <string name="new_patient_string">New Patient</string>
+    <string name="patient_list_ek1_string">Patient List</string>
+    <string name="daily_report_ek1_string">Daily Report</string>
+    <string name="edit_patient_data_string">Edit Patient Data</string>
+    <string name="view_activity_data_string">View Activity Data</string>
+    <string name="associate_radar_string">Associate Radar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

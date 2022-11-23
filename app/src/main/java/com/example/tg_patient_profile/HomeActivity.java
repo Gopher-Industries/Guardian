@@ -10,58 +10,88 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
+    ImageButton newPatientButton, dailyReportButton, editPatientDataButton,
+            patientListButton, viewActivityDataButton, associateRadarButton,
+    newUserButton, settingsButton, signOutButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Button careplan1 = findViewById(R.id.careplan1);
-        Button careplan2 = findViewById(R.id.careplan2);
-        Button careplan3 = findViewById(R.id.careplan3);
-        ImageButton newPatientButton = findViewById(R.id.NewPatientButton);
-        Button button6 = findViewById(R.id.button6);
-        Button button7 = findViewById(R.id.button7);
+        newPatientButton = (ImageButton) findViewById(R.id.NewPatientButton);
+        dailyReportButton = (ImageButton) findViewById(R.id.DailyReportButton);
+        editPatientDataButton = (ImageButton) findViewById(R.id.EditPatientDataButton);
+        patientListButton = (ImageButton) findViewById(R.id.PatientListButton);
+        viewActivityDataButton = (ImageButton) findViewById(R.id.ViewActivityDataButton);
+        associateRadarButton = (ImageButton) findViewById(R.id.AssociateRadarButton);
+        newUserButton = (ImageButton) findViewById(R.id.NewUserButton);
+        settingsButton = (ImageButton) findViewById(R.id.SettingsButton);
+        signOutButton = (ImageButton) findViewById(R.id.SignOutButton);
 
-        careplan1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent careplan1intent = new Intent(HomeActivity.this, Careplan1.class);
-                startActivity(careplan1intent);
-            }
-        });
-        careplan2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent careplan1intent = new Intent(HomeActivity.this, Careplan2.class);
-                startActivity(careplan1intent);
-            }
-        });
-        careplan3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent careplan1intent = new Intent(HomeActivity.this, Careplan3.class);
-                startActivity(careplan1intent);
-            }
-        });
         newPatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 Intent newPatientIntent = new Intent(HomeActivity.this, NewPatientActivity.class);
                 startActivity(newPatientIntent);
             }
         });
-        button6.setOnClickListener(new View.OnClickListener() {
+
+        dailyReportButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent dataforviewIntent = new Intent(HomeActivity.this, DataforviewActivity.class);
-                startActivity(dataforviewIntent);
+            public void onClick(View v) {
+                Intent dailyReportIntent = new Intent(HomeActivity.this, DailyReportActivity.class);
+                startActivity(dailyReportIntent);
             }
         });
-        button7.setOnClickListener(new View.OnClickListener() {
+
+        editPatientDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent dataforview2Intent = new Intent(HomeActivity.this, Dataforview2Activity.class);
-                startActivity(dataforview2Intent);
+            public void onClick(View v) {
+
+            }
+        });
+
+        patientListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent patientProfileList = new Intent(HomeActivity.this, PatientProfileList.class);
+                startActivity(patientProfileList);
+            }
+        });
+
+        viewActivityDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        associateRadarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        newUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        signOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
