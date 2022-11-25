@@ -67,6 +67,9 @@
         <activity
             android:name=".Dataforview2Activity"
             android:exported="false" />
+        <activity
+            android:name=".TestActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

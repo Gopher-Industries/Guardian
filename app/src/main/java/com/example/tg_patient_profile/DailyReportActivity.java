@@ -72,13 +72,19 @@ public class DailyReportActivity extends AppCompatActivity implements IArrowClic
         fragmentContainerView.setLayoutParams(params);
     }
 
+    public void fullExpandView() {
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) fragmentContainerView.getLayoutParams();
+        params.setMargins(0, -600, 0, 0);
+        fragmentContainerView.setLayoutParams(params);;
+    }
+
     @Override
     public void arrowClicked(View v) {
 
         if (fragment.expanded) {
             unExpandView();
         }
-        else {
+         else {
             expandView();
         }
     }
