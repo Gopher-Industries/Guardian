@@ -1,5 +1,9 @@
 package com.example.tg_patient_profile;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,31 +31,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DailyReportFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class DailyReportFragment extends Fragment implements ItemClickListener{
+public class DailyReportFragment extends Fragment{
+
+    private Set<String> chosenPatientStatus = new HashSet<>();
+    private String progressNotes;
+    public String dailyReportDate;
+
 
     private TextView progressTextCountTV;
     private EditText progressEditText;
     private ImageView expandArrowImageView;
     private ScrollView dailyReportScrollView;
-    private RecyclerView patientStatusRecyclerView;
-    ArrayList<PatientStatusChoice> patientStatusChoiceList = new ArrayList<>();
+    private Button submitButton;
     IArrowClick arrowClick;
     Boolean expanded = false;
-//    Boolean expandedTwice = false;
-    private int scrolledDistance = 0;
-    DailyReportScrollVariable scrolled;
-    int var = 0;
 
-    public ImageView getExpandArrowImageView() {
-        return expandArrowImageView;
-    }
 
     private final TextWatcher mTextEditorWatcher = new TextWatcher() {
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -67,43 +66,17 @@ public class DailyReportFragment extends Fragment implements ItemClickListener{
     };
 
     public DailyReportFragment() {
-        // Required empty public constructor
-    }
-
-    public static DailyReportFragment newInstance(String param1, String param2) {
-        DailyReportFragment fragment = new DailyReportFragment();
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        PatientStatusChoice one = new PatientStatusChoice(R.drawable.hospital_patient_status, "test1");
-        PatientStatusChoice two = new PatientStatusChoice(R.drawable.urgent_patient_status, "test2");
-
-        patientStatusChoiceList.add(one); patientStatusChoiceList.add(two);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_daily_report, container, false);
-
-//        patientStatusRecyclerView = (RecyclerView) view.findViewById(R.id.patientStatusRecyclerView);
-//
-//        PatientStatusRecyclerViewAdapter recyclerViewAdapter = new PatientStatusRecyclerViewAdapter(patientStatusChoiceList, getActivity());
-//        //create and set a new adapter to link recycler view to the associated data
-//        patientStatusRecyclerView.setAdapter(recyclerViewAdapter);
-//
-//        // set on click listeners for the adapter
-//        // listener for item view
-////        recyclerViewAdapter.setClickListener(this);
-//
-//        //create and set a layout manager to manage the layout of the view
-//        patientStatusRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-
         return view;
     }
 
@@ -114,9 +87,8 @@ public class DailyReportFragment extends Fragment implements ItemClickListener{
         progressTextCountTV = (TextView) view.findViewById(R.id.progressTextCount);
         expandArrowImageView = (ImageView) view.findViewById(R.id.dailyReportArrow);
         dailyReportScrollView = (ScrollView) view.findViewById(R.id.dailyReportScrollView);
+        submitButton = (Button) view.findViewById(R.id.submitButton);
         LinearLayout layout = view.findViewById(R.id.patientStatusLayout);
-
-        layout.removeAllViews();
 
         int choicesNum = getResources().getStringArray(R.array.PatientStatusText).length;
 
@@ -145,10 +117,15 @@ public class DailyReportFragment extends Fragment implements ItemClickListener{
                     if (clicked) {
                         statusView.setBackground(getActivity().getResources().getDrawable(R.drawable.blue_rectangle));
                         statusTextView.setTextColor(getActivity().getResources().getColor(R.color.white));
+
+                        chosenPatientStatus.add(statusTextView.getText().toString());
                     } else {
                         statusView.setBackground(getActivity().getResources().getDrawable(R.drawable.white_rectangle));
                         statusTextView.setTextColor(getActivity().getResources().getColor(R.color.default_text));
+                        chosenPatientStatus.remove(statusTextView.getText().toString());
                     }
+                    Toast.makeText(getContext(), chosenPatientStatus.toString() + " ", Toast.LENGTH_SHORT).show();
+                    Log.i("suo", Util.setToArray(chosenPatientStatus).toString());
                 }
             });
             view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -187,14 +164,40 @@ public class DailyReportFragment extends Fragment implements ItemClickListener{
             @Override
             public void onScrollChanged() {
                 Log.i("tes", dailyReportScrollView.getScrollY() + "") ;
-//                if (dailyReportScrollView.getScrollY() != 0) {
                     if (DailyReportScrollVariable.getInstance().getScroll() && dailyReportScrollView.getScrollY() <= 0) {
                         DailyReportScrollVariable.getInstance().setScroll(false);
                     } else if (!DailyReportScrollVariable.getInstance().getScroll() && dailyReportScrollView.getScrollY() > 0) {
                         DailyReportScrollVariable.getInstance().setScroll(true);
                     }
                 }
-//            }
+        });
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressNotes = progressEditText.getText().toString();
+                if (progressNotes.length() == 0) {
+                    Toast.makeText(getActivity(),"Progress notes cannot be empty!",Toast.LENGTH_SHORT).show();
+                } else {
+                    // push daily report to shared preferences
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Util.SHARED_PREF_DATA, MODE_PRIVATE); // access hard drive through shared preferences object
+                    SharedPreferences.Editor editor = sharedPreferences.edit(); // variable to let shared preferences editable
+                    editor.putBoolean(Util.DAILY_REPORT_LODGED, true); // key value pair for username
+                    editor.putString(Util.DAILY_REPORT_STATUS_NOTES, progressNotes);
+                    editor.putStringSet(Util.DAILY_REPORT_STATUS_LIST, chosenPatientStatus);
+                    editor.putString(Util.DAILY_REPORT_DATE, dailyReportDate);
+                    editor.apply(); // apply changes
+
+                    SharedPreferences prefs = getActivity().getSharedPreferences(Util.SHARED_PREF_DATA, MODE_PRIVATE);
+                    Intent dailyReportSummaryIntent = new Intent(getActivity(), DailyReportSummaryActivity.class);
+                    dailyReportSummaryIntent.putExtra(Util.DAILY_REPORT_DATE, dailyReportDate);
+                    dailyReportSummaryIntent.putExtra(Util.DAILY_REPORT_STATUS_NOTES, progressNotes);
+                    dailyReportSummaryIntent.putExtra(Util.DAILY_REPORT_STATUS_LIST, Util.setToArray(chosenPatientStatus));
+                    Log.i("ada ga seh", "fragment: " + Util.setToArray(chosenPatientStatus).length);
+                    startActivity(dailyReportSummaryIntent);
+                    getActivity().finish();
+                }
+            }
         });
     }
 
@@ -202,8 +205,4 @@ public class DailyReportFragment extends Fragment implements ItemClickListener{
         this.arrowClick = arrowClick;
     }
 
-    @Override
-    public void onClick(View view, int position) {
-        Toast.makeText(getActivity(),"Hello from " + position,Toast.LENGTH_SHORT).show();
-    }
 }

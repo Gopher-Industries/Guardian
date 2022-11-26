@@ -1,5 +1,6 @@
 package com.example.tg_patient_profile;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import androidx.lifecycle.MutableLiveData;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,11 +24,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.util.Date;
+
 public class DailyReportActivity extends AppCompatActivity implements IArrowClick{
 
     DailyReportFragment fragment;
     FragmentContainerView fragmentContainerView;
     DailyReportScrollVariable dailyReportScrollVariable;
+    CalendarView dailyReportCalendarView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -49,12 +54,25 @@ public class DailyReportActivity extends AppCompatActivity implements IArrowClic
                 if (DailyReportScrollVariable.getInstance().getScroll()) {
                     ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) fragmentContainerView.getLayoutParams();
                     params.setMargins(0, -600, 0, 0);
-                    fragmentContainerView.setLayoutParams(params);;
+                    fragmentContainerView.setLayoutParams(params);
                 } else {
                     ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) fragmentContainerView.getLayoutParams();
                     params.setMargins(0, -300, 0, 0);
-                    fragmentContainerView.setLayoutParams(params);;
+                    fragmentContainerView.setLayoutParams(params);
                 }
+            }
+        });
+
+        Date maxDate = new Date(System.currentTimeMillis()); //set your max date here
+        fragment.dailyReportDate = DateFormat.format("dd/MM/yyyy ", maxDate.getTime()).toString();
+
+        dailyReportCalendarView = (CalendarView) findViewById(R.id.calendarView);
+        dailyReportCalendarView.setMaxDate(maxDate.getTime());
+        dailyReportCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+
+                fragment.dailyReportDate = dayOfMonth + "/" + (month + 1) + "/" + year;
             }
         });
 

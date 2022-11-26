@@ -16,7 +16,6 @@
         android:clickable="false"
         android:dateTextAppearance="@style/CalenderViewDateCustomText"
         android:focusable="false"
-        android:onClick="dailyReportCalendarClick"
         android:theme="@style/CalenderViewCustom"
         android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
         app:layout_constraintEnd_toEndOf="parent"
