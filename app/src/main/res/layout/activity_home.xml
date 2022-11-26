@@ -8,104 +8,70 @@
 
 
     <ImageButton
-        android:id="@+id/NewPatientButton"
+        android:id="@+id/dailyReportButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="48dp"
         android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:srcCompat="@drawable/dataentry" />
-
-    <ImageButton
-        android:id="@+id/DailyReportButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:background="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/EditPatientDataButton"
-        app:layout_constraintStart_toEndOf="@+id/NewPatientButton"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/patientDataButton"
         app:srcCompat="@drawable/daily_report" />
 
     <ImageButton
-        android:id="@+id/EditPatientDataButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="24dp"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:srcCompat="@drawable/edit_patient_data" />
-
-    <ImageButton
-        android:id="@+id/PatientListButton"
+        android:id="@+id/patientDataButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="48dp"
         android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NewPatientButton"
-        app:srcCompat="@drawable/patient_list" />
+        app:layout_constraintTop_toBottomOf="@+id/chooseDiffPatientTV"
+        app:srcCompat="@drawable/patient_data" />
 
     <ImageButton
-        android:id="@+id/ViewActivityDataButton"
+        android:id="@+id/carePlanButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="24dp"
         android:background="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/AssociateRadarButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseDiffPatientTV"
+        app:srcCompat="@drawable/care_plan" />
+
+    <ImageButton
+        android:id="@+id/healthDataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/carePlanButton"
+        app:layout_constraintStart_toEndOf="@+id/patientDataButton"
+        app:layout_constraintTop_toBottomOf="@+id/chooseDiffPatientTV"
+        app:srcCompat="@drawable/health_data" />
+
+    <ImageButton
+        android:id="@+id/viewActivityDataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/associateRadarButton"
         app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toEndOf="@+id/PatientListButton"
-        app:layout_constraintTop_toBottomOf="@+id/DailyReportButton"
+        app:layout_constraintStart_toEndOf="@+id/dailyReportButton"
+        app:layout_constraintTop_toBottomOf="@+id/healthDataButton"
         app:srcCompat="@drawable/view_activity_data" />
 
     <ImageButton
-        android:id="@+id/NewUserButton"
+        android:id="@+id/associateRadarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
-        android:background="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PatientListButton"
-        app:srcCompat="@drawable/new_user" />
-
-    <ImageButton
-        android:id="@+id/SettingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:background="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/SignOutButton"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toEndOf="@+id/NewUserButton"
-        app:layout_constraintTop_toBottomOf="@+id/ViewActivityDataButton"
-        app:srcCompat="@drawable/settings" />
-
-    <ImageButton
-        android:id="@+id/SignOutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="24dp"
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AssociateRadarButton"
-        app:srcCompat="@drawable/sign_out" />
-
-    <ImageButton
-        android:id="@+id/AssociateRadarButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="24dp"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditPatientDataButton"
+        app:layout_constraintTop_toBottomOf="@+id/carePlanButton"
         app:srcCompat="@drawable/associate_radar" />
 
     <androidx.cardview.widget.CardView
@@ -150,6 +116,18 @@
                 app:srcCompat="@drawable/profile_avatar_women" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/chooseDiffPatientTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="@string/choose_diff_patient"
+        android:textColor="#2B86AC"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

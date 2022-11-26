@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,9 +15,9 @@ import java.util.Set;
 
 public class HomeActivity extends AppCompatActivity {
 
-    ImageButton newPatientButton, dailyReportButton, editPatientDataButton,
-            patientListButton, viewActivityDataButton, associateRadarButton,
-    newUserButton, settingsButton, signOutButton;
+    ImageButton patientDataButton, dailyReportButton, healthDataButton,
+            viewActivityDataButton, associateRadarButton, carePlanButton;
+    TextView choosePatientButton;
     Boolean dailyReportLodged;
     Set<String> dailyReportStatusList = new HashSet<>();
     String dailyReportNotes, dailyReportDate;
@@ -28,10 +28,8 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(Util.SHARED_PREF_DATA, MODE_PRIVATE);
         dailyReportLodged = prefs.getBoolean(Util.DAILY_REPORT_LODGED, false);
         dailyReportStatusList = prefs.getStringSet(Util.DAILY_REPORT_STATUS_LIST, dailyReportStatusList);
-        Log.i("berapa", dailyReportStatusList.size() + "");
         dailyReportNotes = prefs.getString(Util.DAILY_REPORT_STATUS_NOTES, "");
         dailyReportDate = prefs.getString(Util.DAILY_REPORT_DATE, "");
-        Log.i("mok", "onResume: " + dailyReportLodged);
     }
 
     @Override
@@ -39,25 +37,13 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        newPatientButton = (ImageButton) findViewById(R.id.NewPatientButton);
-        dailyReportButton = (ImageButton) findViewById(R.id.DailyReportButton);
-        editPatientDataButton = (ImageButton) findViewById(R.id.EditPatientDataButton);
-        patientListButton = (ImageButton) findViewById(R.id.PatientListButton);
-        viewActivityDataButton = (ImageButton) findViewById(R.id.ViewActivityDataButton);
-        associateRadarButton = (ImageButton) findViewById(R.id.AssociateRadarButton);
-        newUserButton = (ImageButton) findViewById(R.id.NewUserButton);
-        settingsButton = (ImageButton) findViewById(R.id.SettingsButton);
-        signOutButton = (ImageButton) findViewById(R.id.SignOutButton);
-
-        Log.i("mok", "onCreate: " + dailyReportLodged);
-
-        newPatientButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent newPatientIntent = new Intent(HomeActivity.this, NewPatientActivity.class);
-                startActivity(newPatientIntent);
-            }
-        });
+        choosePatientButton = (TextView) findViewById(R.id.chooseDiffPatientTV);
+        patientDataButton = (ImageButton) findViewById(R.id.patientDataButton);
+        dailyReportButton = (ImageButton) findViewById(R.id.dailyReportButton);
+        healthDataButton = (ImageButton) findViewById(R.id.healthDataButton);
+        viewActivityDataButton = (ImageButton) findViewById(R.id.viewActivityDataButton);
+        associateRadarButton = (ImageButton) findViewById(R.id.associateRadarButton);
+        carePlanButton = (ImageButton) findViewById(R.id.carePlanButton);
 
         dailyReportButton.setOnClickListener(new View.OnClickListener() {
 
@@ -77,19 +63,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        editPatientDataButton.setOnClickListener(new View.OnClickListener() {
+        choosePatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent dailyReportIntent = new Intent(HomeActivity.this, TestActivity.class);
-                startActivity(dailyReportIntent);
-            }
-        });
-
-        patientListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent patientProfileList = new Intent(HomeActivity.this, PatientProfileList.class);
-                startActivity(patientProfileList);
+                Intent patientListIntent = new Intent(HomeActivity.this, PatientProfileList.class);
+                startActivity(patientListIntent);
             }
         });
 
@@ -101,27 +79,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         associateRadarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        newUserButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
