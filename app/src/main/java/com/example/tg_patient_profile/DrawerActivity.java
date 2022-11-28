@@ -37,18 +37,17 @@ public class DrawerActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id=menuItem.getItemId();
-                if (id == R.id.menuProfile){
+                int id = menuItem.getItemId();
+                if (id == R.id.menuProfile) {
                     Intent newIntent = new Intent(DrawerActivity.this, Careplan1.class);
                     startActivity(newIntent);
-                }
-                else if (id == R.id.menuNofications){
+                } else if (id == R.id.menuNofications) {
                     Intent newIntent = new Intent(DrawerActivity.this, Careplan2.class);
                     startActivity(newIntent);
                 }
                 return true;
             }
         });
-
+    }
 
 }

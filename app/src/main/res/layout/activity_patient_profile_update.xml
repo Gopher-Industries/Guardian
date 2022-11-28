@@ -93,7 +93,7 @@
         android:id="@+id/fragment"
         android:name="com.example.tg_patient_profile.PatientProfileUpdate1Fragment"
         android:layout_width="410dp"
-        android:layout_height="540dp"
+        android:layout_height="430dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
