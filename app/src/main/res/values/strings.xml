@@ -11,4 +11,186 @@
     <string name="about">About</string>
     <string name="others">Others</string>
     <string name="verified">Verified</string>
+
+    <string-array name="aged_care_planning_regional_code_array">
+        <item>1**</item>
+        <item>2**</item>
+        <item>3**</item>
+        <item>4**</item>
+        <item>5**</item>
+        <item>6**</item>
+        <item>7**</item>
+        <item>8**</item>
+    </string-array>
+
+    <string-array name="aged_care_planning_region_name_array">
+        <item>Barwon-South Western</item>
+        <item>Western Metro</item>
+        <item>Grampians</item>
+        <item>Loddon-Mallee</item>
+        <item>Hume</item>
+        <item>Northern Metro</item>
+        <item>Gippsland</item>
+        <item>Southern Metro</item>
+    </string-array>
+
+    <string-array name="activities_of_daily_living_array">
+        <item>VL - Very Low</item>
+        <item>L - Low</item>
+        <item>LM - Low Mid</item>
+        <item>M - Mid</item>
+        <item>HM - High Mid</item>
+        <item>H - High</item>
+        <item>VH - Very High</item>
+    </string-array>
+
+    <string-array name="admission_type_array">
+        <item>Temporary Care</item>
+        <item>Permanent Care</item>
+    </string-array>
+
+    <string-array name="age_group_array">
+        <item>20-29</item>
+        <item>30-39</item>
+        <item>40-49</item>
+        <item>50-59</item>
+        <item>60-69</item>
+        <item>70-79</item>
+        <item>80-89</item>
+        <item>90-99</item>
+        <item>100+</item>
+    </string-array>
+
+    <string-array name="care_type_array">
+        <item>Residential Care</item>
+        <item>Help at Home</item>
+        <item>Short-term Care</item>
+        <item>Aged-care Home</item>
+    </string-array>
+
+    <string-array name="complex_health_care_score_array">
+        <item>N/A</item>
+        <item>L - Low</item>
+        <item>M - Medium</item>
+        <item>H - High</item>
+        <item>VH - Very High</item>
+    </string-array>
+
+    <string-array name="country_of_birth_array">
+        <item>Australia</item>
+        <item>China</item>
+        <item>Italy</item>
+        <item>Greece</item>
+        <item>India</item>
+        <item>Indonesia</item>
+        <item>Korea</item>
+        <item>Malaysia</item>
+        <item>Nigeria</item>
+        <item>Pakistan</item>
+        <item>Vietnam</item>
+        <item>Zimbabwe</item>
+    </string-array>
+
+    <string-array name="reason_for_departure_array">
+        <item>To Hospital</item>
+    </string-array>
+
+    <string-array name="reason_for_discharge_array">
+        <item>To Hospital</item>
+    </string-array>
+
+    <string-array name="first_admission_array">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="homecare_level_array">
+        <item>L1 - Level 1</item>
+        <item>L2 - Level 2</item>
+        <item>L3 - Level 3</item>
+        <item>L4 - Level 4</item>
+    </string-array>
+
+    <string-array name="indigenous_status_array">
+        <item>Non-Indigenous</item>
+        <item>Indigenous</item>
+    </string-array>
+
+    <string-array name="mmm_code_array">
+        <item>Metropolitan</item>
+        <item>Regional Centres</item>
+        <item>Large Regional Towns</item>
+        <item>Medium Rural Towns</item>
+        <item>Small Rural Towns</item>
+        <item>Remote Communities</item>
+        <item>Very Remote Communities</item>
+    </string-array>
+
+    <string-array name="operational_type_array">
+        <item>Government</item>
+        <item>Non-For-Profit</item>
+        <item>Private</item>
+    </string-array>
+
+    <string-array name="preferred_language_array">
+        <item>English</item>
+        <item>Arabic</item>
+        <item>Chinese</item>
+        <item>Hindi</item>
+        <item>Italian</item>
+        <item>Greek</item>
+        <item>Vietnamese</item>
+    </string-array>
+
+    <string-array name="program_type_array">
+        <item>Residential Care</item>
+        <item>Short-term Care</item>
+        <item>Transition Care</item>
+        <item>Restorative Care</item>
+        <item>Respite Care</item>
+        <item></item>
+    </string-array>
+
+    <string-array name="remoteness_array">
+        <item>Major Cities of Australia</item>
+        <item>Country Town</item>
+        <item>Rural</item>
+    </string-array>
+
+    <string-array name="sex_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="service_size_array">
+        <item>1-5</item>
+        <item>6-10</item>
+        <item>11-15</item>
+        <item>16-20</item>
+        <item>21-25</item>
+    </string-array>
+
+    <string-array name="state_array">
+        <item>Victoria</item>
+        <item>New South Wales</item>
+        <item>Western Australia</item>
+        <item>Queensland</item>
+        <item>South Australia</item>
+        <item>Northern Territory</item>
+        <item>Tasmania</item>
+    </string-array>
+
+    <string-array name="year_array">
+        <item>2022</item>
+        <item>2023</item>
+        <item>2024</item>
+        <item>2025</item>
+        <item>2026</item>
+        <item>2027</item>
+        <item>2028</item>
+    </string-array>
+
+
+
+
 </resources>
