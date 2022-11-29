@@ -11,4 +11,5 @@ public class Dataforview2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dataforview2);
     }
+
 }
