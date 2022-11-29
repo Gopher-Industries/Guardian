@@ -14,4 +14,9 @@
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
     <color name="bordercolor">#000000</color>
+    <color name="_bg__new_homepage___ek2_color">#FFFFFF</color>
+    <color name="ellipse_9_color">#C4C4C4</color>
+    <color name="gray">#F3F3F3</color>
+    <color name="default_text">#808080</color>
+
 </resources>

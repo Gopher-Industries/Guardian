@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="PatientStatusImage">
+        <item>@drawable/urgent_patient_status</item>
+        <item>@drawable/hospital_patient_status</item>
+        <item>@drawable/time_patient_status</item>
+        <item>@drawable/forbidden_patient_status</item>
+    </array>
+    <array name="PatientStatusText">
+        <item>Urgent Medical Attention</item>
+        <item>Requires Hospitalisation</item>
+        <item>Requires Hourly Monitoring</item>
+        <item>Do Not Disturb</item>
+    </array>
+</resources>

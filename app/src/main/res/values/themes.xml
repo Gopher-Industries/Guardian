@@ -15,4 +15,13 @@
         <item name="android:buttonCornerRadius">30dp</item>
         <item name="android:fontFamily">@font/poppins</item>
     </style>
+
+    <style name="Theme.TeamGuardians.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.TeamGuardians.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.TeamGuardians.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
