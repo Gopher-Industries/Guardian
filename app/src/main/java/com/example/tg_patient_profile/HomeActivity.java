@@ -85,4 +85,23 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    //Listener for the button to add orders
+    public void onMedicalDiagnosticsClick(View view) {
+        Intent medicalDiagnosticsActivityIntent = new Intent(HomeActivity.this, MedicalDiagnosticsActivity.class);
+        startActivity(medicalDiagnosticsActivityIntent);
+    }
+
+    //Listener for the button to add orders
+    public void onNavigationDrawerClick(View view) {
+        Intent drawerActivityActivityIntent = new Intent(HomeActivity.this, DrawerActivity.class);
+        startActivity(drawerActivityActivityIntent);
+    }
+
+    //Listener for the button to add orders
+    public void onPatientProfileUpdateClick(View view) {
+        Intent patientProfileUpdateIntent = new Intent(HomeActivity.this, PatientProfileUpdate.class);
+        startActivity(patientProfileUpdateIntent);
+    }
 }

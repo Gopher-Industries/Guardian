@@ -75,7 +75,7 @@
         app:srcCompat="@drawable/associate_radar" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/medicalDiaganosticsHeaderCardView"
         android:layout_width="0dp"
         android:layout_height="220dp"
         android:layout_marginTop="-40dp"
@@ -90,7 +90,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/medicalDiagnosticsTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -101,14 +101,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/medicalDiagnosticsEditImageView" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/medicalDiagnosticsEditImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="54dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView3"
+                app:layout_constraintBottom_toTopOf="@+id/medicalDiagnosticsTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -127,7 +127,37 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <Button
+        android:id="@+id/medicalDiagnosticsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="onMedicalDiagnosticsClick"
+        android:text="Medical Diagnostics"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewActivityDataButton" />
+
+    <Button
+        android:id="@+id/patientProfileUpdateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onPatientProfileUpdateClick"
+        android:text="Patient Profile Update"
+        app:layout_constraintStart_toStartOf="@+id/medicalDiagnosticsButton"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiagnosticsButton" />
+
+    <Button
+        android:id="@+id/navigationDrawerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onNavigationDrawerClick"
+        android:text="Side Menu"
+        app:layout_constraintStart_toStartOf="@+id/patientProfileUpdateButton"
+        app:layout_constraintTop_toBottomOf="@+id/patientProfileUpdateButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
