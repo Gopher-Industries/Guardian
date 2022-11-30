@@ -14,7 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamGuardians"
+        tools:replace="android:label"
         tools:targetApi="31">
+        <activity
+            android:name=".CarePlanSummaryActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".CarePlanActivity"
             android:exported="false">
@@ -66,15 +74,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- These are here only for UI testing -->
-        <activity
-            android:name=".Careplan1"
-            android:exported="false" />
-        <activity
-            android:name=".Careplan2"
-            android:exported="false" />
-        <activity
-            android:name=".Careplan3"
-            android:exported="false" />
         <activity
             android:name=".DataforviewActivity"
             android:exported="false" />

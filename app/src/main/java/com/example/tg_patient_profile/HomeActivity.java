@@ -63,6 +63,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        carePlanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent carePlanIntent = new Intent(HomeActivity.this, CarePlanActivity.class);
+                startActivity(carePlanIntent);
+            }
+        });
+
         choosePatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
