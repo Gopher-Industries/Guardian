@@ -1,3 +1,5 @@
+//Testing - Home Page
+
 package com.example.tg_patient_profile;
 
 import android.content.Intent;
