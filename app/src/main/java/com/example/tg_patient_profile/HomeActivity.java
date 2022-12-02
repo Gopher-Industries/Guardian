@@ -89,7 +89,8 @@ public class HomeActivity extends AppCompatActivity {
         associateRadarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent activityProfilingIntent = new Intent(HomeActivity.this, ActivityProfilingActivity.class);
+                startActivity(activityProfilingIntent);
             }
         });
     }

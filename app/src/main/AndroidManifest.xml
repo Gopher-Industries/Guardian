@@ -17,6 +17,20 @@
         tools:replace="android:label"
         tools:targetApi="31">
         <activity
+            android:name=".WeeklyActivityProfilingActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ActivityProfilingActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".CarePlanSummaryActivity"
             android:exported="false">
             <meta-data

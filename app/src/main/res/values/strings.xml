@@ -20,4 +20,6 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="status_ok">(Status: <font fgcolor="#00FFFF">OK</font>)</string>
+    <string name="status_ok_white">(<font fgcolor="#FFFFFF">Status: OK)</font></string>
 </resources>
