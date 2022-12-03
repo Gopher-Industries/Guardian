@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button getStartedButton = findViewById(R.id.getStartedButton);
         Button patientProfileButton = findViewById(R.id.patientProfileButton);
+        Button GP_ProfileButton = findViewById(R.id.GP_ProfileButton);
 
         getStartedButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent patientProfileIntent = new Intent(MainActivity.this, PatientProfileList.class);
+                startActivity(patientProfileIntent);
+            }
+        });
+
+        GP_ProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent patientProfileIntent = new Intent(MainActivity.this, GP_List.class);
                 startActivity(patientProfileIntent);
             }
         });

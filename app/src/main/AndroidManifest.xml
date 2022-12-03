@@ -17,6 +17,19 @@
         tools:replace="android:label"
         tools:targetApi="31">
         <activity
+
+            android:name=".GP_List"
+            android:exported="false" />
+        <activity
+            android:name=".GP_Model"
+            android:exported="false" />
+        <activity
+            android:name=".GP_Add"
+            android:exported="false" />
+        <activity
+            android:name=".GP_Adapter"
+            android:exported="false" />
+
             android:name=".ActivitySuggestionActivity"
             android:exported="false">
             <meta-data
@@ -47,12 +60,7 @@
        <activity
             android:name=".CarePlanActivity"
             android:exported="false"/>
-<!--        <activity-->
-<!--            android:name=".CaretakerDashboard"-->
-<!--            android:exported="false" >-->
-<!--            <meta-data-->
-<!--                android:name="android.app.lib_name"-->
-<!--                android:value="" />-->
+
         <activity
             android:name=".DailyReportSummaryActivity"
             android:exported="false" >
