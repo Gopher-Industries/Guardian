@@ -6,96 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".PatientProfileList">
 
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
+        android:id="@+id/rv2"
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:layout_marginTop="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/medicalDiaganosticsHeaderCardView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <Button
-        android:id="@+id/getStartedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:width="200dp"
-        android:height="60dp"
-        android:backgroundTint="@color/TG_blue"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Get started"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:cornerRadius="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/rv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="45dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc vel. Cursus euismod quis viverra nibh cras pulvinar mattis nunc sed."
-        app:layout_constraintBottom_toTopOf="@+id/getStartedButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.86" />
     <androidx.cardview.widget.CardView
-        android:id="@+id/medicalDiaganosticsHeaderCardView"
-        android:layout_width="0dp"
-        android:layout_height="220dp"
-        android:layout_marginTop="-40dp"
+        android:id="@+id/headerCard"
+        android:layout_width="409dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="-20dp"
+        android:translationZ="-20dp"
         app:cardBackgroundColor="@color/TG_blue"
-        app:cardCornerRadius="40dp"
+        app:cardCornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/medicalDiagnosticsTitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/poppins_bold"
-                android:text="Welcome to Patient checker"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/medicalDiagnosticsEditImageView" />
-
-            <ImageView
-                android:id="@+id/medicalDiagnosticsEditImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/medicalDiagnosticsTitleTextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/gopher_logo" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="123dp"
         android:layout_height="125dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -107,11 +45,11 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#00FFC3"
         android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/rv"
-        app:layout_constraintEnd_toEndOf="@+id/rv"
+        app:layout_constraintBottom_toBottomOf="@+id/rv2"
+        app:layout_constraintEnd_toEndOf="@+id/rv2"
         app:layout_constraintHorizontal_bias="0.96"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.899"
+        app:layout_constraintVertical_bias="0.846"
         app:srcCompat="@drawable/add_new" />
 </androidx.constraintlayout.widget.ConstraintLayout>

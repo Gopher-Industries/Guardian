@@ -1,46 +1,47 @@
 package com.example.tg_patient_profile;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.SearchView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.SearchView;
+
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class PatientProfileList extends AppCompatActivity {
+public class GP_List extends AppCompatActivity {
     RecyclerView recyclerView;
-    MainAdapter mainAdapter;
+    GP_Adapter gp_adapter;
 
-    FloatingActionButton floatingActionButton;
+    FloatingActionButton floatingActionButton1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_gp_list);
 
-        recyclerView= findViewById(R.id.rv2);
+        recyclerView= findViewById(R.id.rv1);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        FirebaseRecyclerOptions<MainModel> options =
-                new FirebaseRecyclerOptions.Builder<MainModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("patients"), MainModel.class)
+        FirebaseRecyclerOptions<GP_Model> options =
+                new FirebaseRecyclerOptions.Builder<GP_Model>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("gp"), GP_Model.class)
                         .build();
-        mainAdapter=new MainAdapter(options);
-        recyclerView.setAdapter(mainAdapter);
+        gp_adapter=new GP_Adapter(options);
+        recyclerView.setAdapter(gp_adapter);
 
-        floatingActionButton=(FloatingActionButton)findViewById(R.id.floatingActionButton);
-        floatingActionButton.setOnClickListener(new View.OnClickListener(){
+        floatingActionButton1=(FloatingActionButton)findViewById(R.id.floatingActionButton1);
+        floatingActionButton1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(getApplicationContext(), AddActivity.class));
+                startActivity(new Intent(getApplicationContext(),GP_Add.class));
             }
         });
     }
@@ -48,13 +49,13 @@ public class PatientProfileList extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        mainAdapter.startListening();
+        gp_adapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mainAdapter.stopListening();
+        gp_adapter.stopListening();
     }
 
     @Override
@@ -80,13 +81,13 @@ public class PatientProfileList extends AppCompatActivity {
 
     private void txtSearch(String str){
 
-        FirebaseRecyclerOptions<MainModel> options =
-                new FirebaseRecyclerOptions.Builder<MainModel>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("patients").orderByChild("name").startAt(str).endAt(str+"~"), MainModel.class)
+        FirebaseRecyclerOptions<GP_Model> options =
+                new FirebaseRecyclerOptions.Builder<GP_Model>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("gp").orderByChild("first_name").startAt(str).endAt(str+"~"), GP_Model.class)
                         .build();
 
-        mainAdapter=new MainAdapter(options);
-        mainAdapter.startListening();
-        recyclerView.setAdapter(mainAdapter);
+        gp_adapter=new GP_Adapter(options);
+        gp_adapter.startListening();
+        recyclerView.setAdapter(gp_adapter);
     }
 }
