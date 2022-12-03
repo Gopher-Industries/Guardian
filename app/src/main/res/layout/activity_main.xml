@@ -12,9 +12,9 @@
         android:layout_height="729dp"
         android:layout_marginTop="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.069" />
 
     <Button
         android:id="@+id/getStartedButton"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/medicalDiaganosticsHeaderCardView"
         android:layout_width="0dp"
         android:layout_height="220dp"
         android:layout_marginTop="-40dp"
@@ -65,7 +65,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/medicalDiagnosticsTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -75,14 +75,14 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/medicalDiagnosticsEditImageView" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/medicalDiagnosticsEditImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/textView3"
+                app:layout_constraintBottom_toTopOf="@+id/medicalDiagnosticsTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
