@@ -44,15 +44,15 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
+       <activity
             android:name=".CarePlanActivity"
-            android:exported="false">
-        <activity
-            android:name=".CaretakeDashboard"
-            android:exported="false" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+            android:exported="false"/>
+<!--        <activity-->
+<!--            android:name=".CaretakerDashboard"-->
+<!--            android:exported="false" >-->
+<!--            <meta-data-->
+<!--                android:name="android.app.lib_name"-->
+<!--                android:value="" />-->
         <activity
             android:name=".DailyReportSummaryActivity"
             android:exported="false" >
