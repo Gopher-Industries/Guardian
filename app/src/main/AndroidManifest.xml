@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.tg_patient_profile">
+    package="com.example.tg_patient_profile" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,8 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamGuardians"
+        tools:replace="android:label"
         tools:targetApi="31">
         <activity
+
             android:name=".GP_List"
             android:exported="false" />
         <activity
@@ -27,23 +29,48 @@
         <activity
             android:name=".GP_Adapter"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".CarePlanActivity"-->
-<!--            android:exported="false">-->
-<!--            <meta-data-->
-<!--                android:name="android.app.lib_name"-->
-<!--                android:value="" />-->
-<!--        </activity>-->
-        <activity
-            android:name=".DailyReportSummaryActivity"
+
+            android:name=".ActivitySuggestionActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".DailyReportActivity"
+            android:name=".WeeklyActivityProfilingActivity"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ActivityProfilingActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CarePlanSummaryActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+       <activity
+            android:name=".CarePlanActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".DailyReportSummaryActivity"
+            android:exported="false" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DailyReportActivity"
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -71,7 +98,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -79,29 +106,17 @@
             </intent-filter>
         </activity> <!-- These are here only for UI testing -->
         <activity
-            android:name=".Careplan1"
-            android:exported="false" />
-        <activity
-            android:name=".Careplan2"
-            android:exported="false" />
-        <activity
-            android:name=".Careplan3"
-            android:exported="false" />
-        <activity
             android:name=".DataforviewActivity"
             android:exported="false" />
         <activity
             android:name=".Dataforview2Activity"
             android:exported="false" />
-
         <activity
             android:name=".MedicalDiagnosticsActivity"
             android:exported="false" />
-
         <activity
             android:name=".DrawerActivity"
             android:exported="false" />
-
         <activity
             android:name=".PatientProfileUpdate"
             android:exported="false" />

@@ -1,6 +1,6 @@
-//Testing - Home Page
+package com.example.tg_patient_profile.view;
 
-package com.example.tg_patient_profile;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,12 +10,20 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.tg_patient_profile.DailyReportActivity;
+import com.example.tg_patient_profile.DailyReportSummaryActivity;
+import com.example.tg_patient_profile.DrawerActivity;
+import com.example.tg_patient_profile.HomeActivity;
+import com.example.tg_patient_profile.MedicalDiagnosticsActivity;
+import com.example.tg_patient_profile.PatientProfileList;
+import com.example.tg_patient_profile.PatientProfileUpdate;
+import com.example.tg_patient_profile.R;
+import com.example.tg_patient_profile.Util;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class HomeActivity extends AppCompatActivity {
+public class CaretakerDashboard extends AppCompatActivity {
 
     ImageButton patientDataButton, dailyReportButton, healthDataButton,
             viewActivityDataButton, associateRadarButton, carePlanButton;
@@ -37,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_caretaker_dashboard);
 
         choosePatientButton = (TextView) findViewById(R.id.chooseDiffPatientTV);
         patientDataButton = (ImageButton) findViewById(R.id.patientDataButton);
@@ -52,10 +60,10 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!dailyReportLodged) {
-                    Intent dailyReportIntent = new Intent(HomeActivity.this, DailyReportActivity.class);
+                    Intent dailyReportIntent = new Intent(CaretakerDashboard.this, DailyReportActivity.class);
                     startActivity(dailyReportIntent);
                 } else {
-                    Intent dailyReportSummaryIntent = new Intent(HomeActivity.this, DailyReportSummaryActivity.class);
+                    Intent dailyReportSummaryIntent = new Intent(CaretakerDashboard.this, DailyReportSummaryActivity.class);
                     dailyReportSummaryIntent.putExtra(Util.DAILY_REPORT_STATUS_NOTES, dailyReportNotes);
                     dailyReportSummaryIntent.putExtra(Util.DAILY_REPORT_DATE, dailyReportDate);
                     dailyReportSummaryIntent.putExtra(Util.DAILY_REPORT_STATUS_LIST, Util.setToArray(dailyReportStatusList));
@@ -65,18 +73,10 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        carePlanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent carePlanIntent = new Intent(HomeActivity.this, CarePlanActivity.class);
-                startActivity(carePlanIntent);
-            }
-        });
-
         choosePatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent patientListIntent = new Intent(HomeActivity.this, PatientProfileList.class);
+                Intent patientListIntent = new Intent(CaretakerDashboard.this, PatientProfileList.class);
                 startActivity(patientListIntent);
             }
         });
@@ -84,16 +84,14 @@ public class HomeActivity extends AppCompatActivity {
         viewActivityDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent weeklyActivityProfilingIntent = new Intent(HomeActivity.this, WeeklyActivityProfilingActivity.class);
-                startActivity(weeklyActivityProfilingIntent);
+
             }
         });
 
         associateRadarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent activityProfilingIntent = new Intent(HomeActivity.this, ActivityProfilingActivity.class);
-                startActivity(activityProfilingIntent);
+
             }
         });
     }
@@ -101,19 +99,19 @@ public class HomeActivity extends AppCompatActivity {
 
     //Listener for the button to add orders
     public void onMedicalDiagnosticsClick(View view) {
-        Intent medicalDiagnosticsActivityIntent = new Intent(HomeActivity.this, MedicalDiagnosticsActivity.class);
+        Intent medicalDiagnosticsActivityIntent = new Intent(CaretakerDashboard.this, MedicalDiagnosticsActivity.class);
         startActivity(medicalDiagnosticsActivityIntent);
     }
 
     //Listener for the button to add orders
     public void onNavigationDrawerClick(View view) {
-        Intent drawerActivityActivityIntent = new Intent(HomeActivity.this, DrawerActivity.class);
+        Intent drawerActivityActivityIntent = new Intent(CaretakerDashboard.this, DrawerActivity.class);
         startActivity(drawerActivityActivityIntent);
     }
 
     //Listener for the button to add orders
     public void onPatientProfileUpdateClick(View view) {
-        Intent patientProfileUpdateIntent = new Intent(HomeActivity.this, PatientProfileUpdate.class);
+        Intent patientProfileUpdateIntent = new Intent(CaretakerDashboard.this, PatientProfileUpdate.class);
         startActivity(patientProfileUpdateIntent);
     }
 }
