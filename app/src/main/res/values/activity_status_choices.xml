@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="ActivityStatusImage">
+        <item>@drawable/empty_bed</item>
+        <item>@drawable/walking</item>
+        <item>@drawable/sitting_on_chair</item>
+        <item>@drawable/standing_man</item>
+        <item>@drawable/empty_bed</item>
+    </array>
+    <array name="ActivityStatusText">
+        <item>Sleeping</item>
+        <item>Walking</item>
+        <item>Sitting on Chair</item>
+        <item>Standing Man</item>
+        <item>Taking Meds</item>
+    </array>
+</resources>

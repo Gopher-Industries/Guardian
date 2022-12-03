@@ -65,6 +65,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        carePlanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent carePlanIntent = new Intent(HomeActivity.this, CarePlanActivity.class);
+                startActivity(carePlanIntent);
+            }
+        });
+
         choosePatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,14 +84,16 @@ public class HomeActivity extends AppCompatActivity {
         viewActivityDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent weeklyActivityProfilingIntent = new Intent(HomeActivity.this, WeeklyActivityProfilingActivity.class);
+                startActivity(weeklyActivityProfilingIntent);
             }
         });
 
         associateRadarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent activityProfilingIntent = new Intent(HomeActivity.this, ActivityProfilingActivity.class);
+                startActivity(activityProfilingIntent);
             }
         });
     }
