@@ -31,7 +31,7 @@ public class ActivityProfilingActivity extends AppCompatActivity {
             int img = imgs.getResourceId(i, -1);
 
             View statusView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_status_layout,null);
-            ConstraintLayout activityStatusBG = (ConstraintLayout) statusView.findViewById(R.id.activityStatusBGG);
+            ConstraintLayout activityStatusBG = (ConstraintLayout) statusView.findViewById(R.id.activityStatusBG);
             ImageView statusImageView = statusView.findViewById(R.id.activityStatusIV);
             TextView statusTextView = statusView.findViewById(R.id.activityStatusTV);
             TextView statusOKTV = statusView.findViewById(R.id.statusOKTV);

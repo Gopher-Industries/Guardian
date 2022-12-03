@@ -82,7 +82,8 @@ public class HomeActivity extends AppCompatActivity {
         viewActivityDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent weeklyActivityProfilingIntent = new Intent(HomeActivity.this, WeeklyActivityProfilingActivity.class);
+                startActivity(weeklyActivityProfilingIntent);
             }
         });
 
