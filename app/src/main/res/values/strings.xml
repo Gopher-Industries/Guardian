@@ -22,4 +22,5 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="status_ok">(Status: <font fgcolor="#00FFFF">OK</font>)</string>
     <string name="status_ok_white">(<font fgcolor="#FFFFFF">Status: OK)</font></string>
+    <string name="activity_suggestin_alert">Guardian suggests you physically check up on <b>Benjamin</b> to confirm these behaviours. In case you are unable, please call <b>Benjamin</b> personally.</string>
 </resources>

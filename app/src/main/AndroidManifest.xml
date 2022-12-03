@@ -17,6 +17,13 @@
         tools:replace="android:label"
         tools:targetApi="31">
         <activity
+            android:name=".ActivitySuggestionActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".WeeklyActivityProfilingActivity"
             android:exported="false">
             <meta-data

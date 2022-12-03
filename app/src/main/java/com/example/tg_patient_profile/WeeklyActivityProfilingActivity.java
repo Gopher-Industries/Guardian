@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.text.Html;
@@ -46,6 +47,14 @@ public class WeeklyActivityProfilingActivity extends AppCompatActivity {
             weeklyActivitySummaryTextView.setText(Html.fromHtml(text));
 //            weeklyActivitySummaryTextView.setClickable(true);
 //            weeklyActivitySummaryTextView.setMovementMethod(LinkMovementMethod.getInstance());
+
+            statusView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent suggestionIntent = new Intent(getApplicationContext(), ActivitySuggestionActivity.class);
+                    startActivity(suggestionIntent);
+                }
+            });
 
             weeklyActivityProfilingLayout.addView(statusView);
         }
