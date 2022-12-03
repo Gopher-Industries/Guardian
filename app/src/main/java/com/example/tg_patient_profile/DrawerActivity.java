@@ -39,10 +39,10 @@ public class DrawerActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
                 if (id == R.id.menuProfile) {
-                    Intent newIntent = new Intent(DrawerActivity.this, Careplan1.class);
+                    Intent newIntent = new Intent(DrawerActivity.this, CareTakerProfile.class);
                     startActivity(newIntent);
                 } else if (id == R.id.menuNofications) {
-                    Intent newIntent = new Intent(DrawerActivity.this, Careplan2.class);
+                    Intent newIntent = new Intent(DrawerActivity.this, ActivityProfilingActivity.class);
                     startActivity(newIntent);
                 }
                 return true;
