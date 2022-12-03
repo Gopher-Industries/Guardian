@@ -11,7 +11,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/weeklySummaryCV"
         android:layout_width="350dp"
-        android:layout_height="110dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,11 +52,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="6dp"
+                android:layout_marginBottom="15dp"
                 android:autoLink="none"
                 android:fontFamily="@font/poppins"
                 android:text="Standing at unusual spot (near window) for longer than 2.5 hour(s), 4 times this week. Patient responded “Just staring outside.”"
                 android:textColor="@color/black"
                 android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/weeklyActivitySummaryIV"
                 app:layout_constraintTop_toBottomOf="@+id/weeklyActivitySummaryTitleTV" />
         </androidx.constraintlayout.widget.ConstraintLayout>
