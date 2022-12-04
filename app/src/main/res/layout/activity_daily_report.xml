@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/daily_report_background"
-    tools:context=".DailyReportActivity">
+    tools:context=".view.patient.dailyreport.DailyReportActivity">
 
     <CalendarView
         android:id="@+id/calendarView"
