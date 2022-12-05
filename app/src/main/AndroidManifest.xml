@@ -21,20 +21,12 @@
             android:name=".GP_List"
             android:exported="false" />
         <activity
-            android:name=".GP_Model"
-            android:exported="false" />
-        <activity
             android:name=".GP_Add"
             android:exported="false" />
         <activity
-            android:name=".GP_Adapter"
-            android:exported="false" />
-
             android:name=".ActivitySuggestionActivity"
             android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+
         </activity>
         <activity
             android:name=".WeeklyActivityProfilingActivity"
