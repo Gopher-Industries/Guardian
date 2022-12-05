@@ -47,7 +47,7 @@
             android:name=".view.general.PatientListActivity"
             android:exported="false" />
         <activity
-            android:name=".view.caretaker.CaretakerProfile"
+            android:name=".view.caretaker.CaretakerProfileActivity"
             android:exported="false" />
         <activity
             android:name=".view.patient.PatientDashboardActivity"
@@ -71,13 +71,13 @@
             </intent-filter>
         </activity> <!-- These are here only for UI testing -->
         <activity
-            android:name=".view.patient.careplan.Careplan1"
+            android:name=".view.patient.careplan.Careplan1Activity"
             android:exported="false" />
         <activity
-            android:name=".view.patient.careplan.Careplan2"
+            android:name=".view.patient.careplan.Careplan2Activity"
             android:exported="false" />
         <activity
-            android:name=".view.patient.careplan.Careplan3"
+            android:name=".view.patient.careplan.Careplan3Activity"
             android:exported="false" />
         <activity
             android:name=".view.patient.dailyreport.Dataforview2Activity"

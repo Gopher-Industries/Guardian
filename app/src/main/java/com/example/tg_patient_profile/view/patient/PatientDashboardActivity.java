@@ -16,7 +16,7 @@ import com.example.tg_patient_profile.view.patient.dailyreport.DailyReportSummar
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.util.Util;
 import com.example.tg_patient_profile.view.general.PatientListActivity;
-import com.example.tg_patient_profile.view.patient.careplan.Careplan1;
+import com.example.tg_patient_profile.view.patient.careplan.Careplan1Activity;
 import com.example.tg_patient_profile.view.general.DrawerActivity;
 import com.example.tg_patient_profile.view.patient.healthdata.healthandwelfaredetails.HealthAndWelfareActivity;
 import com.example.tg_patient_profile.view.patient.healthdata.healthdetails.MedicalDiagnosticsActivity;
@@ -123,7 +123,7 @@ public class PatientDashboardActivity extends AppCompatActivity {
 
     //Listener for the button to add orders
     public void onCarePlanClick(View view) {
-        Intent patientProfileUpdateIntent = new Intent(PatientDashboardActivity.this, Careplan1.class);
+        Intent patientProfileUpdateIntent = new Intent(PatientDashboardActivity.this, Careplan1Activity.class);
         startActivity(patientProfileUpdateIntent);
     }
 }

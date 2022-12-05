@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tg_patient_profile.R;
 
-public class Careplan1 extends AppCompatActivity {
+public class Careplan1Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class Careplan1 extends AppCompatActivity {
         careplan1NextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent careplan2Intent = new Intent(Careplan1.this, Careplan2.class);
+                Intent careplan2Intent = new Intent(Careplan1Activity.this, Careplan2Activity.class);
                 startActivity(careplan2Intent);
             }
         });

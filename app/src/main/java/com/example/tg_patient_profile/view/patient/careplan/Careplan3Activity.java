@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tg_patient_profile.R;
 
-public class Careplan3 extends AppCompatActivity {
+public class Careplan3Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class Careplan3 extends AppCompatActivity {
         careplan3NextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Careplan3.this, "Next screen not implemented yet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Careplan3Activity.this, "Next screen not implemented yet", Toast.LENGTH_SHORT).show();
             }
         });
 

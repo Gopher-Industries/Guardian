@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tg_patient_profile.R;
 
-public class CaretakerProfile extends AppCompatActivity {
+public class CaretakerProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
