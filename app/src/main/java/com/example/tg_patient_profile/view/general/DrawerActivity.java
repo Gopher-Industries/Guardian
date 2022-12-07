@@ -11,8 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.tg_patient_profile.R;
-import com.example.tg_patient_profile.view.patient.careplan.Careplan1Activity;
-import com.example.tg_patient_profile.view.patient.careplan.Careplan2Activity;
+
 import com.google.android.material.navigation.NavigationView;
 
 public class DrawerActivity extends AppCompatActivity {
@@ -40,11 +39,9 @@ public class DrawerActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
                 if (id == R.id.menuProfile) {
-                    Intent newIntent = new Intent(DrawerActivity.this, Careplan1Activity.class);
-                    startActivity(newIntent);
+                    //Add intent
                 } else if (id == R.id.menuNofications) {
-                    Intent newIntent = new Intent(DrawerActivity.this, Careplan2Activity.class);
-                    startActivity(newIntent);
+                    //Add intent
                 }
                 return true;
             }

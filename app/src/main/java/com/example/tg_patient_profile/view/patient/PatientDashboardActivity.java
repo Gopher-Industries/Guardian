@@ -11,15 +11,18 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.example.tg_patient_profile.view.patient.associateradar.ActivityProfilingActivity;
+import com.example.tg_patient_profile.view.patient.careplan.CarePlanActivity;
 import com.example.tg_patient_profile.view.patient.dailyreport.DailyReportActivity;
 import com.example.tg_patient_profile.view.patient.dailyreport.DailyReportSummaryActivity;
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.util.Util;
 import com.example.tg_patient_profile.view.general.PatientListActivity;
-import com.example.tg_patient_profile.view.patient.careplan.Careplan1Activity;
 import com.example.tg_patient_profile.view.general.DrawerActivity;
-import com.example.tg_patient_profile.view.patient.healthdata.healthandwelfaredetails.HealthAndWelfareActivity;
-import com.example.tg_patient_profile.view.patient.healthdata.healthdetails.MedicalDiagnosticsActivity;
+import com.example.tg_patient_profile.view.patient.patientdata.healthandwelfare.HealthAndWelfareActivity;
+import com.example.tg_patient_profile.view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity;
+import com.example.tg_patient_profile.view.patient.patientdata.generalpractitioner.GPListActivity;
+import com.example.tg_patient_profile.view.patient.viewactivitydata.WeeklyActivityProfilingActivity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -95,35 +98,51 @@ public class PatientDashboardActivity extends AppCompatActivity {
 
             }
         });
+
+
+        viewActivityDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent weeklyActivityProfilingIntent = new Intent(PatientDashboardActivity.this, WeeklyActivityProfilingActivity.class);
+                startActivity(weeklyActivityProfilingIntent);
+            }
+        });
+        associateRadarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activityProfilingIntent = new Intent(PatientDashboardActivity.this, ActivityProfilingActivity.class);
+                startActivity(activityProfilingIntent);
+            }
+        });
     }
 
-    //Listener for the button to add orders
+
     public void onPatientDataClick(View view) {
-
-    }
-
-    //Listener for the button to add orders
-    public void onHealthDataClick(View view) {
-        Intent medicalDiagnosticsActivityIntent = new Intent(PatientDashboardActivity.this, MedicalDiagnosticsActivity.class);
+        Intent medicalDiagnosticsActivityIntent = new Intent(PatientDashboardActivity.this, GPListActivity.class);
         startActivity(medicalDiagnosticsActivityIntent);
     }
 
-    //Listener for the button to add orders
+    public void onHealthDataClick(View view) {
+    }
+
     public void onNavigationDrawerClick(View view) {
         Intent drawerActivityActivityIntent = new Intent(PatientDashboardActivity.this, DrawerActivity.class);
         startActivity(drawerActivityActivityIntent);
     }
 
-    //Listener for the button to add orders
     public void onPatientProfileUpdateClick(View view) {
         Intent patientProfileUpdateIntent = new Intent(PatientDashboardActivity.this, HealthAndWelfareActivity.class);
         startActivity(patientProfileUpdateIntent);
     }
 
 
-    //Listener for the button to add orders
+    public void onMedicalDiagnosticsClick(View view) {
+        Intent patientProfileUpdateIntent = new Intent(PatientDashboardActivity.this, MedicalDiagnosticsActivity.class);
+        startActivity(patientProfileUpdateIntent);
+    }
+
     public void onCarePlanClick(View view) {
-        Intent patientProfileUpdateIntent = new Intent(PatientDashboardActivity.this, Careplan1Activity.class);
+        Intent patientProfileUpdateIntent = new Intent(PatientDashboardActivity.this, CarePlanActivity.class);
         startActivity(patientProfileUpdateIntent);
     }
 }

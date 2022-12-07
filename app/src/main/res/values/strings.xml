@@ -21,6 +21,9 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="status_ok">(Status: <font fgcolor="#00FFFF">OK</font>)</string>
+    <string name="status_ok_white">(<font fgcolor="#FFFFFF">Status: OK)</font></string>
+    <string name="activity_suggestin_alert">Guardian suggests you physically check up on <b>Benjamin</b> to confirm these behaviours. In case you are unable, please call <b>Benjamin</b> personally.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -211,5 +214,4 @@
         <item>2027</item>
         <item>2028</item>
     </string-array>
-
 </resources>

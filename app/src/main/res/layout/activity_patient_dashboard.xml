@@ -136,12 +136,25 @@
         android:id="@+id/patientProfileUpdateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="436dp"
+        android:layout_marginTop="404dp"
         android:onClick="onPatientProfileUpdateClick"
         android:text="Test: Health and Welfare Details"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <Button
+        android:id="@+id/medicalDiaganosticsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:onClick="onMedicalDiagnosticsClick"
+        android:text="Test: Medical Diagnostics"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patientProfileUpdateButton" />
 
     <Button
         android:id="@+id/navigationDrawerButton"
@@ -152,7 +165,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/patientProfileUpdateButton" />
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsButton"
+        app:layout_constraintVertical_bias="0.919" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
