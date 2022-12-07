@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".view.general.MainActivity">
 
 
     <androidx.cardview.widget.CardView
@@ -91,7 +91,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment"
-        android:name="com.example.tg_patient_profile.PatientProfileUpdate1Fragment"
+        android:name="com.example.tg_patient_profile.view.patient.patientdata.healthandwelfare.HealthAndWelfareFragment1"
         android:layout_width="410dp"
         android:layout_height="430dp"
         app:layout_constraintBottom_toBottomOf="parent"

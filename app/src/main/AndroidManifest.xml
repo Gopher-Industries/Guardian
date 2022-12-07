@@ -16,80 +16,82 @@
         android:theme="@style/Theme.TeamGuardians"
         tools:replace="android:label"
         tools:targetApi="31">
-        <activity
 
-            android:name=".GP_List"
+        <activity
+            android:name=".view.caretaker.CaretakerDashboardActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".view.patient.patientdata.generalpractitioner.GPListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".view.general.AddNewGPActivity"
             android:exported="false" />
         <activity
-            android:name=".GP_Add"
-            android:exported="false" />
-        <activity
-            android:name=".ActivitySuggestionActivity"
+            android:name=".view.patient.associateradar.ActivitySuggestionActivity"
             android:exported="false">
 
         </activity>
         <activity
-            android:name=".WeeklyActivityProfilingActivity"
+            android:name=".view.patient.viewactivitydata.WeeklyActivityProfilingActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".ActivityProfilingActivity"
+            android:name=".view.patient.associateradar.ActivityProfilingActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CarePlanSummaryActivity"
+            android:name=".view.patient.careplan.CarePlanSummaryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
        <activity
-            android:name=".CarePlanActivity"
+            android:name=".view.patient.careplan.CarePlanActivity"
             android:exported="false"/>
 
         <activity
-            android:name=".DailyReportSummaryActivity"
+            android:name=".view.patient.dailyreport.DailyReportSummaryActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".DailyReportActivity"
+            android:name=".view.patient.dailyreport.DailyReportActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".PatientProfileList"
+            android:name=".view.general.PatientListActivity"
             android:exported="false" />
         <activity
-            android:name=".NewPatientActivity"
+            android:name=".view.caretaker.CaretakerProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".CareTakerProfile"
+            android:name=".view.patient.PatientDashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".view.general.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".view.general.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".view.general.AddNewPatientActivity"
             android:exported="false" />
         <activity
-            android:name=".AddActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".view.general.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -98,19 +100,16 @@
             </intent-filter>
         </activity> <!-- These are here only for UI testing -->
         <activity
-            android:name=".DataforviewActivity"
+            android:name=".view.patient.dailyreport.Dataforview2Activity"
             android:exported="false" />
         <activity
-            android:name=".Dataforview2Activity"
+            android:name=".view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity"
             android:exported="false" />
         <activity
-            android:name=".MedicalDiagnosticsActivity"
+            android:name=".view.general.DrawerActivity"
             android:exported="false" />
         <activity
-            android:name=".DrawerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PatientProfileUpdate"
+            android:name=".view.patient.patientdata.healthandwelfare.HealthAndWelfareActivity"
             android:exported="false" />
 
         <meta-data

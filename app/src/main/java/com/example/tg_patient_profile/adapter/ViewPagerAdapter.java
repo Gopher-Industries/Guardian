@@ -5,8 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.tg_patient_profile.CurrentMedicalDiagnosticsFragment;
-import com.example.tg_patient_profile.PastMedicalDiagnosticsFragment;
+
+import com.example.tg_patient_profile.view.patient.patientdata.medicaldiagnostics.CurrentMedicalDiagnosticsFragment;
+import com.example.tg_patient_profile.view.patient.patientdata.medicaldiagnostics.PastMedicalDiagnosticsFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 

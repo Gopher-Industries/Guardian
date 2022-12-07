@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:background="#EDEDED"
         android:orientation="vertical"
-        tools:context=".ActivitySuggestionActivity">
+        tools:context=".view.patient.associateradar.ActivitySuggestionActivity">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
