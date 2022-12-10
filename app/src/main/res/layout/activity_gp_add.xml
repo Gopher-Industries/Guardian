@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".view.general.AddNewGPActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:viewBindingIgnore="true">
 
         <TextView
             android:layout_width="match_parent"
@@ -141,35 +142,31 @@
             android:gravity="center"
             android:id="@+id/txtEmail"/>
 
-        <TextView
+        <Button
+            android:id="@+id/uploadPhotoButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="16dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="25dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="Photo"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="25dp"
             android:background="@drawable/rounded"
             android:gravity="center"
-            android:id="@+id/urlPhoto"/>
+            android:text="Upload Photo"
+            android:textAllCaps="false"
+            android:textSize="21sp" />
 
         <Button
+            android:id="@+id/btnAdd"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="33dp"
             android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
             android:layout_marginTop="5dp"
-            android:text="Save"
-            android:textSize="21sp"
-            android:textAllCaps="false"
+            android:layout_marginRight="25dp"
             android:background="@drawable/rounded"
             android:gravity="center"
-            android:id="@+id/btnAdd"/>
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textSize="21sp" />
 
         <Button
             android:layout_width="100dp"

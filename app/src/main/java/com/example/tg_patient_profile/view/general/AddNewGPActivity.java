@@ -2,6 +2,7 @@ package com.example.tg_patient_profile.view.general;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -51,6 +52,16 @@ public class AddNewGPActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //finish();
                 onBackPressed();
+            }
+        });
+
+        Button uploadPhotoButton = findViewById(R.id.uploadPhotoButton);
+
+        uploadPhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent uploadPhotoIntent = new Intent(AddNewGPActivity.this, UploadPhoto.class);
+                startActivity(uploadPhotoIntent);
             }
         });
     }
