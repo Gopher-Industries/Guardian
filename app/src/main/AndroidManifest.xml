@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.tg_patient_profile" >
+    package="com.example.tg_patient_profile">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,29 +10,41 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label=""
+        android:label="Guardians"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TeamGuardians"
         tools:replace="android:label"
         tools:targetApi="31">
 
+
+        <activity
+            android:name=".view.caretaker.notifications.falsealarm.FalseAlertConfirmedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.caretaker.notifications.confirmincident.ConfirmIncidentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.caretaker.notifications.falsealarm.FalseAlertConfirmedDialogActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.caretaker.notifications.CaretakerDashboardNotificationsActivity"
+            android:exported="false" />
         <activity
             android:name=".view.caretaker.CaretakerDashboardActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".view.patient.patientdata.healthdata.HealthDataActivity"
+            android:exported="false" />
         <activity
             android:name=".view.patient.patientdata.generalpractitioner.GPListActivity"
             android:exported="false" />
-
         <activity
             android:name=".view.general.AddNewGPActivity"
             android:exported="false" />
         <activity
             android:name=".view.patient.associateradar.ActivitySuggestionActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".view.patient.viewactivitydata.WeeklyActivityProfilingActivity"
             android:exported="false">
@@ -54,20 +66,19 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-       <activity
+        <activity
             android:name=".view.patient.careplan.CarePlanActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".view.patient.dailyreport.DailyReportSummaryActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".view.patient.dailyreport.DailyReportActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -92,7 +103,7 @@
             android:exported="false" />
         <activity
             android:name=".view.general.MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
