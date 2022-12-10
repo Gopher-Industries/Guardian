@@ -20,6 +20,7 @@ import com.example.tg_patient_profile.util.Util;
 import com.example.tg_patient_profile.view.general.PatientListActivity;
 import com.example.tg_patient_profile.view.general.DrawerActivity;
 import com.example.tg_patient_profile.view.patient.patientdata.healthandwelfare.HealthAndWelfareActivity;
+import com.example.tg_patient_profile.view.patient.patientdata.healthdata.HealthDataActivity;
 import com.example.tg_patient_profile.view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity;
 import com.example.tg_patient_profile.view.patient.patientdata.generalpractitioner.GPListActivity;
 import com.example.tg_patient_profile.view.patient.viewactivitydata.WeeklyActivityProfilingActivity;
@@ -74,6 +75,15 @@ public class PatientDashboardActivity extends AppCompatActivity {
                     Log.i("berapa", Util.setToArray(dailyReportStatusList).length + "");
                     startActivity(dailyReportSummaryIntent);
                 }
+            }
+        });
+
+
+        healthDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent patientListIntent = new Intent(PatientDashboardActivity.this, HealthDataActivity.class);
+                startActivity(patientListIntent);
             }
         });
 

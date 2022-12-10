@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.tg_patient_profile.R;
+import com.example.tg_patient_profile.view.caretaker.notifications.CaretakerDashboardNotificationsActivity;
 import com.example.tg_patient_profile.view.general.PatientListActivity;
+import com.example.tg_patient_profile.view.patient.patientdata.healthdata.HealthDataActivity;
 
 public class CaretakerDashboardActivity extends AppCompatActivity {
 
@@ -25,6 +27,12 @@ public class CaretakerDashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_caretaker_dashboard);
 
         selectAPatientTextView = (TextView) findViewById(R.id.selectAPatientTextView);
+    }
+
+
+    public void onNotificationsClick(View view) {
+        Intent medicalDiagnosticsActivityIntent = new Intent(CaretakerDashboardActivity.this, CaretakerDashboardNotificationsActivity.class);
+        startActivity(medicalDiagnosticsActivityIntent);
     }
 
     //Listener for the button to add orders
