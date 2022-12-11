@@ -24,7 +24,7 @@
             android:name=".view.patient.Patient_Page"
             android:exported="false" />
         <activity
-            android:name=".view.general.UploadPhoto"
+            android:name=".view.general.UploadPhoto"/>
 
 
 
@@ -136,6 +136,14 @@
         <activity
             android:name=".view.patient.patientdata.healthandwelfare.HealthAndWelfareActivity"
             android:exported="false" />
+
+        <service
+            android:name=".model.FirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <meta-data
             android:name="preloaded_fonts"
