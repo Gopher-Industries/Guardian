@@ -7,45 +7,45 @@
     tools:context=".view.general.RegisterActivity">
 
         <EditText
-            android:id="@+id/registerEmail"
+            android:id="@+id/Email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:ems="10"
             android:hint="Enter email address"
             android:inputType="textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/registerPassword"
+            app:layout_constraintBottom_toTopOf="@+id/password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/registerPassword"
+            android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:ems="10"
             android:hint="Enter password"
             android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/registerConfirm"
+            app:layout_constraintBottom_toTopOf="@+id/passwordConfirm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/registerConfirm"
+            android:id="@+id/passwordConfirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:ems="10"
             android:hint="Confirm password"
             android:inputType="textPassword"
-            app:layout_constraintBottom_toTopOf="@+id/createAccountButton"
+            app:layout_constraintBottom_toTopOf="@+id/registerBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/createAccountButton"
+        android:id="@+id/registerBtn"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_marginBottom="10dp"
@@ -72,9 +72,36 @@
         app:cornerRadius="24dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.cardview.widget.CardView
+    <TextView
+        android:id="@+id/createText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:text="Already Registered ? Login Here"
+        android:textColor="#0598a5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerBtn" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createText"
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="invisible" />
+
+    <androidx.cardview.widget.CardView
             android:id="@+id/medicalDiaganosticsHeaderCardView"
             android:layout_width="0dp"
             android:layout_height="220dp"

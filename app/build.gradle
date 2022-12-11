@@ -57,7 +57,12 @@ dependencies {
 
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'com.google.firebase:firebase-storage:20.1.0'
+
+    implementation 'com.google.firebase:firebase-auth:21.1.0'
+    implementation 'com.google.firebase:firebase-firestore:24.4.1'
+
     implementation 'com.google.firebase:firebase-messaging:23.0.5'
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

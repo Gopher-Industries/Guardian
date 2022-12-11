@@ -11,9 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tg_patient_profile.R;
+
+import com.google.firebase.auth.FirebaseAuth;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,5 +53,12 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("token", token);
                     }
                 });
+    }
+
+
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();//logout
+        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+        finish();
     }
 }
