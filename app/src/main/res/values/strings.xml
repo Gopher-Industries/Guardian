@@ -36,6 +36,25 @@
     <string name="about">About</string>
     <string name="others">Others</string>
     <string name="verified">Verified</string>
+    
+    <string name="confirm_incident_text"> ·   Lying in an unsual place. \n \n ·   Resembling sleeping behaviour in an unusual time \n \n      ·   <b>Usual bedtime</b>: 10:30pm - 6:30am \n \n      ·   <b>Recorder bedtime</b>: 10:30pm - 6:30am \n \n ·   No movement detected over 15 minutes</string>
+    <string name="confirm_incident_verified_by"><b>Incident verified by:</b> <font fgcolor="#FF0B98C5"> Georgia Blakeney</font></string>
+
+    <string-array name="hospital_list_array">
+        <item>Royal Melbourne Hospital</item>
+        <item>Austin Hospital</item>
+        <item>St Vincent’s Hospital Melbourne</item>
+        <item>Western Hospital Footscray</item>
+        <item>Sunshine Hospital and Joan Kirner Women’s and Children’s</item>
+        <item>Monash Medical Centre (Clayton Campus) and Monash Children’s Hospital</item>
+        <item>Monash Medical Centre (Moorabbin Campus)</item>
+        <item>Dandenong Hospital</item>
+        <item>Angliss Hospital</item>
+        <item>Box Hill Hospital</item>
+        <item>Wantirna Health</item>
+        <item>Caulfield Hospital</item>
+        <item>Sandringham Hospital</item>
+    </string-array>
 
     <string-array name="aged_care_planning_regional_code_array">
         <item>1**</item>

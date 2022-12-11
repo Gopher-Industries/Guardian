@@ -16,18 +16,13 @@
         android:theme="@style/Theme.TeamGuardians"
         tools:replace="android:label"
         tools:targetApi="31">
-
         <activity
             android:name=".view.general.GP_Page"
             android:exported="false" />
         <activity
             android:name=".view.patient.Patient_Page"
             android:exported="false" />
-        <activity
-            android:name=".view.general.UploadPhoto"/>
-
-
-
+        <activity android:name=".view.general.UploadPhoto" />
         <activity
             android:name=".view.caretaker.notifications.falsealarm.FalseAlertConfirmedActivity"
             android:exported="false" />
@@ -38,18 +33,14 @@
             android:name=".view.caretaker.notifications.falsealarm.FalseAlertConfirmedDialogActivity"
             android:exported="false" />
         <activity
-            android:name=".view.caretaker.notifications.CaretakerDashboardNotificationsActivity"
-
+            android:name=".view.caretaker.notifications.FallAlertActivity"
             android:exported="false" />
         <activity
             android:name=".view.caretaker.CaretakerDashboardActivity"
             android:exported="false" />
-
-
         <activity
             android:name=".view.patient.patientdata.healthdata.HealthDataActivity"
             android:exported="false" />
-
         <activity
             android:name=".view.patient.patientdata.generalpractitioner.GPListActivity"
             android:exported="false" />
