@@ -95,20 +95,6 @@ public class PatientDashboardActivity extends AppCompatActivity {
             }
         });
 
-        viewActivityDataButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        associateRadarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
 
         viewActivityDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
