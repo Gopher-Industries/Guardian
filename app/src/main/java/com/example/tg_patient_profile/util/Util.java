@@ -1,5 +1,16 @@
 package com.example.tg_patient_profile.util;
 
+import android.content.Context;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 import java.util.Set;
 
 public class Util {
@@ -22,6 +33,46 @@ public class Util {
     public static final String PAIN = "pain";
     public static final String PAIN_SCORE = "pain_score";
     public static final String BEHAVIOUR_MANAGEMENT = "behaviour_management";
+
+    // variables for notification
+    public static final String NOTIFICATION_TITLE = "title";
+    public static final String NOTIFICATION_RECEIVER_TOKEN = "to";
+    public static final String NOTIFICATION_MESSAGE = "message";
+    public static final String NOTIFICATION_DATA = "data";
+    public static final String CHANNEL_ID = "guardians";
+    public static final String CHANNEL_NAME = "guardians_app_notifications";
+    public static final String CHANNEL_DESCRIPTION = "Guardians App Notifications";
+
+    // token nodes
+    public static final String TOKENS = "tokens";
+    public static final String DEVICE_TOKEN = "device_token";
+
+    public static void updateDeviceToken(final Context context, String token, String username) {
+
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference(); // get root node of the firebase
+        DatabaseReference databaseReference = rootRef.child(Util.TOKENS).child(username); // get token node associated to the user
+
+        // create new hashmap, used to specify nodes in the firebase
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put(Util.DEVICE_TOKEN, token);
+
+        // set values of nodes in the firebase
+        databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+            // on click listener for if the node update is completed
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (!task.isSuccessful()) // if token is failed to be updated
+                {
+                    Util.createToast(context, "Failed to update token");
+                }
+            }
+        });
+    }
+
+    public static void createToast(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
 
 
 
