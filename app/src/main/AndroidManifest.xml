@@ -22,7 +22,9 @@
         <activity
             android:name=".view.patient.Patient_Page"
             android:exported="false" />
-        <activity android:name=".view.general.UploadPhoto" />
+        <activity
+            android:name=".view.general.UploadPhoto"
+            android:exported="false" />
         <activity
             android:name=".view.caretaker.notifications.falsealarm.FalseAlertConfirmedActivity"
             android:exported="false" />
@@ -106,6 +108,7 @@
         <activity
             android:name=".view.general.AddNewPatientActivity"
             android:exported="false" />
+            <!--Kussay: may we need to change the start up page into login page  -->
         <activity
             android:name=".view.general.MainActivity"
             android:exported="true">
