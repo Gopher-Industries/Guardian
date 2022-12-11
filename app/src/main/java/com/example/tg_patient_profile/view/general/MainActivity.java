@@ -8,6 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tg_patient_profile.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,5 +27,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(getStartedIntent);
             }
         });
+    }
+
+
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();//logout
+        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+        finish();
     }
 }
