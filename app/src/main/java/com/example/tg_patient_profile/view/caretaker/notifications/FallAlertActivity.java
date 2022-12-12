@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.view.caretaker.notifications.confirmincident.ConfirmIncidentActivity;
-import com.example.tg_patient_profile.view.caretaker.notifications.falsealarm.FalseAlertConfirmedDialogActivity;
+import com.example.tg_patient_profile.view.caretaker.notifications.falsealarm.FalseAlertConfirmedActivity;
 
 public class FallAlertActivity extends AppCompatActivity {
 
@@ -32,7 +32,8 @@ public class FallAlertActivity extends AppCompatActivity {
         falseAlarmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent medicalDiagnosticsActivityIntent = new Intent(FallAlertActivity.this, FalseAlertConfirmedDialogActivity.class);
+
+                Intent medicalDiagnosticsActivityIntent = new Intent(FallAlertActivity.this, FalseAlertConfirmedActivity.class);
                 startActivity(medicalDiagnosticsActivityIntent);
             }
         });
