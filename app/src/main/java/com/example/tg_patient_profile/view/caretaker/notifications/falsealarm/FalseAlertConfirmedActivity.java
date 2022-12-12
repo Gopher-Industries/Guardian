@@ -14,7 +14,7 @@ public class FalseAlertConfirmedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.confirmincidentfalsealert);
+        setContentView(R.layout.activity_confirm_false_alert);
     }
 
     public void onFalseAlertConfirmedCancelClick(View view) {

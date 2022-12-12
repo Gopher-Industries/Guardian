@@ -13,7 +13,7 @@ public class FalseAlertConfirmedDialogActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.falsealertconfirmed);
+        setContentView(R.layout.activity_false_alert_confirmed);
     }
 
     public void onFalseAlertConfirmedClick(View view) {

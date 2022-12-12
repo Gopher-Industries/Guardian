@@ -39,6 +39,7 @@
     
     <string name="confirm_incident_text"> ·   Lying in an unsual place. \n \n ·   Resembling sleeping behaviour in an unusual time \n \n      ·   <b>Usual bedtime</b>: 10:30pm - 6:30am \n \n      ·   <b>Recorder bedtime</b>: 10:30pm - 6:30am \n \n ·   No movement detected over 15 minutes</string>
     <string name="confirm_incident_verified_by"><b>Incident verified by:</b> <font fgcolor="#FF0B98C5"> Georgia Blakeney</font></string>
+    <string name="false_alert_verified_by"><b>False alert verified by:</b> <font fgcolor="#FF0B98C5"> Georgia Blakeney</font></string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
