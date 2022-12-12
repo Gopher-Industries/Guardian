@@ -10,7 +10,6 @@ import android.widget.ImageButton;
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.view.caretaker.notifications.confirmincident.ConfirmIncidentActivity;
 import com.example.tg_patient_profile.view.caretaker.notifications.falsealarm.FalseAlertConfirmedActivity;
-import com.example.tg_patient_profile.view.caretaker.notifications.falsealarm.FalseAlertConfirmedDialogActivity;
 
 public class FallAlertActivity extends AppCompatActivity {
 
