@@ -264,7 +264,7 @@
 
         <TextView
             android:id="@+id/currentMedicalDiagnosticsBloodfatLevelHeadingTextView"
-            android:layout_width="match_parent"
+            android:layout_width="386dp"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingTop="15dp"
@@ -275,7 +275,7 @@
 
         <TextView
             android:id="@+id/currentMedicalDiagnosticsBloodfatLevelTextView"
-            android:layout_width="match_parent"
+            android:layout_width="395dp"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingBottom="5dp"
