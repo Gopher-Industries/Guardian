@@ -4,25 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/L1111"
     tools:context=".view.patient.Patient_Page">
 
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/medicalDiaganosticsHeaderCardView"
         android:layout_width="425dp"
-        android:layout_height="189dp"
+        android:layout_height="250dp"
         android:layout_marginTop="-40dp"
-        app:cardBackgroundColor="@color/TG_blue"
+        app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="244dp">
+        <ImageView
+            android:id="@+id/editPatientButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="356dp"
+            android:layout_marginTop="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/edit_button" />
 
-            <ImageView
+        <ImageView
                 android:id="@+id/menuButton11"
                 android:layout_width="33dp"
                 android:layout_height="wrap_content"
@@ -32,7 +39,19 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/menu_button" />
 
-            <TextView
+        <ImageView
+            android:id="@+id/medicalDiagnosticsEditImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="31dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/medicalDiagnosticsTitleTextView"
+            app:srcCompat="@drawable/profile_avatar_women" />
+
+        <TextView
                 android:id="@+id/medicalDiagnosticsTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,9 +68,7 @@
                 />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <LinearLayout
@@ -77,14 +94,6 @@
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
 
-        <ImageView
-            android:id="@+id/medicalDiagnosticsEditImageView"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/profile_avatar_women" />
 
         <TextView
             android:id="@+id/txtFirstName"
@@ -254,23 +263,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#E5E5E5" />
-
-        <Button
-            android:id="@+id/MoreInfoOfPatient"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="100dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="#3297C3"
-            android:fontFamily="@font/poppins_bold"
-            android:text="More info"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/behaviorManagementSummary" />
 
     </LinearLayout>
 
