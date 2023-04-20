@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "82295290581",
-    "firebase_url": "https://testtg-b99cd-default-rtdb.firebaseio.com",
-    "project_id": "testtg-b99cd",
-    "storage_bucket": "testtg-b99cd.appspot.com"
+    "project_number": "979498571776",
+    "project_id": "sit-22t3-team-guardian-c-a0b51",
+    "storage_bucket": "sit-22t3-team-guardian-c-a0b51.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:82295290581:android:757e86b71783113c37405c",
+        "mobilesdk_app_id": "1:979498571776:android:f8a9d1e39854c620bbe0e5",
         "android_client_info": {
           "package_name": "com.example.tg_patient_profile"
         }
       },
       "oauth_client": [
         {
-          "client_id": "82295290581-6noglbikcbcdepktlhh8evlb445ev29c.apps.googleusercontent.com",
+          "client_id": "979498571776-e56cgoacmbadignra15253rdieqtrbks.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCpfOlpsT9zfGyOZf68RTgtMiQsn6GHT6I"
+          "current_key": "AIzaSyBlrAkFSOGZmu1J6hxF9VMR4X5egthPRc4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "82295290581-6noglbikcbcdepktlhh8evlb445ev29c.apps.googleusercontent.com",
+              "client_id": "979498571776-e56cgoacmbadignra15253rdieqtrbks.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

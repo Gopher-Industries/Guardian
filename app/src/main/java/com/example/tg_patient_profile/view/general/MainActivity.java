@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                         String token = task.getResult();
 
                         // Log and toast
-                        Log.d("token", token);
+                        Log.d("token: ", token);
                     }
                 });
     }
