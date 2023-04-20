@@ -50,6 +50,9 @@
             android:name=".view.patient.associateradar.ActivitySuggestionActivity"
             android:exported="false" />
         <activity
+            android:name=".view.general.HealthDataForViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.patient.viewactivitydata.WeeklyActivityProfilingActivity"
             android:exported="false">
             <meta-data
@@ -104,8 +107,7 @@
             android:exported="false" />
         <activity
             android:name=".view.general.AddNewPatientActivity"
-            android:exported="false" />
-            <!--Kussay: may we need to change the start up page into login page  -->
+            android:exported="false" /> <!-- Kussay: may we need to change the start up page into login page -->
         <activity
             android:name=".view.general.MainActivity"
             android:exported="true">

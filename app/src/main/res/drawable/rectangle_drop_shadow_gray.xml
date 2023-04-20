@@ -12,11 +12,11 @@
     </item>
 
     <!-- White Top color -->
-    <item android:bottom="5px">
+    <item android:bottom="3px">
 
         <shape  android:shape="rectangle">
 
-            <solid android:color="#F5F5F5" />
+            <solid android:color="#F9F9F9" />
             <corners android:radius="7dp" />
 
 
