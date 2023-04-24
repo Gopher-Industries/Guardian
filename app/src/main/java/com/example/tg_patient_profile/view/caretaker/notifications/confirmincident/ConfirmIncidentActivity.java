@@ -12,7 +12,6 @@ import android.widget.Spinner;
 
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.view.caretaker.CaretakerDashboardActivity;
-import com.example.tg_patient_profile.view.patient.patientdata.healthandwelfare.HealthAndWelfareFragment1;
 
 public class ConfirmIncidentActivity extends AppCompatActivity {
 

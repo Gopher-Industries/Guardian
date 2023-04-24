@@ -25,7 +25,6 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="48dp"
         android:background="@color/white"
-        android:onClick="onPatientDataClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectAPatientTextView"
         app:srcCompat="@drawable/patient_data" />
@@ -133,28 +132,16 @@
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
     <Button
-        android:id="@+id/patientProfileUpdateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="404dp"
-        android:onClick="onPatientProfileUpdateClick"
-        android:text="Test: Health and Welfare Details"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
-
-    <Button
         android:id="@+id/medicalDiaganosticsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="60dp"
         android:onClick="onMedicalDiagnosticsClick"
         android:text="Test: Medical Diagnostics"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/patientProfileUpdateButton" />
+        app:layout_constraintTop_toBottomOf="@+id/viewActivityDataButton" />
 
     <Button
         android:id="@+id/navigationDrawerButton"

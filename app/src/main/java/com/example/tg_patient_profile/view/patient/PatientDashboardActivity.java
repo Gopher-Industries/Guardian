@@ -19,10 +19,8 @@ import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.util.Util;
 import com.example.tg_patient_profile.view.general.PatientListActivity;
 import com.example.tg_patient_profile.view.general.DrawerActivity;
-import com.example.tg_patient_profile.view.patient.patientdata.healthandwelfare.HealthAndWelfareActivity;
 import com.example.tg_patient_profile.view.patient.patientdata.healthdata.HealthDataActivity;
 import com.example.tg_patient_profile.view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity;
-import com.example.tg_patient_profile.view.patient.patientdata.generalpractitioner.GPListActivity;
 import com.example.tg_patient_profile.view.patient.viewactivitydata.WeeklyActivityProfilingActivity;
 
 import java.util.HashSet;
@@ -30,7 +28,7 @@ import java.util.Set;
 
 public class PatientDashboardActivity extends AppCompatActivity {
 
-    ImageButton patientDataButton, dailyReportButton, healthDataButton,
+    ImageButton dailyReportButton, healthDataButton,
             viewActivityDataButton, associateRadarButton, carePlanButton;
     TextView choosePatientButton;
     Boolean dailyReportLodged;
@@ -53,7 +51,6 @@ public class PatientDashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_patient_dashboard);
 
         choosePatientButton = (TextView) findViewById(R.id.selectAPatientTextView);
-        patientDataButton = (ImageButton) findViewById(R.id.patientDataButton);
         dailyReportButton = (ImageButton) findViewById(R.id.dailyReportButton);
         healthDataButton = (ImageButton) findViewById(R.id.healthDataButton);
         viewActivityDataButton = (ImageButton) findViewById(R.id.viewActivityDataButton);
@@ -112,12 +109,6 @@ public class PatientDashboardActivity extends AppCompatActivity {
         });
     }
 
-
-    public void onPatientDataClick(View view) {
-        Intent medicalDiagnosticsActivityIntent = new Intent(PatientDashboardActivity.this, GPListActivity.class);
-        startActivity(medicalDiagnosticsActivityIntent);
-    }
-
     public void onHealthDataClick(View view) {
     }
 
@@ -125,12 +116,6 @@ public class PatientDashboardActivity extends AppCompatActivity {
         Intent drawerActivityActivityIntent = new Intent(PatientDashboardActivity.this, DrawerActivity.class);
         startActivity(drawerActivityActivityIntent);
     }
-
-    public void onPatientProfileUpdateClick(View view) {
-        Intent patientProfileUpdateIntent = new Intent(PatientDashboardActivity.this, HealthAndWelfareActivity.class);
-        startActivity(patientProfileUpdateIntent);
-    }
-
 
     public void onMedicalDiagnosticsClick(View view) {
         Intent patientProfileUpdateIntent = new Intent(PatientDashboardActivity.this, MedicalDiagnosticsActivity.class);
