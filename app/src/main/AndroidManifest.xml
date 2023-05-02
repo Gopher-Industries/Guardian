@@ -17,12 +17,6 @@
         tools:replace="android:label"
         tools:targetApi="31">
         <activity
-            android:name=".view.general.GP_Page"
-            android:exported="false" />
-        <activity
-            android:name=".view.patient.Patient_Page"
-            android:exported="false" />
-        <activity
             android:name=".view.general.UploadPhoto"
             android:exported="false" />
         <activity
@@ -39,12 +33,6 @@
             android:exported="false" />
         <activity
             android:name=".view.patient.patientdata.healthdata.HealthDataActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.patient.patientdata.generalpractitioner.GPListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.AddNewGPActivity"
             android:exported="false" />
         <activity
             android:name=".view.patient.associateradar.ActivitySuggestionActivity"
@@ -94,12 +82,6 @@
             android:name=".view.general.PatientListActivity"
             android:exported="false" />
         <activity
-            android:name=".view.caretaker.CaretakerProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.patient.PatientDashboardActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.general.RegisterActivity"
             android:exported="false" />
         <activity
@@ -118,16 +100,13 @@
             </intent-filter>
         </activity> <!-- These are here only for UI testing -->
         <activity
-            android:name=".view.patient.dailyreport.Dataforview2Activity"
-            android:exported="false" />
-        <activity
             android:name=".view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity"
             android:exported="false" />
         <activity
             android:name=".view.general.DrawerActivity"
             android:exported="false" />
         <activity
-            android:name=".view.patient.patientdata.healthandwelfare.HealthAndWelfareActivity"
+            android:name=".view.patient.PatientDashboardActivity"
             android:exported="false" />
 
         <service

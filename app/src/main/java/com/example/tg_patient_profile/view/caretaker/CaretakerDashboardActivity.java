@@ -44,10 +44,4 @@ public class CaretakerDashboardActivity extends AppCompatActivity {
         Intent patientProfileListIntent = new Intent(CaretakerDashboardActivity.this, PatientListActivity.class);
         startActivity(patientProfileListIntent);
     }
-
-    //Listener for the button to add orders
-    public void onCaretakerProfileEditClick(View view) {
-        Intent patientProfileListIntent = new Intent(CaretakerDashboardActivity.this, CaretakerProfileActivity.class);
-        startActivity(patientProfileListIntent);
-    }
 }

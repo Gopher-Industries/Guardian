@@ -89,21 +89,6 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-  <TextView
-      android:id="@+id/editCaretakerProfileTextView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:onClick="onCaretakerProfileEditClick"
-      android:text="Edit Caretaker Profile"
-      android:textColor="#2B86AC"
-      android:textStyle="bold"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.503"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/selectAPatientTextView"
-      app:layout_constraintVertical_bias="0.214" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
