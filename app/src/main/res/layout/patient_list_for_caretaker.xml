@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textAlignment="center"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:context=".view.caretaker.CaretakerForPatientList">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/patient_list_backgroud"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/menuButton_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/menu_button"
+            tools:layout_editor_absoluteX="51dp"
+            tools:layout_editor_absoluteY="65dp" />
+
+
+        <ImageView
+            android:id="@+id/imageView8_a"
+            android:layout_width="54dp"
+            android:layout_height="51dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="624dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/profile_icon_small" />
+
+        <ImageView
+            android:id="@+id/imageView7_a"
+            android:layout_width="67dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="44dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/gopher_logo" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
+
+
+            <TextView
+                android:id="@+id/title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Patient List"
+                android:textColor="@android:color/white"
+                android:textSize="25dp"
+                android:translationZ="2dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="134dp" />
+
+            <ImageView
+                android:id="@+id/imageView48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.21"
+                app:srcCompat="@drawable/rectangle_18161"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/placeholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Search patients or others"
+                android:translationZ="2dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView48"
+                tools:layout_editor_absoluteX="98dp" />
+
+            <ImageView
+                android:id="@+id/imageView70"
+                android:layout_width="26dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView48"
+                app:srcCompat="@drawable/right_vector"
+                tools:layout_editor_absoluteX="337dp" />
+
+            <ImageView
+                android:id="@+id/imageView63"
+                android:layout_width="35dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView48"
+                app:srcCompat="@drawable/search_icon"
+                tools:layout_editor_absoluteX="41dp" />
+
+            <ImageView
+                android:id="@+id/imageView49"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView48"
+                app:layout_constraintVertical_bias="0.138"
+                app:srcCompat="@drawable/rectangle_18161"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/placeholder2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Patients Overiew"
+                android:translationZ="2dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView49"
+                tools:layout_editor_absoluteX="98dp" />
+
+            <ImageView
+                android:id="@+id/imageView64"
+                android:layout_width="26dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView49"
+                app:srcCompat="@drawable/right_vector"
+                tools:layout_editor_absoluteX="337dp" />
+
+            <ImageView
+                android:id="@+id/imageView55"
+                android:layout_width="35dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="14dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView49"
+                app:srcCompat="@drawable/red_circle"
+                tools:layout_editor_absoluteX="41dp" />
+
+            <ImageView
+                android:id="@+id/imageView50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView49"
+                app:layout_constraintVertical_bias="0.157"
+                app:srcCompat="@drawable/rectangle_18161"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/placeholder3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Patient name 1"
+                android:translationZ="2dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView50"
+                tools:layout_editor_absoluteX="98dp" />
+
+            <ImageView
+                android:id="@+id/imageView65"
+                android:layout_width="26dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView50"
+                app:srcCompat="@drawable/right_vector"
+                tools:layout_editor_absoluteX="337dp" />
+
+            <ImageView
+                android:id="@+id/imageView56"
+                android:layout_width="35dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView50"
+                app:srcCompat="@drawable/red_circle"
+                tools:layout_editor_absoluteX="41dp" />
+
+            <ImageView
+                android:id="@+id/imageView51"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView50"
+                app:layout_constraintVertical_bias="0.19"
+                app:srcCompat="@drawable/rectangle_18161"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/placeholder4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Patient name 2"
+                android:translationZ="2dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView51"
+                tools:layout_editor_absoluteX="98dp" />
+
+            <ImageView
+                android:id="@+id/imageView66"
+                android:layout_width="26dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView51"
+                app:srcCompat="@drawable/right_vector"
+                tools:layout_editor_absoluteX="337dp" />
+
+            <ImageView
+                android:id="@+id/imageView57"
+                android:layout_width="35dp"
+                android:layout_height="33dp"
+                app:srcCompat="@drawable/red_circle"
+                tools:layout_editor_absoluteX="41dp"
+                tools:layout_editor_absoluteY="369dp" />
+
+            <ImageView
+                android:id="@+id/imageView52"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView51"
+                app:layout_constraintVertical_bias="0.235"
+                app:srcCompat="@drawable/rectangle_18161"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/placeholder5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Patient name 3"
+                android:translationZ="2dp"
+                app:layout_constraintTop_toBottomOf="@+id/imageView51"
+                tools:layout_editor_absoluteX="98dp" />
+
+            <ImageView
+                android:id="@+id/imageView67"
+                android:layout_width="26dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="21dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView52"
+                app:srcCompat="@drawable/right_vector"
+                tools:layout_editor_absoluteX="337dp" />
+
+            <ImageView
+                android:id="@+id/imageView58"
+                android:layout_width="35dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView52"
+                app:srcCompat="@drawable/orange_circle"
+                tools:layout_editor_absoluteX="41dp" />
+
+            <ImageView
+                android:id="@+id/imageView53"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView52"
+                app:layout_constraintVertical_bias="0.307"
+                app:srcCompat="@drawable/rectangle_18161"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/placeholder6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Patient name 4"
+                android:translationZ="2dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView53"
+                tools:layout_editor_absoluteX="98dp" />
+
+            <ImageView
+                android:id="@+id/imageView68"
+                android:layout_width="26dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView53"
+                app:srcCompat="@drawable/right_vector"
+                tools:layout_editor_absoluteX="337dp" />
+
+            <ImageView
+                android:id="@+id/imageView59"
+                android:layout_width="35dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView53"
+                app:srcCompat="@drawable/green_circle"
+                tools:layout_editor_absoluteX="41dp" />
+
+            <ImageView
+                android:id="@+id/imageView54"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageView53"
+                app:layout_constraintVertical_bias="0.444"
+                app:srcCompat="@drawable/rectangle_18161"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/placeholder7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Patient name 5"
+                android:translationZ="2dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView54"
+                tools:layout_editor_absoluteX="98dp" />
+
+            <ImageView
+                android:id="@+id/imageView69"
+                android:layout_width="26dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView54"
+                app:srcCompat="@drawable/right_vector"
+                tools:layout_editor_absoluteX="337dp" />
+
+            <ImageView
+                android:id="@+id/imageView60"
+                android:layout_width="35dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="@+id/imageView54"
+                app:srcCompat="@drawable/green_circle"
+                tools:layout_editor_absoluteX="41dp" />
+
+            <ImageView
+                android:id="@+id/imageView61"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/three_point"
+                tools:layout_editor_absoluteX="188dp"
+                tools:layout_editor_absoluteY="641dp" />
+
+            <ImageView
+                android:id="@+id/imageView62"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/edit_button_plus"
+                tools:layout_editor_absoluteX="188dp"
+                tools:layout_editor_absoluteY="671dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
