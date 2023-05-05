@@ -25,7 +25,8 @@ public class CaretakerForPatientList extends RecyclerView.ViewHolder {
         arrowImage65.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), CaretakerPatientDetail.class);
+                //Because I don't have a Patient Profile page here yet, I'll use activity_caretakerprofile.xml temporarily for now
+                Intent intent = new Intent(v.getContext(), CaretakerProfileActivity.class);
 
                 v.getContext().startActivity(intent);
             }
@@ -35,7 +36,8 @@ public class CaretakerForPatientList extends RecyclerView.ViewHolder {
         arrowImage66.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), CaretakerPatientDetail.class);
+                //Because I don't have a Patient Profile page here yet, I'll use activity_caretakerprofile.xml temporarily for now
+                Intent intent = new Intent(v.getContext(), CaretakerProfileActivity.class);
 
                 v.getContext().startActivity(intent);
             }
@@ -45,7 +47,8 @@ public class CaretakerForPatientList extends RecyclerView.ViewHolder {
         arrowImage67.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), CaretakerPatientDetail.class);
+                //Because I don't have a Patient Profile page here yet, I'll use activity_caretakerprofile.xml temporarily for now
+                Intent intent = new Intent(v.getContext(), CaretakerProfileActivity.class);
 
                 v.getContext().startActivity(intent);
             }
@@ -55,7 +58,8 @@ public class CaretakerForPatientList extends RecyclerView.ViewHolder {
         arrowImage68.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), CaretakerPatientDetail.class);
+                //Because I don't have a Patient Profile page here yet, I'll use activity_caretakerprofile.xml temporarily for now
+                Intent intent = new Intent(v.getContext(), CaretakerProfileActivity.class);
 
                 v.getContext().startActivity(intent);
             }
@@ -65,7 +69,8 @@ public class CaretakerForPatientList extends RecyclerView.ViewHolder {
         arrowImage69.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), CaretakerPatientDetail.class);
+                //Because I don't have a Patient Profile page here yet, I'll use activity_caretakerprofile.xml temporarily for now
+                Intent intent = new Intent(v.getContext(), CaretakerProfileActivity.class);
 
                 v.getContext().startActivity(intent);
             }
