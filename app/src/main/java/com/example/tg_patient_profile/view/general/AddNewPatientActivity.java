@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class AddNewPatientActivity extends AppCompatActivity {
 
-    EditText name, address, underCare, photo, phone, dob;
+    EditText name, id, caretaker, photo, dob, medicare;
     Button btnAdd, btnBack;
 
     @Override
@@ -26,12 +26,13 @@ public class AddNewPatientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_patient);
 
-        name=(EditText) findViewById(R.id.txtName);
-        address=(EditText) findViewById(R.id.txtAddress);
-        underCare=(EditText) findViewById(R.id.txtUnderCare);
-        phone=(EditText) findViewById(R.id.txtPhone);
-        photo=(EditText) findViewById(R.id.urlPhoto);
-        dob=(EditText) findViewById(R.id.txtDoB);
+        name = (EditText) findViewById(R.id.patientNameEditText);
+        id = (EditText) findViewById(R.id.patientIDEditText);
+        dob = (EditText) findViewById(R.id.dateOfBirthEditText);
+        photo =(EditText) findViewById(R.id.patientPhotoURLEditText);
+        dob = (EditText) findViewById(R.id.dateOfBirthEditText);
+        caretaker = (EditText) findViewById(R.id.careTakerEditText);
+        medicare = (EditText) findViewById(R.id.medicareEditText);
 
         btnAdd=(Button) findViewById(R.id.btnAdd);
         btnBack=(Button) findViewById(R.id.btnBack);
@@ -57,9 +58,9 @@ public class AddNewPatientActivity extends AppCompatActivity {
     {
         Map<String, Object> map =new HashMap<>();
         map.put("name", name.getText().toString());
-        map.put("address", address.getText().toString());
-        map.put("underCare", underCare.getText().toString());
-        map.put("phone", phone.getText().toString());
+        map.put("id", id.getText().toString());
+        map.put("medicare", medicare.getText().toString());
+        map.put("caretaker", caretaker.getText().toString());
         map.put("photo", photo.getText().toString());
         map.put("dob", dob.getText().toString());
 
@@ -82,10 +83,10 @@ public class AddNewPatientActivity extends AppCompatActivity {
     private void clearAll()
     {
         name.setText("");
-        address.setText("");
-        underCare.setText("");
+        id.setText("");
+        caretaker.setText("");
         dob.setText("");
         photo.setText("");
-        phone.setText("");
+        medicare.setText("");
     }
 }

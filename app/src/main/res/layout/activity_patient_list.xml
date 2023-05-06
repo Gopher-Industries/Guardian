@@ -8,13 +8,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:layout_marginTop="11dp"
+        android:layout_width="350dp"
+        android:layout_height="0dp"
+
+        android:paddingTop="120dp"
+        android:paddingBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.069" />
+        app:layout_constraintTop_toBottomOf="@+id/getStartedButton" />
 
     <Button
         android:id="@+id/getStartedButton"
@@ -94,9 +96,9 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/rv"
         app:layout_constraintEnd_toEndOf="@+id/rv"
-        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.899"
+        app:layout_constraintVertical_bias="0.97"
         app:srcCompat="@drawable/add_new" />
 </androidx.constraintlayout.widget.ConstraintLayout>

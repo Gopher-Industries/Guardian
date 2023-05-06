@@ -3,103 +3,164 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="30dp"
+    android:background="@drawable/rectangle_drop_shadow"
     android:elevation="6dp"
     app:cardCornerRadius="9dp"
     app:cardUseCompatPadding="true"
-    app:contentPadding="30dp">
+    app:contentPadding="10dp">
 
     <RelativeLayout
         android:id="@+id/patientDataListItem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp">
+        android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img1"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginTop="25sp"
             android:src="@mipmap/ic_launcher"
             app:civ_border_color="#aaaaaa"
             app:civ_border_width="2dp" />
 
         <TextView
             android:id="@+id/nametext"
-            android:layout_width="match_parent"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:layout_toRightOf="@+id/img1"
-            android:text="Patient Name: "
-            android:textColor="#000"
-            android:textSize="20sp"
+            android:fontFamily="@font/poppins"
+            android:text="Name:"
+            android:textColor="#666262"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/addresstext"
-            android:layout_width="match_parent"
+            android:id="@+id/idtext"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/nametext"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/img1"
-            android:text="Address: "
-            android:textColor="#000"
-            android:textSize="20sp" />
+            android:text="ID:"
+            android:textColor="#666262"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/dobtext"
-            android:layout_width="match_parent"
+            android:id="@+id/agetext"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/addresstext"
-            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/idtext"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/img1"
-            android:text="Date of Birth: "
-            android:textColor="#000"
-            android:textSize="20sp" />
+            android:text="Age:"
+            android:textColor="#666262"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/phonetext"
-            android:layout_width="match_parent"
+            android:id="@+id/medicaretext"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/dobtext"
-            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/agetext"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/img1"
-            android:text="Phone: "
-            android:textColor="#000"
-            android:textSize="20sp" />
+            android:text="Medicare:"
+            android:textColor="#666262"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/undercaretext"
-            android:layout_width="match_parent"
+            android:id="@+id/caretakertext"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/phonetext"
-            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/medicaretext"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/img1"
-            android:text="Under Care: "
-            android:textColor="#000"
-            android:textSize="20sp" />
+            android:text="Caretaker:"
+            android:textColor="#666262"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/patientCaretakerTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/patientMedicareTV"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@id/caretakertext"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/patientNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/nametext"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/patientIDTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/patientNameTV"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@id/idtext"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/patientAgeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/patientIDTV"
+            android:layout_marginTop="9dp"
+            android:layout_toRightOf="@id/agetext"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/patientMedicareTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/patientAgeTV"
+            android:layout_marginTop="9dp"
+            android:layout_toRightOf="@id/medicaretext"
+            android:text="TextView" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/undercaretext"
+            android:layout_below="@+id/caretakertext"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnEdit"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
                 android:backgroundTint="#0B98C5"
                 android:text="Edit"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnDelete"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
                 android:backgroundTint="#0B98C5"
                 android:text="Delete"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </RelativeLayout>

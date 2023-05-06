@@ -28,16 +28,16 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/rounded"
         android:gravity="center"
-        android:id="@+id/txtName"/>
+        android:id="@+id/patientNameEditText"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="Address"/>
+        android:gravity="center"
+        android:text="ID"
+        android:textSize="20sp" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -45,7 +45,7 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/rounded"
         android:gravity="center"
-        android:id="@+id/txtAddress"/>
+        android:id="@+id/patientIDEditText"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -62,16 +62,16 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/rounded"
         android:gravity="center"
-        android:id="@+id/txtDoB"/>
+        android:id="@+id/dateOfBirthEditText"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="Phone"/>
+        android:gravity="center"
+        android:text="Medicare"
+        android:textSize="20sp" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -79,16 +79,16 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/rounded"
         android:gravity="center"
-        android:id="@+id/txtPhone"/>
+        android:id="@+id/medicareEditText"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="20sp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="Under Care of"/>
+        android:gravity="center"
+        android:text="Caretaker"
+        android:textSize="20sp" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -96,7 +96,7 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/rounded"
         android:gravity="center"
-        android:id="@+id/txtUnderCare"/>
+        android:id="@+id/careTakerEditText"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -113,7 +113,7 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/rounded"
         android:gravity="center"
-        android:id="@+id/urlPhoto"/>
+        android:id="@+id/patientPhotoURLEditText"/>
 
     <Button
         android:layout_width="match_parent"

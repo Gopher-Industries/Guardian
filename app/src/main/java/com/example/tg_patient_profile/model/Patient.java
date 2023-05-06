@@ -1,27 +1,33 @@
 package com.example.tg_patient_profile.model;
 
+import java.util.Date;
+
 public class Patient {
-    String address, dob, name, phone, photo, underCare;
+    String name, id, medicare, caretaker, dob, photo;
+//    Date dob;
+//    byte[] photo;
 
-    Patient(){
-
+    public Patient() {
     }
-    public Patient(String address, String dob, String name, String phone, String photo, String underCare) {
-        this.address = address;
-        this.dob = dob;
+
+    public Patient(String photo, String name, String id, String dob, String medicare, String caretaker) {
         this.name = name;
-        this.phone = phone;
+        this.id = id;
+        this.dob = dob;
+        this.medicare = medicare;
+        this.caretaker = caretaker;
         this.photo = photo;
-        this.underCare = underCare;
     }
 
-    public String getAddress() {
-        return address;
-    }
+//    public Patient(byte[] photo, String name, String id, Date dob, String medicare, String caretaker) {
+//        this.name = name;
+//        this.id = id;
+//        this.dob = dob;
+//        this.medicare = medicare;
+//        this.caretaker = caretaker;
+//        this.photo = photo;
+//    }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public String getDob() {
         return dob;
@@ -29,22 +35,6 @@ public class Patient {
 
     public void setDob(String dob) {
         this.dob = dob;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getPhoto() {
@@ -55,11 +45,36 @@ public class Patient {
         this.photo = photo;
     }
 
-    public String getUnderCare() {
-        return underCare;
+    public String getId() {
+        return id;
     }
 
-    public void setUnderCare(String underCare) {
-        this.underCare = underCare;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+    public String getMedicare() {
+        return medicare;
+    }
+
+    public void setMedicare(String medicare) {
+        this.medicare = medicare;
+    }
+
+    public String getCaretaker() {
+        return caretaker;
+    }
+
+    public void setCaretaker(String caretaker) {
+        this.caretaker = caretaker;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -24,8 +24,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.time.Period;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -46,12 +50,23 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<Patient, Patient
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull myViewHolder holder,final int position, @NonNull Patient model) {
+    protected void onBindViewHolder(@NonNull myViewHolder holder, final int position, @NonNull Patient model) {
+        int age = -1;
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//            Date dob = model.getDob();
+//            LocalDate localDob = dob.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//            LocalDate now = LocalDate.now();
+//            Period period = Period.between(localDob, now);
+//            age = period.getYears();
+//        }
+
         holder.name.setText(model.getName());
-        holder.address.setText(model.getAddress());
-        holder.dob.setText(model.getDob());
-        holder.phone.setText(model.getPhone());
-        holder.underCare.setText(model.getUnderCare());
+        holder.id.setText(model.getId());
+        holder.caretaker.setText(model.getCaretaker());
+        holder.medicare.setText(model.getMedicare());
+        holder.age.setText(model.getDob());
+
+//        holder.age.setText(age == -1 ? "Unknown" : String.valueOf(age));
 
         Glide.with(holder.photo.getContext())
                 .load(model.getPhoto())
@@ -59,65 +74,65 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<Patient, Patient
                 .circleCrop()
                 .error(com.firebase.ui.database.R.drawable.common_google_signin_btn_icon_dark_normal)
                 .into(holder.photo);
-
-        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final DialogPlus dialogPlus=DialogPlus.newDialog(holder.photo.getContext())
-                        .setContentHolder(new ViewHolder(R.layout.update_popup))
-                        .setExpanded(true,1500)
-                        .create();
-
-                View view =dialogPlus.getHolderView();
-
-                EditText name =view.findViewById(R.id.txtName);
-                EditText dob=view.findViewById(R.id.txtDoB);
-                EditText address=view.findViewById(R.id.txtAddress);
-                EditText phone=view.findViewById(R.id.txtPhone);
-                EditText photo=view.findViewById(R.id.urlPhoto);
-                EditText underCare=view.findViewById(R.id.txtUnderCare);
-
-                Button btnUpdate=view.findViewById(R.id.btnUpdate);
-
-                name.setText(model.getName());
-                dob.setText(model.getDob());
-                address.setText(model.getAddress());
-                phone.setText(model.getPhone());
-                photo.setText(model.getPhoto());
-                underCare.setText(model.getUnderCare());
-                dialogPlus.show();
-
-                btnUpdate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Map<String,Object> map = new HashMap<>();
-                        map.put("name",name.getText().toString());
-                        map.put("address",address.getText().toString());
-                        map.put("dob",dob.getText().toString());
-                        map.put("phone",phone.getText().toString());
-                        map.put("photo",photo.getText().toString());
-                        map.put("underCare",underCare.getText().toString());
-
-                        FirebaseDatabase.getInstance().getReference().child("patients")
-                                .child(getRef(position).getKey()).updateChildren(map)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                        Toast.makeText(holder.name.getContext(),"Data Updated",Toast.LENGTH_SHORT);
-                                        dialogPlus.dismiss();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(Exception e) {
-                                        Toast.makeText(holder.name.getContext(),"Failed to Updated",Toast.LENGTH_SHORT);
-                                        dialogPlus.dismiss();
-                                    }
-                                });
-                    }
-                });
-            }
-        });
+//
+//        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final DialogPlus dialogPlus=DialogPlus.newDialog(holder.photo.getContext())
+//                        .setContentHolder(new ViewHolder(R.layout.update_popup))
+//                        .setExpanded(true,1500)
+//                        .create();
+//
+//                View view =dialogPlus.getHolderView();
+//
+//                EditText name =view.findViewById(R.id.txtName);
+//                EditText dob=view.findViewById(R.id.txtDoB);
+//                EditText address=view.findViewById(R.id.txtAddress);
+//                EditText phone=view.findViewById(R.id.txtPhone);
+//                EditText photo=view.findViewById(R.id.urlPhoto);
+//                EditText underCare=view.findViewById(R.id.txtUnderCare);
+//
+//                Button btnUpdate=view.findViewById(R.id.btnUpdate);
+//
+//                name.setText(model.getName());
+//                dob.setText(model.getDob());
+//                address.setText(model.getAddress());
+//                phone.setText(model.getPhone());
+//                photo.setText(model.getPhoto());
+//                underCare.setText(model.getUnderCare());
+//                dialogPlus.show();
+//
+//                btnUpdate.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Map<String,Object> map = new HashMap<>();
+//                        map.put("name",name.getText().toString());
+//                        map.put("address",address.getText().toString());
+//                        map.put("dob",dob.getText().toString());
+//                        map.put("phone",phone.getText().toString());
+//                        map.put("photo",photo.getText().toString());
+//                        map.put("underCare",underCare.getText().toString());
+//
+//                        FirebaseDatabase.getInstance().getReference().child("patients")
+//                                .child(getRef(position).getKey()).updateChildren(map)
+//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                    @Override
+//                                    public void onSuccess(Void unused) {
+//                                        Toast.makeText(holder.name.getContext(),"Data Updated",Toast.LENGTH_SHORT);
+//                                        dialogPlus.dismiss();
+//                                    }
+//                                })
+//                                .addOnFailureListener(new OnFailureListener() {
+//                                    @Override
+//                                    public void onFailure(Exception e) {
+//                                        Toast.makeText(holder.name.getContext(),"Failed to Updated",Toast.LENGTH_SHORT);
+//                                        dialogPlus.dismiss();
+//                                    }
+//                                });
+//                    }
+//                });
+//            }
+//        });
 
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,7 +169,7 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<Patient, Patient
 
     class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         CircleImageView photo;
-        TextView name, address, dob, phone, underCare;
+        TextView name, id, age, medicare, caretaker;
 
         Button btnEdit, btnDelete;
 
@@ -165,11 +180,11 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<Patient, Patient
             super(itemView);
 
             photo=(CircleImageView) itemView.findViewById(R.id.img1);
-            name=(TextView)itemView.findViewById(R.id.nametext);
-            address=(TextView) itemView.findViewById(R.id.addresstext);
-            dob=(TextView) itemView.findViewById(R.id.dobtext);
-            phone=(TextView) itemView.findViewById(R.id.phonetext);
-            underCare=(TextView) itemView.findViewById(R.id.undercaretext);
+            name=(TextView)itemView.findViewById(R.id.patientNameTV);
+            id=(TextView) itemView.findViewById(R.id.patientIDTV);
+            age=(TextView) itemView.findViewById(R.id.patientAgeTV);
+            medicare=(TextView) itemView.findViewById(R.id.patientMedicareTV);
+            caretaker=(TextView) itemView.findViewById(R.id.patientCaretakerTV);
 
             btnEdit=(Button)itemView.findViewById(R.id.btnEdit);
             btnDelete=(Button) itemView.findViewById(R.id.btnDelete);
