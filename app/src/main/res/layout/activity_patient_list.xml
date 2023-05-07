@@ -4,99 +4,151 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/patient_list_backgroud"
+    android:textAlignment="center"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
     tools:context=".view.general.PatientListActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:layout_marginTop="11dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.069" />
-
-    <Button
-        android:id="@+id/getStartedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:width="200dp"
-        android:height="60dp"
-        android:backgroundTint="@color/TG_blue"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Get started"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:cornerRadius="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/rv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/medicalDiaganosticsHeaderCardView"
-        android:layout_width="0dp"
-        android:layout_height="220dp"
-        android:layout_marginTop="-40dp"
-        app:cardBackgroundColor="@color/TG_blue"
-        app:cardCornerRadius="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/medicalDiagnosticsTitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/poppins_bold"
-                android:text="Welcome to Patient checker"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/medicalDiagnosticsEditImageView" />
-
-            <ImageView
-                android:id="@+id/medicalDiagnosticsEditImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/medicalDiagnosticsTitleTextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/gopher_logo" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="123dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/patient_list_manu_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#00FFC3"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/rv"
-        app:layout_constraintEnd_toEndOf="@+id/rv"
-        app:layout_constraintHorizontal_bias="0.96"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="65dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.899"
-        app:srcCompat="@drawable/add_new" />
+        app:srcCompat="@drawable/menu_button" />
+
+
+    <ImageView
+        android:id="@+id/patient_list_head_image"
+        android:layout_width="54dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintStart_toEndOf="@+id/patient_list_company_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/profile_icon_small" />
+
+    <ImageView
+        android:id="@+id/patient_list_company_icon"
+        android:layout_width="67dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/gopher_logo" />
+
+    <TextView
+        android:id="@+id/patient_list_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Patient List"
+        android:textColor="@android:color/white"
+        android:textSize="25dp"
+        android:translationZ="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patient_list_company_icon" />
+
+    <SearchView
+        android:id="@+id/patient_list_searchView"
+        android:layout_width="375dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/white_rectangle_patient_list"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search patients or others"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patient_list_title" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/patient_list_patient_overview"
+        android:layout_width="375dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="3dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patient_list_searchView">
+
+        <LinearLayout
+            android:id="@+id/patient_list_overview_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <ImageView
+                android:id="@+id/imageView55"
+                android:layout_width="35dp"
+                android:layout_height="33dp"
+                app:srcCompat="@drawable/red_circle"
+                tools:layout_editor_absoluteX="41dp"
+                tools:layout_editor_absoluteY="232dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="9dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Patients Overview"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <ImageView
+                android:id="@+id/imageView64"
+                android:layout_width="26dp"
+                android:layout_height="31dp"
+                android:layout_marginLeft="140dp"
+                android:layout_marginTop="5dp"
+                app:srcCompat="@drawable/right_vector"
+                tools:layout_editor_absoluteX="337dp"
+                tools:layout_editor_absoluteY="234dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:id="@+id/patient_list_scrollView"
+        android:layout_width="409dp"
+        android:layout_height="338dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patient_list_patient_overview">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/patient_list_recycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/imageView61"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginTop="7dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patient_list_scrollView"
+        app:srcCompat="@drawable/three_point" />
+
+    <ImageView
+        android:id="@+id/imageView62"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="188dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView61"
+        app:srcCompat="@drawable/edit_button_plus" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
