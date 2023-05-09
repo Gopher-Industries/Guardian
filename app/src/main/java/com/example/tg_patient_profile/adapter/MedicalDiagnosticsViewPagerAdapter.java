@@ -2,16 +2,16 @@ package com.example.tg_patient_profile.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 
 import com.example.tg_patient_profile.view.patient.patientdata.medicaldiagnostics.CurrentMedicalDiagnosticsFragment;
+import com.example.tg_patient_profile.view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsFragment;
 import com.example.tg_patient_profile.view.patient.patientdata.medicaldiagnostics.PastMedicalDiagnosticsFragment;
 
-public class ViewPagerAdapter extends FragmentStateAdapter {
+public class MedicalDiagnosticsViewPagerAdapter extends FragmentStateAdapter {
 
-    public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
+    public MedicalDiagnosticsViewPagerAdapter(@NonNull MedicalDiagnosticsFragment fragmentActivity) {
         super(fragmentActivity);
     }
 
@@ -31,6 +31,4 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     public int getItemCount() {
         return 2;
     }
-
-    //TEST
 }
