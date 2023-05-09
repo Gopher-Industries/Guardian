@@ -51,12 +51,5 @@
             app:tabTextAppearance="@style/TabLayoutTheme"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/layout_navigation_header"
-        app:menu="@menu/navigation_menu" />
-
+    <include layout="@layout/navigation_view" android:id="@id/nav_view"/>
 </androidx.drawerlayout.widget.DrawerLayout>
