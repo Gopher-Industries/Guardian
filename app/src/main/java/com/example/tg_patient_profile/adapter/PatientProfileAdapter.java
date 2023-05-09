@@ -7,7 +7,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.example.tg_patient_profile.view.GP.GPProfileFragment;
 import com.example.tg_patient_profile.view.general.HealthDataForViewFragment;
+import com.example.tg_patient_profile.view.nextofkin.NextOfKinFragment;
 import com.example.tg_patient_profile.view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsFragment;
 import com.example.tg_patient_profile.view.patient.patientdata.patient.PatientProfileFragment;
 
@@ -24,9 +27,9 @@ public class PatientProfileAdapter extends FragmentStateAdapter {
             case 0:
                 return new PatientProfileFragment();
             case 1:
-                return new PatientProfileFragment();
+                return new GPProfileFragment();
             case 2:
-                return new PatientProfileFragment();
+                return new NextOfKinFragment();
             case 3:
                 return  new MedicalDiagnosticsFragment();
             default:
