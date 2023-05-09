@@ -27,9 +27,9 @@ public class PatientProfileAdapter extends FragmentStateAdapter {
             case 0:
                 return new PatientProfileFragment();
             case 1:
-                return new GPProfileFragment();
-            case 2:
                 return new NextOfKinFragment();
+            case 2:
+                return new GPProfileFragment();
             case 3:
                 return  new MedicalDiagnosticsFragment();
             default:
