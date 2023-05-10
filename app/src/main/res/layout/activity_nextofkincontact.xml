@@ -4,49 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/L1111"
     tools:context=".view.patient.Patient_Page">
 
-
-    <ImageView
-        android:id="@+id/imageView21"
-        android:layout_width="413dp"
-        android:layout_height="900dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/medicalDiaganosticsHeaderCardView"
+        android:layout_width="425dp"
+        android:layout_height="250dp"
         android:layout_marginTop="-40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/patient_profile_bg" />
-
-    <ImageView
-        android:id="@+id/menuButton11"
-        android:layout_width="33dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="95dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView21"
-        app:srcCompat="@drawable/menu_button" />
-
-    <TextView
-        android:id="@+id/medicalDiagnosticsTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="GP Profile"
-        android:textColor="@color/white"
-
-        android:textSize="20sp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+
+
+            <ImageView
+                android:id="@+id/menuButton11"
+                android:layout_width="33dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="76dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/menu_button" />
+
+        <ImageView
+                android:id="@+id/medicalDiagnosticsEditImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/profile_avatar_men"
+                tools:layout_editor_absoluteX="160dp"
+                tools:layout_editor_absoluteY="120dp" />
+
+        <TextView
+            android:id="@+id/medicalDiagnosticsTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Next of Kin Contact"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="113dp"
+            tools:layout_editor_absoluteY="76dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:layout_marginTop="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="172dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-16dp">
 
 
         <TextView
@@ -70,7 +87,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:background="#"
-            android:text="Johnny"
+            android:text="Harry"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,8 +149,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
+            android:background="#"
             android:inputType="textMultiLine"
-            android:text="Smiths"
+            android:text="Bvarton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -143,26 +161,26 @@
             android:background="#E5E5E5" />
 
         <TextView
-            android:id="@+id/clinic_addresstext"
+            android:id="@+id/DateOfBirth"
             android:layout_width="250dp"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
-            android:text="Clinic Address"
+            android:text="Address"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/supportReqSummary" />
 
         <TextView
-            android:id="@+id/txtClinicAddress"
+            android:id="@+id/txtDateOfBirth"
             android:layout_width="365dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:background="#"
-            android:text="31 Solaris Drive, Melbourne, VIC, 2767, Australia"
+            android:text="41 Solaris Drive, Melbourne, VIC 2767,Australla"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateOfBirth" />
 
@@ -172,7 +190,7 @@
             android:background="#E5E5E5" />
 
         <TextView
-            android:id="@+id/phoneNumber"
+            android:id="@+id/medicareNumber"
             android:layout_width="133dp"
             android:layout_height="25dp"
             android:layout_marginStart="16dp"
@@ -185,14 +203,14 @@
             app:layout_constraintTop_toBottomOf="@+id/dietTimingSummary" />
 
         <TextView
-            android:id="@+id/txtPhone"
+            android:id="@+id/txtMedicareNumber"
             android:layout_width="365dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:background="#"
             android:inputType="textMultiLine"
-            android:text="+61 399 832  791"
+            android:text="+61 399 832 791"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView131" />
 
@@ -202,7 +220,7 @@
             android:background="#E5E5E5" />
 
         <TextView
-            android:id="@+id/Email"
+            android:id="@+id/WesternAffairsNumber"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
@@ -215,14 +233,14 @@
             app:layout_constraintTop_toBottomOf="@+id/drinkLikesSummary" />
 
         <TextView
-            android:id="@+id/txtEmail"
+            android:id="@+id/txtWesternAffairsNumber"
             android:layout_width="365dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:background="#"
             android:backgroundTint="#ECECEC"
-            android:text="sample@gmail.com"
+            android:text="harrybvarton@gmail.com"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView61" />
 
@@ -231,52 +249,23 @@
             android:layout_height="1dp"
             android:background="#E5E5E5" />
 
-        <TextView
-            android:id="@+id/faxtext"
+        <Button
+            android:id="@+id/MoreInfoOfPatient"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="sans-serif-black"
-            android:text="Fax"
-            android:textColor="@color/black"
-            android:textSize="16sp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="#3297C3"
+            android:fontFamily="@font/poppins_bold"
+            android:text="More info"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/drinkLikesSummary" />
-
-        <TextView
-            android:id="@+id/txtFax"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="5dp"
-            android:background="#"
-            android:backgroundTint="#ECECEC"
-            android:text="336-555-2222"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView61" />
+            app:layout_constraintTop_toBottomOf="@+id/behaviorManagementSummary" />
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="121dp"
-        android:layout_height="103dp"
-        android:layout_marginTop="90dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/man2" />
-
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="38dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="50dp"
-        android:background="#0B93BF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/edit_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
