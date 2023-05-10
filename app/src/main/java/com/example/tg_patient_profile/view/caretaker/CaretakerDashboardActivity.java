@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.view.caretaker.notifications.FallAlertActivity;
-import com.example.tg_patient_profile.view.general.HealthDataForViewActivity;
+import com.example.tg_patient_profile.view.general.PatientProfileActivity;
 import com.example.tg_patient_profile.view.general.PatientListActivity;
 
 public class CaretakerDashboardActivity extends AppCompatActivity {
@@ -30,7 +30,7 @@ public class CaretakerDashboardActivity extends AppCompatActivity {
     }
 
     public void onHealthDataClick(View view) {
-        Intent healthDataActivityIntent = new Intent(CaretakerDashboardActivity.this, HealthDataForViewActivity.class);
+        Intent healthDataActivityIntent = new Intent(CaretakerDashboardActivity.this, PatientProfileActivity.class);
         startActivity(healthDataActivityIntent);
     }
 

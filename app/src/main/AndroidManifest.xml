@@ -38,7 +38,7 @@
             android:name=".view.patient.associateradar.ActivitySuggestionActivity"
             android:exported="false" />
         <activity
-            android:name=".view.general.HealthDataForViewActivity"
+            android:name=".view.general.PatientProfileActivity"
             android:exported="false" />
         <activity
             android:name=".view.patient.viewactivitydata.WeeklyActivityProfilingActivity"

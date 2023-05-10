@@ -1,78 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.patient.Patient_Page">
+    android:layout_height="match_parent">
+<FrameLayout  android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/medicalDiaganosticsHeaderCardView"
-        android:layout_width="425dp"
-        android:layout_height="189dp"
-        android:layout_marginTop="-40dp"
-        app:cardBackgroundColor="@color/TG_blue"
-        app:cardCornerRadius="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="244dp">
-
-            <ImageView
-                android:id="@+id/menuButton11"
-                android:layout_width="33dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="60dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/menu_button" />
-
-            <TextView
-                android:id="@+id/medicalDiagnosticsTitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="152dp"
-                android:fontFamily="@font/poppins_bold"
-                android:text="Patient Profile"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-
-                />
-
-            <ImageView
-                android:id="@+id/headerGuardiansLogo"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                app:srcCompat="@drawable/profile_avatar_women"
-                tools:layout_editor_absoluteX="160dp"
-                tools:layout_editor_absoluteY="137dp" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
+    <!-- Background ImageView -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/background_logo" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent">
-
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-16dp">
 
         <TextView
             android:id="@+id/FirstName"
@@ -94,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
-            android:text="Marilyn"
+            android:text="Harry"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -172,7 +121,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
-            android:text="Date of Birth"
+            android:text="Address"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -184,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
-            android:text="6/5/1980"
+            android:text="41 Solaris Drive, Melbourne, VIC 2767,Australla"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateOfBirth" />
 
@@ -200,7 +149,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
-            android:text="Medicare no"
+            android:text="Phone Number"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -213,7 +162,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:inputType="textMultiLine"
-            android:text="5065521796"
+            android:text="+61 399 832 791"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView131" />
 
@@ -229,7 +178,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
-            android:text="Western Affairs no"
+            android:text="Email"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -242,7 +191,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:backgroundTint="#ECECEC"
-            android:text="L67M8OB004HQ"
+            android:text="harrybvarton@gmail.com"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView61" />
 
@@ -269,5 +218,5 @@
             app:layout_constraintTop_toBottomOf="@+id/behaviorManagementSummary" />
 
     </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
+</ScrollView>

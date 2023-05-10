@@ -55,7 +55,7 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:cornerRadius="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView4"
+        app:layout_constraintBottom_toTopOf="@+id/headerProfileIcon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
     <TextView
@@ -139,7 +139,7 @@
         app:layout_constraintTop_toTopOf="@+id/radioGroup2" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/headerProfileIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
