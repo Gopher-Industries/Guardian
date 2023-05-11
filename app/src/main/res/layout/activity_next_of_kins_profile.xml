@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/L1111"
-    tools:context=".view.patient.Patient_Page">
+    android:background="@drawable/patient_profile_bg"
+    tools:context=".view.general.NextOfKinsProfile">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/medicalDiaganosticsHeaderCardView"
@@ -21,36 +21,39 @@
 
 
 
-            <ImageView
-                android:id="@+id/menuButton11"
-                android:layout_width="33dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="44dp"
-                android:layout_marginTop="76dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/menu_button" />
+        <ImageView
+            android:id="@+id/menuButton11"
+            android:layout_width="33dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="76dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/menu_button" />
 
         <ImageView
-                android:id="@+id/medicalDiagnosticsEditImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                app:srcCompat="@drawable/profile_avatar_men"
-                tools:layout_editor_absoluteX="160dp"
-                tools:layout_editor_absoluteY="120dp" />
+            android:id="@+id/medicalDiagnosticsEditImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/profile_avatar_men"
+            tools:layout_editor_absoluteX="160dp"
+            tools:layout_editor_absoluteY="120dp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/medicalDiagnosticsTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="76dp"
             android:fontFamily="@font/poppins_bold"
             android:text="Next of Kin Contact"
             android:textColor="@color/white"
             android:textSize="20sp"
-            tools:layout_editor_absoluteX="113dp"
-            tools:layout_editor_absoluteY="76dp" />
+            app:layout_constraintStart_toEndOf="@+id/menuButton11"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -86,7 +89,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
-            android:background="#"
             android:text="Harry"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -117,7 +119,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
-            android:background="#"
             android:text="None"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -149,7 +150,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
-            android:background="#"
             android:inputType="textMultiLine"
             android:text="Bvarton"
             app:layout_constraintStart_toStartOf="parent"
@@ -179,7 +179,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
-            android:background="#"
             android:text="41 Solaris Drive, Melbourne, VIC 2767,Australla"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateOfBirth" />
@@ -208,7 +207,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
-            android:background="#"
             android:inputType="textMultiLine"
             android:text="+61 399 832 791"
             app:layout_constraintStart_toStartOf="parent"
@@ -238,7 +236,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
-            android:background="#"
             android:backgroundTint="#ECECEC"
             android:text="harrybvarton@gmail.com"
             app:layout_constraintStart_toStartOf="parent"
