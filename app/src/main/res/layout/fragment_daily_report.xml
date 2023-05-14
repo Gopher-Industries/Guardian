@@ -3,6 +3,7 @@
 
     <!-- TODO: Update blank fragment layout -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dailyReportScrollView"
     android:layout_width="match_parent"
@@ -11,95 +12,214 @@
     android:background="@drawable/rounded_bg"
     tools:context=".view.patient.dailyreport.DailyReportFragment">
 
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginStart="30px">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="133dp"
+            android:layout_height="25dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Reported By"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="6dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <TextView
+            android:id="@+id/autoid"
+            android:layout_width="360dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/textviewbydailyreport"
+            android:text="Loading data from database..."
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/textView1"
+            tools:layout_editor_absoluteX="6dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="133dp"
+            android:layout_height="25dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Patient name/ID"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="6dp"
+            tools:layout_editor_absoluteY="83dp" />
+
+        <TextView
+            android:id="@+id/autoselect"
+            android:layout_width="362dp"
+            android:layout_height="39dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/textviewbydailyreport"
+            android:text="Auto populate patient to select"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            tools:layout_editor_absoluteX="6dp" />
 
         <ImageView
-            android:id="@+id/dailyReportArrow"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:onClick="dailyReportExpand"
-            android:src="@drawable/arrow_down" />
+            android:id="@+id/imageView0"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/vector"
+            tools:layout_editor_absoluteX="320dp"
+            tools:layout_editor_absoluteY="120dp" />
 
         <TextView
-            android:id="@+id/textView17"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20sp"
-            android:layout_marginTop="10sp"
+            android:id="@+id/textView3"
+            android:layout_width="133dp"
+            android:layout_height="25dp"
+            android:fontFamily="sans-serif-black"
             android:text="Progress Notes"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="6dp"
+            tools:layout_editor_absoluteY="164dp" />
 
         <EditText
-            android:id="@+id/progressNotesTextarea"
-            android:layout_width="350dp"
-            android:layout_height="163dp"
-            android:layout_marginLeft="20sp"
-            android:layout_marginTop="5sp"
-            android:background="@drawable/rectangle"
-            android:inputType="text|textMultiLine"
-            android:maxLength="500"
-            android:textSize="14sp" />
+            android:id="@+id/patientNnormal"
+            android:layout_width="364dp"
+            android:layout_height="94dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/textviewbydailyreport"
+            android:gravity="left"
+            android:text="Patient normal, daily visit..."
+            android:textColor="@color/black_overlay"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            tools:layout_editor_absoluteX="7dp" />
 
         <TextView
-            android:id="@+id/progressTextCount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="30sp"
-            android:text="0/500"
-            android:textAlignment="viewEnd" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20sp"
-            android:layout_marginTop="20sp"
-            android:text="Current Status"
+            android:id="@+id/textView4"
+            android:layout_width="133dp"
+            android:layout_height="25dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Alert"
             android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="6dp"
+            tools:layout_editor_absoluteY="300dp" />
 
+        <TextView
+            android:id="@+id/urgentMedicalAttentionTextView"
+            android:layout_width="340dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_shadow_bg"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Urgent Medical Attention    "
+            android:textColor="#595656"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="22dp"
+            tools:layout_editor_absoluteY="333dp" />
 
-        <LinearLayout
-            android:id="@+id/patientStatusLayout"
-            android:layout_width="350dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20sp"
-            android:orientation="vertical">
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/urgent_patient_status"
+            tools:layout_editor_absoluteX="36dp"
+            tools:layout_editor_absoluteY="338dp" />
 
+        <TextView
+            android:id="@+id/requiresHospitalisationTextView"
+            android:layout_width="340dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_shadow_bg"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Requires Hospitalisation     "
+            android:textColor="#595656"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="22dp"
+            tools:layout_editor_absoluteY="390dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/hospital_patient_status"
+            tools:layout_editor_absoluteX="36dp"
+            tools:layout_editor_absoluteY="395dp" />
+
+        <TextView
+            android:id="@+id/notApplicableTextView"
+            android:layout_width="340dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_shadow_bg"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Not Applicable                       "
+            android:textColor="#595656"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="22dp"
+            tools:layout_editor_absoluteY="449dp" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/forbidden_patient_status"
+            tools:layout_editor_absoluteX="36dp"
+            tools:layout_editor_absoluteY="454dp" />
+
+        <TextView
+            android:id="@+id/requiresHourlyAttentionTextView"
+            android:layout_width="340dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_shadow_bg"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Requires hourly attention    "
+            android:textColor="#595656"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="22dp"
+            tools:layout_editor_absoluteY="508dp" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:src="@drawable/time_patient_status"
+            tools:layout_editor_absoluteX="36dp"
+            tools:layout_editor_absoluteY="513dp" />
 
         <Button
-            android:id="@+id/submitButton"
-            android:layout_width="match_parent"
+            android:id="@+id/loginBtn"
+            android:layout_width="200dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="60dp"
-            android:backgroundTint="@color/light_blue_900"
-            android:text="Submit"
-            android:textColor="@color/white" />
+            android:layout_marginStart="128dp"
+            android:layout_marginEnd="128dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/TG_blue"
+            android:fontFamily="@font/poppins_bold"
+            android:text="SUBMIT"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:cornerRadius="24dp"
+            tools:layout_editor_absoluteX="90dp"
+            tools:layout_editor_absoluteY="572dp" />
 
 
-        <Button
-            android:id="@+id/button11"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/button14"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-        <Button
-            android:id="@+id/button10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
