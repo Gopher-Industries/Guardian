@@ -34,10 +34,10 @@
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/medicalDiagnosticsEditImageView" />
+          app:layout_constraintTop_toBottomOf="@+id/headerGuardiansLogo" />
 
       <ImageView
-          android:id="@+id/medicalDiagnosticsEditImageView"
+          android:id="@+id/headerGuardiansLogo"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="54dp"
@@ -57,8 +57,21 @@
           android:onClick="onNotificationsClick"
           android:text="Test: Notifications"
           android:textSize="10sp"
-          app:layout_constraintBottom_toBottomOf="@+id/medicalDiagnosticsEditImageView"
+          app:layout_constraintBottom_toBottomOf="@+id/headerGuardiansLogo"
           app:layout_constraintEnd_toEndOf="parent" />
+
+      <Button
+          android:id="@+id/button6"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="20dp"
+          android:onClick="onHealthDataClick"
+          android:text="TEST: health data"
+          android:textSize="10sp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.922"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/caretakerDashboardNotificationsButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.cardview.widget.CardView>
 
@@ -75,21 +88,6 @@
       app:layout_constraintHorizontal_bias="0.503"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
-
-  <TextView
-      android:id="@+id/editCaretakerProfileTextView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:onClick="onCaretakerProfileEditClick"
-      android:text="Edit Caretaker Profile"
-      android:textColor="#2B86AC"
-      android:textStyle="bold"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.503"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/selectAPatientTextView"
-      app:layout_constraintVertical_bias="0.214" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

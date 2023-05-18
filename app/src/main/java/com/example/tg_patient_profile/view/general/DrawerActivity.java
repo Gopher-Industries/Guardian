@@ -14,14 +14,13 @@ import com.example.tg_patient_profile.R;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class DrawerActivity extends AppCompatActivity {
-
+public class DrawerActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
 
-        DrawerLayout drawerLayout = findViewById(R.id.drawerlayout);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
 
         findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
             @Override

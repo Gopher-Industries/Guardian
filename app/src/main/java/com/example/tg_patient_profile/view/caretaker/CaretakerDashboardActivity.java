@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.view.caretaker.notifications.FallAlertActivity;
+import com.example.tg_patient_profile.view.general.PatientProfileActivity;
 import com.example.tg_patient_profile.view.general.PatientListActivity;
 
 public class CaretakerDashboardActivity extends AppCompatActivity {
@@ -28,6 +29,10 @@ public class CaretakerDashboardActivity extends AppCompatActivity {
         selectAPatientTextView = (TextView) findViewById(R.id.selectAPatientTextView);
     }
 
+    public void onHealthDataClick(View view) {
+        Intent healthDataActivityIntent = new Intent(CaretakerDashboardActivity.this, PatientProfileActivity.class);
+        startActivity(healthDataActivityIntent);
+    }
 
     public void onNotificationsClick(View view) {
         Intent medicalDiagnosticsActivityIntent = new Intent(CaretakerDashboardActivity.this, FallAlertActivity.class);
@@ -37,12 +42,6 @@ public class CaretakerDashboardActivity extends AppCompatActivity {
     //Listener for the button to add orders
     public void onSelectAPatientClick(View view) {
         Intent patientProfileListIntent = new Intent(CaretakerDashboardActivity.this, PatientListActivity.class);
-        startActivity(patientProfileListIntent);
-    }
-
-    //Listener for the button to add orders
-    public void onCaretakerProfileEditClick(View view) {
-        Intent patientProfileListIntent = new Intent(CaretakerDashboardActivity.this, CaretakerProfileActivity.class);
         startActivity(patientProfileListIntent);
     }
 }
