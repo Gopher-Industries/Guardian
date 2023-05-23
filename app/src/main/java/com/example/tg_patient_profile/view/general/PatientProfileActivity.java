@@ -66,8 +66,10 @@ public class PatientProfileActivity extends AppCompatActivity {
                         else if (position == 3){
                             tab.setText("Health Details");
                         }
-                        else {
+                        else if (position == 4){
                             tab.setText("Health & Welfare Det.");
+                        }else{
+                            tab.setText("Care Plan");
                         }
                     }
                 }).attach();
@@ -91,9 +93,13 @@ public class PatientProfileActivity extends AppCompatActivity {
                 } else if (position == 3) {
                     customHeader.setHeaderText("Health Details");
                     customHeader.setHeaderTopImageVisibility(View.GONE);
-                } else {
+                } else if(position == 4){
                     customHeader.setHeaderText("Patient Details");
                     customHeader.setHeaderTopImageVisibility(View.GONE);
+                }else{
+                    customHeader.setHeaderText("Care Plan");
+                    customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);
+                    customHeader.setHeaderTopImageVisibility(View.VISIBLE);
                 }
             }
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/patient_profile_bg"
-    tools:context=".MainPageWithMenuActivity">
+    tools:context=".view.general.MainPageWithMenuActivity">
 
     <Button
         android:id="@+id/menu_button_main_page"
