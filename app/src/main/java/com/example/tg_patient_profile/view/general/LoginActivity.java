@@ -1,18 +1,13 @@
 package com.example.tg_patient_profile.view.general;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
     TextView mCreateBtn,forgotTextLink;
     ProgressBar progressBar;
     FirebaseAuth Auth;
-    RadioGroup role_radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +44,6 @@ public class LoginActivity extends AppCompatActivity {
         mLoginBtn = findViewById(R.id.loginBtn);
         mCreateBtn = findViewById(R.id.createText);
         forgotTextLink = findViewById(R.id.forgotPassword);
-        role_radioGroup = findViewById(R.id.login_role_radioGroup);
-
-
 
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -61,27 +52,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
-                String role = "";
-                int selectedRadioButtonId = role_radioGroup.getCheckedRadioButtonId();
-                if(selectedRadioButtonId!=-1){
-                    RadioButton seletedRadioButton = findViewById(selectedRadioButtonId);
-                    role = seletedRadioButton.getText().toString();
-                    SharedPreferences sharedPreferences = getSharedPreferences("MY_PREF", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                    if(role.equals("Caretaker")){
-                        editor.putInt("login_role", 0);
-
-                    }else{
-                        editor.putInt("login_role", 1);
-
-                    }
-                    editor.apply();
-                }else{
-                    Toast.makeText(LoginActivity.this, "please choose a role", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
 
                 if(TextUtils.isEmpty(email)){
                     mEmail.setError("Email is Required.");
@@ -107,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),Homepage4admin.class));
+                            startActivity(new Intent(getApplicationContext(),CaretakerDashboardActivity.class));
                         }else {
                             Toast.makeText(LoginActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);

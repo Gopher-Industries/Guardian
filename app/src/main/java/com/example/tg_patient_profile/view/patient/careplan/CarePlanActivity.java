@@ -172,15 +172,15 @@ public class CarePlanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CarePlanSummaryActivity.class);
-//                intent.putExtra(Util.CARE_PLAN_TYPE, carePlanType);
-//                intent.putExtra(Util.NUTRITION_HYDRATION_TYPE, nutritionHyrdration);
-//                intent.putExtra(Util.SUPPORT_REQUIREMENTS, supportRequirements.toArray(new String[0]));
-//                intent.putExtra(Util.DIET_TIMING, dietTiming);
-//                intent.putExtra(Util.DRINK_LIKES, drinkLikes.toArray(new String[0]));
-//                intent.putExtra(Util.SLEEP_PATTERN, sleepPattern);
-//                intent.putExtra(Util.PAIN, painList.toArray(new String[0]));
-//                intent.putExtra(Util.PAIN_SCORE, painScore);
-//                intent.putExtra(Util.BEHAVIOUR_MANAGEMENT, behavioralManagement.toArray(new String[0]));
+                intent.putExtra(Util.CARE_PLAN_TYPE, carePlanType);
+                intent.putExtra(Util.NUTRITION_HYDRATION_TYPE, nutritionHyrdration);
+                intent.putExtra(Util.SUPPORT_REQUIREMENTS, supportRequirements.toArray(new String[0]));
+                intent.putExtra(Util.DIET_TIMING, dietTiming);
+                intent.putExtra(Util.DRINK_LIKES, drinkLikes.toArray(new String[0]));
+                intent.putExtra(Util.SLEEP_PATTERN, sleepPattern);
+                intent.putExtra(Util.PAIN, painList.toArray(new String[0]));
+                intent.putExtra(Util.PAIN_SCORE, painScore);
+                intent.putExtra(Util.BEHAVIOUR_MANAGEMENT, behavioralManagement.toArray(new String[0]));
                 startActivity(intent);
             }
         });
