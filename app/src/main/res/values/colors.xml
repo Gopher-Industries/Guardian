@@ -33,5 +33,6 @@
     <color name="homepageButtonsEnd">#FF2F83AA</color>
     <color name="homepageButtonsStart">#FF54C5F4</color>
 
+    <color name="gray2">#D3D3D3</color>
 
 </resources>
