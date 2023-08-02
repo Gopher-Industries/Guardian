@@ -133,7 +133,7 @@ public class UploadPhoto extends AppCompatActivity {
                     imageuri = data.getData();
                     Bitmap photoBitmap = (Bitmap) data.getExtras().get("data");
                     binding.profile.setImageBitmap(photoBitmap);
-                    startCrop();
+//                    startCrop();
                 } else {
                     uploadImageToFirebase(imageUri2);
                     binding.profile.setImageURI(imageUri2);
@@ -142,7 +142,7 @@ public class UploadPhoto extends AppCompatActivity {
                 imageUri2 = data.getData();
                 uploadImageToFirebase(imageUri2);
                 binding.profile.setImageURI(imageUri2);
-                startCrop();
+//                startCrop();
             }
         }
     }
