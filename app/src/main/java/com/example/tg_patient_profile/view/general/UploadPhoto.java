@@ -18,6 +18,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -166,7 +167,7 @@ public class UploadPhoto extends AppCompatActivity {
 
         String imageName = String.valueOf(imageUri); // Replace "example.jpg" with the desired image file name
         StorageReference imageRef = storageReference.child("images/" + imageName);
-
+        Log.v(imageName,"Image....");
 
         UploadTask uploadTask = imageRef.putFile(imageUri);
 
@@ -177,13 +178,13 @@ public class UploadPhoto extends AppCompatActivity {
             long totalBytes = taskSnapshot.getTotalByteCount();
 
             int progress = (int) (100.0 * bytesTransferred / totalBytes);
+            Log.v(String.valueOf(progress),"progress....");
 
         }).addOnSuccessListener(taskSnapshot -> {
 
             imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                 String downloadUrl = uri.toString();
-                // Now you have the download URL of the uploaded image
-                // You can store this URL in your database or use it as needed
+                Log.v(downloadUrl,"Downloading....");
             });
         }).addOnFailureListener(exception -> {
 
