@@ -83,7 +83,8 @@ dependencies {
     //ProfileCirle
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     //CropImg
-    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+//    implementation 'com.theartofdev.edmodo:android-image-cropper:x.y.z'
 
 
     //Navigation Component

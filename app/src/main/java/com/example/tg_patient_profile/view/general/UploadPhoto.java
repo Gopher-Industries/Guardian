@@ -40,6 +40,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 
 public class UploadPhoto extends AppCompatActivity {
 
@@ -55,6 +56,8 @@ public class UploadPhoto extends AppCompatActivity {
     Uri imageuri;
     Uri imageUri2;
 
+    Uri UpdatedPic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,7 @@ public class UploadPhoto extends AppCompatActivity {
 
         storage=FirebaseStorage.getInstance();
         storageReference=storage.getReference();
+
 
         binding.takephoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,20 +90,27 @@ public class UploadPhoto extends AppCompatActivity {
         binding.crop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startCrop();
+                if (CapturePhoto && imageuri != null) {
+                    startCrop(imageuri);
+                } else if (!CapturePhoto && imageUri2 != null) {
+                    startCrop(imageUri2);
+                } else {
+                    Toast.makeText(UploadPhoto.this, "No image selected for cropping", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         binding.close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UploadPhoto.this, PatientAdd.class));
+                Intent intent=new Intent(UploadPhoto.this,PatientAdd.class);
+                startActivity(intent);
             }
         });
     }
 
-    private void startCrop(){
-        CropImage.activity()
+    private void startCrop(Uri imagesUri){
+        CropImage.activity(imagesUri)
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .start(this);
     }
@@ -129,21 +140,29 @@ public class UploadPhoto extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_IMAGE_CAPTURE) {
+            if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                Uri croppedImageUri = result.getUri();
+                binding.profile.setImageURI(croppedImageUri);
+                uploadImageToFirebase(croppedImageUri);
+            } else if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 if (CapturePhoto) {
                     imageuri = data.getData();
                     Bitmap photoBitmap = (Bitmap) data.getExtras().get("data");
                     binding.profile.setImageBitmap(photoBitmap);
-//                    startCrop();
+                    UpdatedPic=imageuri;
                 } else {
+                    imageUri2 = data.getData();
                     uploadImageToFirebase(imageUri2);
                     binding.profile.setImageURI(imageUri2);
+                    startCrop(imageUri2);
+                    UpdatedPic=imageUri2;
                 }
             } else if (requestCode == REQUEST_IMAGE_PICK) {
                 imageUri2 = data.getData();
                 uploadImageToFirebase(imageUri2);
                 binding.profile.setImageURI(imageUri2);
-//                startCrop();
+                startCrop(imageUri2);
             }
         }
     }
@@ -165,31 +184,33 @@ public class UploadPhoto extends AppCompatActivity {
 
     private void uploadImageToFirebase(Uri imageUri) {
 
-        String imageName = String.valueOf(imageUri); // Replace "example.jpg" with the desired image file name
+        String imageName = UUID.randomUUID().toString();
+
         StorageReference imageRef = storageReference.child("images/" + imageName);
-        Log.v(imageName,"Image....");
 
         UploadTask uploadTask = imageRef.putFile(imageUri);
-
 
         uploadTask.addOnProgressListener(taskSnapshot -> {
 
             long bytesTransferred = taskSnapshot.getBytesTransferred();
             long totalBytes = taskSnapshot.getTotalByteCount();
-
             int progress = (int) (100.0 * bytesTransferred / totalBytes);
-            Log.v(String.valueOf(progress),"progress....");
-
+            Log.i("Upload Progress", String.valueOf(progress));
         }).addOnSuccessListener(taskSnapshot -> {
 
             imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                 String downloadUrl = uri.toString();
-                Log.v(downloadUrl,"Downloading....");
+                Log.i("Download URL", downloadUrl);
+
+            }).addOnFailureListener(exception -> {
+
+                exception.printStackTrace();
             });
         }).addOnFailureListener(exception -> {
 
             exception.printStackTrace();
         });
+
     }
 
 }

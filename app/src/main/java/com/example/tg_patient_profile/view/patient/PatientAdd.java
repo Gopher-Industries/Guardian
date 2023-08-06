@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,14 +24,11 @@ public class PatientAdd extends AppCompatActivity {
         next_button = findViewById(R.id.add_patient_nextButton);
         AddImg=findViewById(R.id.addButton);
 
-
-
         AddImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(PatientAdd.this,UploadPhoto.class);
                 startActivity(intent);
-
             }
         });
 

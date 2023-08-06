@@ -42,8 +42,8 @@
         <activity
             android:name=".view.general.UploadPhoto"
             android:exported="false"/>
-        <activity
-            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"/>
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
         <activity
             android:name=".view.caretaker.notifications.falsealarm.FalseAlertConfirmedActivity"
             android:exported="false" />
