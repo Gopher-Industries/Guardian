@@ -42,9 +42,9 @@ tools:context=".view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsFr
                 tools:layout_editor_absoluteX="132dp"
                 tools:layout_editor_absoluteY="10dp" />
 
-            <ImageView
-                android:id="@+id/headerGuardiansLogo"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/header_edit_button"
+                android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="15dp"
                 android:baselineAlignBottom="false"
@@ -52,7 +52,7 @@ tools:context=".view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsFr
                 app:layout_constraintHorizontal_bias="0.789"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/medical_diagnostics_edit" />
+                android:background="@drawable/medical_diagnostics_edit" />
 
 
         </LinearLayout>
