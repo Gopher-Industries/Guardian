@@ -21,7 +21,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tg_patient_profile.R;
-import com.example.tg_patient_profile.databinding.ActivityHomepage4adminBinding;
 import com.example.tg_patient_profile.view.caretaker.CaretakerDashboardActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -106,21 +105,9 @@ public class LoginActivity extends AppCompatActivity {
                 Auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        String role = "";
-                        int selectedRadioButtonId = role_radioGroup.getCheckedRadioButtonId();
-                        if(selectedRadioButtonId!=-1) {
-                            RadioButton seletedRadioButton = findViewById(selectedRadioButtonId);
-                            role = seletedRadioButton.getText().toString();
-                        }
                         if(task.isSuccessful()){
                             Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                            if(role.equals("Caretaker")){
-                                Toast.makeText(LoginActivity.this, "Logged in as CareTaker", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), Homepage4caretaker.class));
-                            }
-                            else{
-                                startActivity(new Intent(getApplicationContext(), Homepage4admin.class));
-                            }
+                            startActivity(new Intent(getApplicationContext(),Homepage4admin.class));
                         }else {
                             Toast.makeText(LoginActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
