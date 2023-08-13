@@ -38,7 +38,9 @@
         <activity
             android:name=".view.general.Homepage4admin"
             android:exported="false" />
-
+        <activity
+            android:name=".view.general.Homepage4caretaker"
+            android:exported="false" />
         <activity
             android:name=".view.general.UploadPhoto"
             android:exported="false"/>
