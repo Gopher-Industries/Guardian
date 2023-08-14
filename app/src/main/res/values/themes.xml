@@ -1,27 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
+    <!-- Base application theme for light mode. -->
     <style name="Theme.TeamGuardians" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Primary brand color. -->
         <item name="colorPrimary">@color/TG_blue</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/white</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-        <item name="android:buttonCornerRadius">30dp</item>
+
         <item name="android:fontFamily">@font/poppins</item>
     </style>
 
-    <style name="Theme.TeamGuardians.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 
-    <style name="Theme.TeamGuardians.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.TeamGuardians.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
