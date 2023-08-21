@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".view.general.UploadPhoto">
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/toolbar"-->
-<!--        android:layout_width="408dp"-->
-<!--        android:layout_height="28dp"-->
-<!--        android:background="?attr/colorPrimary"-->
-<!--        android:elevation="4dp"-->
-<!--        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-<!--        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />-->
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/smallCard"
@@ -37,6 +29,7 @@
             android:text="Add Image"
             android:textAlignment="center"
             android:textColor="@color/black"
+            android:fontFamily="@font/poppins_bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.453"
@@ -78,6 +71,7 @@
             android:layout_marginTop="60dp"
             android:elevation="20dp"
             android:text="Crop Image"
+            android:fontFamily="@font/poppins_bold"
             android:textAlignment="gravity" />
 
         <ImageView
@@ -94,6 +88,7 @@
             android:layout_height="44dp"
             android:layout_marginLeft="18dp"
             android:layout_marginTop="146dp"
+            android:fontFamily="@font/poppins_bold"
             android:background="@drawable/custom_background"
             android:text="Take Photo" />
 
@@ -111,6 +106,7 @@
             android:layout_height="44dp"
             android:layout_marginLeft="18dp"
             android:layout_marginTop="192dp"
+            android:fontFamily="@font/poppins_bold"
             android:background="@drawable/custom_background"
             android:text="Select from gallery" />
 

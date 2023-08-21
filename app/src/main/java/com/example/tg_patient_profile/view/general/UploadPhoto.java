@@ -10,14 +10,17 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -57,6 +60,8 @@ public class UploadPhoto extends AppCompatActivity {
     Uri imageUri2;
 
     Uri UpdatedPic;
+
+    String imgName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +109,8 @@ public class UploadPhoto extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(UploadPhoto.this,PatientAdd.class);
+                intent.putExtra("imgname",imgName);
+//                Log.i("Uploaded Image Name", imgName);
                 startActivity(intent);
             }
         });
@@ -143,11 +150,15 @@ public class UploadPhoto extends AppCompatActivity {
             if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
                 CropImage.ActivityResult result = CropImage.getActivityResult(data);
                 Uri croppedImageUri = result.getUri();
+                String imageName = getImageNameFromUri(croppedImageUri);
+                Log.i("Uploaded Image Name", imageName);
+                imgName=imageName;
                 binding.profile.setImageURI(croppedImageUri);
                 uploadImageToFirebase(croppedImageUri);
             } else if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 if (CapturePhoto) {
                     imageuri = data.getData();
+
                     Bitmap photoBitmap = (Bitmap) data.getExtras().get("data");
                     binding.profile.setImageBitmap(photoBitmap);
                     UpdatedPic=imageuri;
@@ -167,6 +178,29 @@ public class UploadPhoto extends AppCompatActivity {
         }
     }
 
+    private String getImageNameFromUri(Uri uri) {
+        String imageName = null;
+        String scheme = uri.getScheme();
+
+        if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                if (nameIndex >= 0) {
+                    imageName = cursor.getString(nameIndex);
+                }
+                cursor.close();
+            }
+        }
+
+        if (imageName == null) {
+            // If the name couldn't be retrieved from the content resolver, use a default name
+            imageName = generateImageName();
+        }
+
+        return imageName;
+    }
+
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -180,37 +214,33 @@ public class UploadPhoto extends AppCompatActivity {
             }
         }
     }
-
-
     private void uploadImageToFirebase(Uri imageUri) {
-
-        String imageName = UUID.randomUUID().toString();
-
+        String imageName = generateImageName();
         StorageReference imageRef = storageReference.child("images/" + imageName);
 
         UploadTask uploadTask = imageRef.putFile(imageUri);
 
         uploadTask.addOnProgressListener(taskSnapshot -> {
-
             long bytesTransferred = taskSnapshot.getBytesTransferred();
             long totalBytes = taskSnapshot.getTotalByteCount();
             int progress = (int) (100.0 * bytesTransferred / totalBytes);
             Log.i("Upload Progress", String.valueOf(progress));
         }).addOnSuccessListener(taskSnapshot -> {
-
             imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                 String downloadUrl = uri.toString();
                 Log.i("Download URL", downloadUrl);
-
             }).addOnFailureListener(exception -> {
-
                 exception.printStackTrace();
             });
         }).addOnFailureListener(exception -> {
-
             exception.printStackTrace();
         });
+    }
 
+    private String generateImageName() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
+        String timeStamp = dateFormat.format(new Date());
+        return "image_" + timeStamp + ".jpg";
     }
 
 }
