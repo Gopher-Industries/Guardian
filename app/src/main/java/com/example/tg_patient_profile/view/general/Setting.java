@@ -33,6 +33,7 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
         settings_theme_button = findViewById(R.id.settings_theme_button);
         settings_notification_button = findViewById(R.id.settings_notification_button);
         settings_app_update_button = findViewById(R.id.settings_app_update_button);
@@ -43,30 +44,28 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
         settings_app_update_button.setOnClickListener(this);
         settings_feedback_button.setOnClickListener(this);
 
-        notificationSwitch = findViewById(R.id.notification_switch);
-        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                handleNotificationSwitch(isChecked);
+        ConstraintLayout settingsThemeButton = findViewById(R.id.settings_theme_button);
+        settingsThemeButton.setOnClickListener(v -> {
+            SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+            boolean currentNightMode = sharedPreferences.getBoolean("night_mode", false);
+            if (currentNightMode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                sharedPreferences.edit().putBoolean("night_mode", false).apply();
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                sharedPreferences.edit().putBoolean("night_mode", true).apply();
             }
+            recreate();
         });
 
-        SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
-        boolean isNightModeEnabled = preferences.getBoolean("nightMode", false);
-
-        if (isNightModeEnabled) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
+        notificationSwitch = findViewById(R.id.notification_switch);
+        notificationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> handleNotificationSwitch(isChecked));
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.settings_theme_button:
-                toggleDayNightMode();
-                break;
+
             case R.id.settings_feedback_button:
                 showFeedbackDialog();
                 break;
@@ -77,19 +76,6 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
                 break;
         }
     }
-
-    private void toggleDayNightMode() {
-        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-        boolean isNightModeEnabled = currentNightMode == Configuration.UI_MODE_NIGHT_YES;
-
-        AppCompatDelegate.setDefaultNightMode(isNightModeEnabled
-                ? AppCompatDelegate.MODE_NIGHT_NO
-                : AppCompatDelegate.MODE_NIGHT_YES);
-
-        SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
-        preferences.edit().putBoolean("nightMode", !isNightModeEnabled).apply();
-    }
-
     // Notifications
     private void handleNotificationSwitch(boolean isChecked) {
         if (isChecked) {

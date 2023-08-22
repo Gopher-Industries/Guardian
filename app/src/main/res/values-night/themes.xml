@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Dark mode theme -->
+    <style name="Theme.TeamGuardians" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/dark_primary_color</item>
+        <item name="colorPrimaryVariant">@color/dark_primary_variant_color</item>
+        <item name="colorOnPrimary">@color/dark_primary_color</item>
+        <!-- Customize other dark mode attributes here -->
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
+</resources>
