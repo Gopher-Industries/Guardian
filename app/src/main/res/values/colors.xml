@@ -35,4 +35,10 @@
 
     <color name="gray2">#D3D3D3</color>
 
+    <color name="dark_primary_color">#FF2F83AA</color>
+    <color name="dark_primary_variant_color">#FF54C5F4</color>
+    <color name="dark_text_color">#FFFFFF</color>
+    <color name="dark_secondary_color">#3D3D3D</color>
+    <color name="dark_secondary_variant_color">#000000</color>
+
 </resources>

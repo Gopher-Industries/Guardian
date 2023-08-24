@@ -39,6 +39,6 @@ public class PatientProfileAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 6;
     }
 }
