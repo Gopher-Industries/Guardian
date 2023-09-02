@@ -1,20 +1,21 @@
 package com.example.tg_patient_profile.model;
 
 public class GP {
-    String clinic_address, fax, first_name, middle_name, last_name, phone, photo, email;
+    String first_name, middle_name, last_name, clinic_address, phone, email, fax, photo;
 
     GP(){
 
     }
-    public GP(String clinic_address, String fax, String first_name, String middle_name, String last_name, String phone, String photo, String email) {
-        this.clinic_address = clinic_address;
-        this.fax = fax;
+
+    public GP(String first_name, String middle_name, String last_name, String clinic_address, String phone, String email, String fax, String photo) {
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
+        this.clinic_address = clinic_address;
         this.phone = phone;
-        this.photo = photo;
         this.email = email;
+        this.fax = fax;
+        this.photo = photo;
     }
 
     public String getClinic_address() {
