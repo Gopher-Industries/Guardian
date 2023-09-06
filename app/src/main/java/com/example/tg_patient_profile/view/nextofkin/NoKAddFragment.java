@@ -72,6 +72,9 @@ public class NoKAddFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.i("masuk", "coiming 1");
+
+
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -83,6 +86,7 @@ public class NoKAddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.i("masuk", "coiming 2");
         viewPager2 = getActivity().findViewById(R.id.dataForViewViewPager);
         View rootView =inflater.inflate(R.layout.fragment_nok_add, container, false);
         left_button = rootView.findViewById(R.id.nok_add_polygon_left);
@@ -95,6 +99,86 @@ public class NoKAddFragment extends Fragment {
         address_input = rootView.findViewById(R.id.input_nok_adress);
         phone_input = rootView.findViewById(R.id.input_nok_PhoneNumber);
         email_input = rootView.findViewById(R.id.input_nok_EmailAdress);
+
+        Button step1_button = rootView.findViewById(R.id.step1);
+        Button step2_button = rootView.findViewById(R.id.step2);
+        Button step3_button = rootView.findViewById(R.id.step3);
+        Button step4_button = rootView.findViewById(R.id.step4);
+        Button step5_button = rootView.findViewById(R.id.step5);
+
+
+        if (status == 1) {
+            step2_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
+            step3_button.setBackgroundResource(R.drawable.roundshapebtn);
+
+        }
+        if (status == 2) {
+            Log.i("masuk2", "Page 3");
+            step3_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
+            step2_button.setBackgroundResource(R.drawable.roundshapebtn);
+
+        }
+
+        step1_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dataChecker()){
+                    saveNextofKin();
+                    //int nextPage = viewPager2.getCurrentItem()-1;
+                    viewPager2.setCurrentItem(0,true);
+                }
+
+            }
+        });
+
+        step2_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("masuk1", "Pageno 2");
+                if(dataChecker()){
+                    saveNextofKin();
+                    //step3_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
+
+                    // int nextPage = viewPager2.getCurrentItem()+1;
+                    viewPager2.setCurrentItem(1,true);
+                }
+
+            }
+        });
+        step3_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("masuk1", "Pageno 3");
+                if(dataChecker()){
+                    saveNextofKin();
+                    //int nextPage = viewPager2.getCurrentItem()+1;
+                    viewPager2.setCurrentItem(2,true);
+                }
+
+            }
+        });
+        step4_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dataChecker()){
+                    saveNextofKin();
+                    //int nextPage = viewPager2.getCurrentItem()+2;
+                    viewPager2.setCurrentItem(3,true);
+                }
+
+            }
+        });
+        step5_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dataChecker()){
+                    saveNextofKin();
+                   // int nextPage = viewPager2.getCurrentItem()+3;
+                    viewPager2.setCurrentItem(4,true);
+                }
+
+            }
+        });
 
 
         if(status==2){
