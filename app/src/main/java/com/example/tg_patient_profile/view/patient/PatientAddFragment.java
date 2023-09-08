@@ -109,44 +109,44 @@ public class PatientAddFragment extends Fragment {
         step2_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dataChecker()){
+                //if(dataChecker()){
                     savePatient();
                     int nextPage = viewPager2.getCurrentItem()+1;
                     viewPager2.setCurrentItem(nextPage,true);
-                }
+                //}
 
             }
         });
         step3_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dataChecker()){
+                //if(dataChecker()){
                     savePatient();
                     int nextPage = viewPager2.getCurrentItem()+2;
                     viewPager2.setCurrentItem(nextPage,true);
-                }
+               // }
 
             }
         });
         step4_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dataChecker()){
+                //if(dataChecker()){
                     savePatient();
                     int nextPage = viewPager2.getCurrentItem()+3;
                     viewPager2.setCurrentItem(nextPage,true);
-                }
+               // }
 
             }
         });
         step5_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dataChecker()){
+               // if(dataChecker()){
                     savePatient();
                     int nextPage = viewPager2.getCurrentItem()+4;
                     viewPager2.setCurrentItem(nextPage,true);
-                }
+               // }
 
             }
         });

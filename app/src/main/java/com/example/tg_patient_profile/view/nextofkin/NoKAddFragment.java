@@ -122,11 +122,11 @@ public class NoKAddFragment extends Fragment {
         step1_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dataChecker()){
+                //if(dataChecker()){
                     saveNextofKin();
                     //int nextPage = viewPager2.getCurrentItem()-1;
                     viewPager2.setCurrentItem(0,true);
-                }
+                //}
 
             }
         });
@@ -135,13 +135,13 @@ public class NoKAddFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.i("masuk1", "Pageno 2");
-                if(dataChecker()){
+                //if(dataChecker()){
                     saveNextofKin();
                     //step3_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
 
                     // int nextPage = viewPager2.getCurrentItem()+1;
                     viewPager2.setCurrentItem(1,true);
-                }
+                //}
 
             }
         });
@@ -149,33 +149,33 @@ public class NoKAddFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.i("masuk1", "Pageno 3");
-                if(dataChecker()){
+                //if(dataChecker()){
                     saveNextofKin();
                     //int nextPage = viewPager2.getCurrentItem()+1;
                     viewPager2.setCurrentItem(2,true);
-                }
+                //}
 
             }
         });
         step4_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dataChecker()){
+                //if(dataChecker()){
                     saveNextofKin();
                     //int nextPage = viewPager2.getCurrentItem()+2;
                     viewPager2.setCurrentItem(3,true);
-                }
+               // }
 
             }
         });
         step5_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dataChecker()){
+                //if(dataChecker()){
                     saveNextofKin();
                    // int nextPage = viewPager2.getCurrentItem()+3;
                     viewPager2.setCurrentItem(4,true);
-                }
+                //}
 
             }
         });
