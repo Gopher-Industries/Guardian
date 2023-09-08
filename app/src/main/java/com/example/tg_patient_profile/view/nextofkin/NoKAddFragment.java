@@ -164,7 +164,11 @@ public class NoKAddFragment extends Fragment {
                     saveNextofKin();
                     //int nextPage = viewPager2.getCurrentItem()+2;
                     viewPager2.setCurrentItem(3,true);
+<<<<<<< Updated upstream
                // }
+=======
+                //}
+>>>>>>> Stashed changes
 
             }
         });
@@ -173,13 +177,20 @@ public class NoKAddFragment extends Fragment {
             public void onClick(View view) {
                 //if(dataChecker()){
                     saveNextofKin();
+<<<<<<< Updated upstream
                    // int nextPage = viewPager2.getCurrentItem()+3;
+=======
+                    // int nextPage = viewPager2.getCurrentItem()+3;
+>>>>>>> Stashed changes
                     viewPager2.setCurrentItem(4,true);
                 //}
 
             }
         });
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 
         if(status==2){
             left_button.setBackgroundResource(R.drawable.polygon_3);
