@@ -106,15 +106,6 @@ public class PatientAddFragment extends Fragment {
         Button step4_button = rootView.findViewById(R.id.step4);
         Button step5_button = rootView.findViewById(R.id.step5);
 
-<<<<<<< Updated upstream
-=======
-        Button step1_button = rootView.findViewById(R.id.step1);
-        Button step2_button = rootView.findViewById(R.id.step2);
-        Button step3_button = rootView.findViewById(R.id.step3);
-        Button step4_button = rootView.findViewById(R.id.step4);
-        Button step5_button = rootView.findViewById(R.id.step5);
-
->>>>>>> Stashed changes
         step2_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,45 +114,6 @@ public class PatientAddFragment extends Fragment {
                     int nextPage = viewPager2.getCurrentItem()+1;
                     viewPager2.setCurrentItem(nextPage,true);
                 //}
-<<<<<<< Updated upstream
-=======
-
-            }
-        });
-        step3_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //if(dataChecker()){
-                    savePatient();
-                    int nextPage = viewPager2.getCurrentItem()+2;
-                    viewPager2.setCurrentItem(nextPage,true);
-                //}
-
-            }
-        });
-        step4_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //if(dataChecker()){
-                    savePatient();
-                    int nextPage = viewPager2.getCurrentItem()+3;
-                    viewPager2.setCurrentItem(nextPage,true);
-                //}
-
-            }
-        });
-        step5_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //if(dataChecker()){
-                    savePatient();
-                    int nextPage = viewPager2.getCurrentItem()+4;
-                    viewPager2.setCurrentItem(nextPage,true);
-                //}
-
-            }
-        });
->>>>>>> Stashed changes
 
             }
         });

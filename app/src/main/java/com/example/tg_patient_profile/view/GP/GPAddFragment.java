@@ -113,20 +113,12 @@ public class GPAddFragment extends Fragment {
         step1_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< Updated upstream
                // if(dataChecker()){
-=======
-                //if(dataChecker()){
->>>>>>> Stashed changes
                     saveGp();
 
                     //int nextPage = viewPager2.getCurrentItem()-1;
                     viewPager2.setCurrentItem(0,true);
-<<<<<<< Updated upstream
                // }
-=======
-                //}
->>>>>>> Stashed changes
 
             }
         });
@@ -141,31 +133,19 @@ public class GPAddFragment extends Fragment {
 
                     // int nextPage = viewPager2.getCurrentItem()+1;
                     viewPager2.setCurrentItem(1,true);
-<<<<<<< Updated upstream
                // }
-=======
-                //}
->>>>>>> Stashed changes
 
             }
         });
         step3_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< Updated upstream
                // if(dataChecker()){
-=======
-                //if(dataChecker()){
->>>>>>> Stashed changes
                     saveGp();
 
                     //int nextPage = viewPager2.getCurrentItem()+1;
                     viewPager2.setCurrentItem(2,true);
-<<<<<<< Updated upstream
                // }
-=======
-                //}
->>>>>>> Stashed changes
 
             }
         });
@@ -177,11 +157,7 @@ public class GPAddFragment extends Fragment {
 
                     //int nextPage = viewPager2.getCurrentItem()+2;
                     viewPager2.setCurrentItem(3,true);
-<<<<<<< Updated upstream
                // }
-=======
-                //}
->>>>>>> Stashed changes
 
             }
         });
@@ -193,19 +169,12 @@ public class GPAddFragment extends Fragment {
 
                     // int nextPage = viewPager2.getCurrentItem()+3;
                     viewPager2.setCurrentItem(4,true);
-<<<<<<< Updated upstream
                // }
-=======
-                //}
->>>>>>> Stashed changes
 
             }
         });
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
         if(status==2){
             left_button.setBackgroundResource(R.drawable.polygon_3);
             right_button.setBackgroundResource(R.drawable.polygon_4);
