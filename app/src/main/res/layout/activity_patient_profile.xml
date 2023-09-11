@@ -41,14 +41,33 @@
                 android:layout_height="match_parent" />
         </FrameLayout>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/dataForViewTabLayout"
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorHeight="4dp"
-            app:tabIndicatorColor="@color/TG_blue"
-            app:tabSelectedTextColor="@color/TG_blue"
-            app:tabTextAppearance="@style/TabLayoutTheme"/>
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
+            android:foregroundGravity="center_vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/dataForViewTabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabIndicatorColor="@color/TG_blue"
+                    app:tabIndicatorHeight="4dp"
+                    app:tabSelectedTextColor="@color/TG_blue"
+                    app:tabGravity="center"
+                    app:tabTextAppearance="@style/TabLayoutTheme" />
+            </LinearLayout>
+        </HorizontalScrollView>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
     <include layout="@layout/navigation_view" android:id="@id/nav_view"/>
