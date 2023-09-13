@@ -18,7 +18,6 @@ import android.widget.EditText;
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.model.GP;
 import com.example.tg_patient_profile.util.DataListener;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link GPAddFragment#newInstance} factory method to
@@ -93,6 +92,88 @@ public class GPAddFragment extends Fragment {
         phone_number_input = rootView.findViewById(R.id.input_gp_Phone);
         email_input = rootView.findViewById(R.id.input_gp_Email);
         fax_input = rootView.findViewById(R.id.input_gp_Fax);
+
+        Button step1_button = rootView.findViewById(R.id.step1);
+        Button step2_button = rootView.findViewById(R.id.step2);
+        Button step3_button = rootView.findViewById(R.id.step3);
+        Button step4_button = rootView.findViewById(R.id.step4);
+        Button step5_button = rootView.findViewById(R.id.step5);
+
+        if (status == 1) {
+            step4_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
+            step5_button.setBackgroundResource(R.drawable.roundshapebtn);
+
+        }
+        if (status == 2) {
+            //Log.i("masuk2", "Page 3");
+            step5_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
+            step4_button.setBackgroundResource(R.drawable.roundshapebtn);
+        }
+
+        step1_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // if(dataChecker()){
+                    saveGp();
+
+                    //int nextPage = viewPager2.getCurrentItem()-1;
+                    viewPager2.setCurrentItem(0,true);
+               // }
+
+            }
+        });
+
+        step2_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //if(dataChecker()){
+                    saveGp();
+
+                    //step3_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
+
+                    // int nextPage = viewPager2.getCurrentItem()+1;
+                    viewPager2.setCurrentItem(1,true);
+               // }
+
+            }
+        });
+        step3_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // if(dataChecker()){
+                    saveGp();
+
+                    //int nextPage = viewPager2.getCurrentItem()+1;
+                    viewPager2.setCurrentItem(2,true);
+               // }
+
+            }
+        });
+        step4_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //if(dataChecker()){
+                    saveGp();
+
+                    //int nextPage = viewPager2.getCurrentItem()+2;
+                    viewPager2.setCurrentItem(3,true);
+               // }
+
+            }
+        });
+        step5_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //if(dataChecker()){
+                    saveGp();
+
+                    // int nextPage = viewPager2.getCurrentItem()+3;
+                    viewPager2.setCurrentItem(4,true);
+               // }
+
+            }
+        });
+
 
         if(status==2){
             left_button.setBackgroundResource(R.drawable.polygon_3);

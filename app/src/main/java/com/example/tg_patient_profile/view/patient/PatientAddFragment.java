@@ -1,9 +1,14 @@
 package com.example.tg_patient_profile.view.patient;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -25,6 +30,9 @@ import com.example.tg_patient_profile.util.DataListener;
  * create an instance of this fragment.
  */
 public class PatientAddFragment extends Fragment {
+    private Button step1_button;
+    private Button step2_button;
+    private Button step3_button;
 
     private Button next_button;
     private EditText first_name, middle_name, last_name, date_of_birth, medicare_no, western_affairs_no;
@@ -77,6 +85,8 @@ public class PatientAddFragment extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @SuppressLint({"MissingInflatedId", "NewApi"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -90,9 +100,67 @@ public class PatientAddFragment extends Fragment {
        date_of_birth = rootView.findViewById(R.id.input_patient_DateOfBirth);
        medicare_no = rootView.findViewById(R.id.input_patient_MedicareNumber);
        western_affairs_no = rootView.findViewById(R.id.input_patient_WesternAffairsNumber);
+        step1_button = rootView.findViewById(R.id.step1);
+        Button step2_button = rootView.findViewById(R.id.step2);
+        Button step3_button = rootView.findViewById(R.id.step3);
+        Button step4_button = rootView.findViewById(R.id.step4);
+        Button step5_button = rootView.findViewById(R.id.step5);
 
+        step2_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //if(dataChecker()){
+                    savePatient();
+                    int nextPage = viewPager2.getCurrentItem()+1;
+                    viewPager2.setCurrentItem(nextPage,true);
+                //}
 
+            }
+        });
+        step3_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //if(dataChecker()){
+                    savePatient();
+                    int nextPage = viewPager2.getCurrentItem()+2;
+                    viewPager2.setCurrentItem(nextPage,true);
+               // }
 
+            }
+        });
+        step4_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //if(dataChecker()){
+                    savePatient();
+                    int nextPage = viewPager2.getCurrentItem()+3;
+                    viewPager2.setCurrentItem(nextPage,true);
+               // }
+
+            }
+        });
+        step5_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // if(dataChecker()){
+                    savePatient();
+                    int nextPage = viewPager2.getCurrentItem()+4;
+                    viewPager2.setCurrentItem(nextPage,true);
+               // }
+
+            }
+        });
+
+        //step1
+
+        /*step1_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               // step1_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
+
+            }
+        });*/
 
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
