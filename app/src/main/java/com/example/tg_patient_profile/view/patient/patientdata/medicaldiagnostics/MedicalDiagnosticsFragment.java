@@ -21,10 +21,16 @@ public class MedicalDiagnosticsFragment extends Fragment {
 
     private Button edit_button;
     private Boolean isEditable = false;
+    private String patient_id;
     public CurrentMedicalDiagnosticsFragment currentFragment;
     public PastMedicalDiagnosticsFragment pastFragment;
+
     public MedicalDiagnosticsFragment() {
         // Required empty public constructor
+    }
+
+    public MedicalDiagnosticsFragment(String patient_id){
+        this.patient_id = patient_id;
     }
 
     public static MedicalDiagnosticsFragment newInstance() {
@@ -48,7 +54,7 @@ public class MedicalDiagnosticsFragment extends Fragment {
         TabLayout tabLayout = view.findViewById(R.id.medicalDiagnosticsTabLayout);
         ViewPager2 viewPager2 = view.findViewById(R.id.medicalDiagnosticsViewPager);
 
-        MedicalDiagnosticsViewPagerAdapter viewPagerAdapter = new MedicalDiagnosticsViewPagerAdapter(this);
+        MedicalDiagnosticsViewPagerAdapter viewPagerAdapter = new MedicalDiagnosticsViewPagerAdapter(patient_id,this);
         viewPager2.setAdapter(viewPagerAdapter);
 
         new TabLayoutMediator(tabLayout, viewPager2,

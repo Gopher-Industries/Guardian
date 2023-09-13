@@ -18,6 +18,7 @@ import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.adapter.PatientProfileAdapter;
 import com.example.tg_patient_profile.adapter.PatientProfileAddAdapter;
 import com.example.tg_patient_profile.model.GP;
+import com.example.tg_patient_profile.model.Medical_diagnostic;
 import com.example.tg_patient_profile.model.NextofKin;
 import com.example.tg_patient_profile.model.Patient;
 import com.example.tg_patient_profile.util.DataListener;
@@ -27,6 +28,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class PatientProfileAddActivity extends AppCompatActivity implements DataListener {
 
@@ -217,6 +219,29 @@ public class PatientProfileAddActivity extends AppCompatActivity implements Data
 
                     }
                 });
+        PatientRelatedCreat(patient_id);
 
+    }
+
+    private void PatientRelatedCreat(String patient_id) {
+        createMedicalDiagnostic(patient_id);
+    }
+
+    private void createMedicalDiagnostic(String patient_id) {
+        Medical_diagnostic current_medical_diagnostic = new Medical_diagnostic(patient_id,true);
+        Medical_diagnostic prev_medical_diagnostic = new Medical_diagnostic(patient_id,false);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("health_details");
+        Query query = reference
+                .orderByChild("patient_id")
+                .equalTo(patient_id);
+        String id=reference.push().getKey();
+        reference.child(id).setValue(current_medical_diagnostic)
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(PatientProfileAddActivity.this, "Fail to create health detail of this patient!Please try it again!Reason:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
     }
 }
