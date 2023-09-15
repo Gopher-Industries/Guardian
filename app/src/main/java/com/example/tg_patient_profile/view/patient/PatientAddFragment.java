@@ -180,7 +180,6 @@ public class PatientAddFragment extends Fragment {
                 super.onPageSelected(position);
                 //once scroll, save data
                 savePatient();
-
             }
         });
 

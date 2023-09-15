@@ -16,8 +16,10 @@ import com.example.tg_patient_profile.view.patient.patientdata.patient.PatientPr
 
 public class PatientProfileAdapter extends FragmentStateAdapter {
 
-    public PatientProfileAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    String patient_id;
+    public PatientProfileAdapter(@NonNull String patient_id,@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
+        this.patient_id = patient_id;
     }
 
     @NonNull
@@ -31,7 +33,7 @@ public class PatientProfileAdapter extends FragmentStateAdapter {
             case 2:
                 return new GPProfileFragment();
             case 3:
-                return  new MedicalDiagnosticsFragment();
+                return  new MedicalDiagnosticsFragment(patient_id);
             default:
                 return new HealthDataForViewFragment();
         }

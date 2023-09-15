@@ -3,16 +3,31 @@ package com.example.tg_patient_profile.view.patient.patientdata.medicaldiagnosti
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.tg_patient_profile.R;
+import com.example.tg_patient_profile.model.Medical_diagnostic;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,11 +67,15 @@ public class CurrentMedicalDiagnosticsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private String patient_id;
+    Medical_diagnostic medical_diagnostic_current;
 
 
     public CurrentMedicalDiagnosticsFragment() {
         // Required empty public constructor
+    }
+    public CurrentMedicalDiagnosticsFragment(String patient_id) {
+        this.patient_id = patient_id;
     }
 
     /**
@@ -104,6 +123,9 @@ public class CurrentMedicalDiagnosticsFragment extends Fragment {
             editText.setFocusableInTouchMode(false);
             editText.setEnabled(false);
             editButton.setVisibility(View.INVISIBLE);
+            
+            setInfo();
+            
             editButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -124,6 +146,14 @@ public class CurrentMedicalDiagnosticsFragment extends Fragment {
         return rootView;
     }
 
+    private void setInfo() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("health_details");
+        Query query = reference
+                .orderByChild("patient_id")
+                .equalTo(patient_id);
+        //here to be added for grabing info from firebase
+    }
+
     public void setEditState(boolean isEditable){
         if(isEditable){
             for(Button editButton: editButtonArray){
@@ -138,7 +168,56 @@ public class CurrentMedicalDiagnosticsFragment extends Fragment {
                 editText.setFocusableInTouchMode(false);
                 editText.setEnabled(false);
             }
+            saveInFirebase();
         }
+    }
+
+    private void saveInFirebase() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("health_details");
+        Query query = reference
+                .orderByChild("patient_id")
+                .equalTo(patient_id);
+        Log.v("测试query",query.toString());
+        if(dataChecker()){
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot childSnapshot : snapshot.getChildren()){
+                        Boolean isCurrent = childSnapshot.child("current").getValue(Boolean.class);
+                        if(isCurrent){
+                            childSnapshot.getRef().setValue(medical_diagnostic_current);
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+    }
+
+    private Boolean dataChecker(){
+        for (int i = 0; i < editTextArray.length; i++){
+            if(TextUtils.isEmpty(editTextArray[i].getText())){
+                editTextArray[i].setError("it shouldn't be empty!");
+                return false;
+            }
+        }
+        medical_diagnostic_current = new Medical_diagnostic(patient_id,
+                editTextArray[0].getText().toString(),
+                editTextArray[1].getText().toString(),
+                editTextArray[2].getText().toString(),
+                editTextArray[3].getText().toString(),
+                editTextArray[4].getText().toString(),
+                editTextArray[5].getText().toString(),
+                editTextArray[6].getText().toString(),
+                editTextArray[7].getText().toString(),
+                true
+                );
+        return true;
     }
 
 }

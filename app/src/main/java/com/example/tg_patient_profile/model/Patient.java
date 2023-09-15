@@ -1,6 +1,7 @@
 package com.example.tg_patient_profile.model;
 
 public class Patient {
+    String patient_id;
     String address, dob, patient_name, phone, photo, underCare;
     String first_name, middle_name, last_name;
     String medicareNo, westwenAffairesNo;
@@ -11,7 +12,8 @@ public class Patient {
 
     }
 
-    public Patient(String first_name, String middle_name, String last_name) {
+    public Patient(String patient_id,String first_name, String middle_name, String last_name) {
+        this.patient_id = patient_id;
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
@@ -40,6 +42,14 @@ public class Patient {
         this.phone = phone;
         this.photo = photo;
         this.underCare = underCare;
+    }
+
+    public String getPatient_id() {
+        return patient_id;
+    }
+
+    public void setPatient_id(String patient_id) {
+        this.patient_id = patient_id;
     }
 
     public String getPatient_name() {
