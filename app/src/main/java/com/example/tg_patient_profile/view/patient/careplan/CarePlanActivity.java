@@ -37,7 +37,7 @@ public class CarePlanActivity extends AppCompatActivity {
     ArrayList<String> behavioralManagement = new ArrayList<>();
     ArrayList<String>painList = new ArrayList<>();
 
-    RatingBar painRatingBar;
+    RadioGroup painRatingGroup;
 
     Button submitButton;
 
@@ -96,11 +96,13 @@ public class CarePlanActivity extends AppCompatActivity {
 
         // rating bar
 
-        painRatingBar = findViewById(R.id.painRatingBar);
-        painRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        painRatingGroup = (RadioGroup) findViewById(R.id.ratingGroup);
+
+        painRatingGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                painScore = Float.toString(rating);
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton button = findViewById(checkedId);
+                painScore = button.getText().toString();
             }
         });
 

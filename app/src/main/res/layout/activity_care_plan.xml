@@ -98,7 +98,7 @@
         <TextView
             android:id="@+id/textView13"
             android:layout_width="133dp"
-            android:layout_height="25dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
@@ -119,23 +119,21 @@
 
             <RadioButton
                 android:id="@+id/radioButton2"
-                android:layout_width="0dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_weight="1"
+                android:background="@drawable/careplan_button"
                 android:text="Home"
                 android:textStyle="bold"
-                android:background="@drawable/careplan_button"
                 />
 
             <RadioButton
                 android:id="@+id/radioButton"
-                android:layout_width="0dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
+                android:layout_marginStart="35dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="16dp"
-                android:layout_weight="1"
                 android:text="Hospital"
                 android:textStyle="bold"
                 android:background="@drawable/careplan_button"/>
@@ -165,30 +163,29 @@
 
             <RadioButton
                 android:id="@+id/radioButton6"
-                android:layout_width="0dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_weight="1"
                 android:text="Yes"
                 android:textStyle="bold"
                 android:background="@drawable/careplan_button"/>
 
             <RadioButton
                 android:id="@+id/radioButton7"
-                android:layout_width="0dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginStart="32dp"
                 android:text="No"
                 android:textStyle="bold"
                 android:background="@drawable/careplan_button"/>
 
             <RadioButton
                 android:id="@+id/radioButton8"
-                android:layout_width="0dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
+                android:layout_marginStart="-332dp"
                 android:text="NA"
+                android:layout_marginTop="40dp"
                 android:textStyle="bold"
                 android:background="@drawable/careplan_button"/>
 
@@ -209,45 +206,44 @@
 
         <CheckBox
             android:id="@+id/bathroomCheckBox"
-            android:layout_width="111dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="150dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/careplan_button"
             android:text="Bathroom"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selfCareCheckBox" />
+            app:layout_constraintStart_toStartOf="@+id/activitiesCheckBox"
+            app:layout_constraintTop_toBottomOf="@+id/activitiesCheckBox" />
 
         <CheckBox
             android:id="@+id/activitiesCheckBox"
-            android:layout_width="111dp"
-            android:layout_height="33dp"
+            android:layout_width="150dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="32dp"
             android:background="@drawable/careplan_button"
             android:text="Activities"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/walkingCheckBox"
             app:layout_constraintStart_toEndOf="@+id/selfCareCheckBox"
             app:layout_constraintTop_toTopOf="@+id/selfCareCheckBox"
             />
 
         <CheckBox
             android:id="@+id/walkingCheckBox"
-            android:layout_width="111dp"
-            android:layout_height="33dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="150dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/careplan_button"
             android:text="Walking"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/activitiesCheckBox" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selfCareCheckBox" />
 
         <CheckBox
             android:id="@+id/selfCareCheckBox"
-            android:layout_width="111dp"
-            android:layout_height="33dp"
+            android:layout_width="150dp"
+            android:layout_height="32dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:background="@drawable/careplan_button"
             android:text="Self-care"
             android:textStyle="bold"
@@ -256,21 +252,23 @@
 
         <CheckBox
             android:id="@+id/shoppingCheckBox"
-            android:layout_width="111dp"
-            android:layout_height="33dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="150dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="47dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/careplan_button"
             android:text="Shopping"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/activitiesCheckBox"
-            app:layout_constraintTop_toBottomOf="@+id/activitiesCheckBox" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selfCareCheckBox" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="250dp"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="50dp"
             android:fontFamily="sans-serif-black"
             android:text="4.Diet timings:"
             android:textColor="@color/black"
@@ -291,16 +289,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/careplan_button"
-                android:text="Lunch – 12pm"
+                android:text="Breakfast – 8am"
                 android:textStyle="bold" />
 
             <RadioButton
                 android:id="@+id/radioButton5"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
-                android:text="Breakfast – 8am"
+                android:layout_marginTop="8dp"
+                android:text="Lunch – 12pm"
                 android:textStyle="bold"
                 android:background="@drawable/careplan_button"/>
 
@@ -308,6 +306,7 @@
                 android:id="@+id/radioButton10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/careplan_button"
                 android:text="Supper – 6pm"
                 android:textStyle="bold" />
@@ -316,7 +315,7 @@
         <TextView
             android:id="@+id/textView131"
             android:layout_width="133dp"
-            android:layout_height="25dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
@@ -328,7 +327,7 @@
 
         <CheckBox
             android:id="@+id/coffeeCheckBox"
-            android:layout_width="90dp"
+            android:layout_width="150dp"
             android:layout_height="28dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
@@ -340,23 +339,24 @@
 
         <CheckBox
             android:id="@+id/waterCheckBox"
-            android:layout_width="90dp"
+            android:layout_width="150dp"
             android:layout_height="28dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/careplan_button"
             android:text="Water"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/teaCheckBox" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/coffeeCheckBox" />
 
         <CheckBox
             android:id="@+id/teaCheckBox"
-            android:layout_width="90dp"
+            android:layout_width="150dp"
             android:layout_height="28dp"
+            android:layout_marginStart="32dp"
             android:background="@drawable/careplan_button"
             android:text="Tea"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/waterCheckBox"
             app:layout_constraintStart_toEndOf="@+id/coffeeCheckBox"
             app:layout_constraintTop_toTopOf="@+id/coffeeCheckBox" />
 
@@ -365,7 +365,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="50dp"
             android:fontFamily="sans-serif-black"
             android:text="6.Sleep pattern:"
             android:textColor="@color/black"
@@ -384,7 +384,7 @@
 
             <RadioButton
                 android:id="@+id/radioButton61"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="10pm - 6am"
                 android:textStyle="bold"
@@ -392,7 +392,7 @@
 
             <RadioButton
                 android:id="@+id/radioButton71"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/careplan_button"
                 android:text="8pm - 4pm"
@@ -400,7 +400,7 @@
 
             <RadioButton
                 android:id="@+id/radioButton81"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="11pm - 7am"
                 android:textStyle="bold"
@@ -422,52 +422,56 @@
 
         <CheckBox
             android:id="@+id/chronicCheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/careplan_button"
             android:text="Chronic"
-            app:layout_constraintBottom_toTopOf="@+id/massageRequiredCheckBox"
-            app:layout_constraintStart_toStartOf="@+id/textView71"
-            app:layout_constraintTop_toBottomOf="@+id/textView71"
             android:textStyle="bold"
-            android:background="@drawable/careplan_button"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView71"/>
 
         <CheckBox
             android:id="@+id/massageRequiredCheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="170dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="32dp"
+            android:background="@drawable/careplan_button"
             android:text="Massage required"
-            app:layout_constraintBottom_toTopOf="@+id/pillowSupportCheckBox"
-            app:layout_constraintStart_toStartOf="@+id/chronicCheckBox"
-            app:layout_constraintTop_toBottomOf="@+id/chronicCheckBox"
             android:textStyle="bold"
-            android:background="@drawable/careplan_button"/>
-
-        <CheckBox
-            android:id="@+id/pillowSupportCheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pillow support"
-            app:layout_constraintBottom_toTopOf="@+id/heatPackCheckBox"
-            app:layout_constraintStart_toStartOf="@+id/massageRequiredCheckBox"
-            app:layout_constraintTop_toBottomOf="@+id/massageRequiredCheckBox"
-            android:textStyle="bold"
-            android:background="@drawable/careplan_button"/>
+            app:layout_constraintStart_toEndOf="@+id/chronicCheckBox"
+            app:layout_constraintTop_toTopOf="@+id/chronicCheckBox"
+            />
 
         <CheckBox
             android:id="@+id/heatPackCheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Heat pack"
-            app:layout_constraintBottom_toTopOf="@+id/NAcheckBox"
-            app:layout_constraintStart_toStartOf="@+id/pillowSupportCheckBox"
-            app:layout_constraintTop_toBottomOf="@+id/pillowSupportCheckBox"
+            android:layout_width="150dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/careplan_button"
+            android:text="Heat Pack"
             android:textStyle="bold"
-            android:background="@drawable/careplan_button"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chronicCheckBox" />
+
+
+        <CheckBox
+            android:id="@+id/pillowSupportCheckBox"
+            android:layout_width="150dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/careplan_button"
+            android:text="Pillow Support"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/massageRequiredCheckBox"
+            app:layout_constraintTop_toBottomOf="@+id/massageRequiredCheckBox" />
 
         <CheckBox
             android:id="@+id/NAcheckBox"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="NA"
             app:layout_constraintStart_toStartOf="@+id/heatPackCheckBox"
             app:layout_constraintTop_toBottomOf="@+id/heatPackCheckBox"
@@ -477,7 +481,7 @@
         <TextView
             android:id="@+id/textView1311"
             android:layout_width="300dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
@@ -487,14 +491,131 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/NAcheckBox" />
 
-        <RatingBar
-            android:id="@+id/painRatingBar"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/ratingGroup"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView1311" />
+            app:layout_constraintTop_toBottomOf="@+id/textView1311">
+
+            <RadioButton
+                android:id="@+id/radioButton21"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="1"
+                android:textStyle="bold"
+                android:background="@drawable/careplan_button"/>
+
+            <RadioButton
+                android:id="@+id/radioButton22"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="2"
+                android:textStyle="bold"
+                android:background="@drawable/careplan_button"
+                app:layout_constraintStart_toEndOf="@+id/radioButton21"
+                app:layout_constraintTop_toTopOf="@+id/radioButton21"/>
+
+            <RadioButton
+                android:id="@+id/radioButton23"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="3"
+                android:textStyle="bold"
+                android:background="@drawable/careplan_button"
+                app:layout_constraintStart_toEndOf="@+id/radioButton22"
+                app:layout_constraintTop_toTopOf="@+id/radioButton22"/>
+
+            <RadioButton
+                android:id="@+id/radioButton24"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="4"
+                android:textStyle="bold"
+                android:background="@drawable/careplan_button"
+                app:layout_constraintStart_toEndOf="@+id/radioButton23"
+                app:layout_constraintTop_toTopOf="@+id/radioButton23"/>
+
+            <RadioButton
+                android:id="@+id/radioButton25"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-295dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/careplan_button"
+                android:text="5"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioButton21" />
+
+            <RadioButton
+                android:id="@+id/radioButton26"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/careplan_button"
+                android:text="6"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/radioButton25"
+                app:layout_constraintTop_toBottomOf="@+id/radioButton22" />
+
+            <RadioButton
+                android:id="@+id/radioButton27"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/careplan_button"
+                android:text="7"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/radioButton26"
+                app:layout_constraintTop_toBottomOf="@+id/radioButton23" />
+
+            <RadioButton
+                android:id="@+id/radioButton28"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/careplan_button"
+                android:text="8"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/radioButton27"
+                app:layout_constraintTop_toBottomOf="@+id/radioButton24" />
+
+            <RadioButton
+                android:id="@+id/radioButton29"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-295dp"
+                android:layout_marginTop="80dp"
+                android:background="@drawable/careplan_button"
+                android:text="9"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioButton25" />
+
+            <RadioButton
+                android:id="@+id/radioButton30"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="80dp"
+                android:background="@drawable/careplan_button"
+                android:text="10"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/radioButton29"
+                app:layout_constraintTop_toBottomOf="@+id/radioButton25" />
+
+
+        </RadioGroup>
 
         <TextView
             android:id="@+id/textView711"
@@ -507,23 +628,21 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/painRatingBar" />
+            app:layout_constraintTop_toBottomOf="@+id/ratingGroup" />
 
         <CheckBox
             android:id="@+id/dollTherapyCheckBox"
-            android:layout_width="wrap_content"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:text="Doll therapy"
-
             app:layout_constraintStart_toStartOf="@+id/textView711"
             app:layout_constraintTop_toBottomOf="@+id/textView711"
-
             android:textStyle="bold"
             android:background="@drawable/careplan_button"/>
 
         <CheckBox
             android:id="@+id/petTherapyCheckBox"
-            android:layout_width="wrap_content"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:text="Pet therapy"
             app:layout_constraintStart_toStartOf="@+id/dollTherapyCheckBox"
@@ -533,7 +652,7 @@
 
         <CheckBox
             android:id="@+id/dementiaCheckBox"
-            android:layout_width="wrap_content"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:text="Dementia management "
             app:layout_constraintStart_toStartOf="@+id/petTherapyCheckBox"
@@ -543,7 +662,7 @@
 
         <CheckBox
             android:id="@+id/lightsOnBedroomCB"
-            android:layout_width="wrap_content"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:text="Lights on bedroom"
             app:layout_constraintStart_toStartOf="@+id/dementiaCheckBox"
@@ -553,7 +672,7 @@
 
         <CheckBox
             android:id="@+id/lightsOnBathroomCB"
-            android:layout_width="wrap_content"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:text="Lights on bathroom"
             app:layout_constraintStart_toStartOf="@+id/lightsOnBedroomCB"

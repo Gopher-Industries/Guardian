@@ -12,9 +12,11 @@ import com.example.tg_patient_profile.view.patient.patientdata.medicaldiagnostic
 public class MedicalDiagnosticsViewPagerAdapter extends FragmentStateAdapter {
 
     private MedicalDiagnosticsFragment parentFragment;
-    public MedicalDiagnosticsViewPagerAdapter(@NonNull MedicalDiagnosticsFragment fragmentActivity) {
+    private String patient_id;
+    public MedicalDiagnosticsViewPagerAdapter(String patient_id, @NonNull MedicalDiagnosticsFragment fragmentActivity) {
         super(fragmentActivity);
         parentFragment = fragmentActivity;
+        this.patient_id = patient_id;
     }
 
     @NonNull
@@ -23,10 +25,10 @@ public class MedicalDiagnosticsViewPagerAdapter extends FragmentStateAdapter {
 
         switch (position) {
             case 0:
-                parentFragment.currentFragment = new CurrentMedicalDiagnosticsFragment();
+                parentFragment.currentFragment = new CurrentMedicalDiagnosticsFragment(patient_id);
                 return parentFragment.currentFragment;
             default:
-                parentFragment.pastFragment = new PastMedicalDiagnosticsFragment();
+                parentFragment.pastFragment = new PastMedicalDiagnosticsFragment(patient_id);
                 return parentFragment.pastFragment;
         }
     }

@@ -29,8 +29,9 @@ public class PatientProfileActivity extends AppCompatActivity {
         customHeader = findViewById(R.id.customHeader);
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        String patient_id = getIntent().getStringExtra("id");
 
-        PatientProfileAdapter viewPagerAdapter = new PatientProfileAdapter(getSupportFragmentManager(), getLifecycle());
+        PatientProfileAdapter viewPagerAdapter = new PatientProfileAdapter(patient_id,getSupportFragmentManager(), getLifecycle());
         viewPager2.setAdapter(viewPagerAdapter);
 
         customHeader.setHeaderHeight(450);
