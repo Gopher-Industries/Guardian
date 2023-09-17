@@ -72,13 +72,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_header_card_view">
 
+
         <TextView
             android:id="@+id/theme_button_title"
             android:layout_width="wrap_content"
             android:layout_height="20sp"
             android:layout_marginStart="25dp"
             android:fontFamily="@font/poppins"
-            android:text="Theme"
+            android:text="Theme Mode"
             android:textColor="#FFFFFF"
             android:textFontWeight="400"
             android:textSize="16sp"
@@ -101,7 +102,7 @@
             android:layout_height="17sp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/poppins"
-            android:text="System Default"
+            android:text="Change"
             android:textColor="#FFFFFF"
             android:textFontWeight="275"
             android:textSize="13sp"
@@ -111,6 +112,7 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/settings_notification_button"
@@ -137,6 +139,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Switch
+            android:id="@+id/notification_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
         <ImageView
             android:id="@+id/notification_button_arrow"
             android:layout_width="wrap_content"
@@ -153,8 +165,6 @@
             android:layout_height="18sp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/poppins"
-            android:text="On"
-            android:textColor="#FFFFFF"
             android:textFontWeight="275"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -188,6 +198,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/app_update_button_arrow"
             android:layout_width="wrap_content"

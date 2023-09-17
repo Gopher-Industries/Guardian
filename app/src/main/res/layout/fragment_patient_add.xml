@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.patient.PatientAddFragment">
+    <FrameLayout  android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <!-- Background ImageView -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/background_logo" />
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-16dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:id="@+id/stepperView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/step1"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="1"
+                    android:textSize="10dp"
+                    android:gravity="center"
+                    android:background="@drawable/roundshapeseletebtn"
+                    android:layout_marginLeft="25sp"
+                    android:layout_marginRight="2sp"
+                    android:layout_marginTop="0sp" />
+
+                    <View
+                        android:layout_width="20dp"
+                        android:layout_height="2dp"
+                        android:background="#787878"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"/>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/steplbl1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-black"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginRight="2sp"
+                    android:layout_marginTop="8sp"
+                    android:text="New patient details"
+                    app:layout_constraintTop_toBottomOf="@id/step1"
+                    android:textSize="8dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/step2"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="2"
+                        android:textSize="10dp"
+                        android:gravity="center"
+                        android:background="@drawable/roundshapebtn"
+                        android:layout_marginLeft="5sp"
+                        android:layout_marginRight="2sp"
+                        android:layout_marginTop="0sp" />
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="2dp"
+                        android:background="#787878"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"/>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/steplbl2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-black"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="0sp"
+                    android:layout_marginRight="2sp"
+                    android:layout_marginTop="8sp"
+                    android:text="Next to Kin"
+                    app:layout_constraintTop_toBottomOf="@id/step1"
+                    android:textSize="8dp"/>
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/step3"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="3"
+                        android:textSize="10dp"
+                        android:gravity="center"
+                        android:background="@drawable/roundshapebtn"
+                        android:layout_marginLeft="5sp"
+                        android:layout_marginRight="2sp"
+                        android:layout_marginTop="0sp" />
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="2dp"
+                        android:background="#787878"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"/>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/steplbl3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-black"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="0sp"
+                    android:layout_marginRight="2sp"
+                    android:layout_marginTop="8sp"
+                    android:text="Next to Kin+"
+                    app:layout_constraintTop_toBottomOf="@id/step1"
+                    android:textSize="8dp"/>
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/step4"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="4"
+                        android:textSize="10dp"
+                        android:gravity="center"
+                        android:background="@drawable/roundshapebtn"
+                        android:layout_marginLeft="5sp"
+                        android:layout_marginRight="2sp"
+                        android:layout_marginTop="0sp" />
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="2dp"
+                        android:background="#787878"
+                        android:layout_marginTop="13dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="5dp"/>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/steplbl4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-black"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="2sp"
+                    android:layout_marginTop="8sp"
+                    android:text="Gp"
+                    app:layout_constraintTop_toBottomOf="@id/step1"
+                    android:textSize="8dp"/>
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/step5"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="5"
+                        android:textSize="10dp"
+                        android:gravity="center"
+                        android:background="@drawable/roundshapebtn"
+                        android:layout_marginLeft="5sp"
+                        android:layout_marginRight="2sp"
+                        android:layout_marginTop="0sp" />
+
+
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/steplbl5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="sans-serif-black"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="2sp"
+                    android:layout_marginTop="8sp"
+                    android:text="Gp+"
+                    app:layout_constraintTop_toBottomOf="@id/step1"
+                    android:textSize="8dp"/>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/gp_add_polygon_left"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/polygon_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.87"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.27" />
+
+        <Button
+            android:id="@+id/gp_add_polygon_right"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/polygon_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="0dp"
+            app:layout_constraintHorizontal_bias="0.97"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.27" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+        <TextView
+            android:id="@+id/FirstName"
+            android:layout_width="133dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-black"
+            android:text="First name*"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+
+        <EditText
+            android:id="@+id/input_patient_FirstName"
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="1dp"
+            android:background="@null"
+            android:hint="Enter a first name"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E5E5E5" />
+
+        <TextView
+            android:id="@+id/MiddleName"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Middle Name"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carePlanSummary" />
+
+        <EditText
+            android:id="@+id/input_patient_MiddleName"
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="1dp"
+            android:background="@null"
+            android:hint="Enter a middle name"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E5E5E5" />
+
+        <TextView
+            android:id="@+id/LastName"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Last Name*"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nutritionHydrationSummary" />
+
+
+        <EditText
+            android:id="@+id/input_patient_LastName"
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="1dp"
+            android:background="@null"
+            android:inputType="textMultiLine"
+            android:hint="Enter a last name"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E5E5E5" />
+
+        <TextView
+            android:id="@+id/DateOfBirth"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Date of Birth*"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supportReqSummary" />
+
+        <EditText
+            android:id="@+id/input_patient_DateOfBirth"
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@null"
+            android:hint="DD/MM/YYYY"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateOfBirth" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E5E5E5" />
+
+        <TextView
+            android:id="@+id/medicareNumber"
+            android:layout_width="133dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Medicare no*"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dietTimingSummary" />
+
+        <EditText
+            android:id="@+id/input_patient_MedicareNumber"
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="1dp"
+            android:background="@null"
+            android:inputType="textMultiLine"
+            android:hint="Eg. 1234 56789 0"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView131" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E5E5E5" />
+
+        <TextView
+            android:id="@+id/WesternAffairsNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Western Affairs no"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/drinkLikesSummary" />
+
+        <EditText
+            android:id="@+id/input_patient_WesternAffairsNumber"
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@null"
+            android:backgroundTint="#ECECEC"
+            android:hint="Eg. L123456789012"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView61" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E5E5E5" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <Button
+                android:id="@+id/patient_add_NextButton"
+                android:layout_width="127dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#3297C3"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Next"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</FrameLayout>
+    </ScrollView>

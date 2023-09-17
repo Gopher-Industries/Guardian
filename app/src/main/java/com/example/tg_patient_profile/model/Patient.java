@@ -1,18 +1,39 @@
 package com.example.tg_patient_profile.model;
 
 public class Patient {
+    String patient_id;
     String address, dob, patient_name, phone, photo, underCare;
     String first_name, middle_name, last_name;
+    String medicareNo, westwenAffairesNo;
+    String nok_id1, nok_id2;
+    String gp_id1,gp_id2;
 
     Patient(){
 
     }
 
-    public Patient(String first_name, String middle_name, String last_name) {
+    public Patient(String patient_id,String first_name, String middle_name, String last_name) {
+        this.patient_id = patient_id;
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
     }
+
+    //constructor for adding a patient
+    public Patient(String dob, String first_name, String middle_name, String last_name, String medicareNo, String westwenAffairesNo, String nok_id1, String nok_id2, String gp_id1, String gp_id2) {
+        this.dob = dob;
+        this.first_name = first_name;
+        this.middle_name = middle_name;
+        this.last_name = last_name;
+        this.medicareNo = medicareNo;
+        this.westwenAffairesNo = westwenAffairesNo;
+        this.nok_id1 = nok_id1;
+        this.nok_id2 = nok_id2;
+        this.gp_id1 = gp_id1;
+        this.gp_id2 = gp_id2;
+    }
+
+
 
     public Patient(String address, String dob, String name, String phone, String photo, String underCare) {
         this.address = address;
@@ -21,6 +42,70 @@ public class Patient {
         this.phone = phone;
         this.photo = photo;
         this.underCare = underCare;
+    }
+
+    public String getPatient_id() {
+        return patient_id;
+    }
+
+    public void setPatient_id(String patient_id) {
+        this.patient_id = patient_id;
+    }
+
+    public String getPatient_name() {
+        return patient_name;
+    }
+
+    public void setPatient_name(String patient_name) {
+        this.patient_name = patient_name;
+    }
+
+    public String getMedicareNo() {
+        return medicareNo;
+    }
+
+    public void setMedicareNo(String medicareNo) {
+        this.medicareNo = medicareNo;
+    }
+
+    public String getWestwenAffairesNo() {
+        return westwenAffairesNo;
+    }
+
+    public void setWestwenAffairesNo(String westwenAffairesNo) {
+        this.westwenAffairesNo = westwenAffairesNo;
+    }
+
+    public String getNok_id1() {
+        return nok_id1;
+    }
+
+    public void setNok_id1(String nok_id1) {
+        this.nok_id1 = nok_id1;
+    }
+
+    public String getNok_id2() {
+        return nok_id2;
+    }
+
+    public void setNok_id2(String nok_id2) {
+        this.nok_id2 = nok_id2;
+    }
+
+    public String getGp_id1() {
+        return gp_id1;
+    }
+
+    public void setGp_id1(String gp_id1) {
+        this.gp_id1 = gp_id1;
+    }
+
+    public String getGp_id2() {
+        return gp_id2;
+    }
+
+    public void setGp_id2(String gp_id2) {
+        this.gp_id2 = gp_id2;
     }
 
     public String getFirst_name() {
@@ -98,7 +183,21 @@ public class Patient {
     @Override
     public String toString() {
         return "Patient{" +
-                "name='" + patient_name + '\'' +
+                "address='" + address + '\'' +
+                ", dob='" + dob + '\'' +
+                ", patient_name='" + patient_name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", photo='" + photo + '\'' +
+                ", underCare='" + underCare + '\'' +
+                ", first_name='" + first_name + '\'' +
+                ", middle_name='" + middle_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", medicareNo='" + medicareNo + '\'' +
+                ", westwenAffairesNo='" + westwenAffairesNo + '\'' +
+                ", nok_id1='" + nok_id1 + '\'' +
+                ", nok_id2='" + nok_id2 + '\'' +
+                ", gp_id1='" + gp_id1 + '\'' +
+                ", gp_id2='" + gp_id2 + '\'' +
                 '}';
     }
 }

@@ -22,7 +22,38 @@
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="-16dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/polygon_left"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/polygon_2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.784"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.27" />
 
+            <Button
+                android:id="@+id/polygon_right"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/polygon_1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.890"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.27" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:id="@+id/FirstName"
             android:layout_width="133dp"
@@ -37,13 +68,15 @@
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
 
-        <TextView
-            android:id="@+id/txtFirstName"
+        <EditText
+            android:id="@+id/input_nok_FirstName"
             android:layout_width="365dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="5dp"
-            android:text="Harry"
+            android:layout_marginTop="1dp"
+            android:background="@null"
+            android:hint="Enter a first name"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,13 +100,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/carePlanSummary" />
 
-        <TextView
-            android:id="@+id/txtMiddleName"
+        <EditText
+            android:id="@+id/input_nok_MiddleName"
             android:layout_width="365dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="5dp"
-            android:text="None"
+            android:layout_marginTop="1dp"
+            android:background="@null"
+            android:hint="Enter a middle name"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -98,14 +133,16 @@
             app:layout_constraintTop_toBottomOf="@+id/nutritionHydrationSummary" />
 
 
-        <TextView
-            android:id="@+id/txtLastName"
+        <EditText
+            android:id="@+id/input_nok_LastName"
             android:layout_width="365dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="1dp"
+            android:background="@null"
             android:inputType="textMultiLine"
-            android:text="Bvarton"
+            android:hint="Enter a last name"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -127,13 +164,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/supportReqSummary" />
 
-        <TextView
-            android:id="@+id/txtDateOfBirth"
+        <EditText
+            android:id="@+id/input_nok_DateOfBirth"
             android:layout_width="365dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="5dp"
-            android:text="41 Solaris Drive, Melbourne, VIC 2767,Australla"
+            android:layout_marginBottom="15dp"
+            android:background="@null"
+            android:hint="Enter/Search Address"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dateOfBirth" />
 
@@ -155,14 +194,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dietTimingSummary" />
 
-        <TextView
-            android:id="@+id/txtMedicareNumber"
+        <EditText
+            android:id="@+id/input_nok_MedicareNumber"
             android:layout_width="365dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="1dp"
+            android:background="@null"
             android:inputType="textMultiLine"
-            android:text="+61 399 832 791"
+            android:text="+61 412 345 678"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView131" />
 
@@ -184,14 +225,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/drinkLikesSummary" />
 
-        <TextView
-            android:id="@+id/txtWesternAffairsNumber"
+        <EditText
+            android:id="@+id/input_nok_WesternAffairsNumber"
             android:layout_width="365dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="5dp"
+            android:background="@null"
             android:backgroundTint="#ECECEC"
-            android:text="harrybvarton@gmail.com"
+            android:hint="someone@example.com"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView61" />
 
@@ -199,7 +241,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#E5E5E5" />
-
         <Button
             android:id="@+id/MoreInfoOfPatient"
             android:layout_width="match_parent"

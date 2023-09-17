@@ -56,14 +56,14 @@ public class PatientListActivity extends AppCompatActivity{
 
 
         Query all_query = FirebaseDatabase.getInstance().getReference().child("patient_profile");
-
         FirebaseRecyclerOptions<Patient> all_options=
                 new FirebaseRecyclerOptions.Builder<Patient>()
                         .setQuery(all_query, new SnapshotParser<Patient>() {
                             @NonNull
                             @Override
                             public Patient parseSnapshot(@NonNull DataSnapshot snapshot) {
-                                Patient patient = new Patient(snapshot.child("first_name").getValue().toString(),
+                                Patient patient = new Patient(snapshot.getKey(),
+                                        snapshot.child("first_name").getValue().toString(),
                                         snapshot.child("middle_name").getValue().toString(),
                                         snapshot.child("last_name").getValue().toString()
                                 );
@@ -99,7 +99,8 @@ public class PatientListActivity extends AppCompatActivity{
                                     @NonNull
                                     @Override
                                     public Patient parseSnapshot(@NonNull DataSnapshot snapshot) {
-                                        Patient patient = new Patient(snapshot.child("first_name").getValue().toString(),
+                                        Patient patient = new Patient(snapshot.getKey(),
+                                                snapshot.child("first_name").getValue().toString(),
                                                 snapshot.child("middle_name").getValue().toString(),
                                                 snapshot.child("last_name").getValue().toString()
                                         );
