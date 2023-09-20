@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.tg_patient_profile.view.patient.PatientAdd;
+//import com.example.tg_patient_profile.view.patient.PatientAdd;
 import com.example.tg_patient_profile.R;
 
 import android.annotation.SuppressLint;
@@ -30,7 +30,7 @@ public class Homepage4caretaker extends AppCompatActivity {
         setContentView(R.layout.activity_homepage4caretaker);
 
         patientListButton = findViewById(R.id.patientListButton);
-        settingsButton = findViewById(R.id.settingsButton);
+        settingsButton = findViewById(R.id.settingsButton3);
         signOutButton = findViewById(R.id.sighOutButton);
 
 
