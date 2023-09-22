@@ -3,11 +3,13 @@ package com.example.tg_patient_profile.view.general;
 import static androidx.camera.core.CameraX.getContext;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -122,7 +124,33 @@ public class PatientProfileAddActivity extends AppCompatActivity implements Data
     @Override
     public void onDataFinihsed(Boolean isFinished) {
         // insert a dialog here
-        saveInFirebase();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Saving Changes?");
+        // builder.setMessage("Do you really want to whatever?");
+        //builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int whichButton) {
+                saveInFirebase();
+                //Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("No", null);
+
+        AlertDialog dialog = builder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorGreen));
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorRed));
+                //dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.black));
+            }
+        });
+        dialog.show();
+        //insert
+
+
     }
 
     private void saveInFirebase() {

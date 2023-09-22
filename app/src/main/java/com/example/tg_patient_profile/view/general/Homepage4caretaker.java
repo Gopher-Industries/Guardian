@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.tg_patient_profile.view.patient.PatientAdd;
+//import com.example.tg_patient_profile.view.patient.PatientAdd;
 import com.example.tg_patient_profile.R;
 
 import android.annotation.SuppressLint;

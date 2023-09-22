@@ -1,7 +1,9 @@
 package com.example.tg_patient_profile.view.patient.careplan;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -173,7 +175,16 @@ public class CarePlanActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CarePlanSummaryActivity.class);
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());//new AlertDialog.Builder(this);
+                builder.setTitle("Saving Changes?");
+                // builder.setMessage("Do you really want to whatever?");
+                //builder.setIcon(android.R.drawable.ic_dialog_alert);
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Intent intent = new Intent(getApplicationContext(), CarePlanSummaryActivity.class);
 //                intent.putExtra(Util.CARE_PLAN_TYPE, carePlanType);
 //                intent.putExtra(Util.NUTRITION_HYDRATION_TYPE, nutritionHyrdration);
 //                intent.putExtra(Util.SUPPORT_REQUIREMENTS, supportRequirements.toArray(new String[0]));
@@ -183,7 +194,28 @@ public class CarePlanActivity extends AppCompatActivity {
 //                intent.putExtra(Util.PAIN, painList.toArray(new String[0]));
 //                intent.putExtra(Util.PAIN_SCORE, painScore);
 //                intent.putExtra(Util.BEHAVIOUR_MANAGEMENT, behavioralManagement.toArray(new String[0]));
-                startActivity(intent);
+                        startActivity(intent);
+                        //Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+                    }
+                });
+//        builder.setNegativeButton(android.R.string.no, null);
+//        AlertDialog show = builder.show();
+                builder.setNegativeButton("No", null);
+
+                AlertDialog dialog = builder.create();
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorGreen));
+                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorRed));
+                        //dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.black));
+                    }
+                });
+                dialog.show();
+
+
+
+
             }
         });
 
