@@ -49,7 +49,10 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<Patient, Patient
                 int role = sharedPreferences.getInt("login_role", -1);
                 if(role==0){
                     //caretaker
-                    context.startActivity(new Intent(context, DailyReportActivity.class));
+                    //context.startActivity(new Intent(context, DailyReportActivity.class));
+                    Intent intent = new Intent(context, DailyReportActivity.class);
+                    intent.putExtra("patientName", holder.patient_name.getText());
+                    context.startActivity(intent);
 
                 }else if(role ==1){
                     //admin
