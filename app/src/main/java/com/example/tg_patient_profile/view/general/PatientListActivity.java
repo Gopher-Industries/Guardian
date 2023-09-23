@@ -62,11 +62,15 @@ public class PatientListActivity extends AppCompatActivity{
                             @NonNull
                             @Override
                             public Patient parseSnapshot(@NonNull DataSnapshot snapshot) {
-                                Patient patient = new Patient(snapshot.getKey(),
-                                        snapshot.child("first_name").getValue().toString(),
-                                        snapshot.child("middle_name").getValue().toString(),
-                                        snapshot.child("last_name").getValue().toString()
-                                );
+                                String firstname = snapshot.child("first_name").getValue() == null ? "" : snapshot.child("first_name").getValue().toString();
+                                String middlename = snapshot.child("middle_name").getValue() == null ? "" : snapshot.child("middle_name").getValue().toString();
+                                String lastname = snapshot.child("last_name").getValue() == null ? "" : snapshot.child("last_name").getValue().toString();
+
+                                Patient patient = new Patient(snapshot.getKey(), firstname, lastname);
+
+                                if(middlename != "")
+                                    patient.setMiddle_name(middlename);
+
                                 return patient;
                             }
                         })
@@ -101,9 +105,11 @@ public class PatientListActivity extends AppCompatActivity{
                                     public Patient parseSnapshot(@NonNull DataSnapshot snapshot) {
                                         Patient patient = new Patient(snapshot.getKey(),
                                                 snapshot.child("first_name").getValue().toString(),
-                                                snapshot.child("middle_name").getValue().toString(),
                                                 snapshot.child("last_name").getValue().toString()
                                         );
+                                        Object middle_name = snapshot.child("middle_name").getValue();
+                                        if(middle_name!=null)
+                                            patient.setMiddle_name(middle_name.toString());
                                         return patient;
                                     }
                                 })

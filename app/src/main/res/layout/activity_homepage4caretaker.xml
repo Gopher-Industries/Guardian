@@ -5,17 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.general.Homepage4caretaker"
-    tools:layout_editor_absoluteX="-8dp"
-    tools:layout_editor_absoluteY="4dp">
+    tools:layout_editor_absoluteX="-22dp"
+    tools:layout_editor_absoluteY="-108dp">
+
+    <Button
+        android:id="@+id/settingsButton3"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="224dp"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/homepage_button_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
     <View
-        android:id="@+id/settingsIcon"
+        android:id="@+id/settingsIcon3"
         android:layout_width="53dp"
         android:layout_height="43dp"
-        android:layout_marginStart="288dp"
+        android:layout_marginStart="256dp"
         android:layout_marginTop="116dp"
         android:background="@drawable/menu_settings"
         android:elevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <TextView
+        android:id="@+id/settingsTxt3"
+        android:layout_width="102dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="252dp"
+        android:layout_marginTop="168dp"
+        android:elevation="4dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Settings"
+        android:textColor="@color/white"
+        android:textSize="13dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
@@ -54,20 +78,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-    <TextView
-        android:id="@+id/settingsTxt"
-        android:layout_width="91dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="280dp"
-        android:layout_marginTop="168dp"
-        android:elevation="4dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Settings"
-        android:textColor="@color/white"
-        android:textSize="13dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
-
     <Button
         android:id="@+id/sighOutButton"
         android:layout_width="120dp"
@@ -81,10 +91,10 @@
 
     <TextView
         android:id="@+id/sighOutTxt"
-        android:layout_width="87dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="324dp"
+        android:layout_width="82dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="320dp"
         android:elevation="4dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Sign Out"
@@ -101,16 +111,6 @@
         android:layout_marginTop="268dp"
         android:background="@drawable/menu_signout"
         android:elevation="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
-
-    <Button
-        android:id="@+id/settingsButton"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="252dp"
-        android:layout_marginTop="88dp"
-        android:background="@drawable/homepage_button_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 

@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.TextView;
 
 import com.example.tg_patient_profile.R;
+import com.example.tg_patient_profile.model.Patient;
 
 import java.util.Date;
 
@@ -29,6 +31,21 @@ public class DailyReportActivity extends AppCompatActivity implements IArrowClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_report);
+
+        // Retrieve the patient's name from the intent extras
+        String patientName = getIntent().getStringExtra("patientName").split(" ")[0];
+
+        // Find the TextView for the username
+        TextView usernameTextView = findViewById(R.id.username);
+
+        if (patientName != null) {
+            // Set the patient's name in the TextView
+            usernameTextView.setText(patientName);
+        } else {
+            // Handle the case where patientName is not provided
+            // You can set a default value or show an error message.
+        }
+
 //
 //        fragmentContainerView = findViewById(R.id.dailyReportFragmentContainer);
 //
@@ -97,6 +114,7 @@ public class DailyReportActivity extends AppCompatActivity implements IArrowClic
 //            expandView();
 //        }
     }
+
 
     @Override
     public void arrowClicked(View v) {

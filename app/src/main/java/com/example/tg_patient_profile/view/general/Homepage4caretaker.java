@@ -30,7 +30,7 @@ public class Homepage4caretaker extends AppCompatActivity {
         setContentView(R.layout.activity_homepage4caretaker);
 
         patientListButton = findViewById(R.id.patientListButton);
-        settingsButton = findViewById(R.id.settingsButton);
+        settingsButton = findViewById(R.id.settingsButton3);
         signOutButton = findViewById(R.id.sighOutButton);
 
 

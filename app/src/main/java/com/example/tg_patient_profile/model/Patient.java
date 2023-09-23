@@ -12,10 +12,9 @@ public class Patient {
 
     }
 
-    public Patient(String patient_id,String first_name, String middle_name, String last_name) {
+    public Patient(String patient_id,String first_name,  String last_name) {
         this.patient_id = patient_id;
         this.first_name = first_name;
-        this.middle_name = middle_name;
         this.last_name = last_name;
     }
 
