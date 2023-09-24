@@ -1,11 +1,31 @@
-## Overview of Gopher in T2 2023:
-[Click here](https://deakin365.sharepoint.com/:p:/r/sites/GopherIndustries2/_layouts/15/Doc.aspx?sourcedoc=%7B0C4E7C6C-2873-423D-BBF0-1CE09D4B526D%7D&file=Junior%20Gopher%20Industries%20Presentation.pptx&action=edit&mobileredirect=true)
+
+## What is Guardian?
+**Overview, Goals and Objectives**
+Guardians is an activity monitoring and profiling system for the aged care sector with plans to expand to residential homes. Guardians uses non-invasive radar technology to record a user’s activity and classify these activities over time. Guardians utilises the classified data to predict possible physical and mental health conditions associated with that behaviour.
+
+The goal of the project is to alert the patient’s carer and/or health professional to unusual changes inmonitored behaviour. Additionally, Guardians detects more urgent incidents such as fall detection.The key features of Guardian are:
+
+- Patent profile capture, edit and search.
+- Monitoring and profiling patient activities.
+- Alerting caregivers and supervisors during an emergency.
+- Predicting potential physical and mental health conditions at an early stage.
+- Providing suggestions to see a health professional based on health issues detected.
+- Encouraging positive activities.
+- Generating weekly and monthly activity dashboards.
+- Providing access to accurate real-time visualisation and patient position(s).
+- Ability to define a baseline for a patient.
+- User management allows for defining Patient, Carer, and Admin users.
+
+Overview of Gopher in T2 2023:
+[Click here](https://deakin365.sharepoint.com/:p:/r/sites/GopherIndustries2/_layouts/15/Doc.aspx?sourcedoc=%7B0C4E7C6C-2873-423D-BBF0-1CE09D4B526D%7D&file=Junior%20Gopher%20Industries%20Presentation.pptx&action=edit&mobileredirect=true)(This link doesn't work, we can replace with T2 handover video)
+
+## User Manual
+
 
 ## Branching strategy:
-To contribute to this repo, follow the guide [here](https://deakin365.sharepoint.com/:w:/r/sites/GopherIndustries2/Shared%20Documents/Guardians%20(T1)/T1%202023/TeamGuardians-CloneProcess.docx?d=wfba6c34a53b743c4a39b519990def465&csf=1&web=1&e=PfBjyp)
+Because this repository is protected, you have to fork to your own repository before cloning. Please follow [steps](https://deakin365.sharepoint.com/:w:/r/sites/GopherIndustries2/Shared%20Documents/Guardians%20(T1)/T1%202023/TeamGuardians-CloneProcess.docx?d=wfba6c34a53b743c4a39b519990def465&csf=1&web=1&e=PfBjyp) to clone this repo. [Click here](https://deakin365.sharepoint.com/:w:/s/GopherIndustries2/EaQj9mdwqT1Jk505WQZqK0gBSJ3pDyz-Rz6naKJPP15m5w?e=n0MqIn) to find how to create a pull request after you've done wonderful development.
 
-## Android Studio Setup:
-[Click here](https://deakin365.sharepoint.com/:w:/s/GopherIndustries2/EdSrJiI562ZCj2gx4QXkCRYBU58s5W6MNCDr3yDlcHXcog?e=oCLfc1)
+## How to set up Android Studio :
+in [Click here](https://deakin365.sharepoint.com/:w:/s/GopherIndustries2/EdSrJiI562ZCj2gx4QXkCRYBU58s5W6MNCDr3yDlcHXcog?e=oCLfc1), you can learn how to install Android Studio, initial set and create an emulator.
 
-## Pull Request:
-[Click here](https://deakin365.sharepoint.com/:w:/s/GopherIndustries2/EaQj9mdwqT1Jk505WQZqK0gBSJ3pDyz-Rz6naKJPP15m5w?e=n0MqIn)
+
