@@ -1,9 +1,11 @@
 package com.example.tg_patient_profile.view.GP;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -18,7 +20,6 @@ import android.widget.EditText;
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.model.GP;
 import com.example.tg_patient_profile.util.DataListener;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link GPAddFragment#newInstance} factory method to
@@ -94,6 +95,88 @@ public class GPAddFragment extends Fragment {
         email_input = rootView.findViewById(R.id.input_gp_Email);
         fax_input = rootView.findViewById(R.id.input_gp_Fax);
 
+        Button step1_button = rootView.findViewById(R.id.step1);
+        Button step2_button = rootView.findViewById(R.id.step2);
+        Button step3_button = rootView.findViewById(R.id.step3);
+        Button step4_button = rootView.findViewById(R.id.step4);
+        Button step5_button = rootView.findViewById(R.id.step5);
+
+        if (status == 1) {
+            step4_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
+            step5_button.setBackgroundResource(R.drawable.roundshapebtn);
+
+        }
+        if (status == 2) {
+            //Log.i("masuk2", "Page 3");
+            step5_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
+            step4_button.setBackgroundResource(R.drawable.roundshapebtn);
+        }
+
+        step1_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dataChecker()){
+                    saveGp();
+
+                    //int nextPage = viewPager2.getCurrentItem()-1;
+                    viewPager2.setCurrentItem(0,true);
+                }
+
+            }
+        });
+
+        step2_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dataChecker()){
+                    saveGp();
+
+                    //step3_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
+
+                    // int nextPage = viewPager2.getCurrentItem()+1;
+                    viewPager2.setCurrentItem(1,true);
+                }
+
+            }
+        });
+        step3_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dataChecker()){
+                    saveGp();
+
+                    //int nextPage = viewPager2.getCurrentItem()+1;
+                    viewPager2.setCurrentItem(2,true);
+                }
+
+            }
+        });
+        step4_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dataChecker()){
+                    saveGp();
+
+                    //int nextPage = viewPager2.getCurrentItem()+2;
+                    viewPager2.setCurrentItem(3,true);
+                }
+
+            }
+        });
+        step5_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dataChecker()){
+                    saveGp();
+
+                    // int nextPage = viewPager2.getCurrentItem()+3;
+                    viewPager2.setCurrentItem(4,true);
+                }
+
+            }
+        });
+
+
         if(status==2){
             left_button.setBackgroundResource(R.drawable.polygon_3);
             right_button.setBackgroundResource(R.drawable.polygon_4);
@@ -134,12 +217,36 @@ public class GPAddFragment extends Fragment {
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //als();
                 if(dataChecker()){
                     saveGp();
                     if(status==1){
                         scrollPage(true);
                     }else{
-                        dataListener.onDataFinihsed(true);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());//new AlertDialog.Builder(this);
+                        builder.setTitle("Saving Changes?");
+                        // builder.setMessage("Do you really want to whatever?");
+                        //builder.setIcon(android.R.drawable.ic_dialog_alert);
+                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                dataListener.onDataFinihsed(true);
+                                //Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        builder.setNegativeButton("No", null);
+
+                        AlertDialog dialog = builder.create();
+                        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                            @Override
+                            public void onShow(DialogInterface arg0) {
+                                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorGreen));
+                                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorRed));
+                                //dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.black));
+                            }
+                        });
+                        dialog.show();
+
                     }
 
                 }

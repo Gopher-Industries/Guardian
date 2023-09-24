@@ -1,3 +1,4 @@
+
 ## What is Guardian?
 **Overview, Goals and Objectives**
 Guardians is an activity monitoring and profiling system for the aged care sector with plans to expand to residential homes. Guardians uses non-invasive radar technology to record a user’s activity and classify these activities over time. Guardians utilises the classified data to predict possible physical and mental health conditions associated with that behaviour.
@@ -26,4 +27,5 @@ Because this repository is protected, you have to fork to your own repository be
 
 ## How to set up Android Studio :
 in [Click here](https://deakin365.sharepoint.com/:w:/s/GopherIndustries2/EdSrJiI562ZCj2gx4QXkCRYBU58s5W6MNCDr3yDlcHXcog?e=oCLfc1), you can learn how to install Android Studio, initial set and create an emulator.
+
 
