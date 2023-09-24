@@ -1,9 +1,11 @@
 package com.example.tg_patient_profile.view.GP;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -113,12 +115,12 @@ public class GPAddFragment extends Fragment {
         step1_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // if(dataChecker()){
+                if(dataChecker()){
                     saveGp();
 
                     //int nextPage = viewPager2.getCurrentItem()-1;
                     viewPager2.setCurrentItem(0,true);
-               // }
+                }
 
             }
         });
@@ -126,50 +128,50 @@ public class GPAddFragment extends Fragment {
         step2_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //if(dataChecker()){
+                if(dataChecker()){
                     saveGp();
 
                     //step3_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
 
                     // int nextPage = viewPager2.getCurrentItem()+1;
                     viewPager2.setCurrentItem(1,true);
-               // }
+                }
 
             }
         });
         step3_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // if(dataChecker()){
+                if(dataChecker()){
                     saveGp();
 
                     //int nextPage = viewPager2.getCurrentItem()+1;
                     viewPager2.setCurrentItem(2,true);
-               // }
+                }
 
             }
         });
         step4_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //if(dataChecker()){
+                if(dataChecker()){
                     saveGp();
 
                     //int nextPage = viewPager2.getCurrentItem()+2;
                     viewPager2.setCurrentItem(3,true);
-               // }
+                }
 
             }
         });
         step5_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //if(dataChecker()){
+                if(dataChecker()){
                     saveGp();
 
                     // int nextPage = viewPager2.getCurrentItem()+3;
                     viewPager2.setCurrentItem(4,true);
-               // }
+                }
 
             }
         });
@@ -215,12 +217,36 @@ public class GPAddFragment extends Fragment {
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //als();
                 if(dataChecker()){
                     saveGp();
                     if(status==1){
                         scrollPage(true);
                     }else{
-                        dataListener.onDataFinihsed(true);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());//new AlertDialog.Builder(this);
+                        builder.setTitle("Saving Changes?");
+                        // builder.setMessage("Do you really want to whatever?");
+                        //builder.setIcon(android.R.drawable.ic_dialog_alert);
+                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                dataListener.onDataFinihsed(true);
+                                //Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        builder.setNegativeButton("No", null);
+
+                        AlertDialog dialog = builder.create();
+                        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                            @Override
+                            public void onShow(DialogInterface arg0) {
+                                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorGreen));
+                                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorRed));
+                                //dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.black));
+                            }
+                        });
+                        dialog.show();
+
                     }
 
                 }
