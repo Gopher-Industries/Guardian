@@ -20,6 +20,7 @@ Overview of Gopher in T2 2023:
 [Click here](https://deakin365.sharepoint.com/:p:/r/sites/GopherIndustries2/_layouts/15/Doc.aspx?sourcedoc=%7B0C4E7C6C-2873-423D-BBF0-1CE09D4B526D%7D&file=Junior%20Gopher%20Industries%20Presentation.pptx&action=edit&mobileredirect=true)(This link doesn't work, we can replace with T2 handover video)
 
 ## User Manual
+https://deakin365.sharepoint.com/:w:/s/GopherIndustries2/EYjVSnG50B1GvYgdT2KKMj0Bj4-vwmNHitYyU0fzGUk_RA?e=IrpJZt
 
 
 ## Branching strategy:
