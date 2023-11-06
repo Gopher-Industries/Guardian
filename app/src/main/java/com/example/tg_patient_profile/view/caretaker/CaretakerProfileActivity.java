@@ -9,7 +9,7 @@ import com.example.tg_patient_profile.R;
 public class CaretakerProfileActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caretakerprofile);
     }

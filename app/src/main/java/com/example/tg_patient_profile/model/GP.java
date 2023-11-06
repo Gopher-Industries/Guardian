@@ -3,11 +3,11 @@ package com.example.tg_patient_profile.model;
 public class GP {
     String first_name, middle_name, last_name, clinic_address, phone, email, fax, photo;
 
-    GP(){
+    GP() {
 
     }
 
-    public GP(String first_name, String middle_name, String last_name, String clinic_address, String phone, String email, String fax, String photo) {
+    public GP(final String first_name, final String middle_name, final String last_name, final String clinic_address, final String phone, final String email, final String fax, final String photo) {
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
@@ -22,7 +22,7 @@ public class GP {
         return clinic_address;
     }
 
-    public void setClinic_address(String clinic_address) {
+    public void setClinic_address(final String clinic_address) {
         this.clinic_address = clinic_address;
     }
 
@@ -30,7 +30,7 @@ public class GP {
         return fax;
     }
 
-    public void setFax(String fax) {
+    public void setFax(final String fax) {
         this.fax = fax;
     }
 
@@ -38,7 +38,7 @@ public class GP {
         return first_name;
     }
 
-    public void setFirst_name(String first_name) {
+    public void setFirst_name(final String first_name) {
         this.first_name = first_name;
     }
 
@@ -46,7 +46,7 @@ public class GP {
         return middle_name;
     }
 
-    public void setMiddle_name(String middle_name) {
+    public void setMiddle_name(final String middle_name) {
         this.middle_name = middle_name;
     }
 
@@ -54,7 +54,7 @@ public class GP {
         return last_name;
     }
 
-    public void setLast_name(String last_name) {
+    public void setLast_name(final String last_name) {
         this.last_name = last_name;
     }
 
@@ -62,7 +62,7 @@ public class GP {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(final String phone) {
         this.phone = phone;
     }
 
@@ -70,7 +70,7 @@ public class GP {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(final String photo) {
         this.photo = photo;
     }
 
@@ -78,7 +78,7 @@ public class GP {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 }

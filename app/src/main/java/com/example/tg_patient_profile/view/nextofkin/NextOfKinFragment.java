@@ -1,12 +1,11 @@
 package com.example.tg_patient_profile.view.nextofkin;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.tg_patient_profile.R;
 
@@ -39,9 +38,9 @@ public class NextOfKinFragment extends Fragment {
      * @return A new instance of fragment NextOfKinFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static NextOfKinFragment newInstance(String param1, String param2) {
-        NextOfKinFragment fragment = new NextOfKinFragment();
-        Bundle args = new Bundle();
+    public static NextOfKinFragment newInstance(final String param1, final String param2) {
+        final NextOfKinFragment fragment = new NextOfKinFragment();
+        final Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
@@ -49,17 +48,17 @@ public class NextOfKinFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (null != getArguments()) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_next_of_kin, container, false);
     }

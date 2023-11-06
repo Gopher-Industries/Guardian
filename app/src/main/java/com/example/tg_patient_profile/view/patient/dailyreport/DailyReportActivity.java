@@ -1,25 +1,15 @@
 package com.example.tg_patient_profile.view.patient.dailyreport;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentContainerView;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.CalendarView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.tg_patient_profile.R;
-import com.example.tg_patient_profile.model.Patient;
 
-import java.util.Date;
-
-public class DailyReportActivity extends AppCompatActivity implements IArrowClick{
+public class DailyReportActivity extends AppCompatActivity implements IArrowClick {
 
 //    DailyReportFragment fragment;
 //    FragmentContainerView fragmentContainerView;
@@ -28,17 +18,17 @@ public class DailyReportActivity extends AppCompatActivity implements IArrowClic
 
     @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_report);
 
         // Retrieve the patient's name from the intent extras
-        String patientName = getIntent().getStringExtra("patientName").split(" ")[0];
+        final String patientName = getIntent().getStringExtra("patientName").split(" ")[0];
 
         // Find the TextView for the username
-        TextView usernameTextView = findViewById(R.id.username);
+        final TextView usernameTextView = findViewById(R.id.username);
 
-        if (patientName != null) {
+        if (null != patientName) {
             // Set the patient's name in the TextView
             usernameTextView.setText(patientName);
         } else {
@@ -117,7 +107,7 @@ public class DailyReportActivity extends AppCompatActivity implements IArrowClic
 
 
     @Override
-    public void arrowClicked(View v) {
+    public void arrowClicked(final View v) {
 
     }
 }

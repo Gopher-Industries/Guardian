@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,8 +20,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tg_patient_profile.R;
-import com.example.tg_patient_profile.databinding.ActivityHomepage4adminBinding;
-import com.example.tg_patient_profile.view.caretaker.CaretakerDashboardActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,15 +29,15 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText mEmail,mPassword;
+    EditText mEmail, mPassword;
     Button mLoginBtn;
-    TextView mCreateBtn,forgotTextLink;
+    TextView mCreateBtn, forgotTextLink;
     ProgressBar progressBar;
     FirebaseAuth Auth;
     RadioGroup role_radioGroup;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -54,47 +51,45 @@ public class LoginActivity extends AppCompatActivity {
         role_radioGroup = findViewById(R.id.login_role_radioGroup);
 
 
-
-
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
 
-                String email = mEmail.getText().toString().trim();
-                String password = mPassword.getText().toString().trim();
+                final String email = mEmail.getText().toString().trim();
+                final String password = mPassword.getText().toString().trim();
                 String role = "";
-                int selectedRadioButtonId = role_radioGroup.getCheckedRadioButtonId();
-                if(selectedRadioButtonId!=-1){
-                    RadioButton seletedRadioButton = findViewById(selectedRadioButtonId);
+                final int selectedRadioButtonId = role_radioGroup.getCheckedRadioButtonId();
+                if (-1 != selectedRadioButtonId) {
+                    final RadioButton seletedRadioButton = findViewById(selectedRadioButtonId);
                     role = seletedRadioButton.getText().toString();
-                    SharedPreferences sharedPreferences = getSharedPreferences("MY_PREF", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    final SharedPreferences sharedPreferences = getSharedPreferences("MY_PREF", Context.MODE_PRIVATE);
+                    final SharedPreferences.Editor editor = sharedPreferences.edit();
 
-                    if(role.equals("Caretaker")){
+                    if (role.equals("Caretaker")) {
                         editor.putInt("login_role", 0);
 
-                    }else{
+                    } else {
                         editor.putInt("login_role", 1);
 
                     }
                     editor.apply();
-                }else{
+                } else {
                     Toast.makeText(LoginActivity.this, "please choose a role", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
 
-                if(TextUtils.isEmpty(email)){
+                if (TextUtils.isEmpty(email)) {
                     mEmail.setError("Email is Required.");
                     return;
                 }
 
-                if(TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(password)) {
                     mPassword.setError("Password is Required.");
                     return;
                 }
 
-                if(password.length() < 6){
+                if (6 > password.length()) {
                     mPassword.setError("Password Must be >= 6 Characters");
                     return;
                 }
@@ -103,25 +98,24 @@ public class LoginActivity extends AppCompatActivity {
 
                 // authenticate the user
 
-                Auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                Auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                    public void onComplete(@NonNull final Task<AuthResult> task) {
                         String role = "";
-                        int selectedRadioButtonId = role_radioGroup.getCheckedRadioButtonId();
-                        if(selectedRadioButtonId!=-1) {
-                            RadioButton seletedRadioButton = findViewById(selectedRadioButtonId);
+                        final int selectedRadioButtonId = role_radioGroup.getCheckedRadioButtonId();
+                        if (-1 != selectedRadioButtonId) {
+                            final RadioButton seletedRadioButton = findViewById(selectedRadioButtonId);
                             role = seletedRadioButton.getText().toString();
                         }
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                            if(role.equals("Caretaker")){
+                            if (role.equals("Caretaker")) {
                                 Toast.makeText(LoginActivity.this, "Logged in as CareTaker", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), Homepage4caretaker.class));
-                            }
-                            else{
+                            } else {
                                 startActivity(new Intent(getApplicationContext(), Homepage4admin.class));
                             }
-                        }else {
+                        } else {
                             Toast.makeText(LoginActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                         }
@@ -134,14 +128,14 @@ public class LoginActivity extends AppCompatActivity {
 
         mCreateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
+            public void onClick(final View v) {
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
             }
         });
 
         forgotTextLink.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
 
                 final EditText resetMail = new EditText(v.getContext());
                 final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
@@ -151,17 +145,17 @@ public class LoginActivity extends AppCompatActivity {
 
                 passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(final DialogInterface dialog, final int which) {
                         // extract the email and send reset link
-                        String mail = resetMail.getText().toString();
+                        final String mail = resetMail.getText().toString();
                         Auth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(Void aVoid) {
+                            public void onSuccess(final Void aVoid) {
                                 Toast.makeText(LoginActivity.this, "Reset Link Sent To Your Email.", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
-                            public void onFailure(@NonNull Exception e) {
+                            public void onFailure(@NonNull final Exception e) {
                                 Toast.makeText(LoginActivity.this, "Error ! Reset Link is Not Sent" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -171,7 +165,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(final DialogInterface dialog, final int which) {
                         // close the dialog
                     }
                 });

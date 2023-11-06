@@ -22,40 +22,39 @@ public class AddNewPatientActivity extends AppCompatActivity {
     Button btnAdd, btnBack;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_patient);
 
-        name=(EditText) findViewById(R.id.txtName);
-        address=(EditText) findViewById(R.id.txtAddress);
-        underCare=(EditText) findViewById(R.id.txtUnderCare);
-        phone=(EditText) findViewById(R.id.txtPhone);
-        photo=(EditText) findViewById(R.id.urlPhoto);
-        dob=(EditText) findViewById(R.id.txtDoB);
+        name = findViewById(R.id.txtName);
+        address = findViewById(R.id.txtAddress);
+        underCare = findViewById(R.id.txtUnderCare);
+        phone = findViewById(R.id.txtPhone);
+        photo = findViewById(R.id.urlPhoto);
+        dob = findViewById(R.id.txtDoB);
 
-        btnAdd=(Button) findViewById(R.id.btnAdd);
-        btnBack=(Button) findViewById(R.id.btnBack);
+        btnAdd = findViewById(R.id.btnAdd);
+        btnBack = findViewById(R.id.btnBack);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-               insertData();
+            public void onClick(final View v) {
+                insertData();
                 clearAll();
             }
         });
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 //finish();
                 onBackPressed();
             }
         });
     }
 
-    private void insertData()
-    {
-        Map<String, Object> map =new HashMap<>();
+    private void insertData() {
+        final Map<String, Object> map = new HashMap<>();
         map.put("name", name.getText().toString());
         map.put("address", address.getText().toString());
         map.put("underCare", underCare.getText().toString());
@@ -67,20 +66,19 @@ public class AddNewPatientActivity extends AppCompatActivity {
                 .setValue(map)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(AddNewPatientActivity.this,"New patient added",Toast.LENGTH_SHORT).show();
+                    public void onSuccess(final Void unused) {
+                        Toast.makeText(AddNewPatientActivity.this, "New patient added", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(Exception e) {
-                        Toast.makeText(AddNewPatientActivity.this,"Error adding patient",Toast.LENGTH_SHORT).show();
+                    public void onFailure(final Exception e) {
+                        Toast.makeText(AddNewPatientActivity.this, "Error adding patient", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-    private void clearAll()
-    {
+    private void clearAll() {
         name.setText("");
         address.setText("");
         underCare.setText("");

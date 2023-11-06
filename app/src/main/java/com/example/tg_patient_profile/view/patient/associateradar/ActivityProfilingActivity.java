@@ -1,9 +1,5 @@
 package com.example.tg_patient_profile.view.patient.associateradar;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,33 +8,37 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.example.tg_patient_profile.R;
 
 public class ActivityProfilingActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profiling);
-        LinearLayout activityProfilingLayout = findViewById(R.id.activityProfilingLayout);
+        final LinearLayout activityProfilingLayout = findViewById(R.id.activityProfilingLayout);
 
-        int choicesNum = getResources().getStringArray(R.array.ActivityStatusText).length;
+        final int choicesNum = getResources().getStringArray(R.array.ActivityStatusText).length;
 
 
-        TypedArray texts = getResources().obtainTypedArray(R.array.ActivityStatusText);
-        TypedArray imgs = getResources().obtainTypedArray(R.array.ActivityStatusImage);
+        final TypedArray texts = getResources().obtainTypedArray(R.array.ActivityStatusText);
+        final TypedArray imgs = getResources().obtainTypedArray(R.array.ActivityStatusImage);
 
         for (int i = 0; i < choicesNum; i++) {
-            String text = texts.getString(i);
-            int img = imgs.getResourceId(i, -1);
+            final String text = texts.getString(i);
+            final int img = imgs.getResourceId(i, -1);
 
-            View statusView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_status_layout,null);
-            ConstraintLayout activityStatusBG = (ConstraintLayout) statusView.findViewById(R.id.activityStatusBG);
-            ImageView statusImageView = statusView.findViewById(R.id.activityStatusIV);
-            TextView statusTextView = statusView.findViewById(R.id.activityStatusTV);
-            TextView statusOKTV = statusView.findViewById(R.id.statusOKTV);
-            ImageView expandImageView = statusView.findViewById(R.id.activityStatusExpandIV);
-            CardView expandedCardView = statusView.findViewById(R.id.activityExpandedCV);
+            final View statusView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.activity_status_layout, null);
+            final ConstraintLayout activityStatusBG = statusView.findViewById(R.id.activityStatusBG);
+            final ImageView statusImageView = statusView.findViewById(R.id.activityStatusIV);
+            final TextView statusTextView = statusView.findViewById(R.id.activityStatusTV);
+            final TextView statusOKTV = statusView.findViewById(R.id.statusOKTV);
+            final ImageView expandImageView = statusView.findViewById(R.id.activityStatusExpandIV);
+            final CardView expandedCardView = statusView.findViewById(R.id.activityExpandedCV);
             statusImageView.setImageResource(img);
             statusTextView.setText(text);
             statusView.setTag(i);
@@ -47,9 +47,10 @@ public class ActivityProfilingActivity extends AppCompatActivity {
 
             statusView.setOnClickListener(new View.OnClickListener() {
 
-                boolean clicked = false;
+                boolean clicked;
+
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     clicked = !clicked;
 
                     if (clicked) {
@@ -69,5 +70,6 @@ public class ActivityProfilingActivity extends AppCompatActivity {
             });
 
             activityProfilingLayout.addView(statusView);
+        }
     }
-}}
+}

@@ -1,17 +1,14 @@
 package com.example.tg_patient_profile.view.general;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
-import com.example.tg_patient_profile.R;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.view.patient.dailyreport.DailyReportActivity;
 
 
@@ -27,7 +24,7 @@ public class Homepage4admin extends AppCompatActivity {
 
     @SuppressLint("MissingInflatedId")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage4admin);
 
@@ -40,8 +37,8 @@ public class Homepage4admin extends AppCompatActivity {
         //new Patient Button
         newPatientButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent medicalDiagnosticsActivityIntent = new Intent(Homepage4admin.this, PatientProfileAddActivity.class);
+            public void onClick(final View view) {
+                final Intent medicalDiagnosticsActivityIntent = new Intent(Homepage4admin.this, PatientProfileAddActivity.class);
                 startActivity(medicalDiagnosticsActivityIntent);
             }
         });
@@ -49,16 +46,16 @@ public class Homepage4admin extends AppCompatActivity {
         //daily report button
         dailyReportButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent medicalDiagnosticsActivityIntent = new Intent(Homepage4admin.this, DailyReportActivity.class);
+            public void onClick(final View view) {
+                final Intent medicalDiagnosticsActivityIntent = new Intent(Homepage4admin.this, DailyReportActivity.class);
                 startActivity(medicalDiagnosticsActivityIntent);
             }
         });
         //patient list button
         patientListButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent medicalDiagnosticsActivityIntent = new Intent(Homepage4admin.this, PatientListActivity.class);
+            public void onClick(final View view) {
+                final Intent medicalDiagnosticsActivityIntent = new Intent(Homepage4admin.this, PatientListActivity.class);
                 startActivity(medicalDiagnosticsActivityIntent);
             }
         });
@@ -66,8 +63,8 @@ public class Homepage4admin extends AppCompatActivity {
         //settings button
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent medicalDiagnosticsActivityIntent = new Intent(Homepage4admin.this, Setting.class);
+            public void onClick(final View view) {
+                final Intent medicalDiagnosticsActivityIntent = new Intent(Homepage4admin.this, Setting.class);
                 startActivity(medicalDiagnosticsActivityIntent);
             }
         });
@@ -75,8 +72,8 @@ public class Homepage4admin extends AppCompatActivity {
         //sign out button
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent medicalDiagnosticsActivityIntent = new Intent(Homepage4admin.this, LoginActivity.class);
+            public void onClick(final View view) {
+                final Intent medicalDiagnosticsActivityIntent = new Intent(Homepage4admin.this, LoginActivity.class);
                 startActivity(medicalDiagnosticsActivityIntent);
             }
         });

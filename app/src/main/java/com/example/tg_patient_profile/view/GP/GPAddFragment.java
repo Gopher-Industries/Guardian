@@ -3,42 +3,38 @@ package com.example.tg_patient_profile.view.GP;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.model.GP;
 import com.example.tg_patient_profile.util.DataListener;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link GPAddFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class GPAddFragment extends Fragment {
-    private int status;
-    private Button left_button, right_button;
-    private Button next_button,prev_button;
-    private GP gp;
-    ViewPager2 viewPager2;
-    private DataListener dataListener;
-    private EditText first_name_input, middle_name_input, last_name_input,clinic_address_input, phone_number_input,email_input,fax_input;
-    private String firstName,middleName, lastName,clinicAddress, phoneNumber,email,fax;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    ViewPager2 viewPager2;
+    private int status;
+    private Button left_button, right_button;
+    private Button next_button, prev_button;
+    private GP gp;
+    private DataListener dataListener;
+    private EditText first_name_input, middle_name_input, last_name_input, clinic_address_input, phone_number_input, email_input, fax_input;
+    private String firstName, middleName, lastName, clinicAddress, phoneNumber, email, fax;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -46,7 +42,8 @@ public class GPAddFragment extends Fragment {
     public GPAddFragment() {
         // Required empty public constructor
     }
-    public GPAddFragment(int status){
+
+    public GPAddFragment(final int status) {
         this.status = status;
     }
 
@@ -59,9 +56,9 @@ public class GPAddFragment extends Fragment {
      * @return A new instance of fragment GPAddFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static GPAddFragment newInstance(String param1, String param2) {
-        GPAddFragment fragment = new GPAddFragment();
-        Bundle args = new Bundle();
+    public static GPAddFragment newInstance(final String param1, final String param2) {
+        final GPAddFragment fragment = new GPAddFragment();
+        final Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
@@ -69,20 +66,20 @@ public class GPAddFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (null != getArguments()) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         viewPager2 = getActivity().findViewById(R.id.dataForViewViewPager);
-        View rootView = inflater.inflate(R.layout.fragment_gp_add, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_gp_add, container, false);
         left_button = rootView.findViewById(R.id.gp_add_polygon_left);
         right_button = rootView.findViewById(R.id.gp_add_polygon_right);
         next_button = rootView.findViewById(R.id.gp_add_NextButton);
@@ -95,18 +92,18 @@ public class GPAddFragment extends Fragment {
         email_input = rootView.findViewById(R.id.input_gp_Email);
         fax_input = rootView.findViewById(R.id.input_gp_Fax);
 
-        Button step1_button = rootView.findViewById(R.id.step1);
-        Button step2_button = rootView.findViewById(R.id.step2);
-        Button step3_button = rootView.findViewById(R.id.step3);
-        Button step4_button = rootView.findViewById(R.id.step4);
-        Button step5_button = rootView.findViewById(R.id.step5);
+        final Button step1_button = rootView.findViewById(R.id.step1);
+        final Button step2_button = rootView.findViewById(R.id.step2);
+        final Button step3_button = rootView.findViewById(R.id.step3);
+        final Button step4_button = rootView.findViewById(R.id.step4);
+        final Button step5_button = rootView.findViewById(R.id.step5);
 
-        if (status == 1) {
+        if (1 == status) {
             step4_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
             step5_button.setBackgroundResource(R.drawable.roundshapebtn);
 
         }
-        if (status == 2) {
+        if (2 == status) {
             //Log.i("masuk2", "Page 3");
             step5_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
             step4_button.setBackgroundResource(R.drawable.roundshapebtn);
@@ -114,12 +111,12 @@ public class GPAddFragment extends Fragment {
 
         step1_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if(dataChecker()){
+            public void onClick(final View view) {
+                if (dataChecker()) {
                     saveGp();
 
                     //int nextPage = viewPager2.getCurrentItem()-1;
-                    viewPager2.setCurrentItem(0,true);
+                    viewPager2.setCurrentItem(0, true);
                 }
 
             }
@@ -127,72 +124,71 @@ public class GPAddFragment extends Fragment {
 
         step2_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if(dataChecker()){
+            public void onClick(final View view) {
+                if (dataChecker()) {
                     saveGp();
 
                     //step3_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
 
                     // int nextPage = viewPager2.getCurrentItem()+1;
-                    viewPager2.setCurrentItem(1,true);
+                    viewPager2.setCurrentItem(1, true);
                 }
 
             }
         });
         step3_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if(dataChecker()){
+            public void onClick(final View view) {
+                if (dataChecker()) {
                     saveGp();
 
                     //int nextPage = viewPager2.getCurrentItem()+1;
-                    viewPager2.setCurrentItem(2,true);
+                    viewPager2.setCurrentItem(2, true);
                 }
 
             }
         });
         step4_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if(dataChecker()){
+            public void onClick(final View view) {
+                if (dataChecker()) {
                     saveGp();
 
                     //int nextPage = viewPager2.getCurrentItem()+2;
-                    viewPager2.setCurrentItem(3,true);
+                    viewPager2.setCurrentItem(3, true);
                 }
 
             }
         });
         step5_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if(dataChecker()){
+            public void onClick(final View view) {
+                if (dataChecker()) {
                     saveGp();
 
                     // int nextPage = viewPager2.getCurrentItem()+3;
-                    viewPager2.setCurrentItem(4,true);
+                    viewPager2.setCurrentItem(4, true);
                 }
 
             }
         });
 
 
-        if(status==2){
+        if (2 == status) {
             left_button.setBackgroundResource(R.drawable.polygon_3);
             right_button.setBackgroundResource(R.drawable.polygon_4);
-        }else{
+        } else {
             next_button.setText("Next");
         }
 
 
-
         right_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if(status==1){
+            public void onClick(final View view) {
+                if (1 == status) {
                     //for now I keep 2 next of kins and 2 gps waiting to be add
                     //but defaultly adding 1 nok and 1gp, after alick right arrow the second one shows up is better
-                    if(dataChecker()){
+                    if (dataChecker()) {
                         saveGp();
                         scrollPage(true);
                     }
@@ -204,9 +200,9 @@ public class GPAddFragment extends Fragment {
 
         left_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if(status ==2){
-                    if(dataChecker()){
+            public void onClick(final View view) {
+                if (2 == status) {
+                    if (dataChecker()) {
                         saveGp();
                         scrollPage(false);
                     }
@@ -216,30 +212,30 @@ public class GPAddFragment extends Fragment {
 
         next_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 //als();
-                if(dataChecker()){
+                if (dataChecker()) {
                     saveGp();
-                    if(status==1){
+                    if (1 == status) {
                         scrollPage(true);
-                    }else{
-                        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());//new AlertDialog.Builder(this);
+                    } else {
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());//new AlertDialog.Builder(this);
                         builder.setTitle("Saving Changes?");
                         // builder.setMessage("Do you really want to whatever?");
                         //builder.setIcon(android.R.drawable.ic_dialog_alert);
                         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int whichButton) {
+                            public void onClick(final DialogInterface dialog, final int whichButton) {
                                 dataListener.onDataFinihsed(true);
                                 //Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
                             }
                         });
                         builder.setNegativeButton("No", null);
 
-                        AlertDialog dialog = builder.create();
+                        final AlertDialog dialog = builder.create();
                         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                             @Override
-                            public void onShow(DialogInterface arg0) {
+                            public void onShow(final DialogInterface arg0) {
                                 dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorGreen));
                                 dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorRed));
                                 //dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.black));
@@ -255,8 +251,8 @@ public class GPAddFragment extends Fragment {
 
         prev_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if(dataChecker()){
+            public void onClick(final View view) {
+                if (dataChecker()) {
                     saveGp();
                     scrollPage(false);
                 }
@@ -266,20 +262,20 @@ public class GPAddFragment extends Fragment {
 
     }
 
-    private void scrollPage(boolean isNextPage){
-        if(isNextPage){
-            int nextPage = viewPager2.getCurrentItem()+1;
-            viewPager2.setCurrentItem(nextPage,true);
-        }else{
-            int nextPage = viewPager2.getCurrentItem()-1;
-            viewPager2.setCurrentItem(nextPage,true);
+    private void scrollPage(final boolean isNextPage) {
+        if (isNextPage) {
+            final int nextPage = viewPager2.getCurrentItem() + 1;
+            viewPager2.setCurrentItem(nextPage, true);
+        } else {
+            final int nextPage = viewPager2.getCurrentItem() - 1;
+            viewPager2.setCurrentItem(nextPage, true);
         }
     }
 
-    private void saveGp(){
-        if (gp == null) {
-            gp = new GP(firstName,middleName,lastName,clinicAddress,phoneNumber,email,fax,null);
-        }else{
+    private void saveGp() {
+        if (null == gp) {
+            gp = new GP(firstName, middleName, lastName, clinicAddress, phoneNumber, email, fax, null);
+        } else {
             gp.setFirst_name(firstName);
             gp.setMiddle_name(middleName);
             gp.setLast_name(lastName);
@@ -288,15 +284,15 @@ public class GPAddFragment extends Fragment {
             gp.setEmail(email);
             gp.setFax(fax);
         }
-        if(status==1){
-            dataListener.onDataFilled(null,null,null,gp,null);
-        }else{
-            dataListener.onDataFilled(null,null,null,null,gp);
+        if (1 == status) {
+            dataListener.onDataFilled(null, null, null, gp, null);
+        } else {
+            dataListener.onDataFilled(null, null, null, null, gp);
 
         }
     }
 
-    private boolean dataChecker(){
+    private boolean dataChecker() {
         firstName = first_name_input.getText().toString();
         middleName = middle_name_input.getText().toString();
         lastName = last_name_input.getText().toString();
@@ -312,25 +308,26 @@ public class GPAddFragment extends Fragment {
             setErrorAndReturn(last_name_input, "Last name is Required.");
             return false;
         }
-        if(TextUtils.isEmpty(clinicAddress)){
-            setErrorAndReturn(clinic_address_input,"Clinic address is Required.");
+        if (TextUtils.isEmpty(clinicAddress)) {
+            setErrorAndReturn(clinic_address_input, "Clinic address is Required.");
         }
-        if(TextUtils.isEmpty(phoneNumber)){
-            setErrorAndReturn(phone_number_input,"Phone number is Required.");
+        if (TextUtils.isEmpty(phoneNumber)) {
+            setErrorAndReturn(phone_number_input, "Phone number is Required.");
         }
         return true;
     }
 
-    private void setErrorAndReturn(EditText editText, String s) {
+    private void setErrorAndReturn(final EditText editText, final String s) {
         editText.setError(s);
     }
+
     @Override
-    public void onAttach(@NonNull Context context) {
+    public void onAttach(@NonNull final Context context) {
         super.onAttach(context);
         try {
             dataListener = (DataListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement DataListener");
+        } catch (final ClassCastException e) {
+            throw new ClassCastException(context + " must implement DataListener");
         }
     }
 }

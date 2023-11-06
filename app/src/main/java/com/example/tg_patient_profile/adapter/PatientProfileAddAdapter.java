@@ -7,23 +7,18 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.tg_patient_profile.view.GP.GPAddFragment;
-import com.example.tg_patient_profile.view.GP.GPProfileFragment;
-import com.example.tg_patient_profile.view.general.HealthDataForViewFragment;
-import com.example.tg_patient_profile.view.nextofkin.NextOfKinFragment;
 import com.example.tg_patient_profile.view.nextofkin.NoKAddFragment;
 import com.example.tg_patient_profile.view.patient.PatientAddFragment;
-import com.example.tg_patient_profile.view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsFragment;
-import com.example.tg_patient_profile.view.patient.patientdata.patient.PatientProfileFragment;
 
 public class PatientProfileAddAdapter extends FragmentStateAdapter {
 
-    public PatientProfileAddAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    public PatientProfileAddAdapter(@NonNull final FragmentManager fragmentManager, @NonNull final Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }
 
     @NonNull
     @Override
-    public Fragment createFragment(int position) {
+    public Fragment createFragment(final int position) {
         Fragment fragment;
         switch (position) {
             case 0:

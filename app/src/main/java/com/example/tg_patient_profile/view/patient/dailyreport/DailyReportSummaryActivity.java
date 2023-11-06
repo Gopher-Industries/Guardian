@@ -1,12 +1,12 @@
 package com.example.tg_patient_profile.view.patient.dailyreport;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.widget.CalendarView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.util.Util;
@@ -17,11 +17,10 @@ import java.util.Date;
 
 public class DailyReportSummaryActivity extends AppCompatActivity {
 
+    private final StringBuilder statuses = new StringBuilder();
     private String date;
     private String notes;
     private String[] statusList;
-    private StringBuilder statuses = new StringBuilder();
-
     private long dateMs;
 
     private TextView currentStatusSummary;
@@ -29,34 +28,34 @@ public class DailyReportSummaryActivity extends AppCompatActivity {
     private CalendarView patientReportSummaryCalendarView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_report_summary);
 
-        currentStatusSummary = (TextView) findViewById(R.id.currentStatusSummary);
-        progressNotesSummary = (TextView) findViewById(R.id.progressNotesSummary);
-        patientReportSummaryCalendarView = (CalendarView) findViewById(R.id.patientReportSummaryCalendarView);
+        currentStatusSummary = findViewById(R.id.currentStatusSummary);
+        progressNotesSummary = findViewById(R.id.progressNotesSummary);
+        patientReportSummaryCalendarView = findViewById(R.id.patientReportSummaryCalendarView);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         date = intent.getStringExtra(Util.DAILY_REPORT_DATE);
         notes = intent.getStringExtra(Util.DAILY_REPORT_STATUS_NOTES);
         statusList = intent.getStringArrayExtra(Util.DAILY_REPORT_STATUS_LIST);
-        if (statusList.length != 0) {
+        if (0 != statusList.length) {
             for (int i = 0; i < statusList.length - 1; i++) {
                 statuses.append(statusList[i] + "\n");
             }
-            statuses.append(statusList[statusList.length-1]);
+            statuses.append(statusList[statusList.length - 1]);
         }
 
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        if (android.os.Build.VERSION_CODES.N <= android.os.Build.VERSION.SDK_INT) {
+            final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
             try {
                 Date d = null;
                 d = formatter.parse(date);
                 dateMs = d.getTime();
-            } catch (ParseException e) {
+            } catch (final ParseException e) {
                 e.printStackTrace();
             }
         }

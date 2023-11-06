@@ -1,7 +1,5 @@
 package com.example.tg_patient_profile.adapter;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -17,13 +15,14 @@ import com.example.tg_patient_profile.view.patient.patientdata.patient.PatientPr
 public class PatientProfileAdapter extends FragmentStateAdapter {
 
     String patient_id;
-    public PatientProfileAdapter(@NonNull String patient_id,@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+
+    public PatientProfileAdapter(@NonNull final String patient_id, @NonNull final FragmentManager fragmentManager, @NonNull final Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
         this.patient_id = patient_id;
     }
 
     @NonNull
-    public Fragment createFragment(int position) {
+    public Fragment createFragment(final int position) {
         Fragment fragment;
         switch (position) {
             case 0:
@@ -33,7 +32,7 @@ public class PatientProfileAdapter extends FragmentStateAdapter {
             case 2:
                 return new GPProfileFragment();
             case 3:
-                return  new MedicalDiagnosticsFragment(patient_id);
+                return new MedicalDiagnosticsFragment(patient_id);
             default:
                 return new HealthDataForViewFragment();
         }

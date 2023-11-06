@@ -1,13 +1,13 @@
 package com.example.tg_patient_profile.view.general;
 
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
-
-import android.os.Bundle;
-import android.view.View;
 
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.adapter.PatientProfileAdapter;
@@ -20,18 +20,18 @@ public class PatientProfileActivity extends AppCompatActivity {
     private CustomHeader customHeader;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_profile);
 
-        TabLayout tabLayout = findViewById(R.id.dataForViewTabLayout);
-        ViewPager2 viewPager2 = findViewById(R.id.dataForViewViewPager);
+        final TabLayout tabLayout = findViewById(R.id.dataForViewTabLayout);
+        final ViewPager2 viewPager2 = findViewById(R.id.dataForViewViewPager);
         customHeader = findViewById(R.id.customHeader);
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        String patient_id = getIntent().getStringExtra("id");
+        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        final NavigationView navigationView = findViewById(R.id.nav_view);
+        final String patient_id = getIntent().getStringExtra("id");
 
-        PatientProfileAdapter viewPagerAdapter = new PatientProfileAdapter(patient_id,getSupportFragmentManager(), getLifecycle());
+        final PatientProfileAdapter viewPagerAdapter = new PatientProfileAdapter(patient_id, getSupportFragmentManager(), getLifecycle());
         viewPager2.setAdapter(viewPagerAdapter);
 
         customHeader.setHeaderHeight(450);
@@ -40,11 +40,11 @@ public class PatientProfileActivity extends AppCompatActivity {
 
         navigationView.setItemIconTintList(null);
 
-        if (customHeader != null) {
+        if (null != customHeader) {
             customHeader.menuButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    if (drawerLayout != null) {
+                public void onClick(final View v) {
+                    if (null != drawerLayout) {
                         drawerLayout.openDrawer(GravityCompat.START);
                     }
                 }
@@ -54,22 +54,18 @@ public class PatientProfileActivity extends AppCompatActivity {
         new TabLayoutMediator(tabLayout, viewPager2,
                 new TabLayoutMediator.TabConfigurationStrategy() {
                     @Override
-                    public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                        if (position == 0) {
+                    public void onConfigureTab(@NonNull final TabLayout.Tab tab, final int position) {
+                        if (0 == position) {
                             tab.setText("Patient");
-                        }
-                        else if (position == 1){
+                        } else if (1 == position) {
                             tab.setText("Next of Kin");
-                        }
-                        else if (position == 2){
+                        } else if (2 == position) {
                             tab.setText("General Practitioner");
-                        }
-                        else if (position == 3){
+                        } else if (3 == position) {
                             tab.setText("Health Details");
-                        }
-                        else if (position == 4){
+                        } else if (4 == position) {
                             tab.setText("Health & Welfare Det.");
-                        }else{
+                        } else {
                             tab.setText("Care Plan");
                         }
                     }
@@ -77,27 +73,27 @@ public class PatientProfileActivity extends AppCompatActivity {
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                int position = tab.getPosition();
-                if (position == 0) {
+            public void onTabSelected(final TabLayout.Tab tab) {
+                final int position = tab.getPosition();
+                if (0 == position) {
                     customHeader.setHeaderText("Patient Profile");
                     customHeader.setHeaderTopImageVisibility(View.VISIBLE);
                     customHeader.setHeaderTopImage(R.drawable.profile_avatar_women);
-                } else if (position == 1) {
+                } else if (1 == position) {
                     customHeader.setHeaderText("Next Of Kin Contact");
                     customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);
                     customHeader.setHeaderTopImageVisibility(View.VISIBLE);
-                } else if (position == 2) {
+                } else if (2 == position) {
                     customHeader.setHeaderText("GP Details");
                     customHeader.setHeaderTopImage(R.drawable.profile_avatar_men2);
                     customHeader.setHeaderTopImageVisibility(View.VISIBLE);
-                } else if (position == 3) {
+                } else if (3 == position) {
                     customHeader.setHeaderText("Health Details");
                     customHeader.setHeaderTopImageVisibility(View.GONE);
-                } else if(position == 4){
+                } else if (4 == position) {
                     customHeader.setHeaderText("Patient Details");
                     customHeader.setHeaderTopImageVisibility(View.GONE);
-                }else{
+                } else {
                     customHeader.setHeaderText("Care Plan");
                     customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);
                     customHeader.setHeaderTopImageVisibility(View.VISIBLE);
@@ -105,11 +101,11 @@ public class PatientProfileActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+            public void onTabUnselected(final TabLayout.Tab tab) {
             }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
+            public void onTabReselected(final TabLayout.Tab tab) {
             }
         });
     }

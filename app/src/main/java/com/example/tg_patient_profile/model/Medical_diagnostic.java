@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Medical_diagnostic {
-    String patient_id,name,patient_temp,blood_pressure,glicose_level,oxygen_saturation,pulse_rate,respiration_rate, bloodfast_level;
+    String patient_id, name, patient_temp, blood_pressure, glicose_level, oxygen_saturation, pulse_rate, respiration_rate, bloodfast_level;
     Boolean current;
 
-    public Medical_diagnostic(String patient_id, String name, String blood_pressure, String patient_temp, String glicose_level, String oxygen_saturation, String pulse_rate, String respiration_rate, String bloodfast_level, Boolean isCurrent) {
+    public Medical_diagnostic(final String patient_id, final String name, final String blood_pressure, final String patient_temp, final String glicose_level, final String oxygen_saturation, final String pulse_rate, final String respiration_rate, final String bloodfast_level, final Boolean isCurrent) {
         this.patient_id = patient_id;
         this.name = name;
         this.patient_temp = patient_temp;
@@ -20,7 +20,7 @@ public class Medical_diagnostic {
         this.current = isCurrent;
     }
 
-    public Medical_diagnostic(String patient_id, Boolean isCurrent) {
+    public Medical_diagnostic(final String patient_id, final Boolean isCurrent) {
         this.patient_id = patient_id;
         this.current = isCurrent;
     }
@@ -29,7 +29,7 @@ public class Medical_diagnostic {
         return patient_id;
     }
 
-    public void setPatient_id(String patient_id) {
+    public void setPatient_id(final String patient_id) {
         this.patient_id = patient_id;
     }
 
@@ -37,7 +37,7 @@ public class Medical_diagnostic {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -45,7 +45,7 @@ public class Medical_diagnostic {
         return patient_temp;
     }
 
-    public void setPatient_temp(String patient_temp) {
+    public void setPatient_temp(final String patient_temp) {
         this.patient_temp = patient_temp;
     }
 
@@ -53,7 +53,7 @@ public class Medical_diagnostic {
         return blood_pressure;
     }
 
-    public void setBlood_pressure(String blood_pressure) {
+    public void setBlood_pressure(final String blood_pressure) {
         this.blood_pressure = blood_pressure;
     }
 
@@ -61,7 +61,7 @@ public class Medical_diagnostic {
         return glicose_level;
     }
 
-    public void setGlicose_level(String glicose_level) {
+    public void setGlicose_level(final String glicose_level) {
         this.glicose_level = glicose_level;
     }
 
@@ -69,7 +69,7 @@ public class Medical_diagnostic {
         return oxygen_saturation;
     }
 
-    public void setOxygen_saturation(String oxygen_saturation) {
+    public void setOxygen_saturation(final String oxygen_saturation) {
         this.oxygen_saturation = oxygen_saturation;
     }
 
@@ -77,7 +77,7 @@ public class Medical_diagnostic {
         return pulse_rate;
     }
 
-    public void setPulse_rate(String pulse_rate) {
+    public void setPulse_rate(final String pulse_rate) {
         this.pulse_rate = pulse_rate;
     }
 
@@ -86,7 +86,7 @@ public class Medical_diagnostic {
         return current;
     }
 
-    public void setCurrent(Boolean isCurrent) {
+    public void setCurrent(final Boolean isCurrent) {
         this.current = isCurrent;
     }
 
@@ -94,7 +94,7 @@ public class Medical_diagnostic {
         return respiration_rate;
     }
 
-    public void setRespiration_rate(String respiration_rate) {
+    public void setRespiration_rate(final String respiration_rate) {
         this.respiration_rate = respiration_rate;
     }
 
@@ -102,7 +102,7 @@ public class Medical_diagnostic {
         return bloodfast_level;
     }
 
-    public void setBloodfast_level(String bloodfast_level) {
+    public void setBloodfast_level(final String bloodfast_level) {
         this.bloodfast_level = bloodfast_level;
     }
 
@@ -123,7 +123,7 @@ public class Medical_diagnostic {
     }
 
     public Map<String, Object> toMap() {
-        HashMap<String, Object> res = new HashMap<>();
+        final HashMap<String, Object> res = new HashMap<>();
         res.put("patient_id", patient_id);
         res.put("name", name);
         res.put("patient_temp", patient_temp);

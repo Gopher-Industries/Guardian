@@ -1,24 +1,23 @@
 package com.example.tg_patient_profile.view.general;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
-import androidx.appcompat.app.AlertDialog;
-import com.example.tg_patient_profile.R;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.example.tg_patient_profile.R;
 
 public class Setting extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,7 +29,7 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
     Switch notificationSwitch;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
@@ -44,10 +43,10 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
         settings_app_update_button.setOnClickListener(this);
         settings_feedback_button.setOnClickListener(this);
 
-        ConstraintLayout settingsThemeButton = findViewById(R.id.settings_theme_button);
+        final ConstraintLayout settingsThemeButton = findViewById(R.id.settings_theme_button);
         settingsThemeButton.setOnClickListener(v -> {
-            SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
-            boolean currentNightMode = sharedPreferences.getBoolean("night_mode", false);
+            final SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+            final boolean currentNightMode = sharedPreferences.getBoolean("night_mode", false);
             if (currentNightMode) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 sharedPreferences.edit().putBoolean("night_mode", false).apply();
@@ -63,7 +62,7 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
         switch (v.getId()) {
 
             case R.id.settings_feedback_button:
@@ -76,8 +75,9 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
                 break;
         }
     }
+
     // Notifications
-    private void handleNotificationSwitch(boolean isChecked) {
+    private void handleNotificationSwitch(final boolean isChecked) {
         if (isChecked) {
             showNotification();
             showToast("Notifications turned on");
@@ -86,23 +86,25 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
             showToast("Notifications turned off");
         }
     }
+
     private void showNotification() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(
+        if (Build.VERSION_CODES.O <= Build.VERSION.SDK_INT) {
+            final NotificationChannel channel = new NotificationChannel(
                     "channel_id",
                     "Channel Name",
                     NotificationManager.IMPORTANCE_DEFAULT
             );
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            final NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
     }
+
     private void cancelNotification() {
     }
 
-//feedback
+    //feedback
     private void showFeedbackDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Provide Feedback");
 
         final EditText feedbackEditText = new EditText(this);
@@ -111,8 +113,8 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
 
         builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String feedback = feedbackEditText.getText().toString();
+            public void onClick(final DialogInterface dialog, final int which) {
+                final String feedback = feedbackEditText.getText().toString();
                 if (!feedback.isEmpty()) {
                     showToast("Feedback submitted: " + feedback);
                 } else {
@@ -123,13 +125,14 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
 
         builder.setNegativeButton("Cancel", null);
 
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.show();
     }
-// app update
+
+    // app update
     private void checkForUpdates() {
         showToast("Checking for updates...");
-        boolean isUpdated = false;
+        final boolean isUpdated = false;
 
         if (isUpdated) {
             showToast("New version available! Please update.");
@@ -139,7 +142,7 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
     }
 
 
-    private void showToast(String message) {
+    private void showToast(final String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

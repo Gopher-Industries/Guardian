@@ -47,13 +47,13 @@ public class Util {
     public static final String TOKENS = "tokens";
     public static final String DEVICE_TOKEN = "device_token";
 
-    public static void updateDeviceToken(final Context context, String token, String username) {
+    public static void updateDeviceToken(final Context context, final String token, final String username) {
 
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference(); // get root node of the firebase
-        DatabaseReference databaseReference = rootRef.child(Util.TOKENS).child(username); // get token node associated to the user
+        final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference(); // get root node of the firebase
+        final DatabaseReference databaseReference = rootRef.child(Util.TOKENS).child(username); // get token node associated to the user
 
         // create new hashmap, used to specify nodes in the firebase
-        HashMap<String, String> hashMap = new HashMap<>();
+        final HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put(Util.DEVICE_TOKEN, token);
 
         // set values of nodes in the firebase
@@ -61,7 +61,7 @@ public class Util {
 
             // on click listener for if the node update is completed
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
+            public void onComplete(@NonNull final Task<Void> task) {
                 if (!task.isSuccessful()) // if token is failed to be updated
                 {
                     Util.createToast(context, "Failed to update token");
@@ -70,26 +70,18 @@ public class Util {
         });
     }
 
-    public static void createToast(Context context, String message) {
+    public static void createToast(final Context context, final String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
 
-
-
-
-
-
-
-
-
-    public static final String[] setToArray(Set<String> hashSet) {
-        String arr[] = new String[hashSet.size()];
+    public static final String[] setToArray(final Set<String> hashSet) {
+        final String[] arr = new String[hashSet.size()];
 
         int i = 0;
 
         // iterating over the hashset
-        for (String ele : hashSet) {
+        for (final String ele : hashSet) {
             arr[i++] = ele;
         }
         return arr;

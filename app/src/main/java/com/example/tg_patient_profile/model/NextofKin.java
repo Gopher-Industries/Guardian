@@ -1,9 +1,9 @@
 package com.example.tg_patient_profile.model;
 
 public class NextofKin {
-    String first_name, middle_name, last_name, home_address , mobile_phone, email_address, photo;
+    String first_name, middle_name, last_name, home_address, mobile_phone, email_address, photo;
 
-    public NextofKin(String first_name, String middle_name, String last_name, String home_address, String mobile_phone, String email_address, String photo) {
+    public NextofKin(final String first_name, final String middle_name, final String last_name, final String home_address, final String mobile_phone, final String email_address, final String photo) {
         this.first_name = first_name;
         this.middle_name = middle_name;
         this.last_name = last_name;
@@ -17,7 +17,7 @@ public class NextofKin {
         return home_address;
     }
 
-    public void setHome_address(String home_address) {
+    public void setHome_address(final String home_address) {
         this.home_address = home_address;
     }
 
@@ -25,7 +25,7 @@ public class NextofKin {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(final String photo) {
         this.photo = photo;
     }
 
@@ -33,7 +33,7 @@ public class NextofKin {
         return first_name;
     }
 
-    public void setFirst_name(String first_name) {
+    public void setFirst_name(final String first_name) {
         this.first_name = first_name;
     }
 
@@ -41,7 +41,7 @@ public class NextofKin {
         return middle_name;
     }
 
-    public void setMiddle_name(String middle_name) {
+    public void setMiddle_name(final String middle_name) {
         this.middle_name = middle_name;
     }
 
@@ -49,7 +49,7 @@ public class NextofKin {
         return last_name;
     }
 
-    public void setLast_name(String last_name) {
+    public void setLast_name(final String last_name) {
         this.last_name = last_name;
     }
 
@@ -57,7 +57,7 @@ public class NextofKin {
         return mobile_phone;
     }
 
-    public void setMobile_phone(String mobile_phone) {
+    public void setMobile_phone(final String mobile_phone) {
         this.mobile_phone = mobile_phone;
     }
 
@@ -65,7 +65,7 @@ public class NextofKin {
         return email_address;
     }
 
-    public void setEmail_address(String email_address) {
+    public void setEmail_address(final String email_address) {
         this.email_address = email_address;
     }
 

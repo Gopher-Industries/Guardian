@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
     public static final String TAG = "TAG";
-    EditText mEmail,mPassword;
+    EditText mEmail, mPassword;
     Button mRegisterBtn;
     TextView mLoginBtn;
     FirebaseAuth Auth;
@@ -39,27 +39,27 @@ public class RegisterActivity extends AppCompatActivity {
     String userID;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        EditText registerEmail = findViewById(R.id.Email);
-        EditText password = findViewById(R.id.password);
-        EditText passwordConfirm = findViewById(R.id.passwordConfirm);
-        Button backToLoginButton = findViewById(R.id.backToLoginButton);
+        final EditText registerEmail = findViewById(R.id.Email);
+        final EditText password = findViewById(R.id.password);
+        final EditText passwordConfirm = findViewById(R.id.passwordConfirm);
+        final Button backToLoginButton = findViewById(R.id.backToLoginButton);
 
         backToLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+            public void onClick(final View view) {
+                final Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(loginIntent);
             }
         });
 
-        mEmail      = findViewById(R.id.Email);
-        mPassword   = findViewById(R.id.password);
-        mRegisterBtn= findViewById(R.id.registerBtn);
-        mLoginBtn   = findViewById(R.id.createText);
+        mEmail = findViewById(R.id.Email);
+        mPassword = findViewById(R.id.password);
+        mRegisterBtn = findViewById(R.id.registerBtn);
+        mLoginBtn = findViewById(R.id.createText);
 
         Auth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -68,21 +68,21 @@ public class RegisterActivity extends AppCompatActivity {
 
         mRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 final String email = mEmail.getText().toString().trim();
-                String password = mPassword.getText().toString().trim();
+                final String password = mPassword.getText().toString().trim();
 
-                if(TextUtils.isEmpty(email)){
+                if (TextUtils.isEmpty(email)) {
                     mEmail.setError("Email is Required.");
                     return;
                 }
 
-                if(TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(password)) {
                     mPassword.setError("Password is Required.");
                     return;
                 }
 
-                if(password.length() < 6){
+                if (6 > password.length()) {
                     mPassword.setError("Password Must be >= 6 Characters");
                     return;
                 }
@@ -91,47 +91,47 @@ public class RegisterActivity extends AppCompatActivity {
 
                 // register the user in firebase
 
-                Auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                Auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                    public void onComplete(@NonNull final Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
 
                             // send verification link
 
-                            FirebaseUser fuser = Auth.getCurrentUser();
+                            final FirebaseUser fuser = Auth.getCurrentUser();
                             fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
-                                public void onSuccess(Void aVoid) {
+                                public void onSuccess(final Void aVoid) {
                                     Toast.makeText(RegisterActivity.this, "Verification Email Has been Sent.", Toast.LENGTH_SHORT).show();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
-                                public void onFailure(@NonNull Exception e) {
+                                public void onFailure(@NonNull final Exception e) {
                                     Log.d(TAG, "onFailure: Email not sent " + e.getMessage());
                                 }
                             });
 
                             Toast.makeText(RegisterActivity.this, "User Created.", Toast.LENGTH_SHORT).show();
                             userID = Auth.getCurrentUser().getUid();
-                            DocumentReference documentReference = fStore.collection("users").document(userID);
-                            Map<String,Object> user = new HashMap<>();
+                            final DocumentReference documentReference = fStore.collection("users").document(userID);
+                            final Map<String, Object> user = new HashMap<>();
 
-                            user.put("email",email);
+                            user.put("email", email);
 
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "onSuccess: user Profile is created for "+ userID);
+                                public void onSuccess(final Void aVoid) {
+                                    Log.d(TAG, "onSuccess: user Profile is created for " + userID);
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.d(TAG, "onFailure: " + e.toString());
+                                public void onFailure(@NonNull final Exception e) {
+                                    Log.d(TAG, "onFailure: " + e);
                                 }
                             });
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
-                        }else {
+                        } else {
                             Toast.makeText(RegisterActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
                         }
@@ -141,11 +141,10 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
-
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+            public void onClick(final View v) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             }
         });
 
