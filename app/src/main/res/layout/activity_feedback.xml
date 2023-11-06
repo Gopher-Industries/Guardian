@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.general.FeedbackActivity">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/feedback_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Provide Feedback"
-        android:textSize="20sp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:text="Provide Feedback"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/feedback_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/feedback_title"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="Enter your feedback..."
         android:gravity="top"
+        android:hint="Enter your feedback..."
         android:minLines="4" />
 
     <Button

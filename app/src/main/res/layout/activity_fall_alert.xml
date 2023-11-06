@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FallAlertActivity"
-    android:textAlignment="center">
+    android:textAlignment="center"
+    tools:context=".view.caretaker.notifications.FallAlertActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/headerCard"
@@ -266,6 +266,7 @@
         app:srcCompat="@drawable/reddot" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

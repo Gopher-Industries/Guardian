@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.patient.patientdata.healthdetails.MedicalDiagnosticsActivity">
+    tools:context=".view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/medicalDiaganosticsHeaderCardView"

@@ -31,6 +31,7 @@ android {
         dataBinding true
     }
     buildToolsVersion '33.0.0'
+    namespace 'com.example.tg_patient_profile'
 }
 
 dependencies {
