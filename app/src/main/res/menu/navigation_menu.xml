@@ -6,19 +6,23 @@
         android:icon="@drawable/profile"
         android:title="@string/profile" />
 
-    <item android:id="@+id/menuNofications"
+    <item
+        android:id="@+id/menuNofications"
         android:icon="@drawable/notifcations"
         android:title="@string/notifications" />
 
-    <item android:id="@+id/menuCollection"
+    <item
+        android:id="@+id/menuCollection"
         android:icon="@drawable/collection"
         android:title="@string/collection" />
 
-    <item android:id="@+id/menuInbox"
+    <item
+        android:id="@+id/menuInbox"
         android:icon="@drawable/inbox"
         android:title="@string/inbox" />
 
-    <item android:id="@+id/menuOrders"
+    <item
+        android:id="@+id/menuOrders"
         android:icon="@drawable/menu_new_user"
         android:title="@string/new_user" />
 

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true">
-
-
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -66,6 +63,7 @@
 
 
         </androidx.cardview.widget.CardView>
+
         <ImageView
             android:id="@+id/imageView9"
             android:layout_width="match_parent"
@@ -162,11 +160,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
+            android:background="@drawable/careplan_button"
             android:inputType="textMultiLine"
             android:text="Walking"
-            android:background="@drawable/careplan_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
         <TextView
             android:id="@+id/supportReqSummary"
             android:layout_width="365dp"
@@ -333,8 +332,8 @@
             android:layout_marginBottom="10dp"
             android:backgroundTint="#3297C3"
             android:text="Previous"
-            android:textStyle="bold"
             android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.091"

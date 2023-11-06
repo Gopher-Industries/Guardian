@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- ellipse_9 from your XD file. -->
+<?xml version="1.0" encoding="utf-8"?><!-- ellipse_9 from your XD file. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-	android:shape="oval" >
-	<solid android:color="@color/ellipse_9_color" />
+    android:shape="oval">
+    <solid android:color="@color/ellipse_9_color" />
 </shape>
 

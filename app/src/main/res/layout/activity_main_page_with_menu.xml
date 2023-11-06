@@ -11,12 +11,12 @@
         android:id="@+id/menu_button_main_page"
         android:layout_width="33dp"
         android:layout_height="wrap_content"
-        android:clickable="true"
         android:layout_marginStart="32dp"
         android:layout_marginTop="60dp"
+        android:background="@drawable/menu_button"
+        android:clickable="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/menu_button" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/menu_drawerLayout"

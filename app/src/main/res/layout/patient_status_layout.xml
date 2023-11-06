@@ -5,8 +5,8 @@
     android:id="@+id/patientStatusConstraintLayout"
     android:layout_width="340dp"
     android:layout_height="wrap_content"
-    app:layout_constraintGuide_percent="0.1"
-    android:background="@drawable/white_rectangle">
+    android:background="@drawable/white_rectangle"
+    app:layout_constraintGuide_percent="0.1">
 
     <ImageView
         android:id="@+id/patientStatusImageView"
