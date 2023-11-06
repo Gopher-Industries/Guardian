@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
+            android:contentDescription="TODO"
             app:layout_constraintStart_toStartOf="@+id/imageView35"
             app:layout_constraintTop_toBottomOf="@+id/imageView35"
             app:srcCompat="@drawable/rectangle1592" />
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="1dp"
             android:layout_marginBottom="16dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imageView49"
             app:srcCompat="@drawable/rectangle1592" />
@@ -37,6 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
+            android:contentDescription="TODO"
             app:layout_constraintStart_toStartOf="@+id/imageView38"
             app:layout_constraintTop_toBottomOf="@+id/imageView38"
             app:srcCompat="@drawable/rectangle1592" />
@@ -127,6 +130,7 @@
             android:layout_width="424dp"
             android:layout_height="0dp"
             android:layout_marginBottom="2dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/imageView39"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.23"
@@ -165,6 +169,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="190dp"
                 android:layout_marginTop="65dp"
+                android:contentDescription="TODO"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/gopher_logo" />
 
@@ -174,6 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="70dp"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/menu_button" />
 
             <ImageView
@@ -182,6 +188,7 @@
                 android:layout_height="51dp"
                 android:layout_marginLeft="340dp"
                 android:layout_marginTop="65dp"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/profile_avatar_women" />
 
             <TextView
@@ -199,7 +206,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:text="Home"
                 android:textColor="@android:color/white"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
         </androidx.cardview.widget.CardView>
 
@@ -209,6 +216,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="127dp"
             android:layout_marginBottom="296dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/imageView48"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.538"
@@ -223,6 +231,7 @@
             android:layout_marginTop="160dp"
             android:layout_marginEnd="18dp"
             android:layout_marginBottom="251dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/imageView29_a"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView37"
@@ -234,6 +243,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/name22"
             app:layout_constraintTop_toBottomOf="@+id/name26"
@@ -245,6 +255,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="56dp"
             android:layout_marginBottom="35dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/imageView52"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/name23"
@@ -256,6 +267,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/imageView40"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView40"
@@ -279,6 +291,7 @@
             android:id="@+id/imageView9_b"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="@+id/imageView9_a"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -292,6 +305,7 @@
             android:layout_marginStart="53dp"
             android:layout_marginTop="114dp"
             android:layout_marginEnd="13dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/name"
             app:layout_constraintEnd_toStartOf="@+id/imageView10_a"
             app:layout_constraintStart_toStartOf="parent"
@@ -303,6 +317,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="39dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/name23"
             app:layout_constraintEnd_toStartOf="@+id/imageView52"
             app:layout_constraintStart_toStartOf="parent"
@@ -341,6 +356,7 @@
             android:layout_marginStart="53dp"
             android:layout_marginEnd="170dp"
             android:layout_marginBottom="197dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/name23"
             app:layout_constraintStart_toStartOf="parent"
@@ -353,6 +369,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="36dp"
             android:layout_marginBottom="34dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/imageView53"
             app:layout_constraintEnd_toStartOf="@+id/imageView47"
             app:layout_constraintStart_toEndOf="@+id/name24"
@@ -365,6 +382,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="55dp"
             android:layout_marginBottom="9dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="@+id/imageView49"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/name25"
@@ -376,6 +394,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="56dp"
             android:layout_marginBottom="9dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="@+id/imageView50"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/name26"
@@ -386,6 +405,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="166dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/imageView40"
             app:layout_constraintEnd_toStartOf="@+id/name24"
             app:layout_constraintStart_toEndOf="@+id/imageView38"
@@ -399,6 +419,7 @@
             android:layout_marginStart="53dp"
             android:layout_marginEnd="136dp"
             android:layout_marginBottom="31dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/imageView54"
             app:layout_constraintEnd_toStartOf="@+id/name25"
             app:layout_constraintStart_toStartOf="parent"
@@ -412,6 +433,7 @@
             android:layout_marginStart="53dp"
             android:layout_marginEnd="148dp"
             android:layout_marginBottom="25dp"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/name26"
             app:layout_constraintStart_toStartOf="parent"
@@ -424,6 +446,7 @@
         android:id="@+id/imageView29_b"
         android:layout_width="424dp"
         android:layout_height="82dp"
+        android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.23"
         app:layout_constraintStart_toStartOf="parent"
@@ -458,6 +481,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="190dp"
             android:layout_marginTop="65dp"
+            android:contentDescription="TODO"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/gopher_logo" />
 
@@ -467,6 +491,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="70dp"
+            android:contentDescription="TODO"
             app:srcCompat="@drawable/menu_button" />
 
         <ImageView
@@ -475,6 +500,7 @@
             android:layout_height="51dp"
             android:layout_marginLeft="340dp"
             android:layout_marginTop="65dp"
+            android:contentDescription="TODO"
             app:srcCompat="@drawable/profile_avatar_women" />
 
         <TextView
@@ -503,13 +529,14 @@
             android:layout_marginTop="120dp"
             android:text="!"
             android:textColor="@android:color/holo_red_light"
-            android:textSize="23dp" />
+            android:textSize="23sp" />
     </androidx.cardview.widget.CardView>
 
     <ImageView
         android:id="@+id/imageView10_b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="TODO"
         app:srcCompat="@drawable/chevrondown"
         tools:layout_editor_absoluteX="371dp"
         tools:layout_editor_absoluteY="160dp" />
@@ -518,6 +545,7 @@
         android:id="@+id/imageView22_b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="TODO"
         app:srcCompat="@drawable/rectangle3"
         tools:layout_editor_absoluteX="113dp"
         tools:layout_editor_absoluteY="725dp" />

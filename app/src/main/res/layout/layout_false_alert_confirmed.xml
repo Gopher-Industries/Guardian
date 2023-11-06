@@ -29,7 +29,7 @@
         android:maxWidth="250dp"
         android:text="False Alert Noted And Benjamin's Activity Profile Has Been Updated \n \n All admins have been notified."
         android:textAlignment="center"
-        android:textSize="10dp"
+        android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name9" />

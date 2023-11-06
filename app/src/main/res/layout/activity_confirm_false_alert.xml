@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="180dp"
             android:layout_marginTop="40dp"
+            android:contentDescription="TODO"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/gopher_logo" />
 
@@ -46,6 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="50dp"
+            android:contentDescription="TODO"
             app:srcCompat="@drawable/menu_button" />
 
         <ImageView
@@ -54,6 +56,7 @@
             android:layout_height="51dp"
             android:layout_marginLeft="330dp"
             android:layout_marginTop="45dp"
+            android:contentDescription="TODO"
             app:srcCompat="@drawable/profile_avatar_women" />
 
         <TextView
@@ -83,7 +86,7 @@
             android:fontFamily="sans-serif"
             android:text="Confirm Incident"
             android:textColor="@android:color/white"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
     </androidx.cardview.widget.CardView>
 
@@ -92,6 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="82dp"
         android:layout_marginTop="-45dp"
+        android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +110,7 @@
         android:fontFamily="@font/poppins_bold"
         android:text="!  Alert"
         android:textColor="@android:color/holo_green_light"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView9" />
@@ -118,7 +122,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:text="Recorded time: 09:49 AM"
-        android:textSize="10dp"
+        android:textSize="10sp"
         app:layout_constraintStart_toEndOf="@+id/textView30"
         app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
@@ -153,7 +157,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
             android:text="@string/confirm_incident_text"
-            android:textSize="10dp"
+            android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name3" />
@@ -178,6 +182,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:contentDescription="TODO"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -200,7 +205,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="Verification time: 09:49 AM"
-            android:textSize="10dp"
+            android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name7" />
@@ -236,6 +241,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/gray_border_rectangle"
                 android:hint="Add your input here.."
+                android:textIsSelectable="true"
                 android:textSize="9sp" />
 
         </RadioGroup>
@@ -247,7 +253,6 @@
         android:layout_width="136dp"
         android:layout_height="45dp"
         android:layout_marginBottom="16dp"
-        android:onClick="onFalseAlertConfirmedCancelClick"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

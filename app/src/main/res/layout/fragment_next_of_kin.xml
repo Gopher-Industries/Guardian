@@ -7,7 +7,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <!-- Background ImageView -->
         <ImageView
@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:contentDescription="TODO"
             android:src="@drawable/background_logo" />
 
         <LinearLayout
@@ -79,6 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
                 android:hint="Enter a first name"
                 android:textSize="14sp"
@@ -111,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
                 android:hint="Enter a middle name"
                 android:textSize="14sp"
@@ -144,6 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
                 android:hint="Enter a last name"
                 android:inputType="textMultiLine"
@@ -175,6 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="15dp"
+                android:autofillHints=""
                 android:background="@null"
                 android:hint="Enter/Search Address"
                 android:textSize="14sp"
@@ -205,6 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
                 android:inputType="textMultiLine"
                 android:text="+61 412 345 678"
@@ -235,6 +241,7 @@
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:autofillHints=""
                 android:background="@null"
                 android:backgroundTint="#ECECEC"
                 android:hint="someone@example.com"

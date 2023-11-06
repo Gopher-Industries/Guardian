@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="180dp"
                 android:layout_marginTop="40dp"
+                android:contentDescription="TODO"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/gopher_logo" />
 
@@ -38,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/menu_button" />
 
             <ImageView
@@ -46,6 +48,7 @@
                 android:layout_height="51dp"
                 android:layout_marginLeft="330dp"
                 android:layout_marginTop="45dp"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/profile_avatar_women" />
 
 
@@ -58,7 +61,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Care Plan Summary"
                 android:textColor="@android:color/white"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
 
@@ -69,6 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="82dp"
             android:layout_marginTop="-45dp"
+            android:contentDescription="TODO"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +86,7 @@
             android:layout_marginTop="30dp"
             android:fontFamily="@font/poppins_bold"
             android:text="Summary"
-            android:textSize="15dp"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@+id/imageView9"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView9" />

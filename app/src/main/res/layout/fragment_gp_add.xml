@@ -7,7 +7,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <!-- Background ImageView -->
         <ImageView
@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:contentDescription="TODO"
             android:src="@drawable/background_logo" />
 
         <LinearLayout
@@ -59,7 +60,7 @@
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
                                 android:text="1"
-                                android:textSize="10dp" />
+                                android:textSize="10sp" />
 
                             <View
                                 android:layout_width="20dp"
@@ -81,7 +82,7 @@
                             android:text="New patient details"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="8dp"
+                            android:textSize="8sp"
                             app:layout_constraintTop_toBottomOf="@id/step1" />
 
                     </LinearLayout>
@@ -107,7 +108,7 @@
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
                                 android:text="2"
-                                android:textSize="10dp" />
+                                android:textSize="10sp" />
 
                             <View
                                 android:layout_width="15dp"
@@ -129,7 +130,7 @@
                             android:text="Next to Kin"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="8dp"
+                            android:textSize="8sp"
                             app:layout_constraintTop_toBottomOf="@id/step1" />
 
 
@@ -156,7 +157,7 @@
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
                                 android:text="3"
-                                android:textSize="10dp" />
+                                android:textSize="10sp" />
 
                             <View
                                 android:layout_width="15dp"
@@ -178,7 +179,7 @@
                             android:text="Next to Kin+"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="8dp"
+                            android:textSize="8sp"
                             app:layout_constraintTop_toBottomOf="@id/step1" />
 
 
@@ -205,7 +206,7 @@
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
                                 android:text="4"
-                                android:textSize="10dp" />
+                                android:textSize="10sp" />
 
                             <View
                                 android:layout_width="15dp"
@@ -227,7 +228,7 @@
                             android:text="Gp"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="8dp"
+                            android:textSize="8sp"
                             app:layout_constraintTop_toBottomOf="@id/step1" />
 
 
@@ -254,7 +255,7 @@
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
                                 android:text="5"
-                                android:textSize="10dp" />
+                                android:textSize="10sp" />
 
 
                         </LinearLayout>
@@ -270,7 +271,7 @@
                             android:text="Gp+"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="8dp"
+                            android:textSize="8sp"
                             app:layout_constraintTop_toBottomOf="@id/step1" />
 
 
@@ -328,6 +329,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
                 android:hint="Enter a first name"
                 android:textSize="14sp"
@@ -360,6 +362,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
                 android:hint="Enter a middle name"
                 android:textSize="14sp"
@@ -393,6 +396,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
                 android:hint="Enter a last name"
                 android:inputType="textMultiLine"
@@ -424,6 +428,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
                 android:hint="Enter clinic address"
                 android:inputType="textMultiLine"
@@ -453,6 +458,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
                 android:hint="eg: 1234 56789 0 "
                 android:inputType="textMultiLine"
@@ -482,6 +488,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
                 android:hint="Enter an email adress"
                 android:inputType="textMultiLine"
@@ -511,6 +518,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
                 android:hint="Enter a fax"
                 android:inputType="textMultiLine"

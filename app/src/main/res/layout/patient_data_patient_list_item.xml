@@ -85,6 +85,7 @@
 
             <Button
                 android:id="@+id/btnEdit"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
@@ -94,6 +95,7 @@
 
             <Button
                 android:id="@+id/btnDelete"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"

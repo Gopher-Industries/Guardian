@@ -26,6 +26,7 @@
                 android:id="@+id/patient_list_status_circle"
                 android:layout_width="35dp"
                 android:layout_height="33dp"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/red_circle"
                 tools:layout_editor_absoluteX="41dp"
                 tools:layout_editor_absoluteY="232dp" />
@@ -39,7 +40,7 @@
                 android:fontFamily="sans-serif-black"
                 android:text="Patient name"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <ImageView
                 android:id="@+id/patient_list_arrow"
@@ -47,6 +48,7 @@
                 android:layout_height="31dp"
                 android:layout_marginLeft="140dp"
                 android:layout_marginTop="5dp"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/right_vector"
                 tools:layout_editor_absoluteX="337dp"
                 tools:layout_editor_absoluteY="234dp" />

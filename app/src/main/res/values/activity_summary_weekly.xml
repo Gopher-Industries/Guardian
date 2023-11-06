@@ -13,6 +13,6 @@
     <string-array name="WeeklyActivitySummaryText">
         <item><string>Standing at unusual spot (near window) for longer than 2.5 hour(s), 4 times this week. Patient responded “Just staring outside. &lt;a href= "">Read full conversation here.&lt;/a</string></item>
         <item>Standing at unusual spot (near window) for longer than 2.75 hour(s), 3 times this week.</item>
-        <item>Biting nails and keep on looking at the clock, at least 10 times a day. Patient responded with "They are coming. "&lt;a href = ""> Read full conversation here.&lt;/a</item>
+        <item>Biting nails and keep on looking at the clock, at least 10 times a day. Patient responded with “They are coming. ”&lt;a href = ""> Read full conversation here.&lt;/a</item>
     </string-array>
 </resources>
