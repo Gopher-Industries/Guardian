@@ -107,15 +107,6 @@ public class PatientAddFragment extends Fragment {
 
     // step1
 
-    /*step1_button.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-           // step1_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
-
-        }
-    });*/
-
     next_button.setOnClickListener(
         view -> {
           if (dataChecker()) {

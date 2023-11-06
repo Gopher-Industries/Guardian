@@ -63,24 +63,4 @@ public class Homepage4admin extends AppCompatActivity {
           startActivity(medicalDiagnosticsActivityIntent);
         });
   }
-
-  //    public void onNotificationsClick(View view) {
-  //        Intent medicalDiagnosticsActivityIntent = new Intent(CaretakerDashboardActivity.this,
-  // FallAlertActivity.class);
-  //        startActivity(medicalDiagnosticsActivityIntent);
-  //    }
-  //
-  //    //Listener for the button to add orders
-  //    public void onSelectAPatientClick(View view) {
-  //        Intent patientProfileListIntent = new Intent(CaretakerDashboardActivity.this,
-  // PatientListActivity.class);
-  //        startActivity(patientProfileListIntent);
-  //    }
-  //
-  //    //Listener for the button to add orders
-  //    public void onCaretakerProfileEditClick(View view) {
-  //        Intent patientProfileListIntent = new Intent(CaretakerDashboardActivity.this,
-  // CaretakerProfileActivity.class);
-  //        startActivity(patientProfileListIntent);
-  //    }
 }
