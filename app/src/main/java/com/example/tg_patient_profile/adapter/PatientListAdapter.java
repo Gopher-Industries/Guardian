@@ -25,8 +25,6 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<Patient, Patient
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
      * {@link FirebaseRecyclerOptions} for configuration options.
-     *
-     * @param options
      */
     Context context;
 
@@ -57,7 +55,6 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<Patient, Patient
                     intent.putExtra("id", model.getPatient_id());
                     context.startActivity(intent);
 
-                } else {
                 }
             }
         });
@@ -73,7 +70,7 @@ public class PatientListAdapter extends FirebaseRecyclerAdapter<Patient, Patient
     }
 
 
-    class myViewHolder extends RecyclerView.ViewHolder {
+    static class myViewHolder extends RecyclerView.ViewHolder {
 
         TextView patient_name;
         CardView patient_item;
