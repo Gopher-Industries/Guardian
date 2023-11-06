@@ -9,326 +9,331 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
-
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.model.GP;
 import com.example.tg_patient_profile.util.DataListener;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link GPAddFragment#newInstance} factory method to
+ * A simple {@link Fragment} subclass. Use the {@link GPAddFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class GPAddFragment extends Fragment {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    ViewPager2 viewPager2;
-    private int status;
-    private Button left_button, right_button;
-    private Button next_button, prev_button;
-    private GP gp;
-    private DataListener dataListener;
-    private EditText first_name_input, middle_name_input, last_name_input, clinic_address_input, phone_number_input, email_input, fax_input;
-    private String firstName, middleName, lastName, clinicAddress, phoneNumber, email, fax;
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+  private static final String ARG_PARAM1 = "param1";
+  private static final String ARG_PARAM2 = "param2";
+  ViewPager2 viewPager2;
+  private int status;
+  private Button left_button, right_button;
+  private Button next_button, prev_button;
+  private GP gp;
+  private DataListener dataListener;
+  private EditText first_name_input,
+      middle_name_input,
+      last_name_input,
+      clinic_address_input,
+      phone_number_input,
+      email_input,
+      fax_input;
+  private String firstName, middleName, lastName, clinicAddress, phoneNumber, email, fax;
+  private String mParam1;
+  private String mParam2;
 
-    public GPAddFragment() {
-        // Required empty public constructor
+  public GPAddFragment() {
+    // Required empty public constructor
+  }
+
+  public GPAddFragment(final int status) {
+    this.status = status;
+  }
+
+  /**
+   * Use this factory method to create a new instance of this fragment using the provided
+   * parameters.
+   *
+   * @param param1 Parameter 1.
+   * @param param2 Parameter 2.
+   * @return A new instance of fragment GPAddFragment.
+   */
+  // TODO: Rename and change types and number of parameters
+  public static GPAddFragment newInstance(final String param1, final String param2) {
+    final GPAddFragment fragment = new GPAddFragment();
+    final Bundle args = new Bundle();
+    args.putString(ARG_PARAM1, param1);
+    args.putString(ARG_PARAM2, param2);
+    fragment.setArguments(args);
+    return fragment;
+  }
+
+  @Override
+  public void onCreate(final Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    if (null != getArguments()) {
+      mParam1 = getArguments().getString(ARG_PARAM1);
+      mParam2 = getArguments().getString(ARG_PARAM2);
+    }
+  }
+
+  @Override
+  public View onCreateView(
+      final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+    // Inflate the layout for this fragment
+    viewPager2 = getActivity().findViewById(R.id.dataForViewViewPager);
+    final View rootView = inflater.inflate(R.layout.fragment_gp_add, container, false);
+    left_button = rootView.findViewById(R.id.gp_add_polygon_left);
+    right_button = rootView.findViewById(R.id.gp_add_polygon_right);
+    next_button = rootView.findViewById(R.id.gp_add_NextButton);
+    prev_button = rootView.findViewById(R.id.gp_add_PrevButton);
+    first_name_input = rootView.findViewById(R.id.input_gp_FirstName);
+    middle_name_input = rootView.findViewById(R.id.input_gp_MiddleName);
+    last_name_input = rootView.findViewById(R.id.input_gp_LastName);
+    clinic_address_input = rootView.findViewById(R.id.input_gp_ClinicAddress);
+    phone_number_input = rootView.findViewById(R.id.input_gp_Phone);
+    email_input = rootView.findViewById(R.id.input_gp_Email);
+    fax_input = rootView.findViewById(R.id.input_gp_Fax);
+
+    final Button step1_button = rootView.findViewById(R.id.step1);
+    final Button step2_button = rootView.findViewById(R.id.step2);
+    final Button step3_button = rootView.findViewById(R.id.step3);
+    final Button step4_button = rootView.findViewById(R.id.step4);
+    final Button step5_button = rootView.findViewById(R.id.step5);
+
+    if (1 == status) {
+      step4_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
+      step5_button.setBackgroundResource(R.drawable.roundshapebtn);
+    }
+    if (2 == status) {
+      // Log.i("masuk2", "Page 3");
+      step5_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
+      step4_button.setBackgroundResource(R.drawable.roundshapebtn);
     }
 
-    public GPAddFragment(final int status) {
-        this.status = status;
-    }
+    step1_button.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(final View view) {
+            if (dataChecker()) {
+              saveGp();
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GPAddFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static GPAddFragment newInstance(final String param1, final String param2) {
-        final GPAddFragment fragment = new GPAddFragment();
-        final Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (null != getArguments()) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-                             final Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        viewPager2 = getActivity().findViewById(R.id.dataForViewViewPager);
-        final View rootView = inflater.inflate(R.layout.fragment_gp_add, container, false);
-        left_button = rootView.findViewById(R.id.gp_add_polygon_left);
-        right_button = rootView.findViewById(R.id.gp_add_polygon_right);
-        next_button = rootView.findViewById(R.id.gp_add_NextButton);
-        prev_button = rootView.findViewById(R.id.gp_add_PrevButton);
-        first_name_input = rootView.findViewById(R.id.input_gp_FirstName);
-        middle_name_input = rootView.findViewById(R.id.input_gp_MiddleName);
-        last_name_input = rootView.findViewById(R.id.input_gp_LastName);
-        clinic_address_input = rootView.findViewById(R.id.input_gp_ClinicAddress);
-        phone_number_input = rootView.findViewById(R.id.input_gp_Phone);
-        email_input = rootView.findViewById(R.id.input_gp_Email);
-        fax_input = rootView.findViewById(R.id.input_gp_Fax);
-
-        final Button step1_button = rootView.findViewById(R.id.step1);
-        final Button step2_button = rootView.findViewById(R.id.step2);
-        final Button step3_button = rootView.findViewById(R.id.step3);
-        final Button step4_button = rootView.findViewById(R.id.step4);
-        final Button step5_button = rootView.findViewById(R.id.step5);
-
-        if (1 == status) {
-            step4_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
-            step5_button.setBackgroundResource(R.drawable.roundshapebtn);
-
-        }
-        if (2 == status) {
-            //Log.i("masuk2", "Page 3");
-            step5_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
-            step4_button.setBackgroundResource(R.drawable.roundshapebtn);
-        }
-
-        step1_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                if (dataChecker()) {
-                    saveGp();
-
-                    //int nextPage = viewPager2.getCurrentItem()-1;
-                    viewPager2.setCurrentItem(0, true);
-                }
-
+              // int nextPage = viewPager2.getCurrentItem()-1;
+              viewPager2.setCurrentItem(0, true);
             }
+          }
         });
 
-        step2_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                if (dataChecker()) {
-                    saveGp();
+    step2_button.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(final View view) {
+            if (dataChecker()) {
+              saveGp();
 
-                    //step3_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
+              // step3_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
 
-                    // int nextPage = viewPager2.getCurrentItem()+1;
-                    viewPager2.setCurrentItem(1, true);
-                }
-
+              // int nextPage = viewPager2.getCurrentItem()+1;
+              viewPager2.setCurrentItem(1, true);
             }
+          }
         });
-        step3_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                if (dataChecker()) {
-                    saveGp();
+    step3_button.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(final View view) {
+            if (dataChecker()) {
+              saveGp();
 
-                    //int nextPage = viewPager2.getCurrentItem()+1;
-                    viewPager2.setCurrentItem(2, true);
-                }
-
+              // int nextPage = viewPager2.getCurrentItem()+1;
+              viewPager2.setCurrentItem(2, true);
             }
+          }
         });
-        step4_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                if (dataChecker()) {
-                    saveGp();
+    step4_button.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(final View view) {
+            if (dataChecker()) {
+              saveGp();
 
-                    //int nextPage = viewPager2.getCurrentItem()+2;
-                    viewPager2.setCurrentItem(3, true);
-                }
-
+              // int nextPage = viewPager2.getCurrentItem()+2;
+              viewPager2.setCurrentItem(3, true);
             }
+          }
         });
-        step5_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                if (dataChecker()) {
-                    saveGp();
+    step5_button.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(final View view) {
+            if (dataChecker()) {
+              saveGp();
 
-                    // int nextPage = viewPager2.getCurrentItem()+3;
-                    viewPager2.setCurrentItem(4, true);
-                }
-
+              // int nextPage = viewPager2.getCurrentItem()+3;
+              viewPager2.setCurrentItem(4, true);
             }
-        });
-
-
-        if (2 == status) {
-            left_button.setBackgroundResource(R.drawable.polygon_3);
-            right_button.setBackgroundResource(R.drawable.polygon_4);
-        } else {
-            next_button.setText("Next");
-        }
-
-
-        right_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                if (1 == status) {
-                    //for now I keep 2 next of kins and 2 gps waiting to be add
-                    //but defaultly adding 1 nok and 1gp, after alick right arrow the second one shows up is better
-                    if (dataChecker()) {
-                        saveGp();
-                        scrollPage(true);
-                    }
-
-                }
-
-            }
+          }
         });
 
-        left_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                if (2 == status) {
-                    if (dataChecker()) {
-                        saveGp();
-                        scrollPage(false);
-                    }
-                }
-            }
-        });
-
-        next_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                //als();
-                if (dataChecker()) {
-                    saveGp();
-                    if (1 == status) {
-                        scrollPage(true);
-                    } else {
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());//new AlertDialog.Builder(this);
-                        builder.setTitle("Saving Changes?");
-                        // builder.setMessage("Do you really want to whatever?");
-                        //builder.setIcon(android.R.drawable.ic_dialog_alert);
-                        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(final DialogInterface dialog, final int whichButton) {
-                                dataListener.onDataFinihsed(true);
-                                //Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        builder.setNegativeButton("No", null);
-
-                        final AlertDialog dialog = builder.create();
-                        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-                            @Override
-                            public void onShow(final DialogInterface arg0) {
-                                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorGreen));
-                                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorRed));
-                                //dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.black));
-                            }
-                        });
-                        dialog.show();
-
-                    }
-
-                }
-            }
-        });
-
-        prev_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View view) {
-                if (dataChecker()) {
-                    saveGp();
-                    scrollPage(false);
-                }
-            }
-        });
-        return rootView;
-
+    if (2 == status) {
+      left_button.setBackgroundResource(R.drawable.polygon_3);
+      right_button.setBackgroundResource(R.drawable.polygon_4);
+    } else {
+      next_button.setText("Next");
     }
 
-    private void scrollPage(final boolean isNextPage) {
-        if (isNextPage) {
-            final int nextPage = viewPager2.getCurrentItem() + 1;
-            viewPager2.setCurrentItem(nextPage, true);
-        } else {
-            final int nextPage = viewPager2.getCurrentItem() - 1;
-            viewPager2.setCurrentItem(nextPage, true);
-        }
-    }
+    right_button.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(final View view) {
+            if (1 == status) {
+              // for now I keep 2 next of kins and 2 gps waiting to be add
+              // but defaultly adding 1 nok and 1gp, after alick right arrow the second one shows up
+              // is better
+              if (dataChecker()) {
+                saveGp();
+                scrollPage(true);
+              }
+            }
+          }
+        });
 
-    private void saveGp() {
-        if (null == gp) {
-            gp = new GP(firstName, middleName, lastName, clinicAddress, phoneNumber, email, fax, null);
-        } else {
-            gp.setFirst_name(firstName);
-            gp.setMiddle_name(middleName);
-            gp.setLast_name(lastName);
-            gp.setClinic_address(clinicAddress);
-            gp.setPhone(phoneNumber);
-            gp.setEmail(email);
-            gp.setFax(fax);
-        }
-        if (1 == status) {
-            dataListener.onDataFilled(null, null, null, gp, null);
-        } else {
-            dataListener.onDataFilled(null, null, null, null, gp);
+    left_button.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(final View view) {
+            if (2 == status) {
+              if (dataChecker()) {
+                saveGp();
+                scrollPage(false);
+              }
+            }
+          }
+        });
 
-        }
-    }
+    next_button.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(final View view) {
+            // als();
+            if (dataChecker()) {
+              saveGp();
+              if (1 == status) {
+                scrollPage(true);
+              } else {
+                final AlertDialog.Builder builder =
+                    new AlertDialog.Builder(view.getContext()); // new AlertDialog.Builder(this);
+                builder.setTitle("Saving Changes?");
+                // builder.setMessage("Do you really want to whatever?");
+                // builder.setIcon(android.R.drawable.ic_dialog_alert);
+                builder.setPositiveButton(
+                    "YES",
+                    new DialogInterface.OnClickListener() {
+                      @Override
+                      public void onClick(final DialogInterface dialog, final int whichButton) {
+                        dataListener.onDataFinihsed(true);
+                        // Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+                      }
+                    });
+                builder.setNegativeButton("No", null);
 
-    private boolean dataChecker() {
-        firstName = first_name_input.getText().toString();
-        middleName = middle_name_input.getText().toString();
-        lastName = last_name_input.getText().toString();
-        clinicAddress = clinic_address_input.getText().toString();
-        phoneNumber = phone_number_input.getText().toString();
-        email = email_input.getText().toString();
-        fax = fax_input.getText().toString();
-        if (TextUtils.isEmpty(firstName)) {
-            setErrorAndReturn(first_name_input, "First name is Required.");
-            return false;
-        }
-        if (TextUtils.isEmpty(lastName)) {
-            setErrorAndReturn(last_name_input, "Last name is Required.");
-            return false;
-        }
-        if (TextUtils.isEmpty(clinicAddress)) {
-            setErrorAndReturn(clinic_address_input, "Clinic address is Required.");
-        }
-        if (TextUtils.isEmpty(phoneNumber)) {
-            setErrorAndReturn(phone_number_input, "Phone number is Required.");
-        }
-        return true;
-    }
+                final AlertDialog dialog = builder.create();
+                dialog.setOnShowListener(
+                    new DialogInterface.OnShowListener() {
+                      @Override
+                      public void onShow(final DialogInterface arg0) {
+                        dialog
+                            .getButton(AlertDialog.BUTTON_POSITIVE)
+                            .setTextColor(getResources().getColor(R.color.colorGreen));
+                        dialog
+                            .getButton(AlertDialog.BUTTON_NEGATIVE)
+                            .setTextColor(getResources().getColor(R.color.colorRed));
+                        // dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.black));
+                      }
+                    });
+                dialog.show();
+              }
+            }
+          }
+        });
 
-    private void setErrorAndReturn(final EditText editText, final String s) {
-        editText.setError(s);
-    }
+    prev_button.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(final View view) {
+            if (dataChecker()) {
+              saveGp();
+              scrollPage(false);
+            }
+          }
+        });
+    return rootView;
+  }
 
-    @Override
-    public void onAttach(@NonNull final Context context) {
-        super.onAttach(context);
-        try {
-            dataListener = (DataListener) context;
-        } catch (final ClassCastException e) {
-            throw new ClassCastException(context + " must implement DataListener");
-        }
+  private void scrollPage(final boolean isNextPage) {
+    if (isNextPage) {
+      final int nextPage = viewPager2.getCurrentItem() + 1;
+      viewPager2.setCurrentItem(nextPage, true);
+    } else {
+      final int nextPage = viewPager2.getCurrentItem() - 1;
+      viewPager2.setCurrentItem(nextPage, true);
     }
+  }
+
+  private void saveGp() {
+    if (null == gp) {
+      gp = new GP(firstName, middleName, lastName, clinicAddress, phoneNumber, email, fax, null);
+    } else {
+      gp.setFirstName(firstName);
+      gp.setMiddleName(middleName);
+      gp.setLastName(lastName);
+      gp.setClinicAddress(clinicAddress);
+      gp.setPhone(phoneNumber);
+      gp.setEmail(email);
+      gp.setFax(fax);
+    }
+    if (1 == status) {
+      dataListener.onDataFilled(null, null, null, gp, null);
+    } else {
+      dataListener.onDataFilled(null, null, null, null, gp);
+    }
+  }
+
+  private boolean dataChecker() {
+    firstName = first_name_input.getText().toString();
+    middleName = middle_name_input.getText().toString();
+    lastName = last_name_input.getText().toString();
+    clinicAddress = clinic_address_input.getText().toString();
+    phoneNumber = phone_number_input.getText().toString();
+    email = email_input.getText().toString();
+    fax = fax_input.getText().toString();
+    if (TextUtils.isEmpty(firstName)) {
+      setErrorAndReturn(first_name_input, "First name is Required.");
+      return false;
+    }
+    if (TextUtils.isEmpty(lastName)) {
+      setErrorAndReturn(last_name_input, "Last name is Required.");
+      return false;
+    }
+    if (TextUtils.isEmpty(clinicAddress)) {
+      setErrorAndReturn(clinic_address_input, "Clinic address is Required.");
+    }
+    if (TextUtils.isEmpty(phoneNumber)) {
+      setErrorAndReturn(phone_number_input, "Phone number is Required.");
+    }
+    return true;
+  }
+
+  private void setErrorAndReturn(final EditText editText, final String s) {
+    editText.setError(s);
+  }
+
+  @Override
+  public void onAttach(@NonNull final Context context) {
+    super.onAttach(context);
+    try {
+      dataListener = (DataListener) context;
+    } catch (final ClassCastException e) {
+      throw new ClassCastException(context + " must implement DataListener");
+    }
+  }
 }
-

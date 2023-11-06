@@ -9,53 +9,60 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.view.patient.associateradar.ActivitySuggestionActivity;
 
 public class WeeklyActivityProfilingActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_weekly_profiling);
+  @Override
+  protected void onCreate(final Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_weekly_profiling);
 
+    final LinearLayout weeklyActivityProfilingLayout =
+        findViewById(R.id.weeklyActivityProfilingLayout);
 
-        final LinearLayout weeklyActivityProfilingLayout = findViewById(R.id.weeklyActivityProfilingLayout);
+    final int choicesNum = getResources().getStringArray(R.array.WeeklyActivitySummaryText).length;
 
-        final int choicesNum = getResources().getStringArray(R.array.WeeklyActivitySummaryText).length;
+    final TypedArray titles =
+        getResources().obtainTypedArray(R.array.WeeklyActivitySummaryTitleText);
+    final String[] texts = getResources().getStringArray(R.array.WeeklyActivitySummaryText);
+    final TypedArray imgs = getResources().obtainTypedArray(R.array.WeeklyActivitySummaryImage);
 
-        final TypedArray titles = getResources().obtainTypedArray(R.array.WeeklyActivitySummaryTitleText);
-        final String[] texts = getResources().getStringArray(R.array.WeeklyActivitySummaryText);
-        final TypedArray imgs = getResources().obtainTypedArray(R.array.WeeklyActivitySummaryImage);
+    for (int i = 0; i < choicesNum; i++) {
+      final String text = texts[i];
+      final String title = titles.getString(i);
+      final int img = imgs.getResourceId(i, -1);
 
-        for (int i = 0; i < choicesNum; i++) {
-            final String text = texts[i];
-            final String title = titles.getString(i);
-            final int img = imgs.getResourceId(i, -1);
+      final View statusView =
+          LayoutInflater.from(getApplicationContext())
+              .inflate(R.layout.patient_weekly_activity_summary_layout, null);
+      final ImageView weeklyActivityImageView =
+          statusView.findViewById(R.id.weeklyActivitySummaryIV);
+      final TextView weeklyActivitySummaryTitleTextView =
+          statusView.findViewById(R.id.weeklyActivitySummaryTitleTV);
+      final TextView weeklyActivitySummaryTextView =
+          statusView.findViewById(R.id.weeklyActivitySummaryTV);
 
-            final View statusView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.patient_weekly_activity_summary_layout, null);
-            final ImageView weeklyActivityImageView = statusView.findViewById(R.id.weeklyActivitySummaryIV);
-            final TextView weeklyActivitySummaryTitleTextView = statusView.findViewById(R.id.weeklyActivitySummaryTitleTV);
-            final TextView weeklyActivitySummaryTextView = statusView.findViewById(R.id.weeklyActivitySummaryTV);
+      weeklyActivityImageView.setImageResource(img);
+      weeklyActivitySummaryTitleTextView.setText(title);
+      weeklyActivitySummaryTextView.setText(Html.fromHtml(text));
+      //            weeklyActivitySummaryTextView.setClickable(true);
+      //
+      // weeklyActivitySummaryTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
-            weeklyActivityImageView.setImageResource(img);
-            weeklyActivitySummaryTitleTextView.setText(title);
-            weeklyActivitySummaryTextView.setText(Html.fromHtml(text));
-//            weeklyActivitySummaryTextView.setClickable(true);
-//            weeklyActivitySummaryTextView.setMovementMethod(LinkMovementMethod.getInstance());
+      statusView.setOnClickListener(
+          new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+              final Intent suggestionIntent =
+                  new Intent(getApplicationContext(), ActivitySuggestionActivity.class);
+              startActivity(suggestionIntent);
+            }
+          });
 
-            statusView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    final Intent suggestionIntent = new Intent(getApplicationContext(), ActivitySuggestionActivity.class);
-                    startActivity(suggestionIntent);
-                }
-            });
-
-            weeklyActivityProfilingLayout.addView(statusView);
-        }
+      weeklyActivityProfilingLayout.addView(statusView);
     }
+  }
 }

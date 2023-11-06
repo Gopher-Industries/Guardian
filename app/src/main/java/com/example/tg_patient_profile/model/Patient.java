@@ -1,185 +1,196 @@
 package com.example.tg_patient_profile.model;
 
 public class Patient {
-    String patient_id;
-    String address, dob, patient_name, phone, photo, underCare;
-    String first_name, middle_name, last_name;
-    String medicareNo, westwenAffairesNo;
-    String nok_id1, nok_id2;
-    String gp_id1, gp_id2;
+  String patientId;
+  String address;
+  String dob;
+  String patientName;
+  String phone;
+  String photo;
+  String underCare;
+  String firstName;
+  String middleName;
+  String lastName;
+  String medicareNo;
+  String westwenAffairesNo;
+  String nokId1;
+  String nokId2;
+  String gpId1;
+  String gpId2;
 
-    Patient() {
+  public Patient(final String patientId, final String firstName, final String lastName) {
+    this.patientId = patientId;
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
 
-    }
+  // constructor for adding a patient
+  public Patient(
+      final String dob,
+      final String firstName,
+      final String middleName,
+      final String lastName,
+      final String medicareNo,
+      final String westwenAffairesNo,
+      final String nokId1,
+      final String nokId2,
+      final String gpId1,
+      final String gpId2) {
+    this.dob = dob;
+    this.firstName = firstName;
+    this.middleName = middleName;
+    this.lastName = lastName;
+    this.medicareNo = medicareNo;
+    this.westwenAffairesNo = westwenAffairesNo;
+    this.nokId1 = nokId1;
+    this.nokId2 = nokId2;
+    this.gpId1 = gpId1;
+    this.gpId2 = gpId2;
+  }
 
-    public Patient(final String patient_id, final String first_name, final String last_name) {
-        this.patient_id = patient_id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-    }
+  public Patient(
+      final String address,
+      final String dob,
+      final String name,
+      final String phone,
+      final String photo,
+      final String underCare) {
+    this.address = address;
+    this.dob = dob;
+    this.patientName = name;
+    this.phone = phone;
+    this.photo = photo;
+    this.underCare = underCare;
+  }
 
-    //constructor for adding a patient
-    public Patient(final String dob, final String first_name, final String middle_name, final String last_name, final String medicareNo, final String westwenAffairesNo, final String nok_id1, final String nok_id2, final String gp_id1, final String gp_id2) {
-        this.dob = dob;
-        this.first_name = first_name;
-        this.middle_name = middle_name;
-        this.last_name = last_name;
-        this.medicareNo = medicareNo;
-        this.westwenAffairesNo = westwenAffairesNo;
-        this.nok_id1 = nok_id1;
-        this.nok_id2 = nok_id2;
-        this.gp_id1 = gp_id1;
-        this.gp_id2 = gp_id2;
-    }
+  public String getPatientId() {
+    return patientId;
+  }
 
+  public void setMedicareNo(final String medicareNo) {
+    this.medicareNo = medicareNo;
+  }
 
-    public Patient(final String address, final String dob, final String name, final String phone, final String photo, final String underCare) {
-        this.address = address;
-        this.dob = dob;
-        this.patient_name = name;
-        this.phone = phone;
-        this.photo = photo;
-        this.underCare = underCare;
-    }
+  public void setWestwenAffairesNo(final String westwenAffairesNo) {
+    this.westwenAffairesNo = westwenAffairesNo;
+  }
 
-    public String getPatient_id() {
-        return patient_id;
-    }
+  public void setNokId1(final String nokId1) {
+    this.nokId1 = nokId1;
+  }
 
-    public void setPatient_id(final String patient_id) {
-        this.patient_id = patient_id;
-    }
+  public void setNokId2(final String nokId2) {
+    this.nokId2 = nokId2;
+  }
 
-    public String getPatient_name() {
-        return patient_name;
-    }
+  public void setGpId1(final String gpId1) {
+    this.gpId1 = gpId1;
+  }
 
-    public void setPatient_name(final String patient_name) {
-        this.patient_name = patient_name;
-    }
+  public void setGpId2(final String gpId2) {
+    this.gpId2 = gpId2;
+  }
 
-    public String getMedicareNo() {
-        return medicareNo;
-    }
+  public String getFirstName() {
+    return firstName;
+  }
 
-    public void setMedicareNo(final String medicareNo) {
-        this.medicareNo = medicareNo;
-    }
+  public void setFirstName(final String firstName) {
+    this.firstName = firstName;
+  }
 
-    public String getWestwenAffairesNo() {
-        return westwenAffairesNo;
-    }
+  public String getMiddleName() {
+    return middleName;
+  }
 
-    public void setWestwenAffairesNo(final String westwenAffairesNo) {
-        this.westwenAffairesNo = westwenAffairesNo;
-    }
+  public void setMiddleName(final String middleName) {
+    this.middleName = middleName;
+  }
 
-    public String getNok_id1() {
-        return nok_id1;
-    }
+  public String getLastName() {
+    return lastName;
+  }
 
-    public void setNok_id1(final String nok_id1) {
-        this.nok_id1 = nok_id1;
-    }
+  public void setLastName(final String lastName) {
+    this.lastName = lastName;
+  }
 
-    public String getNok_id2() {
-        return nok_id2;
-    }
+  public String getAddress() {
+    return address;
+  }
 
-    public void setNok_id2(final String nok_id2) {
-        this.nok_id2 = nok_id2;
-    }
+  public void setAddress(final String address) {
+    this.address = address;
+  }
 
-    public String getGp_id1() {
-        return gp_id1;
-    }
+  public void setDob(final String dob) {
+    this.dob = dob;
+  }
 
-    public void setGp_id1(final String gp_id1) {
-        this.gp_id1 = gp_id1;
-    }
+  public String getName() {
+    return patientName;
+  }
 
-    public String getGp_id2() {
-        return gp_id2;
-    }
+  public void setName(final String name) {
+    this.patientName = name;
+  }
 
-    public void setGp_id2(final String gp_id2) {
-        this.gp_id2 = gp_id2;
-    }
+  public String getPhone() {
+    return phone;
+  }
 
-    public String getFirst_name() {
-        return first_name;
-    }
+  public void setPhone(final String phone) {
+    this.phone = phone;
+  }
 
-    public void setFirst_name(final String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getMiddle_name() {
-        return middle_name;
-    }
-
-    public void setMiddle_name(final String middle_name) {
-        this.middle_name = middle_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(final String last_name) {
-        this.last_name = last_name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(final String address) {
-        this.address = address;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public void setDob(final String dob) {
-        this.dob = dob;
-    }
-
-    public String getName() {
-        return patient_name;
-    }
-
-    public void setName(final String name) {
-        this.patient_name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(final String phone) {
-        this.phone = phone;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(final String photo) {
-        this.photo = photo;
-    }
-
-    public String getUnderCare() {
-        return underCare;
-    }
-
-    public void setUnderCare(final String underCare) {
-        this.underCare = underCare;
-    }
-
-    @Override
-    public String toString() {
-        return "Patient{" + "address='" + address + '\'' + ", dob='" + dob + '\'' + ", patient_name='" + patient_name + '\'' + ", phone='" + phone + '\'' + ", photo='" + photo + '\'' + ", underCare='" + underCare + '\'' + ", first_name='" + first_name + '\'' + ", middle_name='" + middle_name + '\'' + ", last_name='" + last_name + '\'' + ", medicareNo='" + medicareNo + '\'' + ", westwenAffairesNo='" + westwenAffairesNo + '\'' + ", nok_id1='" + nok_id1 + '\'' + ", nok_id2='" + nok_id2 + '\'' + ", gp_id1='" + gp_id1 + '\'' + ", gp_id2='" + gp_id2 + '\'' + '}';
-    }
+  @Override
+  public String toString() {
+    return "Patient{"
+        + "address='"
+        + address
+        + '\''
+        + ", dob='"
+        + dob
+        + '\''
+        + ", patient_name='"
+        + patientName
+        + '\''
+        + ", phone='"
+        + phone
+        + '\''
+        + ", photo='"
+        + photo
+        + '\''
+        + ", underCare='"
+        + underCare
+        + '\''
+        + ", first_name='"
+        + firstName
+        + '\''
+        + ", middle_name='"
+        + middleName
+        + '\''
+        + ", last_name='"
+        + lastName
+        + '\''
+        + ", medicareNo='"
+        + medicareNo
+        + '\''
+        + ", westwenAffairesNo='"
+        + westwenAffairesNo
+        + '\''
+        + ", nok_id1='"
+        + nokId1
+        + '\''
+        + ", nok_id2='"
+        + nokId2
+        + '\''
+        + ", gp_id1='"
+        + gpId1
+        + '\''
+        + ", gp_id2='"
+        + gpId2
+        + '\''
+        + '}';
+  }
 }
