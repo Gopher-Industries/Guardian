@@ -3,30 +3,13 @@ package com.example.tg_patient_profile.view.patient.careplan;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.RatingBar;
-import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.tg_patient_profile.R;
 
 public class CarePlanSummaryActivity extends AppCompatActivity {
 
-  TextView carePlanSummary,
-      nutritionHydrationSummary,
-      supportReqSummary,
-      dietTimingSummary,
-      drinkLikesSummary,
-      sleepPatternSummary,
-      painSummary,
-      behaviorSummary;
-  RatingBar painScoreSummary;
-
-  Button prev_button, save_button;
-  StringBuilder supportReq = new StringBuilder();
-  StringBuilder drinkLikes = new StringBuilder();
-  StringBuilder pain = new StringBuilder();
-  StringBuilder behaviour = new StringBuilder();
+  Button prev_button;
 
   @SuppressLint("MissingInflatedId")
   @Override
@@ -95,11 +78,6 @@ public class CarePlanSummaryActivity extends AppCompatActivity {
     //        painScoreSummary.setRating(painScore);
     //        behaviorSummary.setText(behaviour);
     prev_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            startActivity(new Intent(CarePlanSummaryActivity.this, CarePlanActivity.class));
-          }
-        });
+            view -> startActivity(new Intent(CarePlanSummaryActivity.this, CarePlanActivity.class)));
   }
 }

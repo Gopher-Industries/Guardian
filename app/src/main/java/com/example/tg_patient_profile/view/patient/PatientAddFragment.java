@@ -26,10 +26,6 @@ public class PatientAddFragment extends Fragment {
   // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
   private static final String ARG_PARAM1 = "param1";
   private static final String ARG_PARAM2 = "param2";
-  private Button step1_button;
-  private Button step2_button;
-  private Button step3_button;
-  private Button next_button;
   private EditText first_name,
       middle_name,
       last_name,
@@ -44,38 +40,18 @@ public class PatientAddFragment extends Fragment {
   private String lastName;
   private String medicareNo;
   private String westernAffairsNo;
-  // TODO: Rename and change types of parameters
-  private String mParam1;
-  private String mParam2;
 
   public PatientAddFragment() {
     // Required empty public constructor
-  }
-
-  /**
-   * Use this factory method to create a new instance of this fragment using the provided
-   * parameters.
-   *
-   * @param param1 Parameter 1.
-   * @param param2 Parameter 2.
-   * @return A new instance of fragment PatientAddFragment.
-   */
-  // TODO: Rename and change types and number of parameters
-  public static PatientAddFragment newInstance(final String param1, final String param2) {
-    final PatientAddFragment fragment = new PatientAddFragment();
-    final Bundle args = new Bundle();
-    args.putString(ARG_PARAM1, param1);
-    args.putString(ARG_PARAM2, param2);
-    fragment.setArguments(args);
-    return fragment;
   }
 
   @Override
   public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     if (null != getArguments()) {
-      mParam1 = getArguments().getString(ARG_PARAM1);
-      mParam2 = getArguments().getString(ARG_PARAM2);
+      // TODO: Rename and change types of parameters
+      final String mParam1 = getArguments().getString(ARG_PARAM1);
+      final String mParam2 = getArguments().getString(ARG_PARAM2);
     }
   }
 
@@ -86,7 +62,7 @@ public class PatientAddFragment extends Fragment {
       final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     final View rootView = inflater.inflate(R.layout.fragment_patient_add, container, false);
-    next_button = rootView.findViewById(R.id.patient_add_NextButton);
+    final Button next_button = rootView.findViewById(R.id.patient_add_NextButton);
     final ViewPager2 viewPager2 = getActivity().findViewById(R.id.dataForViewViewPager);
     first_name = rootView.findViewById(R.id.input_patient_FirstName);
     middle_name = rootView.findViewById(R.id.input_patient_MiddleName);
@@ -94,54 +70,42 @@ public class PatientAddFragment extends Fragment {
     date_of_birth = rootView.findViewById(R.id.input_patient_DateOfBirth);
     medicare_no = rootView.findViewById(R.id.input_patient_MedicareNumber);
     western_affairs_no = rootView.findViewById(R.id.input_patient_WesternAffairsNumber);
-    step1_button = rootView.findViewById(R.id.step1);
+    final Button step1_button = rootView.findViewById(R.id.step1);
     final Button step2_button = rootView.findViewById(R.id.step2);
     final Button step3_button = rootView.findViewById(R.id.step3);
     final Button step4_button = rootView.findViewById(R.id.step4);
     final Button step5_button = rootView.findViewById(R.id.step5);
 
     step2_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (dataChecker()) {
-              savePatient();
-              final int nextPage = viewPager2.getCurrentItem() + 1;
-              viewPager2.setCurrentItem(nextPage, true);
-            }
+        view -> {
+          if (dataChecker()) {
+            savePatient();
+            final int nextPage = viewPager2.getCurrentItem() + 1;
+            viewPager2.setCurrentItem(nextPage, true);
           }
         });
     step3_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (dataChecker()) {
-              savePatient();
-              final int nextPage = viewPager2.getCurrentItem() + 2;
-              viewPager2.setCurrentItem(nextPage, true);
-            }
+        view -> {
+          if (dataChecker()) {
+            savePatient();
+            final int nextPage = viewPager2.getCurrentItem() + 2;
+            viewPager2.setCurrentItem(nextPage, true);
           }
         });
     step4_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (dataChecker()) {
-              savePatient();
-              final int nextPage = viewPager2.getCurrentItem() + 3;
-              viewPager2.setCurrentItem(nextPage, true);
-            }
+        view -> {
+          if (dataChecker()) {
+            savePatient();
+            final int nextPage = viewPager2.getCurrentItem() + 3;
+            viewPager2.setCurrentItem(nextPage, true);
           }
         });
     step5_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (dataChecker()) {
-              savePatient();
-              final int nextPage = viewPager2.getCurrentItem() + 4;
-              viewPager2.setCurrentItem(nextPage, true);
-            }
+        view -> {
+          if (dataChecker()) {
+            savePatient();
+            final int nextPage = viewPager2.getCurrentItem() + 4;
+            viewPager2.setCurrentItem(nextPage, true);
           }
         });
 
@@ -157,14 +121,11 @@ public class PatientAddFragment extends Fragment {
     });*/
 
     next_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (dataChecker()) {
-              savePatient();
-              final int nextPage = viewPager2.getCurrentItem() + 1;
-              viewPager2.setCurrentItem(nextPage, true);
-            }
+        view -> {
+          if (dataChecker()) {
+            savePatient();
+            final int nextPage = viewPager2.getCurrentItem() + 1;
+            viewPager2.setCurrentItem(nextPage, true);
           }
         });
 

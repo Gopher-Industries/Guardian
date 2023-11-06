@@ -33,7 +33,7 @@ public class DailyReportSummaryActivity extends AppCompatActivity {
     final String[] statusList = intent.getStringArrayExtra(Util.DAILY_REPORT_STATUS_LIST);
     if (null != statusList && 0 != statusList.length) {
       for (int i = 0; i < statusList.length - 1; i++) {
-        statuses.append(statusList[i] + "\n");
+        statuses.append(statusList[i]).append("\n");
       }
       statuses.append(statusList[statusList.length - 1]);
     }

@@ -14,7 +14,6 @@ import com.example.tg_patient_profile.view.caretaker.CaretakerDashboardActivity;
 public class ConfirmIncidentActivity extends AppCompatActivity {
 
   Spinner hospitalSpinner;
-  String hospitalSelection;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -56,7 +55,8 @@ public class ConfirmIncidentActivity extends AppCompatActivity {
     startActivity(medicalDiagnosticsActivityIntent);
   }
 
-  public class SpinnerActivity extends Activity implements AdapterView.OnItemSelectedListener {
+  public static class SpinnerActivity extends Activity
+      implements AdapterView.OnItemSelectedListener {
 
     public void onItemSelected(
         final AdapterView<?> parent, final View view, final int pos, final long id) {}

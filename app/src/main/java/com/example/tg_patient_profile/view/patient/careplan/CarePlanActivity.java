@@ -12,18 +12,11 @@ import com.example.tg_patient_profile.R;
 import java.util.HashMap;
 
 public class CarePlanActivity extends AppCompatActivity {
+  final HashMap<CheckBox, String> supportRequirementsCheckBox = new HashMap<>();
+  final HashMap<CheckBox, String> drinkLikesCheckBox = new HashMap<>();
+  final HashMap<CheckBox, String> painCheckBox = new HashMap<>();
+  final HashMap<CheckBox, String> behavioralManagementCheckBox = new HashMap<>();
   RadioGroup carePlanTypeGroup, nutritionHydrationGroup, dietTimingsGroup, sleepPatternsGroup;
-  HashMap<CheckBox, String> supportRequirementsCheckBox = new HashMap<>();
-  HashMap<CheckBox, String> drinkLikesCheckBox = new HashMap<>();
-  HashMap<CheckBox, String> painCheckBox = new HashMap<>();
-  HashMap<CheckBox, String> behavioralManagementCheckBox = new HashMap<>();
-
-  String carePlanType = "";
-  String nutritionHyrdration = "";
-  String dietTiming = "";
-  String sleepPattern = "";
-  String painScore = "";
-
   RadioGroup painRatingGroup;
 
   Button submitButton;

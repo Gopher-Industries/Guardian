@@ -18,13 +18,7 @@ public class FalseAlertConfirmedActivity extends AppCompatActivity {
 
     final Button submitFalseAlertButton = findViewById(R.id.submitFalseAlert);
 
-    submitFalseAlertButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-            showDialog();
-          }
-        });
+    submitFalseAlertButton.setOnClickListener(v -> showDialog());
   }
 
   private void showDialog() {
@@ -33,14 +27,11 @@ public class FalseAlertConfirmedActivity extends AppCompatActivity {
     dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
     final Button okButtonFalseAlert = dialog.findViewById(R.id.okButtonFalseAlert);
     okButtonFalseAlert.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-            final Intent intent =
-                new Intent(getApplicationContext(), CaretakerDashboardActivity.class);
-            startActivity(intent);
-            finish();
-          }
+        v -> {
+          final Intent intent =
+              new Intent(getApplicationContext(), CaretakerDashboardActivity.class);
+          startActivity(intent);
+          finish();
         });
     dialog.show();
   }

@@ -1,12 +1,10 @@
 package com.example.tg_patient_profile.view.general;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -19,11 +17,8 @@ import com.example.tg_patient_profile.model.Medical_diagnostic;
 import com.example.tg_patient_profile.model.NextOfKin;
 import com.example.tg_patient_profile.model.Patient;
 import com.example.tg_patient_profile.util.DataListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
 public class PatientProfileAddActivity extends AppCompatActivity implements DataListener {
 
@@ -52,14 +47,11 @@ public class PatientProfileAddActivity extends AppCompatActivity implements Data
 
     if (null != customHeader) {
       customHeader.menuButton.setOnClickListener(
-          new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-              if (null != drawerLayout) {
-                drawerLayout.openDrawer(GravityCompat.START);
-              }
-            }
-          });
+              v -> {
+                if (null != drawerLayout) {
+                  drawerLayout.openDrawer(GravityCompat.START);
+                }
+              });
     }
 
     viewPager2.registerOnPageChangeCallback(
@@ -126,29 +118,23 @@ public class PatientProfileAddActivity extends AppCompatActivity implements Data
     // builder.setIcon(android.R.drawable.ic_dialog_alert);
     builder.setPositiveButton(
         "YES",
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(final DialogInterface dialog, final int whichButton) {
-            saveInFirebase();
-            // Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
-          }
-        });
+            (dialog, whichButton) -> {
+              saveInFirebase();
+              // Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+            });
     builder.setNegativeButton("No", null);
 
     final AlertDialog dialog = builder.create();
     dialog.setOnShowListener(
-        new DialogInterface.OnShowListener() {
-          @Override
-          public void onShow(final DialogInterface arg0) {
-            dialog
-                .getButton(AlertDialog.BUTTON_POSITIVE)
-                .setTextColor(getResources().getColor(R.color.colorGreen));
-            dialog
-                .getButton(AlertDialog.BUTTON_NEGATIVE)
-                .setTextColor(getResources().getColor(R.color.colorRed));
-            // dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.black));
-          }
-        });
+            arg0 -> {
+              dialog
+                  .getButton(AlertDialog.BUTTON_POSITIVE)
+                  .setTextColor(getResources().getColor(R.color.colorGreen));
+              dialog
+                  .getButton(AlertDialog.BUTTON_NEGATIVE)
+                  .setTextColor(getResources().getColor(R.color.colorRed));
+              // dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.black));
+            });
     dialog.show();
     // insert
 
@@ -171,90 +157,50 @@ public class PatientProfileAddActivity extends AppCompatActivity implements Data
         .child(nof1_id)
         .setValue(nextOfKin1)
         .addOnSuccessListener(
-            new OnSuccessListener<Void>() {
-              @Override
-              public void onSuccess(final Void unused) {
-                Log.v("nok1 success", "");
-              }
-            })
+                unused -> Log.v("nok1 success", ""))
         .addOnFailureListener(
-            new OnFailureListener() {
-              @Override
-              public void onFailure(@NonNull final Exception e) {
-                Toast.makeText(
+                e -> Toast.makeText(
                         PatientProfileAddActivity.this,
                         "fail to upload first next of kin" + e.getMessage(),
                         Toast.LENGTH_SHORT)
-                    .show();
-              }
-            });
+                    .show());
 
     nokRef
         .child(nof2_id)
         .setValue(nextOfKin2)
         .addOnSuccessListener(
-            new OnSuccessListener<Void>() {
-              @Override
-              public void onSuccess(final Void unused) {
-                Log.v("nok2success", "");
-              }
-            })
+                unused -> Log.v("nok2success", ""))
         .addOnFailureListener(
-            new OnFailureListener() {
-              @Override
-              public void onFailure(@NonNull final Exception e) {
-                Toast.makeText(
+                e -> Toast.makeText(
                         PatientProfileAddActivity.this,
                         "fail to upload second next of kin" + e.getMessage(),
                         Toast.LENGTH_SHORT)
-                    .show();
-              }
-            });
+                    .show());
 
     gpRef
         .child(gp1_id)
         .setValue(gp1)
         .addOnSuccessListener(
-            new OnSuccessListener<Void>() {
-              @Override
-              public void onSuccess(final Void unused) {
-                Log.v("gp1success", "");
-              }
-            })
+                unused -> Log.v("gp1success", ""))
         .addOnFailureListener(
-            new OnFailureListener() {
-              @Override
-              public void onFailure(@NonNull final Exception e) {
-                Toast.makeText(
+                e -> Toast.makeText(
                         PatientProfileAddActivity.this,
                         "fail to upload first gp" + e.getMessage(),
                         Toast.LENGTH_SHORT)
-                    .show();
-              }
-            });
+                    .show());
     if (null != gp2) {
 
       gpRef
           .child(gp2_id)
           .setValue(gp2)
           .addOnSuccessListener(
-              new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(final Void unused) {
-                  Log.v("gp2success", "");
-                }
-              })
+                  unused -> Log.v("gp2success", ""))
           .addOnFailureListener(
-              new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull final Exception e) {
-                  Toast.makeText(
+                  e -> Toast.makeText(
                           PatientProfileAddActivity.this,
                           "fail to upload second gp" + e.getMessage(),
                           Toast.LENGTH_SHORT)
-                      .show();
-                }
-              });
+                      .show());
     }
 
     final String patient_id = patientRef.push().getKey();
@@ -262,32 +208,24 @@ public class PatientProfileAddActivity extends AppCompatActivity implements Data
         .child(patient_id)
         .setValue(patient)
         .addOnSuccessListener(
-            new OnSuccessListener<Void>() {
-              @Override
-              public void onSuccess(final Void unused) {
-                Log.v("patientsuccess", "");
-                Toast.makeText(
-                        PatientProfileAddActivity.this,
-                        "Success on adding a new patient",
-                        Toast.LENGTH_SHORT)
-                    .show();
-                final Intent intent =
-                    new Intent(PatientProfileAddActivity.this, PatientProfileActivity.class);
-                intent.putExtra("created_patient_id", patient_id);
-                startActivity(intent);
-              }
-            })
+                unused -> {
+                  Log.v("patientsuccess", "");
+                  Toast.makeText(
+                          PatientProfileAddActivity.this,
+                          "Success on adding a new patient",
+                          Toast.LENGTH_SHORT)
+                      .show();
+                  final Intent intent =
+                      new Intent(PatientProfileAddActivity.this, PatientProfileActivity.class);
+                  intent.putExtra("created_patient_id", patient_id);
+                  startActivity(intent);
+                })
         .addOnFailureListener(
-            new OnFailureListener() {
-              @Override
-              public void onFailure(@NonNull final Exception e) {
-                Toast.makeText(
+                e -> Toast.makeText(
                         PatientProfileAddActivity.this,
                         "fail to upload patient" + e.getMessage(),
                         Toast.LENGTH_SHORT)
-                    .show();
-              }
-            });
+                    .show());
     PatientRelatedCreat(patient_id);
   }
 
@@ -297,25 +235,18 @@ public class PatientProfileAddActivity extends AppCompatActivity implements Data
 
   private void createMedicalDiagnostic(final String patient_id) {
     final Medical_diagnostic current_medical_diagnostic = new Medical_diagnostic(patient_id, true);
-    final Medical_diagnostic prev_medical_diagnostic = new Medical_diagnostic(patient_id, false);
-    final DatabaseReference reference =
+      final DatabaseReference reference =
         FirebaseDatabase.getInstance().getReference("health_details");
-    final Query query = reference.orderByChild("patient_id").equalTo(patient_id);
-    final String id = reference.push().getKey();
+      final String id = reference.push().getKey();
     reference
         .child(id)
         .setValue(current_medical_diagnostic)
         .addOnFailureListener(
-            new OnFailureListener() {
-              @Override
-              public void onFailure(@NonNull final Exception e) {
-                Toast.makeText(
+                e -> Toast.makeText(
                         PatientProfileAddActivity.this,
                         "Fail to create health detail of this patient!Please try it again!Reason:"
                             + e.getMessage(),
                         Toast.LENGTH_SHORT)
-                    .show();
-              }
-            });
+                    .show());
   }
 }

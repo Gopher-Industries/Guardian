@@ -32,8 +32,6 @@ public class UploadPhoto extends AppCompatActivity {
   ActivityUploadPhotoBinding binding;
   Uri imageuri;
   Uri imageUri2;
-  Uri UpdatedPic;
-  private FirebaseStorage storage;
   private StorageReference storageReference;
   private boolean CapturePhoto;
 
@@ -46,49 +44,37 @@ public class UploadPhoto extends AppCompatActivity {
 
     setContentView(binding.getRoot());
 
-    storage = FirebaseStorage.getInstance();
+    final FirebaseStorage storage = FirebaseStorage.getInstance();
     storageReference = storage.getReference();
 
     binding.takephoto.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-            CapturePhoto = true;
-            onCaptureButtonClick(v);
-          }
+        v -> {
+          CapturePhoto = true;
+          onCaptureButtonClick(v);
         });
 
     binding.gallery.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-            CapturePhoto = false;
-            PickImageIntent();
-          }
+        v -> {
+          CapturePhoto = false;
+          PickImageIntent();
         });
 
     binding.crop.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-            if (CapturePhoto && null != imageuri) {
-              startCrop(imageuri);
-            } else if (!CapturePhoto && null != imageUri2) {
-              startCrop(imageUri2);
-            } else {
-              Toast.makeText(UploadPhoto.this, "No image selected for cropping", Toast.LENGTH_SHORT)
-                  .show();
-            }
+        v -> {
+          if (CapturePhoto && null != imageuri) {
+            startCrop(imageuri);
+          } else if (!CapturePhoto && null != imageUri2) {
+            startCrop(imageUri2);
+          } else {
+            Toast.makeText(UploadPhoto.this, "No image selected for cropping", Toast.LENGTH_SHORT)
+                .show();
           }
         });
 
     binding.close.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-            final Intent intent = new Intent(UploadPhoto.this, PatientAddFragment.class);
-            startActivity(intent);
-          }
+        v -> {
+          final Intent intent = new Intent(UploadPhoto.this, PatientAddFragment.class);
+          startActivity(intent);
         });
   }
 
@@ -131,13 +117,11 @@ public class UploadPhoto extends AppCompatActivity {
           imageuri = data.getData();
           final Bitmap photoBitmap = (Bitmap) data.getExtras().get("data");
           binding.profile.setImageBitmap(photoBitmap);
-          UpdatedPic = imageuri;
         } else {
           imageUri2 = data.getData();
           uploadImageToFirebase(imageUri2);
           binding.profile.setImageURI(imageUri2);
           startCrop(imageUri2);
-          UpdatedPic = imageUri2;
         }
       } else if (REQUEST_IMAGE_PICK == requestCode) {
         imageUri2 = data.getData();
@@ -180,22 +164,15 @@ public class UploadPhoto extends AppCompatActivity {
               Log.i("Upload Progress", String.valueOf(progress));
             })
         .addOnSuccessListener(
-            taskSnapshot -> {
-              imageRef
-                  .getDownloadUrl()
-                  .addOnSuccessListener(
-                      uri -> {
-                        final String downloadUrl = uri.toString();
-                        Log.i("Download URL", downloadUrl);
-                      })
-                  .addOnFailureListener(
-                      exception -> {
-                        exception.printStackTrace();
-                      });
-            })
-        .addOnFailureListener(
-            exception -> {
-              exception.printStackTrace();
-            });
+            taskSnapshot ->
+                imageRef
+                    .getDownloadUrl()
+                    .addOnSuccessListener(
+                        uri -> {
+                          final String downloadUrl = uri.toString();
+                          Log.i("Download URL", downloadUrl);
+                        })
+                    .addOnFailureListener(Throwable::printStackTrace))
+        .addOnFailureListener(Throwable::printStackTrace);
   }
 }

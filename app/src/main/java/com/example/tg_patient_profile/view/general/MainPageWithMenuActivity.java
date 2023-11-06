@@ -2,7 +2,6 @@ package com.example.tg_patient_profile.view.general;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -22,16 +21,13 @@ public class MainPageWithMenuActivity extends AppCompatActivity {
     menu_button = findViewById(R.id.menu_button_main_page);
 
     menu_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            Log.v("clikced", "yes");
-            if (menu_DrawerLayout.isDrawerOpen(GravityCompat.START)) {
-              menu_DrawerLayout.closeDrawer(GravityCompat.START);
-            } else {
-              menu_DrawerLayout.openDrawer(GravityCompat.START);
-            }
-          }
-        });
+            view -> {
+              Log.v("clikced", "yes");
+              if (menu_DrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                menu_DrawerLayout.closeDrawer(GravityCompat.START);
+              } else {
+                menu_DrawerLayout.openDrawer(GravityCompat.START);
+              }
+            });
   }
 }

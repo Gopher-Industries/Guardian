@@ -20,24 +20,17 @@ public class FallAlertActivity extends AppCompatActivity {
     final ImageButton falseAlarmButton = findViewById(R.id.falseAlarmButton);
 
     confirmIncidentButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-            final Intent medicalDiagnosticsActivityIntent =
-                new Intent(FallAlertActivity.this, ConfirmIncidentActivity.class);
-            startActivity(medicalDiagnosticsActivityIntent);
-          }
+        v -> {
+          final Intent medicalDiagnosticsActivityIntent =
+              new Intent(FallAlertActivity.this, ConfirmIncidentActivity.class);
+          startActivity(medicalDiagnosticsActivityIntent);
         });
 
     falseAlarmButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-
-            final Intent medicalDiagnosticsActivityIntent =
-                new Intent(FallAlertActivity.this, FalseAlertConfirmedActivity.class);
-            startActivity(medicalDiagnosticsActivityIntent);
-          }
+        v -> {
+          final Intent medicalDiagnosticsActivityIntent =
+              new Intent(FallAlertActivity.this, FalseAlertConfirmedActivity.class);
+          startActivity(medicalDiagnosticsActivityIntent);
         });
   }
 }

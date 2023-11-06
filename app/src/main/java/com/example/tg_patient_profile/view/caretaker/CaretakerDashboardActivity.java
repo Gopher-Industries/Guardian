@@ -3,7 +3,6 @@ package com.example.tg_patient_profile.view.caretaker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.view.caretaker.notifications.FallAlertActivity;
@@ -11,13 +10,6 @@ import com.example.tg_patient_profile.view.general.PatientListActivity;
 import com.example.tg_patient_profile.view.general.PatientProfileActivity;
 
 public class CaretakerDashboardActivity extends AppCompatActivity {
-
-  TextView selectAPatientTextView;
-
-  @Override
-  protected void onResume() {
-    super.onResume();
-  }
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {

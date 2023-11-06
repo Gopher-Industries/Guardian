@@ -19,29 +19,20 @@ public class DrawerActivity extends AppCompatActivity {
     final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
 
     findViewById(R.id.imageMenu)
-        .setOnClickListener(
-            new View.OnClickListener() {
-              @Override
-              public void onClick(final View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
-              }
-            });
+        .setOnClickListener(view -> drawerLayout.openDrawer(GravityCompat.START));
 
     final NavigationView navigationView = findViewById(R.id.navigationView);
     navigationView.setItemIconTintList(null);
 
     navigationView.setNavigationItemSelectedListener(
-        new NavigationView.OnNavigationItemSelectedListener() {
-          @Override
-          public boolean onNavigationItemSelected(@NonNull final MenuItem menuItem) {
-            final int id = menuItem.getItemId();
-            if (R.id.menuProfile == id) {
-              // Add intent
-            } else if (R.id.menuNofications == id) {
-              // Add intent
-            }
-            return true;
+        menuItem -> {
+          final int id = menuItem.getItemId();
+          if (R.id.menuProfile == id) {
+            // Add intent
+          } else if (R.id.menuNofications == id) {
+            // Add intent
           }
+          return true;
         });
   }
 }

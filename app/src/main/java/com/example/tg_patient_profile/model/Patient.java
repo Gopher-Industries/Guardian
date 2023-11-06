@@ -48,21 +48,6 @@ public class Patient {
     this.gpId2 = gpId2;
   }
 
-  public Patient(
-      final String address,
-      final String dob,
-      final String name,
-      final String phone,
-      final String photo,
-      final String underCare) {
-    this.address = address;
-    this.dob = dob;
-    this.patientName = name;
-    this.phone = phone;
-    this.photo = photo;
-    this.underCare = underCare;
-  }
-
   public String getPatientId() {
     return patientId;
   }
@@ -115,32 +100,8 @@ public class Patient {
     this.lastName = lastName;
   }
 
-  public String getAddress() {
-    return address;
-  }
-
-  public void setAddress(final String address) {
-    this.address = address;
-  }
-
   public void setDob(final String dob) {
     this.dob = dob;
-  }
-
-  public String getName() {
-    return patientName;
-  }
-
-  public void setName(final String name) {
-    this.patientName = name;
-  }
-
-  public String getPhone() {
-    return phone;
-  }
-
-  public void setPhone(final String phone) {
-    this.phone = phone;
   }
 
   @Override

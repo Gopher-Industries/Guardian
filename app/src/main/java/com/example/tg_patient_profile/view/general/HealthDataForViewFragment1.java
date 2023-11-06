@@ -36,13 +36,7 @@ public class HealthDataForViewFragment1 extends Fragment {
       final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
     final View view = inflater.inflate(R.layout.fragment_health_data_for_view1, container, false);
     final Button nextButton = view.findViewById(R.id.nextButtonHealthData);
-    nextButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-            mButtonClickedListener.onNextButtonClicked();
-          }
-        });
+    nextButton.setOnClickListener(v -> mButtonClickedListener.onNextButtonClicked());
     return view;
   }
 

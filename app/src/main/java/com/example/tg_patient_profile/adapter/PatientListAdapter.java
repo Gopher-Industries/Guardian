@@ -23,7 +23,7 @@ public class PatientListAdapter
    * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See {@link
    * FirebaseRecyclerOptions} for configuration options.
    */
-  Context context;
+  final Context context;
 
   public PatientListAdapter(
       final Context context, @NonNull final FirebaseRecyclerOptions<Patient> options) {
@@ -68,8 +68,8 @@ public class PatientListAdapter
   }
 
   static class myViewHolder extends RecyclerView.ViewHolder {
-    TextView patient_name;
-    CardView patient_item;
+    final TextView patient_name;
+    final CardView patient_item;
 
     public myViewHolder(@NonNull final View itemView) {
       super(itemView);

@@ -51,16 +51,8 @@ public class CustomHeader extends FrameLayout {
     headerTextView.setText(text);
   }
 
-  public void setHeaderLogoVisibility(final int visible) {
-    headerLogo.setVisibility(visible);
-  }
-
   public void setHeaderHeight(final int height) {
     headerCard.getLayoutParams().height = height;
     headerCard.requestLayout();
-  }
-
-  public void setProfileIconVisibility(final int visible) {
-    headerProfileIcon.setVisibility(visible);
   }
 }

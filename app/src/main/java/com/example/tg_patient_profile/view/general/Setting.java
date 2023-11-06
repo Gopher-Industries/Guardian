@@ -2,12 +2,10 @@ package com.example.tg_patient_profile.view.general;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -23,7 +21,6 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
   ConstraintLayout settings_notification_button;
   ConstraintLayout settings_app_update_button;
   ConstraintLayout settings_feedback_button;
-  Button settings_menu_button;
   Switch notificationSwitch;
 
   @Override
@@ -97,8 +94,6 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
     }
   }
 
-  private void cancelNotification() {}
-
   // feedback
   private void showFeedbackDialog() {
     final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -110,17 +105,14 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
 
     builder.setPositiveButton(
         "Submit",
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(final DialogInterface dialog, final int which) {
-            final String feedback = feedbackEditText.getText().toString();
-            if (!feedback.isEmpty()) {
-              showToast("Feedback submitted: " + feedback);
-            } else {
-              showToast("Please enter your feedback");
-            }
-          }
-        });
+            (dialog, which) -> {
+              final String feedback = feedbackEditText.getText().toString();
+              if (!feedback.isEmpty()) {
+                showToast("Feedback submitted: " + feedback);
+              } else {
+                showToast("Please enter your feedback");
+              }
+            });
 
     builder.setNegativeButton("Cancel", null);
 

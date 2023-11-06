@@ -24,11 +24,10 @@ import java.util.Set;
 
 public class PatientDashboardActivity extends AppCompatActivity {
 
-  ImageButton dailyReportButton,
-      healthDataButton,
-      viewActivityDataButton,
-      associateRadarButton,
-      carePlanButton;
+  ImageButton dailyReportButton;
+  ImageButton healthDataButton;
+  ImageButton viewActivityDataButton;
+  ImageButton associateRadarButton;
   TextView choosePatientButton;
   Boolean dailyReportLodged;
   Set<String> dailyReportStatusList = new HashSet<>();
@@ -58,68 +57,50 @@ public class PatientDashboardActivity extends AppCompatActivity {
     carePlanButton = findViewById(R.id.carePlanButton);
 
     dailyReportButton.setOnClickListener(
-        new View.OnClickListener() {
-
-          @Override
-          public void onClick(final View v) {
-            if (!dailyReportLodged) {
-              final Intent dailyReportIntent =
-                  new Intent(PatientDashboardActivity.this, DailyReportActivity.class);
-              startActivity(dailyReportIntent);
-            } else {
-              final Intent dailyReportSummaryIntent =
-                  new Intent(PatientDashboardActivity.this, DailyReportSummaryActivity.class);
-              dailyReportSummaryIntent.putExtra(Util.DAILY_REPORT_STATUS_NOTES, dailyReportNotes);
-              dailyReportSummaryIntent.putExtra(Util.DAILY_REPORT_DATE, dailyReportDate);
-              dailyReportSummaryIntent.putExtra(
-                  Util.DAILY_REPORT_STATUS_LIST, Util.setToArray(dailyReportStatusList));
-              Log.i("berapa", Util.setToArray(dailyReportStatusList).length + "");
-              startActivity(dailyReportSummaryIntent);
-            }
+        v -> {
+          if (!dailyReportLodged) {
+            final Intent dailyReportIntent =
+                new Intent(PatientDashboardActivity.this, DailyReportActivity.class);
+            startActivity(dailyReportIntent);
+          } else {
+            final Intent dailyReportSummaryIntent =
+                new Intent(PatientDashboardActivity.this, DailyReportSummaryActivity.class);
+            dailyReportSummaryIntent.putExtra(Util.DAILY_REPORT_STATUS_NOTES, dailyReportNotes);
+            dailyReportSummaryIntent.putExtra(Util.DAILY_REPORT_DATE, dailyReportDate);
+            dailyReportSummaryIntent.putExtra(
+                Util.DAILY_REPORT_STATUS_LIST, Util.setToArray(dailyReportStatusList));
+            Log.i("berapa", Util.setToArray(dailyReportStatusList).length + "");
+            startActivity(dailyReportSummaryIntent);
           }
         });
 
     healthDataButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-            final Intent patientListIntent =
-                new Intent(PatientDashboardActivity.this, HealthDataActivity.class);
-            startActivity(patientListIntent);
-          }
+        v -> {
+          final Intent patientListIntent =
+              new Intent(PatientDashboardActivity.this, HealthDataActivity.class);
+          startActivity(patientListIntent);
         });
 
     choosePatientButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-            final Intent patientListIntent =
-                new Intent(PatientDashboardActivity.this, PatientListActivity.class);
-            startActivity(patientListIntent);
-          }
+        v -> {
+          final Intent patientListIntent =
+              new Intent(PatientDashboardActivity.this, PatientListActivity.class);
+          startActivity(patientListIntent);
         });
 
     viewActivityDataButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-            final Intent weeklyActivityProfilingIntent =
-                new Intent(PatientDashboardActivity.this, WeeklyActivityProfilingActivity.class);
-            startActivity(weeklyActivityProfilingIntent);
-          }
+        v -> {
+          final Intent weeklyActivityProfilingIntent =
+              new Intent(PatientDashboardActivity.this, WeeklyActivityProfilingActivity.class);
+          startActivity(weeklyActivityProfilingIntent);
         });
     associateRadarButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-            final Intent activityProfilingIntent =
-                new Intent(PatientDashboardActivity.this, ActivityProfilingActivity.class);
-            startActivity(activityProfilingIntent);
-          }
+        v -> {
+          final Intent activityProfilingIntent =
+              new Intent(PatientDashboardActivity.this, ActivityProfilingActivity.class);
+          startActivity(activityProfilingIntent);
         });
   }
-
-  public void onHealthDataClick(final View view) {}
 
   public void onNavigationDrawerClick(final View view) {
     final Intent drawerActivityActivityIntent =

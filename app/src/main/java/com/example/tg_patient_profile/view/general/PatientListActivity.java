@@ -2,7 +2,6 @@ package com.example.tg_patient_profile.view.general;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import com.example.tg_patient_profile.adapter.PatientListAdapter;
 import com.example.tg_patient_profile.model.Patient;
 import com.example.tg_patient_profile.view.patient.careplan.CarePlanActivity;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.firebase.ui.database.SnapshotParser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,42 +35,33 @@ public class PatientListActivity extends AppCompatActivity {
     patient_searchView = findViewById(R.id.patient_list_searchView);
     // this clicker is for test:
     overview_cardview.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            startActivity(new Intent(PatientListActivity.this, CarePlanActivity.class));
-          }
-        });
+            view -> startActivity(new Intent(PatientListActivity.this, CarePlanActivity.class)));
 
     final Query all_query = FirebaseDatabase.getInstance().getReference().child("patient_profile");
     final FirebaseRecyclerOptions<Patient> all_options =
         new FirebaseRecyclerOptions.Builder<Patient>()
             .setQuery(
                 all_query,
-                new SnapshotParser<Patient>() {
-                  @NonNull
-                  @Override
-                  public Patient parseSnapshot(@NonNull final DataSnapshot snapshot) {
-                    final String firstname =
-                        null == snapshot.child("first_name").getValue()
-                            ? ""
-                            : snapshot.child("first_name").getValue().toString();
-                    final String middlename =
-                        null == snapshot.child("middle_name").getValue()
-                            ? ""
-                            : snapshot.child("middle_name").getValue().toString();
-                    final String lastname =
-                        null == snapshot.child("last_name").getValue()
-                            ? ""
-                            : snapshot.child("last_name").getValue().toString();
+                    snapshot -> {
+                      final String firstname =
+                          null == snapshot.child("first_name").getValue()
+                              ? ""
+                              : snapshot.child("first_name").getValue().toString();
+                      final String middlename =
+                          null == snapshot.child("middle_name").getValue()
+                              ? ""
+                              : snapshot.child("middle_name").getValue().toString();
+                      final String lastname =
+                          null == snapshot.child("last_name").getValue()
+                              ? ""
+                              : snapshot.child("last_name").getValue().toString();
 
-                    final Patient patient = new Patient(snapshot.getKey(), firstname, lastname);
+                      final Patient patient = new Patient(snapshot.getKey(), firstname, lastname);
 
-                    if ("" != middlename) patient.setMiddleName(middlename);
+                      if ("" != middlename) patient.setMiddleName(middlename);
 
-                    return patient;
-                  }
-                })
+                      return patient;
+                    })
             .build();
     final PatientListAdapter patientListAdapter_default =
         new PatientListAdapter(PatientListActivity.this, all_options);
@@ -104,20 +93,16 @@ public class PatientListActivity extends AppCompatActivity {
                 new FirebaseRecyclerOptions.Builder<Patient>()
                     .setQuery(
                         query,
-                        new SnapshotParser<Patient>() {
-                          @NonNull
-                          @Override
-                          public Patient parseSnapshot(@NonNull final DataSnapshot snapshot) {
-                            final Patient patient =
-                                new Patient(
-                                    snapshot.getKey(),
-                                    snapshot.child("first_name").getValue().toString(),
-                                    snapshot.child("last_name").getValue().toString());
-                            final Object middle_name = snapshot.child("middle_name").getValue();
-                            if (null != middle_name) patient.setMiddleName(middle_name.toString());
-                            return patient;
-                          }
-                        })
+                            snapshot -> {
+                              final Patient patient =
+                                  new Patient(
+                                      snapshot.getKey(),
+                                      snapshot.child("first_name").getValue().toString(),
+                                      snapshot.child("last_name").getValue().toString());
+                              final Object middle_name = snapshot.child("middle_name").getValue();
+                              if (null != middle_name) patient.setMiddleName(middle_name.toString());
+                              return patient;
+                            })
                     .build();
             patientListAdapter = new PatientListAdapter(PatientListActivity.this, options);
             query.addListenerForSingleValueEvent(

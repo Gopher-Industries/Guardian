@@ -1,14 +1,11 @@
 package com.example.tg_patient_profile.view.general;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.tg_patient_profile.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,22 +31,16 @@ public class AddNewPatientActivity extends AppCompatActivity {
     btnBack = findViewById(R.id.btnBack);
 
     btnAdd.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-            insertData();
-            clearAll();
-          }
-        });
+            v -> {
+              insertData();
+              clearAll();
+            });
 
     btnBack.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View v) {
-            // finish();
-            onBackPressed();
-          }
-        });
+            v -> {
+              // finish();
+              onBackPressed();
+            });
   }
 
   private void insertData() {
@@ -67,22 +58,12 @@ public class AddNewPatientActivity extends AppCompatActivity {
         .push()
         .setValue(map)
         .addOnSuccessListener(
-            new OnSuccessListener<Void>() {
-              @Override
-              public void onSuccess(final Void unused) {
-                Toast.makeText(AddNewPatientActivity.this, "New patient added", Toast.LENGTH_SHORT)
-                    .show();
-              }
-            })
+                unused -> Toast.makeText(AddNewPatientActivity.this, "New patient added", Toast.LENGTH_SHORT)
+                    .show())
         .addOnFailureListener(
-            new OnFailureListener() {
-              @Override
-              public void onFailure(final Exception e) {
-                Toast.makeText(
+                e -> Toast.makeText(
                         AddNewPatientActivity.this, "Error adding patient", Toast.LENGTH_SHORT)
-                    .show();
-              }
-            });
+                    .show());
   }
 
   private void clearAll() {

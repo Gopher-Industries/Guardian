@@ -41,12 +41,9 @@ public class PatientProfileActivity extends AppCompatActivity {
 
     if (null != customHeader) {
       customHeader.menuButton.setOnClickListener(
-          new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-              if (null != drawerLayout) {
-                drawerLayout.openDrawer(GravityCompat.START);
-              }
+          v -> {
+            if (null != drawerLayout) {
+              drawerLayout.openDrawer(GravityCompat.START);
             }
           });
     }
@@ -54,22 +51,19 @@ public class PatientProfileActivity extends AppCompatActivity {
     new TabLayoutMediator(
             tabLayout,
             viewPager2,
-            new TabLayoutMediator.TabConfigurationStrategy() {
-              @Override
-              public void onConfigureTab(@NonNull final TabLayout.Tab tab, final int position) {
-                if (0 == position) {
-                  tab.setText("Patient");
-                } else if (1 == position) {
-                  tab.setText("Next of Kin");
-                } else if (2 == position) {
-                  tab.setText("General Practitioner");
-                } else if (3 == position) {
-                  tab.setText("Health Details");
-                } else if (4 == position) {
-                  tab.setText("Health & Welfare Det.");
-                } else {
-                  tab.setText("Care Plan");
-                }
+            (tab, position) -> {
+              if (0 == position) {
+                tab.setText("Patient");
+              } else if (1 == position) {
+                tab.setText("Next of Kin");
+              } else if (2 == position) {
+                tab.setText("General Practitioner");
+              } else if (3 == position) {
+                tab.setText("Health Details");
+              } else if (4 == position) {
+                tab.setText("Health & Welfare Det.");
+              } else {
+                tab.setText("Care Plan");
               }
             })
         .attach();

@@ -3,13 +3,13 @@ package com.example.tg_patient_profile.model;
 import androidx.annotation.NonNull;
 
 public class NextOfKin {
+  final String photo;
   String firstName;
   String middleName;
   String lastName;
   String homeAddress;
   String mobilePhone;
   String emailAddress;
-  String photo;
 
   public NextOfKin(
       final String firstName,

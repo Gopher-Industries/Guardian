@@ -23,31 +23,25 @@ public class MainActivity extends AppCompatActivity {
     final Button getStartedButton = findViewById(R.id.getStartedButton);
 
     getStartedButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            final Intent getStartedIntent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(getStartedIntent);
-          }
+        view -> {
+          final Intent getStartedIntent = new Intent(MainActivity.this, LoginActivity.class);
+          startActivity(getStartedIntent);
         });
 
     FirebaseMessaging.getInstance()
         .getToken()
         .addOnCompleteListener(
-            new OnCompleteListener<String>() {
-              @Override
-              public void onComplete(@NonNull final Task<String> task) {
-                if (!task.isSuccessful()) {
-                  Log.w("tag", "Fetching FCM registration token failed", task.getException());
-                  return;
-                }
-
-                // Get new FCM registration token
-                final String token = task.getResult();
-
-                // Log and toast
-                Log.d("token: ", token);
+            task -> {
+              if (!task.isSuccessful()) {
+                Log.w("tag", "Fetching FCM registration token failed", task.getException());
+                return;
               }
+
+              // Get new FCM registration token
+              final String token = task.getResult();
+
+              // Log and toast
+              Log.d("token: ", token);
             });
   }
 

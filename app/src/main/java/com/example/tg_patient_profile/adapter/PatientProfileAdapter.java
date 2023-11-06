@@ -12,7 +12,7 @@ import com.example.tg_patient_profile.view.patient.patientdata.medicaldiagnostic
 import com.example.tg_patient_profile.view.patient.patientdata.patient.PatientProfileFragment;
 
 public class PatientProfileAdapter extends FragmentStateAdapter {
-  String patient_id;
+  final String patient_id;
 
   public PatientProfileAdapter(
       @NonNull final String patient_id,

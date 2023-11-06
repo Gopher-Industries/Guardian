@@ -1,7 +1,8 @@
 package com.example.tg_patient_profile.model;
 
 public class Medical_diagnostic {
-  String patient_id;
+  final String patient_id;
+  final Boolean current;
   String name;
   String patientTemp;
   String bloodPressure;
@@ -10,7 +11,6 @@ public class Medical_diagnostic {
   String pulseRate;
   String respirationRate;
   String bloodFatLevel;
-  Boolean current;
 
   public Medical_diagnostic(
       final String patient_id,
@@ -38,14 +38,6 @@ public class Medical_diagnostic {
   public Medical_diagnostic(final String patient_id, final Boolean isCurrent) {
     this.patient_id = patient_id;
     this.current = isCurrent;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(final String name) {
-    this.name = name;
   }
 
   @Override

@@ -203,7 +203,7 @@ public class GPAddFragment extends Fragment {
 
   private void saveGp() {
     if (null == gp) {
-      gp = new GP(firstName, middleName, lastName, clinicAddress, phoneNumber, email, fax, null);
+      gp = new GP(firstName, middleName, lastName, phoneNumber, email, fax, null);
     } else {
       gp.setFirstName(firstName);
       gp.setMiddleName(middleName);
