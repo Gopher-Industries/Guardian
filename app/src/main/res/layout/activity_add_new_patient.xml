@@ -31,7 +31,7 @@
         android:autofillHints=""
         android:background="@drawable/rounded"
         android:gravity="center"
-        android:inputType="TODO" />
+        android:inputType="text" />
 
     <TextView
         android:layout_width="match_parent"
@@ -51,7 +51,7 @@
         android:autofillHints=""
         android:background="@drawable/rounded"
         android:gravity="center"
-        android:inputType="TODO" />
+        android:inputType="text" />
 
     <TextView
         android:layout_width="match_parent"
@@ -71,7 +71,7 @@
         android:autofillHints=""
         android:background="@drawable/rounded"
         android:gravity="center"
-        android:inputType="TODO" />
+        android:inputType="text" />
 
     <TextView
         android:layout_width="match_parent"
@@ -91,7 +91,7 @@
         android:autofillHints=""
         android:background="@drawable/rounded"
         android:gravity="center"
-        android:inputType="TODO" />
+        android:inputType="text" />
 
     <TextView
         android:layout_width="match_parent"
@@ -111,7 +111,7 @@
         android:autofillHints=""
         android:background="@drawable/rounded"
         android:gravity="center"
-        android:inputType="TODO" />
+        android:inputType="text" />
 
     <TextView
         android:layout_width="match_parent"
@@ -131,7 +131,7 @@
         android:autofillHints=""
         android:background="@drawable/rounded"
         android:gravity="center"
-        android:inputType="TODO" />
+        android:inputType="text" />
 
     <Button
         android:id="@+id/btnAdd"

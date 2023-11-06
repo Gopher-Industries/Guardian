@@ -120,7 +120,7 @@ public class GPAddFragment extends Fragment {
       left_button.setBackgroundResource(R.drawable.polygon_3);
       right_button.setBackgroundResource(R.drawable.polygon_4);
     } else {
-      next_button.setText(R.string.next_button);
+      next_button.setText(R.string.next);
     }
 
     right_button.setOnClickListener(

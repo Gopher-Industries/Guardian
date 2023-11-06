@@ -207,7 +207,7 @@
                 android:autofillHints=""
                 android:background="@drawable/rectangle"
                 android:gravity="left"
-                android:inputType="TODO"
+                android:inputType="text"
                 android:text="Patient normal, daily visit..."
                 android:textColor="@color/black_overlay"
                 android:textSize="12sp"

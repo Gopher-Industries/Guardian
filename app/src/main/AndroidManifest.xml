@@ -20,7 +20,7 @@
             android:exported="false" />
         <activity
             android:name=".view.general.PatientProfileAddActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".view.general.Homepage4admin"
             android:exported="false" />

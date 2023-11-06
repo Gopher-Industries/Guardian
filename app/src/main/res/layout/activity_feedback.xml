@@ -23,7 +23,7 @@
         android:autofillHints=""
         android:gravity="top"
         android:hint="Enter your feedback..."
-        android:inputType="TODO"
+        android:inputType="text"
         android:minLines="4" />
 
     <Button
