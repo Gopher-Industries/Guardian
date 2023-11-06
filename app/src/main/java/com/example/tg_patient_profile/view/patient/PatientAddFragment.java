@@ -18,10 +18,6 @@ import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.model.Patient;
 import com.example.tg_patient_profile.util.DataListener;
 
-/**
- * A simple {@link Fragment} subclass. Use the {@link PatientAddFragment#newInstance} factory method
- * to create an instance of this fragment.
- */
 public class PatientAddFragment extends Fragment {
   // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
   private static final String ARG_PARAM1 = "param1";

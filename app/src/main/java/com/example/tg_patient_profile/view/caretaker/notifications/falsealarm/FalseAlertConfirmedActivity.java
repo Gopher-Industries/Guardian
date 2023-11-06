@@ -3,7 +3,6 @@ package com.example.tg_patient_profile.view.caretaker.notifications.falsealarm;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.tg_patient_profile.R;

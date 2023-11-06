@@ -2,7 +2,6 @@ package com.example.tg_patient_profile.view.general;
 
 import android.os.Bundle;
 import android.view.View;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
