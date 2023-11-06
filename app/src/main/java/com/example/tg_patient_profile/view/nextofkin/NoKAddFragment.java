@@ -16,30 +16,19 @@ import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.model.NextOfKin;
 import com.example.tg_patient_profile.util.DataListener;
 
-/**
- * A simple {@link Fragment} subclass. Use the {@link NoKAddFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class NoKAddFragment extends Fragment {
 
-  private static final String ARG_PARAM1 = "param1";
-  private static final String ARG_PARAM2 = "param2";
   ViewPager2 viewPager2;
-  private Button left_button, right_button;
-  private Button next_button, prev_button;
   private int status;
   private NextOfKin nextofKin;
   private DataListener dataListener;
-  private EditText first_name_input,
-      middle_name_input,
-      last_name_input,
-      address_input,
-      phone_input,
-      email_input;
+  private EditText firstNameInput,
+      middleNameInput,
+      lastNameInput,
+      addressInput,
+      phoneInput,
+      emailInput;
   private String firstName, middleName, lastName, address, phoneNumber, email;
-  // TODO: Rename and change types of parameters
-  private String mParam1;
-  private String mParam2;
 
   public NoKAddFragment() {
     // Required empty public constructor
@@ -49,52 +38,27 @@ public class NoKAddFragment extends Fragment {
     this.status = status;
   }
 
-  /**
-   * Use this factory method to create a new instance of this fragment using the provided
-   * parameters.
-   *
-   * @param param1 Parameter 1.
-   * @param param2 Parameter 2.
-   * @return A new instance of fragment NoKAddFragment.
-   */
-  // TODO: Rename and change types and number of parameters
-  public static NoKAddFragment newInstance(final String param1, final String param2) {
-    final NoKAddFragment fragment = new NoKAddFragment();
-    final Bundle args = new Bundle();
-    args.putString(ARG_PARAM1, param1);
-    args.putString(ARG_PARAM2, param2);
-    fragment.setArguments(args);
-    return fragment;
-  }
-
   @Override
   public void onCreate(final Bundle savedInstanceState) {
-    Log.i("masuk", "coiming 1");
-
     super.onCreate(savedInstanceState);
-    if (null != getArguments()) {
-      mParam1 = getArguments().getString(ARG_PARAM1);
-      mParam2 = getArguments().getString(ARG_PARAM2);
-    }
   }
 
   @Override
   public View onCreateView(
       final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
     Log.i("masuk", "coiming 2");
-    viewPager2 = getActivity().findViewById(R.id.dataForViewViewPager);
+    viewPager2 = requireActivity().findViewById(R.id.dataForViewViewPager);
     final View rootView = inflater.inflate(R.layout.fragment_nok_add, container, false);
-    left_button = rootView.findViewById(R.id.nok_add_polygon_left);
-    right_button = rootView.findViewById(R.id.nok_add_polygon_right);
-    next_button = rootView.findViewById(R.id.nok_add_NextButton);
-    prev_button = rootView.findViewById(R.id.nok_add_PrevButton);
-    first_name_input = rootView.findViewById(R.id.input_nok_FirstName);
-    middle_name_input = rootView.findViewById(R.id.input_nok_MiddleName);
-    last_name_input = rootView.findViewById(R.id.input_nok_FirstName);
-    address_input = rootView.findViewById(R.id.input_nok_adress);
-    phone_input = rootView.findViewById(R.id.input_nok_PhoneNumber);
-    email_input = rootView.findViewById(R.id.input_nok_EmailAdress);
+    final Button leftButton = rootView.findViewById(R.id.nok_add_polygon_left);
+    final Button rightButton = rootView.findViewById(R.id.nok_add_polygon_right);
+    final Button nextButton = rootView.findViewById(R.id.nok_add_NextButton);
+    final Button prevButton = rootView.findViewById(R.id.nok_add_PrevButton);
+    firstNameInput = rootView.findViewById(R.id.input_nok_FirstName);
+    middleNameInput = rootView.findViewById(R.id.input_nok_MiddleName);
+    lastNameInput = rootView.findViewById(R.id.input_nok_LastName);
+    addressInput = rootView.findViewById(R.id.input_nok_adress);
+    phoneInput = rootView.findViewById(R.id.input_nok_PhoneNumber);
+    emailInput = rootView.findViewById(R.id.input_nok_EmailAdress);
 
     final Button step1_button = rootView.findViewById(R.id.step1);
     final Button step2_button = rootView.findViewById(R.id.step2);
@@ -113,103 +77,59 @@ public class NoKAddFragment extends Fragment {
     }
 
     step1_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (dataChecker()) {
-              saveNextofKin();
-              // int nextPage = viewPager2.getCurrentItem()-1;
-              viewPager2.setCurrentItem(0, true);
-            }
+        view -> {
+          if (dataChecker()) {
+            saveNextofKin();
+            // int nextPage = viewPager2.getCurrentItem()-1;
+            viewPager2.setCurrentItem(0, true);
           }
         });
 
     step2_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            Log.i("masuk1", "Pageno 2");
-            if (dataChecker()) {
-              saveNextofKin();
-              // step3_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
+        view -> {
+          Log.i("masuk1", "Pageno 2");
+          if (dataChecker()) {
+            saveNextofKin();
 
-              // int nextPage = viewPager2.getCurrentItem()+1;
-              viewPager2.setCurrentItem(1, true);
-            }
+            viewPager2.setCurrentItem(1, true);
           }
         });
     step3_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            Log.i("masuk1", "Pageno 3");
-            if (dataChecker()) {
-              saveNextofKin();
-              // int nextPage = viewPager2.getCurrentItem()+1;
-              viewPager2.setCurrentItem(2, true);
-            }
+        view -> {
+          Log.i("masuk1", "Pageno 3");
+          if (dataChecker()) {
+            saveNextofKin();
+            // int nextPage = viewPager2.getCurrentItem()+1;
+            viewPager2.setCurrentItem(2, true);
           }
         });
     step4_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (dataChecker()) {
-              saveNextofKin();
-              // int nextPage = viewPager2.getCurrentItem()+2;
-              viewPager2.setCurrentItem(3, true);
-            }
+        view -> {
+          if (dataChecker()) {
+            saveNextofKin();
+            // int nextPage = viewPager2.getCurrentItem()+2;
+            viewPager2.setCurrentItem(3, true);
           }
         });
     step5_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (dataChecker()) {
-              saveNextofKin();
-              // int nextPage = viewPager2.getCurrentItem()+3;
-              viewPager2.setCurrentItem(4, true);
-            }
+        view -> {
+          if (dataChecker()) {
+            saveNextofKin();
+            // int nextPage = viewPager2.getCurrentItem()+3;
+            viewPager2.setCurrentItem(4, true);
           }
         });
 
     if (2 == status) {
-      left_button.setBackgroundResource(R.drawable.polygon_3);
-      right_button.setBackgroundResource(R.drawable.polygon_4);
+      leftButton.setBackgroundResource(R.drawable.polygon_3);
+      rightButton.setBackgroundResource(R.drawable.polygon_4);
     }
-    right_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (1 == status) {
-              // for now I keep 2 next of kins and 2 gps waiting to be add
-              // but defaultly adding 1 nok and 1gp, after alick right arrow the second one shows up
-              // is better
-              if (dataChecker()) {
-                saveNextofKin();
-                scrollPage(true);
-              }
-            }
-          }
-        });
-
-    left_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (2 == status) {
-              if (dataChecker()) {
-                saveNextofKin();
-                scrollPage(false);
-              }
-            }
-          }
-        });
-
-    next_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
+    rightButton.setOnClickListener(
+        view -> {
+          if (1 == status) {
+            // for now I keep 2 next of kins and 2 gps waiting to be add
+            // but defaultly adding 1 nok and 1gp, after alick right arrow the second one shows up
+            // is better
             if (dataChecker()) {
               saveNextofKin();
               scrollPage(true);
@@ -217,10 +137,9 @@ public class NoKAddFragment extends Fragment {
           }
         });
 
-    prev_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
+    leftButton.setOnClickListener(
+        view -> {
+          if (2 == status) {
             if (dataChecker()) {
               saveNextofKin();
               scrollPage(false);
@@ -228,17 +147,33 @@ public class NoKAddFragment extends Fragment {
           }
         });
 
+    nextButton.setOnClickListener(
+        view -> {
+          if (dataChecker()) {
+            saveNextofKin();
+            scrollPage(true);
+          }
+        });
+
+    prevButton.setOnClickListener(
+        view -> {
+          if (dataChecker()) {
+            saveNextofKin();
+            scrollPage(false);
+          }
+        });
+
     return rootView;
   }
 
   private void scrollPage(final boolean isNextPage) {
+    final int nextPage;
     if (isNextPage) {
-      final int nextPage = viewPager2.getCurrentItem() + 1;
-      viewPager2.setCurrentItem(nextPage, true);
+      nextPage = viewPager2.getCurrentItem() + 1;
     } else {
-      final int nextPage = viewPager2.getCurrentItem() - 1;
-      viewPager2.setCurrentItem(nextPage, true);
+      nextPage = viewPager2.getCurrentItem() - 1;
     }
+    viewPager2.setCurrentItem(nextPage, true);
   }
 
   private void saveNextofKin() {
@@ -260,34 +195,34 @@ public class NoKAddFragment extends Fragment {
   }
 
   private boolean dataChecker() {
-    firstName = first_name_input.getText().toString();
-    middleName = middle_name_input.getText().toString();
-    lastName = last_name_input.getText().toString();
-    address = address_input.getText().toString();
-    phoneNumber = phone_input.getText().toString();
-    email = email_input.getText().toString();
+    firstName = firstNameInput.getText().toString();
+    middleName = middleNameInput.getText().toString();
+    lastName = lastNameInput.getText().toString();
+    address = addressInput.getText().toString();
+    phoneNumber = phoneInput.getText().toString();
+    email = emailInput.getText().toString();
 
     if (TextUtils.isEmpty(firstName)) {
-      setErrorAndReturn(first_name_input, "First name is Required.");
+      setErrorAndReturn(firstNameInput, "First name is Required.");
       return false;
     }
     if (TextUtils.isEmpty(lastName)) {
-      setErrorAndReturn(last_name_input, "Last name is Required.");
+      setErrorAndReturn(lastNameInput, "Last name is Required.");
       return false;
     }
     if (TextUtils.isEmpty(address)) {
-      setErrorAndReturn(address_input, "Address is Required.");
+      setErrorAndReturn(addressInput, "Address is Required.");
       return false;
     }
     if (TextUtils.isEmpty(phoneNumber)) {
-      setErrorAndReturn(phone_input, "Phone number is Required.");
+      setErrorAndReturn(phoneInput, "Phone number is Required.");
       return false;
     }
 
     return true;
   }
 
-  private void setErrorAndReturn(final EditText editText, final String s) {
+  private void setErrorAndReturn(final EditText editText, final CharSequence s) {
     editText.setError(s);
   }
 

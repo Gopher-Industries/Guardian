@@ -1,7 +1,6 @@
 package com.example.tg_patient_profile.view.GP;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,17 +16,9 @@ import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.model.GP;
 import com.example.tg_patient_profile.util.DataListener;
 
-/**
- * A simple {@link Fragment} subclass. Use the {@link GPAddFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class GPAddFragment extends Fragment {
-  private static final String ARG_PARAM1 = "param1";
-  private static final String ARG_PARAM2 = "param2";
   ViewPager2 viewPager2;
   private int status;
-  private Button left_button, right_button;
-  private Button next_button, prev_button;
   private GP gp;
   private DataListener dataListener;
   private EditText first_name_input,
@@ -38,8 +29,6 @@ public class GPAddFragment extends Fragment {
       email_input,
       fax_input;
   private String firstName, middleName, lastName, clinicAddress, phoneNumber, email, fax;
-  private String mParam1;
-  private String mParam2;
 
   public GPAddFragment() {
     // Required empty public constructor
@@ -49,43 +38,16 @@ public class GPAddFragment extends Fragment {
     this.status = status;
   }
 
-  /**
-   * Use this factory method to create a new instance of this fragment using the provided
-   * parameters.
-   *
-   * @param param1 Parameter 1.
-   * @param param2 Parameter 2.
-   * @return A new instance of fragment GPAddFragment.
-   */
-  // TODO: Rename and change types and number of parameters
-  public static GPAddFragment newInstance(final String param1, final String param2) {
-    final GPAddFragment fragment = new GPAddFragment();
-    final Bundle args = new Bundle();
-    args.putString(ARG_PARAM1, param1);
-    args.putString(ARG_PARAM2, param2);
-    fragment.setArguments(args);
-    return fragment;
-  }
-
-  @Override
-  public void onCreate(final Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    if (null != getArguments()) {
-      mParam1 = getArguments().getString(ARG_PARAM1);
-      mParam2 = getArguments().getString(ARG_PARAM2);
-    }
-  }
-
   @Override
   public View onCreateView(
       final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    viewPager2 = getActivity().findViewById(R.id.dataForViewViewPager);
+    viewPager2 = requireActivity().findViewById(R.id.dataForViewViewPager);
     final View rootView = inflater.inflate(R.layout.fragment_gp_add, container, false);
-    left_button = rootView.findViewById(R.id.gp_add_polygon_left);
-    right_button = rootView.findViewById(R.id.gp_add_polygon_right);
-    next_button = rootView.findViewById(R.id.gp_add_NextButton);
-    prev_button = rootView.findViewById(R.id.gp_add_PrevButton);
+    final Button left_button = rootView.findViewById(R.id.gp_add_polygon_left);
+    final Button right_button = rootView.findViewById(R.id.gp_add_polygon_right);
+    final Button next_button = rootView.findViewById(R.id.gp_add_NextButton);
+    final Button prev_button = rootView.findViewById(R.id.gp_add_PrevButton);
     first_name_input = rootView.findViewById(R.id.input_gp_FirstName);
     middle_name_input = rootView.findViewById(R.id.input_gp_MiddleName);
     last_name_input = rootView.findViewById(R.id.input_gp_LastName);
@@ -111,66 +73,46 @@ public class GPAddFragment extends Fragment {
     }
 
     step1_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (dataChecker()) {
-              saveGp();
+        view -> {
+          if (dataChecker()) {
+            saveGp();
 
-              // int nextPage = viewPager2.getCurrentItem()-1;
-              viewPager2.setCurrentItem(0, true);
-            }
+            // int nextPage = viewPager2.getCurrentItem()-1;
+            viewPager2.setCurrentItem(0, true);
           }
         });
 
     step2_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (dataChecker()) {
-              saveGp();
+        view -> {
+          if (dataChecker()) {
+            saveGp();
 
-              // step3_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
-
-              // int nextPage = viewPager2.getCurrentItem()+1;
-              viewPager2.setCurrentItem(1, true);
-            }
+            viewPager2.setCurrentItem(1, true);
           }
         });
     step3_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (dataChecker()) {
-              saveGp();
+        view -> {
+          if (dataChecker()) {
+            saveGp();
 
-              // int nextPage = viewPager2.getCurrentItem()+1;
-              viewPager2.setCurrentItem(2, true);
-            }
+            // int nextPage = viewPager2.getCurrentItem()+1;
+            viewPager2.setCurrentItem(2, true);
           }
         });
     step4_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (dataChecker()) {
-              saveGp();
+        view -> {
+          if (dataChecker()) {
+            saveGp();
 
-              // int nextPage = viewPager2.getCurrentItem()+2;
-              viewPager2.setCurrentItem(3, true);
-            }
+            viewPager2.setCurrentItem(3, true);
           }
         });
     step5_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (dataChecker()) {
-              saveGp();
+        view -> {
+          if (dataChecker()) {
+            saveGp();
 
-              // int nextPage = viewPager2.getCurrentItem()+3;
-              viewPager2.setCurrentItem(4, true);
-            }
+            viewPager2.setCurrentItem(4, true);
           }
         });
 
@@ -178,105 +120,85 @@ public class GPAddFragment extends Fragment {
       left_button.setBackgroundResource(R.drawable.polygon_3);
       right_button.setBackgroundResource(R.drawable.polygon_4);
     } else {
-      next_button.setText("Next");
+      next_button.setText(R.string.next_button);
     }
 
     right_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (1 == status) {
-              // for now I keep 2 next of kins and 2 gps waiting to be add
-              // but defaultly adding 1 nok and 1gp, after alick right arrow the second one shows up
-              // is better
-              if (dataChecker()) {
-                saveGp();
-                scrollPage(true);
-              }
+        view -> {
+          if (1 == status) {
+            // for now I keep 2 next of kins and 2 gps waiting to be add
+            // but defaultly adding 1 nok and 1gp, after alick right arrow the second one shows up
+            // is better
+            if (dataChecker()) {
+              saveGp();
+              scrollPage(true);
             }
           }
         });
 
     left_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (2 == status) {
-              if (dataChecker()) {
-                saveGp();
-                scrollPage(false);
-              }
-            }
-          }
-        });
-
-    next_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            // als();
-            if (dataChecker()) {
-              saveGp();
-              if (1 == status) {
-                scrollPage(true);
-              } else {
-                final AlertDialog.Builder builder =
-                    new AlertDialog.Builder(view.getContext()); // new AlertDialog.Builder(this);
-                builder.setTitle("Saving Changes?");
-                // builder.setMessage("Do you really want to whatever?");
-                // builder.setIcon(android.R.drawable.ic_dialog_alert);
-                builder.setPositiveButton(
-                    "YES",
-                    new DialogInterface.OnClickListener() {
-                      @Override
-                      public void onClick(final DialogInterface dialog, final int whichButton) {
-                        dataListener.onDataFinihsed(true);
-                        // Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
-                      }
-                    });
-                builder.setNegativeButton("No", null);
-
-                final AlertDialog dialog = builder.create();
-                dialog.setOnShowListener(
-                    new DialogInterface.OnShowListener() {
-                      @Override
-                      public void onShow(final DialogInterface arg0) {
-                        dialog
-                            .getButton(AlertDialog.BUTTON_POSITIVE)
-                            .setTextColor(getResources().getColor(R.color.colorGreen));
-                        dialog
-                            .getButton(AlertDialog.BUTTON_NEGATIVE)
-                            .setTextColor(getResources().getColor(R.color.colorRed));
-                        // dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.black));
-                      }
-                    });
-                dialog.show();
-              }
-            }
-          }
-        });
-
-    prev_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
+        view -> {
+          if (2 == status) {
             if (dataChecker()) {
               saveGp();
               scrollPage(false);
             }
           }
         });
+
+    next_button.setOnClickListener(
+        view -> {
+          // als();
+          if (dataChecker()) {
+            saveGp();
+            if (1 == status) {
+              scrollPage(true);
+            } else {
+              final AlertDialog.Builder builder =
+                  new AlertDialog.Builder(view.getContext()); // new AlertDialog.Builder(this);
+              builder.setTitle("Saving Changes?");
+              builder.setPositiveButton(
+                  "YES",
+                  (dialog, whichButton) -> {
+                    dataListener.onDataFinihsed(true);
+                    // Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+                  });
+              builder.setNegativeButton("No", null);
+
+              final AlertDialog dialog = builder.create();
+              dialog.setOnShowListener(
+                  arg0 -> {
+                    dialog
+                        .getButton(AlertDialog.BUTTON_POSITIVE)
+                        .setTextColor(getResources().getColor(R.color.colorGreen));
+                    dialog
+                        .getButton(AlertDialog.BUTTON_NEGATIVE)
+                        .setTextColor(getResources().getColor(R.color.colorRed));
+                    // dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.black));
+                  });
+              dialog.show();
+            }
+          }
+        });
+
+    prev_button.setOnClickListener(
+        view -> {
+          if (dataChecker()) {
+            saveGp();
+            scrollPage(false);
+          }
+        });
     return rootView;
   }
 
   private void scrollPage(final boolean isNextPage) {
+    final int nextPage;
     if (isNextPage) {
-      final int nextPage = viewPager2.getCurrentItem() + 1;
-      viewPager2.setCurrentItem(nextPage, true);
+      nextPage = viewPager2.getCurrentItem() + 1;
     } else {
-      final int nextPage = viewPager2.getCurrentItem() - 1;
-      viewPager2.setCurrentItem(nextPage, true);
+      nextPage = viewPager2.getCurrentItem() - 1;
     }
+    viewPager2.setCurrentItem(nextPage, true);
   }
 
   private void saveGp() {
@@ -323,7 +245,7 @@ public class GPAddFragment extends Fragment {
     return true;
   }
 
-  private void setErrorAndReturn(final EditText editText, final String s) {
+  private void setErrorAndReturn(final EditText editText, final CharSequence s) {
     editText.setError(s);
   }
 

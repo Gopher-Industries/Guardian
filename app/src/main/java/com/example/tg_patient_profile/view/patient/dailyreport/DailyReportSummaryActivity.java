@@ -10,33 +10,28 @@ import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.util.Util;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Locale;
 
 public class DailyReportSummaryActivity extends AppCompatActivity {
 
   private final StringBuilder statuses = new StringBuilder();
-  private String date;
-  private String notes;
-  private String[] statusList;
   private long dateMs;
-
-  private TextView currentStatusSummary;
-  private TextView progressNotesSummary;
-  private CalendarView patientReportSummaryCalendarView;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_daily_report_summary);
 
-    currentStatusSummary = findViewById(R.id.currentStatusSummary);
-    progressNotesSummary = findViewById(R.id.progressNotesSummary);
-    patientReportSummaryCalendarView = findViewById(R.id.patientReportSummaryCalendarView);
+    final TextView currentStatusSummary = findViewById(R.id.currentStatusSummary);
+    final TextView progressNotesSummary = findViewById(R.id.progressNotesSummary);
+    final CalendarView patientReportSummaryCalendarView =
+        findViewById(R.id.patientReportSummaryCalendarView);
 
     final Intent intent = getIntent();
-    date = intent.getStringExtra(Util.DAILY_REPORT_DATE);
-    notes = intent.getStringExtra(Util.DAILY_REPORT_STATUS_NOTES);
-    statusList = intent.getStringArrayExtra(Util.DAILY_REPORT_STATUS_LIST);
-    if (0 != statusList.length) {
+    final String date = intent.getStringExtra(Util.DAILY_REPORT_DATE);
+    final String notes = intent.getStringExtra(Util.DAILY_REPORT_STATUS_NOTES);
+    final String[] statusList = intent.getStringArrayExtra(Util.DAILY_REPORT_STATUS_LIST);
+    if (null != statusList && 0 != statusList.length) {
       for (int i = 0; i < statusList.length - 1; i++) {
         statuses.append(statusList[i] + "\n");
       }
@@ -44,10 +39,10 @@ public class DailyReportSummaryActivity extends AppCompatActivity {
     }
 
     if (android.os.Build.VERSION_CODES.N <= android.os.Build.VERSION.SDK_INT) {
-      final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+      final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
       try {
-        Date d = null;
+        final Date d;
         d = formatter.parse(date);
         dateMs = d.getTime();
       } catch (final ParseException e) {

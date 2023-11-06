@@ -3,7 +3,6 @@ package com.example.tg_patient_profile.view.patient.patientdata.medicaldiagnosti
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,16 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-/**
- * A simple {@link Fragment} subclass. Use the {@link CurrentMedicalDiagnosticsFragment#newInstance}
- * factory method to create an instance of this fragment.
- */
 public class CurrentMedicalDiagnosticsFragment extends Fragment {
-
-  // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
-  private static final String ARG_PARAM1 = "param1";
-  private static final String ARG_PARAM2 = "param2";
   private final int[] editTextIds = {
     R.id.currentMedicalDiagnosticsNameTextView,
     R.id.currentMedicalDiagnosticsBloodPressureTextView,
@@ -55,9 +45,6 @@ public class CurrentMedicalDiagnosticsFragment extends Fragment {
   Medical_diagnostic medical_diagnostic_current;
   private EditText[] editTextArray;
   private Button[] editButtonArray;
-  // TODO: Rename and change types of parameters
-  private String mParam1;
-  private String mParam2;
   private String patient_id;
 
   public CurrentMedicalDiagnosticsFragment() {
@@ -68,32 +55,9 @@ public class CurrentMedicalDiagnosticsFragment extends Fragment {
     this.patient_id = patient_id;
   }
 
-  /**
-   * Use this factory method to create a new instance of this fragment using the provided
-   * parameters.
-   *
-   * @param param1 Parameter 1.
-   * @param param2 Parameter 2.
-   * @return A new instance of fragment CurrentMedicalDiagnosticsFragment.
-   */
-  // TODO: Rename and change types and number of parameters
-  public static CurrentMedicalDiagnosticsFragment newInstance(
-      final String param1, final String param2) {
-    final CurrentMedicalDiagnosticsFragment fragment = new CurrentMedicalDiagnosticsFragment();
-    final Bundle args = new Bundle();
-    args.putString(ARG_PARAM1, param1);
-    args.putString(ARG_PARAM2, param2);
-    fragment.setArguments(args);
-    return fragment;
-  }
-
   @Override
   public void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    if (null != getArguments()) {
-      mParam1 = getArguments().getString(ARG_PARAM1);
-      mParam2 = getArguments().getString(ARG_PARAM2);
-    }
   }
 
   @Override
@@ -116,33 +80,21 @@ public class CurrentMedicalDiagnosticsFragment extends Fragment {
       editText.setEnabled(false);
       editButton.setVisibility(View.INVISIBLE);
 
-      setInfo();
-
       editButton.setOnClickListener(
-          new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-              editText.setFocusable(true);
-              editText.setFocusableInTouchMode(true);
-              editText.setEnabled(true);
-              editText.requestFocus();
-              editText.selectAll();
-              final InputMethodManager imm =
-                  (InputMethodManager)
-                      requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-              imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-            }
+          v -> {
+            editText.setFocusable(true);
+            editText.setFocusableInTouchMode(true);
+            editText.setEnabled(true);
+            editText.requestFocus();
+            editText.selectAll();
+            final InputMethodManager imm =
+                (InputMethodManager)
+                    requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
           });
     }
 
     return rootView;
-  }
-
-  private void setInfo() {
-    final DatabaseReference reference =
-        FirebaseDatabase.getInstance().getReference("health_details");
-    final Query query = reference.orderByChild("patient_id").equalTo(patient_id);
-    // here to be added for grabing info from firebase
   }
 
   public void setEditState(final boolean isEditable) {
@@ -167,30 +119,15 @@ public class CurrentMedicalDiagnosticsFragment extends Fragment {
     final DatabaseReference reference =
         FirebaseDatabase.getInstance().getReference("health_details");
     final Query query = reference.orderByChild("patient_id").equalTo(patient_id);
-    Log.v("测试query", query.toString());
     if (dataChecker()) {
-      query.addListenerForSingleValueEvent(
-          new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull final DataSnapshot snapshot) {
-              for (final DataSnapshot childSnapshot : snapshot.getChildren()) {
-                final Boolean isCurrent = childSnapshot.child("current").getValue(Boolean.class);
-                if (isCurrent) {
-                  childSnapshot.getRef().setValue(medical_diagnostic_current);
-                }
-              }
-            }
-
-            @Override
-            public void onCancelled(@NonNull final DatabaseError error) {}
-          });
+      query.addListenerForSingleValueEvent(new MyValueEventListener());
     }
   }
 
   private Boolean dataChecker() {
-    for (int i = 0; i < editTextArray.length; i++) {
-      if (TextUtils.isEmpty(editTextArray[i].getText())) {
-        editTextArray[i].setError("it shouldn't be empty!");
+    for (final EditText editText : editTextArray) {
+      if (TextUtils.isEmpty(editText.getText())) {
+        editText.setError("it shouldn't be empty!");
         return false;
       }
     }
@@ -207,5 +144,20 @@ public class CurrentMedicalDiagnosticsFragment extends Fragment {
             editTextArray[7].getText().toString(),
             true);
     return true;
+  }
+
+  private class MyValueEventListener implements ValueEventListener {
+    @Override
+    public void onDataChange(@NonNull final DataSnapshot snapshot) {
+      for (final DataSnapshot childSnapshot : snapshot.getChildren()) {
+        final Boolean isCurrent = childSnapshot.child("current").getValue(Boolean.class);
+        if (Boolean.TRUE.equals(isCurrent)) {
+          childSnapshot.getRef().setValue(medical_diagnostic_current);
+        }
+      }
+    }
+
+    @Override
+    public void onCancelled(@NonNull final DatabaseError error) {}
   }
 }

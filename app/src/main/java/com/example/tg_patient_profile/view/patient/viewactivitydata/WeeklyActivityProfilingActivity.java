@@ -14,7 +14,6 @@ import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.view.patient.associateradar.ActivitySuggestionActivity;
 
 public class WeeklyActivityProfilingActivity extends AppCompatActivity {
-
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -48,18 +47,12 @@ public class WeeklyActivityProfilingActivity extends AppCompatActivity {
       weeklyActivityImageView.setImageResource(img);
       weeklyActivitySummaryTitleTextView.setText(title);
       weeklyActivitySummaryTextView.setText(Html.fromHtml(text));
-      //            weeklyActivitySummaryTextView.setClickable(true);
-      //
-      // weeklyActivitySummaryTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
       statusView.setOnClickListener(
-          new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-              final Intent suggestionIntent =
-                  new Intent(getApplicationContext(), ActivitySuggestionActivity.class);
-              startActivity(suggestionIntent);
-            }
+          v -> {
+            final Intent suggestionIntent =
+                new Intent(getApplicationContext(), ActivitySuggestionActivity.class);
+            startActivity(suggestionIntent);
           });
 
       weeklyActivityProfilingLayout.addView(statusView);

@@ -13,7 +13,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.tg_patient_profile.R;
 
 public class ActivityProfilingActivity extends AppCompatActivity {
-
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

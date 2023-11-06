@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import com.example.tg_patient_profile.R;
 
 public class PatientProfileFragment extends Fragment {
-
   public PatientProfileFragment() {}
 
   @Override

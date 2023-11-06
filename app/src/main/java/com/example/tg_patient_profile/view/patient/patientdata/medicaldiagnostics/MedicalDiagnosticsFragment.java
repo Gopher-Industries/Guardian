@@ -15,26 +15,18 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MedicalDiagnosticsFragment extends Fragment {
-
   public CurrentMedicalDiagnosticsFragment currentFragment;
   public PastMedicalDiagnosticsFragment pastFragment;
-  private Button edit_button;
+  private Button editButton;
   private Boolean isEditable = false;
-  private String patient_id;
+  private String patientId;
 
   public MedicalDiagnosticsFragment() {
     // Required empty public constructor
   }
 
-  public MedicalDiagnosticsFragment(final String patient_id) {
-    this.patient_id = patient_id;
-  }
-
-  public static MedicalDiagnosticsFragment newInstance() {
-    final MedicalDiagnosticsFragment fragment = new MedicalDiagnosticsFragment();
-    final Bundle args = new Bundle();
-    fragment.setArguments(args);
-    return fragment;
+  public MedicalDiagnosticsFragment(final String patientId) {
+    this.patientId = patientId;
   }
 
   @Override
@@ -49,41 +41,35 @@ public class MedicalDiagnosticsFragment extends Fragment {
       @Nullable final ViewGroup container,
       @Nullable final Bundle savedInstanceState) {
     final View view = inflater.inflate(R.layout.fragment_medical_diagnostics, container, false);
-    edit_button = view.findViewById(R.id.header_edit_button);
+    editButton = view.findViewById(R.id.header_edit_button);
 
     final TabLayout tabLayout = view.findViewById(R.id.medicalDiagnosticsTabLayout);
     final ViewPager2 viewPager2 = view.findViewById(R.id.medicalDiagnosticsViewPager);
 
     final MedicalDiagnosticsViewPagerAdapter viewPagerAdapter =
-        new MedicalDiagnosticsViewPagerAdapter(patient_id, this);
+        new MedicalDiagnosticsViewPagerAdapter(patientId, this);
     viewPager2.setAdapter(viewPagerAdapter);
 
     new TabLayoutMediator(
             tabLayout,
             viewPager2,
-            new TabLayoutMediator.TabConfigurationStrategy() {
-              @Override
-              public void onConfigureTab(@NonNull final TabLayout.Tab tab, final int position) {
-                if (0 == position) {
-                  tab.setText("Current");
-                } else {
-                  tab.setText("Past");
-                }
+            (tab, position) -> {
+              if (0 == position) {
+                tab.setText("Current");
+              } else {
+                tab.setText("Past");
               }
             })
         .attach();
 
-    edit_button.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(final View view) {
-            if (isEditable) {
-              edit_button.setBackgroundResource(R.drawable.medical_diagnostics_edit);
-            } else {
-              edit_button.setBackgroundResource(R.drawable.medical_diagnostics_stop);
-            }
-            handleEditButtonClick();
+    editButton.setOnClickListener(
+        view1 -> {
+          if (isEditable) {
+            editButton.setBackgroundResource(R.drawable.medical_diagnostics_edit);
+          } else {
+            editButton.setBackgroundResource(R.drawable.medical_diagnostics_stop);
           }
+          handleEditButtonClick();
         });
     return view;
   }
