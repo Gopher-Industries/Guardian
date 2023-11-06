@@ -14,6 +14,7 @@ import com.example.tg_patient_profile.view.caretaker.CaretakerDashboardActivity;
 public class ConfirmIncidentActivity extends AppCompatActivity {
 
   Spinner hospitalSpinner;
+  String hospitalSelection;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
