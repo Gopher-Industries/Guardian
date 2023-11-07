@@ -54,7 +54,6 @@ public class PatientDashboardActivity extends AppCompatActivity {
     healthDataButton = findViewById(R.id.healthDataButton);
     viewActivityDataButton = findViewById(R.id.viewActivityDataButton);
     associateRadarButton = findViewById(R.id.associateRadarButton);
-    carePlanButton = findViewById(R.id.carePlanButton);
 
     dailyReportButton.setOnClickListener(
         v -> {

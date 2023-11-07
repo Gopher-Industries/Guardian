@@ -208,7 +208,6 @@ public class GPAddFragment extends Fragment {
       gp.setFirstName(firstName);
       gp.setMiddleName(middleName);
       gp.setLastName(lastName);
-      gp.setClinicAddress(clinicAddress);
       gp.setPhone(phoneNumber);
       gp.setEmail(email);
       gp.setFax(fax);

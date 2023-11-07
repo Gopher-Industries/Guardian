@@ -10,13 +10,10 @@ import com.example.tg_patient_profile.view.general.PatientListActivity;
 import com.example.tg_patient_profile.view.general.PatientProfileActivity;
 
 public class CaretakerDashboardActivity extends AppCompatActivity {
-
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_caretaker_dashboard);
-
-    selectAPatientTextView = findViewById(R.id.selectAPatientTextView);
   }
 
   public void onHealthDataClick(final View view) {
