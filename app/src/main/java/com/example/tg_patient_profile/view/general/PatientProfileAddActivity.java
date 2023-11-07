@@ -207,7 +207,6 @@ public class PatientProfileAddActivity extends AppCompatActivity implements Data
         .setValue(patient)
         .addOnSuccessListener(
             unused -> {
-              Log.v("patientsuccess", "");
               Toast.makeText(
                       PatientProfileAddActivity.this,
                       "Success on adding a new patient",

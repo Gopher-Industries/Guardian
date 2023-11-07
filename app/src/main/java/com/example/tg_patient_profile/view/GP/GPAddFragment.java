@@ -67,7 +67,6 @@ public class GPAddFragment extends Fragment {
       step5_button.setBackgroundResource(R.drawable.roundshapebtn);
     }
     if (2 == status) {
-      // Log.i("masuk2", "Page 3");
       step5_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
       step4_button.setBackgroundResource(R.drawable.roundshapebtn);
     }

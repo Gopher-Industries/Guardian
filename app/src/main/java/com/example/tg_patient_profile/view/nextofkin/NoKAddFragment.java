@@ -3,7 +3,6 @@ package com.example.tg_patient_profile.view.nextofkin;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +45,6 @@ public class NoKAddFragment extends Fragment {
   @Override
   public View onCreateView(
       final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-    Log.i("masuk", "coiming 2");
     viewPager2 = requireActivity().findViewById(R.id.dataForViewViewPager);
     final View rootView = inflater.inflate(R.layout.fragment_nok_add, container, false);
     final Button leftButton = rootView.findViewById(R.id.nok_add_polygon_left);
@@ -71,7 +69,6 @@ public class NoKAddFragment extends Fragment {
       step3_button.setBackgroundResource(R.drawable.roundshapebtn);
     }
     if (2 == status) {
-      Log.i("masuk2", "Page 3");
       step3_button.setBackgroundResource(R.drawable.roundshapeseletebtn);
       step2_button.setBackgroundResource(R.drawable.roundshapebtn);
     }
@@ -87,7 +84,6 @@ public class NoKAddFragment extends Fragment {
 
     step2_button.setOnClickListener(
         view -> {
-          Log.i("masuk1", "Pageno 2");
           if (dataChecker()) {
             saveNextofKin();
 
@@ -96,7 +92,6 @@ public class NoKAddFragment extends Fragment {
         });
     step3_button.setOnClickListener(
         view -> {
-          Log.i("masuk1", "Pageno 3");
           if (dataChecker()) {
             saveNextofKin();
             // int nextPage = viewPager2.getCurrentItem()+1;

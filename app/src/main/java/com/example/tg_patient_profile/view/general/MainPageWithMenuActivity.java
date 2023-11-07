@@ -21,13 +21,12 @@ public class MainPageWithMenuActivity extends AppCompatActivity {
     menu_button = findViewById(R.id.menu_button_main_page);
 
     menu_button.setOnClickListener(
-            view -> {
-              Log.v("clikced", "yes");
-              if (menu_DrawerLayout.isDrawerOpen(GravityCompat.START)) {
-                menu_DrawerLayout.closeDrawer(GravityCompat.START);
-              } else {
-                menu_DrawerLayout.openDrawer(GravityCompat.START);
-              }
-            });
+        view -> {
+          if (menu_DrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            menu_DrawerLayout.closeDrawer(GravityCompat.START);
+          } else {
+            menu_DrawerLayout.openDrawer(GravityCompat.START);
+          }
+        });
   }
 }
