@@ -1,64 +1,48 @@
 package com.example.tg_patient_profile.view.general;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
-//import com.example.tg_patient_profile.view.patient.PatientAdd;
-import com.example.tg_patient_profile.R;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.view.View;
+import android.os.Bundle;
 import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+import com.example.tg_patient_profile.R;
 
-
-import com.example.tg_patient_profile.view.patient.dailyreport.DailyReportActivity;
 public class Homepage4caretaker extends AppCompatActivity {
 
-    Button patientListButton, settingsButton, signOutButton;
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
+  Button patientListButton, settingsButton, signOutButton;
 
     @SuppressLint("MissingInflatedId")
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage4caretaker);
+  @Override
+  protected void onCreate(final Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_homepage4caretaker);
 
-        patientListButton = findViewById(R.id.patientListButton);
-        settingsButton = findViewById(R.id.settingsButton3);
-        signOutButton = findViewById(R.id.sighOutButton);
+    patientListButton = findViewById(R.id.patientListButton);
+    settingsButton = findViewById(R.id.settingsButton3);
+    signOutButton = findViewById(R.id.sighOutButton);
 
+    // patient list button
+    patientListButton.setOnClickListener(
+            view -> {
+              final Intent medicalDiagnosticsActivityIntent =
+                  new Intent(Homepage4caretaker.this, PatientListActivity.class);
+              startActivity(medicalDiagnosticsActivityIntent);
+            });
 
-        //patient list button
-        patientListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent medicalDiagnosticsActivityIntent = new Intent(Homepage4caretaker.this, PatientListActivity.class);
-                startActivity(medicalDiagnosticsActivityIntent);
-            }
-        });
+    // settings button
+    settingsButton.setOnClickListener(
+            view -> {
+              final Intent medicalDiagnosticsActivityIntent =
+                  new Intent(Homepage4caretaker.this, Setting.class);
+              startActivity(medicalDiagnosticsActivityIntent);
+            });
 
-        //settings button
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent medicalDiagnosticsActivityIntent = new Intent(Homepage4caretaker.this, Setting.class);
-                startActivity(medicalDiagnosticsActivityIntent);
-            }
-        });
-
-        //sign out button
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent medicalDiagnosticsActivityIntent = new Intent(Homepage4caretaker.this, LoginActivity.class);
-                startActivity(medicalDiagnosticsActivityIntent);
-            }
-        });
-    }
+    // sign out button
+    signOutButton.setOnClickListener(
+            view -> {
+              final Intent medicalDiagnosticsActivityIntent =
+                  new Intent(Homepage4caretaker.this, LoginActivity.class);
+              startActivity(medicalDiagnosticsActivityIntent);
+            });
+  }
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:textAlignment="center">
@@ -25,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
+        android:contentDescription="TODO"
         android:translationZ="20dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,16 +36,19 @@
     <TextView
         android:id="@+id/headerText"
         android:layout_width="wrap_content"
-        android:layout_height="210dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginBottom="70dp"
         android:fontFamily="sans-serif-medium"
         android:text="Caretaker Profile"
         android:textColor="@color/white"
         android:textFontWeight="700"
         android:textSize="20sp"
         android:translationZ="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="27dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/editButton"
@@ -53,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="350dp"
         android:layout_marginTop="25dp"
+        android:contentDescription="TODO"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/edit_button" />
@@ -63,6 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="25dp"
+        android:contentDescription="TODO"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu_button" />
@@ -74,14 +79,17 @@
         android:text="3501 80315 1"
         app:layout_constraintEnd_toEndOf="@+id/caretakerImage"
         app:layout_constraintStart_toStartOf="@+id/caretakerImage"
-        tools:layout_editor_absoluteY="175dp" />
+        app:layout_constraintTop_toBottomOf="@+id/caretakerImage" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="70dp"
-        app:layout_constraintTop_toBottomOf="@+id/headerText"
-        tools:layout_editor_absoluteX="1dp">
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerText">
 
         <TextView
             android:id="@+id/name"
@@ -107,9 +115,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="409dp"
-        android:layout_height="70dp"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="354dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerText">
 
         <TextView
             android:id="@+id/dateOfBirth"
@@ -135,8 +147,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <TextView
@@ -163,8 +177,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
         <TextView
@@ -190,8 +206,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="409dp"
+        android:id="@+id/constraintLayout6"
+        android:layout_width="0dp"
         android:layout_height="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
         <TextView

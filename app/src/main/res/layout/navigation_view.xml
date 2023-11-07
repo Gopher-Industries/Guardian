@@ -1,5 +1,4 @@
-<com.google.android.material.navigation.NavigationView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.navigation.NavigationView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_view"
     android:layout_width="wrap_content"
@@ -17,6 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="72dp"
             android:layout_marginTop="41dp"
+            android:contentDescription="TODO"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/gopher_logo" />
@@ -28,6 +28,7 @@
             android:layout_marginStart="27dp"
             android:layout_marginTop="32dp"
             android:clickable="true"
+            android:focusable="true"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/company_logo">
@@ -51,6 +52,7 @@
             android:layout_marginStart="27dp"
             android:layout_marginTop="63dp"
             android:clickable="true"
+            android:focusable="true"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menu_home_linearLayout">
@@ -59,6 +61,7 @@
                 android:id="@+id/menu_admin_icon"
                 android:layout_width="22.5dp"
                 android:layout_height="20dp"
+                android:contentDescription="TODO"
                 android:src="@drawable/menu_pen_edit" />
 
             <TextView
@@ -80,6 +83,7 @@
             android:layout_marginStart="27dp"
             android:layout_marginTop="63dp"
             android:clickable="true"
+            android:focusable="true"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menu_admin_linearLayout">
@@ -88,6 +92,7 @@
                 android:id="@+id/menu_settings_icon"
                 android:layout_width="22.5dp"
                 android:layout_height="20dp"
+                android:contentDescription="TODO"
                 android:src="@drawable/menu_settings" />
 
             <TextView
@@ -109,6 +114,7 @@
             android:layout_marginStart="27dp"
             android:layout_marginTop="63dp"
             android:clickable="true"
+            android:focusable="true"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menu_settings_linearLayout">
@@ -117,6 +123,7 @@
                 android:id="@+id/menu_sigh_out_icon"
                 android:layout_width="22.5dp"
                 android:layout_height="20dp"
+                android:contentDescription="TODO"
                 android:src="@drawable/menu_signout" />
 
             <TextView

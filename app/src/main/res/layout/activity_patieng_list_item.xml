@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/patient_list_patient_item"
         android:layout_width="375dp"
@@ -25,6 +26,7 @@
                 android:id="@+id/patient_list_status_circle"
                 android:layout_width="35dp"
                 android:layout_height="33dp"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/red_circle"
                 tools:layout_editor_absoluteX="41dp"
                 tools:layout_editor_absoluteY="232dp" />
@@ -38,7 +40,7 @@
                 android:fontFamily="sans-serif-black"
                 android:text="Patient name"
                 android:textColor="@color/black"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <ImageView
                 android:id="@+id/patient_list_arrow"
@@ -46,6 +48,7 @@
                 android:layout_height="31dp"
                 android:layout_marginLeft="140dp"
                 android:layout_marginTop="5dp"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/right_vector"
                 tools:layout_editor_absoluteX="337dp"
                 tools:layout_editor_absoluteY="234dp" />

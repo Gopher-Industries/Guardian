@@ -1,19 +1,18 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.general.UploadPhoto">
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/toolbar"-->
-<!--        android:layout_width="408dp"-->
-<!--        android:layout_height="28dp"-->
-<!--        android:background="?attr/colorPrimary"-->
-<!--        android:elevation="4dp"-->
-<!--        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-<!--        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />-->
+    <!--    <androidx.appcompat.widget.Toolbar-->
+    <!--        android:id="@+id/toolbar"-->
+    <!--        android:layout_width="408dp"-->
+    <!--        android:layout_height="28dp"-->
+    <!--        android:background="?attr/colorPrimary"-->
+    <!--        android:elevation="4dp"-->
+    <!--        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+    <!--        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />-->
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/smallCard"
@@ -48,18 +47,18 @@
         <View
             android:layout_width="334dp"
             android:layout_height="123dp"
-            android:layout_marginTop="22dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="22dp"
             android:background="@drawable/custom_background"
-            android:orientation="vertical"/>
+            android:orientation="vertical" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/profile"-->
-<!--            android:layout_width="93dp"-->
-<!--            android:layout_height="95dp"-->
-<!--            android:layout_marginLeft="50dp"-->
-<!--            android:layout_marginTop="35dp"-->
-<!--            android:elevation="20dp"/>-->
+        <!--        <ImageView-->
+        <!--            android:id="@+id/profile"-->
+        <!--            android:layout_width="93dp"-->
+        <!--            android:layout_height="95dp"-->
+        <!--            android:layout_marginLeft="50dp"-->
+        <!--            android:layout_marginTop="35dp"-->
+        <!--            android:elevation="20dp"/>-->
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile"
@@ -85,6 +84,7 @@
             android:layout_height="25dp"
             android:layout_marginLeft="165dp"
             android:layout_marginTop="72dp"
+            android:contentDescription="TODO"
             android:elevation="20dp"
             android:src="@drawable/crop" />
 
@@ -102,6 +102,7 @@
             android:layout_height="25dp"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="155dp"
+            android:contentDescription="TODO"
             android:elevation="20dp"
             android:src="@drawable/camera" />
 
@@ -119,6 +120,7 @@
             android:layout_height="25dp"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="201dp"
+            android:contentDescription="TODO"
             android:elevation="20dp"
             android:src="@drawable/gallery" />
 
@@ -129,9 +131,9 @@
             android:layout_height="23dp"
             android:layout_marginLeft="345dp"
             android:layout_marginTop="3dp"
+            android:contentDescription="TODO"
             android:elevation="20dp"
             android:src="@drawable/close" />
-
 
 
     </com.google.android.material.card.MaterialCardView>

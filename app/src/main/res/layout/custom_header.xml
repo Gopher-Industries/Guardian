@@ -10,6 +10,7 @@
         android:layout_width="164dp"
         android:layout_height="47dp"
         android:layout_marginTop="20dp"
+        android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
+        android:contentDescription="TODO"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu_button" />
@@ -31,6 +33,7 @@
         android:layout_height="42dp"
         android:layout_marginStart="350dp"
         android:layout_marginTop="40dp"
+        android:contentDescription="TODO"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/profile_avatar_women" />
@@ -57,6 +60,7 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_marginTop="-40dp"
+        android:contentDescription="TODO"
         android:src="@drawable/profile_avatar_women"
         android:translationZ="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,6 +77,6 @@
         app:cardCornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

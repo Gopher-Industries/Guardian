@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.patient.patientdata.healthdetails.MedicalDiagnosticsActivity">
+    tools:context=".view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/medicalDiaganosticsHeaderCardView"
@@ -41,6 +41,7 @@
                 android:id="@+id/medicalDiagnosticsHeaderImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="TODO"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
@@ -94,6 +95,7 @@
                     android:layout_height="35dp"
                     android:layout_marginLeft="15dp"
                     android:baselineAlignBottom="false"
+                    android:contentDescription="TODO"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.789"
                     app:layout_constraintStart_toStartOf="parent"

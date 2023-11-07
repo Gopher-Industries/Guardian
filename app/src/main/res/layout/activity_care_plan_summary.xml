@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true">
-
-
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="180dp"
                 android:layout_marginTop="40dp"
+                android:contentDescription="TODO"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/gopher_logo" />
 
@@ -41,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/menu_button" />
 
             <ImageView
@@ -49,6 +48,7 @@
                 android:layout_height="51dp"
                 android:layout_marginLeft="330dp"
                 android:layout_marginTop="45dp"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/profile_avatar_women" />
 
 
@@ -61,16 +61,18 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="Care Plan Summary"
                 android:textColor="@android:color/white"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
 
         </androidx.cardview.widget.CardView>
+
         <ImageView
             android:id="@+id/imageView9"
             android:layout_width="match_parent"
             android:layout_height="82dp"
             android:layout_marginTop="-45dp"
+            android:contentDescription="TODO"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +86,7 @@
             android:layout_marginTop="30dp"
             android:fontFamily="@font/poppins_bold"
             android:text="Summary"
-            android:textSize="15dp"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@+id/imageView9"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView9" />
@@ -162,11 +164,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
+            android:background="@drawable/careplan_button"
             android:inputType="textMultiLine"
             android:text="Walking"
-            android:background="@drawable/careplan_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
         <TextView
             android:id="@+id/supportReqSummary"
             android:layout_width="365dp"
@@ -333,8 +336,8 @@
             android:layout_marginBottom="10dp"
             android:backgroundTint="#3297C3"
             android:text="Previous"
-            android:textStyle="bold"
             android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.091"

@@ -2,7 +2,6 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -33,12 +32,14 @@
 
             <EditText
                 android:id="@+id/pastMedicalDiagnosticsNameTextView"
-                android:text="Marilyn Bvaton"
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="Marilyn Bvaton"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,14 +47,15 @@
 
 
         </LinearLayout>
+
         <Button
             android:id="@+id/past_name_pencil"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center"
-            android:background="@drawable/pencil"
-            />
+            android:background="@drawable/pencil" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -83,12 +85,14 @@
 
             <EditText
                 android:id="@+id/pastMedicalDiagnosticsBloodPressureTextView"
-                android:text="Normal"
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="Normal"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,6 +106,7 @@
             android:layout_gravity="center"
             android:background="@drawable/pencil" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -136,15 +141,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
-                android:textSize="14sp"
+                android:inputType="text"
                 android:text="Normal"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pastMedicalDiagnosticsNameHeadingTextView" />
 
 
         </LinearLayout>
+
         <Button
             android:id="@+id/past_temperature_pencil"
             android:layout_width="20dp"
@@ -152,6 +160,7 @@
             android:layout_gravity="center"
             android:background="@drawable/pencil" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -181,12 +190,14 @@
 
             <EditText
                 android:id="@+id/pastMedicalDiagnosticsGlucoseLevelTextView"
-                android:text="High"
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="High"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -233,12 +244,14 @@
 
             <EditText
                 android:id="@+id/pastMedicalDiagnosticsO2SaturationTextView"
-                android:text="Normal"
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="Normal"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -246,6 +259,7 @@
 
 
         </LinearLayout>
+
         <Button
             android:id="@+id/past_blood_o2_saturation_pencil"
             android:layout_width="20dp"
@@ -254,6 +268,7 @@
             android:background="@drawable/pencil" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -283,12 +298,14 @@
 
             <EditText
                 android:id="@+id/pastMedicalDiagnosticsPulseRateTextView"
-                android:text="High"
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="High"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -305,6 +322,7 @@
             android:background="@drawable/pencil" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -334,12 +352,14 @@
 
             <EditText
                 android:id="@+id/pastMedicalDiagnosticsRespirationRateTextView"
-                android:text="High"
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="High"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -347,6 +367,7 @@
 
 
         </LinearLayout>
+
         <Button
             android:id="@+id/past_respiration_rate_pencil"
             android:layout_width="20dp"
@@ -355,6 +376,7 @@
             android:background="@drawable/pencil" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -384,12 +406,14 @@
 
             <EditText
                 android:id="@+id/pastMedicalDiagnosticsBloodfatLevelTextView"
-                android:text="High"
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="High"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -397,6 +421,7 @@
 
 
         </LinearLayout>
+
         <Button
             android:id="@+id/past_bloodfat_level_pencil"
             android:layout_width="20dp"
@@ -405,6 +430,7 @@
             android:background="@drawable/pencil" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
