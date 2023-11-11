@@ -7,5 +7,5 @@ data class GP(
     var phone: String,
     var email: String,
     var fax: String,
-    var photo: String
+    var photo: String,
 )
