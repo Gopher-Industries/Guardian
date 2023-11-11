@@ -15,6 +15,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id "com.diffplug.spotless" version "6.22.0"
 }
 
 android {
@@ -45,6 +46,16 @@ android {
         dataBinding true
     }
     namespace 'com.example.tg_patient_profile'
+}
+
+spotless {
+    java {
+        target 'src/*/java/**/*.java'
+        googleJavaFormat()
+    }
+    kotlin {
+        ktlint()
+    }
 }
 
 dependencies {
