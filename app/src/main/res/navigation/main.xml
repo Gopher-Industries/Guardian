@@ -6,12 +6,12 @@
     app:startDestination="@id/homeActivity3">
     <activity
         android:id="@+id/homeActivity3"
-        android:name="com.gopher.guardian.view.patient.PatientDashboardActivity"
+        android:name="deakin.gopher.guardian.view.patient.PatientDashboardActivity"
         android:label="activity_home"
         tools:layout="@layout/activity_patient_dashboard" />
     <fragment
         android:id="@+id/currentMedicalDiagnosticsFragment"
-        android:name="com.gopher.guardian.view.patient.patientdata.medicaldiagnostics.CurrentMedicalDiagnosticsFragment"
+        android:name="deakin.gopher.guardian.view.patient.patientdata.medicaldiagnostics.CurrentMedicalDiagnosticsFragment"
         android:label="fragment_current_medical_diagnostics"
         tools:layout="@layout/fragment_current_medical_diagnostics" />
 </navigation>
