@@ -9,7 +9,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    tools:context=".view.general.PatientListActivity">
+    tools:context="com.gopher.guardian.view.general.PatientListActivity">
 
     <ImageView
         android:id="@+id/patient_list_manu_button"

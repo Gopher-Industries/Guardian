@@ -6,14 +6,14 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.general.PatientProfileActivity">
+    tools:context="com.gopher.guardian.view.general.PatientProfileActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-        <com.example.guardian.view.general.CustomHeader
+        <com.gopher.guardian.view.general.CustomHeader
             android:id="@+id/customHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

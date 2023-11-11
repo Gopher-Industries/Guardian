@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:background="#EDEDED"
         android:orientation="vertical"
-        tools:context=".view.patient.associateradar.ActivityProfilingActivity">
+        tools:context="com.gopher.guardian.view.patient.associateradar.ActivityProfilingActivity">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"

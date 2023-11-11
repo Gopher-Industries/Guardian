@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.patient.patientdata.patient.PatientProfileFragment"
+    tools:context="com.gopher.guardian.view.patient.patientdata.patient.PatientProfileFragment"
     tools:layout_editor_absoluteY="200dp">
 
     <!-- Background ImageView -->

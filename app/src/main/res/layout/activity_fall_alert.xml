@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:textAlignment="center"
-    tools:context=".view.caretaker.notifications.FallAlertActivity">
+    tools:context="com.gopher.guardian.view.caretaker.notifications.FallAlertActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/headerCard"

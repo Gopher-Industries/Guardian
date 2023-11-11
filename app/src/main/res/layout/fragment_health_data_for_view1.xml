@@ -6,7 +6,7 @@
     android:id="@+id/healthDataLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.general.HealthDataForViewFragment1">
+    tools:context="com.gopher.guardian.view.general.HealthDataForViewFragment1">
 
     <ScrollView
         android:id="@+id/scrollView2"
