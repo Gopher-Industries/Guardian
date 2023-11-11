@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 import java.util.HashMap;
 
 public class CarePlanActivity extends AppCompatActivity {

@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 import com.gopher.guardian.util.Util;
 import com.gopher.guardian.view.general.DrawerActivity;
 import com.gopher.guardian.view.general.PatientListActivity;
@@ -19,7 +19,6 @@ import com.gopher.guardian.view.patient.dailyreport.DailyReportSummaryActivity;
 import com.gopher.guardian.view.patient.patientdata.healthdata.HealthDataActivity;
 import com.gopher.guardian.view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity;
 import com.gopher.guardian.view.patient.viewactivitydata.WeeklyActivityProfilingActivity;
-
 import java.util.HashSet;
 import java.util.Set;
 

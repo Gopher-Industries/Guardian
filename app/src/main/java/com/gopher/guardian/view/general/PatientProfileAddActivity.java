@@ -10,15 +10,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
-import com.example.guardian.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.gopher.guardian.R;
 import com.gopher.guardian.adapter.PatientProfileAddAdapter;
 import com.gopher.guardian.model.GP;
 import com.gopher.guardian.model.Medical_diagnostic;
 import com.gopher.guardian.model.NextOfKin;
 import com.gopher.guardian.model.Patient;
 import com.gopher.guardian.util.DataListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class PatientProfileAddActivity extends AppCompatActivity implements DataListener {
 

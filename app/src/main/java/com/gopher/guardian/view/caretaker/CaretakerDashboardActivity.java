@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 import com.gopher.guardian.view.caretaker.notifications.FallAlertActivity;
 import com.gopher.guardian.view.general.PatientListActivity;
 import com.gopher.guardian.view.general.PatientProfileActivity;

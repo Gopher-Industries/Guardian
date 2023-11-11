@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import androidx.fragment.app.Fragment;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 
 public class HealthDataForViewFragment2 extends Fragment {
 

@@ -4,8 +4,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import com.example.guardian.R;
 import com.google.android.material.navigation.NavigationView;
+import com.gopher.guardian.R;
 
 public class DrawerActivity extends AppCompatActivity {
   @Override

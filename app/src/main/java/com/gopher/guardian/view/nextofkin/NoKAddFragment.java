@@ -11,7 +11,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 import com.gopher.guardian.model.NextOfKin;
 import com.gopher.guardian.util.DataListener;
 

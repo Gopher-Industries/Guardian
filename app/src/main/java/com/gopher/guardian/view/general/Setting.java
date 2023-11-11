@@ -13,7 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 
 public class Setting extends AppCompatActivity implements View.OnClickListener {
   ConstraintLayout settingsThemeButton;

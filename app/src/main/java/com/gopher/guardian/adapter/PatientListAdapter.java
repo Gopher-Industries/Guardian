@@ -10,12 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.guardian.R;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.gopher.guardian.R;
 import com.gopher.guardian.model.Patient;
 import com.gopher.guardian.view.general.PatientProfileActivity;
 import com.gopher.guardian.view.patient.dailyreport.DailyReportActivity;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 public class PatientListAdapter
     extends FirebaseRecyclerAdapter<Patient, PatientListAdapter.myViewHolder> {

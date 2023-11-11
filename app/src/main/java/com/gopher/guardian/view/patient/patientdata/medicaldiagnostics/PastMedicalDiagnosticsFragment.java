@@ -11,14 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import com.example.guardian.R;
-import com.gopher.guardian.model.Medical_diagnostic;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.gopher.guardian.R;
+import com.gopher.guardian.model.Medical_diagnostic;
 
 public class PastMedicalDiagnosticsFragment extends Fragment {
 

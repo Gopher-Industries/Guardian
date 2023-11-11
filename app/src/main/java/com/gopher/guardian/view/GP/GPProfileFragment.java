@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 
 public class GPProfileFragment extends Fragment {
 

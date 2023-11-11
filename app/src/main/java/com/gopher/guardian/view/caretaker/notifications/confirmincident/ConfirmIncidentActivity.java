@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 import com.gopher.guardian.view.caretaker.CaretakerDashboardActivity;
 
 public class ConfirmIncidentActivity extends AppCompatActivity {

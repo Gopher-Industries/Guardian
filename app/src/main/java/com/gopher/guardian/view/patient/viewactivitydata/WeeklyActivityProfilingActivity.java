@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 import com.gopher.guardian.view.patient.associateradar.ActivitySuggestionActivity;
 
 public class WeeklyActivityProfilingActivity extends AppCompatActivity {

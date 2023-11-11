@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 import com.gopher.guardian.view.caretaker.notifications.confirmincident.ConfirmIncidentActivity;
 import com.gopher.guardian.view.caretaker.notifications.falsealarm.FalseAlertConfirmedActivity;
 

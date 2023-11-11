@@ -8,16 +8,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.guardian.R;
-import com.gopher.guardian.adapter.PatientListAdapter;
-import com.gopher.guardian.model.Patient;
-import com.gopher.guardian.view.patient.careplan.CarePlanActivity;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.gopher.guardian.R;
+import com.gopher.guardian.adapter.PatientListAdapter;
+import com.gopher.guardian.model.Patient;
+import com.gopher.guardian.view.patient.careplan.CarePlanActivity;
 
 public class PatientListActivity extends AppCompatActivity {
   RecyclerView patient_list_recyclerView;

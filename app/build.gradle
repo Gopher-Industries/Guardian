@@ -45,7 +45,7 @@ android {
         viewBinding true
         dataBinding true
     }
-    namespace 'com.example.guardian'
+    namespace 'com.gopher.guardian'
 }
 
 spotless {

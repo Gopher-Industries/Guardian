@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 
 public class CustomHeader extends FrameLayout {
 

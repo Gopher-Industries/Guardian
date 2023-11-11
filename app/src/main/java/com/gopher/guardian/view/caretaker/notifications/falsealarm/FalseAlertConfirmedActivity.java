@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 import com.gopher.guardian.view.caretaker.CaretakerDashboardActivity;
 
 public class FalseAlertConfirmedActivity extends AppCompatActivity {

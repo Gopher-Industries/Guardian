@@ -15,8 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.guardian.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.gopher.guardian.R;
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {

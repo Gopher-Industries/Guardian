@@ -6,11 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
-import com.example.guardian.R;
-import com.gopher.guardian.adapter.PatientProfileAdapter;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.gopher.guardian.R;
+import com.gopher.guardian.adapter.PatientProfileAdapter;
 
 public class PatientProfileActivity extends AppCompatActivity {
 

@@ -6,9 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.guardian.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.gopher.guardian.R;
 
 public class MainActivity extends AppCompatActivity {
 

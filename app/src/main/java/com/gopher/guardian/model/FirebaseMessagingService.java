@@ -10,10 +10,10 @@ import android.net.Uri;
 import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-import com.example.guardian.R;
+import com.google.firebase.messaging.RemoteMessage;
+import com.gopher.guardian.R;
 import com.gopher.guardian.util.Util;
 import com.gopher.guardian.view.patient.associateradar.ActivitySuggestionActivity;
-import com.google.firebase.messaging.RemoteMessage;
 
 public class FirebaseMessagingService
     extends com.google.firebase.messaging.FirebaseMessagingService {

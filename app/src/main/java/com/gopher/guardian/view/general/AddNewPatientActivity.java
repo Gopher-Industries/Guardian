@@ -5,8 +5,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.guardian.R;
 import com.google.firebase.database.FirebaseDatabase;
+import com.gopher.guardian.R;
 import java.util.HashMap;
 import java.util.Map;
 

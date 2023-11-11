@@ -9,10 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
-import com.example.guardian.R;
-import com.gopher.guardian.adapter.MedicalDiagnosticsViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.gopher.guardian.R;
+import com.gopher.guardian.adapter.MedicalDiagnosticsViewPagerAdapter;
 
 public class MedicalDiagnosticsFragment extends Fragment {
   public CurrentMedicalDiagnosticsFragment currentFragment;

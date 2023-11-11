@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 import com.gopher.guardian.model.GP;
 import com.gopher.guardian.util.DataListener;
 

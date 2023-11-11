@@ -3,7 +3,7 @@ package com.gopher.guardian.view.patient.dailyreport;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 import java.util.Objects;
 
 public class DailyReportActivity extends AppCompatActivity {

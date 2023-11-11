@@ -2,7 +2,7 @@ package com.gopher.guardian.view.patient.associateradar;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 
 public class ActivitySuggestionActivity extends AppCompatActivity {
   @Override

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 
 public class ActivityProfilingActivity extends AppCompatActivity {
   @Override

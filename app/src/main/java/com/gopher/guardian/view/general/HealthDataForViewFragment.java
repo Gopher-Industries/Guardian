@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import com.example.guardian.R;
+import com.gopher.guardian.R;
 
 public class HealthDataForViewFragment extends Fragment
     implements HealthDataForViewFragment1.NextButtonClickedListener,
