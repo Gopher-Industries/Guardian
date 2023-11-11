@@ -54,6 +54,7 @@ spotless {
         googleJavaFormat()
     }
     kotlin {
+        target 'src/*/java/**/*.kt'
         ktlint()
     }
 }
