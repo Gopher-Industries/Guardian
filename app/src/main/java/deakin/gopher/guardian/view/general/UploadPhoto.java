@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +19,6 @@ import androidx.core.content.ContextCompat;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.gopher.guardian.databinding.ActivityUploadPhotoBinding;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import deakin.gopher.guardian.R;
@@ -29,7 +30,6 @@ public class UploadPhoto extends AppCompatActivity {
   private static final int REQUEST_CAMERA_PERMISSION = 200;
   private static final int REQUEST_IMAGE_CAPTURE = 1;
   private static final int REQUEST_IMAGE_PICK = 2;
-  ActivityUploadPhotoBinding binding;
   Uri imageuri;
   Uri imageUri2;
   private StorageReference storageReference;
@@ -40,26 +40,27 @@ public class UploadPhoto extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_upload_photo);
 
-    binding = ActivityUploadPhotoBinding.inflate(getLayoutInflater());
-
-    setContentView(binding.getRoot());
+    setContentView(R.layout.activity_upload_photo);
 
     final FirebaseStorage storage = FirebaseStorage.getInstance();
     storageReference = storage.getReference();
 
-    binding.takephoto.setOnClickListener(
+    final Button takephoto = findViewById(R.id.takephoto);
+    takephoto.setOnClickListener(
         v -> {
           CapturePhoto = true;
           onCaptureButtonClick(v);
         });
 
-    binding.gallery.setOnClickListener(
+    final Button gallery = findViewById(R.id.gallery);
+    gallery.setOnClickListener(
         v -> {
           CapturePhoto = false;
           PickImageIntent();
         });
 
-    binding.crop.setOnClickListener(
+    final Button crop = findViewById(R.id.crop);
+    crop.setOnClickListener(
         v -> {
           if (CapturePhoto && null != imageuri) {
             startCrop(imageuri);
@@ -71,7 +72,8 @@ public class UploadPhoto extends AppCompatActivity {
           }
         });
 
-    binding.close.setOnClickListener(
+    final Button close = findViewById(R.id.close);
+    close.setOnClickListener(
         v -> {
           final Intent intent = new Intent(UploadPhoto.this, PatientAddFragment.class);
           startActivity(intent);
@@ -107,26 +109,27 @@ public class UploadPhoto extends AppCompatActivity {
     super.onActivityResult(requestCode, resultCode, data);
 
     if (RESULT_OK == resultCode) {
+      final ImageView profile = findViewById(R.id.profile);
       if (CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE == requestCode) {
         final CropImage.ActivityResult result = CropImage.getActivityResult(data);
         final Uri croppedImageUri = result.getUri();
-        binding.profile.setImageURI(croppedImageUri);
+        profile.setImageURI(croppedImageUri);
         uploadImageToFirebase(croppedImageUri);
       } else if (REQUEST_IMAGE_CAPTURE == requestCode) {
         if (CapturePhoto) {
           imageuri = data.getData();
           final Bitmap photoBitmap = (Bitmap) data.getExtras().get("data");
-          binding.profile.setImageBitmap(photoBitmap);
+          profile.setImageBitmap(photoBitmap);
         } else {
           imageUri2 = data.getData();
           uploadImageToFirebase(imageUri2);
-          binding.profile.setImageURI(imageUri2);
+          profile.setImageURI(imageUri2);
           startCrop(imageUri2);
         }
       } else if (REQUEST_IMAGE_PICK == requestCode) {
         imageUri2 = data.getData();
         uploadImageToFirebase(imageUri2);
-        binding.profile.setImageURI(imageUri2);
+        profile.setImageURI(imageUri2);
         startCrop(imageUri2);
       }
     }

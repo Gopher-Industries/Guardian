@@ -52,14 +52,6 @@
                 android:background="@drawable/custom_background"
                 android:orientation="vertical" />
 
-        <!--        <ImageView-->
-        <!--            android:id="@+id/profile"-->
-        <!--            android:layout_width="93dp"-->
-        <!--            android:layout_height="95dp"-->
-        <!--            android:layout_marginLeft="50dp"-->
-        <!--            android:layout_marginTop="35dp"-->
-        <!--            android:elevation="20dp"/>-->
-
         <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile"
                 android:layout_width="93dp"
@@ -124,8 +116,7 @@
                 android:elevation="20dp"
                 android:src="@drawable/gallery" />
 
-        <ImageView
-
+        <Button
                 android:id="@+id/close"
                 android:layout_width="23dp"
                 android:layout_height="23dp"
