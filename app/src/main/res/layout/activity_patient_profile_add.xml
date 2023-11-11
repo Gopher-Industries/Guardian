@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
 
-        <com.example.tg_patient_profile.view.general.CustomHeader
+        <com.example.guardian.view.general.CustomHeader
             android:id="@+id/customHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
