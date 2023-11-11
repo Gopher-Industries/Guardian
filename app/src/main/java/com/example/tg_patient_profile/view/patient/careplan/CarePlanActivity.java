@@ -15,7 +15,7 @@ public class CarePlanActivity extends AppCompatActivity {
   final HashMap<CheckBox, String> painCheckBox = new HashMap<>();
   final HashMap<CheckBox, String> behavioralManagementCheckBox = new HashMap<>();
 
-    Button submitButton;
+  Button submitButton;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {

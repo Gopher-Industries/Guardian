@@ -11,7 +11,7 @@ public class Homepage4caretaker extends AppCompatActivity {
 
   Button patientListButton, settingsButton, signOutButton;
 
-    @SuppressLint("MissingInflatedId")
+  @SuppressLint("MissingInflatedId")
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -23,26 +23,26 @@ public class Homepage4caretaker extends AppCompatActivity {
 
     // patient list button
     patientListButton.setOnClickListener(
-            view -> {
-              final Intent medicalDiagnosticsActivityIntent =
-                  new Intent(Homepage4caretaker.this, PatientListActivity.class);
-              startActivity(medicalDiagnosticsActivityIntent);
-            });
+        view -> {
+          final Intent medicalDiagnosticsActivityIntent =
+              new Intent(Homepage4caretaker.this, PatientListActivity.class);
+          startActivity(medicalDiagnosticsActivityIntent);
+        });
 
     // settings button
     settingsButton.setOnClickListener(
-            view -> {
-              final Intent medicalDiagnosticsActivityIntent =
-                  new Intent(Homepage4caretaker.this, Setting.class);
-              startActivity(medicalDiagnosticsActivityIntent);
-            });
+        view -> {
+          final Intent medicalDiagnosticsActivityIntent =
+              new Intent(Homepage4caretaker.this, Setting.class);
+          startActivity(medicalDiagnosticsActivityIntent);
+        });
 
     // sign out button
     signOutButton.setOnClickListener(
-            view -> {
-              final Intent medicalDiagnosticsActivityIntent =
-                  new Intent(Homepage4caretaker.this, LoginActivity.class);
-              startActivity(medicalDiagnosticsActivityIntent);
-            });
+        view -> {
+          final Intent medicalDiagnosticsActivityIntent =
+              new Intent(Homepage4caretaker.this, LoginActivity.class);
+          startActivity(medicalDiagnosticsActivityIntent);
+        });
   }
 }
