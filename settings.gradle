@@ -17,5 +17,5 @@ dependencyResolutionManagement {
         jcenter()
     }
 }
-rootProject.name = "TG_Patient_Profile"
+rootProject.name = "Guardian"
 include ':app'
