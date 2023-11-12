@@ -25,4 +25,4 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
       - name: Android Lint with Gradle
-        run: ./gradlew build
+        run: ./gradlew lint
