@@ -15,13 +15,14 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id "com.diffplug.spotless" version "6.22.0"
 }
 
 android {
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.tg_patient_profile"
+        applicationId "deakin.gopher.guardian"
         minSdkVersion 21
         targetSdkVersion 34
         versionCode 1
@@ -44,7 +45,18 @@ android {
         viewBinding true
         dataBinding true
     }
-    namespace 'com.example.tg_patient_profile'
+    namespace 'deakin.gopher.guardian'
+}
+
+spotless {
+    java {
+        target 'src/*/java/**/*.java'
+        googleJavaFormat()
+    }
+    kotlin {
+        target 'src/*/java/**/*.kt'
+        ktlint()
+    }
 }
 
 dependencies {
