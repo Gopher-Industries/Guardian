@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.tg_patient_profile.view.general.HealthDataForViewFragment1"
+        android:name="deakin.gopher.guardian.view.general.HealthDataForViewFragment1"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.tg_patient_profile.SecondFragment"
+        android:name="com.gopher.guardian.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
