@@ -36,6 +36,8 @@
     <string name="about">About</string>
     <string name="others">Others</string>
     <string name="verified">Verified</string>
+    <string name="welcome_caretaker">Welcome, Caretaker</string>
+    <string name="welcome_admin">Welcome, Administrator</string>
 
     <string name="confirm_incident_text"> ·   Lying in an unsual place. \n \n ·   Resembling sleeping behaviour in an unusual time \n \n      ·   <b>Usual bedtime</b>: 10:30pm - 6:30am \n \n      ·   <b>Recorder bedtime</b>: 10:30pm - 6:30am \n \n ·   No movement detected over 15 minutes</string>
     <string name="confirm_incident_verified_by"><b>Incident verified by:</b> <font fgcolor="#FF0B98C5"> Georgia Blakeney</font></string>
