@@ -13,7 +13,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.tg_patient_profile.R;
 import com.example.tg_patient_profile.adapter.PatientProfileAddAdapter;
 import com.example.tg_patient_profile.model.GP;
-import com.example.tg_patient_profile.model.Medical_diagnostic;
+import com.example.tg_patient_profile.model.MedicalDiagnostic;
 import com.example.tg_patient_profile.model.NextOfKin;
 import com.example.tg_patient_profile.model.Patient;
 import com.example.tg_patient_profile.util.DataListener;
@@ -232,7 +232,7 @@ public class PatientProfileAddActivity extends AppCompatActivity implements Data
   }
 
   private void createMedicalDiagnostic(final String patient_id) {
-    final Medical_diagnostic current_medical_diagnostic = new Medical_diagnostic(patient_id, true);
+    final MedicalDiagnostic current_medical_diagnostic = new MedicalDiagnostic(patient_id, true);
     final DatabaseReference reference =
         FirebaseDatabase.getInstance().getReference("health_details");
     final String id = reference.push().getKey();

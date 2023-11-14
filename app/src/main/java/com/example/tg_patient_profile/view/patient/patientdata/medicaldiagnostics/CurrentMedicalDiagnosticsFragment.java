@@ -12,7 +12,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.tg_patient_profile.R;
-import com.example.tg_patient_profile.model.Medical_diagnostic;
+import com.example.tg_patient_profile.model.MedicalDiagnostic;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,7 +42,7 @@ public class CurrentMedicalDiagnosticsFragment extends Fragment {
     R.id.current_respiration_rate_pencil,
     R.id.current_bloodfat_level_pencil
   };
-  Medical_diagnostic medical_diagnostic_current;
+  MedicalDiagnostic medical_diagnostic_current;
   private EditText[] editTextArray;
   private Button[] editButtonArray;
   private String patient_id;
@@ -132,7 +132,7 @@ public class CurrentMedicalDiagnosticsFragment extends Fragment {
       }
     }
     medical_diagnostic_current =
-        new Medical_diagnostic(
+        new MedicalDiagnostic(
             patient_id,
             editTextArray[0].getText().toString(),
             editTextArray[1].getText().toString(),
