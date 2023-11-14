@@ -33,12 +33,12 @@ class MedicalDiagnostic {
         this.pulseRate = pulseRate
         this.respirationRate = respirationRate
         this.bloodFatLevel = bloodFatLevel
-        current = isCurrent
+        this.current = isCurrent
     }
 
     constructor(patient_id: String, isCurrent: Boolean) {
         this.patient_id = patient_id
-        current = isCurrent
+        this.current = isCurrent
     }
 
     override fun toString(): String {
