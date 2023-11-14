@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TG_Patient_Profile</string>
 
-    <string name="slogan_on_main_activity">Take care of your loved onces</string>
+    <string name="slogan_on_main_activity">We take care of your loved onces</string>
 
     <string name="ek_img_content">ExportKit Image</string>
     <string name="welcome__marilyn___string">Welcome, Marilyn !</string>
