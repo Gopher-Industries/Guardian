@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import deakin.gopher.guardian.R;
-import deakin.gopher.guardian.model.Medical_diagnostic;
+import deakin.gopher.guardian.model.MedicalDiagnostic;
 
 public class PastMedicalDiagnosticsFragment extends Fragment {
 
@@ -44,7 +44,7 @@ public class PastMedicalDiagnosticsFragment extends Fragment {
     R.id.past_respiration_rate_pencil,
     R.id.past_bloodfat_level_pencil
   };
-  Medical_diagnostic medical_diagnostic_past;
+  MedicalDiagnostic medical_diagnostic_past;
   private EditText[] editTextArray;
   private Button[] editButtonArray;
   private String patientId;
@@ -130,7 +130,7 @@ public class PastMedicalDiagnosticsFragment extends Fragment {
       }
     }
     medical_diagnostic_past =
-        new Medical_diagnostic(
+        new MedicalDiagnostic(
             patientId,
             editTextArray[0].getText().toString(),
             editTextArray[1].getText().toString(),
