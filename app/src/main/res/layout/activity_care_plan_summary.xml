@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true">
 
@@ -29,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="180dp"
                 android:layout_marginTop="40dp"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/gopher_logo" />
 
@@ -39,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 app:srcCompat="@drawable/menu_button" />
 
             <ImageView
@@ -48,7 +49,7 @@
                 android:layout_height="51dp"
                 android:layout_marginLeft="330dp"
                 android:layout_marginTop="45dp"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 app:srcCompat="@drawable/profile_avatar_women" />
 
 
@@ -59,7 +60,7 @@
                 android:layout_marginStart="90dp"
                 android:layout_marginTop="90dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="Care Plan Summary"
+                android:text="@string/care_plan_summary"
                 android:textColor="@android:color/white"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -72,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="82dp"
             android:layout_marginTop="-45dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Summary"
+            android:text="@string/summary"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@+id/imageView9"
             app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +100,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="45dp"
             android:fontFamily="sans-serif-black"
-            android:text="Care Plan Type:"
+            android:text="@string/care_plan_type"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -112,7 +113,7 @@
             android:layout_marginStart="19dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/careplan_button"
-            android:text="Loading data from database..."
+            android:text="@string/loading_data_from_database"
             android:textAppearance="?android:textAppearanceMedium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
@@ -125,7 +126,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
-            android:text="Nutrition and Hydration:"
+            android:text="@string/nutrition_and_hydration"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +139,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/careplan_button"
-            android:text="Yes"
+            android:text="@string/yes"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -151,7 +152,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
-            android:text="Support requirements:"
+            android:text="@string/support_requirements"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -166,7 +167,7 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/careplan_button"
             android:inputType="textMultiLine"
-            android:text="Walking"
+            android:text="@string/walking"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -178,7 +179,7 @@
             android:layout_marginTop="42dp"
             android:background="@drawable/careplan_button"
             android:inputType="textMultiLine"
-            android:text="Bath/Toilets"
+            android:text="@string/bath_toilets"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -189,7 +190,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
-            android:text="Diet timings:"
+            android:text="@string/diet_timings"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -202,7 +203,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/careplan_button"
-            android:text="Water"
+            android:text="@string/water"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -213,7 +214,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
-            android:text="Drink Likes:"
+            android:text="@string/drink_likes"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -227,7 +228,7 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/careplan_button"
             android:inputType="textMultiLine"
-            android:text="Water"
+            android:text="@string/water"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView131" />
 
@@ -238,7 +239,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
-            android:text="Sleep pattern:"
+            android:text="@string/sleep_pattern"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -251,7 +252,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/careplan_button"
-            android:text="8PM - 4AM"
+            android:text="@string/_8pm_4am"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView61" />
 
@@ -262,7 +263,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
-            android:text="Pain:"
+            android:text="@string/pain"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -275,9 +276,10 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/careplan_button"
             android:inputType="textMultiLine"
-            android:text="Chronic"
+            android:text="@string/chronic"
             app:layout_constraintStart_toStartOf="@+id/textView71"
-            app:layout_constraintTop_toBottomOf="@+id/textView71" />
+            app:layout_constraintTop_toBottomOf="@+id/textView71"
+                tools:ignore="TextViewEdits" />
 
 
         <TextView
@@ -287,7 +289,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
-            android:text="Pain Score"
+            android:text="@string/pain_score"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -299,7 +301,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/careplan_button"
             android:inputType="textMultiLine"
-            android:text="7"
+            android:text="@string/_7"
             app:layout_constraintStart_toStartOf="@+id/textView1311"
             app:layout_constraintTop_toBottomOf="@+id/textView1311" />
 
@@ -310,7 +312,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-black"
-            android:text="Behavioural Management"
+            android:text="@string/behavioural_management"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -322,7 +324,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@drawable/careplan_button"
-            android:text="Pet therapy"
+            android:text="@string/pet_therapy"
             app:layout_constraintStart_toStartOf="@+id/textView73"
             app:layout_constraintTop_toBottomOf="@+id/textView73" />
 
@@ -335,7 +337,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="#3297C3"
-            android:text="Previous"
+            android:text="@string/previous"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -354,7 +356,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="#3297C3"
-            android:text="Save"
+            android:text="@string/save"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

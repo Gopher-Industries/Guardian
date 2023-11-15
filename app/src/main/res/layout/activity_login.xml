@@ -15,7 +15,7 @@
             android:autofillHints=""
             android:background="@drawable/edit_text_border"
             android:ems="10"
-            android:hint="   Enter password"
+            android:hint="@string/enter_password"
             android:inputType="textPassword"
             android:textColor="@android:color/darker_gray"
             app:layout_constraintBottom_toTopOf="@+id/loginBtn"
@@ -34,7 +34,7 @@
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/TG_blue"
             android:fontFamily="@font/poppins_bold"
-            android:text="Login"
+            android:text="@string/login"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:cornerRadius="24dp"
@@ -51,7 +51,7 @@
             android:layout_marginBottom="-50dp"
             android:backgroundTint="@color/TG_blue"
             android:fontFamily="@font/poppins_bold"
-            android:text="Register"
+            android:text="@string/register"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:cornerRadius="24dp"
@@ -63,7 +63,7 @@
             android:id="@+id/forgotPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forgot Password ?"
+            android:text="@string/forgot_password"
             android:textColor="#0598a5"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/progressBar"
@@ -92,7 +92,7 @@
             android:autofillHints=""
             android:background="@drawable/edit_text_border"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:textColor="@android:color/darker_gray"
             android:textStyle="normal"
@@ -117,14 +117,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Caretaker" />
+                android:text="@string/caretaker" />
 
         <RadioButton
                 android:id="@+id/admin_radioButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Company Admin" />
+                android:text="@string/company_admin" />
     </RadioGroup>
 
     <TextView
@@ -133,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Login as:"
+            android:text="@string/login_as"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/login_role_radioGroup"
@@ -145,7 +145,7 @@
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/shapes1" />
@@ -170,7 +170,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:contentDescription="TODO"
+                    android:contentDescription="@string/todo"
                     app:layout_constraintBottom_toTopOf="@+id/textView2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
@@ -184,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Welcome"
+                    android:text="@string/welcome"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

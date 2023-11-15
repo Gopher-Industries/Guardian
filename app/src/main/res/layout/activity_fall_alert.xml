@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="190dp"
                 android:layout_marginTop="65dp"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/gopher_logo" />
 
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="70dp"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 app:srcCompat="@drawable/menu_button" />
 
         <ImageView
@@ -44,7 +44,7 @@
                 android:layout_height="51dp"
                 android:layout_marginLeft="340dp"
                 android:layout_marginTop="65dp"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 app:srcCompat="@drawable/profile_avatar_women" />
 
         <TextView
@@ -72,7 +72,7 @@
                 android:layout_marginLeft="200dp"
                 android:layout_marginTop="120dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Alert"
+                android:text="@string/alert_word"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="185dp"
                 android:layout_marginTop="120dp"
-                android:text="!"
+                android:text="@string/exclamation"
                 android:textColor="@android:color/holo_red_light"
                 android:textSize="23sp" />
     </androidx.cardview.widget.CardView>
@@ -92,7 +92,7 @@
             android:layout_width="424dp"
             android:layout_height="82dp"
             android:layout_marginTop="2dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.538"
             app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="52dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             app:layout_constraintBottom_toBottomOf="@+id/imageView9"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/chevrondown" />
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:fontFamily="sans-serif-black"
-            android:text="Patient : Benjamin Hogan"
+            android:text="@string/patient_benjamin_hogan"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,7 +127,7 @@
             android:layout_width="402dp"
             android:layout_height="223dp"
             android:layout_marginStart="8dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +138,7 @@
             android:id="@+id/imageView14"
             android:layout_width="416dp"
             android:layout_height="69dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="parent"
@@ -150,7 +150,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="19dp"
-            android:text="Detected : 09:49 AM"
+            android:text="@string/detected_09_49_am"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView14"
             app:layout_constraintEnd_toEndOf="parent"
@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:fontFamily="sans-serif-black"
-            android:text="Benjamin Hogan is seemingly unconscious"
+            android:text="@string/benjamin_hogan_is_seemingly_unconscious"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView14" />
@@ -173,7 +173,7 @@
             android:layout_height="167dp"
             android:layout_marginStart="53dp"
             android:layout_marginEnd="40dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -186,7 +186,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="38dp"
             android:layout_marginTop="4dp"
-            android:text="·   No movement detected over 15 minutes"
+            android:text="@string/no_movement_detected_over_15_minutes"
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="@+id/imageView16"
             app:layout_constraintTop_toBottomOf="@+id/textView27" />
@@ -196,7 +196,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
-            android:text="·   Usual naptime: 1:30pm - 2:20pm"
+            android:text="@string/usual_naptime_1_30pm_2_20pm"
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="@+id/imageView16"
             app:layout_constraintTop_toBottomOf="@+id/textView26" />
@@ -207,7 +207,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginTop="491dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             app:layout_constraintStart_toEndOf="@+id/linearLayout2"
             app:layout_constraintTop_toBottomOf="@+id/imageView9"
             app:srcCompat="@drawable/rectangle3" />
@@ -216,7 +216,7 @@
             android:id="@+id/imageView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             app:layout_constraintStart_toEndOf="@+id/linearLayout2"
             app:layout_constraintTop_toBottomOf="@+id/imageView9"
             app:srcCompat="@drawable/rectangle1646"
@@ -230,7 +230,7 @@
             android:layout_marginStart="38dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Detected"
+            android:text="@string/detected"
             app:layout_constraintStart_toStartOf="@+id/imageView16"
             app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
@@ -240,7 +240,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="38dp"
             android:layout_marginTop="9dp"
-            android:text="·   Lying in an unsual place."
+            android:text="@string/lying_in_an_unsual_place"
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="@+id/imageView16"
             app:layout_constraintTop_toBottomOf="@+id/textView22" />
@@ -252,7 +252,7 @@
             android:layout_marginStart="38dp"
             android:layout_marginTop="7dp"
             android:maxWidth="240dp"
-            android:text="·   Resembling sleeping behaviour in an unusual time"
+            android:text="@string/resembling_sleeping_behaviour_in_an_unusual_time"
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="@+id/imageView16"
             app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -263,7 +263,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="48dp"
             android:layout_marginTop="3dp"
-            android:text="·   Usual bedtime: 10:30pm - 6:30am"
+            android:text="@string/usual_bedtime_10_30pm_6_30am"
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="@+id/imageView16"
             app:layout_constraintTop_toBottomOf="@+id/textView24" />
@@ -273,7 +273,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             app:layout_constraintBottom_toBottomOf="@+id/imageView13"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.632"
@@ -295,7 +295,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 app:srcCompat="@drawable/false_alarm" />
 
         <ImageButton
@@ -304,7 +304,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-5dp"
                 android:background="#FFFFFF"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 android:translationZ="100dp"
                 app:srcCompat="@drawable/call" />
 
@@ -313,7 +313,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 app:srcCompat="@drawable/confirm_incident" />
     </LinearLayout>
 

@@ -43,7 +43,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="72dp"
                         android:layout_marginTop="41dp"
-                        android:contentDescription="TODO"
+                        android:contentDescription="@string/todo"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/gopher_logo" />
@@ -64,7 +64,7 @@
                             android:id="@+id/menu_home_icon"
                             android:layout_width="22.5dp"
                             android:layout_height="20dp"
-                            android:contentDescription="TODO"
+                            android:contentDescription="@string/todo"
                             android:src="@drawable/menu_home" />
 
                     <TextView
@@ -73,7 +73,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/poppins_bold"
-                            android:text="Home"
+                            android:text="@string/home"
                             android:textColor="#FFFFFF"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -95,7 +95,7 @@
                             android:id="@+id/menu_admin_icon"
                             android:layout_width="22.5dp"
                             android:layout_height="20dp"
-                            android:contentDescription="TODO"
+                            android:contentDescription="@string/todo"
                             android:src="@drawable/menu_pen_edit" />
 
                     <TextView
@@ -104,7 +104,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/poppins_bold"
-                            android:text="Admin"
+                            android:text="@string/admin"
                             android:textColor="#FFFFFF"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -126,7 +126,7 @@
                             android:id="@+id/menu_settings_icon"
                             android:layout_width="22.5dp"
                             android:layout_height="20dp"
-                            android:contentDescription="TODO"
+                            android:contentDescription="@string/todo"
                             android:src="@drawable/menu_settings" />
 
                     <TextView
@@ -135,7 +135,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/poppins_bold"
-                            android:text="Settings"
+                            android:text="@string/settings"
                             android:textColor="#FFFFFF"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -157,7 +157,7 @@
                             android:id="@+id/menu_sigh_out_icon"
                             android:layout_width="22.5dp"
                             android:layout_height="20dp"
-                            android:contentDescription="TODO"
+                            android:contentDescription="@string/todo"
                             android:src="@drawable/menu_signout" />
 
                     <TextView
@@ -166,7 +166,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/poppins_bold"
-                            android:text="Sign Out"
+                            android:text="@string/sign_out"
                             android:textColor="#FFFFFF"
                             android:textSize="17sp"
                             android:textStyle="bold" />

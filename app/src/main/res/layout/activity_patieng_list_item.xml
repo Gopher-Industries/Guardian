@@ -26,7 +26,7 @@
                 android:id="@+id/patient_list_status_circle"
                 android:layout_width="35dp"
                 android:layout_height="33dp"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 app:srcCompat="@drawable/red_circle"
                 tools:layout_editor_absoluteX="41dp"
                 tools:layout_editor_absoluteY="232dp" />
@@ -38,7 +38,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="9dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Patient name"
+                android:text="@string/patient_name"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -48,7 +48,7 @@
                 android:layout_height="31dp"
                 android:layout_marginLeft="140dp"
                 android:layout_marginTop="5dp"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 app:srcCompat="@drawable/right_vector"
                 tools:layout_editor_absoluteX="337dp"
                 tools:layout_editor_absoluteY="234dp" />

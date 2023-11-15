@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/todo"
         android:translationZ="20dp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,7 @@
         android:layout_marginTop="27dp"
         android:layout_marginBottom="70dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Caretaker Profile"
+        android:text="@string/caretaker_profile"
         android:textColor="@color/white"
         android:textFontWeight="700"
         android:textSize="20sp"
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="350dp"
         android:layout_marginTop="25dp"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/todo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/edit_button" />
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="25dp"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/todo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu_button" />
@@ -76,7 +76,7 @@
         android:id="@+id/medicareNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3501 80315 1"
+        android:text="@string/_3501_80315_1"
         app:layout_constraintEnd_toEndOf="@+id/caretakerImage"
         app:layout_constraintStart_toStartOf="@+id/caretakerImage"
         app:layout_constraintTop_toBottomOf="@+id/caretakerImage" />
@@ -98,7 +98,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-black"
-            android:text="Name"
+            android:text="@string/name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Marilyn Bvarton"
+            android:text="@string/marilyn_bvarton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
-            android:text="6/5/1980"
+            android:text="@string/_6_5_1980"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -160,7 +160,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-black"
-            android:text="Address"
+            android:text="@string/address"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -170,7 +170,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
-            android:text="31 Solaris drive, Melbourne, VIC, 2767, Australia "
+            android:text="@string/_31_solaris_drive_melbourne_vic_2767_australia"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -190,7 +190,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-black"
-            android:text="Phone number"
+            android:text="@string/phone_number"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -200,7 +200,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
-            android:text="0399-832-791"
+            android:text="@string/_0399_832_791"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -220,7 +220,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-black"
-            android:text="Working at"
+            android:text="@string/working_at"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -230,7 +230,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
-            android:text="St. Vincent's Public Hospital Melbourne"
+            android:text="@string/st_vincent_s_public_hospital_melbourne"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -241,7 +241,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="70dp"
         android:backgroundTint="@color/TG_blue"
-        android:text="Sign Out"
+        android:text="@string/sign_out"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

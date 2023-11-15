@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="25dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/menu_button" />
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="180dp"
             android:layout_marginTop="35dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/gopher_logo" />
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="90dp"
             android:fontFamily="sans-serif-medium"
-            android:text="Patient X Daily Report"
+            android:text="@string/patient_x_daily_report"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
-                    android:text="Progress Notes"
+                    android:text="@string/progress_notes"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="30dp"
-                    android:text="Current Status"
+                    android:text="@string/current_status"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
