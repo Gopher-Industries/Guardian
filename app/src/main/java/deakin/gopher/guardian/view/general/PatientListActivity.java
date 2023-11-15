@@ -131,5 +131,6 @@ public class PatientListActivity extends AppCompatActivity {
             return true;
           }
         });
+
   }
 }

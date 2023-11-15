@@ -194,4 +194,5 @@ public class PatientAddFragment extends Fragment {
       throw new ClassCastException(context + " must implement DataListener");
     }
   }
+
 }
