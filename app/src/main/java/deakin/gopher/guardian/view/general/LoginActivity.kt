@@ -12,15 +12,18 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import deakin.gopher.guardian.R
-import java.util.Objects
+import deakin.gopher.guardian.model.login.RoleName
+import deakin.gopher.guardian.viewmodels.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
+    private val viewModel: LoginViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -33,6 +36,23 @@ class LoginActivity : AppCompatActivity() {
         val forgotTextLink: TextView = findViewById(R.id.forgotPassword)
         val role_radioGroup: RadioGroup = findViewById(R.id.login_role_radioGroup)
 
+        mLoginBtn.setOnClickListener {
+            // TODO create map between role radio id and rolename for strong typing
+            viewModel.onLoginButtonClicked(
+                mEmail.text.toString(),
+                mPassword.text.toString(),
+                RoleName.Caretaker
+            ).also {
+                Toast
+                    .makeText(
+                        applicationContext,
+                        viewModel.loginResult.toString(),
+                        Toast.LENGTH_SHORT
+                    )
+                    .show()
+
+            }
+        }
 
         mLoginBtn.setOnClickListener {
             val email = mEmail.text.toString().trim { it <= ' ' }
@@ -101,12 +121,12 @@ class LoginActivity : AppCompatActivity() {
                             )
                         }
                     } else {
-                        Toast.makeText(
-                            this@LoginActivity,
-                            "Error ! " + Objects.requireNonNull(task.exception).message,
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+//                        Toast.makeText(
+//                            this@LoginActivity,
+//                            "Error ! " + Objects.requireNonNull(task.exception).message,
+//                            Toast.LENGTH_SHORT
+//                        )
+//                            .show()
                         progressBar.visibility = View.GONE
                     }
                 }

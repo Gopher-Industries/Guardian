@@ -8,5 +8,4 @@ data class Password(val password: String) {
 
 sealed class PasswordError(val message: String) {
     data object TooShort : PasswordError("Password must be at least 6 characters long")
-    data object Empty : PasswordError("Password must not be empty")
 }

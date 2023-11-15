@@ -7,8 +7,5 @@ data class EmailAddress(val emailAddress: String) {
 }
 
 sealed class EmailAddressError(val message: String) {
-    data class Invalid(val emailAddress: String) :
-        EmailAddressError("$emailAddress is not a valid email address")
-
-    data object Empty : EmailAddressError("Email address must not be empty")
+    data object Invalid : EmailAddressError("Invalid Email Address")
 }

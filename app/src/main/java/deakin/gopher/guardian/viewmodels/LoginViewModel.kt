@@ -1,16 +1,75 @@
 package deakin.gopher.guardian.viewmodels
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
 import deakin.gopher.guardian.model.login.EmailAddress
+import deakin.gopher.guardian.model.login.GuardianAuthService
+import deakin.gopher.guardian.model.login.LoginError
+import deakin.gopher.guardian.model.login.LoginResult
+import deakin.gopher.guardian.model.login.NavigationDestination
 import deakin.gopher.guardian.model.login.Password
 import deakin.gopher.guardian.model.login.Role
+import deakin.gopher.guardian.model.login.RoleName
 
 class LoginViewModel : ViewModel() {
-    val Auth = FirebaseAuth.getInstance()
-    lateinit var password: Password
-    lateinit var emailAddress: EmailAddress
-    lateinit var role: Role
+    private val _loginResult = MutableLiveData<LoginResult>()
+    val loginResult: LiveData<LoginResult>
+        get() = _loginResult
+
+    private val _navigationDestination = MutableLiveData<NavigationDestination>()
+    val navigationDestination: LiveData<NavigationDestination>
+        get() = _navigationDestination
+
+    val authService = GuardianAuthService().firebaseAuthService
+
+    fun onLoginButtonClicked(rawEmail: String, rawPassword: String, rawRoleName: RoleName) {
+        val emailAddress = EmailAddress(rawEmail)
+        val password = Password(rawPassword)
+        val role = Role(rawRoleName)
+
+        if (!emailAddress.isValid()) {
+            _loginResult.value = LoginResult.Failure(LoginError.EmailInvalidError)
+            return
+        }
+
+        if (!password.isValid()) {
+            _loginResult.value = LoginResult.Failure(LoginError.PasswordValidationError)
+            return
+        }
+
+        if (!role.isValid()) {
+            throw IllegalStateException("Role should be valid. Received ${role.roleName}")
+        }
+
+        authService.signInWithEmailAndPassword(emailAddress.emailAddress, password.password)
+            .addOnCompleteListener { task: Task<AuthResult?> ->
+                if (task.isSuccessful) {
+                    setNavigationDestinationForRole(role)
+                    _loginResult.value = LoginResult.Success(role)
+                } else {
+                    _loginResult.value = LoginResult.Failure(LoginError.AuthenticationError)
+                }
+            }
+    }
+
+    private fun setNavigationDestinationForRole(role: Role) {
+        when (role.roleName) {
+            is RoleName.Caretaker -> {
+                _navigationDestination.value = NavigationDestination.CaretakerHomepage
+            }
+
+            is RoleName.Admin -> {
+                _navigationDestination.value = NavigationDestination.AdminHomepage
+            }
+
+            is RoleName.Nurse -> {
+                _navigationDestination.value = NavigationDestination.NurseHomepage
+            }
+        }
+    }
 //    onLoginButtonClicked() {
 //        val email = mEmail.text.toString().trim { it <= ' ' }
 //        val password = mPassword.text.toString().trim { it <= ' ' }
