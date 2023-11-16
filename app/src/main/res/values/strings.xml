@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">TG_Patient_Profile</string>
 
+    <string name="main_activity_solgan">Take care of your patients</string>
+
     <string name="ek_img_content">ExportKit Image</string>
     <string name="welcome__marilyn___string">Welcome, Marilyn !</string>
     <string name="new_patient_string">New Patient</string>
