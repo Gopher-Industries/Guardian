@@ -1,7 +1,7 @@
 package deakin.gopher.guardian.model
 
 class MedicalDiagnostic {
-    val patient_id: String
+    val patientId: String
     val current: Boolean
     var name: String? = null
     var patientTemp: String? = null
@@ -13,7 +13,7 @@ class MedicalDiagnostic {
     var bloodFatLevel: String? = null
 
     constructor(
-        patient_id: String,
+        patientId: String,
         name: String?,
         bloodPressure: String?,
         patientTemp: String?,
@@ -24,7 +24,7 @@ class MedicalDiagnostic {
         bloodFatLevel: String?,
         isCurrent: Boolean
     ) {
-        this.patient_id = patient_id
+        this.patientId = patientId
         this.name = name
         this.patientTemp = patientTemp
         this.bloodPressure = bloodPressure
@@ -36,15 +36,15 @@ class MedicalDiagnostic {
         current = isCurrent
     }
 
-    constructor(patient_id: String, isCurrent: Boolean) {
-        this.patient_id = patient_id
+    constructor(patientId: String, isCurrent: Boolean) {
+        this.patientId = patientId
         current = isCurrent
     }
 
     override fun toString(): String {
         return ("Medical_diagnostic{"
                 + "patient_id='"
-                + patient_id
+                + patientId
                 + '\''
                 + ", name='"
                 + name
