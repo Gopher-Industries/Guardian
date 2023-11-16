@@ -232,7 +232,9 @@ public class PatientProfileAddActivity extends AppCompatActivity implements Data
   }
 
   private void createMedicalDiagnostic(final String patient_id) {
-    final MedicalDiagnostic currentMedicalDiagnostic = new MedicalDiagnostic(patient_id, true);
+    final MedicalDiagnostic currentMedicalDiagnostic = new MedicalDiagnostic(patient_id, null,
+            null,null,null,null,null,null,
+            null,true);
     final DatabaseReference reference =
         FirebaseDatabase.getInstance().getReference("health_details");
     final String id = reference.push().getKey();
