@@ -117,14 +117,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Caretaker" />
+                android:text="@string/caretaker_role_name"
+                android:minHeight="48dp" />
 
         <RadioButton
                 android:id="@+id/admin_radioButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Company Admin" />
+                android:text="@string/company_admin_role_name"
+                android:minHeight="48dp" />
+
+        <RadioButton
+                android:id="@+id/nurse_radioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/nurse_role_name"
+                android:minHeight="48dp" />
     </RadioGroup>
 
     <TextView
@@ -133,7 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Login as:"
+            android:text="@string/login_role_selection_prompt"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/login_role_radioGroup"
