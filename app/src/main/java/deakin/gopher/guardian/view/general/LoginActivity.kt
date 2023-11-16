@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
@@ -34,13 +35,15 @@ class LoginActivity : AppCompatActivity() {
         val loginButton: Button = findViewById(R.id.loginBtn)
         val mCreateBtn: Button = findViewById(R.id.createText)
         val forgotTextLink: TextView = findViewById(R.id.forgotPassword)
-        val role_radioGroup: RadioGroup = findViewById(R.id.login_role_radioGroup)
 
         loginButton.setOnClickListener {
+            val emailInput = mEmail.text.toString().trim { it <= ' ' }
+            val passwordInput = mPassword.text.toString().trim { it <= ' ' }
+
             val loginValidationError = validateInputs(
-                mEmail.text.toString(),
-                mPassword.text.toString(),
-                RoleName.Caretaker
+                emailInput,
+                passwordInput,
+                getSelectedRole()
             )
 
             if (loginValidationError != null) {
@@ -51,13 +54,19 @@ class LoginActivity : AppCompatActivity() {
                 ).show()
             }
 
-            EmailPasswordAuthService(this, EmailAddress("asd"), Password("asd"))
+            EmailPasswordAuthService(this, EmailAddress(emailInput), Password("asd"))
                 .signIn()
                 ?.addOnSuccessListener {
                     NavigationService(this).onLoginForRole(RoleName.Caretaker)
                 }
-                ?.addOnFailureListener {
+                ?.addOnFailureListener { e: Exception ->
+                    Toast.makeText(
+                        applicationContext,
+                        "Error: " + e.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
+
 
 //            viewModel.onLoginButtonClicked(
 //                mEmail.text.toString(),
@@ -76,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
 //        loginButton.setOnClickListener {
-//            val email = mEmail.text.toString().trim { it <= ' ' }
+        val email = mEmail.text.toString().trim { it <= ' ' }
 //            val password = mPassword.text.toString().trim { it <= ' ' }
 //            val role: String
 //            val selectedRadioButtonId = role_radioGroup.checkedRadioButtonId
@@ -197,7 +206,7 @@ class LoginActivity : AppCompatActivity() {
             })
     }
 
-    fun validateInputs(
+    private fun validateInputs(
         rawEmail: String?,
         rawPassword: String?,
         roleName: RoleName?
@@ -220,8 +229,27 @@ class LoginActivity : AppCompatActivity() {
             return LoginValidationError.PasswordTooShort
         }
 
-        if (roleName.toString().isEmpty()) {
+        if (roleName == null) {
             return LoginValidationError.EmptyRole
+        }
+
+        return null
+    }
+
+    private fun getSelectedRole(): RoleName? {
+        val rolesRadioGroup: RadioGroup = findViewById(R.id.login_role_radioGroup)
+
+        val selectedRadioButtonId = rolesRadioGroup.checkedRadioButtonId
+
+        if (selectedRadioButtonId != -1) {
+            val selected: RadioButton = findViewById(selectedRadioButtonId)
+
+            return when (selected.toString()) {
+                R.string.caretaker_role_name.toString() -> RoleName.Caretaker
+                RoleName.Admin.toString() -> RoleName.Admin
+                RoleName.Nurse.toString() -> RoleName.Nurse
+                else -> null
+            }
         }
 
         return null
