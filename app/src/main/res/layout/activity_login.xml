@@ -15,7 +15,7 @@
             android:autofillHints=""
             android:background="@drawable/edit_text_border"
             android:ems="10"
-            android:hint="   Enter password"
+            android:hint="@string/password_hint"
             android:inputType="textPassword"
             android:textColor="@android:color/darker_gray"
             app:layout_constraintBottom_toTopOf="@+id/loginBtn"
@@ -110,7 +110,8 @@
             app:layout_constraintBottom_toTopOf="@+id/Email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2">
+            app:layout_constraintTop_toBottomOf="@+id/cardView2"
+            android:checkedButton="@id/caretaker_radioButton">
 
         <RadioButton
                 android:id="@+id/caretaker_radioButton"

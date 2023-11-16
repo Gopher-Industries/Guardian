@@ -1,14 +1,11 @@
 package deakin.gopher.guardian.view.general
 
 import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -40,11 +37,7 @@ class LoginActivity : AppCompatActivity() {
             val emailInput = mEmail.text.toString().trim { it <= ' ' }
             val passwordInput = mPassword.text.toString().trim { it <= ' ' }
 
-            val loginValidationError = validateInputs(
-                emailInput,
-                passwordInput,
-                getSelectedRole()
-            )
+            val loginValidationError = validateInputs(emailInput, passwordInput)
 
             if (loginValidationError != null) {
                 Toast.makeText(
@@ -52,21 +45,23 @@ class LoginActivity : AppCompatActivity() {
                     loginValidationError.message,
                     Toast.LENGTH_LONG
                 ).show()
+                return@setOnClickListener
             }
 
-            EmailPasswordAuthService(this, EmailAddress(emailInput), Password("asd"))
+            EmailPasswordAuthService(EmailAddress(emailInput), Password(passwordInput))
                 .signIn()
                 ?.addOnSuccessListener {
+                    progressBar.visibility = View.VISIBLE
                     NavigationService(this).onLoginForRole(RoleName.Caretaker)
                 }
                 ?.addOnFailureListener { e: Exception ->
+                    progressBar.visibility = View.VISIBLE
                     Toast.makeText(
                         applicationContext,
                         "Error: " + e.message,
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
 
 //            viewModel.onLoginButtonClicked(
 //                mEmail.text.toString(),
@@ -85,41 +80,11 @@ class LoginActivity : AppCompatActivity() {
         }
 
 //        loginButton.setOnClickListener {
-        val email = mEmail.text.toString().trim { it <= ' ' }
+//            val email = mEmail.text.toString().trim { it <= ' ' }
 //            val password = mPassword.text.toString().trim { it <= ' ' }
-//            val role: String
-//            val selectedRadioButtonId = role_radioGroup.checkedRadioButtonId
-//            if (-1 != selectedRadioButtonId) {
-//                val seletedRadioButton = findViewById<RadioButton>(selectedRadioButtonId)
-//                role = seletedRadioButton.text.toString()
-//                val sharedPreferences = getSharedPreferences("MY_PREF", MODE_PRIVATE)
-//                val editor = sharedPreferences.edit()
-//                if (role == "Caretaker") {
-//                    editor.putInt("login_role", 0)
-//                } else {
-//                    editor.putInt("login_role", 1)
-//                }
-//                editor.apply()
-//            } else {
-//                Toast.makeText(this@LoginActivity, "please choose a role", Toast.LENGTH_SHORT)
-//                    .show()
-//                return@setOnClickListener
-//            }
-//            if (TextUtils.isEmpty(email)) {
-//                mEmail.error = "Email is Required."
-//                return@setOnClickListener
-//            }
-//            if (TextUtils.isEmpty(password)) {
-//                mPassword.error = "Password is Required."
-//                return@setOnClickListener
-//            }
-//            if (6 > password.length) {
-//                mPassword.error = "Password Must be >= 6 Characters"
-//                return@setOnClickListener
-//            }
+//
 //            progressBar.visibility = View.VISIBLE
 //
-//            // authenticate the user
 //            Auth.signInWithEmailAndPassword(email, password)
 //                .addOnCompleteListener { task: Task<AuthResult?> ->
 //                    var role1 = ""
@@ -161,14 +126,11 @@ class LoginActivity : AppCompatActivity() {
 //                    }
 //                }
 //        }
-        mCreateBtn.setOnClickListener(
-            View.OnClickListener { v: View? ->
-                startActivity(
-                    Intent(
-                        applicationContext, RegisterActivity::class.java
-                    )
-                )
-            })
+
+        mCreateBtn.setOnClickListener {
+            NavigationService(this).onRegister()
+        }
+
         forgotTextLink.setOnClickListener(
             View.OnClickListener { v: View ->
                 val resetMail = EditText(v.context)
@@ -208,8 +170,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validateInputs(
         rawEmail: String?,
-        rawPassword: String?,
-        roleName: RoleName?
+        rawPassword: String?
     ): LoginValidationError? {
         if (rawEmail.isNullOrEmpty()) {
             return LoginValidationError.EmptyEmail
@@ -227,29 +188,6 @@ class LoginActivity : AppCompatActivity() {
         val password = Password(rawPassword)
         if (password.isValid().not()) {
             return LoginValidationError.PasswordTooShort
-        }
-
-        if (roleName == null) {
-            return LoginValidationError.EmptyRole
-        }
-
-        return null
-    }
-
-    private fun getSelectedRole(): RoleName? {
-        val rolesRadioGroup: RadioGroup = findViewById(R.id.login_role_radioGroup)
-
-        val selectedRadioButtonId = rolesRadioGroup.checkedRadioButtonId
-
-        if (selectedRadioButtonId != -1) {
-            val selected: RadioButton = findViewById(selectedRadioButtonId)
-
-            return when (selected.toString()) {
-                R.string.caretaker_role_name.toString() -> RoleName.Caretaker
-                RoleName.Admin.toString() -> RoleName.Admin
-                RoleName.Nurse.toString() -> RoleName.Nurse
-                else -> null
-            }
         }
 
         return null

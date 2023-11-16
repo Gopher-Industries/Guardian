@@ -5,6 +5,7 @@ import android.content.Intent
 import deakin.gopher.guardian.model.login.RoleName
 import deakin.gopher.guardian.view.general.Homepage4admin
 import deakin.gopher.guardian.view.general.Homepage4caretaker
+import deakin.gopher.guardian.view.general.RegisterActivity
 
 class NavigationService(val activity: Activity) {
     fun onLoginForRole(roleName: RoleName) {
@@ -36,5 +37,13 @@ class NavigationService(val activity: Activity) {
                 )
             }
         }
+    }
+
+    fun onRegister() {
+        activity.startActivity(
+            Intent(
+                activity.applicationContext, RegisterActivity::class.java
+            )
+        )
     }
 }

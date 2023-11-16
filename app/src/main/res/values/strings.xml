@@ -46,6 +46,7 @@
     <string name="company_admin_role_name">Company Admin</string>
     <string name="nurse_role_name">Nurse</string>
     <string name="login_role_selection_prompt">Login as:</string>
+    <string name="password_hint">Enter password</string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
