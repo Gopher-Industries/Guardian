@@ -34,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
         val forgotTextLink: TextView = findViewById(R.id.forgotPassword)
 
         loginButton.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val emailInput = mEmail.text.toString().trim { it <= ' ' }
             val passwordInput = mPassword.text.toString().trim { it <= ' ' }
 
@@ -55,117 +56,50 @@ class LoginActivity : AppCompatActivity() {
                     NavigationService(this).onLoginForRole(RoleName.Caretaker)
                 }
                 ?.addOnFailureListener { e: Exception ->
-                    progressBar.visibility = View.VISIBLE
                     Toast.makeText(
                         applicationContext,
-                        "Error: " + e.message,
+                        "Error: ${e.message}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
-//            viewModel.onLoginButtonClicked(
-//                mEmail.text.toString(),
-//                mPassword.text.toString(),
-//                RoleName.Caretaker
-//            ).also {
-//                viewModel.loginResult.toString()
-//                Toast
-//                    .makeText(
-//                        applicationContext,
-//                        viewModel.loginResult.toString(),
-//                        Toast.LENGTH_SHORT
-//                    )
-//                    .show()
-//            }
         }
-
-//        loginButton.setOnClickListener {
-//            val email = mEmail.text.toString().trim { it <= ' ' }
-//            val password = mPassword.text.toString().trim { it <= ' ' }
-//
-//            progressBar.visibility = View.VISIBLE
-//
-//            Auth.signInWithEmailAndPassword(email, password)
-//                .addOnCompleteListener { task: Task<AuthResult?> ->
-//                    var role1 = ""
-//                    val selectedRadioButtonId1 = role_radioGroup.checkedRadioButtonId
-//                    if (-1 != selectedRadioButtonId1) {
-//                        val seletedRadioButton =
-//                            findViewById<RadioButton>(selectedRadioButtonId1)
-//                        role1 = seletedRadioButton.text.toString()
-//                    }
-//                    if (task.isSuccessful) {
-//                        Toast.makeText(
-//                            this@LoginActivity, "Logged in Successfully", Toast.LENGTH_SHORT
-//                        )
-//                            .show()
-//                        if (role1 == "Caretaker") {
-//                            Toast.makeText(
-//                                this@LoginActivity, "Logged in as CareTaker", Toast.LENGTH_SHORT
-//                            )
-//                                .show()
-//                            startActivity(
-//                                Intent(applicationContext, Homepage4caretaker::class.java)
-//                            )
-//                        } else {
-//                            startActivity(
-//                                Intent(
-//                                    applicationContext,
-//                                    Homepage4admin::class.java
-//                                )
-//                            )
-//                        }
-//                    } else {
-////                        Toast.makeText(
-////                            this@LoginActivity,
-////                            "Error ! " + Objects.requireNonNull(task.exception).message,
-////                            Toast.LENGTH_SHORT
-////                        )
-////                            .show()
-//                        progressBar.visibility = View.GONE
-//                    }
-//                }
-//        }
 
         mCreateBtn.setOnClickListener {
             NavigationService(this).onRegister()
         }
 
-        forgotTextLink.setOnClickListener(
-            View.OnClickListener { v: View ->
-                val resetMail = EditText(v.context)
-                val passwordResetDialog = AlertDialog.Builder(v.context)
-                passwordResetDialog.setTitle("Reset Password ?")
-                passwordResetDialog.setMessage("Enter Your Email To Received Reset Link.")
-                passwordResetDialog.setView(resetMail)
-                passwordResetDialog.setPositiveButton(
-                    "Yes"
-                ) { dialog: DialogInterface?, which: Int ->
-                    // extract the email and send reset link
-                    val mail = resetMail.text.toString()
-                    Auth.sendPasswordResetEmail(mail)
-                        .addOnSuccessListener { aVoid: Void? ->
-                            Toast.makeText(
-                                this@LoginActivity,
-                                "Reset Link Sent To Your Email.",
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
-                        }
-                        .addOnFailureListener { e: Exception ->
-                            Toast.makeText(
-                                this@LoginActivity,
-                                "Error ! Reset Link is Not Sent" + e.message,
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
-                        }
-                }
-                passwordResetDialog.setNegativeButton(
-                    "No"
-                ) { dialog: DialogInterface?, which: Int -> }
-                passwordResetDialog.create().show()
-            })
+        forgotTextLink.setOnClickListener { v: View ->
+            val resetMail = EditText(v.context)
+            val passwordResetDialog = AlertDialog.Builder(v.context)
+            passwordResetDialog.setTitle("Reset Password")
+            passwordResetDialog.setMessage("Enter Your Email To Received Reset Link.")
+            passwordResetDialog.setView(resetMail)
+            passwordResetDialog.setPositiveButton(
+                "Yes"
+            ) { dialog: DialogInterface?, which: Int ->
+                val mail = resetMail.text.toString()
+
+                EmailPasswordAuthService.resetPassword(EmailAddress(mail))
+                    ?.addOnSuccessListener {
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Reset Link Sent To Your Email.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    ?.addOnFailureListener { e: Exception ->
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Error. Reset Link is Not Sent. Reason: ${e.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+            }
+            passwordResetDialog.setNegativeButton(
+                "No"
+            ) { dialog: DialogInterface?, which: Int -> }
+            passwordResetDialog.create().show()
+        }
     }
 
     private fun validateInputs(

@@ -19,5 +19,16 @@ class EmailPasswordAuthService(
             null
         }
     }
+
+    companion object {
+        fun resetPassword(emailAddress: EmailAddress): Task<Void>? {
+            return try {
+                FirebaseAuth.getInstance().sendPasswordResetEmail(emailAddress.emailAddress)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
+        }
+    }
 }
 
