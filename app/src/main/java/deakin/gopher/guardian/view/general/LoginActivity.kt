@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.Password
@@ -28,9 +27,8 @@ class LoginActivity : AppCompatActivity() {
         val mEmail: EditText = findViewById(R.id.Email)
         val mPassword: EditText = findViewById(R.id.password)
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
-        val Auth = FirebaseAuth.getInstance()
         val loginButton: Button = findViewById(R.id.loginBtn)
-        val mCreateBtn: Button = findViewById(R.id.createText)
+        val mCreateBtn: Button = findViewById(R.id.loginRegisterBtn)
         val forgotTextLink: TextView = findViewById(R.id.forgotPassword)
 
         loginButton.setOnClickListener {
