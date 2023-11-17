@@ -8,9 +8,10 @@ import deakin.gopher.guardian.model.login.Password
 
 class EmailPasswordAuthService(
     private val emailAddress: EmailAddress,
-    private val password: Password
+    private val password: Password,
 ) {
     private val auth = FirebaseAuth.getInstance()
+
     fun signIn(): Task<AuthResult>? {
         return try {
             auth.signInWithEmailAndPassword(emailAddress.emailAddress, password.password)
@@ -31,4 +32,3 @@ class EmailPasswordAuthService(
         }
     }
 }
-

@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(
                     applicationContext,
                     loginValidationError.message,
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_LONG,
                 ).show()
                 return@setOnClickListener
             }
@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(
                         applicationContext,
                         getString(R.string.toast_login_error, e.message),
-                        Toast.LENGTH_SHORT
+                        Toast.LENGTH_SHORT,
                     ).show()
                 }
         }
@@ -75,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             passwordResetDialog.setPositiveButton(
-                getString(R.string.yes)
+                getString(R.string.yes),
             ) { _: DialogInterface?, _: Int ->
                 val mail = resetMail.text.toString()
 
@@ -84,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(
                             this@LoginActivity,
                             getString(R.string.toast_reset_link_sent_to_your_email),
-                            Toast.LENGTH_SHORT
+                            Toast.LENGTH_SHORT,
                         ).show()
                     }
                     ?.addOnFailureListener { e: Exception ->
@@ -92,14 +92,14 @@ class LoginActivity : AppCompatActivity() {
                             this@LoginActivity,
                             getString(
                                 R.string.toast_error_reset_link_is_not_sent_reason,
-                                e.message
+                                e.message,
                             ),
-                            Toast.LENGTH_SHORT
+                            Toast.LENGTH_SHORT,
                         ).show()
                     }
             }
             passwordResetDialog.setNegativeButton(
-                getString(R.string.no)
+                getString(R.string.no),
             ) { _: DialogInterface?, _: Int -> }
             passwordResetDialog.create().show()
         }
@@ -107,7 +107,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun validateInputs(
         rawEmail: String?,
-        rawPassword: String?
+        rawPassword: String?,
     ): LoginValidationError? {
         if (rawEmail.isNullOrEmpty()) {
             return LoginValidationError.EmptyEmail
@@ -130,4 +130,3 @@ class LoginActivity : AppCompatActivity() {
         return null
     }
 }
-

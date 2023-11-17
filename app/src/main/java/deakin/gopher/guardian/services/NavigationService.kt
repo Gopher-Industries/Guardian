@@ -14,8 +14,8 @@ class NavigationService(val activity: Activity) {
                 activity.startActivity(
                     Intent(
                         activity.applicationContext,
-                        Homepage4caretaker::class.java
-                    )
+                        Homepage4caretaker::class.java,
+                    ),
                 )
             }
 
@@ -23,8 +23,8 @@ class NavigationService(val activity: Activity) {
                 activity.startActivity(
                     Intent(
                         activity.applicationContext,
-                        Homepage4caretaker::class.java
-                    )
+                        Homepage4caretaker::class.java,
+                    ),
                 )
             }
 
@@ -32,8 +32,8 @@ class NavigationService(val activity: Activity) {
                 activity.startActivity(
                     Intent(
                         activity.applicationContext,
-                        Homepage4admin::class.java
-                    )
+                        Homepage4admin::class.java,
+                    ),
                 )
             }
         }
@@ -42,8 +42,9 @@ class NavigationService(val activity: Activity) {
     fun onRegister() {
         activity.startActivity(
             Intent(
-                activity.applicationContext, RegisterActivity::class.java
-            )
+                activity.applicationContext,
+                RegisterActivity::class.java,
+            ),
         )
     }
 }
