@@ -28,7 +28,7 @@ This link doesn't work, we can replace with T2 handover video)
 
 https://deakin365.sharepoint.com/:w:/s/GopherIndustries2/EYjVSnG50B1GvYgdT2KKMj0Bj4-vwmNHitYyU0fzGUk_RA?e=IrpJZt
 
-## Branching strategy:
+## Branching strategy
 
 Because this repository is protected, you have to fork to your own repository before cloning. Please
 follow [steps](https://deakin365.sharepoint.com/:w:/r/sites/GopherIndustries2/Shared%20Documents/Guardians%20(T1)/T1%202023/TeamGuardians-CloneProcess.docx?d=wfba6c34a53b743c4a39b519990def465&csf=1&web=1&e=PfBjyp)
@@ -36,7 +36,7 @@ to clone this
 repo. [Click here](https://deakin365.sharepoint.com/:w:/s/GopherIndustries2/EaQj9mdwqT1Jk505WQZqK0gBSJ3pDyz-Rz6naKJPP15m5w?e=n0MqIn)
 to find how to create a pull request after you've done wonderful development.
 
-## How to set up Android Studio :
+## How to set up Android Studio
 
 in [Click here](https://deakin365.sharepoint.com/:w:/s/GopherIndustries2/EdSrJiI562ZCj2gx4QXkCRYBU58s5W6MNCDr3yDlcHXcog?e=oCLfc1),
 you can learn how to install Android Studio, initial set and create an emulator.
