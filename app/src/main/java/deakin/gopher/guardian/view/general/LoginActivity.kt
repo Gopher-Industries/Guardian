@@ -8,7 +8,6 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import deakin.gopher.guardian.R
@@ -18,10 +17,8 @@ import deakin.gopher.guardian.model.login.Password
 import deakin.gopher.guardian.model.login.RoleName
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
-import deakin.gopher.guardian.viewmodels.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
-    private val viewModel by viewModels<LoginViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
