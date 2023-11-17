@@ -5,7 +5,3 @@ data class EmailAddress(val emailAddress: String) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches()
     }
 }
-
-sealed class EmailAddressError(val message: String) {
-    data object Invalid : EmailAddressError("Invalid Email Address")
-}
