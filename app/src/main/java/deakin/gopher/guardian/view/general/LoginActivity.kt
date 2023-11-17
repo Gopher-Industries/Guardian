@@ -67,11 +67,15 @@ class LoginActivity : AppCompatActivity() {
         forgotTextLink.setOnClickListener { v: View ->
             val resetMail = EditText(v.context)
             val passwordResetDialog = AlertDialog.Builder(v.context)
-            passwordResetDialog.setTitle("Reset Password")
-            passwordResetDialog.setMessage("Enter Your Email To Received Reset Link.")
-            passwordResetDialog.setView(resetMail)
+
+            with(passwordResetDialog) {
+                setTitle(getString(R.string.text_reset_password))
+                setMessage(getString(R.string.text_enter_your_email_to_received_reset_link))
+                setView(resetMail)
+            }
+
             passwordResetDialog.setPositiveButton(
-                "Yes"
+                getString(R.string.yes)
             ) { _: DialogInterface?, _: Int ->
                 val mail = resetMail.text.toString()
 
@@ -95,7 +99,7 @@ class LoginActivity : AppCompatActivity() {
                     }
             }
             passwordResetDialog.setNegativeButton(
-                "No"
+                getString(R.string.no)
             ) { _: DialogInterface?, _: Int -> }
             passwordResetDialog.create().show()
         }

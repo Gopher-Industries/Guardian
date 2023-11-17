@@ -61,6 +61,10 @@
     <string name="validation_invalid_email_address">Invalid Email Address</string>
     <string name="validation_empty_password">Password is Required.</string>
     <string name="validation_password_short">Password Must Be Longer than 6 Characters</string>
+    <string name="text_reset_password">Reset Password</string>
+    <string name="text_enter_your_email_to_received_reset_link">Enter Your Email To Received Reset Link.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
