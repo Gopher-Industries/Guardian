@@ -34,16 +34,16 @@
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/TG_blue"
             android:fontFamily="@font/poppins_bold"
-            android:text="Login"
+            android:text="@string/login_login_button"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:cornerRadius="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/createText"
+            app:layout_constraintBottom_toTopOf="@+id/loginRegisterBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-            android:id="@+id/createText"
+            android:id="@+id/loginRegisterBtn"
             android:layout_width="200dp"
             android:layout_height="60dp"
             android:layout_marginStart="128dp"
@@ -51,7 +51,7 @@
             android:layout_marginBottom="-50dp"
             android:backgroundTint="@color/TG_blue"
             android:fontFamily="@font/poppins_bold"
-            android:text="Register"
+            android:text="@string/login_register_btn"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:cornerRadius="24dp"
@@ -63,13 +63,13 @@
             android:id="@+id/forgotPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forgot Password ?"
+            android:text="@string/login_forgot_password"
             android:textColor="#0598a5"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/progressBar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createText"
+            app:layout_constraintTop_toBottomOf="@+id/loginRegisterBtn"
             app:layout_constraintVertical_bias="0.19999999" />
 
     <ProgressBar
@@ -81,7 +81,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createText"
+            app:layout_constraintTop_toBottomOf="@+id/loginRegisterBtn"
             app:layout_constraintVertical_bias="0.39" />
 
     <EditText
@@ -92,7 +92,7 @@
             android:autofillHints=""
             android:background="@drawable/edit_text_border"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/email_hint"
             android:inputType="textEmailAddress"
             android:textColor="@android:color/darker_gray"
             android:textStyle="normal"
@@ -181,7 +181,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:contentDescription="TODO"
+                    android:contentDescription="@string/content_description_gopher_logo"
                     app:layout_constraintBottom_toTopOf="@+id/textView2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
@@ -195,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Welcome"
+                    android:text="@string/login_welcome"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
