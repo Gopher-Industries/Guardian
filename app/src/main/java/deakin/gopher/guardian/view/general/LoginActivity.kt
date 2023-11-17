@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.login.EmailAddress
+import deakin.gopher.guardian.model.login.LoginValidationError
 import deakin.gopher.guardian.model.login.Password
 import deakin.gopher.guardian.model.login.RoleName
 import deakin.gopher.guardian.services.EmailPasswordAuthService
@@ -56,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
                 ?.addOnFailureListener { e: Exception ->
                     Toast.makeText(
                         applicationContext,
-                        "Error: ${e.message}",
+                        getString(R.string.toast_login_error, e.message),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -74,28 +75,31 @@ class LoginActivity : AppCompatActivity() {
             passwordResetDialog.setView(resetMail)
             passwordResetDialog.setPositiveButton(
                 "Yes"
-            ) { dialog: DialogInterface?, which: Int ->
+            ) { _: DialogInterface?, _: Int ->
                 val mail = resetMail.text.toString()
 
                 EmailPasswordAuthService.resetPassword(EmailAddress(mail))
                     ?.addOnSuccessListener {
                         Toast.makeText(
                             this@LoginActivity,
-                            "Reset Link Sent To Your Email.",
+                            getString(R.string.toast_reset_link_sent_to_your_email),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                     ?.addOnFailureListener { e: Exception ->
                         Toast.makeText(
                             this@LoginActivity,
-                            "Error. Reset Link is Not Sent. Reason: ${e.message}",
+                            getString(
+                                R.string.toast_error_reset_link_is_not_sent_reason,
+                                e.message
+                            ),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
             }
             passwordResetDialog.setNegativeButton(
                 "No"
-            ) { dialog: DialogInterface?, which: Int -> }
+            ) { _: DialogInterface?, _: Int -> }
             passwordResetDialog.create().show()
         }
     }
@@ -126,10 +130,3 @@ class LoginActivity : AppCompatActivity() {
     }
 }
 
-sealed class LoginValidationError(val message: String) {
-    data object EmptyEmail : LoginValidationError("Email is Required.")
-    data object InvalidEmail : LoginValidationError("Invalid Email Address")
-    data object EmptyPassword : LoginValidationError("Password is Required.")
-    data object PasswordTooShort : LoginValidationError("Password Must Be Longer than 6 Characters")
-    data object EmptyRole : LoginValidationError("Please select a role")
-}
