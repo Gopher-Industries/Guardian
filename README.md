@@ -1,6 +1,5 @@
-## What is Guardian?
+## Project Overview
 
-**Overview, Goals and Objectives**
 Guardians is an activity monitoring and profiling system for the aged care sector with plans to
 expand to residential homes. Guardians uses non-invasive radar technology to record a user’s
 activity and classify these activities over time. Guardians utilises the classified data to predict
