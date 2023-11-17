@@ -54,6 +54,13 @@
     <string name="login_welcome">Welcome</string>
     <string name="content_description_gopher_logo">Logo for the Gopher Company</string>
     <string name="content_description_corner_blue_flower_shape">Corner Blue flower shape</string>
+    <string name="toast_reset_link_sent_to_your_email">Reset Link Sent To Your Email.</string>
+    <string name="toast_error_reset_link_is_not_sent_reason">Error. Reset Link is Not Sent. Reason: %1$s</string>
+    <string name="toast_login_error">Error: %1$s</string>
+    <string name="validation_empty_email">Email is Required.</string>
+    <string name="validation_invalid_email_address">Invalid Email Address</string>
+    <string name="validation_empty_password">Password is Required.</string>
+    <string name="validation_password_short">Password Must Be Longer than 6 Characters</string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
