@@ -47,6 +47,12 @@
     <string name="nurse_role_name">Nurse</string>
     <string name="login_role_selection_prompt">Login as:</string>
     <string name="password_hint">Enter password</string>
+    <string name="login_register_btn">Register</string>
+    <string name="login_forgot_password">Forgot Password?</string>
+    <string name="email_hint">Email</string>
+    <string name="login_login_button">Login</string>
+    <string name="login_welcome">Welcome</string>
+    <string name="content_description_gopher_logo">Logo for the Gopher Company</string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
