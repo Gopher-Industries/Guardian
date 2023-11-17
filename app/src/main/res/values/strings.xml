@@ -53,6 +53,7 @@
     <string name="login_login_button">Login</string>
     <string name="login_welcome">Welcome</string>
     <string name="content_description_gopher_logo">Logo for the Gopher Company</string>
+    <string name="content_description_corner_blue_flower_shape">Corner Blue flower shape</string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
