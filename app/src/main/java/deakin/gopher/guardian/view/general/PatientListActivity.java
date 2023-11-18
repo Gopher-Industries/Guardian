@@ -31,11 +31,8 @@ public class PatientListActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_patient_list);
     patient_list_recyclerView = findViewById(R.id.patient_list_recycleView);
-    overview_cardview = findViewById(R.id.patient_list_patient_overview);
     patient_searchView = findViewById(R.id.patient_list_searchView);
-    // this clicker is for test:
-    overview_cardview.setOnClickListener(
-        view -> startActivity(new Intent(PatientListActivity.this, CarePlanActivity.class)));
+
 
     final Query all_query = FirebaseDatabase.getInstance().getReference().child("patient_profile");
     final FirebaseRecyclerOptions<Patient> all_options =
