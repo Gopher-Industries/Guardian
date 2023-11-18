@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|center"
-                android:text="Add Image"
+                android:text="@string/add_image"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -68,7 +68,7 @@
                 android:layout_marginLeft="150dp"
                 android:layout_marginTop="60dp"
                 android:elevation="20dp"
-                android:text="Crop Image"
+                android:text="@string/crop_image"
                 android:textAlignment="gravity" />
 
         <ImageView
@@ -76,7 +76,7 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="165dp"
                 android:layout_marginTop="72dp"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 android:elevation="20dp"
                 android:src="@drawable/crop" />
 
@@ -87,14 +87,14 @@
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="146dp"
                 android:background="@drawable/custom_background"
-                android:text="Take Photo" />
+                android:text="@string/take_photo" />
 
         <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="155dp"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 android:elevation="20dp"
                 android:src="@drawable/camera" />
 
@@ -105,14 +105,14 @@
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="192dp"
                 android:background="@drawable/custom_background"
-                android:text="Select from gallery" />
+                android:text="@string/select_from_gallery" />
 
         <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="201dp"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 android:elevation="20dp"
                 android:src="@drawable/gallery" />
 
@@ -122,7 +122,7 @@
                 android:layout_height="23dp"
                 android:layout_marginLeft="345dp"
                 android:layout_marginTop="3dp"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/todo"
                 android:elevation="20dp"
                 android:src="@drawable/close" />
 

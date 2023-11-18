@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             android:src="@drawable/background_logo" />
 
     <LinearLayout
@@ -31,7 +31,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="First name"
+                android:text="@string/first_name"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:text="Marilyn"
+                android:text="@string/marilyn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Middle Name"
+                android:text="@string/middle_name"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:text="None"
+                android:text="@string/none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +92,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Last Name"
+                android:text="@string/last_name"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +106,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
                 android:inputType="textMultiLine"
-                android:text="Bvarton"
+                android:text="@string/bvarton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -122,7 +122,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Date of Birth"
+                android:text="@string/date_of_birth"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:text="6/5/1980"
+                android:text="@string/_6_5_1980"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dateOfBirth" />
 
@@ -150,7 +150,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Medicare no"
+                android:text="@string/medicare_no"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -163,7 +163,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
                 android:inputType="textMultiLine"
-                android:text="5065521796"
+                android:text="@string/_5065521796"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView131" />
 
@@ -179,7 +179,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Western Affairs no"
+                android:text="@string/western_affairs_no"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -192,7 +192,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
                 android:backgroundTint="#ECECEC"
-                android:text="L67M8OB004HQ"
+                android:text="@string/l67m8ob004hq"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView61" />
 

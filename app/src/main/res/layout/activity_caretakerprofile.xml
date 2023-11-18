@@ -130,7 +130,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-black"
-            android:text="Date of Birth"
+            android:text="@string/date_of_birth"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

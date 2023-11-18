@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/todo"
             android:src="@drawable/background_logo" />
 
         <LinearLayout
@@ -29,7 +29,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="First name"
+                android:text="@string/first_name"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:text="Johnny"
+                android:text="@string/johnny"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Middle Name"
+                android:text="@string/middle_name"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:text="None"
+                android:text="@string/none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +90,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Last Name"
+                android:text="@string/last_name"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +104,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
                 android:inputType="textMultiLine"
-                android:text="Smiths"
+                android:text="@string/smiths"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -120,7 +120,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Clinic Address"
+                android:text="@string/clinic_address"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:text="31 Solaris Drive, Melbourne, VIC, 2767, Australia"
+                android:text="@string/_31_solaris_drive_melbourne_vic_2767_australia"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dateOfBirth" />
 
@@ -148,7 +148,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Phone Number"
+                android:text="@string/phone_number"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -161,7 +161,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
                 android:inputType="textMultiLine"
-                android:text="+61 399 832  791"
+                android:text="@string/_61_399_832_791"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView131" />
 
@@ -177,7 +177,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Email"
+                android:text="@string/email"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -190,7 +190,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
                 android:backgroundTint="#ECECEC"
-                android:text="sample@gmail.com"
+                android:text="@string/sample_gmail_com"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView61" />
 
@@ -206,7 +206,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Fax"
+                android:text="@string/fax"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -219,7 +219,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
                 android:backgroundTint="#ECECEC"
-                android:text="336-555-2222"
+                android:text="@string/_336_555_2222"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView61" />
 

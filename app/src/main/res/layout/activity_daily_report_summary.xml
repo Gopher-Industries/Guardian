@@ -99,7 +99,7 @@
                     android:layout_marginRight="20dp"
                     android:background="#F6F6F6"
                     android:maxWidth="376dp"
-                    android:text="TextView"
+                    android:text="@string/textview"
                     android:textSize="16sp" />
 
             <TextView
@@ -122,7 +122,7 @@
                     android:background="#F6F6F6"
                     android:maxWidth="376dp"
                     android:singleLine="false"
-                    android:text="TextView"
+                    android:text="@string/textview"
                     android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>

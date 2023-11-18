@@ -34,7 +34,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="15dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="Age-cared planning region code"
+                        android:text="@string/age_cared_planning_region_code"
                         android:textColor="#3d3d3d"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -59,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="Age-cared planning region name"
+                        android:text="@string/age_cared_planning_region_name"
                         android:textColor="#3d3d3d"
                         app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName13"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName13" />
@@ -83,7 +83,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="Activities of daily living"
+                        android:text="@string/activities_of_daily_living"
                         android:textColor="#3d3d3d"
                         app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName12"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName12" />
@@ -107,7 +107,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="Admission type"
+                        android:text="@string/admission_type"
                         android:textColor="#3d3d3d"
                         app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName11"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName11" />
@@ -131,7 +131,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="Age group"
+                        android:text="@string/age_group"
                         android:textColor="#3d3d3d"
                         app:layout_constraintStart_toStartOf="@+id/textView13"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName10" />
@@ -155,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="BEH"
+                        android:text="@string/beh"
                         android:textColor="#3d3d3d"
                         app:layout_constraintStart_toStartOf="@+id/textView12"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName9" />
@@ -179,7 +179,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="Care type"
+                        android:text="@string/care_type"
                         android:textColor="#3d3d3d"
                         app:layout_constraintStart_toStartOf="@+id/textView11"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName8" />
@@ -203,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="Complex health care score"
+                        android:text="@string/complex_health_care_score"
                         android:textColor="#3d3d3d"
                         app:layout_constraintStart_toStartOf="@+id/textView10"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
@@ -227,7 +227,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="Country of birth"
+                        android:text="@string/country_of_birth"
                         android:textColor="#3d3d3d"
                         app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName6"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
@@ -251,7 +251,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="Reason for departure"
+                        android:text="@string/reason_for_departure"
                         android:textColor="#3d3d3d"
                         app:layout_constraintStart_toStartOf="@+id/textView8"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
@@ -275,7 +275,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="Reason for discharge"
+                        android:text="@string/reason_for_discharge"
                         android:textColor="#3d3d3d"
                         app:layout_constraintStart_toStartOf="@+id/textView2"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
@@ -299,7 +299,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="First admission"
+                        android:text="@string/first_admission"
                         android:textColor="#3d3d3d"
                         app:layout_constraintStart_toStartOf="@+id/textView5"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
@@ -323,7 +323,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="Homecare level"
+                        android:text="@string/homecare_level"
                         android:textColor="#3d3d3d"
                         app:layout_constraintStart_toStartOf="@+id/textView6"
                         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
@@ -346,7 +346,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/TG_blue"
-                        android:text="Next"
+                        android:text="@string/next"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         app:cornerRadius="20dp"

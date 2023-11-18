@@ -9,7 +9,7 @@
         android:layout_height="50dp"
         android:background="@color/purple_500"
         android:gravity="center"
-        android:text="Update"
+        android:text="@string/update"
         android:textColor="#FFF"
         android:textSize="25sp" />
 
@@ -19,7 +19,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="Name"
+        android:text="@string/name"
         android:textSize="20sp" />
 
     <EditText
@@ -39,7 +39,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="Address"
+        android:text="@string/address"
         android:textSize="20sp" />
 
     <EditText
@@ -59,7 +59,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="Date of Birth"
+        android:text="@string/date_of_birth"
         android:textSize="20sp" />
 
     <EditText
@@ -79,7 +79,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="Phone"
+        android:text="@string/phone"
         android:textSize="20sp" />
 
     <EditText
@@ -99,7 +99,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="Under Care of"
+        android:text="@string/under_care_of"
         android:textSize="20sp" />
 
     <EditText
@@ -119,7 +119,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="Photo"
+        android:text="@string/photo"
         android:textSize="20sp" />
 
     <EditText
@@ -142,7 +142,7 @@
         android:layout_marginRight="25dp"
         android:background="@drawable/rounded"
         android:gravity="center"
-        android:text="Update"
+        android:text="@string/update"
         android:textAllCaps="false"
         android:textSize="21sp" />
 </LinearLayout>
