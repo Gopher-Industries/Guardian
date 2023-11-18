@@ -175,7 +175,12 @@ public class NoKAddFragment extends Fragment {
     if (null == nextofKin) {
       nextofKin = new NextOfKin(firstName, middleName, lastName, address, phoneNumber, email, null);
     } else {
-      nextofKin = new NextOfKin(firstName,middleName,lastName,address,phoneNumber,email,null);
+      nextofKin.setFirstName(firstName);
+      nextofKin.setMiddleName(middleName);
+      nextofKin.setLastName(lastName);
+      nextofKin.setHomeAddress(address);
+      nextofKin.setMobilePhone(phoneNumber);
+      nextofKin.setEmailAddress(email);
 
     }
     if (1 == status) {
