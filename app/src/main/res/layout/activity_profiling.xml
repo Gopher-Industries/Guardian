@@ -32,7 +32,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="72dp"
                         android:layout_marginEnd="28dp"
-                        android:contentDescription="@string/todo"
+                        android:contentDescription="TODO"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.968"
                         app:layout_constraintStart_toEndOf="@+id/imageView7"
@@ -44,7 +44,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="72dp"
-                        android:contentDescription="@string/todo"
+                        android:contentDescription="TODO"
                         app:layout_constraintEnd_toStartOf="@+id/imageView7"
                         app:layout_constraintHorizontal_bias="0.184"
                         app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
                         android:layout_width="45dp"
                         android:layout_height="40dp"
                         android:layout_marginTop="72dp"
-                        android:contentDescription="@string/todo"
+                        android:contentDescription="TODO"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -81,7 +81,7 @@
                         android:layout_height="25dp"
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="24dp"
-                        android:contentDescription="@string/todo"
+                        android:contentDescription="TODO"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView8"
                         app:srcCompat="@drawable/back_arrow" />
@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="298dp"
                 android:layout_marginTop="10dp"
-                android:contentDescription="@string/todo"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/bedroom_activity" />
 
         <TextView

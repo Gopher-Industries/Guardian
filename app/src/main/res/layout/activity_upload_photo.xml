@@ -76,7 +76,7 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="165dp"
                 android:layout_marginTop="72dp"
-                android:contentDescription="@string/todo"
+                android:contentDescription="TODO"
                 android:elevation="20dp"
                 android:src="@drawable/crop" />
 
@@ -94,7 +94,7 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="155dp"
-                android:contentDescription="@string/todo"
+                android:contentDescription="TODO"
                 android:elevation="20dp"
                 android:src="@drawable/camera" />
 
@@ -112,7 +112,7 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="201dp"
-                android:contentDescription="@string/todo"
+                android:contentDescription="TODO"
                 android:elevation="20dp"
                 android:src="@drawable/gallery" />
 
@@ -122,7 +122,7 @@
                 android:layout_height="23dp"
                 android:layout_marginLeft="345dp"
                 android:layout_marginTop="3dp"
-                android:contentDescription="@string/todo"
+                android:contentDescription="TODO"
                 android:elevation="20dp"
                 android:src="@drawable/close" />
 

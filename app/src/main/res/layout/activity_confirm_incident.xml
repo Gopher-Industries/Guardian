@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="190dp"
             android:layout_marginTop="65dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/gopher_logo" />
 
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="70dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:srcCompat="@drawable/menu_button" />
 
         <ImageView
@@ -56,7 +56,7 @@
             android:layout_height="51dp"
             android:layout_marginLeft="340dp"
             android:layout_marginTop="65dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:srcCompat="@drawable/profile_avatar_women" />
 
         <TextView
@@ -95,7 +95,7 @@
         android:layout_width="424dp"
         android:layout_height="82dp"
         android:layout_marginTop="-25dp"
-        android:contentDescription="@string/todo"
+        android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="93dp"
-        android:contentDescription="@string/todo"
+        android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button8"
         app:srcCompat="@drawable/rectangle3" />
@@ -141,7 +141,7 @@
         android:id="@+id/imageView12"
         android:layout_width="316dp"
         android:layout_height="356dp"
-        android:contentDescription="@string/todo"
+        android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView9"
@@ -212,7 +212,7 @@
         android:layout_width="351dp"
         android:layout_height="130dp"
         android:layout_marginTop="10dp"
-        android:contentDescription="@string/todo"
+        android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView12"
@@ -234,7 +234,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:contentDescription="@string/todo"
+        android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView12"
@@ -247,7 +247,7 @@
         android:layout_height="28dp"
         android:layout_marginStart="12dp"
         android:background="#E7EAEB"
-        android:contentDescription="@string/todo"
+        android:contentDescription="TODO"
         app:layout_constraintStart_toStartOf="@+id/imageView26"
         app:layout_constraintTop_toTopOf="@+id/imageView24"
         app:srcCompat="@drawable/checkedcheckbox" />
@@ -303,7 +303,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             android:src="@drawable/spinner_drop" />
 
     </RelativeLayout>

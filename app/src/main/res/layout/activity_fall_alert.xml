@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="190dp"
                 android:layout_marginTop="65dp"
-                android:contentDescription="@string/todo"
+                android:contentDescription="TODO"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/gopher_logo" />
 
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="70dp"
-                android:contentDescription="@string/todo"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/menu_button" />
 
         <ImageView
@@ -44,7 +44,7 @@
                 android:layout_height="51dp"
                 android:layout_marginLeft="340dp"
                 android:layout_marginTop="65dp"
-                android:contentDescription="@string/todo"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/profile_avatar_women" />
 
         <TextView
@@ -92,7 +92,7 @@
             android:layout_width="424dp"
             android:layout_height="82dp"
             android:layout_marginTop="2dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.538"
             app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="52dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="@+id/imageView9"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/chevrondown" />
@@ -127,7 +127,7 @@
             android:layout_width="402dp"
             android:layout_height="223dp"
             android:layout_marginStart="8dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -138,7 +138,7 @@
             android:id="@+id/imageView14"
             android:layout_width="416dp"
             android:layout_height="69dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="parent"
@@ -173,7 +173,7 @@
             android:layout_height="167dp"
             android:layout_marginStart="53dp"
             android:layout_marginEnd="40dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -207,7 +207,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginTop="491dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintStart_toEndOf="@+id/linearLayout2"
             app:layout_constraintTop_toBottomOf="@+id/imageView9"
             app:srcCompat="@drawable/rectangle3" />
@@ -216,7 +216,7 @@
             android:id="@+id/imageView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintStart_toEndOf="@+id/linearLayout2"
             app:layout_constraintTop_toBottomOf="@+id/imageView9"
             app:srcCompat="@drawable/rectangle1646"
@@ -273,7 +273,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="@+id/imageView13"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.632"
@@ -295,7 +295,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
-                android:contentDescription="@string/todo"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/false_alarm" />
 
         <ImageButton
@@ -304,7 +304,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-5dp"
                 android:background="#FFFFFF"
-                android:contentDescription="@string/todo"
+                android:contentDescription="TODO"
                 android:translationZ="100dp"
                 app:srcCompat="@drawable/call" />
 
@@ -313,7 +313,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
-                android:contentDescription="@string/todo"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/confirm_incident" />
     </LinearLayout>
 

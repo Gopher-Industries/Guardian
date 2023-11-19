@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true">
 
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="180dp"
                 android:layout_marginTop="40dp"
-                android:contentDescription="@string/todo"
+                android:contentDescription="TODO"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/gopher_logo" />
 
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="50dp"
-                android:contentDescription="@string/todo"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/menu_button" />
 
             <ImageView
@@ -49,7 +49,7 @@
                 android:layout_height="51dp"
                 android:layout_marginLeft="330dp"
                 android:layout_marginTop="45dp"
-                android:contentDescription="@string/todo"
+                android:contentDescription="TODO"
                 app:srcCompat="@drawable/profile_avatar_women" />
 
 
@@ -73,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="82dp"
             android:layout_marginTop="-45dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

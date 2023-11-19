@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="51dp"
             android:layout_marginTop="65dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/menu_button" />
@@ -29,7 +29,7 @@
             android:layout_height="51dp"
             android:layout_marginStart="94dp"
             android:layout_marginTop="56dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintStart_toEndOf="@+id/patient_list_company_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/profile_icon_small" />
@@ -40,7 +40,7 @@
             android:layout_height="60dp"
             android:layout_marginStart="172dp"
             android:layout_marginTop="44dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/gopher_logo" />
@@ -93,7 +93,7 @@
                     android:id="@+id/imageView55"
                     android:layout_width="35dp"
                     android:layout_height="33dp"
-                    android:contentDescription="@string/todo"
+                    android:contentDescription="TODO"
                     app:srcCompat="@drawable/red_circle"
                     tools:layout_editor_absoluteX="41dp"
                     tools:layout_editor_absoluteY="232dp" />
@@ -114,7 +114,7 @@
                     android:layout_height="31dp"
                     android:layout_marginLeft="140dp"
                     android:layout_marginTop="5dp"
-                    android:contentDescription="@string/todo"
+                    android:contentDescription="TODO"
                     app:srcCompat="@drawable/right_vector"
                     tools:layout_editor_absoluteX="337dp"
                     tools:layout_editor_absoluteY="234dp" />
@@ -142,7 +142,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginStart="188dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toTopOf="@+id/imageView62"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/three_point" />
@@ -153,7 +153,7 @@
             android:layout_height="35dp"
             android:layout_marginStart="188dp"
             android:layout_marginBottom="13dp"
-            android:contentDescription="@string/todo"
+            android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/edit_button_plus" />
