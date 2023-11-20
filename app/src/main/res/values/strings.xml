@@ -2,6 +2,7 @@
     <string name="app_name">TG_Patient_Profile</string>
 
     <string name="main_activity_solgan">Take care of your patients</string>
+
     <string name="ek_img_content">ExportKit Image</string>
     <string name="welcome__marilyn___string">Welcome, Marilyn !</string>
     <string name="new_patient_string">New Patient</string>
@@ -45,6 +46,7 @@
     <string name="confirm_incident_text"> ·   Lying in an unsual place. \n \n ·   Resembling sleeping behaviour in an unusual time \n \n      ·   <b>Usual bedtime</b>: 10:30pm - 6:30am \n \n      ·   <b>Recorder bedtime</b>: 10:30pm - 6:30am \n \n ·   No movement detected over 15 minutes</string>
     <string name="confirm_incident_verified_by"><b>Incident verified by:</b> <font fgcolor="#FF0B98C5"> Georgia Blakeney</font></string>
     <string name="false_alert_verified_by"><b>False alert verified by:</b> <font fgcolor="#FF0B98C5"> Georgia Blakeney</font></string>
+
     <string name="add_new_patient">Add new patient</string>
     <string name="name">Name</string>
     <string name="address">Address</string>
@@ -317,6 +319,28 @@
     <string name="search">Search</string>
     <string name="update">Update</string>
     <string name="enter_an_email_adress">Enter an email adress</string>
+
+    <string name="caretaker_role_name">Caretaker</string>
+    <string name="company_admin_role_name">Company Admin</string>
+    <string name="nurse_role_name">Nurse</string>
+    <string name="login_role_selection_prompt">Login as:</string>
+    <string name="password_hint">Enter password</string>
+    <string name="login_register_btn">Register</string>
+    <string name="login_forgot_password">Forgot Password?</string>
+    <string name="email_hint">Email</string>
+    <string name="login_login_button">Login</string>
+    <string name="login_welcome">Welcome</string>
+    <string name="content_description_gopher_logo">Logo for the Gopher Company</string>
+    <string name="content_description_corner_blue_flower_shape">Corner Blue flower shape</string>
+    <string name="toast_reset_link_sent_to_your_email">Reset Link Sent To Your Email.</string>
+    <string name="toast_error_reset_link_is_not_sent_reason">Error. Reset Link is Not Sent. Reason: %1$s</string>
+    <string name="toast_login_error">Error: %1$s</string>
+    <string name="validation_empty_email">Email is Required.</string>
+    <string name="validation_invalid_email_address">Invalid Email Address</string>
+    <string name="validation_empty_password">Password is Required.</string>
+    <string name="validation_password_short">Password Must Be Longer than 6 Characters</string>
+    <string name="text_reset_password">Reset Password</string>
+    <string name="text_enter_your_email_to_received_reset_link">Enter Your Email To Received Reset Link.</string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
