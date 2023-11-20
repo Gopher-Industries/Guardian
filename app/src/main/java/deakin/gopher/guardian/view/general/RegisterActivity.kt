@@ -24,10 +24,10 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        val backToLoginButton = findViewById<Button>(R.id.backToLoginButton)
-        val mEmail: EditText = findViewById(R.id.register_activity_email)
+        val mEmail: EditText = findViewById(R.id.Email)
         val mPassword: EditText = findViewById(R.id.password)
         val passwordConfirmation: EditText = findViewById(R.id.passwordConfirm)
+        val backToLoginButton: Button = findViewById(R.id.backToLoginButton)
         val mRegisterBtn: Button = findViewById(R.id.registerBtn)
         val mLoginBtn: Button = findViewById(R.id.loginRegisterBtn)
 
