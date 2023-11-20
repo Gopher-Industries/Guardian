@@ -45,11 +45,10 @@ class RegisterActivity : AppCompatActivity() {
 
             if (registrationError != null) {
                 Toast.makeText(
-                    this@RegisterActivity,
-                    registrationError.message,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                    applicationContext,
+                    registrationError.messageResourceId,
+                    Toast.LENGTH_LONG
+                ).show()
                 return@setOnClickListener
             }
             if (TextUtils.isEmpty(emailInput)) {

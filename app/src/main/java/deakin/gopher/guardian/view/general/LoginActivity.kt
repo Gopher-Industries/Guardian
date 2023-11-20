@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
             if (loginValidationError != null) {
                 Toast.makeText(
                     applicationContext,
-                    loginValidationError.message,
+                    loginValidationError.messageResoureId,
                     Toast.LENGTH_LONG,
                 ).show()
                 return@setOnClickListener
