@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.Task
@@ -16,26 +15,19 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.model.login.EmailAddress
+import deakin.gopher.guardian.model.login.Password
+import deakin.gopher.guardian.model.register.RegistrationError
 
 class RegisterActivity : AppCompatActivity() {
-    var mEmail: EditText? = null
-    var mPassword: EditText? = null
-    var mRegisterBtn: Button? = null
-    var mLoginBtn: TextView? = null
-    var Auth: FirebaseAuth? = null
-    var progressBar: ProgressBar? = null
-    var fStore: FirebaseFirestore? = null
     var userID: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         val backToLoginButton = findViewById<Button>(R.id.backToLoginButton)
-        backToLoginButton.setOnClickListener { view: View? ->
-            val loginIntent = Intent(this@RegisterActivity, LoginActivity::class.java)
-            startActivity(loginIntent)
-        }
-        val mEmail: EditText = findViewById(R.id.Email)
+        val mEmail: EditText = findViewById(R.id.register_activity_email)
         val mPassword: EditText = findViewById(R.id.password)
+        val passwordConfirmation: EditText = findViewById(R.id.passwordConfirm)
         val mRegisterBtn: Button = findViewById(R.id.registerBtn)
         val mLoginBtn: Button = findViewById(R.id.loginRegisterBtn)
 
@@ -43,12 +35,24 @@ class RegisterActivity : AppCompatActivity() {
         val Auth = FirebaseAuth.getInstance()
         val fStore = FirebaseFirestore.getInstance()
 
-
-        val progressBar = findViewById(R.id.progressBar)
+        val progressBar: ProgressBar = findViewById(R.id.progressBar)
         mRegisterBtn.setOnClickListener { v: View? ->
-            val email = mEmail.text.toString().trim { it <= ' ' }
+            val emailInput = mEmail.text.toString().trim { it <= ' ' }
             val password = mPassword.text.toString().trim { it <= ' ' }
-            if (TextUtils.isEmpty(email)) {
+            val passwordConfirm = passwordConfirmation.text.toString().trim { it <= ' ' }
+
+            val registrationError = validateInputs(emailInput, password, passwordConfirm)
+
+            if (registrationError != null) {
+                Toast.makeText(
+                    this@RegisterActivity,
+                    registrationError.message,
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+                return@setOnClickListener
+            }
+            if (TextUtils.isEmpty(emailInput)) {
                 mEmail.error = "Email is Required."
                 return@setOnClickListener
             }
@@ -60,31 +64,33 @@ class RegisterActivity : AppCompatActivity() {
                 mPassword.error = "Password Must be >= 6 Characters"
                 return@setOnClickListener
             }
-            progressBar.setVisibility(View.VISIBLE)
+            progressBar.visibility = View.VISIBLE
 
             // register the user in firebase
-            Auth.createUserWithEmailAndPassword(email, password)
+            Auth.createUserWithEmailAndPassword(emailInput, password)
                 .addOnCompleteListener { task: Task<AuthResult?> ->
                     if (task.isSuccessful) {
 
                         // send verification link
                         val fuser = Auth.currentUser
-                        fuser
-                            .sendEmailVerification()
-                            .addOnSuccessListener { aVoid: Void? ->
-                                Toast.makeText(
-                                    this@RegisterActivity,
-                                    "Verification Email Has been Sent.",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
-                            }
-                            .addOnFailureListener { e: Exception ->
-                                Log.d(
-                                    TAG,
-                                    "onFailure: Email not sent " + e.message
-                                )
-                            }
+                        if (fuser != null) {
+                            fuser
+                                .sendEmailVerification()
+                                .addOnSuccessListener { aVoid: Void? ->
+                                    Toast.makeText(
+                                        this@RegisterActivity,
+                                        "Verification Email Has been Sent.",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                }
+                                .addOnFailureListener { e: Exception ->
+                                    Log.d(
+                                        TAG,
+                                        "onFailure: Email not sent " + e.message
+                                    )
+                                }
+                        }
                         Toast.makeText(
                             this@RegisterActivity,
                             "User Created.",
@@ -96,7 +102,7 @@ class RegisterActivity : AppCompatActivity() {
                             userID!!
                         )
                         val user: MutableMap<String, Any> = HashMap()
-                        user["email"] = email
+                        user["email"] = emailInput
                         documentReference
                             .set(user)
                             .addOnSuccessListener { aVoid: Void? ->
@@ -119,22 +125,60 @@ class RegisterActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         )
                             .show()
-                        progressBar.setVisibility(View.GONE)
+                        progressBar.visibility = View.GONE
                     }
                 }
         }
-        
-        mLoginBtn.setOnClickListener(
-            View.OnClickListener { v: View? ->
-                startActivity(
-                    Intent(
-                        applicationContext, LoginActivity::class.java
-                    )
+
+        mLoginBtn.setOnClickListener { v: View? ->
+            startActivity(
+                Intent(
+                    applicationContext, LoginActivity::class.java
                 )
-            })
+            )
+        }
+
+        backToLoginButton.setOnClickListener { view: View? ->
+            val loginIntent = Intent(this@RegisterActivity, LoginActivity::class.java)
+            startActivity(loginIntent)
+        }
     }
 
     companion object {
         const val TAG = "TAG"
+    }
+
+    private fun validateInputs(
+        rawEmail: String?,
+        rawPassword: String?,
+        rawConfirmedPassword: String?
+    ): RegistrationError? {
+        if (rawEmail.isNullOrEmpty()) {
+            return RegistrationError.EmptyEmail
+        }
+
+        val emailAddress = EmailAddress(rawEmail)
+        if (emailAddress.isValid().not()) {
+            return RegistrationError.InvalidEmail
+        }
+
+        if (rawPassword.isNullOrEmpty()) {
+            return RegistrationError.EmptyPassword
+        }
+
+        val password = Password(rawPassword)
+        if (password.isValid().not()) {
+            return RegistrationError.PasswordTooShort
+        }
+
+        if (rawConfirmedPassword.isNullOrEmpty()) {
+            return RegistrationError.EmptyConfirmedPassword
+        }
+
+        if (password.confirmWith(rawConfirmedPassword).not()) {
+            return RegistrationError.PasswordsFailConfirmation
+        }
+
+        return null
     }
 }
