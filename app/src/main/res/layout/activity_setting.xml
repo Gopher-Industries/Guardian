@@ -62,56 +62,43 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/settings_theme_button"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="50dp"
+        android:id="@+id/settings_theme_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/settings_button_background"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_header_card_view">
+
+
+        <TextView
+            android:id="@+id/theme_button_title"
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            android:layout_marginStart="25dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/night_mode"
+            android:textColor="#FFFFFF"
+            android:textFontWeight="400"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.533" />
+
+        <Switch
+            android:id="@+id/theme_switch"
+            android:layout_width="46dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="204dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="15dp"
-            android:background="@drawable/settings_button_background"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_header_card_view">
-
-
-        <TextView
-                android:id="@+id/theme_button_title"
-                android:layout_width="wrap_content"
-                android:layout_height="20sp"
-                android:layout_marginStart="25dp"
-                android:fontFamily="@font/poppins"
-                android:text="@string/theme_mode"
-                android:textColor="#FFFFFF"
-                android:textFontWeight="400"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-                android:id="@+id/theme_button_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:contentDescription="TODO"
-                android:src="@drawable/settings_arrow"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-                android:id="@+id/theme_button_subtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="17sp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/poppins"
-                android:text="@string/change"
-                android:textColor="#FFFFFF"
-                android:textFontWeight="275"
-                android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/theme_button_arrow"
-                app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/theme_button_title"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -144,37 +131,27 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         <Switch
-                android:id="@+id/notification_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-                android:id="@+id/notification_button_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:contentDescription="TODO"
-                android:src="@drawable/settings_arrow"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/notification_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="196dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/notification_button_title"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-                android:id="@+id/notification_button_subtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="18sp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/poppins"
-                android:textFontWeight="275"
-                android:textIsSelectable="true"
-                android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/notification_button_arrow"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/notification_button_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="18sp"
+            android:fontFamily="@font/poppins"
+            android:textFontWeight="275"
+            android:textIsSelectable="true"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="352dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

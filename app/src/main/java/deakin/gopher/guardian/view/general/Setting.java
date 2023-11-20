@@ -21,6 +21,7 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
   ConstraintLayout settingsAppUpdateButton;
   ConstraintLayout settingsFeedbackButton;
   Switch notificationSwitch;
+  Switch themeSwitch;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -32,30 +33,37 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
     settingsAppUpdateButton = findViewById(R.id.settings_app_update_button);
     settingsFeedbackButton = findViewById(R.id.settings_feedback_button);
 
-    settingsThemeButton.setOnClickListener(this);
-    settingsNotificationButton.setOnClickListener(this);
+//    settingsThemeButton.setOnClickListener(this);
+//    settingsNotificationButton.setOnClickListener(this);
     settingsAppUpdateButton.setOnClickListener(this);
     settingsFeedbackButton.setOnClickListener(this);
 
     final ConstraintLayout settingsThemeButton = findViewById(R.id.settings_theme_button);
-    settingsThemeButton.setOnClickListener(
-        v -> {
-          final SharedPreferences sharedPreferences =
-              getSharedPreferences("settings", MODE_PRIVATE);
-          final boolean currentNightMode = sharedPreferences.getBoolean("night_mode", false);
-          if (currentNightMode) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            sharedPreferences.edit().putBoolean("night_mode", false).apply();
-          } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            sharedPreferences.edit().putBoolean("night_mode", true).apply();
-          }
-          recreate();
-        });
+
+    // Below code was from old theme change method, can be deleted if new Switch is accepted
+
+//    settingsThemeButton.setOnClickListener(
+//        v -> {
+//          final SharedPreferences sharedPreferences =
+//              getSharedPreferences("settings", MODE_PRIVATE);
+//          final boolean currentNightMode = sharedPreferences.getBoolean("night_mode", false);
+//          if (currentNightMode) {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//            sharedPreferences.edit().putBoolean("night_mode", false).apply();
+//          } else {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//            sharedPreferences.edit().putBoolean("night_mode", true).apply();
+//          }
+//          recreate();
+//        });
 
     notificationSwitch = findViewById(R.id.notification_switch);
     notificationSwitch.setOnCheckedChangeListener(
         (buttonView, isChecked) -> handleNotificationSwitch(isChecked));
+
+    themeSwitch = findViewById(R.id.theme_switch);
+    themeSwitch.setOnCheckedChangeListener(
+            (buttonView, isChecked) -> handleThemeSwitch(isChecked));
   }
 
   @Override
@@ -73,6 +81,20 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
       showToast("Notifications turned off");
     }
   }
+
+  private void handleThemeSwitch(final boolean isChecked) {
+    final SharedPreferences sharedPreferences =
+            getSharedPreferences("settings", MODE_PRIVATE);
+//    final boolean currentNightMode = sharedPreferences.getBoolean("night_mode", false);
+
+      if (isChecked) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        sharedPreferences.edit().putBoolean("night_mode", true).apply();
+      } else {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        sharedPreferences.edit().putBoolean("night_mode", false).apply();
+      }
+    }
 
   private void showNotification() {
     if (Build.VERSION_CODES.O <= Build.VERSION.SDK_INT) {
