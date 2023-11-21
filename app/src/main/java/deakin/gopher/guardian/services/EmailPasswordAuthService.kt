@@ -35,7 +35,6 @@ class EmailPasswordAuthService(
                 userDataService.create(currentUser.uid, emailAddress.emailAddress)
                 registerResult
             }
-
         } catch (e: Exception) {
             e.printStackTrace()
             null
@@ -53,4 +52,3 @@ class EmailPasswordAuthService(
         }
     }
 }
-

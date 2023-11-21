@@ -38,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(
                     applicationContext,
                     registrationError.messageResourceId,
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_LONG,
                 ).show()
                 return@setOnClickListener
             }
@@ -54,7 +54,7 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(
                         this@RegisterActivity,
                         RegistrationStatusMessage.Success.message,
-                        Toast.LENGTH_SHORT
+                        Toast.LENGTH_SHORT,
                     ).show()
 
                     NavigationService(this).toLogin()
@@ -63,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(
                         this@RegisterActivity,
                         RegistrationStatusMessage.Failure.toString() + " : ${e.message}",
-                        Toast.LENGTH_SHORT
+                        Toast.LENGTH_SHORT,
                     ).show()
                 }
         }
@@ -76,11 +76,11 @@ class RegisterActivity : AppCompatActivity() {
             NavigationService(this).toLogin()
         }
     }
-    
+
     private fun validateInputs(
         rawEmail: String?,
         rawPassword: String?,
-        rawConfirmedPassword: String?
+        rawConfirmedPassword: String?,
     ): RegistrationError? {
         if (rawEmail.isNullOrEmpty()) {
             return RegistrationError.EmptyEmail
