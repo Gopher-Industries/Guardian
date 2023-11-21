@@ -343,6 +343,8 @@
     <string name="validation_error_passwords_do_not_match">Passwords do not match</string>
     <string name="validation_empty_confirmed_password">Password confirmation must not be empty</string>
     <string name="previous">previous</string>
+    <string name="registration_success">Verification Email Has been Sent</string>
+    <string name="registration_failure">Registration Failed</string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
