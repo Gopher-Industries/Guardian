@@ -21,6 +21,24 @@ class EmailPasswordAuthService(
         }
     }
 
+    fun createAccount(): Task<AuthResult>? {
+        return try {
+            val registerResult =
+                auth.createUserWithEmailAndPassword(emailAddress.emailAddress, password.password)
+
+            if (auth.currentUser == null) {
+                registerResult
+            } else {
+                auth.currentUser!!.sendEmailVerification()
+                registerResult
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
     companion object {
         fun resetPassword(emailAddress: EmailAddress): Task<Void>? {
             return try {
@@ -32,3 +50,4 @@ class EmailPasswordAuthService(
         }
     }
 }
+
