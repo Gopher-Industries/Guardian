@@ -10,7 +10,7 @@ class UserDataService : FireStoreDataService() {
     override val dataServiceName: String
         get() = "UserDataService"
 
-    fun createUser(userId: String, email: String) {
+    fun create(userId: String, email: String) {
         usersCollection.document(userId).set(
             hashMapOf(
                 "userId" to userId,
