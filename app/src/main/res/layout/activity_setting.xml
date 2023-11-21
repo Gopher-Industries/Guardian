@@ -141,17 +141,6 @@
             app:layout_constraintStart_toEndOf="@+id/notification_button_title"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/notification_button_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="18sp"
-            android:fontFamily="@font/poppins"
-            android:textFontWeight="275"
-            android:textIsSelectable="true"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="352dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
