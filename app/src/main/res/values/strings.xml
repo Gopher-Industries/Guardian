@@ -216,7 +216,7 @@
     <string name="back_to_login">Back to Login</string>
     <string name="already_registered_login_here">Already Registered ? Login Here</string>
     <string name="account_creation">Account Creation</string>
-    <string name="theme_mode">Theme Mode</string>
+    <string name="night_mode">Night Mode</string>
     <string name="change">Change</string>
     <string name="app_update">App Update</string>
     <string name="feedback">Feedback</string>
