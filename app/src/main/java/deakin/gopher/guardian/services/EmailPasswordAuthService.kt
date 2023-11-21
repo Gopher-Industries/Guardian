@@ -11,6 +11,7 @@ class EmailPasswordAuthService(
     private val password: Password,
 ) {
     private val auth = FirebaseAuth.getInstance()
+    private val userDataService = UserDataService()
 
     fun signIn(): Task<AuthResult>? {
         return try {
@@ -29,7 +30,9 @@ class EmailPasswordAuthService(
             if (auth.currentUser == null) {
                 registerResult
             } else {
-                auth.currentUser!!.sendEmailVerification()
+                val currentUser = auth.currentUser!!
+                currentUser.sendEmailVerification()
+                userDataService.createUser(currentUser.uid, emailAddress.emailAddress)
                 registerResult
             }
 

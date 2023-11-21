@@ -7,8 +7,6 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.RegistrationStatusMessage
 import deakin.gopher.guardian.model.login.EmailAddress
@@ -18,7 +16,6 @@ import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
 
 class RegisterActivity : AppCompatActivity() {
-    var userID: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -28,12 +25,8 @@ class RegisterActivity : AppCompatActivity() {
         val backToLoginButton: Button = findViewById(R.id.backToLoginButton)
         val mRegisterBtn: Button = findViewById(R.id.registerBtn)
         val mLoginBtn: Button = findViewById(R.id.loginRegisterBtn)
-
-
-        val Auth = FirebaseAuth.getInstance()
-        val fStore = FirebaseFirestore.getInstance()
-
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
+
         mRegisterBtn.setOnClickListener {
             val emailInput = mEmail.text.toString().trim { it <= ' ' }
             val passwordInput = mPassword.text.toString().trim { it <= ' ' }
@@ -54,12 +47,13 @@ class RegisterActivity : AppCompatActivity() {
 
             val emailAddress = EmailAddress(emailInput)
             val password = Password(passwordInput)
-            val auth = EmailPasswordAuthService(emailAddress, password)
+
+            EmailPasswordAuthService(emailAddress, password)
                 .createAccount()
                 ?.addOnSuccessListener {
                     Toast.makeText(
                         this@RegisterActivity,
-                        "${RegistrationStatusMessage.Success.message}",
+                        RegistrationStatusMessage.Success.message,
                         Toast.LENGTH_SHORT
                     ).show()
 
@@ -68,72 +62,10 @@ class RegisterActivity : AppCompatActivity() {
                 ?.addOnFailureListener { e: Exception ->
                     Toast.makeText(
                         this@RegisterActivity,
-                        "${RegistrationStatusMessage.Failure.message} : ${e.message}",
+                        RegistrationStatusMessage.Failure.toString() + " : ${e.message}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
-//            Auth.createUserWithEmailAndPassword(emailInput, password)
-//                .addOnCompleteListener { task: Task<AuthResult?> ->
-//                    if (task.isSuccessful) {
-//
-//                        // send verification link
-//                        val fuser = Auth.currentUser
-//                        if (fuser != null) {
-//                            fuser
-//                                .sendEmailVerification()
-//                                .addOnSuccessListener { aVoid: Void? ->
-//                                    Toast.makeText(
-//                                        this@RegisterActivity,
-//                                        "Verification Email Has been Sent.",
-//                                        Toast.LENGTH_SHORT
-//                                    )
-//                                        .show()
-//                                }
-//                                .addOnFailureListener { e: Exception ->
-//                                    Log.d(
-//                                        TAG,
-//                                        "onFailure: Email not sent " + e.message
-//                                    )
-//                                }
-//                        }
-//                        Toast.makeText(
-//                            this@RegisterActivity,
-//                            "User Created.",
-//                            Toast.LENGTH_SHORT
-//                        )
-//                            .show()
-//                        userID = Auth.currentUser!!.uid
-//                        val documentReference = fStore.collection("users").document(
-//                            userID!!
-//                        )
-//                        val user: MutableMap<String, Any> = HashMap()
-//                        user["email"] = emailInput
-//                        documentReference
-//                            .set(user)
-//                            .addOnSuccessListener { aVoid: Void? ->
-//                                Log.d(
-//                                    TAG,
-//                                    "onSuccess: user Profile is created for $userID"
-//                                )
-//                            }
-//                            .addOnFailureListener { e: Exception ->
-//                                Log.d(
-//                                    TAG,
-//                                    "onFailure: $e"
-//                                )
-//                            }
-//                        startActivity(Intent(applicationContext, MainActivity::class.java))
-//                    } else {
-//                        Toast.makeText(
-//                            this@RegisterActivity,
-//                            "Error ! " + task.exception!!.message,
-//                            Toast.LENGTH_SHORT
-//                        )
-//                            .show()
-//                        progressBar.visibility = View.GONE
-//                    }
-//                }
         }
 
         mLoginBtn.setOnClickListener {
@@ -144,11 +76,7 @@ class RegisterActivity : AppCompatActivity() {
             NavigationService(this).toLogin()
         }
     }
-
-    companion object {
-        const val TAG = "TAG"
-    }
-
+    
     private fun validateInputs(
         rawEmail: String?,
         rawPassword: String?,
