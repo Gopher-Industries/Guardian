@@ -13,6 +13,7 @@ data class NextOfKin(
         this.homeAddress = homeAddress
     }
 
+
     fun setFirstName(firstName: String) {
         this.firstName = firstName
     }
