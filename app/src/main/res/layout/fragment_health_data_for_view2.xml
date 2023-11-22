@@ -31,7 +31,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Indigenious status"
+                    android:text="@string/indigenious_status"
                     android:textColor="#3d3d3d"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -62,7 +62,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Length of stay (Days)"
+                    android:text="@string/length_of_stay_days"
                     android:textColor="#3d3d3d"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -94,7 +94,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Length of stay (Months)"
+                    android:text="@string/length_of_stay_months"
                     android:textColor="#3d3d3d"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -126,7 +126,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="MMM code"
+                    android:text="@string/mmm_code"
                     android:textColor="#3d3d3d"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -158,7 +158,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Operational places"
+                    android:text="@string/operational_places"
                     android:textColor="#3d3d3d"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -190,7 +190,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Operational type"
+                    android:text="@string/operational_type"
                     android:textColor="#3d3d3d"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -222,7 +222,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Preferred language"
+                    android:text="@string/preferred_language"
                     android:textColor="#3d3d3d"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -254,7 +254,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Program type"
+                    android:text="@string/program_type"
                     android:textColor="#3d3d3d"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -286,7 +286,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Remoteness"
+                    android:text="@string/remoteness"
                     android:textColor="#3d3d3d"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -318,7 +318,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Sex"
+                    android:text="@string/sex"
                     android:textColor="#3d3d3d"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -350,7 +350,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Service size"
+                    android:text="@string/service_size"
                     android:textColor="#3d3d3d"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -382,7 +382,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="State"
+                    android:text="@string/state"
                     android:textColor="#3d3d3d"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -414,7 +414,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Year"
+                    android:text="@string/year"
                     android:textColor="#3d3d3d"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -444,7 +444,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/TG_blue"
-                    android:text="Prev"
+                    android:text="@string/prev"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     app:cornerRadius="20dp"

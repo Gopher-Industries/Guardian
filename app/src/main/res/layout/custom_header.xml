@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Patient details"
+        android:text="@string/patient_details"
         android:textColor="@color/white"
         android:textFontWeight="700"
         android:textSize="20sp"

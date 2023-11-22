@@ -52,7 +52,7 @@
             android:layout_marginStart="132dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Patient List"
+            android:text="@string/patient_list"
             android:textColor="@android:color/white"
             android:textSize="25sp"
             android:translationZ="2dp"
@@ -70,7 +70,7 @@
             android:queryHint="Search patients or others"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/patient_list_title" />
-    
+
     <ScrollView
             android:id="@+id/patient_list_scrollView"
             android:layout_width="409dp"
