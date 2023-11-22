@@ -12,11 +12,9 @@ data class MedicalDiagnostic(
     var bloodFatLevel: String? = null,
     var current: Boolean? = null
 ) {
-    constructor(patient_id: String, isCurrent: Boolean) : this()  {
-        patientId = patient_id
-        current = isCurrent
-
-
+    constructor(patientId: String, current: Boolean) : this()  {
+        this.patientId = patientId
+        this.current = current
     }
 }
 
