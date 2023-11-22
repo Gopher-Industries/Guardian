@@ -59,7 +59,7 @@
                                 android:background="@drawable/roundshapebtn"
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
-                                android:text="@string/_1"
+                                android:text="1"
                                 android:textSize="10sp" />
 
                             <View
@@ -79,7 +79,7 @@
                             android:layout_marginTop="8sp"
                             android:layout_marginRight="2sp"
                             android:fontFamily="sans-serif-black"
-                            android:text="@string/new_patient_details"
+                            android:text="New patient details"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="8sp"
@@ -107,7 +107,7 @@
                                 android:background="@drawable/roundshapebtn"
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
-                                android:text="@string/_2"
+                                android:text="2"
                                 android:textSize="10sp" />
 
                             <View
@@ -127,7 +127,7 @@
                             android:layout_marginTop="8sp"
                             android:layout_marginRight="2sp"
                             android:fontFamily="sans-serif-black"
-                            android:text="@string/next_to_kin"
+                            android:text="Next to Kin"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="8sp"
@@ -156,7 +156,7 @@
                                 android:background="@drawable/roundshapebtn"
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
-                                android:text="@string/_3"
+                                android:text="3"
                                 android:textSize="10sp" />
 
                             <View
@@ -176,7 +176,7 @@
                             android:layout_marginTop="8sp"
                             android:layout_marginRight="2sp"
                             android:fontFamily="sans-serif-black"
-                            android:text="@string/next_to_kin_plus"
+                            android:text="Next to Kin+"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="8sp"
@@ -205,7 +205,7 @@
                                 android:background="@drawable/roundshapeseletebtn"
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
-                                android:text="@string/_4"
+                                android:text="4"
                                 android:textSize="10sp" />
 
                             <View
@@ -225,7 +225,7 @@
                             android:layout_marginTop="8sp"
                             android:layout_marginRight="2sp"
                             android:fontFamily="sans-serif-black"
-                            android:text="@string/gp"
+                            android:text="Gp"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="8sp"
@@ -254,7 +254,7 @@
                                 android:background="@drawable/roundshapebtn"
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
-                                android:text="@string/_5"
+                                android:text="5"
                                 android:textSize="10sp" />
 
 
@@ -268,7 +268,7 @@
                             android:layout_marginTop="8sp"
                             android:layout_marginRight="2sp"
                             android:fontFamily="sans-serif-black"
-                            android:text="@string/gpplus"
+                            android:text="Gp+"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="8sp"
@@ -316,7 +316,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="@string/first_name_asterisk"
+                android:text="First name*"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -331,7 +331,7 @@
                 android:layout_marginTop="1dp"
                 android:autofillHints=""
                 android:background="@null"
-                android:hint="@string/enter_a_first_name"
+                android:hint="Enter a first name"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -350,7 +350,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="@string/middle_name"
+                android:text="Middle Name"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -364,7 +364,7 @@
                 android:layout_marginTop="1dp"
                 android:autofillHints=""
                 android:background="@null"
-                android:hint="@string/enter_a_middle_name"
+                android:hint="Enter a middle name"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -383,7 +383,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="@string/last_name_askerisk"
+                android:text="Last Name*"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -398,7 +398,7 @@
                 android:layout_marginTop="1dp"
                 android:autofillHints=""
                 android:background="@null"
-                android:hint="@string/enter_a_last_name"
+                android:hint="Enter a last name"
                 android:inputType="textMultiLine"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -416,7 +416,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="@string/clinic_address_asterisk"
+                android:text="Clinic Address*"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -430,7 +430,7 @@
                 android:layout_marginTop="1dp"
                 android:autofillHints=""
                 android:background="@null"
-                android:hint="@string/enter_clinic_address"
+                android:hint="Enter clinic address"
                 android:inputType="textMultiLine"
                 android:textSize="14sp" />
 
@@ -446,7 +446,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="@string/phone_number_asterisk"
+                android:text="Phone Number*"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -460,7 +460,7 @@
                 android:layout_marginTop="1dp"
                 android:autofillHints=""
                 android:background="@null"
-                android:hint="@string/eg_1234_56789_0"
+                android:hint="eg: 1234 56789 0 "
                 android:inputType="textMultiLine"
                 android:textSize="14sp" />
 
@@ -476,7 +476,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="@string/email"
+                android:text="Email"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -490,7 +490,7 @@
                 android:layout_marginTop="1dp"
                 android:autofillHints=""
                 android:background="@null"
-                android:hint="@string/enter_an_email_adress"
+                android:hint="Enter an email adress"
                 android:inputType="textMultiLine"
                 android:textSize="14sp" />
 
@@ -506,7 +506,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="@string/fax"
+                android:text="Fax"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -520,8 +520,8 @@
                 android:layout_marginTop="1dp"
                 android:autofillHints=""
                 android:background="@null"
-                android:hint="@string/enter_a_fax"
-                android:inputType="textMultiLine"
+                android:hint="xxx-xxx-xxxx"
+                android:inputType="number"
                 android:textSize="14sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -535,7 +535,7 @@
                     android:layout_marginTop="10dp"
                     android:backgroundTint="#3297C3"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="@string/prev"
+                    android:text="Prev"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -551,7 +551,7 @@
                     android:layout_marginTop="10dp"
                     android:backgroundTint="#3297C3"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="@string/save"
+                    android:text="Save"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
