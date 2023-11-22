@@ -7,6 +7,7 @@
         <item name="colorOnPrimary">@color/dark_primary_color</item>
         <!-- Customize other dark mode attributes here -->
         <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColorPrimary">@color/white</item>
     </style>
 
 </resources>
