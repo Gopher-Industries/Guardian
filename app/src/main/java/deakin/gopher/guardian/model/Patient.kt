@@ -3,7 +3,7 @@ package deakin.gopher.guardian.model;
 data class Patient(
     private var patientId: String? = null,
     private var address: String? = null,
-    private var dob: String? = null,
+    private var dateOfBirth: String? = null,
     private var patientName: String? = null,
     private var phone: String? = null,
     private var photo: String? = null,
@@ -26,18 +26,18 @@ data class Patient(
 
     constructor(
         dateOfBirth: String,
-        firstname: String,
-        middlename: String,
-        lastname: String,
-        medicareno: String,
-        westernAffairsno: String
+        firstName: String,
+        middleName: String,
+        lastName: String,
+        medicareNo: String,
+        westernAffairsNo: String
     ) : this() {
-        dob = dateOfBirth
-        firstName = firstname
-        middleName = middlename
-        lastName = lastname
-        medicareNo = medicareno
-        westwenAffairesNo = westernAffairsno
+        this.dateOfBirth = dateOfBirth
+        this.firstName = firstName
+        this.middleName = middleName
+        this.lastName = lastName
+        this.medicareNo = medicareNo
+        this.westwenAffairesNo = westernAffairsNo
     }
 
     fun getPatientId() = "$patientId"
@@ -81,8 +81,8 @@ data class Patient(
         this.medicareNo = medicareNo
     }
 
-    fun setDob(dob: String) {
-        this.dob = dob
+    fun setDob(dateOfBirth: String) {
+        this.dateOfBirth = dateOfBirth
     }
 
     fun setWestwenAffairesNo(westwenAffairesNo: String) {
