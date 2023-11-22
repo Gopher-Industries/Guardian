@@ -10,6 +10,7 @@
         <item name="colorOnSecondary">@color/white</item>
 
         <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColorPrimary">@color/black</item>
     </style>
 
 
