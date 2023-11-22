@@ -6,6 +6,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -19,6 +21,8 @@ import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
 
 class LoginActivity : AppCompatActivity() {
+
+    var userRole: RoleName = RoleName.Caretaker
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -28,6 +32,19 @@ class LoginActivity : AppCompatActivity() {
         val loginButton: Button = findViewById(R.id.loginBtn)
         val mCreateBtn: Button = findViewById(R.id.loginRegisterBtn)
         val forgotTextLink: TextView = findViewById(R.id.forgotPassword)
+        val login_role_radio_group: RadioGroup = findViewById(R.id.login_role_radioGroup)
+
+        login_role_radio_group.setOnCheckedChangeListener { group, checkedId ->
+            val radioButton: RadioButton = findViewById(checkedId)
+
+            // Set the user role based on the selected radio button
+            userRole = when (checkedId) {
+                R.id.admin_radioButton -> RoleName.Admin
+                R.id.caretaker_radioButton -> RoleName.Caretaker
+                R.id.nurse_radioButton -> RoleName.Nurse
+                else -> RoleName.Caretaker
+            }
+        }
 
         loginButton.setOnClickListener {
             progressBar.visibility = View.VISIBLE
@@ -49,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
                 .signIn()
                 ?.addOnSuccessListener {
                     progressBar.visibility = View.VISIBLE
-                    NavigationService(this).onLoginForRole(RoleName.Caretaker)
+                    NavigationService(this).onLoginForRole(userRole)
                 }
                 ?.addOnFailureListener { e: Exception ->
                     Toast.makeText(
