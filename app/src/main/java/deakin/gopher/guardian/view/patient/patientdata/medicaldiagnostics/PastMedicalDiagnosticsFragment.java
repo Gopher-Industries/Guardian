@@ -44,7 +44,7 @@ public class PastMedicalDiagnosticsFragment extends Fragment {
     R.id.past_respiration_rate_pencil,
     R.id.past_bloodfat_level_pencil
   };
-  MedicalDiagnostic medical_diagnostic_past;
+  MedicalDiagnostic medicalDiagnosticPast;
   private EditText[] editTextArray;
   private Button[] editButtonArray;
   private String patientId;
@@ -129,7 +129,7 @@ public class PastMedicalDiagnosticsFragment extends Fragment {
         return false;
       }
     }
-    medical_diagnostic_past =
+    medicalDiagnosticPast =
         new MedicalDiagnostic(
             patientId,
             editTextArray[0].getText().toString(),
@@ -150,7 +150,7 @@ public class PastMedicalDiagnosticsFragment extends Fragment {
       for (final DataSnapshot childSnapshot : snapshot.getChildren()) {
         final Boolean isCurrent = childSnapshot.child("current").getValue(Boolean.class);
         if (Boolean.FALSE.equals(isCurrent)) {
-          childSnapshot.getRef().setValue(medical_diagnostic_past);
+          childSnapshot.getRef().setValue(medicalDiagnosticPast);
         }
       }
     }

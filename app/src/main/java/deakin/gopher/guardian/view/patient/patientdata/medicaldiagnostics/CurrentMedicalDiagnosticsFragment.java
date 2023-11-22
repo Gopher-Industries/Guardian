@@ -42,7 +42,7 @@ public class CurrentMedicalDiagnosticsFragment extends Fragment {
     R.id.current_respiration_rate_pencil,
     R.id.current_bloodfat_level_pencil
   };
-  MedicalDiagnostic medical_diagnostic_current;
+  MedicalDiagnostic medicalDiagnosticCurrent;
   private EditText[] editTextArray;
   private Button[] editButtonArray;
   private String patient_id;
@@ -131,7 +131,7 @@ public class CurrentMedicalDiagnosticsFragment extends Fragment {
         return false;
       }
     }
-    medical_diagnostic_current =
+    medicalDiagnosticCurrent =
         new MedicalDiagnostic(
             patient_id,
             editTextArray[0].getText().toString(),
@@ -152,7 +152,7 @@ public class CurrentMedicalDiagnosticsFragment extends Fragment {
       for (final DataSnapshot childSnapshot : snapshot.getChildren()) {
         final Boolean isCurrent = childSnapshot.child("current").getValue(Boolean.class);
         if (Boolean.TRUE.equals(isCurrent)) {
-          childSnapshot.getRef().setValue(medical_diagnostic_current);
+          childSnapshot.getRef().setValue(medicalDiagnosticCurrent);
         }
       }
     }
