@@ -73,7 +73,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/poppins_bold"
-                            android:text="Home"
+                            android:text="@string/home"
                             android:textColor="#FFFFFF"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -104,7 +104,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/poppins_bold"
-                            android:text="Admin"
+                            android:text="@string/admin"
                             android:textColor="#FFFFFF"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -135,7 +135,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/poppins_bold"
-                            android:text="Settings"
+                            android:text="@string/settings"
                             android:textColor="#FFFFFF"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -166,7 +166,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:fontFamily="@font/poppins_bold"
-                            android:text="Sign Out"
+                            android:text="@string/sign_out"
                             android:textColor="#FFFFFF"
                             android:textSize="17sp"
                             android:textStyle="bold" />

@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="90dp"
             android:fontFamily="sans-serif-medium"
-            android:text="Patient X Daily Report"
+            android:text="@string/patient_x_daily_report"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
-                    android:text="Progress Notes"
+                    android:text="@string/progress_notes"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -99,7 +99,7 @@
                     android:layout_marginRight="20dp"
                     android:background="#F6F6F6"
                     android:maxWidth="376dp"
-                    android:text="TextView"
+                    android:text="@string/textview"
                     android:textSize="16sp" />
 
             <TextView
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="30dp"
-                    android:text="Current Status"
+                    android:text="@string/current_status"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -122,7 +122,7 @@
                     android:background="#F6F6F6"
                     android:maxWidth="376dp"
                     android:singleLine="false"
-                    android:text="TextView"
+                    android:text="@string/textview"
                     android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>

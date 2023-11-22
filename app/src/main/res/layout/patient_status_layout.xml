@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_weight="1"
-        android:text="Requires Medical Attention Test Test"
+        android:text="@string/requires_medical_attention_test_test"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/patientStatusImageView"
         app:layout_constraintTop_toTopOf="parent"

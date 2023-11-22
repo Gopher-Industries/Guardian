@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
             if (loginValidationError != null) {
                 Toast.makeText(
                     applicationContext,
-                    loginValidationError.message,
+                    loginValidationError.messageResoureId,
                     Toast.LENGTH_LONG,
                 ).show()
                 return@setOnClickListener
@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
                 .signIn()
                 ?.addOnSuccessListener {
                     progressBar.visibility = View.VISIBLE
-                    NavigationService(this).onLoginForRole(RoleName.Caretaker)
+                    NavigationService(this).toHomeScreenForRole(RoleName.Caretaker)
                 }
                 ?.addOnFailureListener { e: Exception ->
                     Toast.makeText(
@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         mCreateBtn.setOnClickListener {
-            NavigationService(this).onRegister()
+            NavigationService(this).toRegistration()
         }
 
         forgotTextLink.setOnClickListener { v: View ->
