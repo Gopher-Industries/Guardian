@@ -70,9 +70,7 @@
             android:queryHint="Search patients or others"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/patient_list_title" />
-
-
-
+    
     <ScrollView
             android:id="@+id/patient_list_scrollView"
             android:layout_width="409dp"
