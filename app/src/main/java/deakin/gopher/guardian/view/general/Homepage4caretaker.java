@@ -5,7 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+
 import deakin.gopher.guardian.R;
+import deakin.gopher.guardian.model.login.SessionManager;
 
 public class Homepage4caretaker extends AppCompatActivity {
 
@@ -40,9 +44,11 @@ public class Homepage4caretaker extends AppCompatActivity {
     // sign out button
     signOutButton.setOnClickListener(
         view -> {
-          final Intent medicalDiagnosticsActivityIntent =
-              new Intent(Homepage4caretaker.this, LoginActivity.class);
-          startActivity(medicalDiagnosticsActivityIntent);
+            final SessionManager sessionManager = new SessionManager(getApplicationContext());
+            sessionManager.logoutUser();
+            FirebaseAuth.getInstance().signOut(); // logout
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
         });
   }
 }

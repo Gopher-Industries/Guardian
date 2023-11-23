@@ -15,6 +15,7 @@ import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.LoginValidationError
 import deakin.gopher.guardian.model.login.Password
 import deakin.gopher.guardian.model.login.RoleName
+import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
 
@@ -58,7 +59,13 @@ class LoginActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT,
                     ).show()
                 }
+
+            val sessionManager = SessionManager(this)
+            sessionManager.createLoginSession()
+
         }
+
+
 
         mCreateBtn.setOnClickListener {
             NavigationService(this).toRegistration()
