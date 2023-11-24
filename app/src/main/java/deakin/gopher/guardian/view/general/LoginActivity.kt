@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.login.EmailAddress
+import deakin.gopher.guardian.model.login.LoginAuthError
 import deakin.gopher.guardian.model.login.LoginValidationError
 import deakin.gopher.guardian.model.login.Password
 import deakin.gopher.guardian.model.login.RoleName
@@ -75,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
                         if (authService.isUserVerified().not()) {
                             Toast.makeText(
                                 applicationContext,
-                                "User Email Not Verified",
+                                LoginAuthError.EmailNotVerified.messageId,
                                 Toast.LENGTH_SHORT,
                             ).show()
                             return@addOnSuccessListener
