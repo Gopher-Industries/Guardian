@@ -218,5 +218,3 @@ class LoginActivity : AppCompatActivity() {
         private const val RC_GOOGLE_SIGN_IN = 1000
     }
 }
-
-
