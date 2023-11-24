@@ -28,6 +28,8 @@ import deakin.gopher.guardian.model.login.Password
 import deakin.gopher.guardian.model.login.RoleName
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
+import deakin.gopher.guardian.view.hide
+import deakin.gopher.guardian.view.show
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var gsoClient: GoogleSignInClient
@@ -50,13 +52,14 @@ class LoginActivity : AppCompatActivity() {
         gsoClient = GoogleSignIn.getClient(this, gso)
 
         loginButton.setOnClickListener {
-            progressBar.visibility = View.VISIBLE
+            progressBar.show()
             val emailInput = mEmail.text.toString().trim { it <= ' ' }
             val passwordInput = mPassword.text.toString().trim { it <= ' ' }
 
             val loginValidationError = validateInputs(emailInput, passwordInput)
 
             if (loginValidationError != null) {
+                progressBar.hide()
                 Toast.makeText(
                     applicationContext,
                     loginValidationError.messageResoureId,
@@ -72,9 +75,10 @@ class LoginActivity : AppCompatActivity() {
                 authService
                     .signIn()
                     ?.addOnSuccessListener {
-                        progressBar.visibility = View.VISIBLE
+                        progressBar.show()
 
                         if (authService.isUserVerified().not()) {
+                            progressBar.hide()
                             Toast.makeText(
                                 applicationContext,
                                 LoginAuthError.EmailNotVerified.messageId,
@@ -84,8 +88,10 @@ class LoginActivity : AppCompatActivity() {
                         }
 
                         NavigationService(this).toHomeScreenForRole(RoleName.Caretaker)
+                        progressBar.hide()
                     }
                     ?.addOnFailureListener { e: Exception ->
+                        progressBar.hide()
                         Toast.makeText(
                             applicationContext,
                             getString(R.string.toast_login_error, e.message),
@@ -212,3 +218,5 @@ class LoginActivity : AppCompatActivity() {
         private const val RC_GOOGLE_SIGN_IN = 1000
     }
 }
+
+
