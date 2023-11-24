@@ -15,6 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -37,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         val mPassword: EditText = findViewById(R.id.password)
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
         val loginButton: Button = findViewById(R.id.loginBtn)
-        val loginGoogleButton: Button = findViewById(R.id.loginGoogleBtn)
+        val loginGoogleButton: SignInButton = findViewById(R.id.loginGoogleBtn)
         val mCreateBtn: Button = findViewById(R.id.loginRegisterBtn)
         val forgotTextLink: TextView = findViewById(R.id.forgotPassword)
 
