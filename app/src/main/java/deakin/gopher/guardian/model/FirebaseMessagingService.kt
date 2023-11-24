@@ -30,29 +30,39 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         createNotification(title, message)
     }
 
-    private fun createNotification(title: String, message: String) {
+    private fun createNotification(
+        title: String,
+        message: String,
+    ) {
         val notification = buildNotification(title, message)
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(NOTIFICATION_ID, notification)
-
     }
 
-    private fun buildNotification(title: String, message: String): Notification {
+    private fun buildNotification(
+        title: String,
+        message: String,
+    ): Notification {
         val intent = Intent(applicationContext, ActivitySuggestionActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(
-            this, 0, intent, PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
-        )
+        val pendingIntent =
+            PendingIntent.getActivity(
+                this,
+                0,
+                intent,
+                PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE,
+            )
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel()
         }
 
-        val color: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            resources.getColor(R.color.black, theme)
-        } else {
-            ContextCompat.getColor(this, R.color.black)
-        }
+        val color: Int =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                resources.getColor(R.color.black, theme)
+            } else {
+                ContextCompat.getColor(this, R.color.black)
+            }
 
         return NotificationCompat.Builder(this, Util.CHANNEL_ID)
             .setSmallIcon(R.drawable.notifcations).setColor(color).setContentTitle(title)
@@ -62,11 +72,14 @@ class FirebaseMessagingService : FirebaseMessagingService() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel() {
-        val channel = NotificationChannel(
-            Util.CHANNEL_ID, Util.CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH
-        ).apply {
-            description = Util.CHANNEL_DESCRIPTION
-        }
+        val channel =
+            NotificationChannel(
+                Util.CHANNEL_ID,
+                Util.CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_HIGH,
+            ).apply {
+                description = Util.CHANNEL_DESCRIPTION
+            }
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
     }
