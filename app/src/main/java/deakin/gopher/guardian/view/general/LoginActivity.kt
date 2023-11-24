@@ -64,19 +64,33 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            EmailPasswordAuthService(EmailAddress(emailInput), Password(passwordInput))
-                .signIn()
-                ?.addOnSuccessListener {
-                    progressBar.visibility = View.VISIBLE
-                    NavigationService(this).toHomeScreenForRole(RoleName.Caretaker)
-                }
-                ?.addOnFailureListener { e: Exception ->
-                    Toast.makeText(
-                        applicationContext,
-                        getString(R.string.toast_login_error, e.message),
-                        Toast.LENGTH_SHORT,
-                    ).show()
-                }
+            EmailPasswordAuthService(
+                EmailAddress(emailInput), Password(passwordInput)
+            ).also { authService ->
+                authService
+                    .signIn()
+                    ?.addOnSuccessListener {
+                        progressBar.visibility = View.VISIBLE
+
+                        if (authService.isUserVerified().not()) {
+                            Toast.makeText(
+                                applicationContext,
+                                "User Email Not Verified",
+                                Toast.LENGTH_SHORT,
+                            ).show()
+                            return@addOnSuccessListener
+                        }
+
+                        NavigationService(this).toHomeScreenForRole(RoleName.Caretaker)
+                    }
+                    ?.addOnFailureListener { e: Exception ->
+                        Toast.makeText(
+                            applicationContext,
+                            getString(R.string.toast_login_error, e.message),
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                    }
+            }
         }
 
         mCreateBtn.setOnClickListener {
