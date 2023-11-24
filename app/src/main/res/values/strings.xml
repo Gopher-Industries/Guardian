@@ -3,6 +3,8 @@
 
     <string name="main_activity_solgan">Take care of your patients</string>
 
+    <string name="web_client_id">274677794777-fu1sosmmrqm4bgvmkf76gdc3v430d03v.apps.googleusercontent.com</string>
+
     <string name="ek_img_content">ExportKit Image</string>
     <string name="welcome__marilyn___string">Welcome, Marilyn !</string>
     <string name="new_patient_string">New Patient</string>
@@ -325,6 +327,7 @@
     <string name="login_role_selection_prompt">Login as:</string>
     <string name="password_hint">Enter password</string>
     <string name="login_register_btn">Register</string>
+    <string name="login_google_btn">Sign in with Google</string>
     <string name="login_forgot_password">Forgot Password?</string>
     <string name="email_hint">Email</string>
     <string name="login_login_button">Login</string>
