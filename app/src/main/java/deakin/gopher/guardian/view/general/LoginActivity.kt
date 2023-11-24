@@ -66,7 +66,8 @@ class LoginActivity : AppCompatActivity() {
             }
 
             EmailPasswordAuthService(
-                EmailAddress(emailInput), Password(passwordInput)
+                EmailAddress(emailInput),
+                Password(passwordInput),
             ).also { authService ->
                 authService
                     .signIn()
