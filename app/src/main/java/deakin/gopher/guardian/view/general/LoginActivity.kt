@@ -34,7 +34,6 @@ import deakin.gopher.guardian.view.hide
 import deakin.gopher.guardian.view.show
 
 class LoginActivity : AppCompatActivity() {
-
     var userRole: RoleName = RoleName.Caretaker
     private lateinit var gsoClient: GoogleSignInClient
 
@@ -54,12 +53,13 @@ class LoginActivity : AppCompatActivity() {
             val radioButton: RadioButton = findViewById(checkedId)
 
             // Set the user role based on the selected radio button
-            userRole = when (checkedId) {
-                R.id.admin_radioButton -> RoleName.Admin
-                R.id.caretaker_radioButton -> RoleName.Caretaker
-                R.id.nurse_radioButton -> RoleName.Nurse
-                else -> RoleName.Caretaker
-            }
+            userRole =
+                when (checkedId) {
+                    R.id.admin_radioButton -> RoleName.Admin
+                    R.id.caretaker_radioButton -> RoleName.Caretaker
+                    R.id.nurse_radioButton -> RoleName.Nurse
+                    else -> RoleName.Caretaker
+                }
         }
 
         val gso =
