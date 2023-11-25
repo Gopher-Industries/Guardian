@@ -48,9 +48,9 @@ class LoginActivity : AppCompatActivity() {
         val loginGoogleButton: SignInButton = findViewById(R.id.loginGoogleBtn)
         val mCreateBtn: Button = findViewById(R.id.loginRegisterBtn)
         val forgotTextLink: TextView = findViewById(R.id.forgotPassword)
-        val login_role_radio_group: RadioGroup = findViewById(R.id.login_role_radioGroup)
+        val loginRoleRadioGroup: RadioGroup = findViewById(R.id.login_role_radioGroup)
 
-        login_role_radio_group.setOnCheckedChangeListener { group, checkedId ->
+        loginRoleRadioGroup.setOnCheckedChangeListener { group, checkedId ->
             val radioButton: RadioButton = findViewById(checkedId)
 
             // Set the user role based on the selected radio button
