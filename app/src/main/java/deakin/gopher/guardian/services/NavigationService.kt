@@ -9,6 +9,7 @@ import deakin.gopher.guardian.view.general.Homepage4nurse
 import deakin.gopher.guardian.view.general.RegisterActivity
 import deakin.gopher.guardian.view.general.Setting
 import deakin.gopher.guardian.view.general.LoginActivity
+import deakin.gopher.guardian.view.general.TasksListActivity
 
 class NavigationService(val activity: Activity) {
     fun onLoginForRole(roleName: RoleName) {
@@ -67,4 +68,14 @@ class NavigationService(val activity: Activity) {
             )
         )
     }
+    /*
+    fun onLaunchTasks() {
+        activity.startActivity(
+            Intent(
+                activity.applicationContext,
+                TasksListActivity::class.java
+            )
+        )
+    }
+    */
 }

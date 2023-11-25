@@ -10,7 +10,7 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.services.NavigationService
 
 class Homepage4nurse : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage4nurse)
@@ -18,13 +18,10 @@ class Homepage4nurse : AppCompatActivity() {
         val settingsButton: Button = findViewById(R.id.settingsButton_nurse)
         val signOutButton: Button = findViewById(R.id.sighOutButton_nurse)
 
-        // patient list button
-        tasksButton.setOnClickListener(
-            View.OnClickListener { view: View? ->
-                val medicalDiagnosticsActivityIntent =
-                    Intent(this@Homepage4nurse, PatientListActivity::class.java)
-                startActivity(medicalDiagnosticsActivityIntent)
-            })
+        // patient list button - not yet implemented
+        //tasksButton.setOnClickListener{
+        //    NavigationService(this).onLaunchTasks()
+        //}
 
         // settings button
         settingsButton.setOnClickListener {
