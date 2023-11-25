@@ -6,13 +6,13 @@ import deakin.gopher.guardian.model.login.RoleName
 import deakin.gopher.guardian.view.general.Homepage4admin
 import deakin.gopher.guardian.view.general.Homepage4caretaker
 import deakin.gopher.guardian.view.general.Homepage4nurse
+import deakin.gopher.guardian.view.general.LoginActivity
 import deakin.gopher.guardian.view.general.RegisterActivity
 import deakin.gopher.guardian.view.general.Setting
-import deakin.gopher.guardian.view.general.LoginActivity
 import deakin.gopher.guardian.view.general.TasksListActivity
 
 class NavigationService(val activity: Activity) {
-    fun onLoginForRole(roleName: RoleName) {
+    fun toHomeScreenForRole(roleName: RoleName) {
         when (roleName) {
             RoleName.Caretaker -> {
                 activity.startActivity(
@@ -43,7 +43,7 @@ class NavigationService(val activity: Activity) {
         }
     }
 
-    fun onRegister() {
+    fun toRegistration() {
         activity.startActivity(
             Intent(
                 activity.applicationContext,
@@ -51,6 +51,7 @@ class NavigationService(val activity: Activity) {
             ),
         )
     }
+    
     fun onSettings() {
         activity.startActivity(
             Intent(
@@ -78,4 +79,13 @@ class NavigationService(val activity: Activity) {
         )
     }
     */
+
+    fun toLogin() {
+        activity.startActivity(
+            Intent(
+                activity.applicationContext,
+                LoginActivity::class.java,
+            ),
+        )
+    }
 }
