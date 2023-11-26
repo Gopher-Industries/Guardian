@@ -12,6 +12,16 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.LoginAuthError
@@ -25,6 +35,9 @@ import deakin.gopher.guardian.view.hide
 import deakin.gopher.guardian.view.show
 
 class LoginActivity : BaseActivity() {
+    var userRole: RoleName = RoleName.Caretaker
+    private lateinit var gsoClient: GoogleSignInClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
