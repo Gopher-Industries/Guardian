@@ -3,6 +3,8 @@
 
     <string name="main_activity_solgan">Take care of your patients</string>
 
+    <string name="web_client_id">274677794777-fu1sosmmrqm4bgvmkf76gdc3v430d03v.apps.googleusercontent.com</string>
+
     <string name="ek_img_content">ExportKit Image</string>
     <string name="welcome__marilyn___string">Welcome, Marilyn !</string>
     <string name="new_patient_string">New Patient</string>
@@ -39,6 +41,7 @@
     <string name="verified">Verified</string>
     <string name="welcome_caretaker">Welcome, Caretaker</string>
     <string name="welcome_admin">Welcome, Administrator</string>
+    <string name="welcome_nurse">Welcome, Nurse</string>
 
 
     <!-- Below are all strings previously hardcoded added here using the quick function -->
@@ -325,6 +328,7 @@
     <string name="login_role_selection_prompt">Login as:</string>
     <string name="password_hint">Enter password</string>
     <string name="login_register_btn">Register</string>
+    <string name="login_google_btn">Sign in with Google</string>
     <string name="login_forgot_password">Forgot Password?</string>
     <string name="email_hint">Email</string>
     <string name="login_login_button">Login</string>
@@ -340,11 +344,13 @@
     <string name="validation_password_short">Password Must Be Longer than 6 Characters</string>
     <string name="text_reset_password">Reset Password</string>
     <string name="text_enter_your_email_to_received_reset_link">Enter Your Email To Received Reset Link.</string>
+    <string name="tasks_label">Tasks</string>
     <string name="validation_error_passwords_do_not_match">Passwords do not match</string>
     <string name="validation_empty_confirmed_password">Password confirmation must not be empty</string>
     <string name="previous">previous</string>
     <string name="registration_success">Verification Email Has been Sent</string>
     <string name="registration_failure">Registration Failed</string>
+    <string name="login_email_not_verified">User email has not been verified</string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
