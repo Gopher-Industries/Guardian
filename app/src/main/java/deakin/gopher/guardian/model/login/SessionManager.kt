@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 
 class SessionManager(private val _context: Context) {
-    private val pref: SharedPreferences = _context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-    private val editor: SharedPreferences.Editor = pref.edit();
-    private val LAST_ACTIVE_TIME = "LastActiveTime";
+    private val pref: SharedPreferences = _context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+    private val editor: SharedPreferences.Editor = pref.edit()
+    private val lastActiveTime = "LastActiveTime"
 
     fun createLoginSession() {
         editor.putBoolean(IS_LOGIN, true)
@@ -22,12 +22,12 @@ class SessionManager(private val _context: Context) {
     }
 
     fun updateLastActiveTime() {
-        editor.putLong(LAST_ACTIVE_TIME, System.currentTimeMillis())
+        editor.putLong(lastActiveTime, System.currentTimeMillis())
         editor.commit()
     }
 
     fun getLastActiveTime(): Long {
-        return pref.getLong(LAST_ACTIVE_TIME, 0)
+        return pref.getLong(lastActiveTime, 0)
     }
 
     companion object {

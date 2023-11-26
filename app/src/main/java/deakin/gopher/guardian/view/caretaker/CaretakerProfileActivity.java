@@ -1,7 +1,6 @@
 package deakin.gopher.guardian.view.caretaker;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.view.general.BaseActivity;
 

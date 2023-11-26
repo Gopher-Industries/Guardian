@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.util.Util;
 import deakin.gopher.guardian.view.general.BaseActivity;

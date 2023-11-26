@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import androidx.appcompat.app.AppCompatActivity;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.view.caretaker.CaretakerDashboardActivity;
 import deakin.gopher.guardian.view.general.BaseActivity;

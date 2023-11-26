@@ -3,7 +3,6 @@ package deakin.gopher.guardian.view.caretaker.notifications;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageButton;
-import androidx.appcompat.app.AppCompatActivity;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.view.caretaker.notifications.confirmincident.ConfirmIncidentActivity;
 import deakin.gopher.guardian.view.caretaker.notifications.falsealarm.FalseAlertConfirmedActivity;

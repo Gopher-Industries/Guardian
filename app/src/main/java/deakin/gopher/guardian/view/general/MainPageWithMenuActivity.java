@@ -2,7 +2,6 @@ package deakin.gopher.guardian.view.general;
 
 import android.os.Bundle;
 import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import deakin.gopher.guardian.R;

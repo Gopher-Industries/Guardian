@@ -3,7 +3,6 @@ package deakin.gopher.guardian.view.caretaker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import androidx.appcompat.app.AppCompatActivity;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.view.caretaker.notifications.FallAlertActivity;
 import deakin.gopher.guardian.view.general.BaseActivity;
