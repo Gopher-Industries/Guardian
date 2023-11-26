@@ -7,7 +7,7 @@ data class NextOfKin(
     private var homeAddress: String,
     private var mobilePhone: String,
     private var emailAddress: String,
-    private val photo: String? = null
+    private val photo: String? = null,
 ) {
     fun setHomeAddress(homeAddress: String) {
         this.homeAddress = homeAddress
@@ -33,29 +33,32 @@ data class NextOfKin(
     fun setEmailAddress(emailAddress: String) {
         this.emailAddress = emailAddress
     }
+
     override fun toString(): String {
-        return ("NextofKin{"
-                + "first_name='"
-                + firstName
-                + '\''
-                + ", middle_name='"
-                + middleName
-                + '\''
-                + ", last_name='"
-                + lastName
-                + '\''
-                + ", home_address='"
-                + homeAddress
-                + '\''
-                + ", mobile_phone='"
-                + mobilePhone
-                + '\''
-                + ", email_address='"
-                + emailAddress
-                + '\''
-                + ", photo='"
-                + photo
-                + '\''
-                + '}')
+        return (
+            "NextofKin{" +
+                "first_name='" +
+                firstName +
+                '\'' +
+                ", middle_name='" +
+                middleName +
+                '\'' +
+                ", last_name='" +
+                lastName +
+                '\'' +
+                ", home_address='" +
+                homeAddress +
+                '\'' +
+                ", mobile_phone='" +
+                mobilePhone +
+                '\'' +
+                ", email_address='" +
+                emailAddress +
+                '\'' +
+                ", photo='" +
+                photo +
+                '\'' +
+                '}'
+        )
     }
 }
