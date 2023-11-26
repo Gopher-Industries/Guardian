@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Provide Feedback"
+        android:text="@string/provide_feedback"
         android:textSize="20sp" />
 
     <EditText
@@ -22,7 +22,7 @@
         android:layout_marginEnd="16dp"
         android:autofillHints=""
         android:gravity="top"
-        android:hint="Enter your feedback..."
+        android:hint="@string/enter_your_feedback"
         android:inputType="text"
         android:minLines="4" />
 
@@ -33,7 +33,7 @@
         android:layout_below="@id/feedback_edit_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="Submit Feedback" />
+        android:text="@string/submit_feedback" />
 
 </RelativeLayout>
 

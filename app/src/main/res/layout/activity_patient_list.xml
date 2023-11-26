@@ -52,7 +52,7 @@
             android:layout_marginStart="132dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Patient List"
+            android:text="@string/patient_list"
             android:textColor="@android:color/white"
             android:textSize="25sp"
             android:translationZ="2dp"
@@ -104,7 +104,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="9dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Patients Overview"
+                    android:text="@string/patients_overview"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 

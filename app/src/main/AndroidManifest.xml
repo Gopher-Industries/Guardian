@@ -28,6 +28,9 @@
             android:name="deakin.gopher.guardian.view.general.Homepage4caretaker"
             android:exported="false" />
         <activity
+            android:name="deakin.gopher.guardian.view.general.Homepage4nurse"
+            android:exported="false" />
+        <activity
             android:name="deakin.gopher.guardian.view.general.UploadPhoto"
             android:exported="false" />
         <activity
@@ -120,6 +123,7 @@
         <activity
             android:name="deakin.gopher.guardian.view.patient.PatientDashboardActivity"
             android:exported="false" />
+        <activity android:name="deakin.gopher.guardian.view.general.BaseActivity" />
 
         <service
             android:name="deakin.gopher.guardian.model.FirebaseMessagingService"
