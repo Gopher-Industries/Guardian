@@ -104,7 +104,7 @@ class LoginActivity : AppCompatActivity() {
                             return@addOnSuccessListener
                         }
 
-                        NavigationService(this).toHomeScreenForRole(RoleName.Caretaker)
+                        NavigationService(this).toHomeScreenForRole(userRole)
                         progressBar.hide()
                     }
                     ?.addOnFailureListener { e: Exception ->
@@ -213,7 +213,7 @@ class LoginActivity : AppCompatActivity() {
             val auth = FirebaseAuth.getInstance()
             auth.signInWithCredential(credential).addOnCompleteListener { authTask ->
                 if (authTask.isSuccessful) {
-                    NavigationService(this).toHomeScreenForRole(RoleName.Caretaker)
+                    NavigationService(this).toHomeScreenForRole(userRole)
                 } else {
                     Toast.makeText(
                         applicationContext,

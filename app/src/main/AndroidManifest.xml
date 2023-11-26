@@ -30,6 +30,8 @@
         <activity
             android:name="deakin.gopher.guardian.view.general.Homepage4nurse"
             android:exported="false" />
+        <activity android:name=".view.general.TasksListActivity"
+            android:exported="false" />
         <activity
             android:name="deakin.gopher.guardian.view.general.UploadPhoto"
             android:exported="false" />
