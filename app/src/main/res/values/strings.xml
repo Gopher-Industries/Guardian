@@ -543,5 +543,6 @@
         <item>2027</item>
         <item>2028</item>
     </string-array>
+    <string name="title_activity_add_heart_rate">AddHeartRate</string>
 </resources>
 

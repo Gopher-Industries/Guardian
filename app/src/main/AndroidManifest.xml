@@ -16,113 +16,122 @@
         tools:replace="android:label"
         tools:targetApi="31">
         <activity
-            android:name="deakin.gopher.guardian.view.general.Setting"
+            android:name=".view.patient.patientdata.healthdata.AddHeartRateActivity"
+            android:exported="false"
+            android:label="@string/title_activity_add_heart_rate"
+            android:theme="@style/Theme.TeamGuardians" />
+        <activity
+            android:name=".view.patient.patientdata.healthdata.AddHeartRateActivity"
+            android:exported="false"
+            android:label="@string/title_activity_add_heart_rate"
+            android:theme="@style/Theme.TeamGuardians" />
+        <activity
+            android:name=".view.general.Setting"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.general.PatientProfileAddActivity"
+            android:name=".view.general.PatientProfileAddActivity"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.general.Homepage4admin"
+            android:name=".view.general.Homepage4admin"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.general.Homepage4caretaker"
+            android:name=".view.general.Homepage4caretaker"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.general.UploadPhoto"
+            android:name=".view.general.UploadPhoto"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.caretaker.notifications.falsealarm.FalseAlertConfirmedActivity"
+            android:name=".view.caretaker.notifications.falsealarm.FalseAlertConfirmedActivity"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.caretaker.notifications.confirmincident.ConfirmIncidentActivity"
+            android:name=".view.caretaker.notifications.confirmincident.ConfirmIncidentActivity"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.caretaker.notifications.FallAlertActivity"
+            android:name=".view.caretaker.notifications.FallAlertActivity"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.caretaker.CaretakerDashboardActivity"
+            android:name=".view.caretaker.CaretakerDashboardActivity"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.patient.patientdata.healthdata.HealthDataActivity"
+            android:name=".view.patient.patientdata.healthdata.HealthDataActivity"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.patient.associateradar.ActivitySuggestionActivity"
+            android:name=".view.patient.associateradar.ActivitySuggestionActivity"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.general.PatientProfileActivity"
+            android:name=".view.general.PatientProfileActivity"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.patient.viewactivitydata.WeeklyActivityProfilingActivity"
+            android:name=".view.patient.viewactivitydata.WeeklyActivityProfilingActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="deakin.gopher.guardian.view.patient.associateradar.ActivityProfilingActivity"
+            android:name=".view.patient.associateradar.ActivityProfilingActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="deakin.gopher.guardian.view.patient.careplan.CarePlanSummaryActivity"
+            android:name=".view.patient.careplan.CarePlanSummaryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="deakin.gopher.guardian.view.patient.careplan.CarePlanActivity"
+            android:name=".view.patient.careplan.CarePlanActivity"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.patient.dailyreport.DailyReportSummaryActivity"
+            android:name=".view.patient.dailyreport.DailyReportSummaryActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="deakin.gopher.guardian.view.patient.dailyreport.DailyReportActivity"
+            android:name=".view.patient.dailyreport.DailyReportActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="deakin.gopher.guardian.view.general.PatientListActivity"
+            android:name=".view.general.PatientListActivity"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.general.RegisterActivity"
+            android:name=".view.general.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.general.LoginActivity"
+            android:name=".view.general.LoginActivity"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.general.AddNewPatientActivity"
+            android:name=".view.general.AddNewPatientActivity"
             android:exported="false" /> <!-- Kussay: may we need to change the start up page into login page -->
         <activity
-            android:name="deakin.gopher.guardian.view.general.MainActivity"
+            android:name=".view.general.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity> <!-- These are here only for UI testing -->
         <activity
-            android:name="deakin.gopher.guardian.view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity"
+            android:name=".view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.general.DrawerActivity"
+            android:name=".view.general.DrawerActivity"
             android:exported="false" />
         <activity
-            android:name="deakin.gopher.guardian.view.patient.PatientDashboardActivity"
+            android:name=".view.patient.PatientDashboardActivity"
             android:exported="false" />
 
         <service
-            android:name="deakin.gopher.guardian.model.FirebaseMessagingService"
+            android:name=".model.FirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
