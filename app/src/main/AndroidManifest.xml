@@ -120,6 +120,7 @@
         <activity
             android:name="deakin.gopher.guardian.view.patient.PatientDashboardActivity"
             android:exported="false" />
+        <activity android:name="deakin.gopher.guardian.view.general.BaseActivity" />
 
         <service
             android:name="deakin.gopher.guardian.model.FirebaseMessagingService"

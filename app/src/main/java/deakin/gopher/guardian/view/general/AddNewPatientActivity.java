@@ -10,7 +10,7 @@ import deakin.gopher.guardian.R;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddNewPatientActivity extends AppCompatActivity {
+public class AddNewPatientActivity extends BaseActivity {
 
   EditText name, address, underCare, photo, phone, dob;
   Button btnAdd, btnBack;

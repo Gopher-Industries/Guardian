@@ -19,7 +19,7 @@ import deakin.gopher.guardian.adapter.PatientListAdapter;
 import deakin.gopher.guardian.model.Patient;
 import deakin.gopher.guardian.view.patient.careplan.CarePlanActivity;
 
-public class PatientListActivity extends AppCompatActivity {
+public class PatientListActivity extends BaseActivity {
   RecyclerView patient_list_recyclerView;
   PatientListAdapter patientListAdapter;
   Query query;

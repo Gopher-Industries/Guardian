@@ -6,10 +6,11 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.view.caretaker.notifications.FallAlertActivity;
+import deakin.gopher.guardian.view.general.BaseActivity;
 import deakin.gopher.guardian.view.general.PatientListActivity;
 import deakin.gopher.guardian.view.general.PatientProfileActivity;
 
-public class CaretakerDashboardActivity extends AppCompatActivity {
+public class CaretakerDashboardActivity extends BaseActivity {
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

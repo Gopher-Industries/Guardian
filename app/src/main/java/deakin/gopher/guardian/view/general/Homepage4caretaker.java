@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.model.login.SessionManager;
 
-public class Homepage4caretaker extends AppCompatActivity {
+public class Homepage4caretaker extends BaseActivity {
 
   Button patientListButton, settingsButton, signOutButton;
 

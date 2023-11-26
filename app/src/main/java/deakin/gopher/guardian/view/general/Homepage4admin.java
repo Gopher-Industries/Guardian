@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.view.patient.dailyreport.DailyReportActivity;
 
-public class Homepage4admin extends AppCompatActivity {
+public class Homepage4admin extends BaseActivity {
 
   Button newPatientButton, dailyReportButton, patientListButton, settingsButton, signOutButton;
 

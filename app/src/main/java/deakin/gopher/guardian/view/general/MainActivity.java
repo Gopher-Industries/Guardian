@@ -15,7 +15,7 @@ import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.view.general.Homepage4caretaker;
 import deakin.gopher.guardian.services.NavigationService;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {

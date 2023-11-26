@@ -7,8 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.view.caretaker.notifications.confirmincident.ConfirmIncidentActivity;
 import deakin.gopher.guardian.view.caretaker.notifications.falsealarm.FalseAlertConfirmedActivity;
+import deakin.gopher.guardian.view.general.BaseActivity;
 
-public class FallAlertActivity extends AppCompatActivity {
+public class FallAlertActivity extends BaseActivity {
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {

@@ -7,8 +7,9 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.view.caretaker.CaretakerDashboardActivity;
+import deakin.gopher.guardian.view.general.BaseActivity;
 
-public class FalseAlertConfirmedActivity extends AppCompatActivity {
+public class FalseAlertConfirmedActivity extends BaseActivity {
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {

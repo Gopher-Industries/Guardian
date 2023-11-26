@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import deakin.gopher.guardian.R;
 
-public class Setting extends AppCompatActivity implements View.OnClickListener {
+public class Setting extends BaseActivity implements View.OnClickListener {
   ConstraintLayout settingsThemeButton;
   ConstraintLayout settingsNotificationButton;
   ConstraintLayout settingsAppUpdateButton;

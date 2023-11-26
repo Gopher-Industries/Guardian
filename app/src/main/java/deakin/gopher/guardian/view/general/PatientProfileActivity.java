@@ -12,7 +12,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientProfileAdapter;
 
-public class PatientProfileActivity extends AppCompatActivity {
+public class PatientProfileActivity extends BaseActivity {
 
   private CustomHeader customHeader;
 
