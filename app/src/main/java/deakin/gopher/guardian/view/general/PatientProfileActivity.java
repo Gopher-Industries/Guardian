@@ -51,18 +51,28 @@ public class PatientProfileActivity extends AppCompatActivity {
             tabLayout,
             viewPager2,
             (tab, position) -> {
-              if (0 == position) {
-                tab.setText("Patient");
-              } else if (1 == position) {
-                tab.setText("Next of Kin");
-              } else if (2 == position) {
-                tab.setText("General Practitioner");
-              } else if (3 == position) {
-                tab.setText("Health Details");
-              } else if (4 == position) {
-                tab.setText("Health & Welfare Det.");
-              } else {
-                tab.setText("Care Plan");
+              switch (position) {
+                case 0:
+                  tab.setText("Patient");
+                  break;
+                case 1:
+                  tab.setText("Next of Kin");
+                  break;
+                case 2:
+                  tab.setText("General Practitioner");
+                  break;
+                case 3:
+                  tab.setText("Health Details");
+                  break;
+                case 4:
+                  tab.setText("Health & Welfare Det.");
+                  break;
+                case 5:
+                  tab.setText("Heart Rate");
+                  break;
+                default:
+                  tab.setText("Care Plan");
+                  break;
               }
             })
         .attach();
@@ -72,28 +82,39 @@ public class PatientProfileActivity extends AppCompatActivity {
           @Override
           public void onTabSelected(final TabLayout.Tab tab) {
             final int position = tab.getPosition();
-            if (0 == position) {
-              customHeader.setHeaderText("Patient Profile");
-              customHeader.setHeaderTopImageVisibility(View.VISIBLE);
-              customHeader.setHeaderTopImage(R.drawable.profile_avatar_women);
-            } else if (1 == position) {
-              customHeader.setHeaderText("Next Of Kin Contact");
-              customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);
-              customHeader.setHeaderTopImageVisibility(View.VISIBLE);
-            } else if (2 == position) {
-              customHeader.setHeaderText("GP Details");
-              customHeader.setHeaderTopImage(R.drawable.profile_avatar_men2);
-              customHeader.setHeaderTopImageVisibility(View.VISIBLE);
-            } else if (3 == position) {
-              customHeader.setHeaderText("Health Details");
-              customHeader.setHeaderTopImageVisibility(View.GONE);
-            } else if (4 == position) {
-              customHeader.setHeaderText("Patient Details");
-              customHeader.setHeaderTopImageVisibility(View.GONE);
-            } else {
-              customHeader.setHeaderText("Care Plan");
-              customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);
-              customHeader.setHeaderTopImageVisibility(View.VISIBLE);
+            switch (position) {
+              case 0 -> {
+                customHeader.setHeaderText("Patient Profile");
+                customHeader.setHeaderTopImageVisibility(View.VISIBLE);
+                customHeader.setHeaderTopImage(R.drawable.profile_avatar_women);
+              }
+              case 1 -> {
+                customHeader.setHeaderText("Next Of Kin Contact");
+                customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);
+                customHeader.setHeaderTopImageVisibility(View.VISIBLE);
+              }
+              case 2 -> {
+                customHeader.setHeaderText("GP Details");
+                customHeader.setHeaderTopImage(R.drawable.profile_avatar_men2);
+                customHeader.setHeaderTopImageVisibility(View.VISIBLE);
+              }
+              case 3 -> {
+                customHeader.setHeaderText("Health Details");
+                customHeader.setHeaderTopImageVisibility(View.GONE);
+              }
+              case 4 -> {
+                customHeader.setHeaderText("Patient Details");
+                customHeader.setHeaderTopImageVisibility(View.GONE);
+              }
+              case 5 -> {
+                customHeader.setHeaderText("Heart Rate");
+                customHeader.setHeaderTopImageVisibility(View.GONE);
+              }
+              default -> {
+                customHeader.setHeaderText("Care Plan");
+                customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);
+                customHeader.setHeaderTopImageVisibility(View.VISIBLE);
+              }
             }
           }
 
