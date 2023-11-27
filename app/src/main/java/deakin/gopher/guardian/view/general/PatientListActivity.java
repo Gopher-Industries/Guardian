@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientListAdapter;
 import deakin.gopher.guardian.model.Patient;
+
 
 public class PatientListActivity extends AppCompatActivity {
     RecyclerView patient_list_recyclerView;

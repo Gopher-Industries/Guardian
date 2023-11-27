@@ -22,6 +22,10 @@ class EmailPasswordAuthService(
         }
     }
 
+    fun isUserVerified(): Boolean {
+        return auth.currentUser?.isEmailVerified ?: false
+    }
+
     fun createAccount(): Task<AuthResult>? {
         return try {
             val registerResult =
