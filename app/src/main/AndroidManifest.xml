@@ -16,12 +16,7 @@
         tools:replace="android:label"
         tools:targetApi="31">
         <activity
-            android:name=".view.patient.patientdata.healthdata.AddHeartRateActivity"
-            android:exported="false"
-            android:label="@string/title_activity_add_heart_rate"
-            android:theme="@style/Theme.TeamGuardians" />
-        <activity
-            android:name=".view.patient.patientdata.healthdata.AddHeartRateActivity"
+            android:name=".view.patient.patientdata.heartrate.AddHeartRateActivity"
             android:exported="false"
             android:label="@string/title_activity_add_heart_rate"
             android:theme="@style/Theme.TeamGuardians" />

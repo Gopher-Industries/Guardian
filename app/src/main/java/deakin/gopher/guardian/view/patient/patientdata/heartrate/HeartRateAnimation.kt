@@ -1,4 +1,4 @@
-package deakin.gopher.guardian.view.patient.patientdata.healthdata.ui.components
+package deakin.gopher.guardian.view.patient.patientdata.heartrate
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -26,7 +26,7 @@ import androidx.compose.ui.graphics.PathMeasure
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import deakin.gopher.guardian.view.patient.patientdata.healthdata.ui.theme.GuardianTheme
+import deakin.gopher.guardian.view.theme.GuardianTheme
 import kotlinx.coroutines.delay
 
 @Composable

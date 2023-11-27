@@ -1,4 +1,4 @@
-package deakin.gopher.guardian.view.patient.patientdata.healthdata.ui.theme
+package deakin.gopher.guardian.view.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

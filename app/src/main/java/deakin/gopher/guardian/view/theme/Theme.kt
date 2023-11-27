@@ -1,4 +1,4 @@
-package deakin.gopher.guardian.view.patient.patientdata.healthdata.ui.theme
+package deakin.gopher.guardian.view.theme
 
 import android.app.Activity
 import android.os.Build
