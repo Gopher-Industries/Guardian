@@ -133,17 +133,5 @@ public class PatientProfileActivity extends AppCompatActivity {
                     public void onTabReselected(final TabLayout.Tab tab) {}
                 });
     }
-//
-//    @Override
-//    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//
-//      switch (item.getItemId()){
-//          case R.id.nav_home:
-//              startActivity(new Intent(PatientProfileActivity.this, Homepage4admin.class));
-//              break;
-//      }
-//
-//      drawerLayout.closeDrawer(GravityCompat.START);
-//      return true;
-//    }
+
 }
