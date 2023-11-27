@@ -31,6 +31,7 @@ data class Patient(
         lastName: String,
         medicareNo: String,
         westernAffairsNo: String
+
     ) : this() {
         this.dateOfBirth = dateOfBirth
         this.firstName = firstName
@@ -47,7 +48,6 @@ data class Patient(
     fun getMiddleName() = "$middleName"
 
     fun getLastName() = "$lastName"
-
 
     fun setNokId1(nokId1: String) {
         this.nokId1 = nokId1
@@ -88,4 +88,6 @@ data class Patient(
     fun setWestwenAffairesNo(westwenAffairesNo: String) {
         this.westwenAffairesNo = westwenAffairesNo
     }
+
 }
+

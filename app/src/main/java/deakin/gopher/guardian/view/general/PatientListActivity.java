@@ -1,23 +1,24 @@
 package deakin.gopher.guardian.view.general;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.SearchView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientListAdapter;
 import deakin.gopher.guardian.model.Patient;
-import deakin.gopher.guardian.view.patient.careplan.CarePlanActivity;
 
 public class PatientListActivity extends AppCompatActivity {
     RecyclerView patient_list_recyclerView;
@@ -27,12 +28,12 @@ public class PatientListActivity extends AppCompatActivity {
     SearchView patient_searchView;
 
 
-  @Override
-  protected void onCreate(final Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_patient_list);
-    patient_list_recyclerView = findViewById(R.id.patient_list_recycleView);
-    patient_searchView = findViewById(R.id.patient_list_searchView);
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_patient_list);
+        patient_list_recyclerView = findViewById(R.id.patient_list_recycleView);
+        patient_searchView = findViewById(R.id.patient_list_searchView);
 
 
         final Query all_query = FirebaseDatabase.getInstance().getReference().child("patient_profile");
@@ -98,7 +99,8 @@ public class PatientListActivity extends AppCompatActivity {
                                                                     snapshot.child("first_name").getValue().toString(),
                                                                     snapshot.child("last_name").getValue().toString());
                                                     final Object middle_name = snapshot.child("middle_name").getValue();
-                                                    if (null != middle_name) patient.setMiddleName(middle_name.toString());
+                                                    if (null != middle_name)
+                                                        patient.setMiddleName(middle_name.toString());
                                                     return patient;
                                                 })
                                         .build();
@@ -123,7 +125,8 @@ public class PatientListActivity extends AppCompatActivity {
                                     }
 
                                     @Override
-                                    public void onCancelled(@NonNull final DatabaseError error) {}
+                                    public void onCancelled(@NonNull final DatabaseError error) {
+                                    }
                                 });
 
                         return true;
