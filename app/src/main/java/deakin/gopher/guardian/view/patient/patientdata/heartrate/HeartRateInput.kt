@@ -18,12 +18,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
+import com.maxkeppeler.sheets.date_time.DateTimeDialog
+import com.maxkeppeler.sheets.date_time.models.DateTimeSelection
 import deakin.gopher.guardian.view.theme.GuardianTheme
+import java.time.LocalDateTime
 
-@OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalMaterial3Api
 @Composable
 fun HeartRateInput() {
     var heartRate by remember { mutableStateOf("") }
+    var selectedDate by remember { mutableStateOf<LocalDateTime?>(null) }
+    var dateTimeDialogVisible by remember { mutableStateOf(false) }
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -38,12 +44,30 @@ fun HeartRateInput() {
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         )
 
+        Text(text = "Reading Date")
+        Text(text = selectedDate.toString())
+//        OutlinedTextField(
+//            value = selectedDate,
+//            onValueChange = { selectedDate = it },
+//            singleLine = true,
+//        )
+
+        DateTimeDialog(
+            state = rememberUseCaseState(
+                visible = dateTimeDialogVisible,
+                onCloseRequest = { /* TODO */ }),
+            selection = DateTimeSelection.DateTime { newDate ->
+                selectedDate = newDate
+            },
+        )
+
         Button(onClick = { /*TODO*/ }) {
             Text(text = "Save")
         }
     }
 }
 
+@ExperimentalMaterial3Api
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun HeartRateInputPreview() {
