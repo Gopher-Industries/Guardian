@@ -181,7 +181,6 @@ public class NoKAddFragment extends Fragment {
       nextofKin.setHomeAddress(address);
       nextofKin.setMobilePhone(phoneNumber);
       nextofKin.setEmailAddress(email);
-
     }
     if (1 == status) {
       dataListener.onDataFilled(null, nextofKin, null, null, null);
