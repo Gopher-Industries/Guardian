@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
@@ -20,7 +19,7 @@ import deakin.gopher.guardian.model.NextOfKin;
 import deakin.gopher.guardian.model.Patient;
 import deakin.gopher.guardian.util.DataListener;
 
-public class PatientProfileAddActivity extends AppCompatActivity implements DataListener {
+public class PatientProfileAddActivity extends BaseActivity implements DataListener {
 
   private CustomHeader customHeader;
   private Patient patient;

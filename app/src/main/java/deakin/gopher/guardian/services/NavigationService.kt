@@ -9,7 +9,7 @@ import deakin.gopher.guardian.view.general.Homepage4nurse
 import deakin.gopher.guardian.view.general.LoginActivity
 import deakin.gopher.guardian.view.general.RegisterActivity
 import deakin.gopher.guardian.view.general.Setting
-//import deakin.gopher.guardian.view.general.TasksListActivity
+// import deakin.gopher.guardian.view.general.TasksListActivity
 
 class NavigationService(val activity: Activity) {
     fun toHomeScreenForRole(roleName: RoleName) {
@@ -51,13 +51,13 @@ class NavigationService(val activity: Activity) {
             ),
         )
     }
-    
+
     fun onSettings() {
         activity.startActivity(
             Intent(
                 activity.applicationContext,
-                Setting::class.java
-            )
+                Setting::class.java,
+            ),
         )
     }
 
@@ -65,8 +65,8 @@ class NavigationService(val activity: Activity) {
         activity.startActivity(
             Intent(
                 activity.applicationContext,
-                LoginActivity::class.java
-            )
+                LoginActivity::class.java,
+            ),
         )
     }
     /*
@@ -78,7 +78,7 @@ class NavigationService(val activity: Activity) {
             )
         )
     }
-    */
+     */
 
     fun toLogin() {
         activity.startActivity(
