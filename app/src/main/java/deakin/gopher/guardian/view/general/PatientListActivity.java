@@ -1,10 +1,8 @@
 package deakin.gopher.guardian.view.general;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.SearchView;
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -16,13 +14,11 @@ import com.google.firebase.database.ValueEventListener;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientListAdapter;
 import deakin.gopher.guardian.model.Patient;
-import deakin.gopher.guardian.view.patient.careplan.CarePlanActivity;
 
 public class PatientListActivity extends BaseActivity {
   RecyclerView patient_list_recyclerView;
   PatientListAdapter patientListAdapter;
   Query query;
-  CardView overview_cardview;
   SearchView patient_searchView;
 
   @Override
@@ -30,11 +26,7 @@ public class PatientListActivity extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_patient_list);
     patient_list_recyclerView = findViewById(R.id.patient_list_recycleView);
-    overview_cardview = findViewById(R.id.patient_list_patient_overview);
     patient_searchView = findViewById(R.id.patient_list_searchView);
-    // this clicker is for test:
-    overview_cardview.setOnClickListener(
-        view -> startActivity(new Intent(PatientListActivity.this, CarePlanActivity.class)));
 
     final Query all_query = FirebaseDatabase.getInstance().getReference().child("patient_profile");
     final FirebaseRecyclerOptions<Patient> all_options =
