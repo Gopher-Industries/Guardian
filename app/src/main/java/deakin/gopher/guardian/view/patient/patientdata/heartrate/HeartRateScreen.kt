@@ -18,46 +18,59 @@ import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.patrykandpatrick.vico.compose.axis.horizontal.rememberBottomAxis
+import com.patrykandpatrick.vico.compose.axis.vertical.rememberStartAxis
+import com.patrykandpatrick.vico.compose.chart.Chart
+import com.patrykandpatrick.vico.compose.chart.line.lineChart
+import com.patrykandpatrick.vico.core.entry.entryModelOf
 import deakin.gopher.guardian.view.theme.GuardianTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HeartRateScreen() {
     GuardianTheme {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(text = "Heart Rate") },
-                colors = topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
-                ),
-                navigationIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text(text = "Heart Rate") },
+                    colors = topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        titleContentColor = MaterialTheme.colorScheme.primary,
+                    ),
+                    navigationIcon = {
+                        IconButton(onClick = { /*TODO*/ }) {
+                            Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                        }
                     }
+                )
+            },
+            floatingActionButton = {
+                FloatingActionButton(onClick = {
+                    // popup dialog to add heart rate data including measurement and date time
+
+                }) {
+                    Icon(Icons.Default.Add, contentDescription = "Add")
                 }
-            )
-        },
-        floatingActionButton = {
-            FloatingActionButton(onClick = {
-                // popup dialog to add heart rate data including measurement and date time
-
-            }) {
-                Icon(Icons.Default.Add, contentDescription = "Add")
             }
-        }
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-        ) {
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+            ) {
+                val chartEntryModel = entryModelOf(1f, 12f, 8f, 16f)
 
+                Chart(
+                    chart = lineChart(),
+                    model = chartEntryModel,
+                    startAxis = rememberStartAxis(),
+                    bottomAxis = rememberBottomAxis(),
+                )
+
+            }
         }
     }
 }
-    }
 
 @Preview(
     showBackground = true,
