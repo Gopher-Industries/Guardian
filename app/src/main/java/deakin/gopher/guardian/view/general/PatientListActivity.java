@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -21,7 +20,6 @@ public class PatientListActivity extends AppCompatActivity {
   RecyclerView patient_list_recyclerView;
   PatientListAdapter patientListAdapter;
   Query query;
-  CardView overview_cardview;
   SearchView patient_searchView;
 
   @Override
