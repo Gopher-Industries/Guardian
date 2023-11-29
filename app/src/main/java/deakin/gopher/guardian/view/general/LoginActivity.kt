@@ -87,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
                             return@addOnSuccessListener
                         }
 
-                        NavigationService(this).toHomeScreenForRole(RoleName.Admin)
+                        NavigationService(this).toHomeScreenForRole(RoleName.Caretaker)
                         progressBar.hide()
                     }
                     ?.addOnFailureListener { e: Exception ->
