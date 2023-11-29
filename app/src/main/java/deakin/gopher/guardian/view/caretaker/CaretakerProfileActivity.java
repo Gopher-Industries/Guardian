@@ -7,8 +7,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
+import deakin.gopher.guardian.view.general.BaseActivity;
 
-public class CaretakerProfileActivity extends AppCompatActivity {
+public class CaretakerProfileActivity extends BaseActivity {
 
   ImageView caretakerProfileMenuButton;
 

@@ -11,8 +11,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.view.caretaker.CaretakerDashboardActivity;
+import deakin.gopher.guardian.view.general.BaseActivity;
 
-public class FalseAlertConfirmedActivity extends AppCompatActivity {
+public class FalseAlertConfirmedActivity extends BaseActivity {
 
   ImageView falseAlertMenuButton;
 

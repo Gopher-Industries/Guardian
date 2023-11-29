@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
@@ -19,7 +18,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
 
-public class Setting extends AppCompatActivity implements View.OnClickListener {
+public class Setting extends BaseActivity implements View.OnClickListener {
   ConstraintLayout settingsThemeButton;
   ConstraintLayout settingsNotificationButton;
   ConstraintLayout settingsAppUpdateButton;
