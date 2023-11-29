@@ -59,14 +59,12 @@ fun HeartRateScreen() {
                     .padding(innerPadding)
             ) {
                 val chartEntryModel = entryModelOf(1f, 12f, 8f, 16f)
-
                 Chart(
                     chart = lineChart(),
                     model = chartEntryModel,
                     startAxis = rememberStartAxis(),
                     bottomAxis = rememberBottomAxis(),
                 )
-
             }
         }
     }
