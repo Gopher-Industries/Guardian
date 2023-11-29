@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.widget.CalendarView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.util.Util;
 import java.text.ParseException;
@@ -17,10 +21,22 @@ public class DailyReportSummaryActivity extends AppCompatActivity {
   private final StringBuilder statuses = new StringBuilder();
   private long dateMs;
 
+  ImageView dailyReportSummaryMenuButton;
+
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_daily_report_summary);
+
+    final NavigationView navigationView = findViewById(R.id.nav_view);
+    dailyReportSummaryMenuButton = findViewById(R.id.menuButton101);
+    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+    navigationView.setItemIconTintList(null);
+
+    dailyReportSummaryMenuButton.setOnClickListener(
+        v -> {
+          drawerLayout.openDrawer(GravityCompat.START);
+        });
 
     final TextView currentStatusSummary = findViewById(R.id.currentStatusSummary);
     final TextView progressNotesSummary = findViewById(R.id.progressNotesSummary);

@@ -7,12 +7,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
 
 public class Setting extends AppCompatActivity implements View.OnClickListener {
@@ -22,6 +26,7 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
   ConstraintLayout settingsFeedbackButton;
   Switch notificationSwitch;
   Switch themeSwitch;
+  ImageView settingsMenuButton;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -35,6 +40,15 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
 
     settingsAppUpdateButton.setOnClickListener(this);
     settingsFeedbackButton.setOnClickListener(this);
+    final NavigationView navigationView = findViewById(R.id.nav_view);
+    settingsMenuButton = findViewById(R.id.settings_menu_button);
+    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+    navigationView.setItemIconTintList(null);
+
+    settingsMenuButton.setOnClickListener(
+        v -> {
+          drawerLayout.openDrawer(GravityCompat.START);
+        });
 
     final ConstraintLayout settingsThemeButton = findViewById(R.id.settings_theme_button);
 

@@ -2,13 +2,17 @@ package deakin.gopher.guardian.view.general;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -25,6 +29,7 @@ public class PatientListActivity extends AppCompatActivity {
   Query query;
   CardView overview_cardview;
   SearchView patient_searchView;
+  ImageView patientListMenuButton;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -36,6 +41,15 @@ public class PatientListActivity extends AppCompatActivity {
     // this clicker is for test:
     overview_cardview.setOnClickListener(
         view -> startActivity(new Intent(PatientListActivity.this, CarePlanActivity.class)));
+    final NavigationView navigationView = findViewById(R.id.nav_view);
+    patientListMenuButton = findViewById(R.id.patient_list_menu_button);
+    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+    navigationView.setItemIconTintList(null);
+
+    patientListMenuButton.setOnClickListener(
+        v -> {
+          drawerLayout.openDrawer(GravityCompat.START);
+        });
 
     final Query all_query = FirebaseDatabase.getInstance().getReference().child("patient_profile");
     final FirebaseRecyclerOptions<Patient> all_options =
