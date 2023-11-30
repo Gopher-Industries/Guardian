@@ -7,10 +7,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -26,12 +27,14 @@ import deakin.gopher.guardian.model.login.LoginAuthError
 import deakin.gopher.guardian.model.login.LoginValidationError
 import deakin.gopher.guardian.model.login.Password
 import deakin.gopher.guardian.model.login.RoleName
+import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
 import deakin.gopher.guardian.view.hide
 import deakin.gopher.guardian.view.show
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
+    private var userRole: RoleName = RoleName.Caretaker
     private lateinit var gsoClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +47,20 @@ class LoginActivity : AppCompatActivity() {
         val loginGoogleButton: SignInButton = findViewById(R.id.loginGoogleBtn)
         val mCreateBtn: Button = findViewById(R.id.loginRegisterBtn)
         val forgotTextLink: TextView = findViewById(R.id.forgotPassword)
+        val loginRoleRadioGroup: RadioGroup = findViewById(R.id.login_role_radioGroup)
+
+        loginRoleRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+            val radioButton: RadioButton = findViewById(checkedId)
+
+            // Set the user role based on the selected radio button
+            userRole =
+                when (checkedId) {
+                    R.id.admin_radioButton -> RoleName.Admin
+                    R.id.caretaker_radioButton -> RoleName.Caretaker
+                    R.id.nurse_radioButton -> RoleName.Nurse
+                    else -> RoleName.Caretaker
+                }
+        }
 
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -99,6 +116,8 @@ class LoginActivity : AppCompatActivity() {
                         ).show()
                     }
             }
+            val sessionManager = SessionManager(this)
+            sessionManager.createLoginSession()
         }
 
         mCreateBtn.setOnClickListener {
@@ -176,6 +195,7 @@ class LoginActivity : AppCompatActivity() {
         return null
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(
         requestCode: Int,
         resultCode: Int,

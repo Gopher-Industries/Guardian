@@ -59,7 +59,7 @@ public class PatientProfileActivity extends BaseActivity {
                     } else if (R.id.nav_settings == id) {
                       startActivity(new Intent(PatientProfileActivity.this, Setting.class));
                     } else if (R.id.nav_signout == id) {
-                      FirebaseAuth.getInstance().signOut();
+                      mAuth.getInstance().signOut();
                       startActivity(new Intent(PatientProfileActivity.this, LoginActivity.class));
                       finish();
                     }

@@ -7,9 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.util.Util;
+import deakin.gopher.guardian.view.general.BaseActivity;
 import deakin.gopher.guardian.view.general.DrawerActivity;
 import deakin.gopher.guardian.view.general.PatientListActivity;
 import deakin.gopher.guardian.view.patient.associateradar.ActivityProfilingActivity;
@@ -22,7 +22,7 @@ import deakin.gopher.guardian.view.patient.viewactivitydata.WeeklyActivityProfil
 import java.util.HashSet;
 import java.util.Set;
 
-public class PatientDashboardActivity extends AppCompatActivity {
+public class PatientDashboardActivity extends BaseActivity {
 
   ImageButton dailyReportButton;
   ImageButton healthDataButton;
