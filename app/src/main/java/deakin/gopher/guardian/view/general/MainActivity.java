@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 import deakin.gopher.guardian.R;
+import deakin.gopher.guardian.services.NavigationService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    // TODO REMOVE - ONLY FOR TESTING
+    new NavigationService(this).toHeartRateForPatient("test");
     final Button getStartedButton = findViewById(R.id.getStartedButton);
 
     getStartedButton.setOnClickListener(

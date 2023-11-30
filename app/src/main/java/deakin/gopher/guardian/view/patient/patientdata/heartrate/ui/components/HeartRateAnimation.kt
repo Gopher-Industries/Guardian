@@ -1,4 +1,4 @@
-package deakin.gopher.guardian.view.patient.patientdata.heartrate
+package deakin.gopher.guardian.view.patient.patientdata.heartrate.ui.components
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode

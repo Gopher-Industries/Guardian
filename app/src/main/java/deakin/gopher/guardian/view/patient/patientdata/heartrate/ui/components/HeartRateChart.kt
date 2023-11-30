@@ -1,6 +1,8 @@
-package deakin.gopher.guardian.view.patient.patientdata.heartrate
+package deakin.gopher.guardian.view.patient.patientdata.heartrate.ui.components
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.patrykandpatrick.vico.compose.axis.horizontal.rememberBottomAxis
 import com.patrykandpatrick.vico.compose.axis.vertical.rememberStartAxis
@@ -23,12 +25,12 @@ fun HeartRateChart(heartRates: List<HeartRate>) {
     }
 
     val chartEntryModelProducer = ChartEntryModelProducer(getEntries)
-
     Chart(
         chart = lineChart(),
         chartModelProducer = chartEntryModelProducer,
         startAxis = rememberStartAxis(),
         bottomAxis = rememberBottomAxis(),
+        modifier = Modifier.fillMaxWidth(),
     )
 }
 
@@ -61,6 +63,6 @@ fun HeartRateChartPreview() {
             measurementDate = Date()
         ),
     ).soryByDate()
-    
+
     HeartRateChart(heartRates)
 }
