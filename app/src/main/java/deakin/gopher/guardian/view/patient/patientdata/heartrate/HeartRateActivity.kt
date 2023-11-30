@@ -12,12 +12,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import deakin.gopher.guardian.model.health.HeartRate
+import deakin.gopher.guardian.services.HeartRateDataService
 import deakin.gopher.guardian.view.patient.patientdata.heartrate.ui.screens.AddHeartRateScreen
 import deakin.gopher.guardian.view.patient.patientdata.heartrate.ui.screens.HeartRateOverviewScreen
 import deakin.gopher.guardian.view.theme.GuardianTheme
-import java.util.Date
-import java.util.UUID
 
 class HeartRateActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,25 +39,12 @@ fun HeartRateNavHost(navController: NavHostController = rememberNavController())
         navController = navController,
         startDestination = HeartRateRoutes.HeartRateOverview.toString()
     ) {
-        composable(HeartRateRoutes.HeartRateOverview.toString()) {
+        composable(HeartRateRoutes.HeartRateOverview.route) {
             HeartRateOverviewScreen(
-                heartRates = listOf(
-                    HeartRate(
-                        heartRateId = UUID.randomUUID(),
-                        patientId = UUID.randomUUID(),
-                        measurement = 100,
-                        measurementDate = Date()
-                    ),
-                    HeartRate(
-                        heartRateId = UUID.randomUUID(),
-                        patientId = UUID.randomUUID(),
-                        measurement = 40,
-                        measurementDate = Date()
-                    ),
-                ),
+                heartRates = HeartRateDataService.generateTestDate(20),
                 navController
             )
         }
-        composable(HeartRateRoutes.AddHeartRate.toString()) { AddHeartRateScreen() }
+        composable(HeartRateRoutes.AddHeartRate.route) { AddHeartRateScreen() }
     }
 }
