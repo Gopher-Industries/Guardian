@@ -1,88 +1,84 @@
-package deakin.gopher.guardian.view.patient.patientdata.medicaldiagnostics;
+package deakin.gopher.guardian.view.patient.patientdata.medicaldiagnostics
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
-import deakin.gopher.guardian.R;
-import deakin.gopher.guardian.adapter.MedicalDiagnosticsViewPagerAdapter;
+import android.content.Intent
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import deakin.gopher.guardian.R
+import deakin.gopher.guardian.adapter.MedicalDiagnosticsViewPagerAdapter
+import deakin.gopher.guardian.view.patient.patientdata.heartrate.HeartRateActivity
 
-public class MedicalDiagnosticsFragment extends Fragment {
-  public CurrentMedicalDiagnosticsFragment currentFragment;
-  public PastMedicalDiagnosticsFragment pastFragment;
-  private Button editButton;
-  private Boolean isEditable = false;
-  private String patientId;
+class MedicalDiagnosticsFragment : Fragment {
+    @JvmField
+    var currentFragment: CurrentMedicalDiagnosticsFragment? = null
 
-  public MedicalDiagnosticsFragment() {
-    // Required empty public constructor
-  }
+    @JvmField
+    var pastFragment: PastMedicalDiagnosticsFragment? = null
+    private var editButton: Button? = null
+    private var isEditable = false
+    private var patientId: String? = null
 
-  public MedicalDiagnosticsFragment(final String patientId) {
-    this.patientId = patientId;
-  }
+    constructor()
+    constructor(patientId: String?) {
+        this.patientId = patientId
+    }
 
-  @Override
-  public void onCreate(final Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-  }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_medical_diagnostics, container, false)
 
-  @Nullable
-  @Override
-  public View onCreateView(
-      @NonNull final LayoutInflater inflater,
-      @Nullable final ViewGroup container,
-      @Nullable final Bundle savedInstanceState) {
-    final View view = inflater.inflate(R.layout.fragment_medical_diagnostics, container, false);
-    editButton = view.findViewById(R.id.header_edit_button);
+        val editButton: Button = view.findViewById(R.id.header_edit_button)
+        val heartRateButton: Button = view.findViewById(R.id.heart_rate_button)
+        val tabLayout = view.findViewById<TabLayout>(R.id.medicalDiagnosticsTabLayout)
+        val viewPager2 = view.findViewById<ViewPager2>(R.id.medicalDiagnosticsViewPager)
+        val viewPagerAdapter = MedicalDiagnosticsViewPagerAdapter(patientId, this)
+        viewPager2.adapter = viewPagerAdapter
 
-    final TabLayout tabLayout = view.findViewById(R.id.medicalDiagnosticsTabLayout);
-    final ViewPager2 viewPager2 = view.findViewById(R.id.medicalDiagnosticsViewPager);
-
-    final MedicalDiagnosticsViewPagerAdapter viewPagerAdapter =
-        new MedicalDiagnosticsViewPagerAdapter(patientId, this);
-    viewPager2.setAdapter(viewPagerAdapter);
-
-    new TabLayoutMediator(
+        TabLayoutMediator(
             tabLayout,
-            viewPager2,
-            (tab, position) -> {
-              if (0 == position) {
-                tab.setText("Current");
-              } else {
-                tab.setText("Past");
-              }
-            })
-        .attach();
+            viewPager2
+        ) { tab: TabLayout.Tab, position: Int ->
+            if (0 == position) {
+                tab.text = "Current"
+            } else {
+                tab.text = "Past"
+            }
+        }
+            .attach()
 
-    editButton.setOnClickListener(
-        view1 -> {
-          if (isEditable) {
-            editButton.setBackgroundResource(R.drawable.medical_diagnostics_edit);
-          } else {
-            editButton.setBackgroundResource(R.drawable.medical_diagnostics_stop);
-          }
-          handleEditButtonClick();
-        });
-    return view;
-  }
+        heartRateButton.setOnClickListener {
+            Intent(this.context, HeartRateActivity::class.java).also {
+                startActivity(it)
+            }
+        }
 
-  private void handleEditButtonClick() {
-    isEditable = !isEditable;
-
-    if (null != currentFragment) {
-      currentFragment.setEditState(isEditable);
+        editButton.setOnClickListener {
+            if (isEditable) {
+                editButton.setBackgroundResource(R.drawable.medical_diagnostics_edit)
+            } else {
+                editButton.setBackgroundResource(R.drawable.medical_diagnostics_stop)
+            }
+            handleEditButtonClick()
+        }
+        return view
     }
 
-    if (null != pastFragment) {
-      pastFragment.setEditState(isEditable);
+    private fun handleEditButtonClick() {
+        isEditable = !isEditable
+        if (null != currentFragment) {
+            currentFragment!!.setEditState(isEditable)
+        }
+        if (null != pastFragment) {
+            pastFragment!!.setEditState(isEditable)
+        }
     }
-  }
 }

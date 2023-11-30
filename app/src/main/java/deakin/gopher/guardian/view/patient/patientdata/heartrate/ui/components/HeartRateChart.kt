@@ -11,7 +11,7 @@ import com.patrykandpatrick.vico.compose.chart.line.lineChart
 import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
 import com.patrykandpatrick.vico.core.entry.entryOf
 import deakin.gopher.guardian.model.health.HeartRate
-import deakin.gopher.guardian.model.health.soryByDate
+import deakin.gopher.guardian.model.health.sortByDate
 import java.util.Date
 import java.util.UUID
 
@@ -62,7 +62,7 @@ fun HeartRateChartPreview() {
             measurement = 120,
             measurementDate = Date()
         ),
-    ).soryByDate()
+    ).sortByDate()
 
     HeartRateChart(heartRates)
 }

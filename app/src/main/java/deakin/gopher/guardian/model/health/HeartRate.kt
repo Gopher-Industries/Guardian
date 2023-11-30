@@ -16,6 +16,10 @@ data class HeartRate(
     }
 }
 
-fun List<HeartRate>.soryByDate(): List<HeartRate> {
+fun List<HeartRate>.sortByDate(): List<HeartRate> {
     return this.sortedBy { it.measurementDate }
+}
+
+fun List<HeartRate>.average(): Int {
+    return this.map { it.measurement }.average().toInt()
 }

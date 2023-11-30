@@ -1,88 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="deakin.gopher.guardian.view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="deakin.gopher.guardian.view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsFragment">
 
     <androidx.cardview.widget.CardView
-            android:id="@+id/medicalDiagnosticsBodyCardView"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+        android:id="@+id/medicalDiagnosticsBodyCardView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
 
                 <TextView
-                        android:id="@+id/medicalDiagnosticsTitleTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/poppins_bold"
-                        android:gravity="center"
-                        android:text="@string/medical_diagnostics"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        tools:layout_editor_absoluteX="132dp"
-                        tools:layout_editor_absoluteY="10dp" />
+                    android:id="@+id/medicalDiagnosticsTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/poppins_bold"
+                    android:gravity="center"
+                    android:text="@string/medical_diagnostics"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    tools:layout_editor_absoluteX="132dp"
+                    tools:layout_editor_absoluteY="10dp" />
 
                 <Button
-                        android:id="@+id/header_edit_button"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginLeft="15dp"
-                        android:background="@drawable/medical_diagnostics_edit"
-                        android:baselineAlignBottom="false"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.789"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    android:id="@+id/header_edit_button"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/medical_diagnostics_edit"
+                    android:baselineAlignBottom="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.789"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <Button
+                    android:id="@+id/heart_rate_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:backgroundTint="@color/TG_blue"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="@string/heart_rate_button_name"
+                    android:textAllCaps="false"
+                    app:cornerRadius="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </LinearLayout>
 
             <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/medicalDiagnosticsTabLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:layout_editor_absoluteX="182dp"
-                    tools:layout_editor_absoluteY="373dp">
+                android:id="@+id/medicalDiagnosticsTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="182dp"
+                tools:layout_editor_absoluteY="373dp">
 
             </com.google.android.material.tabs.TabLayout>
 
             <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
 
                     <androidx.viewpager2.widget.ViewPager2
-                            android:id="@+id/medicalDiagnosticsViewPager"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            tools:layout_editor_absoluteX="145dp"
-                            tools:layout_editor_absoluteY="500dp" />
+                        android:id="@+id/medicalDiagnosticsViewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:layout_editor_absoluteX="145dp"
+                        tools:layout_editor_absoluteY="500dp" />
                 </LinearLayout>
             </ScrollView>
+
 
         </LinearLayout>
 

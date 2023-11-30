@@ -45,6 +45,6 @@ fun HeartRateNavHost(navController: NavHostController = rememberNavController())
                 navController
             )
         }
-        composable(HeartRateRoutes.AddHeartRate.route) { AddHeartRateScreen() }
+        composable(HeartRateRoutes.AddHeartRate.route) { AddHeartRateScreen(navController) }
     }
 }
