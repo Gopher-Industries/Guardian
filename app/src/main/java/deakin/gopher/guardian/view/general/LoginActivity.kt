@@ -104,7 +104,7 @@ class LoginActivity : BaseActivity() {
                             return@addOnSuccessListener
                         }
 
-                        NavigationService(this).toHomeScreenForRole(RoleName.Caretaker)
+                        NavigationService(this).toHomeScreenForRole(userRole)
                         progressBar.hide()
                     }
                     ?.addOnFailureListener { e: Exception ->
