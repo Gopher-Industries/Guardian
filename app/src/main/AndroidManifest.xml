@@ -21,11 +21,6 @@
             android:label="@string/title_activity_heart_rate"
             android:theme="@style/Theme.TeamGuardians" />
         <activity
-            android:name=".view.patient.patientdata.heartrate.AddHeartRateActivity"
-            android:exported="false"
-            android:label="@string/title_activity_add_heart_rate"
-            android:theme="@style/Theme.TeamGuardians" />
-        <activity
             android:name=".view.general.Setting"
             android:exported="false" />
         <activity
