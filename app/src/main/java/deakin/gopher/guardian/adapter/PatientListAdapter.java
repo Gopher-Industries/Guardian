@@ -42,19 +42,22 @@ public class PatientListAdapter
           final SharedPreferences sharedPreferences =
               context.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE);
           final int role = sharedPreferences.getInt("login_role", -1);
-          if (0 == role) {
-            // caretaker
-            // context.startActivity(new Intent(context, DailyReportActivity.class));
-            final Intent intent = new Intent(context, DailyReportActivity.class);
-            intent.putExtra("patientName", holder.patient_name.getText());
-            context.startActivity(intent);
-
-          } else if (1 == role) {
-            // admin
-            final Intent intent = new Intent(context, PatientProfileActivity.class);
-            intent.putExtra("id", model.getPatientId());
-            context.startActivity(intent);
-          }
+          final Intent intent = new Intent(context, PatientProfileActivity.class);
+          intent.putExtra("patientId", model.getPatientId());
+          context.startActivity(intent);
+//          if (0 == role) {
+//            // caretaker
+//            // context.startActivity(new Intent(context, DailyReportActivity.class));
+//            final Intent intent = new Intent(context, PatientProfileActivity.class);
+//            intent.putExtra("patientId", model.getPatientId());
+//            context.startActivity(intent);
+//
+//          } else if (1 == role) {
+//            // admin
+//            final Intent intent = new Intent(context, PatientProfileActivity.class);
+//            intent.putExtra("id", model.getPatientId());
+//            context.startActivity(intent);
+//          }
         });
   }
 
