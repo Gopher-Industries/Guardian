@@ -1,20 +1,25 @@
 package deakin.gopher.guardian.view.general;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientProfileAdapter;
 
-public class PatientProfileActivity extends AppCompatActivity {
+public class PatientProfileActivity extends BaseActivity {
 
   private CustomHeader customHeader;
+
+  private DrawerLayout drawerLayout;
+
+  private FirebaseAuth mAuth;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -24,7 +29,7 @@ public class PatientProfileActivity extends AppCompatActivity {
     final TabLayout tabLayout = findViewById(R.id.dataForViewTabLayout);
     final ViewPager2 viewPager2 = findViewById(R.id.dataForViewViewPager);
     customHeader = findViewById(R.id.customHeader);
-    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+    drawerLayout = findViewById(R.id.nav_drawer_layout);
     final NavigationView navigationView = findViewById(R.id.nav_view);
     final String patient_id = getIntent().getStringExtra("id");
 
@@ -43,6 +48,23 @@ public class PatientProfileActivity extends AppCompatActivity {
           v -> {
             if (null != drawerLayout) {
               drawerLayout.openDrawer(GravityCompat.START);
+
+              navigationView.setNavigationItemSelectedListener(
+                  menuItem -> {
+                    final int id = menuItem.getItemId();
+                    if (R.id.nav_home == id) {
+                      startActivity(new Intent(PatientProfileActivity.this, Homepage4admin.class));
+                    } else if (R.id.nav_admin == id) {
+                      startActivity(new Intent(PatientProfileActivity.this, Homepage4admin.class));
+                    } else if (R.id.nav_settings == id) {
+                      startActivity(new Intent(PatientProfileActivity.this, Setting.class));
+                    } else if (R.id.nav_signout == id) {
+                      FirebaseAuth.getInstance().signOut();
+                      startActivity(new Intent(PatientProfileActivity.this, LoginActivity.class));
+                      finish();
+                    }
+                    return true;
+                  });
             }
           });
     }
@@ -51,28 +73,18 @@ public class PatientProfileActivity extends AppCompatActivity {
             tabLayout,
             viewPager2,
             (tab, position) -> {
-              switch (position) {
-                case 0:
-                  tab.setText("Patient");
-                  break;
-                case 1:
-                  tab.setText("Next of Kin");
-                  break;
-                case 2:
-                  tab.setText("General Practitioner");
-                  break;
-                case 3:
-                  tab.setText("Health Details");
-                  break;
-                case 4:
-                  tab.setText("Health & Welfare Det.");
-                  break;
-                case 5:
-                  tab.setText("Heart Rate");
-                  break;
-                default:
-                  tab.setText("Care Plan");
-                  break;
+              if (0 == position) {
+                tab.setText("Patient");
+              } else if (1 == position) {
+                tab.setText("Next of Kin");
+              } else if (2 == position) {
+                tab.setText("General Practitioner");
+              } else if (3 == position) {
+                tab.setText("Health Details");
+              } else if (4 == position) {
+                tab.setText("Health & Welfare Det.");
+              } else {
+                tab.setText("Care Plan");
               }
             })
         .attach();
@@ -82,39 +94,28 @@ public class PatientProfileActivity extends AppCompatActivity {
           @Override
           public void onTabSelected(final TabLayout.Tab tab) {
             final int position = tab.getPosition();
-            switch (position) {
-              case 0 -> {
-                customHeader.setHeaderText("Patient Profile");
-                customHeader.setHeaderTopImageVisibility(View.VISIBLE);
-                customHeader.setHeaderTopImage(R.drawable.profile_avatar_women);
-              }
-              case 1 -> {
-                customHeader.setHeaderText("Next Of Kin Contact");
-                customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);
-                customHeader.setHeaderTopImageVisibility(View.VISIBLE);
-              }
-              case 2 -> {
-                customHeader.setHeaderText("GP Details");
-                customHeader.setHeaderTopImage(R.drawable.profile_avatar_men2);
-                customHeader.setHeaderTopImageVisibility(View.VISIBLE);
-              }
-              case 3 -> {
-                customHeader.setHeaderText("Health Details");
-                customHeader.setHeaderTopImageVisibility(View.GONE);
-              }
-              case 4 -> {
-                customHeader.setHeaderText("Patient Details");
-                customHeader.setHeaderTopImageVisibility(View.GONE);
-              }
-              case 5 -> {
-                customHeader.setHeaderText("Heart Rate");
-                customHeader.setHeaderTopImageVisibility(View.GONE);
-              }
-              default -> {
-                customHeader.setHeaderText("Care Plan");
-                customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);
-                customHeader.setHeaderTopImageVisibility(View.VISIBLE);
-              }
+            if (0 == position) {
+              customHeader.setHeaderText("Patient Profile");
+              customHeader.setHeaderTopImageVisibility(View.VISIBLE);
+              customHeader.setHeaderTopImage(R.drawable.profile_avatar_women);
+            } else if (1 == position) {
+              customHeader.setHeaderText("Next Of Kin Contact");
+              customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);
+              customHeader.setHeaderTopImageVisibility(View.VISIBLE);
+            } else if (2 == position) {
+              customHeader.setHeaderText("GP Details");
+              customHeader.setHeaderTopImage(R.drawable.profile_avatar_men2);
+              customHeader.setHeaderTopImageVisibility(View.VISIBLE);
+            } else if (3 == position) {
+              customHeader.setHeaderText("Health Details");
+              customHeader.setHeaderTopImageVisibility(View.GONE);
+            } else if (4 == position) {
+              customHeader.setHeaderText("Patient Details");
+              customHeader.setHeaderTopImageVisibility(View.GONE);
+            } else {
+              customHeader.setHeaderText("Care Plan");
+              customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);
+              customHeader.setHeaderTopImageVisibility(View.VISIBLE);
             }
           }
 
