@@ -43,7 +43,7 @@ class HeartRateDataService : FireStoreDataService() {
     }
 
     companion object {
-        fun generateTestDate(amount: Int): List<HeartRate> {
+        fun generateTestData(amount: Int): List<HeartRate> {
             val range = 1..amount
             return range.map {
                 HeartRate(

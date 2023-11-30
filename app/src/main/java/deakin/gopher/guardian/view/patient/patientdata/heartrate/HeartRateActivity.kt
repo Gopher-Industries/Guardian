@@ -41,7 +41,7 @@ fun HeartRateNavHost(navController: NavHostController = rememberNavController())
     ) {
         composable(HeartRateRoutes.HeartRateOverview.route) {
             HeartRateOverviewScreen(
-                heartRates = HeartRateDataService.generateTestDate(20),
+                heartRates = HeartRateDataService.generateTestData(20),
                 navController
             )
         }
