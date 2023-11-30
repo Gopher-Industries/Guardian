@@ -26,6 +26,7 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.view.theme.GuardianTheme
 
 @ExperimentalMaterial3Api
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun HeartRateInput() {
     var heartRate by remember { mutableStateOf("") }
@@ -34,9 +35,12 @@ fun HeartRateInput() {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(16.dp)
+        modifier = Modifier.padding(16.dp),
     ) {
-        Text(text = stringResource(R.string.add_heart_rate_title), style = MaterialTheme.typography.displaySmall)
+        Text(
+            text = stringResource(R.string.add_heart_rate_title),
+            style = MaterialTheme.typography.displaySmall,
+        )
         OutlinedTextField(
             value = heartRate,
             onValueChange = { heartRate = it },
@@ -50,8 +54,9 @@ fun HeartRateInput() {
 
         DatePicker(
             state = selectedDate,
-            modifier = Modifier
-                .padding(16.dp)
+            modifier =
+                Modifier
+                    .padding(16.dp),
         )
 
         Button(onClick = { /*TODO*/ }) {
@@ -61,6 +66,7 @@ fun HeartRateInput() {
 }
 
 @ExperimentalMaterial3Api
+@Suppress("ktlint:standard:function-naming")
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun HeartRateInputPreview() {

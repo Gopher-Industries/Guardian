@@ -32,27 +32,32 @@ import deakin.gopher.guardian.view.patient.patientdata.heartrate.HeartRateRoutes
 import deakin.gopher.guardian.view.patient.patientdata.heartrate.ui.components.HeartRateChart
 import deakin.gopher.guardian.view.theme.GuardianTheme
 
+@Suppress("ktlint:standard:function-naming")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HeartRateOverviewScreen(heartRates: List<HeartRate>, navController: NavController) {
+fun HeartRateOverviewScreen(
+    heartRates: List<HeartRate>,
+    navController: NavController,
+) {
     GuardianTheme {
         Scaffold(
             topBar = {
                 TopAppBar(
                     title = { Text(text = "Heart Rate") },
                     navigationIcon = {
-                        IconButton(onClick = { /** TODO */ }) {
+                        IconButton(onClick = { }) {
                             Icon(
                                 imageVector = Icons.Default.ArrowBack,
                                 contentDescription = "Return to Heart Rate Patient",
-                                modifier = Modifier.padding(horizontal = 12.dp)
+                                modifier = Modifier.padding(horizontal = 12.dp),
                             )
                         }
                     },
-                    colors = topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        titleContentColor = MaterialTheme.colorScheme.primary,
-                    ),
+                    colors =
+                        topAppBarColors(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            titleContentColor = MaterialTheme.colorScheme.primary,
+                        ),
                 )
             },
             floatingActionButton = {
@@ -70,18 +75,20 @@ fun HeartRateOverviewScreen(heartRates: List<HeartRate>, navController: NavContr
                 ) {
                     Text(
                         text = "Patient Average: ${heartRates.average()}",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp),
-                        textAlign = TextAlign.Center
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp),
+                        textAlign = TextAlign.Center,
                     )
                 }
             },
         ) { innerPadding ->
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding),
             ) {
                 HeartRateChart(heartRates = heartRates)
             }
@@ -89,10 +96,11 @@ fun HeartRateOverviewScreen(heartRates: List<HeartRate>, navController: NavContr
     }
 }
 
+@Suppress("ktlint:standard:function-naming")
 @Preview(
     showBackground = true,
     heightDp = 640,
-    widthDp = 360
+    widthDp = 360,
 )
 @Composable
 fun HeartRateScreenPreview() {

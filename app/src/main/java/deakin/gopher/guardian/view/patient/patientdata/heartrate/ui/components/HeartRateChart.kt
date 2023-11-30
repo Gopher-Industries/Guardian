@@ -15,14 +15,16 @@ import deakin.gopher.guardian.model.health.sortByDate
 import java.util.Date
 import java.util.UUID
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun HeartRateChart(heartRates: List<HeartRate>) {
-    val getEntries = List(heartRates.size) { index ->
-        entryOf(
-            x = index.toFloat(),
-            y = heartRates[index].measurement.toFloat()
-        )
-    }
+    val getEntries =
+        List(heartRates.size) { index ->
+            entryOf(
+                x = index.toFloat(),
+                y = heartRates[index].measurement.toFloat(),
+            )
+        }
 
     val chartEntryModelProducer = ChartEntryModelProducer(getEntries)
     Chart(
@@ -34,35 +36,37 @@ fun HeartRateChart(heartRates: List<HeartRate>) {
     )
 }
 
+@Suppress("ktlint:standard:function-naming")
 @Preview(showBackground = true)
 @Composable
 fun HeartRateChartPreview() {
-    val heartRates = listOf(
-        HeartRate(
-            heartRateId = UUID.randomUUID(),
-            patientId = UUID.randomUUID(),
-            measurement = 100,
-            measurementDate = Date()
-        ),
-        HeartRate(
-            heartRateId = UUID.randomUUID(),
-            patientId = UUID.randomUUID(),
-            measurement = 60,
-            measurementDate = Date()
-        ),
-        HeartRate(
-            heartRateId = UUID.randomUUID(),
-            patientId = UUID.randomUUID(),
-            measurement = 55,
-            measurementDate = Date()
-        ),
-        HeartRate(
-            heartRateId = UUID.randomUUID(),
-            patientId = UUID.randomUUID(),
-            measurement = 120,
-            measurementDate = Date()
-        ),
-    ).sortByDate()
+    val heartRates =
+        listOf(
+            HeartRate(
+                heartRateId = UUID.randomUUID(),
+                patientId = UUID.randomUUID(),
+                measurement = 100,
+                measurementDate = Date(),
+            ),
+            HeartRate(
+                heartRateId = UUID.randomUUID(),
+                patientId = UUID.randomUUID(),
+                measurement = 60,
+                measurementDate = Date(),
+            ),
+            HeartRate(
+                heartRateId = UUID.randomUUID(),
+                patientId = UUID.randomUUID(),
+                measurement = 55,
+                measurementDate = Date(),
+            ),
+            HeartRate(
+                heartRateId = UUID.randomUUID(),
+                patientId = UUID.randomUUID(),
+                measurement = 120,
+                measurementDate = Date(),
+            ),
+        ).sortByDate()
 
     HeartRateChart(heartRates)
 }

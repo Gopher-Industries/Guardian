@@ -11,9 +11,7 @@ class HeartRateDataService : FireStoreDataService() {
     override val dataServiceName: String
         get() = "HeartRateDataService"
 
-    fun create(
-        heartRate: HeartRate,
-    ) {
+    fun create(heartRate: HeartRate) {
         fireStore
             .collection(collectionName)
             .document(heartRate.heartRateId.toString())
@@ -34,10 +32,11 @@ class HeartRateDataService : FireStoreDataService() {
     }
 
     fun get(heartRateId: UUID): HeartRate? {
-        val result = fireStore
-            .collection(collectionName)
-            .document(heartRateId.toString())
-            .get()
+        val result =
+            fireStore
+                .collection(collectionName)
+                .document(heartRateId.toString())
+                .get()
 
         return result.result?.toObject(HeartRate::class.java)
     }
@@ -50,7 +49,7 @@ class HeartRateDataService : FireStoreDataService() {
                     heartRateId = UUID.randomUUID(),
                     patientId = UUID.randomUUID(),
                     measurement = (40..200).random(),
-                    measurementDate = Date()
+                    measurementDate = Date(),
                 )
             }
         }

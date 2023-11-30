@@ -24,7 +24,7 @@ class HeartRateActivity : ComponentActivity() {
             GuardianTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     HeartRateNavHost()
                 }
@@ -34,15 +34,16 @@ class HeartRateActivity : ComponentActivity() {
 }
 
 @Composable
+@Suppress("ktlint:standard:function-naming")
 fun HeartRateNavHost(navController: NavHostController = rememberNavController()) {
     NavHost(
         navController = navController,
-        startDestination = HeartRateRoutes.HeartRateOverview.toString()
+        startDestination = HeartRateRoutes.HeartRateOverview.toString(),
     ) {
         composable(HeartRateRoutes.HeartRateOverview.route) {
             HeartRateOverviewScreen(
                 heartRates = HeartRateDataService.generateTestData(20),
-                navController
+                navController,
             )
         }
         composable(HeartRateRoutes.AddHeartRate.route) { AddHeartRateScreen(navController) }

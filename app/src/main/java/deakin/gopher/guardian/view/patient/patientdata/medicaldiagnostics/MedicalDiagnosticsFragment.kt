@@ -45,7 +45,7 @@ class MedicalDiagnosticsFragment : Fragment {
 
         TabLayoutMediator(
             tabLayout,
-            viewPager2
+            viewPager2,
         ) { tab: TabLayout.Tab, position: Int ->
             if (0 == position) {
                 tab.text = "Current"

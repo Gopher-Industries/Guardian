@@ -88,5 +88,4 @@ class NavigationService(val activity: Activity) {
             ),
         )
     }
-
 }
