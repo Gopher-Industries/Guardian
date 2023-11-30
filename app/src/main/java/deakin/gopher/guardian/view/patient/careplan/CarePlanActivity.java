@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
 import java.util.HashMap;
 
@@ -16,6 +20,7 @@ public class CarePlanActivity extends AppCompatActivity {
   final HashMap<CheckBox, String> behavioralManagementCheckBox = new HashMap<>();
 
   Button submitButton;
+  ImageView carePlanMenuButton;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -23,6 +28,16 @@ public class CarePlanActivity extends AppCompatActivity {
     setContentView(R.layout.activity_care_plan);
 
     submitButton = findViewById(R.id.carePlanSubmitButton);
+
+    final NavigationView navigationView = findViewById(R.id.nav_view);
+    carePlanMenuButton = findViewById(R.id.menuButton11);
+    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+    navigationView.setItemIconTintList(null);
+
+    carePlanMenuButton.setOnClickListener(
+        v -> {
+          drawerLayout.openDrawer(GravityCompat.START);
+        });
 
     // care plan
     supportRequirementsCheckBox.put((CheckBox) findViewById(R.id.selfCareCheckBox), "Self Care");
