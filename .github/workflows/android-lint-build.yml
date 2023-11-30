@@ -25,4 +25,4 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Run gradle tasks
-        run: ./gradlew ${{ matrix.gradle.task }}
+        run: ./gradlew ${{ matrix.gradle-task }}
