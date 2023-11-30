@@ -2,7 +2,6 @@ package deakin.gopher.guardian.view.caretaker;
 
 import android.os.Bundle;
 import android.widget.ImageView;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
