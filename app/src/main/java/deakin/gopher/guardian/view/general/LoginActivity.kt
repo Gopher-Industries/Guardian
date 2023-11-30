@@ -98,33 +98,8 @@ class LoginActivity : BaseActivity() {
                     ).show()
                 }
 
-<<<<<<< HEAD
-                        if (authService.isUserVerified().not()) {
-                            progressBar.hide()
-                            Toast.makeText(
-                                applicationContext,
-                                LoginAuthError.EmailNotVerified.messageId,
-                                Toast.LENGTH_SHORT,
-                            ).show()
-                            return@addOnSuccessListener
-                        }
-
-                        NavigationService(this).toHomeScreenForRole(RoleName.Nurse)
-                        progressBar.hide()
-                    }
-                    ?.addOnFailureListener { e: Exception ->
-                        progressBar.hide()
-                        Toast.makeText(
-                            applicationContext,
-                            getString(R.string.toast_login_error, e.message),
-                            Toast.LENGTH_SHORT,
-                        ).show()
-                    }
-            }
-=======
             val sessionManager = SessionManager(this)
             sessionManager.createLoginSession()
->>>>>>> cdc4d598405499c7c92156ce510758c24fc38ab6
         }
 
         mCreateBtn.setOnClickListener {
