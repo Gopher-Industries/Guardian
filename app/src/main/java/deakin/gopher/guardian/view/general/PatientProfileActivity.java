@@ -1,5 +1,6 @@
 package deakin.gopher.guardian.view.general;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import androidx.core.view.GravityCompat;
@@ -8,12 +9,17 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientProfileAdapter;
 
 public class PatientProfileActivity extends BaseActivity {
 
   private CustomHeader customHeader;
+
+  private DrawerLayout drawerLayout;
+
+  private FirebaseAuth mAuth;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -23,7 +29,7 @@ public class PatientProfileActivity extends BaseActivity {
     final TabLayout tabLayout = findViewById(R.id.dataForViewTabLayout);
     final ViewPager2 viewPager2 = findViewById(R.id.dataForViewViewPager);
     customHeader = findViewById(R.id.customHeader);
-    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+    drawerLayout = findViewById(R.id.nav_drawer_layout);
     final NavigationView navigationView = findViewById(R.id.nav_view);
     final String patient_id = getIntent().getStringExtra("id");
 
@@ -42,6 +48,23 @@ public class PatientProfileActivity extends BaseActivity {
           v -> {
             if (null != drawerLayout) {
               drawerLayout.openDrawer(GravityCompat.START);
+
+              navigationView.setNavigationItemSelectedListener(
+                  menuItem -> {
+                    final int id = menuItem.getItemId();
+                    if (R.id.nav_home == id) {
+                      startActivity(new Intent(PatientProfileActivity.this, Homepage4admin.class));
+                    } else if (R.id.nav_admin == id) {
+                      startActivity(new Intent(PatientProfileActivity.this, Homepage4admin.class));
+                    } else if (R.id.nav_settings == id) {
+                      startActivity(new Intent(PatientProfileActivity.this, Setting.class));
+                    } else if (R.id.nav_signout == id) {
+                      mAuth.getInstance().signOut();
+                      startActivity(new Intent(PatientProfileActivity.this, LoginActivity.class));
+                      finish();
+                    }
+                    return true;
+                  });
             }
           });
     }
