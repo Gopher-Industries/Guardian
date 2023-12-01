@@ -1,60 +1,48 @@
-package deakin.gopher.guardian.view.general;
+package deakin.gopher.guardian.view.general
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.messaging.FirebaseMessaging;
-import deakin.gopher.guardian.R;
-import deakin.gopher.guardian.model.login.SessionManager;
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.messaging.FirebaseMessaging
+import deakin.gopher.guardian.R
+import deakin.gopher.guardian.model.login.SessionManager
 
-public class MainActivity extends BaseActivity {
+class MainActivity : BaseActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val getStartedButton = findViewById<Button>(R.id.getStartedButton)
 
-  @Override
-  protected void onCreate(final Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+        getStartedButton.setOnClickListener { _ -> onGetStartedClick() }
 
-    setContentView(R.layout.activity_main);
-
-    final Button getStartedButton = findViewById(R.id.getStartedButton);
-
-    getStartedButton.setOnClickListener(this::onClick);
-
-    FirebaseMessaging.getInstance()
-        .getToken()
-        .addOnCompleteListener(
-            task -> {
-              if (!task.isSuccessful()) {
-                Log.w("tag", "Fetching FCM registration token failed", task.getException());
-                return;
-              }
-
-              // Get new FCM registration token
-              final String token = task.getResult();
-
-              // Log and toast
-              Log.d("token: ", token);
-            });
-  }
-
-  public void logout(final View view) {
-    final SessionManager sessionManager = new SessionManager(getApplicationContext());
-    sessionManager.logoutUser();
-    FirebaseAuth.getInstance().signOut(); // logout
-    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-    finish();
-  }
-
-  private void onClick(final View view) {
-    final SessionManager sessionManager = new SessionManager(this);
-    if (!sessionManager.isLoggedIn()) {
-      final Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-      startActivity(intent);
-    } else {
-      final Intent getStartedIntent = new Intent(MainActivity.this, Homepage4caretaker.class);
-      startActivity(getStartedIntent);
+        FirebaseMessaging.getInstance()
+            .token
+            .addOnCompleteListener { task: Task<String?> ->
+                if (task.isSuccessful) {
+                    val token = task.result
+                    Log.d("FCM Token", token ?: "Token is null")
+                } else {
+                    Log.w("MainActivity", "Fetching FCM registration token failed", task.exception)
+                }
+            }
     }
-  }
+
+    private fun onGetStartedClick() {
+        val sessionManager = SessionManager(this)
+        if (!sessionManager.isLoggedIn) {
+            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+        } else {
+            startActivity(Intent(this@MainActivity, Homepage4caretaker::class.java))
+        }
+    }
+
+    fun logout() {
+        SessionManager(applicationContext).logoutUser()
+        FirebaseAuth.getInstance().signOut()
+        startActivity(Intent(applicationContext, LoginActivity::class.java))
+        finish()
+    }
 }
