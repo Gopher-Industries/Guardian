@@ -63,7 +63,7 @@ public class PatientListAdapter
   public myViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
     final View view =
         LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.activity_patieng_list_item, parent, false);
+            .inflate(R.layout.activity_patient_list_item, parent, false);
 
     return new myViewHolder(view);
   }
