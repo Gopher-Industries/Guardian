@@ -1,14 +1,22 @@
 package deakin.gopher.guardian.view.general;
 
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.navigation.NavigationView;
@@ -21,6 +29,7 @@ import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientListAdapter;
 import deakin.gopher.guardian.model.Patient;
 import deakin.gopher.guardian.view.patient.careplan.CarePlanActivity;
+import java.util.Objects;
 
 public class PatientListActivity extends BaseActivity {
   RecyclerView patient_list_recyclerView;
@@ -35,6 +44,10 @@ public class PatientListActivity extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_patient_list);
     patient_list_recyclerView = findViewById(R.id.patient_list_recycleView);
+    final SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback();
+    final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
+    itemTouchHelper.attachToRecyclerView(patient_list_recyclerView);
+
     overview_cardview = findViewById(R.id.patient_list_patient_overview);
     patient_searchView = findViewById(R.id.patient_list_searchView);
     // this clicker is for test:
@@ -144,5 +157,67 @@ public class PatientListActivity extends BaseActivity {
             return true;
           }
         });
+  }
+
+  public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
+
+    public SwipeToDeleteCallback() {
+      super(0, ItemTouchHelper.LEFT);
+    }
+
+    @Override
+    public boolean onMove(
+        RecyclerView recyclerView,
+        RecyclerView.ViewHolder viewHolder,
+        RecyclerView.ViewHolder target) {
+      return false;
+    }
+
+    @Override
+    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+      final int position = viewHolder.getBindingAdapterPosition();
+      ((PatientListAdapter) Objects.requireNonNull(patient_list_recyclerView.getAdapter()))
+          .deleteItem(position);
+    }
+
+    @Override
+    public void onChildDraw(
+        Canvas c,
+        RecyclerView recyclerView,
+        RecyclerView.ViewHolder viewHolder,
+        float dX,
+        float dY,
+        int actionState,
+        boolean isCurrentlyActive) {
+      super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
+      final View itemView = viewHolder.itemView;
+      // final int backgroundCornerOffset = 20;
+
+      final Paint p = new Paint();
+      p.setColor(Color.RED);
+
+      final RectF background =
+          new RectF(
+              (float) itemView.getRight() + dX,
+              (float) itemView.getTop(),
+              (float) itemView.getRight(),
+              (float) itemView.getBottom());
+      c.drawRect(background, p);
+
+      final Drawable trashIcon =
+          ContextCompat.getDrawable(recyclerView.getContext(), R.drawable.trash);
+      assert null != trashIcon;
+      final int margin = (itemView.getHeight() - trashIcon.getIntrinsicHeight()) / 2;
+      final int top =
+          itemView.getTop() + (itemView.getHeight() - trashIcon.getIntrinsicHeight()) / 2;
+      final int bottom = top + trashIcon.getIntrinsicHeight();
+
+      final int iconLeft = itemView.getRight() - margin - trashIcon.getIntrinsicWidth();
+      final int iconRight = itemView.getRight() - margin;
+      trashIcon.setBounds(iconLeft, top, iconRight, bottom);
+
+      trashIcon.draw(c);
+    }
   }
 }
