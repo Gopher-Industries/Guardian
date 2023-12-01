@@ -1,121 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="deakin.gopher.guardian.view.general.MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="deakin.gopher.guardian.view.general.MainActivity">
 
     <Button
-            android:id="@+id/getStartedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="200dp"
-            android:height="60dp"
-            android:backgroundTint="@color/TG_blue"
-            android:fontFamily="@font/poppins_bold"
-            android:text="@string/get_started"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            app:cornerRadius="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+        android:id="@+id/getStartedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:height="60dp"
+        android:backgroundTint="@color/TG_blue"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/get_started"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:cornerRadius="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-            android:id="@+id/button"
-            android:layout_width="246dp"
-            android:layout_height="51dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/TG_blue"
-            android:onClick="logout"
-            android:text="@string/logout"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/getStartedButton"
-            app:layout_constraintVertical_bias="0.529" />
+        android:id="@+id/logoutButton"
+        android:layout_width="246dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/TG_blue"
+        android:text="@string/logout"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/getStartedButton"
+        app:layout_constraintVertical_bias="0.529" />
 
     <TextView
-            android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="64dp"
-            android:text="@string/main_activity_solgan"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="64dp"
+        android:text="@string/main_activity_solgan"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <androidx.cardview.widget.CardView
-            android:id="@+id/medicalDiaganosticsHeaderCardView"
-            android:layout_width="0dp"
-            android:layout_height="220dp"
-            android:layout_marginTop="-40dp"
-            app:cardBackgroundColor="@color/TG_blue"
-            app:cardCornerRadius="40dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        android:id="@+id/medicalDiaganosticsHeaderCardView"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="-40dp"
+        app:cardBackgroundColor="@color/TG_blue"
+        app:cardCornerRadius="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
-                    android:id="@+id/medicalDiagnosticsTitleTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="@string/welcome_to_patient_checker"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/headerGuardiansLogo" />
+                android:id="@+id/medicalDiagnosticsTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/welcome_to_patient_checker"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/headerGuardiansLogo" />
 
             <ImageView
-                    android:id="@+id/headerGuardiansLogo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:contentDescription="TODO"
-                    app:layout_constraintBottom_toTopOf="@+id/medicalDiagnosticsTitleTextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/gopher_logo" />
+                android:id="@+id/headerGuardiansLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:contentDescription="TODO"
+                app:layout_constraintBottom_toTopOf="@+id/medicalDiagnosticsTitleTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/gopher_logo" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="123dp"
-            android:layout_height="125dp"
-            android:layout_marginTop="24dp"
-            android:contentDescription="TODO"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView"
-            app:srcCompat="@drawable/fbc_agedcare_icon_" />
+        android:id="@+id/imageView2"
+        android:layout_width="123dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="TODO"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView"
+        app:srcCompat="@drawable/fbc_agedcare_icon_" />
 
     <ImageView
-            android:id="@+id/headerMenuIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="TODO"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/shapes1" />
+        android:id="@+id/headerMenuIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/shapes1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
