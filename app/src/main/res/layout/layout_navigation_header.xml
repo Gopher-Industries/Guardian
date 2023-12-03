@@ -10,7 +10,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/profile_avatar_women"
+        android:src="@drawable/avatar_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:riv_oval="true" />

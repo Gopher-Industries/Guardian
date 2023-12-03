@@ -97,7 +97,7 @@ public class PatientProfileActivity extends BaseActivity {
             if (0 == position) {
               customHeader.setHeaderText("Patient Profile");
               customHeader.setHeaderTopImageVisibility(View.VISIBLE);
-              customHeader.setHeaderTopImage(R.drawable.profile_avatar_women);
+              customHeader.setHeaderTopImage(R.drawable.avatar_icon);
             } else if (1 == position) {
               customHeader.setHeaderText("Next Of Kin Contact");
               customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);

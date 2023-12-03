@@ -37,7 +37,7 @@
             android:layout_marginLeft="140dp"
             android:layout_marginTop="135dp"
             android:contentDescription="TODO"
-            app:srcCompat="@drawable/profile_avatar_women" />
+            app:srcCompat="@drawable/avatar_icon" />
 
         <TextView
             android:id="@+id/username"
