@@ -3,6 +3,7 @@ package deakin.gopher.guardian.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,27 +38,30 @@ public class PatientListAdapter
       @NonNull final myViewHolder holder, final int position, @NonNull final Patient model) {
     holder.patient_name.setText(
         model.getFirstName() + " " + model.getMiddleName() + " " + model.getLastName());
+    Log.d("PatientListAdapter", "Patient ID: " + model.getPatientId());
     holder.patient_item.setOnClickListener(
         view -> {
           final SharedPreferences sharedPreferences =
               context.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE);
           final int role = sharedPreferences.getInt("login_role", -1);
-          final Intent intent = new Intent(context, PatientProfileActivity.class);
-          intent.putExtra("patientId", model.getPatientId());
-          context.startActivity(intent);
-//          if (0 == role) {
-//            // caretaker
-//            // context.startActivity(new Intent(context, DailyReportActivity.class));
-//            final Intent intent = new Intent(context, PatientProfileActivity.class);
-//            intent.putExtra("patientId", model.getPatientId());
-//            context.startActivity(intent);
-//
-//          } else if (1 == role) {
-//            // admin
-//            final Intent intent = new Intent(context, PatientProfileActivity.class);
-//            intent.putExtra("id", model.getPatientId());
-//            context.startActivity(intent);
-//          }
+//          final Intent intent = new Intent(context, PatientProfileActivity.class);
+//          intent.putExtra("patientId", model.getPatientId());
+//          context.startActivity(intent);
+          if (0 == role || -1 == role) {
+            // caretaker
+            // context.startActivity(new Intent(context, DailyReportActivity.class));
+            final Intent intent = new Intent(context, PatientProfileActivity.class);
+            intent.putExtra("patientId", model.getPatientId());
+            context.startActivity(intent);
+
+
+
+          } else if (1 == role) {
+            // admin
+            final Intent intent = new Intent(context, PatientProfileActivity.class);
+            intent.putExtra("id", model.getPatientId());
+            context.startActivity(intent);
+          }
         });
   }
 
