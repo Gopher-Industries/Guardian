@@ -1,223 +1,195 @@
-package deakin.gopher.guardian.view.general;
+package deakin.gopher.guardian.view.general
 
-import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.SearchView;
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.RecyclerView;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import deakin.gopher.guardian.R;
-import deakin.gopher.guardian.adapter.PatientListAdapter;
-import deakin.gopher.guardian.model.Patient;
-import deakin.gopher.guardian.view.patient.careplan.CarePlanActivity;
-import java.util.Objects;
+import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.RectF
+import android.os.Bundle
+import android.widget.ImageView
+import android.widget.SearchView
+import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
+import com.google.firebase.database.ValueEventListener
+import deakin.gopher.guardian.R
+import deakin.gopher.guardian.adapter.PatientListAdapter
+import deakin.gopher.guardian.model.Patient
+import deakin.gopher.guardian.view.patient.careplan.CarePlanActivity
+import java.util.Objects
 
-public class PatientListActivity extends BaseActivity {
-  RecyclerView patient_list_recyclerView;
-  PatientListAdapter patientListAdapter;
-  Query query;
-  CardView overview_cardview;
-  SearchView patient_searchView;
-  ImageView patientListMenuButton;
+class PatientListActivity : BaseActivity() {
+    private lateinit var navigationView: NavigationView
+    private lateinit var patientsOverviewCardView: CardView
+    private lateinit var patientListMenuButton: ImageView
+    private lateinit var patientListRecyclerView: RecyclerView
+    private lateinit var patientSearchView: SearchView
+    private lateinit var drawerLayout: DrawerLayout
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_patient_list)
 
-  @Override
-  protected void onCreate(final Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_patient_list);
-    patient_list_recyclerView = findViewById(R.id.patient_list_recycleView);
-    final SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback();
-    final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
-    itemTouchHelper.attachToRecyclerView(patient_list_recyclerView);
+        initialiseViews()
+        setupRecyclerView()
+        setupSearchView()
 
-    overview_cardview = findViewById(R.id.patient_list_patient_overview);
-    patient_searchView = findViewById(R.id.patient_list_searchView);
-    // this clicker is for test:
-    overview_cardview.setOnClickListener(
-        view -> startActivity(new Intent(PatientListActivity.this, CarePlanActivity.class)));
-    final NavigationView navigationView = findViewById(R.id.nav_view);
-    patientListMenuButton = findViewById(R.id.patient_list_menu_button);
-    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-    navigationView.setItemIconTintList(null);
+        patientListMenuButton.setOnClickListener { _ -> drawerLayout.openDrawer(GravityCompat.START) }
 
-    patientListMenuButton.setOnClickListener(
-        v -> {
-          drawerLayout.openDrawer(GravityCompat.START);
-        });
+        // TODO Prevents icons in navbar from being tinted grey, should this be here?
+        navigationView.itemIconTintList = null
 
-    final Query all_query = FirebaseDatabase.getInstance().getReference().child("patient_profile");
-    final FirebaseRecyclerOptions<Patient> all_options =
-        new FirebaseRecyclerOptions.Builder<Patient>()
-            .setQuery(
-                all_query,
-                snapshot -> {
-                  final String firstname =
-                      null == snapshot.child("first_name").getValue()
-                          ? ""
-                          : snapshot.child("first_name").getValue().toString();
-                  final String middlename =
-                      null == snapshot.child("middle_name").getValue()
-                          ? ""
-                          : snapshot.child("middle_name").getValue().toString();
-                  final String lastname =
-                      null == snapshot.child("last_name").getValue()
-                          ? ""
-                          : snapshot.child("last_name").getValue().toString();
+        // This clicker is for test
+        patientsOverviewCardView.setOnClickListener { _ ->
+            startActivity(Intent(this@PatientListActivity, CarePlanActivity::class.java))
+        }
+    }
 
-                  final Patient patient = new Patient(snapshot.getKey(), firstname, lastname);
+    private fun initialiseViews() {
+        navigationView = findViewById(R.id.nav_view)
+        patientsOverviewCardView = findViewById(R.id.patient_list_patient_overview)
+        patientListMenuButton = findViewById(R.id.patient_list_menu_button)
+        patientListRecyclerView = findViewById(R.id.patient_list_recycleView)
+        patientSearchView = findViewById(R.id.patient_list_searchView)
+        drawerLayout = findViewById(R.id.drawer_layout)
+    }
 
-                  if ("" != middlename) patient.setMiddleName(middlename);
+    private fun setupRecyclerView() {
+        val allQuery: Query = FirebaseDatabase.getInstance().reference.child("patient_profile")
+        val allOptions =
+            FirebaseRecyclerOptions.Builder<Patient>()
+                .setQuery(allQuery, this::parsePatientSnapshot).build()
+        val patientListAdapterDefault = PatientListAdapter(this@PatientListActivity, allOptions)
+        patientListRecyclerView.layoutManager = GridLayoutManager(this@PatientListActivity, 1)
+        patientListRecyclerView.adapter = patientListAdapterDefault
+        patientListAdapterDefault.startListening()
+        
+        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback())
+        itemTouchHelper.attachToRecyclerView(patientListRecyclerView)
+    }
 
-                  return patient;
-                })
-            .build();
-    final PatientListAdapter patientListAdapter_default =
-        new PatientListAdapter(PatientListActivity.this, all_options);
-    patient_list_recyclerView.setLayoutManager(new GridLayoutManager(PatientListActivity.this, 1));
-    patient_list_recyclerView.setAdapter(patientListAdapter_default);
-    patientListAdapter_default.startListening();
-    patient_searchView.setOnQueryTextListener(
-        new SearchView.OnQueryTextListener() {
-          @Override
-          public boolean onQueryTextSubmit(final String s) {
-            return false;
-          }
+    private fun parsePatientSnapshot(snapshot: DataSnapshot): Patient {
+        return Patient(
+            snapshot.key,
+            snapshot.child("first_name").value?.toString() ?: "",
+            snapshot.child("last_name").value?.toString() ?: "",
+        ).apply {
+            middleName = snapshot.child("middle_name").value?.toString() ?: ""
+        }
+    }
 
-          @Override
-          public boolean onQueryTextChange(final String s) {
-            if (s.isEmpty()) {
-              query = FirebaseDatabase.getInstance().getReference().child("patient_profile");
-            } else {
-              query =
-                  FirebaseDatabase.getInstance()
-                      .getReference()
-                      .child("patient_profile")
-                      .orderByChild("first_name")
-                      .startAt(s)
-                      .endAt(s + "\uf8ff")
-                      .limitToFirst(10);
-            }
-            final FirebaseRecyclerOptions<Patient> options =
-                new FirebaseRecyclerOptions.Builder<Patient>()
-                    .setQuery(
-                        query,
-                        snapshot -> {
-                          final Patient patient =
-                              new Patient(
-                                  snapshot.getKey(),
-                                  snapshot.child("first_name").getValue().toString(),
-                                  snapshot.child("last_name").getValue().toString());
-                          final Object middle_name = snapshot.child("middle_name").getValue();
-                          if (null != middle_name) patient.setMiddleName(middle_name.toString());
-                          return patient;
-                        })
-                    .build();
-            patientListAdapter = new PatientListAdapter(PatientListActivity.this, options);
-            query.addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                  @Override
-                  public void onDataChange(@NonNull final DataSnapshot snapshot) {
+    private fun updateRecyclerView(
+        query: Query,
+        options: FirebaseRecyclerOptions<Patient>,
+    ) {
+        val patientListAdapter = PatientListAdapter(this, options)
+        patientListRecyclerView.layoutManager = GridLayoutManager(this, 1)
+        patientListRecyclerView.adapter = patientListAdapter
+
+        query.addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
-                      patientListAdapter =
-                          new PatientListAdapter(PatientListActivity.this, options);
-                      patient_list_recyclerView.setLayoutManager(
-                          new GridLayoutManager(PatientListActivity.this, 1));
-                      patient_list_recyclerView.setAdapter(patientListAdapter);
-                      patientListAdapter.startListening();
-                    } else {
-                      patient_list_recyclerView.setLayoutManager(
-                          new GridLayoutManager(PatientListActivity.this, 1));
-                      patient_list_recyclerView.setAdapter(
-                          new PatientListAdapter(PatientListActivity.this, options));
+                        patientListAdapter.startListening()
                     }
-                  }
+                }
 
-                  @Override
-                  public void onCancelled(@NonNull final DatabaseError error) {}
-                });
-
-            return true;
-          }
-        });
-  }
-
-  public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
-
-    public SwipeToDeleteCallback() {
-      super(0, ItemTouchHelper.LEFT);
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(
+                        this@PatientListActivity,
+                        error.message,
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+            },
+        )
     }
 
-    @Override
-    public boolean onMove(
-        RecyclerView recyclerView,
-        RecyclerView.ViewHolder viewHolder,
-        RecyclerView.ViewHolder target) {
-      return false;
+    private fun setupSearchView() {
+        patientSearchView.setOnQueryTextListener(
+            object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(s: String): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(s: String): Boolean {
+                    performSearch(s)
+                    return true
+                }
+            },
+        )
     }
 
-    @Override
-    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-      final int position = viewHolder.getBindingAdapterPosition();
-      ((PatientListAdapter) Objects.requireNonNull(patient_list_recyclerView.getAdapter()))
-          .deleteItem(position);
+    private fun performSearch(searchString: String) {
+        val query =
+            if (searchString.isEmpty()) {
+                FirebaseDatabase.getInstance().reference.child("patient_profile")
+            } else {
+                FirebaseDatabase.getInstance().reference.child("patient_profile")
+                    .orderByChild("first_name").startAt(searchString).endAt(searchString + "\uf8ff")
+                    .limitToFirst(10)
+            }
+
+        val options =
+            FirebaseRecyclerOptions.Builder<Patient>().setQuery(query, this::parsePatientSnapshot)
+                .build()
+        updateRecyclerView(query, options)
     }
 
-    @Override
-    public void onChildDraw(
-        Canvas c,
-        RecyclerView recyclerView,
-        RecyclerView.ViewHolder viewHolder,
-        float dX,
-        float dY,
-        int actionState,
-        boolean isCurrentlyActive) {
-      super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+    inner class SwipeToDeleteCallback : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder,
+        ): Boolean {
+            return false
+        }
 
-      final View itemView = viewHolder.itemView;
-      // final int backgroundCornerOffset = 20;
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            val position = viewHolder.bindingAdapterPosition
+            (Objects.requireNonNull(patientListRecyclerView.adapter) as PatientListAdapter)
+                .deleteItem(position)
+        }
 
-      final Paint p = new Paint();
-      p.setColor(Color.RED);
-
-      final RectF background =
-          new RectF(
-              (float) itemView.getRight() + dX,
-              (float) itemView.getTop(),
-              (float) itemView.getRight(),
-              (float) itemView.getBottom());
-      c.drawRect(background, p);
-
-      final Drawable trashIcon =
-          ContextCompat.getDrawable(recyclerView.getContext(), R.drawable.trash);
-      assert null != trashIcon;
-      final int margin = (itemView.getHeight() - trashIcon.getIntrinsicHeight()) / 2;
-      final int top =
-          itemView.getTop() + (itemView.getHeight() - trashIcon.getIntrinsicHeight()) / 2;
-      final int bottom = top + trashIcon.getIntrinsicHeight();
-
-      final int iconLeft = itemView.getRight() - margin - trashIcon.getIntrinsicWidth();
-      final int iconRight = itemView.getRight() - margin;
-      trashIcon.setBounds(iconLeft, top, iconRight, bottom);
-
-      trashIcon.draw(c);
+        override fun onChildDraw(
+            c: Canvas,
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            dX: Float,
+            dY: Float,
+            actionState: Int,
+            isCurrentlyActive: Boolean,
+        ) {
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            val itemView = viewHolder.itemView
+            // final int backgroundCornerOffset = 20;
+            val p = Paint()
+            p.color = Color.RED
+            val background = RectF(
+                itemView.right.toFloat() + dX,
+                itemView.top.toFloat(),
+                itemView.right.toFloat(),
+                itemView.bottom.toFloat()
+            )
+            c.drawRect(background, p)
+            val trashIcon = ContextCompat.getDrawable(recyclerView.context, R.drawable.trash)!!
+            val margin = (itemView.height - trashIcon.intrinsicHeight) / 2
+            val top = itemView.top + (itemView.height - trashIcon.intrinsicHeight) / 2
+            val bottom = top + trashIcon.intrinsicHeight
+            val iconLeft = itemView.right - margin - trashIcon.intrinsicWidth
+            val iconRight = itemView.right - margin
+            trashIcon.setBounds(iconLeft, top, iconRight, bottom)
+            trashIcon.draw(c)
+        }
     }
-  }
 }
