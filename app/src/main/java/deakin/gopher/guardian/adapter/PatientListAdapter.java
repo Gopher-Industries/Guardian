@@ -17,7 +17,6 @@ import com.google.firebase.database.DatabaseReference;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.model.Patient;
 import deakin.gopher.guardian.view.general.PatientProfileActivity;
-import deakin.gopher.guardian.view.patient.dailyreport.DailyReportActivity;
 
 public class PatientListAdapter
     extends FirebaseRecyclerAdapter<Patient, PatientListAdapter.myViewHolder> {
@@ -49,8 +48,6 @@ public class PatientListAdapter
             final Intent intent = new Intent(context, PatientProfileActivity.class);
             intent.putExtra("patientId", model.getPatientId());
             context.startActivity(intent);
-
-
 
           } else if (1 == role) {
             // admin

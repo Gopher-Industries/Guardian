@@ -28,7 +28,6 @@ public class PatientProfileActivity extends BaseActivity {
     setContentView(R.layout.activity_patient_profile);
     final Intent intent = getIntent();
 
-
     final TabLayout tabLayout = findViewById(R.id.dataForViewTabLayout);
     final ViewPager2 viewPager2 = findViewById(R.id.dataForViewViewPager);
     customHeader = findViewById(R.id.customHeader);
@@ -37,9 +36,8 @@ public class PatientProfileActivity extends BaseActivity {
     final String patientId = intent.getStringExtra("patientId");
     Log.d("PatientProfileActivity", "Patient ID: " + patientId);
 
-
-      assert patientId != null;
-      final PatientProfileAdapter viewPagerAdapter =
+    assert patientId != null;
+    final PatientProfileAdapter viewPagerAdapter =
         new PatientProfileAdapter(patientId, getSupportFragmentManager(), getLifecycle());
     viewPager2.setAdapter(viewPagerAdapter);
 

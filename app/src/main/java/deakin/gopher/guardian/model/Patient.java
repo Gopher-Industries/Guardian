@@ -41,7 +41,7 @@ public class Patient {
     this.middleName = middleName;
     this.lastName = lastName;
     this.medicareNo = medicareNo;
-    this.westernAffairsNo= westernAffairsNo;
+    this.westernAffairsNo = westernAffairsNo;
     this.nokId1 = nokId1;
     this.nokId2 = nokId2;
     this.gpId1 = gpId1;
@@ -103,17 +103,18 @@ public class Patient {
   public void setDob(final String dob) {
     this.dob = dob;
   }
-    public String getDob() {
-        return this.dob;
-    }
 
-    public String getMedicareNo(){
-      return this.medicareNo;
-    }
+  public String getDob() {
+    return this.dob;
+  }
 
-    public String getWesternAffairsNo(){
-      return this.westernAffairsNo;
-    }
+  public String getMedicareNo() {
+    return this.medicareNo;
+  }
+
+  public String getWesternAffairsNo() {
+    return this.westernAffairsNo;
+  }
 
   @Override
   public String toString() {
@@ -165,6 +166,4 @@ public class Patient {
         + '\''
         + '}';
   }
-
-
 }
