@@ -8,14 +8,11 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.SearchView;
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -194,17 +191,20 @@ public class PatientListActivity extends BaseActivity {
       final Paint p = new Paint();
       p.setColor(Color.RED);
 
-      final RectF background = new RectF(
-          (float) itemView.getRight() + dX,
-          (float) itemView.getTop(),
-          (float) itemView.getRight(),
-          (float) itemView.getBottom());
+      final RectF background =
+          new RectF(
+              (float) itemView.getRight() + dX,
+              (float) itemView.getTop(),
+              (float) itemView.getRight(),
+              (float) itemView.getBottom());
       c.drawRect(background, p);
 
-      final Drawable trashIcon = ContextCompat.getDrawable(recyclerView.getContext(), R.drawable.trash);
+      final Drawable trashIcon =
+          ContextCompat.getDrawable(recyclerView.getContext(), R.drawable.trash);
       assert null != trashIcon;
       final int margin = (itemView.getHeight() - trashIcon.getIntrinsicHeight()) / 2;
-      final int top = itemView.getTop() + (itemView.getHeight() - trashIcon.getIntrinsicHeight()) / 2;
+      final int top =
+          itemView.getTop() + (itemView.getHeight() - trashIcon.getIntrinsicHeight()) / 2;
       final int bottom = top + trashIcon.getIntrinsicHeight();
 
       final int iconLeft = itemView.getRight() - margin - trashIcon.getIntrinsicWidth();
