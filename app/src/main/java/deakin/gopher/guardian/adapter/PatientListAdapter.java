@@ -44,12 +44,8 @@ public class PatientListAdapter
           final SharedPreferences sharedPreferences =
               context.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE);
           final int role = sharedPreferences.getInt("login_role", -1);
-//          final Intent intent = new Intent(context, PatientProfileActivity.class);
-//          intent.putExtra("patientId", model.getPatientId());
-//          context.startActivity(intent);
           if (0 == role || -1 == role) {
-            // caretaker
-            // context.startActivity(new Intent(context, DailyReportActivity.class));
+
             final Intent intent = new Intent(context, PatientProfileActivity.class);
             intent.putExtra("patientId", model.getPatientId());
             context.startActivity(intent);

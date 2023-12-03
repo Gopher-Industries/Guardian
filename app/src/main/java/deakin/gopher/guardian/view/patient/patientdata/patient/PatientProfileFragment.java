@@ -18,23 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import deakin.gopher.guardian.R;
-import deakin.gopher.guardian.model.Patient;
-
-//public class PatientProfileFragment extends Fragment {
-//  public PatientProfileFragment() {}
-//
-//  @Override
-//  public void onCreate(final Bundle savedInstanceState) {
-//    super.onCreate(savedInstanceState);
-//  }
-//
-//  @Override
-//  public View onCreateView(
-//      final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-//    return inflater.inflate(R.layout.fragment_patient_profile, container, false);
-//  }
-//}
-
 
 public class PatientProfileFragment extends Fragment {
 
@@ -54,15 +37,15 @@ public class PatientProfileFragment extends Fragment {
         return view;
     }
 
-    private void loadPatientData(String patientId, View view) {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("patient_profile").child(patientId);
+    private void loadPatientData(final String patientId, final View view) {
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("patient_profile").child(patientId);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String firstName = dataSnapshot.hasChild("name") ? dataSnapshot.child("name").getValue(String.class) : "N/A";
-                String middleName = dataSnapshot.hasChild("middle_name") ? dataSnapshot.child("middle_name").getValue(String.class) : "";
-                String lastName = dataSnapshot.hasChild("last_name") ? dataSnapshot.child("last_name").getValue(String.class) : "N/A";
-                String dob = dataSnapshot.hasChild("dob") ? dataSnapshot.child("dob").getValue(String.class) : "N/A";
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final String firstName = dataSnapshot.hasChild("name") ? dataSnapshot.child("name").getValue(String.class) : "N/A";
+                final String middleName = dataSnapshot.hasChild("middle_name") ? dataSnapshot.child("middle_name").getValue(String.class) : "";
+                final String lastName = dataSnapshot.hasChild("last_name") ? dataSnapshot.child("last_name").getValue(String.class) : "N/A";
+                final String dob = dataSnapshot.hasChild("dob") ? dataSnapshot.child("dob").getValue(String.class) : "N/A";
 
                 // Update TextViews with the fetched data
                 ((TextView) view.findViewById(R.id.txtFirstName)).setText(firstName);
@@ -73,7 +56,8 @@ public class PatientProfileFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull final DatabaseError databaseError) {
+                Log.e("PatientProfileFragment", "Firebase error: " + databaseError.getMessage());
 
             }
         });
