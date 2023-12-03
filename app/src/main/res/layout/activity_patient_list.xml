@@ -9,9 +9,6 @@
     tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/patient_list_backgroud"
@@ -157,18 +154,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/three_point" />
 
-    <ImageView
+        <ImageView
             android:id="@+id/imageView62"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="188dp"
-            android:layout_marginBottom="13dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="180dp"
+            android:layout_marginBottom="16dp"
             android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/edit_button_plus" />
+            app:srcCompat="@drawable/add_new_96" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
         android:id="@id/nav_view"
