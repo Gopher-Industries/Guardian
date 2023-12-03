@@ -545,5 +545,11 @@
         <item>2027</item>
         <item>2028</item>
     </string-array>
+    <string name="title_activity_add_heart_rate">AddHeartRate</string>
+    <string name="title_activity_heart_rate">HeartRateActivity</string>
+    <string name="heart_rate_date_and_time">Date and Time</string>
+    <string name="heart_rate_hint">Heart Rate</string>
+    <string name="add_heart_rate_title">Add Heart Rate Data</string>
+    <string name="heart_rate_button_name">Heart Rate</string>
 </resources>
 

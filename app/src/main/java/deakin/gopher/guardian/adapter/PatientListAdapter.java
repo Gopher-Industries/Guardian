@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.model.Patient;
 import deakin.gopher.guardian.view.general.PatientProfileActivity;
@@ -62,9 +63,14 @@ public class PatientListAdapter
   public myViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
     final View view =
         LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.activity_patieng_list_item, parent, false);
+            .inflate(R.layout.activity_patient_list_item, parent, false);
 
     return new myViewHolder(view);
+  }
+
+  public void deleteItem(final int position) {
+    final DatabaseReference itemRef = getRef(position);
+    itemRef.removeValue();
   }
 
   static class myViewHolder extends RecyclerView.ViewHolder {
