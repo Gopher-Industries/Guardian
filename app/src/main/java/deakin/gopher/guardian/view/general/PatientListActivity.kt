@@ -36,6 +36,7 @@ class PatientListActivity : BaseActivity() {
     private lateinit var patientListRecyclerView: RecyclerView
     private lateinit var patientSearchView: SearchView
     private lateinit var drawerLayout: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patient_list)
@@ -73,7 +74,7 @@ class PatientListActivity : BaseActivity() {
         patientListRecyclerView.layoutManager = GridLayoutManager(this@PatientListActivity, 1)
         patientListRecyclerView.adapter = patientListAdapterDefault
         patientListAdapterDefault.startListening()
-        
+
         val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback())
         itemTouchHelper.attachToRecyclerView(patientListRecyclerView)
     }
@@ -155,7 +156,10 @@ class PatientListActivity : BaseActivity() {
             return false
         }
 
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+        override fun onSwiped(
+            viewHolder: RecyclerView.ViewHolder,
+            direction: Int,
+        ) {
             val position = viewHolder.bindingAdapterPosition
             (Objects.requireNonNull(patientListRecyclerView.adapter) as PatientListAdapter)
                 .deleteItem(position)
@@ -175,12 +179,13 @@ class PatientListActivity : BaseActivity() {
             // final int backgroundCornerOffset = 20;
             val p = Paint()
             p.color = Color.RED
-            val background = RectF(
-                itemView.right.toFloat() + dX,
-                itemView.top.toFloat(),
-                itemView.right.toFloat(),
-                itemView.bottom.toFloat()
-            )
+            val background =
+                RectF(
+                    itemView.right.toFloat() + dX,
+                    itemView.top.toFloat(),
+                    itemView.right.toFloat(),
+                    itemView.bottom.toFloat(),
+                )
             c.drawRect(background, p)
             val trashIcon = ContextCompat.getDrawable(recyclerView.context, R.drawable.trash)!!
             val margin = (itemView.height - trashIcon.intrinsicHeight) / 2
