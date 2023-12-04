@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
 
 class Homepage4nurse : AppCompatActivity() {
@@ -26,7 +27,8 @@ class Homepage4nurse : AppCompatActivity() {
 
         // sign out button
         signOutButton.setOnClickListener {
-            NavigationService(this).onSignOut()
+            EmailPasswordAuthService.signOut(this)
+            finish()
         }
     }
 }

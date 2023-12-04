@@ -1,51 +1,43 @@
-package deakin.gopher.guardian.view.general;
+package deakin.gopher.guardian.view.general
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Button;
-import com.google.firebase.auth.FirebaseAuth;
-import deakin.gopher.guardian.R;
-import deakin.gopher.guardian.model.login.SessionManager;
+import android.annotation.SuppressLint
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
+import deakin.gopher.guardian.R
+import deakin.gopher.guardian.services.EmailPasswordAuthService
 
-public class Homepage4caretaker extends BaseActivity {
+class Homepage4caretaker : BaseActivity() {
+    private lateinit var patientListButton: Button
+    private lateinit var settingsButton: Button
+    private lateinit var signOutButton: Button
 
-  Button patientListButton, settingsButton, signOutButton;
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_homepage4caretaker)
+        patientListButton = findViewById(R.id.patientListButton)
+        settingsButton = findViewById(R.id.settingsButton3)
+        signOutButton = findViewById(R.id.sighOutButton)
 
-  @SuppressLint("MissingInflatedId")
-  @Override
-  protected void onCreate(final Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_homepage4caretaker);
+        // patient list button
+        patientListButton.setOnClickListener {
+            val medicalDiagnosticsActivityIntent =
+                Intent(this@Homepage4caretaker, PatientListActivity::class.java)
+            startActivity(medicalDiagnosticsActivityIntent)
+        }
 
-    patientListButton = findViewById(R.id.patientListButton);
-    settingsButton = findViewById(R.id.settingsButton3);
-    signOutButton = findViewById(R.id.sighOutButton);
+        // settings button
+        settingsButton.setOnClickListener {
+            val medicalDiagnosticsActivityIntent =
+                Intent(this@Homepage4caretaker, Setting::class.java)
+            startActivity(medicalDiagnosticsActivityIntent)
+        }
 
-    // patient list button
-    patientListButton.setOnClickListener(
-        view -> {
-          final Intent medicalDiagnosticsActivityIntent =
-              new Intent(Homepage4caretaker.this, PatientListActivity.class);
-          startActivity(medicalDiagnosticsActivityIntent);
-        });
-
-    // settings button
-    settingsButton.setOnClickListener(
-        view -> {
-          final Intent medicalDiagnosticsActivityIntent =
-              new Intent(Homepage4caretaker.this, Setting.class);
-          startActivity(medicalDiagnosticsActivityIntent);
-        });
-
-    // sign out button
-    signOutButton.setOnClickListener(
-        view -> {
-          final SessionManager sessionManager = new SessionManager(getApplicationContext());
-          sessionManager.logoutUser();
-          FirebaseAuth.getInstance().signOut(); // logout
-          startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-          finish();
-        });
-  }
+        // sign out button
+        signOutButton.setOnClickListener {
+            EmailPasswordAuthService.signOut(this)
+            finish()
+        }
+    }
 }
