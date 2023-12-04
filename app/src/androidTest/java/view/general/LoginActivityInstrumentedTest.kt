@@ -16,11 +16,9 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class LoginActivityInstrumentedTest {
-
     @get:Rule
     val activityRule = ActivityScenarioRule(LoginActivity::class.java)
 
@@ -46,5 +44,4 @@ class LoginActivityInstrumentedTest {
         onView(withId(R.id.loginBtn)).perform(click())
         intended(hasComponent(LoginActivity::class.java.name))
     }
-
 }
