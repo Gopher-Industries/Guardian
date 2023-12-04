@@ -70,7 +70,7 @@
                 android:contentDescription="TODO"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/medicalDiagnosticsTitleTextView"
-                app:srcCompat="@drawable/profile_avatar_women" />
+                app:srcCompat="@drawable/avatar_icon" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
