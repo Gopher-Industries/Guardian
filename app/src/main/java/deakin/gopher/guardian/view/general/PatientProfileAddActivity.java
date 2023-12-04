@@ -20,7 +20,7 @@ import deakin.gopher.guardian.model.NextOfKin;
 import deakin.gopher.guardian.model.Patient;
 import deakin.gopher.guardian.util.DataListener;
 
-public class PatientProfileAddActivity extends AppCompatActivity implements DataListener {
+public abstract class PatientProfileAddActivity extends AppCompatActivity implements DataListener {
 
   private CustomHeader customHeader;
   private Patient patient;

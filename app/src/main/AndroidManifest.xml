@@ -32,6 +32,10 @@
             android:exported="false" />
         <activity android:name=".view.general.TasksListActivity"
             android:exported="false" />
+        <activity android:name=".view.general.TaskDetailActivity"
+            android:exported="false" />
+        <activity android:name=".view.general.TaskAddActivity"
+            android:exported="false" />
         <activity
             android:name="deakin.gopher.guardian.view.general.UploadPhoto"
             android:exported="false" />

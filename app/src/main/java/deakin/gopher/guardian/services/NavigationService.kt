@@ -9,6 +9,7 @@ import deakin.gopher.guardian.view.general.Homepage4nurse
 import deakin.gopher.guardian.view.general.LoginActivity
 import deakin.gopher.guardian.view.general.RegisterActivity
 import deakin.gopher.guardian.view.general.Setting
+import deakin.gopher.guardian.view.general.TaskAddActivity
 import deakin.gopher.guardian.view.general.TasksListActivity
 
 class NavigationService(val activity: Activity) {
@@ -75,6 +76,15 @@ class NavigationService(val activity: Activity) {
             Intent(
                 activity.applicationContext,
                 TasksListActivity::class.java,
+            ),
+        )
+    }
+
+    fun onLaunchTaskCreator() {
+        activity.startActivity(
+            Intent(
+                activity.applicationContext,
+                TaskAddActivity::class.java,
             ),
         )
     }

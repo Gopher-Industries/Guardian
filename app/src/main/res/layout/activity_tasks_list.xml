@@ -83,6 +83,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/task_list_searchView">
 
+        <Button
+            android:id="@+id/add_task_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:alpha="0"
+            android:backgroundTint="@color/_bg__new_homepage___ek2_color"
+            android:text="" />
+
         <LinearLayout
                 android:id="@+id/task_list_overview_layout"
                 android:layout_width="match_parent"

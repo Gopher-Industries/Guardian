@@ -1,6 +1,7 @@
 package deakin.gopher.guardian.view.general
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -13,11 +14,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import deakin.gopher.guardian.R
-import deakin.gopher.guardian.adapter.PatientListAdapter
-import deakin.gopher.guardian.model.Patient
+import deakin.gopher.guardian.adapter.TaskListAdapter
+import deakin.gopher.guardian.model.Task
+import deakin.gopher.guardian.services.NavigationService
 
 class TasksListActivity : AppCompatActivity() {
-    var taskListAdapter: PatientListAdapter? = null
+    var taskListAdapter: TaskListAdapter? = null
     var query: Query? = null
     var overviewCardview: CardView? = null
 
@@ -28,88 +30,66 @@ class TasksListActivity : AppCompatActivity() {
         overviewCardview = findViewById(R.id.task_list_task_overview)
         val taskSearchView: SearchView = findViewById(R.id.task_list_searchView)
 
-        val allQuery: Query = FirebaseDatabase.getInstance().reference.child("task_profile")
+        val addTaskButton: Button = findViewById(R.id.add_task_button)
+        addTaskButton.setOnClickListener {
+            NavigationService(this).onLaunchTaskCreator()
+        }
+
+        query = FirebaseDatabase.getInstance().reference.child("tasks")
+
         val allOptions =
-            FirebaseRecyclerOptions.Builder<Patient>()
-                .setQuery(
-                    allQuery,
-                ) { snapshot: DataSnapshot ->
-                    val firstname =
-                        if (null == snapshot.child("first_name").value) "" else snapshot.child("first_name").value.toString()
-                    val middlename =
-                        if (null == snapshot.child("middle_name").value) "" else snapshot.child("middle_name").value.toString()
-                    val lastname =
-                        if (null == snapshot.child("last_name").value) "" else snapshot.child("last_name").value.toString()
-                    val task = Patient(snapshot.key, firstname, lastname)
-                    if ("" !== middlename) task.middleName = middlename
-                    task
-                }
+            FirebaseRecyclerOptions.Builder<Task>()
+                .setQuery(query!!, Task::class.java)
                 .build()
-        val taskListAdapterDefault = PatientListAdapter(this@TasksListActivity, allOptions)
-        taskListRecyclerView.setLayoutManager(GridLayoutManager(this@TasksListActivity, 1))
-        taskListRecyclerView.setAdapter(taskListAdapterDefault)
+
+        val taskListAdapterDefault = TaskListAdapter(this@TasksListActivity, allOptions)
+        taskListRecyclerView.layoutManager = GridLayoutManager(this@TasksListActivity, 1)
+        taskListRecyclerView.adapter = taskListAdapterDefault
         taskListAdapterDefault.startListening()
-        taskSearchView.setOnQueryTextListener(
-            object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(s: String): Boolean {
-                    return false
+
+        taskSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(s: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(s: String?): Boolean {
+                query = if (s.isNullOrEmpty()) {
+                    FirebaseDatabase.getInstance().reference.child("tasks")
+                } else {
+                    FirebaseDatabase.getInstance()
+                        .reference
+                        .child("tasks")
+                        .orderByChild("description")
+                        .startAt(s)
+                        .endAt(s + "\uf8ff")
+                        .limitToFirst(10)
                 }
 
-                override fun onQueryTextChange(s: String): Boolean {
-                    query =
-                        if (s.isEmpty()) {
-                            FirebaseDatabase.getInstance().reference.child("task_profile")
-                        } else {
-                            FirebaseDatabase.getInstance()
-                                .reference
-                                .child("task_profile")
-                                .orderByChild("first_name")
-                                .startAt(s)
-                                .endAt(s + "\uf8ff")
-                                .limitToFirst(10)
-                        }
-                    val options =
-                        FirebaseRecyclerOptions.Builder<Patient>()
-                            .setQuery(
-                                query!!,
-                            ) { snapshot: DataSnapshot ->
-                                val task =
-                                    Patient(
-                                        snapshot.key,
-                                        snapshot.child("first_name").value.toString(),
-                                        snapshot.child("last_name").value.toString(),
-                                    )
-                                val middleName = snapshot.child("middle_name").value
-                                if (null != middleName) task.middleName = middleName.toString()
-                                task
-                            }
-                            .build()
-                    taskListAdapter = PatientListAdapter(this@TasksListActivity, options)
-                    query!!.addListenerForSingleValueEvent(
-                        object : ValueEventListener {
-                            override fun onDataChange(snapshot: DataSnapshot) {
-                                if (snapshot.exists()) {
-                                    taskListAdapter =
-                                        PatientListAdapter(this@TasksListActivity, options)
-                                    taskListRecyclerView.setLayoutManager(
-                                        GridLayoutManager(this@TasksListActivity, 1),
-                                    )
-                                    taskListRecyclerView.setAdapter(taskListAdapter)
-                                    taskListAdapter!!.startListening()
-                                } else {
-                                    taskListRecyclerView.setLayoutManager(
-                                        GridLayoutManager(this@TasksListActivity, 1),
-                                    )
-                                    taskListRecyclerView.setAdapter(
-                                        PatientListAdapter(this@TasksListActivity, options),
-                                    )
-                                }
-                            }
+                val options = FirebaseRecyclerOptions.Builder<Task>()
+                    .setQuery(query!!, Task::class.java)
+                    .build()
 
-                            override fun onCancelled(error: DatabaseError) {}
-                        },
-                    )
-                    return true
+                taskListAdapter = TaskListAdapter(this@TasksListActivity, options)
+                query!!.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            taskListAdapter = TaskListAdapter(this@TasksListActivity, options)
+                            taskListRecyclerView.layoutManager =
+                                GridLayoutManager(this@TasksListActivity, 1)
+                            taskListRecyclerView.adapter = taskListAdapter
+                            taskListAdapter!!.startListening()
+                        } else {
+                            taskListRecyclerView.layoutManager =
+                                GridLayoutManager(this@TasksListActivity, 1)
+                            taskListRecyclerView.adapter =
+                                TaskListAdapter(this@TasksListActivity, options)
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {}
+                })
+
+                return true
                 }
             },
         )
