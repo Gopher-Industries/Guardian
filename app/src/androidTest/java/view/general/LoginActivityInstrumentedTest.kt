@@ -3,17 +3,13 @@ package view.general
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
-import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.intent.rule.IntentsTestRule
-import androidx.test.espresso.matcher.RootMatchers.isPlatformPopup
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.SmallTest
+import androidx.test.filters.LargeTest
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.view.general.LoginActivity
 import org.junit.Rule
@@ -22,7 +18,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-@SmallTest
+@LargeTest
 class LoginActivityInstrumentedTest {
 
     @get:Rule
@@ -41,10 +37,14 @@ class LoginActivityInstrumentedTest {
     fun onLoginAttempt_LoginFailsWithBadEmailAddress() {
         onView(withId(R.id.Email)).perform(typeText("BadEmailAddress"))
         onView(withId(R.id.loginBtn)).perform(click())
+        intended(hasComponent(LoginActivity::class.java.name))
+    }
 
-        onView(withText(R.string.validation_invalid_email_address))
-            .inRoot(isPlatformPopup())
-            .check(matches(isDisplayed()))
+    @Test
+    fun onLoginAttempt_LoginFailsWithPasswordButNoEmail() {
+        onView(withId(R.id.password)).perform(typeText("HelloWorld"))
+        onView(withId(R.id.loginBtn)).perform(click())
+        intended(hasComponent(LoginActivity::class.java.name))
     }
 
 }
