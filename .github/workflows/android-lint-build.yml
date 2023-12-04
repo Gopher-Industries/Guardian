@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        gradle-task: [lint, build]
+        gradle-task: [lint, build, test]
     steps:
       - uses: actions/checkout@v3
       - name: set up JDK 17

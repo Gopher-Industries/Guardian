@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.messaging.FirebaseMessaging
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.login.SessionManager
+import deakin.gopher.guardian.services.EmailPasswordAuthService
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,9 +42,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun onLogoutClick() {
-        SessionManager(applicationContext).logoutUser()
-        FirebaseAuth.getInstance().signOut()
-        startActivity(Intent(applicationContext, LoginActivity::class.java))
+        EmailPasswordAuthService.signOut(this)
         finish()
     }
 }
