@@ -521,8 +521,9 @@
                 android:autofillHints=""
                 android:background="@null"
                 android:hint="@string/enter_a_fax"
-                android:inputType="textMultiLine"
+                android:inputType="number"
                 android:textSize="14sp" />
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
