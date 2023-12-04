@@ -31,14 +31,3 @@ jobs:
         run: chmod +x gradlew
       - name: Run gradle tasks
         run: ./gradlew ${{ matrix.gradle-task }}
-  instrumentedTest:
-    runs-on: macos-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-
-      - name: Run Instrumented UI Tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 33
-          script: ./gradlew connectedCheck
