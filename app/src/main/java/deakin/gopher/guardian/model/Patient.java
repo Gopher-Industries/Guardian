@@ -12,7 +12,7 @@ public class Patient {
   String middleName;
   String lastName;
   String medicareNo;
-  String westwenAffairesNo;
+  String westernAffairsNo;
   String nokId1;
   String nokId2;
   String gpId1;
@@ -31,7 +31,7 @@ public class Patient {
       final String middleName,
       final String lastName,
       final String medicareNo,
-      final String westwenAffairesNo,
+      final String westernAffairsNo,
       final String nokId1,
       final String nokId2,
       final String gpId1,
@@ -41,7 +41,7 @@ public class Patient {
     this.middleName = middleName;
     this.lastName = lastName;
     this.medicareNo = medicareNo;
-    this.westwenAffairesNo = westwenAffairesNo;
+    this.westernAffairsNo = westernAffairsNo;
     this.nokId1 = nokId1;
     this.nokId2 = nokId2;
     this.gpId1 = gpId1;
@@ -56,8 +56,8 @@ public class Patient {
     this.medicareNo = medicareNo;
   }
 
-  public void setWestwenAffairesNo(final String westwenAffairesNo) {
-    this.westwenAffairesNo = westwenAffairesNo;
+  public void setWesternAffairsNo(final String westernAffairsNo) {
+    this.westernAffairsNo = westernAffairsNo;
   }
 
   public void setNokId1(final String nokId1) {
@@ -104,6 +104,18 @@ public class Patient {
     this.dob = dob;
   }
 
+  public String getDob() {
+    return this.dob;
+  }
+
+  public String getMedicareNo() {
+    return this.medicareNo;
+  }
+
+  public String getWesternAffairsNo() {
+    return this.westernAffairsNo;
+  }
+
   @Override
   public String toString() {
     return "Patient{"
@@ -138,7 +150,7 @@ public class Patient {
         + medicareNo
         + '\''
         + ", westwenAffairesNo='"
-        + westwenAffairesNo
+        + westernAffairsNo
         + '\''
         + ", nok_id1='"
         + nokId1

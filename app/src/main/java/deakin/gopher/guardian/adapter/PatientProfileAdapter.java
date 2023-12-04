@@ -1,5 +1,6 @@
 package deakin.gopher.guardian.adapter;
 
+import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -26,7 +27,11 @@ public class PatientProfileAdapter extends FragmentStateAdapter {
   public Fragment createFragment(final int position) {
     switch (position) {
       case 0:
-        return new PatientProfileFragment();
+        final PatientProfileFragment fragment = new PatientProfileFragment();
+        final Bundle bundle = new Bundle();
+        bundle.putString("patientId", patient_id);
+        fragment.setArguments(bundle);
+        return fragment;
       case 1:
         return new NextOfKinFragment();
       case 2:
