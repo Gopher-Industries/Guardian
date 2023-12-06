@@ -521,7 +521,7 @@
                 android:autofillHints=""
                 android:background="@null"
                 android:hint="@string/enter_a_fax"
-                android:inputType="number"
+                android:inputType="phone"
                 android:textSize="14sp" />
 
 
