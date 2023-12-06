@@ -47,7 +47,7 @@
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/profile_avatar_women" />
+                    app:srcCompat="@drawable/avatar_icon" />
 
             <Button
                     android:id="@+id/caretakerDashboardNotificationsButton"

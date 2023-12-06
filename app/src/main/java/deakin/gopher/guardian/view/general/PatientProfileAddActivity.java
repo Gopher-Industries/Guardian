@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientProfileAddAdapter;
 import deakin.gopher.guardian.model.GP;
-import deakin.gopher.guardian.model.Medical_diagnostic;
+import deakin.gopher.guardian.model.MedicalDiagnostic;
 import deakin.gopher.guardian.model.NextOfKin;
 import deakin.gopher.guardian.model.Patient;
 import deakin.gopher.guardian.util.DataListener;
@@ -235,7 +235,7 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
   }
 
   private void createMedicalDiagnostic(final String patient_id) {
-    final Medical_diagnostic current_medical_diagnostic = new Medical_diagnostic(patient_id, true);
+    final MedicalDiagnostic current_medical_diagnostic = new MedicalDiagnostic(patient_id, true);
     final DatabaseReference reference =
         FirebaseDatabase.getInstance().getReference("health_details");
     final String id = reference.push().getKey();

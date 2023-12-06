@@ -36,7 +36,7 @@
         android:contentDescription="TODO"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profile_avatar_women" />
+        app:srcCompat="@drawable/avatar_icon" />
 
     <TextView
         android:id="@+id/headerTextView"
@@ -61,7 +61,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="-40dp"
         android:contentDescription="TODO"
-        android:src="@drawable/profile_avatar_women"
+        android:src="@drawable/avatar_icon"
         android:translationZ="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

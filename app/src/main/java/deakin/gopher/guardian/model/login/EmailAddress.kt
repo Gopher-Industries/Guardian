@@ -1,7 +1,9 @@
 package deakin.gopher.guardian.model.login
 
+import androidx.core.util.PatternsCompat
+
 data class EmailAddress(val emailAddress: String) {
     fun isValid(): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches()
+        return PatternsCompat.EMAIL_ADDRESS.matcher(emailAddress).matches()
     }
 }

@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
@@ -44,6 +45,13 @@ public class PatientListActivity extends BaseActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_patient_list);
     patient_list_recyclerView = findViewById(R.id.patient_list_recycleView);
+    final ImageView addPatientIcon = findViewById(R.id.imageView62);
+    addPatientIcon.setOnClickListener(
+        v -> {
+          final Intent intent = new Intent(PatientListActivity.this, AddNewPatientActivity.class);
+          startActivity(intent);
+        });
+
     final SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback();
     final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
     itemTouchHelper.attachToRecyclerView(patient_list_recyclerView);
@@ -64,22 +72,24 @@ public class PatientListActivity extends BaseActivity {
         });
 
     final Query all_query = FirebaseDatabase.getInstance().getReference().child("patient_profile");
+    //      Log.d("PatientListActivity", "Data loaded" + all_query);
     final FirebaseRecyclerOptions<Patient> all_options =
         new FirebaseRecyclerOptions.Builder<Patient>()
             .setQuery(
                 all_query,
                 snapshot -> {
                   final String firstname =
-                      null == snapshot.child("first_name").getValue()
+                      null == snapshot.child("name").getValue()
                           ? ""
-                          : snapshot.child("first_name").getValue().toString();
+                          : snapshot.child("name").getValue().toString();
+                  Log.d("PatientListActivity", "Data loaded" + firstname);
                   final String middlename =
                       null == snapshot.child("middle_name").getValue()
-                          ? ""
+                          ? " "
                           : snapshot.child("middle_name").getValue().toString();
                   final String lastname =
                       null == snapshot.child("last_name").getValue()
-                          ? ""
+                          ? " "
                           : snapshot.child("last_name").getValue().toString();
 
                   final Patient patient = new Patient(snapshot.getKey(), firstname, lastname);
@@ -110,7 +120,7 @@ public class PatientListActivity extends BaseActivity {
                   FirebaseDatabase.getInstance()
                       .getReference()
                       .child("patient_profile")
-                      .orderByChild("first_name")
+                      .orderByChild("name")
                       .startAt(s)
                       .endAt(s + "\uf8ff")
                       .limitToFirst(10);
@@ -123,7 +133,7 @@ public class PatientListActivity extends BaseActivity {
                           final Patient patient =
                               new Patient(
                                   snapshot.getKey(),
-                                  snapshot.child("first_name").getValue().toString(),
+                                  snapshot.child("name").getValue().toString(),
                                   snapshot.child("last_name").getValue().toString());
                           final Object middle_name = snapshot.child("middle_name").getValue();
                           if (null != middle_name) patient.setMiddleName(middle_name.toString());

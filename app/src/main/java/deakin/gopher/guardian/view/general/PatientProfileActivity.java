@@ -2,6 +2,7 @@ package deakin.gopher.guardian.view.general;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -25,16 +26,19 @@ public class PatientProfileActivity extends BaseActivity {
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_patient_profile);
+    final Intent intent = getIntent();
 
     final TabLayout tabLayout = findViewById(R.id.dataForViewTabLayout);
     final ViewPager2 viewPager2 = findViewById(R.id.dataForViewViewPager);
     customHeader = findViewById(R.id.customHeader);
     drawerLayout = findViewById(R.id.nav_drawer_layout);
     final NavigationView navigationView = findViewById(R.id.nav_view);
-    final String patient_id = getIntent().getStringExtra("id");
+    final String patientId = intent.getStringExtra("patientId");
+    Log.d("PatientProfileActivity", "Patient ID: " + patientId);
 
+    assert patientId != null;
     final PatientProfileAdapter viewPagerAdapter =
-        new PatientProfileAdapter(patient_id, getSupportFragmentManager(), getLifecycle());
+        new PatientProfileAdapter(patientId, getSupportFragmentManager(), getLifecycle());
     viewPager2.setAdapter(viewPagerAdapter);
 
     customHeader.setHeaderHeight(450);
@@ -97,7 +101,7 @@ public class PatientProfileActivity extends BaseActivity {
             if (0 == position) {
               customHeader.setHeaderText("Patient Profile");
               customHeader.setHeaderTopImageVisibility(View.VISIBLE);
-              customHeader.setHeaderTopImage(R.drawable.profile_avatar_women);
+              customHeader.setHeaderTopImage(R.drawable.avatar_icon);
             } else if (1 == position) {
               customHeader.setHeaderText("Next Of Kin Contact");
               customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);
