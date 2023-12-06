@@ -1,6 +1,5 @@
 package deakin.gopher.guardian.model;
 
-
 public class Patient {
   String patientId;
   String address;
@@ -19,10 +18,10 @@ public class Patient {
   String gpId1;
   String gpId2;
 
-    private long lastExaminedTimestamp;
+  private long lastExaminedTimestamp;
 
-    private boolean needsAssistance;
-    private PatientStatus status;
+  private boolean needsAssistance;
+  private PatientStatus status;
 
   public Patient(final String patientId, final String firstName, final String lastName) {
     this.patientId = patientId;
@@ -126,36 +125,36 @@ public class Patient {
     return this.westernAffairsNo;
   }
 
-    public PatientStatus getStatus() {
-        return status;
-    }
+  public PatientStatus getStatus() {
+    return status;
+  }
 
-    public void setStatus(PatientStatus status) {
-        this.status = status;
-    }
+  public void setStatus(PatientStatus status) {
+    this.status = status;
+  }
 
-    public boolean getNeedsAssistance() {
-        return needsAssistance;
-    }
+  public boolean getNeedsAssistance() {
+    return needsAssistance;
+  }
 
-    public void setNeedsAssistance(boolean needsAssistance) {
-        this.needsAssistance = needsAssistance;
-    }
+  public void setNeedsAssistance(boolean needsAssistance) {
+    this.needsAssistance = needsAssistance;
+  }
 
-    public long getLastExaminedTimestamp() {
-        return lastExaminedTimestamp;
-    }
+  public long getLastExaminedTimestamp() {
+    return lastExaminedTimestamp;
+  }
 
-    public void setLastExaminedTimestamp(long lastExaminedTimestamp) {
-        this.lastExaminedTimestamp = lastExaminedTimestamp;
-    }
+  public void setLastExaminedTimestamp(long lastExaminedTimestamp) {
+    this.lastExaminedTimestamp = lastExaminedTimestamp;
+  }
 
-    public void examinePatient() {
-        if (PatientStatus.REQUIRES_ASSISTANCE == this.status) {
-            this.status = PatientStatus.NO_ASSISTANCE_REQUIRED;
-            this.needsAssistance = false;
-        }
+  public void examinePatient() {
+    if (PatientStatus.REQUIRES_ASSISTANCE == this.status) {
+      this.status = PatientStatus.NO_ASSISTANCE_REQUIRED;
+      this.needsAssistance = false;
     }
+  }
 
   @Override
   public String toString() {
