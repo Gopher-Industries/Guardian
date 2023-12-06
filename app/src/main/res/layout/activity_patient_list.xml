@@ -110,7 +110,8 @@
                 android:layout_height="24dp"
                 android:src="@drawable/red_circle"
                 android:layout_margin="8dp"
-                app:tint="@color/red" />
+                app:tint="@color/red"
+                android:contentDescription="TODO" />
 
 
             <TextView
