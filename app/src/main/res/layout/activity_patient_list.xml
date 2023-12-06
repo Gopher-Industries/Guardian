@@ -79,64 +79,13 @@
             app:layout_constraintTop_toBottomOf="@+id/patient_list_title" />
 
 
-    <androidx.cardview.widget.CardView
-            android:id="@+id/patient_list_patient_overview"
-            android:layout_width="375dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            app:cardCornerRadius="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_list_searchView">
-
-        <LinearLayout
-                android:id="@+id/patient_list_overview_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="15dp">
-
-            <ImageView
-                    android:id="@+id/imageView55"
-                    android:layout_width="35dp"
-                    android:layout_height="33dp"
-                    android:contentDescription="TODO"
-                    app:srcCompat="@drawable/red_circle"
-                    tools:layout_editor_absoluteX="41dp"
-                    tools:layout_editor_absoluteY="232dp" />
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="9dp"
-                    android:fontFamily="sans-serif-black"
-                    android:text="@string/patients_overview"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-            <ImageView
-                    android:id="@+id/imageView64"
-                    android:layout_width="26dp"
-                    android:layout_height="31dp"
-                    android:layout_marginLeft="140dp"
-                    android:layout_marginTop="5dp"
-                    android:contentDescription="TODO"
-                    app:srcCompat="@drawable/right_vector"
-                    tools:layout_editor_absoluteX="337dp"
-                    tools:layout_editor_absoluteY="234dp" />
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
     <ScrollView
             android:id="@+id/patient_list_scrollView"
             android:layout_width="409dp"
             android:layout_height="338dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_list_patient_overview">
+            app:layout_constraintTop_toBottomOf="@+id/patient_list_searchView">
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/patient_list_recycleView"
