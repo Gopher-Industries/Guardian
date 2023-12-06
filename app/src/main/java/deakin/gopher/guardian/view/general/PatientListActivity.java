@@ -29,8 +29,10 @@ import com.google.firebase.database.ValueEventListener;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientListAdapter;
 import deakin.gopher.guardian.model.Patient;
+import deakin.gopher.guardian.model.PatientStatus;
 import deakin.gopher.guardian.view.patient.careplan.CarePlanActivity;
 import java.util.Objects;
+import com.google.firebase.database.DatabaseReference;
 
 public class PatientListActivity extends BaseActivity {
   RecyclerView patient_list_recyclerView;
@@ -91,8 +93,12 @@ public class PatientListActivity extends BaseActivity {
                       null == snapshot.child("last_name").getValue()
                           ? " "
                           : snapshot.child("last_name").getValue().toString();
+                    final PatientStatus newStatus = Boolean.TRUE.equals(snapshot.child("needsAssistance").getValue(Boolean.class))
+                        ? PatientStatus.REQUIRES_ASSISTANCE
+                        : PatientStatus.NO_ASSISTANCE_REQUIRED;
 
-                  final Patient patient = new Patient(snapshot.getKey(), firstname, lastname);
+                    final Patient patient = new Patient(Objects.requireNonNull(snapshot.getKey()), firstname, lastname);
+                    patient.setStatus(newStatus);
 
                   if ("" != middlename) patient.setMiddleName(middlename);
 
@@ -168,6 +174,14 @@ public class PatientListActivity extends BaseActivity {
           }
         });
   }
+
+    public void updatePatientStatus(final String patientId, final PatientStatus newStatus) {
+        final DatabaseReference patientsRef = FirebaseDatabase.getInstance().getReference("patients");
+
+        patientsRef.child(patientId).child("status").setValue(newStatus.toString())
+            .addOnSuccessListener(aVoid -> Log.d("UpdateStatus", "Patient status updated successfully."))
+            .addOnFailureListener(e -> Log.e("UpdateStatus", "Failed to update patient status.", e));
+    }
 
   public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
 

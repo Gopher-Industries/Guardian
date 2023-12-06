@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -37,7 +39,16 @@ public class PatientListAdapter
       @NonNull final myViewHolder holder, final int position, @NonNull final Patient model) {
     holder.patient_name.setText(
         model.getFirstName() + " " + model.getMiddleName() + " " + model.getLastName());
-    Log.d("PatientListAdapter", "Patient ID: " + model.getPatientId());
+
+      final int statusColor = switch (model.getStatus()) {
+          case REQUIRES_ASSISTANCE ->
+              ContextCompat.getColor(context, R.color.red);
+          case NOT_EXAMINED -> ContextCompat.getColor(context, R.color.orange);
+          default -> ContextCompat.getColor(context, R.color.green);
+      };
+
+      holder.statusIndicator.setColorFilter(statusColor);
+      Log.d("PatientListAdapter", "Patient ID: " + model.getPatientId());
     holder.patient_item.setOnClickListener(
         view -> {
           final SharedPreferences sharedPreferences =
@@ -76,11 +87,13 @@ public class PatientListAdapter
   static class myViewHolder extends RecyclerView.ViewHolder {
     final TextView patient_name;
     final CardView patient_item;
+    ImageView statusIndicator;
 
     public myViewHolder(@NonNull final View itemView) {
       super(itemView);
       patient_name = itemView.findViewById(R.id.patient_list_name);
       patient_item = itemView.findViewById(R.id.patient_list_patient_item);
+      statusIndicator = itemView.findViewById(R.id.patient_status_indicator);
     }
   }
 }

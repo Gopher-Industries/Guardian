@@ -1,5 +1,9 @@
 package deakin.gopher.guardian.model
 
+enum class PatientStatus {
+    REQUIRES_ASSISTANCE, NOT_EXAMINED, NO_ASSISTANCE_REQUIRED
+}
+
 data class Patient(
     private var patientId: String? = null,
     private var address: String? = null,
@@ -12,11 +16,13 @@ data class Patient(
     private var middleName: String? = null,
     private var lastName: String? = null,
     private var medicareNo: String? = null,
-    private var westwenAffairesNo: String? = null,
+    private var westernAffairsNo: String? = null,
+    private var needsAssistance: Boolean = false,
     private var nokId1: String? = null,
     private var nokId2: String? = null,
     private var gpId1: String? = null,
     private var gpId2: String? = null,
+    var statusOfPatient: PatientStatus = PatientStatus.NOT_EXAMINED
 ) {
     constructor(Key: String, firstname: String, lastname: String) : this() {
         firstName = firstname
@@ -36,7 +42,7 @@ data class Patient(
         this.middleName = middleName
         this.lastName = lastName
         this.medicareNo = medicareNo
-        this.westwenAffairesNo = westernAffairsNo
+        this.westernAffairsNo = westernAffairsNo
     }
 
     fun getPatientId() = "$patientId"
@@ -83,7 +89,20 @@ data class Patient(
         this.dateOfBirth = dateOfBirth
     }
 
-    fun setWestwenAffairesNo(westwenAffairesNo: String) {
-        this.westwenAffairesNo = westwenAffairesNo
+    fun setWesternAffairsNo(westernAffairsNo: String) {
+        this.westernAffairsNo= westernAffairsNo
     }
+
+    fun getStatus(): PatientStatus = statusOfPatient
+
+    fun setStatus(newStatus: PatientStatus) {
+        statusOfPatient = newStatus
+    }
+
+    fun setNeedsAssistance(assistanceNeeded: Boolean) {
+        needsAssistance = assistanceNeeded
+    }
+
+    fun getNeedsAssistance(): Boolean = needsAssistance
+
 }

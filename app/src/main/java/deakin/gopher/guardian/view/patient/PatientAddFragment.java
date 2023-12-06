@@ -140,7 +140,7 @@ public class PatientAddFragment extends Fragment {
       patient.setLastName(lastName);
       patient.setMedicareNo(medicareNo);
       patient.setDob(dateOfBirth);
-      patient.setWestwenAffairesNo(westernAffairsNo);
+      patient.setWesternAffairsNo(westernAffairsNo);
     }
     dataListener.onDataFilled(patient, null, null, null, null);
   }
