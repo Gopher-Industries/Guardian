@@ -7,5 +7,5 @@ import deakin.gopher.guardian.model.Patient;
 public interface DataListener {
   void onDataFilled(Patient patient, NextOfKin nextOfKin1, NextOfKin nextOfKin2, GP gp1, GP gp2);
 
-  void onDataFinihsed(Boolean isFinished);
+  void onDataFinished(Boolean isFinished);
 }

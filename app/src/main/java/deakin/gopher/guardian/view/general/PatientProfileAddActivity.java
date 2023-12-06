@@ -111,8 +111,10 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
     }
   }
 
-  @Override
-  public void onDataFinihsed(final Boolean isFinished) {
+
+
+    @Override
+  public void onDataFinished(final Boolean isFinished) {
     // insert a dialog here
 
     final AlertDialog.Builder builder = new AlertDialog.Builder(this);

@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -81,6 +83,8 @@ public class PatientListAdapter
             : ContextCompat.getColor(context, R.color.green);
 
         statusIndicator.setColorFilter(statusColor);
+        final Animation pulseAnimation = AnimationUtils.loadAnimation(context, R.anim.scale_animation);
+        statusIndicator.startAnimation(pulseAnimation);
     }
 
     public void updatePatientStatus(String patientId, PatientStatus newStatus, boolean needsAssistance) {
