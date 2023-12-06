@@ -53,7 +53,7 @@ public class AddNewPatientActivity extends BaseActivity {
 
     FirebaseDatabase.getInstance()
         .getReference()
-        .child("patients")
+        .child("patient_profile")
         .push()
         .setValue(map)
         .addOnSuccessListener(

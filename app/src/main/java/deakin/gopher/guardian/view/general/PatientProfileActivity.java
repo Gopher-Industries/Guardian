@@ -1,6 +1,8 @@
 package deakin.gopher.guardian.view.general;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -8,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientProfileAdapter;
 
@@ -15,20 +18,27 @@ public class PatientProfileActivity extends BaseActivity {
 
   private CustomHeader customHeader;
 
+  private DrawerLayout drawerLayout;
+
+  private FirebaseAuth mAuth;
+
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_patient_profile);
+    final Intent intent = getIntent();
 
     final TabLayout tabLayout = findViewById(R.id.dataForViewTabLayout);
     final ViewPager2 viewPager2 = findViewById(R.id.dataForViewViewPager);
     customHeader = findViewById(R.id.customHeader);
-    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+    drawerLayout = findViewById(R.id.nav_drawer_layout);
     final NavigationView navigationView = findViewById(R.id.nav_view);
-    final String patient_id = getIntent().getStringExtra("id");
+    final String patientId = intent.getStringExtra("patientId");
+    Log.d("PatientProfileActivity", "Patient ID: " + patientId);
 
+    assert patientId != null;
     final PatientProfileAdapter viewPagerAdapter =
-        new PatientProfileAdapter(patient_id, getSupportFragmentManager(), getLifecycle());
+        new PatientProfileAdapter(patientId, getSupportFragmentManager(), getLifecycle());
     viewPager2.setAdapter(viewPagerAdapter);
 
     customHeader.setHeaderHeight(450);
@@ -42,6 +52,23 @@ public class PatientProfileActivity extends BaseActivity {
           v -> {
             if (null != drawerLayout) {
               drawerLayout.openDrawer(GravityCompat.START);
+
+              navigationView.setNavigationItemSelectedListener(
+                  menuItem -> {
+                    final int id = menuItem.getItemId();
+                    if (R.id.nav_home == id) {
+                      startActivity(new Intent(PatientProfileActivity.this, Homepage4admin.class));
+                    } else if (R.id.nav_admin == id) {
+                      startActivity(new Intent(PatientProfileActivity.this, Homepage4admin.class));
+                    } else if (R.id.nav_settings == id) {
+                      startActivity(new Intent(PatientProfileActivity.this, Setting.class));
+                    } else if (R.id.nav_signout == id) {
+                      mAuth.getInstance().signOut();
+                      startActivity(new Intent(PatientProfileActivity.this, LoginActivity.class));
+                      finish();
+                    }
+                    return true;
+                  });
             }
           });
     }
@@ -74,7 +101,7 @@ public class PatientProfileActivity extends BaseActivity {
             if (0 == position) {
               customHeader.setHeaderText("Patient Profile");
               customHeader.setHeaderTopImageVisibility(View.VISIBLE);
-              customHeader.setHeaderTopImage(R.drawable.profile_avatar_women);
+              customHeader.setHeaderTopImage(R.drawable.avatar_icon);
             } else if (1 == position) {
               customHeader.setHeaderText("Next Of Kin Contact");
               customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);

@@ -9,12 +9,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientProfileAddAdapter;
 import deakin.gopher.guardian.model.GP;
-import deakin.gopher.guardian.model.Medical_diagnostic;
+import deakin.gopher.guardian.model.MedicalDiagnostic;
 import deakin.gopher.guardian.model.NextOfKin;
 import deakin.gopher.guardian.model.Patient;
 import deakin.gopher.guardian.util.DataListener;
@@ -34,6 +35,7 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
     final ViewPager2 viewPager2 = findViewById(R.id.dataForViewViewPager);
     customHeader = findViewById(R.id.customHeader);
     final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+    final NavigationView navigationView = findViewById(R.id.nav_view);
 
     final PatientProfileAddAdapter viewPagerAdapter =
         new PatientProfileAddAdapter(getSupportFragmentManager(), getLifecycle());
@@ -43,6 +45,8 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
     customHeader.setHeaderText("Patient Add");
     customHeader.setHeaderTopImageVisibility(View.VISIBLE);
     customHeader.setHeaderTopImage(R.drawable.add_image_button);
+
+    navigationView.setItemIconTintList(null);
 
     if (null != customHeader) {
       customHeader.menuButton.setOnClickListener(
@@ -231,7 +235,7 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
   }
 
   private void createMedicalDiagnostic(final String patient_id) {
-    final Medical_diagnostic current_medical_diagnostic = new Medical_diagnostic(patient_id, true);
+    final MedicalDiagnostic current_medical_diagnostic = new MedicalDiagnostic(patient_id, true);
     final DatabaseReference reference =
         FirebaseDatabase.getInstance().getReference("health_details");
     final String id = reference.push().getKey();
