@@ -132,7 +132,17 @@ public class PatientAddFragment extends Fragment {
   private void savePatient() {
     if (null == patient) {
       patient =
-          new Patient(dateOfBirth, firstName, middleName, lastName, medicareNo, westernAffairsNo);
+          new Patient(
+              dateOfBirth,
+              firstName,
+              middleName,
+              lastName,
+              medicareNo,
+              westernAffairsNo,
+              null,
+              null,
+              null,
+              null);
 
     } else {
       patient.setFirstName(first_name.getText().toString());
