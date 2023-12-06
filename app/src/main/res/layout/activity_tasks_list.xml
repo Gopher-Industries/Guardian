@@ -9,7 +9,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context="deakin.gopher.guardian.view.general.TasksListActivity">
+        tools:context=".view.general.TasksListActivity">
 
     <ImageView
             android:id="@+id/task_list_manu_button"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Task List"
+        android:text="@string/task_list"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="25sp"
@@ -112,7 +112,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="6dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Add Task"
+                android:text="@string/add_task"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
