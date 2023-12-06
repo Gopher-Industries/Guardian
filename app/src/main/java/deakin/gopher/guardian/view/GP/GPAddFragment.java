@@ -159,7 +159,7 @@ public class GPAddFragment extends Fragment {
               builder.setPositiveButton(
                   "YES",
                   (dialog, whichButton) -> {
-                    dataListener.onDataFinihsed(true);
+                    dataListener.onDataFinished(true);
                     // Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
                   });
               builder.setNegativeButton("No", null);
