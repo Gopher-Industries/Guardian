@@ -521,7 +521,7 @@
                 android:autofillHints=""
                 android:background="@null"
                 android:hint="xxx-xxx-xxxx"
-                android:inputType="number"
+                android:inputType="phone"
                 android:textSize="14sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
