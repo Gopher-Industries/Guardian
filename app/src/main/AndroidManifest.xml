@@ -60,6 +60,9 @@
             android:name=".view.general.PatientProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".view.general.ArchivedPatientListActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.patient.viewactivitydata.WeeklyActivityProfilingActivity"
             android:exported="false">
             <meta-data

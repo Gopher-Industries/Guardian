@@ -18,6 +18,7 @@ class Patient {
     var photo: String? = null
     var underCare: String? = null
 
+
     @JvmField
     var firstName: String
 
@@ -46,12 +47,16 @@ class Patient {
     @JvmField
     var status: PatientStatus
 
+    @JvmField
+    var isArchived: Boolean = false
+
     constructor(patientId: String?, firstName: String, lastName: String) {
         this.patientId = patientId
         this.firstName = firstName
         this.lastName = lastName
         status = PatientStatus.REQUIRES_ASSISTANCE
         needsAssistance = true
+
     }
 
     // constructor for adding a patient
@@ -79,6 +84,35 @@ class Patient {
         this.gpId2 = gpId2
         status = PatientStatus.REQUIRES_ASSISTANCE
         needsAssistance = true
+
+    }
+
+    fun archivePatient() {
+        isArchived = true
+    }
+
+    fun unarchivePatient() {
+        isArchived = false
+    }
+
+    private fun getIsArchived():String{
+        return if (isArchived){
+            "True";
+        }else{
+            "False";
+        }
+    }
+
+    fun getFirstName(): String {
+        return this.firstName;
+    }
+
+    fun getLastName(): String {
+        return this.lastName;
+    }
+
+    fun getPatientId(): String? {
+        return this.patientId;
     }
 
     fun examinePatient() {
@@ -124,24 +158,8 @@ class Patient {
                 ", westernAffairNo='" +
                 westernAffairsNo +
                 '\'' +
-                ", nok_id1='" +
-                nokId1 +
-                '\'' +
-                ", nok_id2='" +
-                nokId2 +
-                '\'' +
-                ", gp_id1='" +
-                gpId1 +
-                '\'' +
-                ", gp_id2='" +
-                gpId2 +
-                '\'' +
-                ", status='" +
-                status +
-                '\'' +
-                ", needsAssistance='" +
-                needsAssistance +
-                '\'' +
+                ", isArchived='" +
+                getIsArchived() +
                 '}'
         )
     }
