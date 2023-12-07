@@ -26,7 +26,7 @@
     <color name="text_input_color">#666262</color>
     <color name="box_border">#E0DDDD</color>
 
-    <color name="colorPrimary">@color/design_default_color_primary</color>
+    <color name="colorPrimary">@color/light_blue_600</color>
     <color name="colorPrimaryDark">@color/design_default_color_primary_dark</color>
     <color name="colorAccent">@color/light_blue_A200</color>
     <color name="colorPrimaryText">#212121</color>
