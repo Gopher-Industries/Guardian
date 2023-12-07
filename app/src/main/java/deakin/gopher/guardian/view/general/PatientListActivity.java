@@ -1,5 +1,6 @@
 package deakin.gopher.guardian.view.general;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -7,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,12 +25,14 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientListAdapter;
 import deakin.gopher.guardian.model.Patient;
+import deakin.gopher.guardian.model.PatientStatus;
 import deakin.gopher.guardian.view.patient.careplan.CarePlanActivity;
 import java.util.Objects;
 
@@ -39,6 +43,31 @@ public class PatientListActivity extends BaseActivity {
   CardView overview_cardview;
   SearchView patient_searchView;
   ImageView patientListMenuButton;
+
+  private final Handler handler = new Handler();
+  private final Runnable updateRunnable =
+      new Runnable() {
+        @SuppressLint("NotifyDataSetChanged")
+        @Override
+        public void run() {
+          if (patientListAdapter != null) {
+            patientListAdapter.notifyDataSetChanged();
+          }
+          handler.postDelayed(this, 6000);
+        }
+      };
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    handler.post(updateRunnable);
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    handler.removeCallbacks(updateRunnable);
+  }
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -92,9 +121,12 @@ public class PatientListActivity extends BaseActivity {
                           ? " "
                           : snapshot.child("last_name").getValue().toString();
 
-                  final Patient patient = new Patient(snapshot.getKey(), firstname, lastname);
+                  final Patient patient =
+                      new Patient(Objects.requireNonNull(snapshot.getKey()), firstname, lastname);
 
-                  if ("" != middlename) patient.setMiddleName(middlename);
+                  Log.d("PatientListActivity", "patient loaded " + patient);
+
+                  if ("" != middlename) patient.middleName = middlename;
 
                   return patient;
                 })
@@ -133,10 +165,10 @@ public class PatientListActivity extends BaseActivity {
                           final Patient patient =
                               new Patient(
                                   snapshot.getKey(),
-                                  snapshot.child("name").getValue().toString(),
+                                  snapshot.child("first_name").getValue().toString(),
                                   snapshot.child("last_name").getValue().toString());
                           final Object middle_name = snapshot.child("middle_name").getValue();
-                          if (null != middle_name) patient.setMiddleName(middle_name.toString());
+                          if (null != middle_name) patient.middleName = middle_name.toString();
                           return patient;
                         })
                     .build();
@@ -167,6 +199,18 @@ public class PatientListActivity extends BaseActivity {
             return true;
           }
         });
+  }
+
+  public void updatePatientStatus(final String patientId, final PatientStatus newStatus) {
+    final DatabaseReference patientsRef = FirebaseDatabase.getInstance().getReference("patients");
+
+    patientsRef
+        .child(patientId)
+        .child("status")
+        .setValue(newStatus.toString())
+        .addOnSuccessListener(
+            aVoid -> Log.d("UpdateStatus", "Patient status updated successfully."))
+        .addOnFailureListener(e -> Log.e("UpdateStatus", "Failed to update patient status.", e));
   }
 
   public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {

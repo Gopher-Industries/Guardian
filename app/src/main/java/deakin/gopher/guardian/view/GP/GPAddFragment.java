@@ -76,7 +76,6 @@ public class GPAddFragment extends Fragment {
           if (dataChecker()) {
             saveGp();
 
-            // int nextPage = viewPager2.getCurrentItem()-1;
             viewPager2.setCurrentItem(0, true);
           }
         });
@@ -94,7 +93,6 @@ public class GPAddFragment extends Fragment {
           if (dataChecker()) {
             saveGp();
 
-            // int nextPage = viewPager2.getCurrentItem()+1;
             viewPager2.setCurrentItem(2, true);
           }
         });
@@ -153,14 +151,12 @@ public class GPAddFragment extends Fragment {
             if (1 == status) {
               scrollPage(true);
             } else {
-              final AlertDialog.Builder builder =
-                  new AlertDialog.Builder(view.getContext()); // new AlertDialog.Builder(this);
+              final AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
               builder.setTitle("Saving Changes?");
               builder.setPositiveButton(
                   "YES",
                   (dialog, whichButton) -> {
-                    dataListener.onDataFinihsed(true);
-                    // Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
+                    dataListener.onDataFinished(true);
                   });
               builder.setNegativeButton("No", null);
 
@@ -173,7 +169,6 @@ public class GPAddFragment extends Fragment {
                     dialog
                         .getButton(AlertDialog.BUTTON_NEGATIVE)
                         .setTextColor(getResources().getColor(R.color.colorRed));
-                    // dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.black));
                   });
               dialog.show();
             }
