@@ -42,11 +42,10 @@ public class PatientListAdapter
   @Override
   protected void onBindViewHolder(
       @NonNull final myViewHolder holder, final int position, @NonNull final Patient model) {
-    holder.patient_name.setText(
-        model.getFirstName() + " " + model.getMiddleName() + " " + model.getLastName());
-    updateStatusIndicator(holder.statusIndicator, model.getStatus());
+    holder.patient_name.setText(model.firstName + " " + model.middleName + " " + model.lastName);
+    updateStatusIndicator(holder.statusIndicator, model.status);
 
-    Log.d("PatientListAdapter", "Patient ID: " + model.getPatientId());
+    Log.d("PatientListAdapter", "Patient ID: " + model.patientId);
     holder.patient_item.setOnClickListener(
         view -> {
           final SharedPreferences sharedPreferences =
@@ -54,23 +53,22 @@ public class PatientListAdapter
           final int role = sharedPreferences.getInt("login_role", -1);
           if (0 == role || -1 == role) {
 
-            Log.d("PatientListAdapter", "Before toggle: " + model.getStatus());
+            Log.d("PatientListAdapter", "Before toggle: " + model.status);
             model.examinePatient();
-            Log.d("PatientListAdapter", "After toggle: " + model.getStatus());
-            updateStatusIndicator(holder.statusIndicator, model.getStatus());
+            Log.d("PatientListAdapter", "After toggle: " + model.status);
+            updateStatusIndicator(holder.statusIndicator, model.status);
             notifyItemChanged(position);
 
             final Intent intent = new Intent(context, PatientProfileActivity.class);
 
-            intent.putExtra("patientId", model.getPatientId());
+            intent.putExtra("patientId", model.patientId);
             context.startActivity(intent);
-            updatePatientStatus(
-                model.getPatientId(), model.getStatus(), model.getNeedsAssistance());
+            updatePatientStatus(model.patientId, model.status, model.needsAssistance);
 
           } else if (1 == role) {
             // admin
             final Intent intent = new Intent(context, PatientProfileActivity.class);
-            intent.putExtra("id", model.getPatientId());
+            intent.putExtra("id", model.patientId);
             context.startActivity(intent);
           }
         });
@@ -105,10 +103,10 @@ public class PatientListAdapter
     long oneHourMillis = 60000;
     long currentTime = System.currentTimeMillis();
 
-    if (currentTime - patient.getLastExaminedTimestamp() > oneHourMillis) {
+    if (currentTime - patient.lastExaminedTimestamp > oneHourMillis) {
       return ContextCompat.getColor(context, R.color.orange);
     } else {
-      if (PatientStatus.REQUIRES_ASSISTANCE == Objects.requireNonNull(patient.getStatus())) {
+      if (PatientStatus.REQUIRES_ASSISTANCE == Objects.requireNonNull(patient.status)) {
         return ContextCompat.getColor(context, R.color.red);
       }
       return ContextCompat.getColor(context, R.color.green);

@@ -126,7 +126,7 @@ public class PatientListActivity extends BaseActivity {
 
                   Log.d("PatientListActivity", "patient loaded " + patient);
 
-                  if ("" != middlename) patient.setMiddleName(middlename);
+                  if ("" != middlename) patient.middleName = middlename;
 
                   return patient;
                 })
@@ -168,7 +168,7 @@ public class PatientListActivity extends BaseActivity {
                                   snapshot.child("first_name").getValue().toString(),
                                   snapshot.child("last_name").getValue().toString());
                           final Object middle_name = snapshot.child("middle_name").getValue();
-                          if (null != middle_name) patient.setMiddleName(middle_name.toString());
+                          if (null != middle_name) patient.middleName = middle_name.toString();
                           return patient;
                         })
                     .build();
