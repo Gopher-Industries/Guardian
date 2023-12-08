@@ -32,6 +32,4 @@ public abstract class BaseActivity extends AppCompatActivity {
     super.onPause();
     new SessionManager(this).updateLastActiveTime();
   }
-
-  //    protected abstract void onCreate(Bundle savedInstanceState);
 }
