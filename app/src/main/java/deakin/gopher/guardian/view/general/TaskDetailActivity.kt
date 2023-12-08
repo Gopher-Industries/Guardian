@@ -19,26 +19,29 @@ class TaskDetailActivity : AppCompatActivity() {
         val taskId = intent.getStringExtra("taskId")
         if (taskId != null) {
             val taskRef = FirebaseDatabase.getInstance().getReference("tasks").child(taskId)
-            taskRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        val task = dataSnapshot.getValue(
-                            Task::class.java
-                        )
-                        if (task != null) {
-                            taskDescriptionTextView.setText(task.description)
+            taskRef.addListenerForSingleValueEvent(
+                object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            val task =
+                                dataSnapshot.getValue(
+                                    Task::class.java,
+                                )
+                            if (task != null) {
+                                taskDescriptionTextView.setText(task.description)
+                            }
                         }
                     }
-                }
 
-                override fun onCancelled(databaseError: DatabaseError) {
-                    Toast.makeText(
-                        this@TaskDetailActivity,
-                        databaseError.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            })
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        Toast.makeText(
+                            this@TaskDetailActivity,
+                            databaseError.toString(),
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                    }
+                },
+            )
         }
     }
 }

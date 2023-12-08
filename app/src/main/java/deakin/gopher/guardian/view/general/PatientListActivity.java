@@ -77,14 +77,16 @@ public class PatientListActivity extends BaseActivity {
     patient_list_recyclerView = findViewById(R.id.patient_list_recycleView);
     final ImageView addPatientIcon = findViewById(R.id.imageView62);
 
-      final Button viewArchivedButton = findViewById(R.id.button_view_archived);
-      viewArchivedButton.setOnClickListener(new View.OnClickListener() {
+    final Button viewArchivedButton = findViewById(R.id.button_view_archived);
+    viewArchivedButton.setOnClickListener(
+        new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              final Intent intent = new Intent(PatientListActivity.this, ArchivedPatientListActivity.class);
-              startActivity(intent);
+            final Intent intent =
+                new Intent(PatientListActivity.this, ArchivedPatientListActivity.class);
+            startActivity(intent);
           }
-      });
+        });
 
     addPatientIcon.setOnClickListener(
         v -> {

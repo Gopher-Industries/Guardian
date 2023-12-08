@@ -16,18 +16,20 @@ import deakin.gopher.guardian.model.NextOfKin
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.Task
 import deakin.gopher.guardian.util.DataListener
+
 class TaskAddActivity : AppCompatActivity(), DataListener {
     private lateinit var taskDescriptionEditText: EditText
     private lateinit var patientIdEditText: EditText
     private var patient: Patient? = null
     private var task: Task? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_add)
 
         taskDescriptionEditText = findViewById(R.id.taskDescriptionEditText)
         patientIdEditText = findViewById(R.id.taskPatientIdEditText)
-        val submitButton : Button = findViewById(R.id.newTaskSubmitButton)
+        val submitButton: Button = findViewById(R.id.newTaskSubmitButton)
         submitButton.setOnClickListener {
             showSaveDialog()
         }
@@ -42,7 +44,7 @@ class TaskAddActivity : AppCompatActivity(), DataListener {
 
         customHeader.menuButton.setOnClickListener {
             drawerLayout?.openDrawer(
-                GravityCompat.START
+                GravityCompat.START,
             )
         }
     }
@@ -71,6 +73,7 @@ class TaskAddActivity : AppCompatActivity(), DataListener {
     }
 
     fun onDataFinihsed(isFinished: Boolean?) { }
+
     fun onTaskDataFinished(isFinished: Boolean?) {
         showSaveDialog()
     }
@@ -79,7 +82,7 @@ class TaskAddActivity : AppCompatActivity(), DataListener {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(getString(R.string.saving_changes))
         builder.setPositiveButton(
-            getString(R.string.yes)
+            getString(R.string.yes),
         ) { _: DialogInterface?, _: Int -> saveInFirebase() }
         builder.setNegativeButton(getString(R.string.no), null)
         val dialog = builder.create()
@@ -101,9 +104,12 @@ class TaskAddActivity : AppCompatActivity(), DataListener {
 
         val patientId = patientIdEditText.text.toString().trim()
 
-        val newTask = Task(
-            "", taskDescriptionEditText.text.toString().trim(),
-            patient?.patientId ?: "")
+        val newTask =
+            Task(
+                "",
+                taskDescriptionEditText.text.toString().trim(),
+                patient?.patientId ?: "",
+            )
 
         val taskId = taskRef.push().key ?: ""
         newTask.taskId = taskId!!
@@ -114,7 +120,11 @@ class TaskAddActivity : AppCompatActivity(), DataListener {
 
         finish()
     }
-    private fun updatePatientTasks(patientId: String, taskId: String) {
+
+    private fun updatePatientTasks(
+        patientId: String,
+        taskId: String,
+    ) {
         val patientTasksRef = FirebaseDatabase.getInstance().getReference("patients").child(patientId).child("tasks")
         patientTasksRef.child(taskId).setValue(true)
     }
