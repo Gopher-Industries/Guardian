@@ -1,4 +1,4 @@
-package deakin.gopher.guardian.view.general;
+package deakin.gopher.guardian.view.general
 
 import android.os.Bundle
 import android.widget.Button
@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import deakin.gopher.guardian.R
@@ -39,27 +38,30 @@ class TasksListActivity : AppCompatActivity() {
         taskListRecyclerView.layoutManager = GridLayoutManager(this@TasksListActivity, 1)
         taskListRecyclerView.adapter = taskListAdapter
 
-        taskSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(s: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(s: String?): Boolean {
-                query = if (s.isNullOrEmpty()) {
-                    FirebaseDatabase.getInstance().reference.child("tasks")
-                } else {
-                    FirebaseDatabase.getInstance()
-                        .reference
-                        .child("tasks")
-                        .orderByChild("description")
-                        .startAt(s)
-                        .endAt(s + "\uf8ff")
-                        .limitToFirst(10)
+        taskSearchView.setOnQueryTextListener(
+            object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(s: String?): Boolean {
+                    return false
                 }
 
-                return true
-            }
-        })
+                override fun onQueryTextChange(s: String?): Boolean {
+                    query =
+                        if (s.isNullOrEmpty()) {
+                            FirebaseDatabase.getInstance().reference.child("tasks")
+                        } else {
+                            FirebaseDatabase.getInstance()
+                                .reference
+                                .child("tasks")
+                                .orderByChild("description")
+                                .startAt(s)
+                                .endAt(s + "\uf8ff")
+                                .limitToFirst(10)
+                        }
+
+                    return true
+                }
+            },
+        )
     }
 
     private fun getTestData(): List<Task> {
