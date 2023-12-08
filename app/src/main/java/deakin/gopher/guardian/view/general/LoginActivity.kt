@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.login.EmailAddress
-import deakin.gopher.guardian.model.login.LoginAuthError
+//import deakin.gopher.guardian.model.login.LoginAuthError
 import deakin.gopher.guardian.model.login.LoginValidationError
 import deakin.gopher.guardian.model.login.Password
 import deakin.gopher.guardian.model.login.RoleName
@@ -94,15 +94,15 @@ class LoginActivity : BaseActivity() {
                     ?.addOnSuccessListener {
                         progressBar.show()
 
-                        if (authService.isUserVerified().not()) {
-                            progressBar.hide()
-                            Toast.makeText(
-                                applicationContext,
-                                LoginAuthError.EmailNotVerified.messageId,
-                                Toast.LENGTH_SHORT,
-                            ).show()
-                            return@addOnSuccessListener
-                        }
+//                        if (authService.isUserVerified().not()) {
+//                            progressBar.hide()
+//                            Toast.makeText(
+//                                applicationContext,
+//                                LoginAuthError.EmailNotVerified.messageId,
+//                                Toast.LENGTH_SHORT,
+//                            ).show()
+//                            return@addOnSuccessListener
+//                        }
 
                         NavigationService(this).toHomeScreenForRole(userRole)
                         progressBar.hide()
@@ -216,7 +216,7 @@ class LoginActivity : BaseActivity() {
             val auth = FirebaseAuth.getInstance()
             auth.signInWithCredential(credential).addOnCompleteListener { authTask ->
                 if (authTask.isSuccessful) {
-                    NavigationService(this).toHomeScreenForRole(RoleName.Caretaker)
+                    NavigationService(this).toHomeScreenForRole(userRole)
                 } else {
                     Toast.makeText(
                         applicationContext,

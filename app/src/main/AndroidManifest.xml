@@ -35,6 +35,13 @@
         <activity
             android:name=".view.general.Homepage4nurse"
             android:exported="false" />
+
+        <activity android:name=".view.general.TaskDetailActivity"
+            android:exported="false" />
+
+        <activity android:name=".view.general.TaskAddActivity"
+            android:exported="false" />
+
         <activity
             android:name=".view.general.UploadPhoto"
             android:exported="false" />
@@ -130,6 +137,7 @@
         <activity
             android:name=".view.patient.PatientDashboardActivity"
             android:exported="false" />
+        <activity android:name="deakin.gopher.guardian.view.general.TasksListActivity" />
 
         <service
             android:name=".model.FirebaseMessagingService"

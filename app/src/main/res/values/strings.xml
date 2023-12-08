@@ -341,7 +341,7 @@
     <string name="validation_empty_email">Email is Required.</string>
     <string name="validation_invalid_email_address">Invalid Email Address</string>
     <string name="validation_empty_password">Password is Required.</string>
-    <string name="validation_password_short">Password Must Be Longer than 6 Characters</string>
+    <string name="validation_password_weak">Please use a stronger password</string>
     <string name="text_reset_password">Reset Password</string>
     <string name="text_enter_your_email_to_received_reset_link">Enter Your Email To Received Reset Link.</string>
     <string name="tasks_label">Tasks</string>
@@ -351,6 +351,9 @@
     <string name="registration_success">Verification Email Has been Sent</string>
     <string name="registration_failure">Registration Failed</string>
     <string name="login_email_not_verified">User email has not been verified</string>
+    <string name="add_task">Add Task</string>
+    <string name="task_list">Task List</string>
+    <string name="saving_changes">Saving Changes?</string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
