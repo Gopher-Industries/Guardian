@@ -1,8 +1,6 @@
 package deakin.gopher.guardian.view.general;
 
 import android.content.Intent;
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import deakin.gopher.guardian.model.login.SessionManager;
 
@@ -35,5 +33,5 @@ public abstract class BaseActivity extends AppCompatActivity {
     new SessionManager(this).updateLastActiveTime();
   }
 
-//    protected abstract void onCreate(Bundle savedInstanceState);
+  //    protected abstract void onCreate(Bundle savedInstanceState);
 }

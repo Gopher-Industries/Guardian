@@ -78,14 +78,16 @@ public class PatientListActivity extends BaseActivity {
     patient_list_recyclerView = findViewById(R.id.patient_list_recycleView);
     final ImageView addPatientIcon = findViewById(R.id.imageView62);
 
-      final Button viewArchivedButton = findViewById(R.id.button_view_archived);
-      viewArchivedButton.setOnClickListener(new View.OnClickListener() {
+    final Button viewArchivedButton = findViewById(R.id.button_view_archived);
+    viewArchivedButton.setOnClickListener(
+        new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              final Intent intent = new Intent(PatientListActivity.this, ArchivedPatientListActivity.class);
-              startActivity(intent);
+            final Intent intent =
+                new Intent(PatientListActivity.this, ArchivedPatientListActivity.class);
+            startActivity(intent);
           }
-      });
+        });
 
     addPatientIcon.setOnClickListener(
         v -> {
@@ -242,19 +244,24 @@ public class PatientListActivity extends BaseActivity {
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
       final int position = viewHolder.getBindingAdapterPosition();
-        new AlertDialog.Builder(viewHolder.itemView.getContext())
-            .setTitle("Delete Patient")
-            .setMessage("Are you sure you want to delete this patient?")
-            .setPositiveButton("Yes", (dialog, which) -> {
-                ((PatientListAdapter) Objects.requireNonNull(patient_list_recyclerView.getAdapter()))
+      new AlertDialog.Builder(viewHolder.itemView.getContext())
+          .setTitle("Delete Patient")
+          .setMessage("Are you sure you want to delete this patient?")
+          .setPositiveButton(
+              "Yes",
+              (dialog, which) -> {
+                ((PatientListAdapter)
+                        Objects.requireNonNull(patient_list_recyclerView.getAdapter()))
                     .deleteItem(position);
-            })
-            .setNegativeButton("No", (dialog, which) -> {
-                Objects.requireNonNull(patient_list_recyclerView.getAdapter()).notifyItemChanged(position);
-            })
-            .create()
-            .show();
-
+              })
+          .setNegativeButton(
+              "No",
+              (dialog, which) -> {
+                Objects.requireNonNull(patient_list_recyclerView.getAdapter())
+                    .notifyItemChanged(position);
+              })
+          .create()
+          .show();
     }
 
     @Override
