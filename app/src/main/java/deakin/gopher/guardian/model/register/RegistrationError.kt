@@ -9,7 +9,7 @@ sealed class RegistrationError(val messageResourceId: Int) {
 
     data object EmptyPassword : RegistrationError(R.string.validation_empty_password)
     data object PasswordTooShort :
-        RegistrationError(R.string.validation_password_short)
+        RegistrationError(R.string.validation_password_weak)
 
     data object EmptyConfirmedPassword :
         RegistrationError(R.string.validation_empty_confirmed_password)
