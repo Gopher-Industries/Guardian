@@ -39,7 +39,7 @@ public class PatientListAdapter
       final Context context, @NonNull final FirebaseRecyclerOptions<Patient> options, final boolean isArchivedList) {
     super(options);
     this.context = context;
-    this.isArchivedList = false;
+    this.isArchivedList = isArchivedList;
   }
 
     @Override

@@ -18,6 +18,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import deakin.gopher.guardian.adapter.SimpleArchivedPatientAdapter;
 import deakin.gopher.guardian.model.Patient;
 
 @SuppressLint("Registered")
@@ -33,6 +37,10 @@ public class ArchivedPatientListActivity extends BaseActivity {
 
 
         recyclerView = findViewById(R.id.archived_patient_recycler_view);
+
+        final List<Patient> archivedPatients = new ArrayList<>();
+        archivedPatients.add(new Patient("1", "John", "Doe"));
+        archivedPatients.add(new Patient("2", "Jane", "Doe"));
 
 
 
@@ -61,7 +69,7 @@ public class ArchivedPatientListActivity extends BaseActivity {
 
 
 
-        adapter = new PatientListAdapter(this, options, true);
+        SimpleArchivedPatientAdapter adapter = new SimpleArchivedPatientAdapter(archivedPatients);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

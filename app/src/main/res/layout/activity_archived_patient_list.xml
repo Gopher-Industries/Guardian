@@ -86,7 +86,11 @@
                 app:layout_constraintTop_toBottomOf="@id/patient_list_searchView"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <include
             android:id="@+id/nav_view"
