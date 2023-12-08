@@ -92,14 +92,12 @@ class Patient {
         isArchived = false
     }
 
-    private fun getIsArchived(): String  {
-        return if (isArchived)
-            {
-                "True"
-            } else
-            {
-                "False"
-            }
+    private fun getIsArchived(): String {
+        return if (isArchived) {
+            "True"
+        } else {
+            "False"
+        }
     }
 
     fun getFirstName(): String {
