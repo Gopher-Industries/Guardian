@@ -58,6 +58,12 @@
             android:name=".view.caretaker.CaretakerDashboardActivity"
             android:exported="false" />
         <activity
+            android:name=".view.caretaker.CaretakerProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.caretaker.EditCaretakerProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.patient.patientdata.healthdata.HealthDataActivity"
             android:exported="false" />
         <activity

@@ -10,80 +10,69 @@
 
 
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:textAlignment="center">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/headerCard"
-        android:layout_width="415dp"
-        android:layout_height="210dp"
-        android:layout_marginTop="-60dp"
-        android:translationZ="-20dp"
-        app:cardBackgroundColor="@color/deep_blue"
-        app:cardCornerRadius="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/headerCard"
+            android:layout_width="415dp"
+            android:layout_height="210dp"
+            android:layout_marginTop="-60dp"
+            android:translationZ="-20dp"
+            app:cardBackgroundColor="@color/deep_blue"
+            app:cardCornerRadius="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.cardview.widget.CardView>
-
-
-
-    <ImageView
-        android:id="@+id/caretakerImage"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="100dp"
-        android:contentDescription="TODO"
-        android:translationZ="20dp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/heart" />
-
-    <TextView
-        android:id="@+id/headerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/caretaker_profile"
-        android:textColor="@color/white"
-        android:textFontWeight="700"
-        android:textSize="20sp"
-        android:translationZ="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/headerCard" />
-
-    <ImageView
-        android:id="@+id/editButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="350dp"
-        android:layout_marginTop="25dp"
-        android:contentDescription="TODO"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/edit_button" />
+        </androidx.cardview.widget.CardView>
 
 
-    <ImageView
-        android:id="@+id/menuButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
-        android:contentDescription="TODO"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/menu_button" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/caretakerImage"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="100dp"
+            android:contentDescription="TODO"
+            android:translationZ="20dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/heart" />
+
+        <TextView
+            android:id="@+id/headerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/caretaker_profile_edit"
+            android:textColor="@color/white"
+            android:textFontWeight="700"
+            android:textSize="20sp"
+            android:translationZ="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/headerCard" />
+
+
+        <ImageView
+            android:id="@+id/menuButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:contentDescription="TODO"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/menu_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -104,9 +93,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
-                android:hint="Name"
+                android:hint="Enter Your Name"
                 android:inputType="text"
-                android:enabled="false"/>
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -119,9 +108,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
-                android:hint="Address"
-                android:inputType="text"
-                android:enabled="false"/>
+                android:hint="Enter Your Address"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -134,9 +122,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
-                android:hint="@string/date_of_birth"
-                android:inputType="text"
-                android:enabled="false"/>
+                android:hint="Enter Your Date of Birth"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -149,9 +136,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
-                android:hint="@string/phone"
-                android:inputType="text"
-                android:enabled="false"/>
+                android:hint="Enter Your Phone Number"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -164,9 +150,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
-                android:hint="@string/ward"
-                android:inputType="text"
-                android:enabled="false"/>
+                android:hint="Enter Your Ward"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -179,9 +164,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
-                android:hint="@string/photo"
-                android:inputType="text"
-                android:enabled="false"/>
+                android:hint="Upload a Photo of Yourself"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -194,9 +178,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
-                android:hint="@string/medicare_no"
-                android:inputType="text"
-                android:enabled="false"/>
+                android:hint="Enter Your Medicare No"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -205,26 +188,26 @@
             android:layout_marginBottom="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtEmegencyContact"
+                android:id="@+id/txtEmergencyContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
-                android:hint="Emergency Contact"
-                android:inputType="text"
-                android:enabled="false"/>
+                android:hint="Enter Emergency Contact"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
+
+
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/backBtn"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:id="@+id/btnSave"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="1dp"
             android:layout_weight="0.1"
-            android:text="@string/back"
-            android:textColor="@android:color/white"
-            app:backgroundTint="#54D87F" />
+            android:text="@string/save"
+            android:textColor="@android:color/white" />
+
     </LinearLayout>
 
 
