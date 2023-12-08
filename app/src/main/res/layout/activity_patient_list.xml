@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/patient_list_backgroud"
@@ -12,15 +19,15 @@
         tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
 
     <ImageView
-            android:id="@+id/patient_list_manu_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="51dp"
-            android:layout_marginTop="65dp"
-            android:contentDescription="TODO"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/menu_button" />
+        android:id="@+id/patient_list_menu_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="65dp"
+        android:contentDescription="TODO"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/menu_button" />
 
 
     <ImageView
@@ -89,14 +96,16 @@
                 android:orientation="horizontal"
                 android:padding="15dp">
 
+
             <ImageView
-                    android:id="@+id/imageView55"
-                    android:layout_width="35dp"
-                    android:layout_height="33dp"
-                    android:contentDescription="TODO"
-                    app:srcCompat="@drawable/red_circle"
-                    tools:layout_editor_absoluteX="41dp"
-                    tools:layout_editor_absoluteY="232dp" />
+                android:id="@+id/patient_status_indicator"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/red_circle"
+                android:layout_margin="8dp"
+                app:tint="@color/red"
+                android:contentDescription="TODO" />
+
 
             <TextView
                     android:layout_width="wrap_content"
@@ -147,15 +156,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/three_point" />
 
-    <ImageView
+        <ImageView
             android:id="@+id/imageView62"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="188dp"
-            android:layout_marginBottom="13dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="180dp"
+            android:layout_marginBottom="16dp"
             android:contentDescription="TODO"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/edit_button_plus" />
+            app:srcCompat="@drawable/add_new_96" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@id/nav_view"
+        layout="@layout/navigation_view" />
+</androidx.drawerlayout.widget.DrawerLayout>

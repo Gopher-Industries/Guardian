@@ -12,7 +12,6 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -28,13 +27,14 @@ import deakin.gopher.guardian.model.login.LoginAuthError
 import deakin.gopher.guardian.model.login.LoginValidationError
 import deakin.gopher.guardian.model.login.Password
 import deakin.gopher.guardian.model.login.RoleName
+import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
 import deakin.gopher.guardian.view.hide
 import deakin.gopher.guardian.view.show
 
-class LoginActivity : AppCompatActivity() {
-    var userRole: RoleName = RoleName.Caretaker
+class LoginActivity : BaseActivity() {
+    private var userRole: RoleName = RoleName.Caretaker
     private lateinit var gsoClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -116,6 +116,8 @@ class LoginActivity : AppCompatActivity() {
                         ).show()
                     }
             }
+            val sessionManager = SessionManager(this)
+            sessionManager.createLoginSession()
         }
 
         mCreateBtn.setOnClickListener {
@@ -193,6 +195,7 @@ class LoginActivity : AppCompatActivity() {
         return null
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(
         requestCode: Int,
         resultCode: Int,

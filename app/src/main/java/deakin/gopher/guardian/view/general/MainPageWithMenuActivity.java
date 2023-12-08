@@ -2,12 +2,11 @@ package deakin.gopher.guardian.view.general;
 
 import android.os.Bundle;
 import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import deakin.gopher.guardian.R;
 
-public class MainPageWithMenuActivity extends AppCompatActivity {
+public class MainPageWithMenuActivity extends BaseActivity {
 
   DrawerLayout menu_DrawerLayout;
   Button menu_button;

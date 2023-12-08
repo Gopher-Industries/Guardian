@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.google.firebase.storage.FirebaseStorage;
@@ -25,7 +24,7 @@ import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.view.patient.PatientAddFragment;
 import java.util.UUID;
 
-public class UploadPhoto extends AppCompatActivity {
+public class UploadPhoto extends BaseActivity {
 
   private static final int REQUEST_CAMERA_PERMISSION = 200;
   private static final int REQUEST_IMAGE_CAPTURE = 1;

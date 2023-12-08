@@ -145,12 +145,12 @@ public class PatientAddFragment extends Fragment {
               null);
 
     } else {
-      patient.setFirstName(first_name.getText().toString());
-      patient.setMiddleName(middleName);
-      patient.setLastName(lastName);
-      patient.setMedicareNo(medicareNo);
-      patient.setDob(dateOfBirth);
-      patient.setWestwenAffairesNo(westernAffairsNo);
+      patient.firstName = first_name.getText().toString();
+      patient.middleName = middleName;
+      patient.lastName = lastName;
+      patient.medicareNo = medicareNo;
+      patient.dob = dateOfBirth;
+      patient.westernAffairsNo = westernAffairsNo;
     }
     dataListener.onDataFilled(patient, null, null, null, null);
   }

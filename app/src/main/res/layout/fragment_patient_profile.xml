@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/marilyn"
+                android:text="Hello"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +105,6 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
                 android:inputType="textMultiLine"
-                android:text="@string/bvarton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -134,7 +132,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/_6_5_1980"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dateOfBirth" />
 
@@ -163,7 +160,6 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
                 android:inputType="textMultiLine"
-                android:text="@string/_5065521796"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView131" />
 
@@ -192,7 +188,6 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
                 android:backgroundTint="#ECECEC"
-                android:text="@string/l67m8ob004hq"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView61" />
 
