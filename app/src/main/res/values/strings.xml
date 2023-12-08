@@ -233,6 +233,7 @@
     <string name="patient_details">Patient details</string>
     <string name="marilyn_bvaton">Marilyn Bvaton</string>
     <string name="blood_pressure">Blood Pressure</string>
+    <string name="heart_rate">Heart Rate</string>
     <string name="normal">Normal</string>
     <string name="patient_temperature">Patient Temperature</string>
     <string name="glucose_level">Glucose Level</string>
