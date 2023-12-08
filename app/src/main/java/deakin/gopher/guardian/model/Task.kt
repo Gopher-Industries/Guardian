@@ -7,5 +7,3 @@ data class Task(
     val patientId: String = "",
     val isCompleted: Boolean = false
 )
-
-

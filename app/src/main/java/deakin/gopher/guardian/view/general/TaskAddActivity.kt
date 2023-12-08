@@ -16,8 +16,6 @@ import deakin.gopher.guardian.model.NextOfKin
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.Task
 import deakin.gopher.guardian.util.DataListener
-
-
 class TaskAddActivity : AppCompatActivity(), DataListener {
     private lateinit var taskDescriptionEditText: EditText
     private lateinit var patientIdEditText: EditText
@@ -29,18 +27,16 @@ class TaskAddActivity : AppCompatActivity(), DataListener {
 
         taskDescriptionEditText = findViewById(R.id.taskDescriptionEditText)
         patientIdEditText = findViewById(R.id.taskPatientIdEditText)
-
         val submitButton : Button = findViewById(R.id.newTaskSubmitButton)
         submitButton.setOnClickListener {
             showSaveDialog()
         }
 
-
         val customHeader: CustomHeader = findViewById(R.id.taskCustomHeader)
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
 
         customHeader.setHeaderHeight(450)
-        customHeader.setHeaderText("Add Task")
+        customHeader.setHeaderText(getString(R.string.add_task))
         customHeader.setHeaderTopImageVisibility(View.VISIBLE)
         customHeader.setHeaderTopImage(R.drawable.add_image_button)
 
@@ -78,11 +74,11 @@ class TaskAddActivity : AppCompatActivity(), DataListener {
 
     fun showSaveDialog() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("Saving Changes?")
+        builder.setTitle(getString(R.string.saving_changes))
         builder.setPositiveButton(
-            "YES"
+            getString(R.string.yes)
         ) { _: DialogInterface?, _: Int -> saveInFirebase() }
-        builder.setNegativeButton("No", null)
+        builder.setNegativeButton(getString(R.string.no), null)
         val dialog = builder.create()
         dialog.setOnShowListener {
             dialog

@@ -12,7 +12,6 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Task
 
 class TaskListAdapter(private val testData: List<Task>) :
-    //FirebaseRecyclerAdapter<Task, TaskListAdapter.TaskViewHolder>(options) {
     RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
     init {
