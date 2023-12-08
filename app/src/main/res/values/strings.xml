@@ -351,6 +351,9 @@
     <string name="registration_success">Verification Email Has been Sent</string>
     <string name="registration_failure">Registration Failed</string>
     <string name="login_email_not_verified">User email has not been verified</string>
+    <string name="add_task">Add Task</string>
+    <string name="task_list">Task List</string>
+    <string name="saving_changes">Saving Changes?</string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
