@@ -12,6 +12,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -139,7 +141,11 @@ public class PatientListAdapter
 
   public void deleteItem(final int position) {
     final DatabaseReference itemRef = getRef(position);
-    itemRef.removeValue();
+      itemRef.removeValue().addOnSuccessListener(aVoid -> {
+          Toast.makeText(context, "Deleted successfully, click on archive to restore", Toast.LENGTH_LONG).show();
+      }).addOnFailureListener(e -> {
+          Toast.makeText(context, "Error during deletion", Toast.LENGTH_LONG).show();
+      });
   }
 
   static class myViewHolder extends RecyclerView.ViewHolder {

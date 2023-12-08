@@ -70,7 +70,7 @@ public class SimpleArchivedPatientAdapter extends RecyclerView.Adapter<SimpleArc
 
         public void bind(Patient patient) {
             patient_name.setText(patient.getFirstName() + " " + patient.getLastName());
-           
+
         }
     }
 }

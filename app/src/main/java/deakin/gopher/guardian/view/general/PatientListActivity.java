@@ -1,6 +1,7 @@
 package deakin.gopher.guardian.view.general;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -241,8 +242,19 @@ public class PatientListActivity extends BaseActivity {
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
       final int position = viewHolder.getBindingAdapterPosition();
-      ((PatientListAdapter) Objects.requireNonNull(patient_list_recyclerView.getAdapter()))
-          .deleteItem(position);
+        new AlertDialog.Builder(viewHolder.itemView.getContext())
+            .setTitle("Delete Patient")
+            .setMessage("Are you sure you want to delete this patient?")
+            .setPositiveButton("Yes", (dialog, which) -> {
+                ((PatientListAdapter) Objects.requireNonNull(patient_list_recyclerView.getAdapter()))
+                    .deleteItem(position);
+            })
+            .setNegativeButton("No", (dialog, which) -> {
+                Objects.requireNonNull(patient_list_recyclerView.getAdapter()).notifyItemChanged(position);
+            })
+            .create()
+            .show();
+
     }
 
     @Override
