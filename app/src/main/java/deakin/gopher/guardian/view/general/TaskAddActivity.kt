@@ -55,9 +55,12 @@ class TaskAddActivity : AppCompatActivity(), DataListener {
         gp2: GP?,
     ) { }
 
-    override fun onTaskDataFilled(
+    override fun onDataFinished(isFinished: Boolean?) {
+    }
+
+    fun onTaskDataFilled(
         patient: Patient,
-        task: Task
+        task: Task,
     ) {
         if (null != patient) {
             this.patient = patient
@@ -67,8 +70,8 @@ class TaskAddActivity : AppCompatActivity(), DataListener {
         }
     }
 
-    override fun onDataFinihsed(isFinished: Boolean?) { }
-    override fun onTaskDataFinished(isFinished: Boolean?) {
+    fun onDataFinihsed(isFinished: Boolean?) { }
+    fun onTaskDataFinished(isFinished: Boolean?) {
         showSaveDialog()
     }
 
