@@ -1,6 +1,7 @@
 package deakin.gopher.guardian.view.general;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import androidx.annotation.NonNull;
@@ -75,6 +77,18 @@ public class PatientListActivity extends BaseActivity {
     setContentView(R.layout.activity_patient_list);
     patient_list_recyclerView = findViewById(R.id.patient_list_recycleView);
     final ImageView addPatientIcon = findViewById(R.id.imageView62);
+
+    final Button viewArchivedButton = findViewById(R.id.button_view_archived);
+    viewArchivedButton.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            final Intent intent =
+                new Intent(PatientListActivity.this, ArchivedPatientListActivity.class);
+            startActivity(intent);
+          }
+        });
+
     addPatientIcon.setOnClickListener(
         v -> {
           final Intent intent = new Intent(PatientListActivity.this, AddNewPatientActivity.class);
@@ -132,7 +146,7 @@ public class PatientListActivity extends BaseActivity {
                 })
             .build();
     final PatientListAdapter patientListAdapter_default =
-        new PatientListAdapter(PatientListActivity.this, all_options);
+        new PatientListAdapter(PatientListActivity.this, all_options, false);
     patient_list_recyclerView.setLayoutManager(new GridLayoutManager(PatientListActivity.this, 1));
     patient_list_recyclerView.setAdapter(patientListAdapter_default);
     patientListAdapter_default.startListening();
@@ -165,21 +179,21 @@ public class PatientListActivity extends BaseActivity {
                           final Patient patient =
                               new Patient(
                                   snapshot.getKey(),
-                                  snapshot.child("first_name").getValue().toString(),
+                                  snapshot.child("name").getValue().toString(),
                                   snapshot.child("last_name").getValue().toString());
                           final Object middle_name = snapshot.child("middle_name").getValue();
                           if (null != middle_name) patient.middleName = middle_name.toString();
                           return patient;
                         })
                     .build();
-            patientListAdapter = new PatientListAdapter(PatientListActivity.this, options);
+            patientListAdapter = new PatientListAdapter(PatientListActivity.this, options, false);
             query.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                   @Override
                   public void onDataChange(@NonNull final DataSnapshot snapshot) {
                     if (snapshot.exists()) {
                       patientListAdapter =
-                          new PatientListAdapter(PatientListActivity.this, options);
+                          new PatientListAdapter(PatientListActivity.this, options, false);
                       patient_list_recyclerView.setLayoutManager(
                           new GridLayoutManager(PatientListActivity.this, 1));
                       patient_list_recyclerView.setAdapter(patientListAdapter);
@@ -188,7 +202,7 @@ public class PatientListActivity extends BaseActivity {
                       patient_list_recyclerView.setLayoutManager(
                           new GridLayoutManager(PatientListActivity.this, 1));
                       patient_list_recyclerView.setAdapter(
-                          new PatientListAdapter(PatientListActivity.this, options));
+                          new PatientListAdapter(PatientListActivity.this, options, false));
                     }
                   }
 
@@ -230,8 +244,24 @@ public class PatientListActivity extends BaseActivity {
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
       final int position = viewHolder.getBindingAdapterPosition();
-      ((PatientListAdapter) Objects.requireNonNull(patient_list_recyclerView.getAdapter()))
-          .deleteItem(position);
+      new AlertDialog.Builder(viewHolder.itemView.getContext())
+          .setTitle("Delete Patient")
+          .setMessage("Are you sure you want to delete this patient?")
+          .setPositiveButton(
+              "Yes",
+              (dialog, which) -> {
+                ((PatientListAdapter)
+                        Objects.requireNonNull(patient_list_recyclerView.getAdapter()))
+                    .deleteItem(position);
+              })
+          .setNegativeButton(
+              "No",
+              (dialog, which) -> {
+                Objects.requireNonNull(patient_list_recyclerView.getAdapter())
+                    .notifyItemChanged(position);
+              })
+          .create()
+          .show();
     }
 
     @Override

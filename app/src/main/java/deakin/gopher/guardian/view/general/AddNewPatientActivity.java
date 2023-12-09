@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class AddNewPatientActivity extends BaseActivity {
 
-  EditText name, address, underCare, photo, phone, dob;
+  EditText name, address, underCare, photo, phone, dob, medicareNo;
   Button btnAdd, btnBack;
 
   @Override
@@ -25,6 +25,7 @@ public class AddNewPatientActivity extends BaseActivity {
     phone = findViewById(R.id.txtPhone);
     photo = findViewById(R.id.urlPhoto);
     dob = findViewById(R.id.txtDoB);
+    medicareNo = findViewById(R.id.txtMedicareNumber);
 
     btnAdd = findViewById(R.id.btnAdd);
     btnBack = findViewById(R.id.btnBack);
@@ -50,6 +51,7 @@ public class AddNewPatientActivity extends BaseActivity {
     map.put("phone", phone.getText().toString());
     map.put("photo", photo.getText().toString());
     map.put("dob", dob.getText().toString());
+    map.put("medicareNo", medicareNo.getText().toString());
 
     FirebaseDatabase.getInstance()
         .getReference()
@@ -74,5 +76,6 @@ public class AddNewPatientActivity extends BaseActivity {
     dob.setText("");
     photo.setText("");
     phone.setText("");
+    medicareNo.setText("");
   }
 }

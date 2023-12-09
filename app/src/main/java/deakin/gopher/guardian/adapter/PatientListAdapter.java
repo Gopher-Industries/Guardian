@@ -1,5 +1,6 @@
 package deakin.gopher.guardian.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
@@ -31,12 +33,27 @@ public class PatientListAdapter
    * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See {@link
    * FirebaseRecyclerOptions} for configuration options.
    */
-  final Context context;
+  private final Context context;
+
+  private final boolean isArchivedList;
 
   public PatientListAdapter(
-      final Context context, @NonNull final FirebaseRecyclerOptions<Patient> options) {
+      final Context context,
+      @NonNull final FirebaseRecyclerOptions<Patient> options,
+      final boolean isArchivedList) {
     super(options);
     this.context = context;
+    this.isArchivedList = isArchivedList;
+  }
+
+  @Override
+  public void onDataChanged() {
+    super.onDataChanged();
+    if (getItemCount() == 0) {
+      Log.d("PatientListAdapter", "No archived patients found.");
+    } else {
+      Log.d("PatientListAdapter", "Archived patients loaded: " + getItemCount());
+    }
   }
 
   @Override
@@ -44,6 +61,7 @@ public class PatientListAdapter
       @NonNull final myViewHolder holder, final int position, @NonNull final Patient model) {
     holder.patient_name.setText(model.firstName + " " + model.middleName + " " + model.lastName);
     updateStatusIndicator(holder.statusIndicator, model.status);
+    holder.bind(model, isArchivedList);
 
     Log.d("PatientListAdapter", "Patient ID: " + model.patientId);
     holder.patient_item.setOnClickListener(
@@ -120,12 +138,25 @@ public class PatientListAdapter
         LayoutInflater.from(parent.getContext())
             .inflate(R.layout.activity_patient_list_item, parent, false);
 
-    return new myViewHolder(view);
+    return new myViewHolder(view, context);
   }
 
   public void deleteItem(final int position) {
     final DatabaseReference itemRef = getRef(position);
-    itemRef.removeValue();
+    itemRef
+        .removeValue()
+        .addOnSuccessListener(
+            aVoid -> {
+              Toast.makeText(
+                      context,
+                      "Deleted successfully, click on archive to restore",
+                      Toast.LENGTH_LONG)
+                  .show();
+            })
+        .addOnFailureListener(
+            e -> {
+              Toast.makeText(context, "Error during deletion", Toast.LENGTH_LONG).show();
+            });
   }
 
   static class myViewHolder extends RecyclerView.ViewHolder {
@@ -133,12 +164,45 @@ public class PatientListAdapter
     final CardView patient_item;
     final ImageView statusIndicator;
 
-    public myViewHolder(@NonNull final View itemView) {
+    private final Context context;
+
+    private TextView patientNameTextView;
+    private final ImageView actionButton;
+
+    public myViewHolder(@NonNull final View itemView, Context context) {
       super(itemView);
+      this.context = context;
       patient_name = itemView.findViewById(R.id.patient_list_name);
       patient_item = itemView.findViewById(R.id.patient_list_patient_item);
       statusIndicator = itemView.findViewById(R.id.patient_status_indicator);
+      actionButton = itemView.findViewById(R.id.patient_list_arrow);
       Log.d("PatientListAdapter", "Indicator loaded " + statusIndicator);
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void bind(final Patient patient, final boolean isArchivedList) {
+      patient_name.setText(patient.getFirstName() + " " + patient.getLastName());
+
+      if (isArchivedList) {
+        actionButton.setOnClickListener(v -> restorePatient(patient));
+      } else {
+        actionButton.setOnClickListener(v -> viewPatientDetails(patient, context));
+      }
+    }
+
+    private void restorePatient(Patient patient) {
+      final DatabaseReference patientRef =
+          FirebaseDatabase.getInstance()
+              .getReference()
+              .child("patients")
+              .child(Objects.requireNonNull(patient.getPatientId()));
+      patientRef.child("isArchived").setValue(false);
+    }
+
+    private void viewPatientDetails(Patient patient, Context context) {
+      final Intent intent = new Intent(context, PatientProfileActivity.class);
+      intent.putExtra("PATIENT_ID", patient.getPatientId());
+      context.startActivity(intent);
     }
   }
 }

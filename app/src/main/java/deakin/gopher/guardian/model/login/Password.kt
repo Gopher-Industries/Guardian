@@ -15,15 +15,13 @@ data class Password(val password: String) {
         val hasSpecialChar = password.any { it in allowedSpecialChars }
 
         return password.length >= minLength &&
-                hasUppercase &&
-                hasLowercase &&
-                hasDigit &&
-                hasSpecialChar
+            hasUppercase &&
+            hasLowercase &&
+            hasDigit &&
+            hasSpecialChar
     }
 
     fun confirmWith(other: String): Boolean {
         return password == other
     }
 }
-
-
