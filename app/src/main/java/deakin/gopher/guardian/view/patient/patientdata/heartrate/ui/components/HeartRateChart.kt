@@ -35,7 +35,7 @@ fun HeartRateChart(heartRates: List<HeartRate>) {
         }
 
     val chartEntryModelProducer = ChartEntryModelProducer(getEntries)
-    val heartRateChartLineSpec = arrayListOf<LineChart.LineSpec>()
+    val heartRateChartLineSpec = mutableListOf<LineChart.LineSpec>()
     val customLineColor = parseColor("#FF0B98C5")
     heartRateChartLineSpec.add(
         LineChart.LineSpec(
