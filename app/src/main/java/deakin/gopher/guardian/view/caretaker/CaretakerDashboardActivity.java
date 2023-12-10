@@ -6,7 +6,7 @@ import android.view.View;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.view.caretaker.notifications.FallAlertActivity;
 import deakin.gopher.guardian.view.general.BaseActivity;
-import deakin.gopher.guardian.view.general.PatientListActivity;
+import deakin.gopher.guardian.view.general.PatientListFragment;
 import deakin.gopher.guardian.view.general.PatientProfileActivity;
 
 public class CaretakerDashboardActivity extends BaseActivity {
@@ -30,7 +30,7 @@ public class CaretakerDashboardActivity extends BaseActivity {
 
   public void onSelectAPatientClick(final View view) {
     final Intent patientProfileListIntent =
-        new Intent(CaretakerDashboardActivity.this, PatientListActivity.class);
+        new Intent(CaretakerDashboardActivity.this, PatientListFragment.class);
     startActivity(patientProfileListIntent);
   }
 }

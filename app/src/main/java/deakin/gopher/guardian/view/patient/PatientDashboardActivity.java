@@ -11,7 +11,7 @@ import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.util.Util;
 import deakin.gopher.guardian.view.general.BaseActivity;
 import deakin.gopher.guardian.view.general.DrawerActivity;
-import deakin.gopher.guardian.view.general.PatientListActivity;
+import deakin.gopher.guardian.view.general.PatientListFragment;
 import deakin.gopher.guardian.view.patient.associateradar.ActivityProfilingActivity;
 import deakin.gopher.guardian.view.patient.careplan.CarePlanActivity;
 import deakin.gopher.guardian.view.patient.dailyreport.DailyReportActivity;
@@ -83,7 +83,7 @@ public class PatientDashboardActivity extends BaseActivity {
     choosePatientButton.setOnClickListener(
         v -> {
           final Intent patientListIntent =
-              new Intent(PatientDashboardActivity.this, PatientListActivity.class);
+              new Intent(PatientDashboardActivity.this, PatientListFragment.class);
           startActivity(patientListIntent);
         });
 

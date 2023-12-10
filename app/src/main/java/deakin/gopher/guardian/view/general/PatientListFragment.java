@@ -8,14 +8,17 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,7 +35,7 @@ import deakin.gopher.guardian.model.Patient;
 import deakin.gopher.guardian.view.patient.careplan.CarePlanActivity;
 import java.util.Objects;
 
-public class PatientListActivity extends BaseActivity {
+public class PatientListFragment extends Fragment {
   RecyclerView patient_list_recyclerView;
   PatientListAdapter patientListAdapter;
   Query query;
@@ -41,14 +44,15 @@ public class PatientListActivity extends BaseActivity {
   ImageView patientListMenuButton;
 
   @Override
-  protected void onCreate(final Bundle savedInstanceState) {
+  public View onCreateView(
+      LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_patient_list);
-    patient_list_recyclerView = findViewById(R.id.patient_list_recycleView);
-    final ImageView addPatientIcon = findViewById(R.id.imageView62);
+    final View rootView = inflater.inflate(R.layout.fragment_patient_list, container, false);
+    patient_list_recyclerView = rootView.findViewById(R.id.patient_list_recycleView);
+    final ImageView addPatientIcon = rootView.findViewById(R.id.imageView62);
     addPatientIcon.setOnClickListener(
         v -> {
-          final Intent intent = new Intent(PatientListActivity.this, AddNewPatientActivity.class);
+          final Intent intent = new Intent(getActivity(), AddNewPatientActivity.class);
           startActivity(intent);
         });
 
@@ -56,20 +60,14 @@ public class PatientListActivity extends BaseActivity {
     final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
     itemTouchHelper.attachToRecyclerView(patient_list_recyclerView);
 
-    overview_cardview = findViewById(R.id.patient_list_patient_overview);
-    patient_searchView = findViewById(R.id.patient_list_searchView);
+    overview_cardview = rootView.findViewById(R.id.patient_list_patient_overview);
+    patient_searchView = rootView.findViewById(R.id.patient_list_searchView);
     // this clicker is for test:
     overview_cardview.setOnClickListener(
-        view -> startActivity(new Intent(PatientListActivity.this, CarePlanActivity.class)));
-    final NavigationView navigationView = findViewById(R.id.nav_view);
-    patientListMenuButton = findViewById(R.id.patient_list_menu_button);
-    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        view -> startActivity(new Intent(getActivity(), CarePlanActivity.class)));
+    final NavigationView navigationView = rootView.findViewById(R.id.nav_view);
+    final DrawerLayout drawerLayout = rootView.findViewById(R.id.drawer_layout);
     navigationView.setItemIconTintList(null);
-
-    patientListMenuButton.setOnClickListener(
-        v -> {
-          drawerLayout.openDrawer(GravityCompat.START);
-        });
 
     final Query all_query = FirebaseDatabase.getInstance().getReference().child("patient_profile");
     //      Log.d("PatientListActivity", "Data loaded" + all_query);
@@ -100,8 +98,8 @@ public class PatientListActivity extends BaseActivity {
                 })
             .build();
     final PatientListAdapter patientListAdapter_default =
-        new PatientListAdapter(PatientListActivity.this, all_options);
-    patient_list_recyclerView.setLayoutManager(new GridLayoutManager(PatientListActivity.this, 1));
+        new PatientListAdapter(getActivity(), all_options);
+    patient_list_recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
     patient_list_recyclerView.setAdapter(patientListAdapter_default);
     patientListAdapter_default.startListening();
     patient_searchView.setOnQueryTextListener(
@@ -140,23 +138,22 @@ public class PatientListActivity extends BaseActivity {
                           return patient;
                         })
                     .build();
-            patientListAdapter = new PatientListAdapter(PatientListActivity.this, options);
+            patientListAdapter = new PatientListAdapter(getActivity(), options);
             query.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                   @Override
                   public void onDataChange(@NonNull final DataSnapshot snapshot) {
                     if (snapshot.exists()) {
-                      patientListAdapter =
-                          new PatientListAdapter(PatientListActivity.this, options);
+                      patientListAdapter = new PatientListAdapter(getActivity(), options);
                       patient_list_recyclerView.setLayoutManager(
-                          new GridLayoutManager(PatientListActivity.this, 1));
+                          new GridLayoutManager(getActivity(), 1));
                       patient_list_recyclerView.setAdapter(patientListAdapter);
                       patientListAdapter.startListening();
                     } else {
                       patient_list_recyclerView.setLayoutManager(
-                          new GridLayoutManager(PatientListActivity.this, 1));
+                          new GridLayoutManager(getActivity(), 1));
                       patient_list_recyclerView.setAdapter(
-                          new PatientListAdapter(PatientListActivity.this, options));
+                          new PatientListAdapter(getActivity(), options));
                     }
                   }
 
@@ -167,6 +164,7 @@ public class PatientListActivity extends BaseActivity {
             return true;
           }
         });
+    return rootView;
   }
 
   public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {

@@ -18,7 +18,6 @@ public class CaretakerProfileActivity extends BaseActivity {
     setContentView(R.layout.activity_caretakerprofile);
 
     final NavigationView navigationView = findViewById(R.id.nav_view);
-    caretakerProfileMenuButton = findViewById(R.id.patient_list_menu_button);
     final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
     navigationView.setItemIconTintList(null);
 

@@ -23,7 +23,7 @@ class Homepage4caretaker : BaseActivity() {
         // patient list button
         patientListButton.setOnClickListener {
             val medicalDiagnosticsActivityIntent =
-                Intent(this@Homepage4caretaker, PatientListActivity::class.java)
+                Intent(this@Homepage4caretaker, MainPageWithMenuActivity::class.java)
             startActivity(medicalDiagnosticsActivityIntent)
         }
 

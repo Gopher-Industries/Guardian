@@ -60,6 +60,9 @@
             android:name=".view.general.PatientProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".view.general.MainPageWithMenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.patient.viewactivitydata.WeeklyActivityProfilingActivity"
             android:exported="false">
             <meta-data
@@ -98,7 +101,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.general.PatientListActivity"
+            android:name=".view.general.PatientListFragment"
             android:exported="false" />
         <activity
             android:name=".view.general.RegisterActivity"
