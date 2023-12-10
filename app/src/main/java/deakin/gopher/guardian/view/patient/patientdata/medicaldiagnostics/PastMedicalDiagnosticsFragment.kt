@@ -10,8 +10,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -87,19 +86,11 @@ class PastMedicalDiagnosticsFragment : Fragment {
             }
         }
 
-        val heartRateLinearLayout: LinearLayout =
-            rootView.findViewById(R.id.pastMedicalDiagnosticsHeartRateContainer)
-        val heartRateTextView: TextView =
-            rootView.findViewById(R.id.pastMedicalDiagnosticsHeartRateTextView)
-        heartRateLinearLayout.setOnClickListener {
-            if (heartRateTextView.isEnabled) {
-                return@setOnClickListener
-            }
-
-            heartRateLinearLayout.setOnClickListener {
-                Intent(this.context, HeartRateActivity::class.java).also {
-                    startActivity(it)
-                }
+        val heartRateArrowButton: ImageView =
+            rootView.findViewById(R.id.pastMedicalDiagnosticsHeartRateArrowButton)
+        heartRateArrowButton.setOnClickListener {
+            Intent(this.context, HeartRateActivity::class.java).also {
+                startActivity(it)
             }
         }
 

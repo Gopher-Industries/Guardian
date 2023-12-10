@@ -120,7 +120,7 @@
 
         <LinearLayout
             android:id="@+id/currentMedicalDiagnosticsHeartRateContainer"
-            android:layout_width="376dp"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -137,7 +137,7 @@
 
             <EditText
                 android:id="@+id/currentMedicalDiagnosticsHeartRateTextView"
-                android:layout_width="365dp"
+                android:layout_width="340dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
@@ -157,6 +157,15 @@
             android:layout_height="20dp"
             android:layout_gravity="center"
             android:background="@drawable/pencil" />
+
+        <ImageView
+            android:id="@+id/currentMedicalDiagnosticsHeartRateArrowButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/right_arrow_2" />
     </LinearLayout>
 
     <View
