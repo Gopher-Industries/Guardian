@@ -22,10 +22,10 @@ class MedicalDiagnosticsFragment : Fragment {
     var pastFragment: PastMedicalDiagnosticsFragment? = null
     private var editButton: Button? = null
     private var isEditable = false
-    private var patientId: String? = null
+    private lateinit var patientId: String
 
     constructor()
-    constructor(patientId: String?) {
+    constructor(patientId: String) {
         this.patientId = patientId
     }
 
