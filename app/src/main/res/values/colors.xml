@@ -5,16 +5,21 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    <color name="teal">#008080</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="off_white">#F5F5F5</color>
     <color name="TG_blue">#FF0B98C5</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="deep_blue">#003366</color>
     <color name="black_overlay">#66000000</color>
     <color name="bordercolor">#000000</color>
-
+    <color name="red">#fc0303</color>
+    <color name="orange">#fc8803</color>
+    <color name="green">#24fc03</color>
     <color name="_bg__new_homepage___ek2_color">#FFFFFF</color>
     <color name="ellipse_9_color">#C4C4C4</color>
     <color name="gray">#F3F3F3</color>
@@ -24,7 +29,7 @@
     <color name="text_input_color">#666262</color>
     <color name="box_border">#E0DDDD</color>
 
-    <color name="colorPrimary">@color/design_default_color_primary</color>
+    <color name="colorPrimary">@color/light_blue_600</color>
     <color name="colorPrimaryDark">@color/design_default_color_primary_dark</color>
     <color name="colorAccent">@color/light_blue_A200</color>
     <color name="colorPrimaryText">#212121</color>

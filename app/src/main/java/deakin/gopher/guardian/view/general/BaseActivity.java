@@ -4,7 +4,7 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import deakin.gopher.guardian.model.login.SessionManager;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
   @Override
   protected void onResume() {

@@ -10,7 +10,7 @@
         android:layout_width="375dp"
         android:layout_height="64dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="5dp"
         app:cardCornerRadius="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/patient_list_searchView">
@@ -23,13 +23,13 @@
             android:padding="15dp">
 
             <ImageView
-                android:id="@+id/patient_list_status_circle"
-                android:layout_width="35dp"
-                android:layout_height="33dp"
+                android:id="@+id/patient_status_indicator"
+                android:layout_width="20dp"
+                android:layout_height="24dp"
+                android:layout_margin="8dp"
                 android:contentDescription="TODO"
-                app:srcCompat="@drawable/red_circle"
-                tools:layout_editor_absoluteX="41dp"
-                tools:layout_editor_absoluteY="232dp" />
+                android:src="@drawable/circle_red"
+                app:tint="@color/red" />
 
             <TextView
                 android:id="@+id/patient_list_name"
@@ -49,7 +49,7 @@
                 android:layout_marginLeft="140dp"
                 android:layout_marginTop="5dp"
                 android:contentDescription="TODO"
-                app:srcCompat="@drawable/right_vector"
+                app:srcCompat="@drawable/right_arrow_2"
                 tools:layout_editor_absoluteX="337dp"
                 tools:layout_editor_absoluteY="234dp" />
 

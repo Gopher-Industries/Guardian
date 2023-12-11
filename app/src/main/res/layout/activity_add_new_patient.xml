@@ -7,169 +7,143 @@
     android:layout_height="match_parent"
     tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/purple_500"
-        android:gravity="center"
-        android:text="@string/add_new_patient"
-        android:textColor="#FFF"
-        android:textSize="25sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:weightSum="1">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:gravity="center"
-        android:text="@string/name"
-        android:textSize="20sp" />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/add_new_patient"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_marginBottom="16dp"/>
 
-    <EditText
-        android:id="@+id/txtName"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="10dp"
-        android:autofillHints=""
-        android:background="@drawable/rounded"
-        android:gravity="center"
-        android:inputType="text" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:gravity="center"
-        android:text="@string/address"
-        android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:hint="@string/name"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/txtAddress"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="10dp"
-        android:autofillHints=""
-        android:background="@drawable/rounded"
-        android:gravity="center"
-        android:inputType="text" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:gravity="center"
-        android:text="@string/date_of_birth"
-        android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:hint="@string/address"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/txtDoB"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="10dp"
-        android:autofillHints=""
-        android:background="@drawable/rounded"
-        android:gravity="center"
-        android:inputType="text" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:gravity="center"
-        android:text="@string/phone"
-        android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtDoB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:hint="@string/date_of_birth"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/txtPhone"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="10dp"
-        android:autofillHints=""
-        android:background="@drawable/rounded"
-        android:gravity="center"
-        android:inputType="text" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:gravity="center"
-        android:text="@string/under_care_of"
-        android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:hint="@string/phone"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/txtUnderCare"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="10dp"
-        android:autofillHints=""
-        android:background="@drawable/rounded"
-        android:gravity="center"
-        android:inputType="text" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:gravity="center"
-        android:text="@string/photo"
-        android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtUnderCare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/under_care_of"
+                android:backgroundTint="#FFFFFF"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/urlPhoto"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="10dp"
-        android:autofillHints=""
-        android:background="@drawable/rounded"
-        android:gravity="center"
-        android:inputType="text" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="25dp"
-        android:background="@drawable/rounded"
-        android:gravity="center"
-        android:text="@string/save"
-        android:textAllCaps="false"
-        android:textSize="21sp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/urlPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:hint="@string/photo"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="25dp"
-        android:backgroundTint="#00FFC3"
-        android:gravity="center"
-        android:text="@string/back"
-        android:textAllCaps="false"
-        android:textSize="21sp" />
-</LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtMedicareNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:hint="@string/medicare_no"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAdd"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="0.1"
+            android:text="@string/save"
+            android:textColor="@android:color/white"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="0.1"
+            android:text="@string/back"
+            android:textColor="@android:color/white"
+            app:backgroundTint="#54D87F" />
+    </LinearLayout>
 
     <include
-        android:id="@id/nav_view"
+        android:id="@+id/nav_view"
         layout="@layout/navigation_view" />
 </androidx.drawerlayout.widget.DrawerLayout>

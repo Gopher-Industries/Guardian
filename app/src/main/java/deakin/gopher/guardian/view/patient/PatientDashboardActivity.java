@@ -67,8 +67,8 @@ public class PatientDashboardActivity extends BaseActivity {
             dailyReportSummaryIntent.putExtra(Util.DAILY_REPORT_STATUS_NOTES, dailyReportNotes);
             dailyReportSummaryIntent.putExtra(Util.DAILY_REPORT_DATE, dailyReportDate);
             dailyReportSummaryIntent.putExtra(
-                Util.DAILY_REPORT_STATUS_LIST, Util.setToArray(dailyReportStatusList));
-            Log.i("berapa", Util.setToArray(dailyReportStatusList).length + "");
+                Util.DAILY_REPORT_STATUS_LIST, Util.INSTANCE.setToArray(dailyReportStatusList));
+            Log.i("berapa", String.valueOf(Util.INSTANCE.setToArray(dailyReportStatusList).length));
             startActivity(dailyReportSummaryIntent);
           }
         });

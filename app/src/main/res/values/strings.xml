@@ -233,6 +233,7 @@
     <string name="patient_details">Patient details</string>
     <string name="marilyn_bvaton">Marilyn Bvaton</string>
     <string name="blood_pressure">Blood Pressure</string>
+    <string name="heart_rate">Heart Rate</string>
     <string name="normal">Normal</string>
     <string name="patient_temperature">Patient Temperature</string>
     <string name="glucose_level">Glucose Level</string>
@@ -341,7 +342,7 @@
     <string name="validation_empty_email">Email is Required.</string>
     <string name="validation_invalid_email_address">Invalid Email Address</string>
     <string name="validation_empty_password">Password is Required.</string>
-    <string name="validation_password_short">Password Must Be Longer than 6 Characters</string>
+    <string name="validation_password_weak">Please use a stronger password</string>
     <string name="text_reset_password">Reset Password</string>
     <string name="text_enter_your_email_to_received_reset_link">Enter Your Email To Received Reset Link.</string>
     <string name="tasks_label">Tasks</string>
@@ -351,6 +352,9 @@
     <string name="registration_success">Verification Email Has been Sent</string>
     <string name="registration_failure">Registration Failed</string>
     <string name="login_email_not_verified">User email has not been verified</string>
+    <string name="add_task">Add Task</string>
+    <string name="task_list">Task List</string>
+    <string name="saving_changes">Saving Changes?</string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
@@ -551,5 +555,8 @@
     <string name="heart_rate_hint">Heart Rate</string>
     <string name="add_heart_rate_title">Add Heart Rate Data</string>
     <string name="heart_rate_button_name">Heart Rate</string>
+    <string name="log_out">LOG OUT</string>
+    <string name="ward">Ward</string>
+    <string name="caretaker_profile_edit">Caretaker Profile Edit</string>
 </resources>
 

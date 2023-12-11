@@ -216,7 +216,7 @@ class LoginActivity : BaseActivity() {
             val auth = FirebaseAuth.getInstance()
             auth.signInWithCredential(credential).addOnCompleteListener { authTask ->
                 if (authTask.isSuccessful) {
-                    NavigationService(this).toHomeScreenForRole(RoleName.Caretaker)
+                    NavigationService(this).toHomeScreenForRole(userRole)
                 } else {
                     Toast.makeText(
                         applicationContext,
