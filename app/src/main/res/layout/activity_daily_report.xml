@@ -14,9 +14,6 @@
     android:layout_height="851dp"
     android:textAlignment="center">
 
-    <!--test-->
-
-
     <androidx.cardview.widget.CardView
         android:id="@+id/headerCard"
         android:layout_width="match_parent"
@@ -222,175 +219,175 @@
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
+      
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="133dp"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/alert_word"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/urgentMedicalAttentionTextView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="133dp"
-                android:layout_height="34dp"
-                android:layout_marginStart="6dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/alert_word"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/urgentMedicalAttentionTextView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                <TextView
+                    android:id="@+id/urgentMedicalAttentionTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@drawable/button_shadow_bg"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@string/urgent_medical_attention"
+                    android:textColor="#595656"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/requiresHospitalisationTextView"
+                    app:layout_constraintEnd_toEndOf="@+id/requiresHospitalisationTextView"
+                    app:layout_constraintStart_toStartOf="@+id/requiresHospitalisationTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-            <TextView
-                android:id="@+id/urgentMedicalAttentionTextView"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="7dp"
-                android:background="@drawable/button_shadow_bg"
-                android:gravity="center"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:text="@string/urgent_medical_attention"
-                android:textColor="#595656"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/requiresHospitalisationTextView"
-                app:layout_constraintEnd_toEndOf="@+id/requiresHospitalisationTextView"
-                app:layout_constraintStart_toStartOf="@+id/requiresHospitalisationTextView"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/urgent_patient_status"
+                    app:layout_constraintBottom_toBottomOf="@+id/urgentMedicalAttentionTextView"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                    app:layout_constraintStart_toStartOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="@+id/urgentMedicalAttentionTextView" />
 
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1"
-                android:contentDescription="TODO"
-                android:src="@drawable/urgent_patient_status"
-                app:layout_constraintBottom_toBottomOf="@+id/urgentMedicalAttentionTextView"
-                app:layout_constraintEnd_toEndOf="@+id/imageView2"
-                app:layout_constraintStart_toStartOf="@+id/imageView2"
-                app:layout_constraintTop_toTopOf="@+id/urgentMedicalAttentionTextView" />
+                <TextView
+                    android:id="@+id/requiresHospitalisationTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="9dp"
+                    android:background="@drawable/button_shadow_bg"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@string/requires_hospitalisation"
+                    android:textColor="#595656"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/notApplicableTextView"
+                    app:layout_constraintEnd_toEndOf="@+id/notApplicableTextView"
+                    app:layout_constraintStart_toStartOf="@+id/notApplicableTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/urgentMedicalAttentionTextView" />
 
-            <TextView
-                android:id="@+id/requiresHospitalisationTextView"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="9dp"
-                android:background="@drawable/button_shadow_bg"
-                android:gravity="center"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:text="@string/requires_hospitalisation"
-                android:textColor="#595656"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/notApplicableTextView"
-                app:layout_constraintEnd_toEndOf="@+id/notApplicableTextView"
-                app:layout_constraintStart_toStartOf="@+id/notApplicableTextView"
-                app:layout_constraintTop_toBottomOf="@+id/urgentMedicalAttentionTextView" />
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/hospital_patient_status"
+                    app:layout_constraintBottom_toBottomOf="@+id/requiresHospitalisationTextView"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView3"
+                    app:layout_constraintStart_toStartOf="@+id/imageView3" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1"
-                android:contentDescription="TODO"
-                android:src="@drawable/hospital_patient_status"
-                app:layout_constraintBottom_toBottomOf="@+id/requiresHospitalisationTextView"
-                app:layout_constraintEnd_toEndOf="@+id/imageView3"
-                app:layout_constraintStart_toStartOf="@+id/imageView3" />
+                <TextView
+                    android:id="@+id/notApplicableTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="9dp"
+                    android:background="@drawable/button_shadow_bg"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@string/not_applicable"
+                    android:textColor="#595656"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/requiresHourlyAttentionTextView"
+                    app:layout_constraintEnd_toEndOf="@+id/requiresHourlyAttentionTextView"
+                    app:layout_constraintStart_toStartOf="@+id/requiresHourlyAttentionTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/requiresHospitalisationTextView" />
 
-            <TextView
-                android:id="@+id/notApplicableTextView"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="9dp"
-                android:background="@drawable/button_shadow_bg"
-                android:gravity="center"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:text="@string/not_applicable"
-                android:textColor="#595656"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/requiresHourlyAttentionTextView"
-                app:layout_constraintEnd_toEndOf="@+id/requiresHourlyAttentionTextView"
-                app:layout_constraintStart_toStartOf="@+id/requiresHourlyAttentionTextView"
-                app:layout_constraintTop_toBottomOf="@+id/requiresHospitalisationTextView" />
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/forbidden_patient_status"
+                    app:layout_constraintBottom_toBottomOf="@+id/notApplicableTextView"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView4"
+                    app:layout_constraintStart_toStartOf="@+id/imageView4"
+                    app:layout_constraintTop_toTopOf="@+id/notApplicableTextView" />
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1"
-                android:contentDescription="TODO"
-                android:src="@drawable/forbidden_patient_status"
-                app:layout_constraintBottom_toBottomOf="@+id/notApplicableTextView"
-                app:layout_constraintEnd_toEndOf="@+id/imageView4"
-                app:layout_constraintStart_toStartOf="@+id/imageView4"
-                app:layout_constraintTop_toTopOf="@+id/notApplicableTextView" />
+                <TextView
+                    android:id="@+id/requiresHourlyAttentionTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginEnd="22dp"
+                    android:layout_marginBottom="14dp"
+                    android:background="@drawable/button_shadow_bg"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@string/requires_hourly_attention"
+                    android:textColor="#595656"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/loginBtn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/notApplicableTextView" />
 
-            <TextView
-                android:id="@+id/requiresHourlyAttentionTextView"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="22dp"
-                android:layout_marginEnd="22dp"
-                android:layout_marginBottom="14dp"
-                android:background="@drawable/button_shadow_bg"
-                android:gravity="center"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:text="@string/requires_hourly_attention"
-                android:textColor="#595656"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/loginBtn"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/notApplicableTextView" />
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/time_patient_status"
+                    app:layout_constraintBottom_toBottomOf="@+id/requiresHourlyAttentionTextView"
+                    app:layout_constraintEnd_toStartOf="@+id/loginBtn"
+                    app:layout_constraintStart_toStartOf="@+id/requiresHourlyAttentionTextView"
+                    app:layout_constraintTop_toTopOf="@+id/requiresHourlyAttentionTextView" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="14dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1"
-                android:contentDescription="TODO"
-                android:src="@drawable/time_patient_status"
-                app:layout_constraintBottom_toBottomOf="@+id/requiresHourlyAttentionTextView"
-                app:layout_constraintEnd_toStartOf="@+id/loginBtn"
-                app:layout_constraintStart_toStartOf="@+id/requiresHourlyAttentionTextView"
-                app:layout_constraintTop_toTopOf="@+id/requiresHourlyAttentionTextView" />
+                <Button
+                    android:id="@+id/loginBtn"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="78dp"
+                    android:layout_marginEnd="78dp"
+                    android:layout_marginBottom="40dp"
+                    android:backgroundTint="@color/TG_blue"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="@string/submit_caps"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:cornerRadius="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/day"
+                    app:layout_constraintTop_toBottomOf="@+id/requiresHourlyAttentionTextView" />
 
-            <Button
-                android:id="@+id/loginBtn"
-                android:layout_width="200dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="78dp"
-                android:layout_marginEnd="78dp"
-                android:layout_marginBottom="40dp"
-                android:backgroundTint="@color/TG_blue"
-                android:fontFamily="@font/poppins_bold"
-                android:text="@string/submit_caps"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:cornerRadius="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/day"
-                app:layout_constraintTop_toBottomOf="@+id/requiresHourlyAttentionTextView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
-    </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-<include
-android:id="@id/nav_view"
-layout="@layout/navigation_view" />
-    </androidx.drawerlayout.widget.DrawerLayout>
+    <include
+        android:id="@id/nav_view"
+        layout="@layout/navigation_view" />
+</androidx.drawerlayout.widget.DrawerLayout>
