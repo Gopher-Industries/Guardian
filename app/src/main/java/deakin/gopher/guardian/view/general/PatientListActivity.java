@@ -112,26 +112,26 @@ public class PatientListActivity extends BaseActivity {
 
     patientListMenuButton.setOnClickListener(
         v -> {
-            if (null != drawerLayout) {
-                drawerLayout.openDrawer(GravityCompat.START);
+          if (null != drawerLayout) {
+            drawerLayout.openDrawer(GravityCompat.START);
 
-                navigationView.setNavigationItemSelectedListener(
-                        menuItem -> {
-                            final int id = menuItem.getItemId();
-                            if (R.id.nav_home == id) {
-                                startActivity(new Intent(PatientListActivity.this, Homepage4caretaker.class));
-                            } else if (R.id.nav_admin == id) {
-                                startActivity(new Intent(PatientListActivity.this, Homepage4caretaker.class));
-                            } else if (R.id.nav_settings == id) {
-                                startActivity(new Intent(PatientListActivity.this, Setting.class));
-                            } else if (R.id.nav_signout == id) {
-                                FirebaseAuth.getInstance().signOut();
-                                startActivity(new Intent(PatientListActivity.this, LoginActivity.class));
-                                finish();
-                            }
-                            return true;
-                        });
-            }
+            navigationView.setNavigationItemSelectedListener(
+                menuItem -> {
+                  final int id = menuItem.getItemId();
+                  if (R.id.nav_home == id) {
+                    startActivity(new Intent(PatientListActivity.this, Homepage4caretaker.class));
+                  } else if (R.id.nav_admin == id) {
+                    startActivity(new Intent(PatientListActivity.this, Homepage4caretaker.class));
+                  } else if (R.id.nav_settings == id) {
+                    startActivity(new Intent(PatientListActivity.this, Setting.class));
+                  } else if (R.id.nav_signout == id) {
+                    FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(PatientListActivity.this, LoginActivity.class));
+                    finish();
+                  }
+                  return true;
+                });
+          }
         });
 
     final Query all_query = FirebaseDatabase.getInstance().getReference().child("patient_profile");
