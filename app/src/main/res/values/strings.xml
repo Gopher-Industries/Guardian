@@ -263,7 +263,7 @@
     <string name="enter_clinic_address">Enter clinic address</string>
     <string name="phone_number_asterisk">Phone Number*</string>
     <string name="eg_1234_56789_0">eg: 1234 56789 0</string>
-    <string name="enter_a_fax">Enter a fax</string>
+    <string name="enter_a_fax">xxx-xxx-xxxx</string>
     <string name="prev">Prev</string>
     <string name="age_cared_planning_region_code">Age-cared planning region code</string>
     <string name="age_cared_planning_region_name">Age-cared planning region name</string>
