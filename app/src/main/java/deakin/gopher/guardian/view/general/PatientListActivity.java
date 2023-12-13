@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -36,14 +35,12 @@ import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientListAdapter;
 import deakin.gopher.guardian.model.Patient;
 import deakin.gopher.guardian.model.PatientStatus;
-import deakin.gopher.guardian.view.patient.careplan.CarePlanActivity;
 import java.util.Objects;
 
 public class PatientListActivity extends BaseActivity {
   RecyclerView patient_list_recyclerView;
   PatientListAdapter patientListAdapter;
   Query query;
-  CardView overview_cardview;
   SearchView patient_searchView;
   ImageView patientListMenuButton;
 
@@ -100,11 +97,7 @@ public class PatientListActivity extends BaseActivity {
     final ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeToDeleteCallback);
     itemTouchHelper.attachToRecyclerView(patient_list_recyclerView);
 
-    overview_cardview = findViewById(R.id.patient_list_patient_overview);
     patient_searchView = findViewById(R.id.patient_list_searchView);
-    // this clicker is for test:
-    overview_cardview.setOnClickListener(
-        view -> startActivity(new Intent(PatientListActivity.this, CarePlanActivity.class)));
     final NavigationView navigationView = findViewById(R.id.nav_view);
     patientListMenuButton = findViewById(R.id.patient_list_menu_button);
     final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
