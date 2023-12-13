@@ -1,61 +1,49 @@
-package deakin.gopher.guardian.adapter;
+package deakin.gopher.guardian.adapter
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
-import deakin.gopher.guardian.R;
-import deakin.gopher.guardian.model.Patient;
-import java.util.List;
+import android.annotation.SuppressLint
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
+import deakin.gopher.guardian.R
+import deakin.gopher.guardian.adapter.SimpleArchivedPatientAdapter.PatientViewHolder
+import deakin.gopher.guardian.model.Patient
 
-public class SimpleArchivedPatientAdapter
-    extends RecyclerView.Adapter<SimpleArchivedPatientAdapter.PatientViewHolder> {
-
-  private List<Patient> patients;
-
-  public SimpleArchivedPatientAdapter(List<Patient> patients) {
-    this.patients = patients;
-  }
-
-  @NonNull
-  @Override
-  public PatientViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    View view =
-        LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.activity_patient_list_item, parent, false);
-    return new PatientViewHolder(view);
-  }
-
-  @Override
-  public void onBindViewHolder(@NonNull PatientViewHolder holder, int position) {
-    holder.bind(patients.get(position));
-  }
-
-  @Override
-  public int getItemCount() {
-    return patients.size();
-  }
-
-  static class PatientViewHolder extends RecyclerView.ViewHolder {
-    private TextView patient_name;
-    final CardView patient_item;
-    final ImageView statusIndicator;
-    final ImageView actionButton;
-
-    public PatientViewHolder(View itemView) {
-      super(itemView);
-      patient_name = itemView.findViewById(R.id.patient_list_name);
-      patient_item = itemView.findViewById(R.id.patient_list_patient_item);
-      statusIndicator = itemView.findViewById(R.id.patient_status_indicator);
-      actionButton = itemView.findViewById(R.id.patient_list_arrow);
+class SimpleArchivedPatientAdapter(private val patients: List<Patient>) :
+    RecyclerView.Adapter<PatientViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PatientViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.activity_patient_list_item, parent, false)
+        return PatientViewHolder(view)
     }
 
-    public void bind(Patient patient) {
-      patient_name.setText(patient.getFirstName() + " " + patient.getLastName());
+    override fun onBindViewHolder(holder: PatientViewHolder, position: Int) {
+        holder.bind(patients[position])
     }
-  }
+
+    override fun getItemCount(): Int {
+        return patients.size
+    }
+
+    class PatientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val patientName: TextView
+        private val patientItem: CardView
+        private val statusIndicator: ImageView
+        private val actionButton: ImageView
+
+        init {
+            patientName = itemView.findViewById(R.id.patient_list_name)
+            patientItem = itemView.findViewById(R.id.patient_list_patient_item)
+            statusIndicator = itemView.findViewById(R.id.patient_status_indicator)
+            actionButton = itemView.findViewById(R.id.patient_list_arrow)
+        }
+
+        @SuppressLint("SetTextI18n")
+        fun bind(patient: Patient) {
+            patientName.text = "${patient.getFirstName()} ${patient.getLastName()}"
+        }
+    }
 }
