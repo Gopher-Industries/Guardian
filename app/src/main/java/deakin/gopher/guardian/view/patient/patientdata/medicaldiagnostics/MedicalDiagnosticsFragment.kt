@@ -1,6 +1,5 @@
 package deakin.gopher.guardian.view.patient.patientdata.medicaldiagnostics
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.adapter.MedicalDiagnosticsViewPagerAdapter
-import deakin.gopher.guardian.view.patient.patientdata.heartrate.HeartRateActivity
 
 class MedicalDiagnosticsFragment : Fragment {
     @JvmField
@@ -20,7 +18,6 @@ class MedicalDiagnosticsFragment : Fragment {
 
     @JvmField
     var pastFragment: PastMedicalDiagnosticsFragment? = null
-    private var editButton: Button? = null
     private var isEditable = false
     private lateinit var patientId: String
 
@@ -37,7 +34,6 @@ class MedicalDiagnosticsFragment : Fragment {
         val view = inflater.inflate(R.layout.fragment_medical_diagnostics, container, false)
 
         val editButton: Button = view.findViewById(R.id.header_edit_button)
-        val heartRateButton: Button = view.findViewById(R.id.heart_rate_button)
         val tabLayout = view.findViewById<TabLayout>(R.id.medicalDiagnosticsTabLayout)
         val viewPager2 = view.findViewById<ViewPager2>(R.id.medicalDiagnosticsViewPager)
         val viewPagerAdapter = MedicalDiagnosticsViewPagerAdapter(patientId, this)
@@ -54,12 +50,6 @@ class MedicalDiagnosticsFragment : Fragment {
             }
         }
             .attach()
-
-        heartRateButton.setOnClickListener {
-            Intent(this.context, HeartRateActivity::class.java).also {
-                startActivity(it)
-            }
-        }
 
         editButton.setOnClickListener {
             if (isEditable) {
