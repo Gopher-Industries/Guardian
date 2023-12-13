@@ -39,7 +39,7 @@
                 android:layout_marginTop="9dp"
                 android:fontFamily="sans-serif-black"
                 android:text="@string/patient_name"
-                android:textColor="@color/black"
+                android:textColor = "?android:textColorPrimary"
                 android:textSize="15sp" />
 
             <ImageView
