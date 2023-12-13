@@ -14,13 +14,20 @@ import deakin.gopher.guardian.model.Patient
 
 class SimpleArchivedPatientAdapter(private val patients: List<Patient>) :
     RecyclerView.Adapter<PatientViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PatientViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.activity_patient_list_item, parent, false)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): PatientViewHolder {
+        val view =
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.activity_patient_list_item, parent, false)
         return PatientViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: PatientViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: PatientViewHolder,
+        position: Int,
+    ) {
         holder.bind(patients[position])
     }
 
