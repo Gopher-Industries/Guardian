@@ -2,7 +2,6 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/patientStatusConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -30,7 +29,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Week 1: Patient's Response"
+                android:text="@string/week_1_patient_s_response"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/weeklyActivitySummaryIV"
@@ -42,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
+                android:contentDescription="TODO"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/calendar1" />
@@ -55,7 +55,7 @@
                 android:layout_marginBottom="15dp"
                 android:autoLink="none"
                 android:fontFamily="@font/poppins"
-                android:text="Standing at unusual spot (near window) for longer than 2.5 hour(s), 4 times this week. Patient responded “Just staring outside.”"
+                android:text="@string/standing_at_unusual_spot_near_window_for_longer_than_2_5_hour_s_4_times_this_week_patient_responded_just_staring_outside"
                 android:textColor="@color/black"
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="parent"

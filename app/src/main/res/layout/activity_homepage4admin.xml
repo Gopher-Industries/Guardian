@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.general.Homepage4admin">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="deakin.gopher.guardian.view.general.Homepage4admin">
 
-        <TextView
+    <TextView
             android:id="@+id/newPaitentText"
             android:layout_width="87dp"
             android:layout_height="24dp"
@@ -14,13 +14,13 @@
             android:layout_marginTop="128dp"
             android:elevation="4dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="New Patient"
+            android:text="@string/new_patient"
             android:textColor="@color/white"
-            android:textSize="13dp"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-        <TextView
+    <TextView
             android:id="@+id/sighOutTxt"
             android:layout_width="102dp"
             android:layout_height="26dp"
@@ -28,13 +28,13 @@
             android:layout_marginTop="428dp"
             android:elevation="4dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Sign Out"
+            android:text="@string/sign_out"
             android:textColor="@color/white"
-            android:textSize="13dp"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-        <TextView
+    <TextView
             android:id="@+id/dailyReportTxt"
             android:layout_width="102dp"
             android:layout_height="26dp"
@@ -42,13 +42,13 @@
             android:layout_marginTop="128dp"
             android:elevation="4dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Daily Report"
+            android:text="@string/daily_report"
             android:textColor="@color/white"
-            android:textSize="13dp"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-        <View
+    <View
             android:id="@+id/settingsIcon"
             android:layout_width="53dp"
             android:layout_height="43dp"
@@ -59,7 +59,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-        <Button
+    <Button
             android:id="@+id/patientListButton"
             android:layout_width="120dp"
             android:layout_height="120dp"
@@ -69,7 +69,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-        <TextView
+    <TextView
             android:id="@+id/patientListTxt"
             android:layout_width="102dp"
             android:layout_height="26dp"
@@ -77,13 +77,13 @@
             android:layout_marginTop="272dp"
             android:elevation="4dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Patient List"
+            android:text="@string/patient_list"
             android:textColor="@color/white"
-            android:textSize="13dp"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-        <View
+    <View
             android:id="@+id/patientListIcon"
             android:layout_width="42dp"
             android:layout_height="44dp"
@@ -94,7 +94,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-        <TextView
+    <TextView
             android:id="@+id/settingsTxt"
             android:layout_width="102dp"
             android:layout_height="26dp"
@@ -102,13 +102,13 @@
             android:layout_marginTop="276dp"
             android:elevation="4dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Settings"
+            android:text="@string/settings"
             android:textColor="@color/white"
-            android:textSize="13dp"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-        <Button
+    <Button
             android:id="@+id/sighOutButton"
             android:layout_width="120dp"
             android:layout_height="120dp"
@@ -118,7 +118,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-        <View
+    <View
             android:id="@+id/newPatientIcon"
             android:layout_width="55dp"
             android:layout_height="44dp"
@@ -129,7 +129,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-        <Button
+    <Button
             android:id="@+id/newPaitentButton"
             android:layout_width="120dp"
             android:layout_height="120dp"
@@ -139,7 +139,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-        <View
+    <View
             android:id="@+id/dailyReportIcon"
             android:layout_width="44dp"
             android:layout_height="44dp"
@@ -150,7 +150,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-        <Button
+    <Button
             android:id="@+id/settingsButton"
             android:layout_width="120dp"
             android:layout_height="120dp"
@@ -160,7 +160,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-        <View
+    <View
             android:id="@+id/sighOutIcon"
             android:layout_width="53dp"
             android:layout_height="43dp"
@@ -171,7 +171,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-        <Button
+    <Button
             android:id="@+id/dailyReportButton4caretaker"
             android:layout_width="120dp"
             android:layout_height="120dp"
@@ -182,7 +182,7 @@
             app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
 
-        <androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView
             android:id="@+id/medicalDiaganosticsHeaderCardView"
             android:layout_width="0dp"
             android:layout_height="220dp"
@@ -194,17 +194,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
+            <TextView
                     android:id="@+id/medicalDiagnosticsTitleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Welcome ***usert***"
+                    android:text="@string/welcome_admin"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -212,21 +212,21 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/medicalDiagnosticsEditImageView" />
 
-                <ImageView
+            <ImageView
                     android:id="@+id/medicalDiagnosticsEditImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="54dp"
+                    android:contentDescription="TODO"
                     app:layout_constraintBottom_toTopOf="@+id/medicalDiagnosticsTitleTextView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/profile_avatar_women" />
+                    app:srcCompat="@drawable/avatar_icon" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

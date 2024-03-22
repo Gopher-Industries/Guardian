@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <FrameLayout  android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <!-- Background ImageView -->
         <ImageView
@@ -13,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:contentDescription="TODO"
             android:src="@drawable/background_logo" />
 
         <LinearLayout
@@ -22,21 +25,25 @@
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="-16dp">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <LinearLayout
+                    android:id="@+id/stepperView"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:orientation="horizontal"
-                    android:id="@+id/stepperView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="MissingConstraints">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -46,42 +53,45 @@
                                 android:id="@+id/step1"
                                 android:layout_width="26dp"
                                 android:layout_height="26dp"
-                                android:fontFamily="sans-serif-black"
-                                android:text="1"
-                                android:textSize="10dp"
-                                android:gravity="center"
-                                android:background="@drawable/roundshapebtn"
                                 android:layout_marginLeft="25sp"
+                                android:layout_marginTop="0sp"
                                 android:layout_marginRight="2sp"
-                                android:layout_marginTop="0sp" />
+                                android:background="@drawable/roundshapebtn"
+                                android:fontFamily="sans-serif-black"
+                                android:gravity="center"
+                                android:text="@string/_1"
+                                android:textSize="10sp" />
 
                             <View
                                 android:layout_width="20dp"
                                 android:layout_height="2dp"
-                                android:background="#787878"
+                                android:layout_marginLeft="5dp"
                                 android:layout_marginTop="13dp"
                                 android:layout_marginRight="5dp"
-                                android:layout_marginLeft="5dp"/>
+                                android:background="#787878" />
                         </LinearLayout>
+
                         <TextView
                             android:id="@+id/steplbl1"
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:textColor="@color/black"
-                            android:fontFamily="sans-serif-black"
-                            android:textAlignment="center"
                             android:layout_marginLeft="5sp"
-                            android:layout_marginRight="2sp"
                             android:layout_marginTop="8sp"
-                            android:text="New patient details"
-                            app:layout_constraintTop_toBottomOf="@id/step1"
-                            android:textSize="8dp"/>
+                            android:layout_marginRight="2sp"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/new_patient_details"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="8sp"
+                            app:layout_constraintTop_toBottomOf="@id/step1" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -91,44 +101,46 @@
                                 android:id="@+id/step2"
                                 android:layout_width="26dp"
                                 android:layout_height="26dp"
-                                android:fontFamily="sans-serif-black"
-                                android:text="2"
-                                android:textSize="10dp"
-                                android:gravity="center"
-                                android:background="@drawable/roundshapebtn"
                                 android:layout_marginLeft="5sp"
+                                android:layout_marginTop="0sp"
                                 android:layout_marginRight="2sp"
-                                android:layout_marginTop="0sp" />
+                                android:background="@drawable/roundshapebtn"
+                                android:fontFamily="sans-serif-black"
+                                android:gravity="center"
+                                android:text="@string/_2"
+                                android:textSize="10sp" />
 
                             <View
                                 android:layout_width="15dp"
                                 android:layout_height="2dp"
-                                android:background="#787878"
+                                android:layout_marginLeft="5dp"
                                 android:layout_marginTop="13dp"
                                 android:layout_marginRight="5dp"
-                                android:layout_marginLeft="5dp"/>
+                                android:background="#787878" />
                         </LinearLayout>
+
                         <TextView
                             android:id="@+id/steplbl2"
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:textColor="@color/black"
-                            android:fontFamily="sans-serif-black"
-                            android:textAlignment="center"
                             android:layout_marginLeft="0sp"
-                            android:layout_marginRight="2sp"
                             android:layout_marginTop="8sp"
-                            android:text="Next to Kin"
-                            app:layout_constraintTop_toBottomOf="@id/step1"
-                            android:textSize="8dp"/>
-
+                            android:layout_marginRight="2sp"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/next_to_kin"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="8sp"
+                            app:layout_constraintTop_toBottomOf="@id/step1" />
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -138,44 +150,46 @@
                                 android:id="@+id/step3"
                                 android:layout_width="26dp"
                                 android:layout_height="26dp"
-                                android:fontFamily="sans-serif-black"
-                                android:text="3"
-                                android:textSize="10dp"
-                                android:gravity="center"
-                                android:background="@drawable/roundshapebtn"
                                 android:layout_marginLeft="5sp"
+                                android:layout_marginTop="0sp"
                                 android:layout_marginRight="2sp"
-                                android:layout_marginTop="0sp" />
+                                android:background="@drawable/roundshapebtn"
+                                android:fontFamily="sans-serif-black"
+                                android:gravity="center"
+                                android:text="@string/_3"
+                                android:textSize="10sp" />
 
                             <View
                                 android:layout_width="15dp"
                                 android:layout_height="2dp"
-                                android:background="#787878"
+                                android:layout_marginLeft="5dp"
                                 android:layout_marginTop="13dp"
                                 android:layout_marginRight="5dp"
-                                android:layout_marginLeft="5dp"/>
+                                android:background="#787878" />
                         </LinearLayout>
+
                         <TextView
                             android:id="@+id/steplbl3"
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:textColor="@color/black"
-                            android:fontFamily="sans-serif-black"
-                            android:textAlignment="center"
                             android:layout_marginLeft="0sp"
-                            android:layout_marginRight="2sp"
                             android:layout_marginTop="8sp"
-                            android:text="Next to Kin+"
-                            app:layout_constraintTop_toBottomOf="@id/step1"
-                            android:textSize="8dp"/>
-
+                            android:layout_marginRight="2sp"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/next_to_kin_plus"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="8sp"
+                            app:layout_constraintTop_toBottomOf="@id/step1" />
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -185,44 +199,46 @@
                                 android:id="@+id/step4"
                                 android:layout_width="26dp"
                                 android:layout_height="26dp"
-                                android:fontFamily="sans-serif-black"
-                                android:text="4"
-                                android:textSize="10dp"
-                                android:gravity="center"
-                                android:background="@drawable/roundshapeseletebtn"
                                 android:layout_marginLeft="5sp"
+                                android:layout_marginTop="0sp"
                                 android:layout_marginRight="2sp"
-                                android:layout_marginTop="0sp" />
+                                android:background="@drawable/roundshapeseletebtn"
+                                android:fontFamily="sans-serif-black"
+                                android:gravity="center"
+                                android:text="@string/_4"
+                                android:textSize="10sp" />
 
                             <View
                                 android:layout_width="15dp"
                                 android:layout_height="2dp"
-                                android:background="#787878"
+                                android:layout_marginLeft="5dp"
                                 android:layout_marginTop="13dp"
                                 android:layout_marginRight="5dp"
-                                android:layout_marginLeft="5dp"/>
+                                android:background="#787878" />
                         </LinearLayout>
+
                         <TextView
                             android:id="@+id/steplbl4"
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:textColor="@color/black"
-                            android:fontFamily="sans-serif-black"
-                            android:textAlignment="center"
                             android:layout_marginLeft="10sp"
-                            android:layout_marginRight="2sp"
                             android:layout_marginTop="8sp"
-                            android:text="Gp"
-                            app:layout_constraintTop_toBottomOf="@id/step1"
-                            android:textSize="8dp"/>
-
+                            android:layout_marginRight="2sp"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/gp"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="8sp"
+                            app:layout_constraintTop_toBottomOf="@id/step1" />
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -232,36 +248,37 @@
                                 android:id="@+id/step5"
                                 android:layout_width="26dp"
                                 android:layout_height="26dp"
-                                android:fontFamily="sans-serif-black"
-                                android:text="5"
-                                android:textSize="10dp"
-                                android:gravity="center"
-                                android:background="@drawable/roundshapebtn"
                                 android:layout_marginLeft="5sp"
+                                android:layout_marginTop="0sp"
                                 android:layout_marginRight="2sp"
-                                android:layout_marginTop="0sp" />
+                                android:background="@drawable/roundshapebtn"
+                                android:fontFamily="sans-serif-black"
+                                android:gravity="center"
+                                android:text="@string/_5"
+                                android:textSize="10sp" />
 
 
                         </LinearLayout>
+
                         <TextView
                             android:id="@+id/steplbl5"
                             android:layout_width="wrap_content"
                             android:layout_height="20dp"
-                            android:textColor="@color/black"
-                            android:fontFamily="sans-serif-black"
-                            android:textAlignment="center"
                             android:layout_marginLeft="10sp"
-                            android:layout_marginRight="2sp"
                             android:layout_marginTop="8sp"
-                            android:text="Gp+"
-                            app:layout_constraintTop_toBottomOf="@id/step1"
-                            android:textSize="8dp"/>
-
+                            android:layout_marginRight="2sp"
+                            android:fontFamily="sans-serif-black"
+                            android:text="@string/gpplus"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="8sp"
+                            app:layout_constraintTop_toBottomOf="@id/step1" />
 
 
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <Button
                     android:id="@+id/gp_add_polygon_left"
                     android:layout_width="26dp"
@@ -291,6 +308,7 @@
                     app:layout_constraintVertical_bias="0.27" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <TextView
                 android:id="@+id/FirstName"
                 android:layout_width="133dp"
@@ -298,7 +316,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="First name*"
+                android:text="@string/first_name_asterisk"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -311,8 +329,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
-                android:hint="Enter a first name"
+                android:hint="@string/enter_a_first_name"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -331,7 +350,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Middle Name"
+                android:text="@string/middle_name"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -343,8 +362,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
-                android:hint="Enter a middle name"
+                android:hint="@string/enter_a_middle_name"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -363,7 +383,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Last Name*"
+                android:text="@string/last_name_askerisk"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -376,9 +396,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:hint="@string/enter_a_last_name"
                 android:inputType="textMultiLine"
-                android:hint="Enter a last name"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -395,7 +416,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Clinic Address*"
+                android:text="@string/clinic_address_asterisk"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -407,10 +428,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:hint="@string/enter_clinic_address"
                 android:inputType="textMultiLine"
-                android:textSize="14sp"
-                android:hint= "Enter clinic address" />
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -424,7 +446,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Phone Number*"
+                android:text="@string/phone_number_asterisk"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -436,10 +458,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:hint="@string/eg_1234_56789_0"
                 android:inputType="textMultiLine"
-                android:textSize="14sp"
-                android:hint="eg: 1234 56789 0 "/>
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -453,7 +476,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Email"
+                android:text="@string/email"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -465,10 +488,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:hint="@string/enter_an_email_adress"
                 android:inputType="textMultiLine"
-                android:textSize="14sp"
-                android:hint="Enter an email adress"/>
+                android:textSize="14sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -482,7 +506,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Fax"
+                android:text="@string/fax"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -494,10 +518,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
-                android:inputType="textMultiLine"
-                android:textSize="14sp"
-                android:hint="Enter a fax"/>
+                android:hint="@string/enter_a_fax"
+                android:inputType="phone"
+                android:textSize="14sp" />
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -510,7 +536,7 @@
                     android:layout_marginTop="10dp"
                     android:backgroundTint="#3297C3"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Prev"
+                    android:text="@string/prev"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -526,7 +552,7 @@
                     android:layout_marginTop="10dp"
                     android:backgroundTint="#3297C3"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Save"
+                    android:text="@string/save"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

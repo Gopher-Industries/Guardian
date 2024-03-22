@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/img1"
-            android:text="Patient Name: "
+            android:text="@string/patient_name"
             android:textColor="#000"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -40,7 +40,7 @@
             android:layout_below="@+id/nametext"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/img1"
-            android:text="Address: "
+            android:text="@string/address_colon"
             android:textColor="#000"
             android:textSize="20sp" />
 
@@ -51,7 +51,7 @@
             android:layout_below="@+id/addresstext"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/img1"
-            android:text="Date of Birth: "
+            android:text="@string/date_of_birth_colon"
             android:textColor="#000"
             android:textSize="20sp" />
 
@@ -62,7 +62,7 @@
             android:layout_below="@+id/dobtext"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/img1"
-            android:text="Phone: "
+            android:text="@string/phone_colon"
             android:textColor="#000"
             android:textSize="20sp" />
 
@@ -73,7 +73,7 @@
             android:layout_below="@+id/phonetext"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/img1"
-            android:text="Under Care: "
+            android:text="@string/under_care"
             android:textColor="#000"
             android:textSize="20sp" />
 
@@ -85,20 +85,22 @@
 
             <Button
                 android:id="@+id/btnEdit"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
                 android:backgroundTint="#0B98C5"
-                android:text="Edit"
+                android:text="@string/edit"
                 android:textAllCaps="false" />
 
             <Button
                 android:id="@+id/btnDelete"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:backgroundTint="#0B98C5"
-                android:text="Delete"
+                android:text="@string/delete"
                 android:textAllCaps="false" />
         </LinearLayout>
 

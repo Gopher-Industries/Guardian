@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.patient.patientdata.healthdetails.MedicalDiagnosticsActivity">
+    tools:context="deakin.gopher.guardian.view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/medicalDiaganosticsHeaderCardView"
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Health Details"
+                android:text="@string/health_details"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -41,6 +41,7 @@
                 android:id="@+id/medicalDiagnosticsHeaderImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="TODO"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
@@ -82,7 +83,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/poppins_bold"
                     android:gravity="center"
-                    android:text="Medical Diagnostics"
+                    android:text="@string/medical_diagnostics"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     tools:layout_editor_absoluteX="132dp"
@@ -94,6 +95,7 @@
                     android:layout_height="35dp"
                     android:layout_marginLeft="15dp"
                     android:baselineAlignBottom="false"
+                    android:contentDescription="TODO"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.789"
                     app:layout_constraintStart_toStartOf="parent"
@@ -111,6 +113,16 @@
                 tools:layout_editor_absoluteY="373dp">
 
             </com.google.android.material.tabs.TabLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="RECORD HEART RATE" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ScrollView
                 android:layout_width="match_parent"

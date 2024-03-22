@@ -2,7 +2,6 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -26,19 +25,21 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
-                android:text="Name"
+                android:text="@string/name"
                 android:textColor="@color/text_heading_color"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/pastMedicalDiagnosticsNameTextView"
-                android:text="Marilyn Bvaton"
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="@string/marilyn"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,14 +47,15 @@
 
 
         </LinearLayout>
+
         <Button
             android:id="@+id/past_name_pencil"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_gravity="center"
-            android:background="@drawable/pencil"
-            />
+            android:background="@drawable/pencil" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -76,19 +78,21 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
-                android:text="Blood Pressure"
+                android:text="@string/blood_pressure"
                 android:textColor="@color/text_heading_color"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/pastMedicalDiagnosticsBloodPressureTextView"
-                android:text="Normal"
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="@string/normal"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,10 +106,72 @@
             android:layout_gravity="center"
             android:background="@drawable/pencil" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/box_border" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/box_border" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/pastMedicalDiagnosticsHeartRateContainer"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/pastMedicalDiagnosticsHeartRateHeadingTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingTop="15dp"
+                android:text="@string/heart_rate"
+                android:textColor="@color/text_heading_color"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/pastMedicalDiagnosticsHeartRateTextView"
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="1dp"
+                android:autofillHints=""
+                android:background="@null"
+                android:inputType="text"
+                android:text="@string/normal"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pastMedicalDiagnosticsNameHeadingTextView" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/past_heart_rate_pencil"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:background="@drawable/pencil" />
+
+        <ImageView
+            android:id="@+id/pastMedicalDiagnosticsHeartRateArrowButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:scaleType="centerInside"
+            android:src="@drawable/right_arrow_2" />
+    </LinearLayout>
 
 
     <LinearLayout
@@ -125,7 +191,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
-                android:text="Patient Temperature"
+                android:text="@string/patient_temperature"
                 android:textColor="@color/text_heading_color"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -136,15 +202,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="@string/normal"
                 android:textSize="14sp"
-                android:text="Normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pastMedicalDiagnosticsNameHeadingTextView" />
 
 
         </LinearLayout>
+
         <Button
             android:id="@+id/past_temperature_pencil"
             android:layout_width="20dp"
@@ -152,6 +221,7 @@
             android:layout_gravity="center"
             android:background="@drawable/pencil" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -174,19 +244,21 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
-                android:text="Glucose Level"
+                android:text="@string/glucose_level"
                 android:textColor="@color/text_heading_color"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/pastMedicalDiagnosticsGlucoseLevelTextView"
-                android:text="High"
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="@string/high"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -226,19 +298,21 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
-                android:text="O2 Saturation"
+                android:text="@string/o2_saturation"
                 android:textColor="@color/text_heading_color"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/pastMedicalDiagnosticsO2SaturationTextView"
-                android:text="Normal"
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="@string/normal"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -246,6 +320,7 @@
 
 
         </LinearLayout>
+
         <Button
             android:id="@+id/past_blood_o2_saturation_pencil"
             android:layout_width="20dp"
@@ -254,6 +329,7 @@
             android:background="@drawable/pencil" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -276,19 +352,21 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
-                android:text="Pulse Rate"
+                android:text="@string/pulse_rate"
                 android:textColor="@color/text_heading_color"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/pastMedicalDiagnosticsPulseRateTextView"
-                android:text="High"
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="@string/high"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -305,6 +383,7 @@
             android:background="@drawable/pencil" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -327,19 +406,21 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
-                android:text="Respiration Rate"
+                android:text="@string/respiration_rate"
                 android:textColor="@color/text_heading_color"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/pastMedicalDiagnosticsRespirationRateTextView"
-                android:text="High"
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="@string/high"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -347,6 +428,7 @@
 
 
         </LinearLayout>
+
         <Button
             android:id="@+id/past_respiration_rate_pencil"
             android:layout_width="20dp"
@@ -355,6 +437,7 @@
             android:background="@drawable/pencil" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -377,19 +460,21 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:paddingTop="15dp"
-                android:text="Bloodfat Level"
+                android:text="@string/bloodfat_level"
                 android:textColor="@color/text_heading_color"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/pastMedicalDiagnosticsBloodfatLevelTextView"
-                android:text="High"
                 android:layout_width="365dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
+                android:autofillHints=""
                 android:background="@null"
+                android:inputType="text"
+                android:text="@string/high"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -397,6 +482,7 @@
 
 
         </LinearLayout>
+
         <Button
             android:id="@+id/past_bloodfat_level_pencil"
             android:layout_width="20dp"
@@ -405,6 +491,7 @@
             android:background="@drawable/pencil" />
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

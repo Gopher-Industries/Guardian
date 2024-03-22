@@ -5,8 +5,8 @@
     android:id="@+id/patientStatusConstraintLayout"
     android:layout_width="340dp"
     android:layout_height="wrap_content"
-    app:layout_constraintGuide_percent="0.1"
-    android:background="@drawable/white_rectangle">
+    android:background="@drawable/white_rectangle"
+    app:layout_constraintGuide_percent="0.1">
 
     <ImageView
         android:id="@+id/patientStatusImageView"
@@ -16,6 +16,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:layout_weight="1"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_weight="1"
-        android:text="Requires Medical Attention Test Test"
+        android:text="@string/requires_medical_attention_test_test"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/patientStatusImageView"
         app:layout_constraintTop_toTopOf="parent"

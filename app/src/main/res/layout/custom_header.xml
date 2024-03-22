@@ -10,6 +10,7 @@
         android:layout_width="164dp"
         android:layout_height="47dp"
         android:layout_marginTop="20dp"
+        android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
+        android:contentDescription="TODO"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu_button" />
@@ -31,9 +33,10 @@
         android:layout_height="42dp"
         android:layout_marginStart="350dp"
         android:layout_marginTop="40dp"
+        android:contentDescription="TODO"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profile_avatar_women" />
+        app:srcCompat="@drawable/avatar_icon" />
 
     <TextView
         android:id="@+id/headerTextView"
@@ -41,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Patient details"
+        android:text="@string/patient_details"
         android:textColor="@color/white"
         android:textFontWeight="700"
         android:textSize="20sp"
@@ -57,7 +60,8 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_marginTop="-40dp"
-        android:src="@drawable/profile_avatar_women"
+        android:contentDescription="TODO"
+        android:src="@drawable/avatar_icon"
         android:translationZ="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +77,6 @@
         app:cardCornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
