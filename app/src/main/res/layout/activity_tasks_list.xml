@@ -130,19 +130,16 @@
 
     </androidx.cardview.widget.CardView>
 
-    <ScrollView
-            android:id="@+id/task_list_scrollView"
-            android:layout_width="409dp"
-            android:layout_height="338dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_list_task_overview">
+
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/task_list_recycleView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-    </ScrollView>
+                android:layout_width="409dp"
+                android:layout_height="338dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/task_list_task_overview"/>
+
 
     <ImageView
             android:id="@+id/imageView61"
