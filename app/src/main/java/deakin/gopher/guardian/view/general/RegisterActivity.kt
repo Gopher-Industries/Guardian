@@ -23,7 +23,6 @@ class RegisterActivity : BaseActivity() {
         val passwordConfirmation: EditText = findViewById(R.id.passwordConfirm)
         val backToLoginButton: Button = findViewById(R.id.backToLoginButton)
         val mRegisterBtn: Button = findViewById(R.id.registerBtn)
-        val mLoginBtn: Button = findViewById(R.id.loginRegisterBtn)
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
 
         mRegisterBtn.setOnClickListener {
@@ -65,10 +64,6 @@ class RegisterActivity : BaseActivity() {
                         Toast.LENGTH_SHORT,
                     ).show()
                 }
-        }
-
-        mLoginBtn.setOnClickListener {
-            NavigationService(this).toLogin()
         }
 
         backToLoginButton.setOnClickListener {
