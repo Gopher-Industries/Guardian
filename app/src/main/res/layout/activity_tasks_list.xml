@@ -129,17 +129,13 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
-
-
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/task_list_recycleView"
                 android:layout_width="409dp"
-                android:layout_height="338dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/task_list_task_overview"/>
-
 
     <ImageView
             android:id="@+id/imageView61"
