@@ -91,17 +91,21 @@
             android:queryHint="Search patients or others"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/patient_list_title" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/patient_list_recycleView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+
+
+    <ScrollView
+            android:id="@+id/patient_list_scrollView"
+            android:layout_width="409dp"
+            android:layout_height="338dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_list_searchView"
-            app:layout_constraintBottom_toTopOf="@+id/imageView62" />
+            app:layout_constraintTop_toBottomOf="@+id/patient_list_searchView">
 
-
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/patient_list_recycleView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+    </ScrollView>
 
     <ImageView
             android:id="@+id/imageView61"
