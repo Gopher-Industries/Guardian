@@ -49,25 +49,25 @@ public class ArchivedPatientListActivity extends BaseActivity {
     DatabaseReference patientRef = FirebaseDatabase.getInstance().getReference().child("patients");
     Query archivedQuery = patientRef.orderByChild("is_Archived").equalTo(true);
     archivedQuery.addListenerForSingleValueEvent(
-            new ValueEventListener() {
-              @Override
-              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                  Log.d("FirebaseTest", "Archived patients found: " + dataSnapshot.getChildrenCount());
-                } else {
-                  Log.d("FirebaseTest", "No archived patients found.");
-                }
-              }
+        new ValueEventListener() {
+          @Override
+          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            if (dataSnapshot.exists()) {
+              Log.d("FirebaseTest", "Archived patients found: " + dataSnapshot.getChildrenCount());
+            } else {
+              Log.d("FirebaseTest", "No archived patients found.");
+            }
+          }
 
-              @Override
-              public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("FirebaseTest", "Error fetching data", databaseError.toException());
-              }
-            });
+          @Override
+          public void onCancelled(@NonNull DatabaseError databaseError) {
+            Log.e("FirebaseTest", "Error fetching data", databaseError.toException());
+          }
+        });
     final FirebaseRecyclerOptions<Patient> options =
-            new FirebaseRecyclerOptions.Builder<Patient>()
-                    .setQuery(archivedQuery, Patient.class)
-                    .build();
+        new FirebaseRecyclerOptions.Builder<Patient>()
+                .setQuery(archivedQuery, Patient.class)
+                .build();
 
     SimpleArchivedPatientAdapter adapter = new SimpleArchivedPatientAdapter(archivedPatients);
     recyclerView.setAdapter(adapter);
