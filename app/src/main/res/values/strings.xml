@@ -558,5 +558,7 @@
     <string name="log_out">LOG OUT</string>
     <string name="ward">Ward</string>
     <string name="caretaker_profile_edit">Caretaker Profile Edit</string>
+    <string name="navigation_drawer_open">Drawer Open</string>
+    <string name="navigation_drawer_close">Drawer Closed</string>
 </resources>
 

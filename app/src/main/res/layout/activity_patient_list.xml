@@ -18,19 +18,19 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
 
-    <ImageView
-        android:id="@+id/patient_list_menu_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="65dp"
-        android:contentDescription="TODO"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/menu_button" />
+        <ImageView
+            android:id="@+id/patient_list_menu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="51dp"
+            android:layout_marginTop="65dp"
+            android:contentDescription="TODO"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/menu_button" />
 
 
-    <ImageView
+        <ImageView
             android:id="@+id/patient_list_head_image"
             android:layout_width="54dp"
             android:layout_height="51dp"
@@ -41,7 +41,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/profile_icon_small" />
 
-    <ImageView
+        <ImageView
             android:id="@+id/patient_list_company_icon"
             android:layout_width="67dp"
             android:layout_height="60dp"
@@ -52,7 +52,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/gopher_logo" />
 
-    <TextView
+        <TextView
             android:id="@+id/patient_list_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,21 +93,18 @@
             app:layout_constraintTop_toBottomOf="@+id/patient_list_title" />
 
 
-    <ScrollView
-            android:id="@+id/patient_list_scrollView"
-            android:layout_width="409dp"
-            android:layout_height="338dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/patient_list_recycleView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_list_searchView">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/patient_list_searchView"
+            app:layout_constraintBottom_toTopOf="@+id/imageView62" />
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/patient_list_recycleView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-    </ScrollView>
 
-    <ImageView
+        <ImageView
             android:id="@+id/imageView61"
             android:layout_width="35dp"
             android:layout_height="35dp"

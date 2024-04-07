@@ -45,15 +45,15 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     navigationView.setItemIconTintList(null);
 
     settingsMenuButton.setOnClickListener(
-        v -> {
-          drawerLayout.openDrawer(GravityCompat.START);
-        });
+            v -> {
+              drawerLayout.openDrawer(GravityCompat.START);
+            });
 
     final ConstraintLayout settingsThemeButton = findViewById(R.id.settings_theme_button);
 
     notificationSwitch = findViewById(R.id.notification_switch);
     notificationSwitch.setOnCheckedChangeListener(
-        (buttonView, isChecked) -> handleNotificationSwitch(isChecked));
+            (buttonView, isChecked) -> handleNotificationSwitch(isChecked));
 
     themeSwitch = findViewById(R.id.theme_switch);
     themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> handleThemeSwitch(isChecked));
@@ -64,6 +64,12 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     if (R.id.settings_feedback_button == v.getId()) {
       showFeedbackDialog();
     }
+  }
+
+  private void initializeSwitchStates() {
+    final SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+    boolean isNightMode = sharedPreferences.getBoolean("night_mode", false);
+    themeSwitch.setChecked(isNightMode);
   }
 
   private void handleNotificationSwitch(final boolean isChecked) {
@@ -89,8 +95,8 @@ public class Setting extends BaseActivity implements View.OnClickListener {
   private void showNotification() {
     if (Build.VERSION_CODES.O <= Build.VERSION.SDK_INT) {
       final NotificationChannel channel =
-          new NotificationChannel(
-              "channel_id", "Channel Name", NotificationManager.IMPORTANCE_DEFAULT);
+              new NotificationChannel(
+                      "channel_id", "Channel Name", NotificationManager.IMPORTANCE_DEFAULT);
       final NotificationManager notificationManager = getSystemService(NotificationManager.class);
       notificationManager.createNotificationChannel(channel);
     }
@@ -106,15 +112,15 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     builder.setView(feedbackEditText);
 
     builder.setPositiveButton(
-        "Submit",
-        (dialog, which) -> {
-          final String feedback = feedbackEditText.getText().toString();
-          if (!feedback.isEmpty()) {
-            showToast("Feedback submitted: " + feedback);
-          } else {
-            showToast("Please enter your feedback");
-          }
-        });
+            "Submit",
+            (dialog, which) -> {
+              final String feedback = feedbackEditText.getText().toString();
+              if (!feedback.isEmpty()) {
+                showToast("Feedback submitted: " + feedback);
+              } else {
+                showToast("Please enter your feedback");
+              }
+            });
 
     builder.setNegativeButton("Cancel", null);
 
@@ -124,5 +130,11 @@ public class Setting extends BaseActivity implements View.OnClickListener {
 
   private void showToast(final CharSequence message) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    initializeSwitchStates();
   }
 }
