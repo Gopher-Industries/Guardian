@@ -1,6 +1,7 @@
 package deakin.gopher.guardian.view.general
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
@@ -57,7 +58,6 @@ class TasksListActivity : AppCompatActivity() {
                                 .endAt(s + "\uf8ff")
                                 .limitToFirst(10)
                         }
-
                     return true
                 }
             },
@@ -68,6 +68,8 @@ class TasksListActivity : AppCompatActivity() {
         return listOf(
             Task("1", "Task 1 Description", "Patient 1"),
             Task("2", "Task 2 Description", "Patient 2"),
+            Task("3", "Task 3 Description", "Patient 3"),
+            Task("4", "Task 4 Description", "Patient 4"),
         )
     }
 }
