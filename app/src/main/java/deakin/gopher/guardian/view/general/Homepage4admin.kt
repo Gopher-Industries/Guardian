@@ -38,8 +38,8 @@ class Homepage4admin : BaseActivity() {
         }
         // patient list button
         patientListButton.setOnClickListener {
-            val medicalDiagnosticsActivityIntent =
-                Intent(this@Homepage4admin, PatientListActivity::class.java)
+            val medicalDiagnosticsActivityIntent = Intent(this@Homepage4admin, PatientListActivity::class.java)
+            medicalDiagnosticsActivityIntent.putExtra("userType", "admin")
             startActivity(medicalDiagnosticsActivityIntent)
         }
 
