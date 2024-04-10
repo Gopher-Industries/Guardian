@@ -33,6 +33,9 @@ class EmailPasswordAuthService(
                 val currentUser = auth.currentUser!!
                 currentUser.sendEmailVerification()
                 userDataService.create(currentUser.uid, emailAddress.emailAddress)
+                // Update the lastPasswordChange timestamp
+                userDataService.updateLastPasswordChangeTimestamp(currentUser.uid,
+                    System.currentTimeMillis())
                 registerResult
             }
         } catch (e: Exception) {
