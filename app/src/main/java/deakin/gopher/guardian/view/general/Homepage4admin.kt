@@ -13,6 +13,7 @@ class Homepage4admin : BaseActivity() {
     private lateinit var patientListButton: Button
     private lateinit var settingsButton: Button
     private lateinit var signOutButton: Button
+    private lateinit var nurseRosterButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +23,7 @@ class Homepage4admin : BaseActivity() {
         patientListButton = findViewById(R.id.patientListButton)
         settingsButton = findViewById(R.id.settingsButton)
         signOutButton = findViewById(R.id.sighOutButton)
+        nurseRosterButton = findViewById(R.id.nurseRoseterButton)
 
         // new Patient Button
         newPatientButton.setOnClickListener {
@@ -54,6 +56,13 @@ class Homepage4admin : BaseActivity() {
         signOutButton.setOnClickListener {
             EmailPasswordAuthService.signOut(this)
             finish()
+        }
+
+        // nurse roster button
+        nurseRosterButton.setOnClickListener {
+            val nurseRosterActivityIntent =
+                Intent(this@Homepage4admin, NurseRosterActivity::class.java)
+            startActivity(nurseRosterActivityIntent)
         }
     }
 }
