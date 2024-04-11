@@ -10,4 +10,8 @@ sealed class LoginValidationError(val messageResoureId: Int) {
     data object EmptyPassword : LoginValidationError(R.string.validation_empty_password)
     data object PasswordTooShort :
         LoginValidationError(R.string.validation_password_weak)
+
+    object IncorrectPassword : LoginValidationError() {
+
+    }
 }
