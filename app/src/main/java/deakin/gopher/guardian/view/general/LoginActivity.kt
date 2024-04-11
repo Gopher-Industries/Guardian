@@ -189,7 +189,7 @@ class LoginActivity : BaseActivity() {
 
         val password = Password(rawPassword)
         if (password.isValid().not()) {
-            return LoginValidationError.PasswordTooShort
+            return LoginValidationError.IncorrectPassword
         }
 
         return null
