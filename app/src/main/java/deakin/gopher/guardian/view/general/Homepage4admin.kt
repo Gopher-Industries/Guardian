@@ -47,6 +47,7 @@ class Homepage4admin : BaseActivity() {
         settingsButton.setOnClickListener {
             val medicalDiagnosticsActivityIntent =
                 Intent(this@Homepage4admin, Setting::class.java)
+            medicalDiagnosticsActivityIntent.putExtra("userType", "admin")
             startActivity(medicalDiagnosticsActivityIntent)
         }
 
