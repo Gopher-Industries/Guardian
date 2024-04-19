@@ -139,6 +139,7 @@ class LoginActivity : BaseActivity() {
                 setView(resetMail)
             }
 
+
             passwordResetDialog.setPositiveButton(
                 getString(R.string.yes),
             ) { _: DialogInterface?, _: Int ->
