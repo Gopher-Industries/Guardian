@@ -76,11 +76,11 @@ public class PatientProfileActivity extends BaseActivity {
                                         final int id = menuItem.getItemId();
                                         if (R.id.nav_home == id) {
                                             startActivity(new Intent(PatientProfileActivity.this, Homepage4admin.class));
-                                        } else if (R.id.nav_admin == id) {
+                                        } /*else if (R.id.nav_admin == id) {
                                             startActivity(new Intent(PatientProfileActivity.this, Homepage4admin.class));
                                         } else if (R.id.nav_settings == id) {
                                             startActivity(new Intent(PatientProfileActivity.this, Setting.class));
-                                        } else if (R.id.nav_signout == id) {
+                                        }*/ else if (R.id.nav_signout == id) {
                                             mAuth.getInstance().signOut();
                                             startActivity(new Intent(PatientProfileActivity.this, LoginActivity.class));
                                             finish();
