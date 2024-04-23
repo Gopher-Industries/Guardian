@@ -343,6 +343,7 @@
     <string name="validation_invalid_email_address">Invalid Email Address</string>
     <string name="validation_empty_password">Password is Required.</string>
     <string name="validation_password_weak">Please use a stronger password</string>
+    <string name="validation_Incorrect_password">Incorrect password</string>
     <string name="text_reset_password">Reset Password</string>
     <string name="text_enter_your_email_to_received_reset_link">Enter Your Email To Received Reset Link.</string>
     <string name="tasks_label">Tasks</string>
