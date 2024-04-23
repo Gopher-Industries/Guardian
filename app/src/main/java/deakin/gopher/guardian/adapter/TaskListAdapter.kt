@@ -9,11 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Task
 
-class TaskListAdapter(private val testData: List<Task>) :
-    RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
-    init {
-        Log.d("TaskListAdapter", "Test Data Size: ${testData.size}")
-    }
+class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
+    private val tasks: MutableList<Task> = mutableListOf()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -29,8 +26,8 @@ class TaskListAdapter(private val testData: List<Task>) :
         holder: TaskViewHolder,
         position: Int,
     ) {
-        holder.bind(testData[position])
-        Log.d("TaskListAdapter", testData[position].toString())
+        holder.bind(tasks[position])
+        Log.d("TaskListAdapter", tasks[position].toString())
     }
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -44,6 +41,13 @@ class TaskListAdapter(private val testData: List<Task>) :
     }
 
     override fun getItemCount(): Int {
-        return testData.size
+        return tasks.size
+    }
+
+    fun updateData(newTasks: List<Task>) {
+        tasks.clear()
+        tasks.addAll(newTasks)
+        notifyDataSetChanged()
     }
 }
+
