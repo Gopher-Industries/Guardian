@@ -42,11 +42,7 @@ class PatientListAdapter(
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(
-        holder: MyViewHolder,
-        position: Int,
-        model: Patient,
-    ) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: Patient, ) {
         holder.patientName.text = "${model.firstName} ${model.middleName} ${model.lastName}"
         updateStatusIndicator(holder.statusIndicator, model.status)
         holder.bind(model, isArchivedList)

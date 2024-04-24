@@ -126,6 +126,9 @@ public class PatientListActivity extends BaseActivity {
                                 case R.id.nav_home:
                                     intent = new Intent(PatientListActivity.this, userType.equals("admin") ? Homepage4admin.class : Homepage4caretaker.class);
                                     break;
+                                case R.id.Add_Task:
+                                    intent = new Intent(PatientListActivity.this, userType.equals("admin") ? Homepage4admin.class : Homepage4caretaker.class);
+                                    break;
                                 case R.id.nav_signout:
                                     FirebaseAuth.getInstance().signOut();
                                     startActivity(new Intent(PatientListActivity.this, LoginActivity.class));

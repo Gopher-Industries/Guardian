@@ -77,11 +77,7 @@ class LoginActivity : BaseActivity() {
 
             if (loginValidationError != null) {
                 progressBar.hide()
-                Toast.makeText(
-                    applicationContext,
-                    loginValidationError.messageResoureId,
-                    Toast.LENGTH_LONG,
-                ).show()
+                Toast.makeText(applicationContext, loginValidationError.messageResoureId, Toast.LENGTH_LONG,).show()
                 return@setOnClickListener
             }
 
@@ -89,18 +85,13 @@ class LoginActivity : BaseActivity() {
                 EmailAddress(emailInput),
                 Password(passwordInput),
             ).also { authService ->
-                authService
-                    .signIn()
+                authService.signIn()
                     ?.addOnSuccessListener {
                         progressBar.show()
 
                         if (authService.isUserVerified().not()) {
                             progressBar.hide()
-                            Toast.makeText(
-                                applicationContext,
-                                LoginAuthError.EmailNotVerified.messageId,
-                                Toast.LENGTH_SHORT,
-                            ).show()
+                            Toast.makeText(applicationContext, LoginAuthError.EmailNotVerified.messageId, Toast.LENGTH_SHORT,).show()
                             return@addOnSuccessListener
                         }
 
@@ -138,7 +129,6 @@ class LoginActivity : BaseActivity() {
                 setMessage(getString(R.string.text_enter_your_email_to_received_reset_link))
                 setView(resetMail)
             }
-
 
             passwordResetDialog.setPositiveButton(
                 getString(R.string.yes),
@@ -190,7 +180,7 @@ class LoginActivity : BaseActivity() {
 
         val password = Password(rawPassword)
         if (password.isValid().not()) {
-            return LoginValidationError.IncorrectPassword
+            return LoginValidationError.PasswordTooShort
         }
 
         return null
