@@ -32,12 +32,12 @@ public class PatientAddFragment extends Fragment {
           western_affairs_no;
   private Patient patient;
   private DataListener dataListener;
-  private String dateOfBirth;
-  private String firstName;
-  private String middleName;
-  private String lastName;
-  private String medicareNo;
-  private String westernAffairsNo;
+  private String dateOfBirth = "";
+  private String firstName = "";
+  private String middleName = "";
+  private String lastName = "";
+  private String medicareNo = "";
+  private String westernAffairsNo = "";
 
   public PatientAddFragment() {
     // Required empty public constructor
