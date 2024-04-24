@@ -24,9 +24,7 @@
                 android:layout_width="35dp"
                 android:layout_height="33dp"
                 android:contentDescription="TODO"
-                app:srcCompat="@drawable/red_circle"
-                tools:layout_editor_absoluteX="41dp"
-                tools:layout_editor_absoluteY="232dp" />
+                app:srcCompat="@drawable/red_circle" />
 
             <TextView
                 android:id="@+id/task_description_text_view"
