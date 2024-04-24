@@ -6,6 +6,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.RegistrationStatusMessage
 import deakin.gopher.guardian.model.login.EmailAddress
@@ -49,11 +51,18 @@ class RegisterActivity : BaseActivity() {
             EmailPasswordAuthService(emailAddress, password)
                 .createAccount()
                 ?.addOnSuccessListener {
-                    Toast.makeText(
-                        this@RegisterActivity,
-                        RegistrationStatusMessage.Success.message,
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    val user = Firebase.auth.currentUser
+
+                    user!!.sendEmailVerification()
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Toast.makeText(
+                                    this@RegisterActivity,
+                                    RegistrationStatusMessage.Success.message,
+                                    Toast.LENGTH_SHORT,
+                                ).show()
+                            }
+                        }
 
                     NavigationService(this).toLogin()
                 }
