@@ -33,6 +33,7 @@ class TasksListActivity : AppCompatActivity() {
         var taskListMenuBtn : ImageView = findViewById(R.id.task_list_manu_button);
         var drawerLayout : DrawerLayout = findViewById(R.id.drawer_layout);
 
+        //test
         navigationView.setItemIconTintList(null);
         taskListMenuBtn.setOnClickListener({
             drawerLayout.openDrawer(GravityCompat.START);
