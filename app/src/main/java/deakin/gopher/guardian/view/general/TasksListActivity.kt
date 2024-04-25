@@ -9,19 +9,31 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
+import com.google.android.material.navigation.NavigationView;
+import android.widget.ImageView;
+import androidx.drawerlayout.widget.DrawerLayout
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.adapter.TaskListAdapter
 import deakin.gopher.guardian.model.Task
 import deakin.gopher.guardian.services.NavigationService
+import androidx.core.view.GravityCompat
+
 
 class TasksListActivity : AppCompatActivity() {
     private var taskListAdapter: TaskListAdapter? = null
     private var query: Query? = null
     private var overviewCardview: CardView? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tasks_list)
+        setContentView(R.layout.activity_tasks_list);
+        var navigationView : NavigationView  = findViewById(R.id.nav_view);
+        var taskListMenuBtn : ImageView = findViewById(R.id.task_list_manu_button);
+        var drawerLayout : DrawerLayout = findViewById(R.id.drawer_layout);
+
+        navigationView.setItemIconTintList(null);
+        taskListMenuBtn.setOnClickListener({
+            drawerLayout.openDrawer(GravityCompat.START);
+        });
 
         val taskListRecyclerView: RecyclerView = findViewById(R.id.task_list_recycleView)
         overviewCardview = findViewById(R.id.task_list_task_overview)
