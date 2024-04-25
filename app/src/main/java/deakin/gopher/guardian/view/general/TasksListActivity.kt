@@ -33,7 +33,7 @@ class TasksListActivity : AppCompatActivity() {
         var taskListMenuBtn : ImageView = findViewById(R.id.task_list_manu_button);
         var drawerLayout : DrawerLayout = findViewById(R.id.drawer_layout);
 
-        //test
+        //test 123
         navigationView.setItemIconTintList(null);
         taskListMenuBtn.setOnClickListener({
             drawerLayout.openDrawer(GravityCompat.START);
@@ -75,7 +75,7 @@ class TasksListActivity : AppCompatActivity() {
                 true
             }
         });
-
+        //Test comment
         val taskListRecyclerView: RecyclerView = findViewById(R.id.task_list_recycleView)
         overviewCardview = findViewById(R.id.task_list_task_overview)
         val taskSearchView: SearchView = findViewById(R.id.task_list_searchView)
