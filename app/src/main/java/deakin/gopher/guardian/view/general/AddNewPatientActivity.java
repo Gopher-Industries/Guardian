@@ -34,16 +34,16 @@ public class AddNewPatientActivity extends BaseActivity {
     btnBack = findViewById(R.id.btnBack);
 
     btnAdd.setOnClickListener(
-            v -> {
-              insertData();
-              clearAll();
-            });
+        v -> {
+          insertData();
+          clearAll();
+        });
 
     btnBack.setOnClickListener(
-            v -> {
-              // finish();
-              onBackPressed();
-            });
+        v -> {
+          // finish();
+          onBackPressed();
+        });
   }
 
   private void insertData() {
@@ -58,19 +58,19 @@ public class AddNewPatientActivity extends BaseActivity {
     map.put("medicareNo", medicareNo.getText().toString());
 
     FirebaseDatabase.getInstance()
-            .getReference()
-            .child("patient_profile")
-            .push()
-            .setValue(map)
-            .addOnSuccessListener(
-                    unused ->
-                            Toast.makeText(AddNewPatientActivity.this, "New patient added", Toast.LENGTH_SHORT)
-                                    .show())
-            .addOnFailureListener(
-                    e ->
-                            Toast.makeText(
-                                            AddNewPatientActivity.this, "Error adding patient", Toast.LENGTH_SHORT)
-                                    .show());
+        .getReference()
+        .child("patient_profile")
+        .push()
+        .setValue(map)
+        .addOnSuccessListener(
+                unused ->
+                        Toast.makeText(AddNewPatientActivity.this, "New patient added", Toast.LENGTH_SHORT)
+                                .show())
+        .addOnFailureListener(
+                e ->
+                        Toast.makeText(
+                                        AddNewPatientActivity.this, "Error adding patient", Toast.LENGTH_SHORT)
+                                .show());
   }
 
   private void clearAll() {

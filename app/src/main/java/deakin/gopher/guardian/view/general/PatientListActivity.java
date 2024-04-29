@@ -333,6 +333,4 @@ public class PatientListActivity extends BaseActivity {
             trashIcon.draw(c);
         }
     }
-
-
 }
