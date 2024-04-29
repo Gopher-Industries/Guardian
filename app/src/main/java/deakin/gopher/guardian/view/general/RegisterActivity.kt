@@ -52,6 +52,7 @@ class RegisterActivity : BaseActivity() {
                 .createAccount()
                 ?.addOnSuccessListener {
                     val user = Firebase.auth.currentUser
+                    val uid = user?.uid //this is a starting point and may be used later.
 
                     user!!.sendEmailVerification()
                         .addOnCompleteListener { task ->
