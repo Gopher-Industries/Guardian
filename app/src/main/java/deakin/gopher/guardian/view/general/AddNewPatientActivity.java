@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import deakin.gopher.guardian.R;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AddNewPatientActivity extends BaseActivity {
+  String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();  // Get the current user's UID
 
   EditText name, address, underCare, photo, phone, dob, medicareNo;
   Button btnAdd, btnBack;
@@ -31,20 +34,21 @@ public class AddNewPatientActivity extends BaseActivity {
     btnBack = findViewById(R.id.btnBack);
 
     btnAdd.setOnClickListener(
-        v -> {
-          insertData();
-          clearAll();
-        });
+            v -> {
+              insertData();
+              clearAll();
+            });
 
     btnBack.setOnClickListener(
-        v -> {
-          // finish();
-          onBackPressed();
-        });
+            v -> {
+              // finish();
+              onBackPressed();
+            });
   }
 
   private void insertData() {
     final Map<String, Object> map = new HashMap<>();
+    map.put("userId", userId);  // Include the userId in the map
     map.put("name", name.getText().toString());
     map.put("address", address.getText().toString());
     map.put("underCare", underCare.getText().toString());
@@ -54,19 +58,19 @@ public class AddNewPatientActivity extends BaseActivity {
     map.put("medicareNo", medicareNo.getText().toString());
 
     FirebaseDatabase.getInstance()
-        .getReference()
-        .child("patient_profile")
-        .push()
-        .setValue(map)
-        .addOnSuccessListener(
-            unused ->
-                Toast.makeText(AddNewPatientActivity.this, "New patient added", Toast.LENGTH_SHORT)
-                    .show())
-        .addOnFailureListener(
-            e ->
-                Toast.makeText(
-                        AddNewPatientActivity.this, "Error adding patient", Toast.LENGTH_SHORT)
-                    .show());
+            .getReference()
+            .child("patient_profile")
+            .push()
+            .setValue(map)
+            .addOnSuccessListener(
+                    unused ->
+                            Toast.makeText(AddNewPatientActivity.this, "New patient added", Toast.LENGTH_SHORT)
+                                    .show())
+            .addOnFailureListener(
+                    e ->
+                            Toast.makeText(
+                                            AddNewPatientActivity.this, "Error adding patient", Toast.LENGTH_SHORT)
+                                    .show());
   }
 
   private void clearAll() {
