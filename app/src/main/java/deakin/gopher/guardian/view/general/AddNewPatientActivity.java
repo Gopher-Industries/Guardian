@@ -63,14 +63,14 @@ public class AddNewPatientActivity extends BaseActivity {
         .push()
         .setValue(map)
         .addOnSuccessListener(
-                unused ->
-                        Toast.makeText(AddNewPatientActivity.this, "New patient added", Toast.LENGTH_SHORT)
-                                .show())
+            unused ->
+                    Toast.makeText(AddNewPatientActivity.this, "New patient added", Toast.LENGTH_SHORT)
+                            .show())
         .addOnFailureListener(
-                e ->
-                        Toast.makeText(
-                                        AddNewPatientActivity.this, "Error adding patient", Toast.LENGTH_SHORT)
-                                .show());
+            e ->
+                    Toast.makeText(
+                                    AddNewPatientActivity.this, "Error adding patient", Toast.LENGTH_SHORT)
+                            .show());
   }
 
   private void clearAll() {
