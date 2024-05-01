@@ -1,5 +1,6 @@
 package deakin.gopher.guardian.view.patient.patientdata.heartrate.ui.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,11 +24,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import deakin.gopher.guardian.view.patient.patientdata.heartrate.HeartRateRoutes
 import deakin.gopher.guardian.view.patient.patientdata.heartrate.ui.components.HeartRateInput
+import androidx.compose.ui.platform.LocalContext
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.database.ktx.database
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Suppress("ktlint:standard:function-naming")
+@ExperimentalMaterial3Api
 @Composable
 fun AddHeartRateScreen(navController: NavController) {
+    val context = LocalContext.current
     Scaffold(
         topBar = {
             TopAppBar(
@@ -41,31 +45,34 @@ fun AddHeartRateScreen(navController: NavController) {
                         )
                     }
                 },
-                colors =
-                    TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        titleContentColor = MaterialTheme.colorScheme.primary,
-                    ),
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary,
+                ),
             )
         },
     ) { innerPadding ->
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding),
         ) {
-            HeartRateInput()
+            HeartRateInput(onSaveHeartRate = { heartRate, date ->
+                // Here you would add your Firebase save logic
+                // For example:
+                val db = Firebase.database.reference
+                val key = db.child("heartRates").push().key ?: ""
+                val heartRateEntry = mapOf("rate" to heartRate, "date" to date)
+                db.child("heartRates").child(key).setValue(heartRateEntry)
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "Heart rate saved successfully", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(context, "Failed to save heart rate", Toast.LENGTH_SHORT).show()
+                    }
+            })
         }
     }
-}
-
-@Suppress("ktlint:standard:function-naming")
-@Preview(showBackground = true)
-@Composable
-fun AddHeartRateScreenPreview() {
-    val navController = rememberNavController()
-    AddHeartRateScreen(navController = navController)
 }
