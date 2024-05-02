@@ -29,8 +29,8 @@ public class DailyReportActivity extends AppCompatActivity {
           drawerLayout.openDrawer(GravityCompat.START);
         });
 
-    /*final String patientName =
-        Objects.requireNonNull(getIntent().getStringExtra("patientName")).split(" ")[0];*/
+    final String patientNameExtra = getIntent().getStringExtra("patientName");
+    final String patientName = patientNameExtra != null ? patientNameExtra.split(" ")[0] : "";
 
     final TextView usernameTextView = findViewById(R.id.username);
 
