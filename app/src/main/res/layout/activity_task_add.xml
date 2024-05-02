@@ -50,14 +50,48 @@
                         android:inputType="textMultiLine" />
 
                     <EditText
-                        android:id="@+id/taskPatientIdEditText"
+                        android:id="@+id/taskAssignedNurseEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginTop="16dp"
-                        android:hint="Patient ID
-    "
+                        android:hint="Assigned Nurse"
                         android:inputType="textMultiLine" />
+
+                    <RadioGroup
+                        android:id="@+id/taskPriorityRadioGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="48sp"
+                        android:layout_margin="16dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/taskPriorityRadioButtonLow"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Low"
+                            android:textColor="#FF000000"
+                            android:textSize="18sp" />
+
+                        <RadioButton
+                            android:id="@+id/taskPriorityRadioButtonMedium"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Medium"
+                            android:textColor="#FF000000"
+                            android:textSize="18sp" />
+
+                        <RadioButton
+                            android:id="@+id/taskPriorityRadioButtonHigh"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="High"
+                            android:textColor="#FF000000"
+                            android:textSize="18sp" />
+                    </RadioGroup>
 
                     <Button
                         android:id="@+id/newTaskSubmitButton"
@@ -68,14 +102,6 @@
                         android:text="@string/submit"
                         android:textColor="@color/white" />
                 </LinearLayout>
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/dataForTaskViewViewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone">
-
-                </androidx.viewpager2.widget.ViewPager2>
 
             </FrameLayout>
 

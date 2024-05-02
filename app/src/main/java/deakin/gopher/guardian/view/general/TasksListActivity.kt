@@ -1,5 +1,6 @@
 package deakin.gopher.guardian.view.general
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -25,6 +26,11 @@ class TasksListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tasks_list)
+
+        val addTaskButton: Button = findViewById(R.id.add_task_button)
+        addTaskButton.setOnClickListener {
+            startActivity(Intent(this, TaskAddActivity::class.java))
+        }
 
         val taskListRecyclerView: RecyclerView = findViewById(R.id.task_list_recycleView)
         val taskSearchView: SearchView = findViewById(R.id.task_list_searchView)

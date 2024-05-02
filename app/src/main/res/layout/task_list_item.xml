@@ -40,9 +40,10 @@
             <ImageView
                 android:layout_width="26dp"
                 android:layout_height="31dp"
-                android:layout_marginLeft="140dp"
                 android:layout_marginTop="5dp"
+                android:layout_weight="1"
                 android:contentDescription="TODO"
+                android:scaleType="fitEnd"
                 app:srcCompat="@drawable/right_vector" />
             <!--                tools:layout_editor_absoluteX="337dp"-->
             <!--                tools:layout_editor_absoluteY="234dp" />-->
