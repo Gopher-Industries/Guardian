@@ -28,7 +28,7 @@ class TaskDetailActivity : AppCompatActivity() {
                                     Task::class.java,
                                 )
                             if (task != null) {
-                                taskDescriptionTextView.setText(task.description)
+                                taskDescriptionTextView.setText(task.Description)
                             }
                         }
                     }

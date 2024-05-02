@@ -5,48 +5,86 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="375dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        app:cardCornerRadius="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="5dp"
+        app:cardCornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="15dp">
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="33dp"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/red_circle" />
-
-            <TextView
-                android:id="@+id/task_description_text_view"
-                android:layout_width="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="9dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/patients_overview"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:orientation="horizontal"
+                android:layout_gravity="center"
 
-            <ImageView
-                android:layout_width="26dp"
-                android:layout_height="31dp"
-                android:layout_marginLeft="140dp"
-                android:layout_marginTop="5dp"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/right_vector" />
-            <!--                tools:layout_editor_absoluteX="337dp"-->
-            <!--                tools:layout_editor_absoluteY="234dp" />-->
+                android:padding="5dp">
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+
+                    android:contentDescription="TODO"
+                    app:srcCompat="@drawable/red_circle" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="9dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Task :"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/TaskName"
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="5dp"
+                    android:contentDescription="TODO"
+                    />
+                <!--                tools:layout_editor_absoluteX="337dp"-->
+                <!--                tools:layout_editor_absoluteY="234dp" />-->
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="9dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Task Description :"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_Task_Description"
+                    android:layout_width="match_parent"
+                    android:layout_height="31dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="5dp"
+                    android:contentDescription="TODO"
+                    />
+                <!--                tools:layout_editor_absoluteX="337dp"-->
+                <!--                tools:layout_editor_absoluteY="234dp" />-->
+
+            </LinearLayout>
         </LinearLayout>
+
 
     </androidx.cardview.widget.CardView>
 

@@ -38,11 +38,11 @@
         <activity
             android:name=".view.general.Homepage4caretaker"
             android:exported="true">
-            <intent-filter>
+           <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".view.general.Homepage4nurse"
@@ -140,13 +140,11 @@
             android:name=".view.general.MainActivity"
             android:exported="true">
 
-            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            -->
         </activity> <!-- These are here only for UI testing -->
         <activity
             android:name=".view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity"

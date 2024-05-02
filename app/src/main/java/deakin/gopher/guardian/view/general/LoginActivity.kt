@@ -21,6 +21,8 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import deakin.gopher.guardian.DataBase.DataClasses.Login
+import deakin.gopher.guardian.DataBase.Database_
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.LoginAuthError
@@ -32,14 +34,18 @@ import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
 import deakin.gopher.guardian.view.hide
 import deakin.gopher.guardian.view.show
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginActivity : BaseActivity() {
     private var userRole: RoleName = RoleName.Caretaker
     private lateinit var gsoClient: GoogleSignInClient
-
+    lateinit var db: Database_
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        db=Database_.getDatabase(applicationContext)
         val mEmail: EditText = findViewById(R.id.Email)
         val mPassword: EditText = findViewById(R.id.password)
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
@@ -95,6 +101,26 @@ class LoginActivity : BaseActivity() {
                             return@addOnSuccessListener
                         }
 
+                      var  login = db.Dao().getCheckLogin(emailInput,passwordInput)
+
+                        if(login!=null && login.LoginID!=null &&!login.LoginID.equals(""))
+                        {
+
+
+
+                        }
+                        else{
+
+
+                                var log=Login()
+                                log.LoginID=emailInput
+                                log.Password=passwordInput
+                                db.Dao().insertLogin(log)
+
+
+
+                        }
+
                         NavigationService(this).toHomeScreenForRole(userRole)
                         progressBar.hide()
                     }
@@ -134,7 +160,6 @@ class LoginActivity : BaseActivity() {
                 getString(R.string.yes),
             ) { _: DialogInterface?, _: Int ->
                 val mail = resetMail.text.toString()
-
                 EmailPasswordAuthService.resetPassword(EmailAddress(mail))
                     ?.addOnSuccessListener {
                         Toast.makeText(

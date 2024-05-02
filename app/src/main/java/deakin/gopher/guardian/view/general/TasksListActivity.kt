@@ -20,6 +20,7 @@ class TasksListActivity : AppCompatActivity() {
     private var query: Query? = null
     private var overviewCardview: CardView? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tasks_list)
@@ -66,10 +67,10 @@ class TasksListActivity : AppCompatActivity() {
 
     private fun getTestData(): List<Task> {
         return listOf(
-            Task("1", "Task 1 Description", "Patient 1"),
-            Task("2", "Task 2 Description", "Patient 2"),
-            Task("3", "Task 3 Description", "Patient 3"),
-            Task("4", "Task 4 Description", "Patient 4"),
+            //Task("1", "Task 1 Description", "Patient 1"),
+            //Task("2", "Task 2 Description", "Patient 2"),
+            //Task("3", "Task 3 Description", "Patient 3"),
+           // Task("4", "Task 4 Description", "Patient 4"),
         )
     }
 }

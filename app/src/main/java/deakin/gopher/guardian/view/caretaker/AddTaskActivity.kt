@@ -2,47 +2,51 @@ package deakin.gopher.guardian.view.caretaker
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.FirebaseDatabase
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.adapter.Adapter_for_TaskAdd
 import deakin.gopher.guardian.view.general.Homepage4caretaker
 import deakin.gopher.guardian.view.general.LoginActivity
+import com.google.firebase.database.Query
+import deakin.gopher.guardian.model.Task
+import java.util.Objects
 
 class AddTaskActivity : AppCompatActivity() {
 
     var Task_list_searchView: SearchView? = null
     var taskListMenuButton: ImageView? = null
-   var ll_for_AddTask: LinearLayout?=null
+   var cd_for_AddTask: CardView?=null
+    var query: Query? = null
 
-    var Iv_for_AddTask:ImageView?=null
+    var add_task_button:Button?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_task)
 
         val addPatientIcon = findViewById<ImageView>(R.id.imageView62)
         taskListMenuButton = findViewById<ImageView>(R.id.Task_list_menu_button)
-        ll_for_AddTask=findViewById(R.id.ll_for_AddTask)
-        Iv_for_AddTask=findViewById(R.id.Iv_for_AddTask)
+        cd_for_AddTask=findViewById(R.id.cd_for_AddTask)
+        add_task_button=findViewById(R.id.add_task_button);
         var drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
-
-
-
-
         var recyclerview = findViewById<RecyclerView>(R.id.recycleView)
-        recyclerview.layoutManager = LinearLayoutManager(this)
-        var adapter = Adapter_for_AddedTask(GlobleClass.tasks)
-        recyclerview.adapter = adapter
-
         Task_list_searchView = findViewById(R.id.Task_list_searchView)
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         val menu = navigationView.menu
@@ -55,7 +59,7 @@ class AddTaskActivity : AppCompatActivity() {
         navigationView.itemIconTintList = null
 
 
-        Iv_for_AddTask?.setOnClickListener{
+        add_task_button?.setOnClickListener{
 
             intent = Intent(this@AddTaskActivity, TaskAddFormActivity::class.java)
             startActivity(intent)
@@ -75,7 +79,7 @@ class AddTaskActivity : AppCompatActivity() {
                             )
 
                             R.id.Add_Task -> {
-                                ll_for_AddTask?.visibility=View.VISIBLE
+                                cd_for_AddTask?.visibility=View.VISIBLE
                                 if (null != drawerLayout) {
                                     drawerLayout.closeDrawers()
                                 }
@@ -103,5 +107,41 @@ class AddTaskActivity : AppCompatActivity() {
 
 
 
+        val adapterforTask =
+            Adapter_for_TaskAdd(this@AddTaskActivity, all_options)
+        recyclerview!!.setLayoutManager(GridLayoutManager(this@AddTaskActivity, 1))
+        recyclerview!!.setAdapter(adapterforTask)
+        adapterforTask.startListening()
+
+
+
+
     }
+
+    val all_query: Query = FirebaseDatabase.getInstance().reference.child("Add_Task")
+
+    val all_options = FirebaseRecyclerOptions.Builder<Task>()
+        .setQuery(
+            all_query
+        ) { snapshot: DataSnapshot ->
+            val Task_Name =
+                if (null == snapshot.child("Task_Name").value) "" else snapshot.child("Task_Name").value
+                    .toString()
+
+            val Description = if (null == snapshot.child("Description")
+                    .value
+            ) " " else snapshot.child("Description").value.toString()
+
+
+
+            val task = Task(Task_Name,Description
+
+            )
+
+
+            task
+        }
+        .build()
+
+
 }

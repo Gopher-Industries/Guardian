@@ -31,7 +31,7 @@ class TaskAddActivity : AppCompatActivity(), DataListener {
         patientIdEditText = findViewById(R.id.taskPatientIdEditText)
         val submitButton: Button = findViewById(R.id.newTaskSubmitButton)
         submitButton.setOnClickListener {
-            showSaveDialog()
+          //  showSaveDialog()
         }
 
         val customHeader: CustomHeader = findViewById(R.id.taskCustomHeader)
@@ -75,51 +75,11 @@ class TaskAddActivity : AppCompatActivity(), DataListener {
     fun onDataFinihsed(isFinished: Boolean?) { }
 
     fun onTaskDataFinished(isFinished: Boolean?) {
-        showSaveDialog()
+       // showSaveDialog()
     }
 
-    fun showSaveDialog() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.saving_changes))
-        builder.setPositiveButton(
-            getString(R.string.yes),
-        ) { _: DialogInterface?, _: Int -> saveInFirebase() }
-        builder.setNegativeButton(getString(R.string.no), null)
-        val dialog = builder.create()
-        dialog.setOnShowListener {
-            dialog
-                .getButton(AlertDialog.BUTTON_POSITIVE)
-                .setTextColor(resources.getColor(R.color.colorGreen))
-            dialog
-                .getButton(AlertDialog.BUTTON_NEGATIVE)
-                .setTextColor(resources.getColor(R.color.colorRed))
-        }
-        dialog.show()
-    }
 
-    private fun saveInFirebase() {
-        val databaseRef = FirebaseDatabase.getInstance().reference
-        val patientRef = databaseRef.child("patient_profile")
-        val taskRef = databaseRef.child("tasks")
 
-        val patientId = patientIdEditText.text.toString().trim()
-
-        val newTask =
-            Task(
-                "",
-                taskDescriptionEditText.text.toString().trim(),
-                patient?.patientId ?: "",
-            )
-
-        val taskId = taskRef.push().key ?: ""
-        newTask.taskId = taskId!!
-
-        patient?.let { taskRef.child(taskId!!).setValue(newTask) }
-
-        updatePatientTasks(patientId, taskId)
-
-        finish()
-    }
 
     private fun updatePatientTasks(
         patientId: String,

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.FirebaseDatabase
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.model.Task
 
 class TaskAddFormActivity : AppCompatActivity() {
 
@@ -37,15 +38,15 @@ class TaskAddFormActivity : AppCompatActivity() {
     }
     private fun insertData() {
 
-        var task=TaskAddedClass()
-        task.taskName=tv_Task_Name?.text.toString()
-        task.taskDescription=tv_Task_Description?.text.toString()
+        var task= Task()
+        task.Task_Name=tv_Task_Name?.text.toString()
+        task.Description=tv_Task_Description?.text.toString()
 
-        GlobleClass.tasks.add(task)
+
 
         val map: MutableMap<String, Any> = HashMap()
-        map["name"] = tv_Task_Name?.text.toString()
-        map["address"] = tv_Task_Description?.text.toString()
+        map["Task_Name"] = tv_Task_Name?.text.toString()
+        map["Description"] = tv_Task_Description?.text.toString()
 
         FirebaseDatabase.getInstance()
             .reference
@@ -63,5 +64,6 @@ class TaskAddFormActivity : AppCompatActivity() {
                     .show()
             }
     }
+
 
 }

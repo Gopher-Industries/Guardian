@@ -34,12 +34,11 @@ class TaskListAdapter(private val testData: List<Task>) :
     }
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val descriptionTextView: TextView =
-            itemView.findViewById(R.id.task_description_text_view)
+       // private val descriptionTextView: TextView = itemView.findViewById(R.id.task_description_text_view)
 
         fun bind(task: Task) {
-            descriptionTextView.text = task.description
-            Log.d("TaskListAdapter", task.description)
+         //   descriptionTextView.text = task.description
+            //Log.d("TaskListAdapter", task.description)
         }
     }
 
