@@ -37,33 +37,4 @@ class UserDataService : FireStoreDataService() {
                 Log.e(dataServiceName, "Failed to update lastPasswordChange for user $userId: $e")
             }
     }
-    fun getLastPasswordChangeTimestamp(userId: String, callback: (Long?) -> Unit) {
-
-        usersCollection.document(userId).get()
-
-            .addOnSuccessListener { documentSnapshot ->
-
-                if (documentSnapshot.exists()) {
-
-                    val lastPasswordChange = documentSnapshot.getLong("lastPasswordChange")
-
-                    callback(lastPasswordChange)
-
-                } else {
-
-                    callback(null)
-
-                }
-
-            }
-
-            .addOnFailureListener {
-
-                Log.e(dataServiceName, "Error fetching last password change", it)
-
-                callback(null)
-
-            }
-
-    }
 }
