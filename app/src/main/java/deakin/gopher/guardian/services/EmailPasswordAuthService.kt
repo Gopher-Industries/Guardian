@@ -1,11 +1,15 @@
 package deakin.gopher.guardian.services
 
+import android.content.Context
+import android.content.Intent
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.Password
 import android.util.Log  // Import statement for Log
+import deakin.gopher.guardian.model.login.SessionManager
+import deakin.gopher.guardian.view.general.LoginActivity
 
 class EmailPasswordAuthService(
     private val emailAddress: EmailAddress,
@@ -22,6 +26,10 @@ class EmailPasswordAuthService(
             e.printStackTrace()
             null
         }
+    }
+
+    fun isUserVerified(): Boolean {
+        return auth.currentUser?.isEmailVerified ?: false
     }
 
     fun createAccount(): Task<AuthResult>? {
@@ -69,6 +77,16 @@ class EmailPasswordAuthService(
             } catch (e: Exception) {
                 e.printStackTrace()
                 null
+            }
+        }
+
+        fun signOut(context: Context) {
+            try {
+                SessionManager(context).logoutUser()
+                FirebaseAuth.getInstance().signOut()
+                context.startActivity(Intent(context, LoginActivity::class.java))
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }

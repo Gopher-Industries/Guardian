@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="deakin.gopher.guardian.view.general.Setting">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="deakin.gopher.guardian.view.general.Setting">
 
-    <androidx.cardview.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/settings_header_card_view"
             android:layout_width="0dp"
             android:layout_height="220dp"
@@ -18,11 +26,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <ImageView
+                <ImageView
                     android:id="@+id/settings_menu_button"
                     android:layout_width="33dp"
                     android:layout_height="wrap_content"
@@ -33,7 +41,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/menu_button" />
 
-            <TextView
+                <TextView
                     android:id="@+id/medicalDiagnosticsTitleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -46,7 +54,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent" />
 
-            <View
+                <View
                     android:id="@+id/settingsIcon"
                     android:layout_width="86dp"
                     android:layout_height="86dp"
@@ -58,53 +66,51 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent" />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/settings_theme_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/settings_button_background"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settings_header_card_view">
+
+
+            <TextView
+                android:id="@+id/theme_button_title"
+                android:layout_width="wrap_content"
+                android:layout_height="20sp"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/night_mode"
+                android:textColor="#FFFFFF"
+                android:textFontWeight="400"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.533" />
+
+            <Switch
+                android:id="@+id/theme_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/settings_theme_button"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/settings_button_background"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_header_card_view">
 
 
-        <TextView
-            android:id="@+id/theme_button_title"
-            android:layout_width="wrap_content"
-            android:layout_height="20sp"
-            android:layout_marginStart="25dp"
-            android:fontFamily="@font/poppins"
-            android:text="@string/night_mode"
-            android:textColor="#FFFFFF"
-            android:textFontWeight="400"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.533" />
-
-        <Switch
-            android:id="@+id/theme_switch"
-            android:layout_width="46dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="204dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="15dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/theme_button_title"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/settings_notification_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -116,7 +122,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/settings_theme_button">
 
-        <TextView
+            <TextView
                 android:id="@+id/notification_button_title"
                 android:layout_width="wrap_content"
                 android:layout_height="20sp"
@@ -130,21 +136,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        <Switch
-            android:id="@+id/notification_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="196dp"
-            android:layout_marginEnd="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/notification_button_title"
-            app:layout_constraintTop_toTopOf="parent" />
+            <Switch
+                android:id="@+id/notification_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="196dp"
+                android:layout_marginEnd="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/notification_button_title"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/settings_app_update_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -156,7 +162,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/settings_notification_button">
 
-        <TextView
+            <TextView
                 android:id="@+id/app_update_button_title"
                 android:layout_width="wrap_content"
                 android:layout_height="20sp"
@@ -170,7 +176,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+            <ImageView
                 android:id="@+id/app_update_button_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -180,9 +186,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/settings_feedback_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -194,7 +200,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/settings_app_update_button">
 
-        <TextView
+            <TextView
                 android:id="@+id/feedback_button_title"
                 android:layout_width="wrap_content"
                 android:layout_height="20sp"
@@ -208,7 +214,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+            <ImageView
                 android:id="@+id/feedback_button_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -218,5 +224,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@id/nav_view"
+        layout="@layout/navigation_view" />
+</androidx.drawerlayout.widget.DrawerLayout>

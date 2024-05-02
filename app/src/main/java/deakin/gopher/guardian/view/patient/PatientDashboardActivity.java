@@ -7,9 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.util.Util;
+import deakin.gopher.guardian.view.general.BaseActivity;
 import deakin.gopher.guardian.view.general.DrawerActivity;
 import deakin.gopher.guardian.view.general.PatientListActivity;
 import deakin.gopher.guardian.view.patient.associateradar.ActivityProfilingActivity;
@@ -22,7 +22,7 @@ import deakin.gopher.guardian.view.patient.viewactivitydata.WeeklyActivityProfil
 import java.util.HashSet;
 import java.util.Set;
 
-public class PatientDashboardActivity extends AppCompatActivity {
+public class PatientDashboardActivity extends BaseActivity {
 
   ImageButton dailyReportButton;
   ImageButton healthDataButton;
@@ -67,8 +67,8 @@ public class PatientDashboardActivity extends AppCompatActivity {
             dailyReportSummaryIntent.putExtra(Util.DAILY_REPORT_STATUS_NOTES, dailyReportNotes);
             dailyReportSummaryIntent.putExtra(Util.DAILY_REPORT_DATE, dailyReportDate);
             dailyReportSummaryIntent.putExtra(
-                Util.DAILY_REPORT_STATUS_LIST, Util.setToArray(dailyReportStatusList));
-            Log.i("berapa", Util.setToArray(dailyReportStatusList).length + "");
+                Util.DAILY_REPORT_STATUS_LIST, Util.INSTANCE.setToArray(dailyReportStatusList));
+            Log.i("berapa", String.valueOf(Util.INSTANCE.setToArray(dailyReportStatusList).length));
             startActivity(dailyReportSummaryIntent);
           }
         });

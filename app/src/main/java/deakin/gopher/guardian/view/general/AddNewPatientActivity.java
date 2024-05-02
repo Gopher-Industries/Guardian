@@ -4,15 +4,14 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.FirebaseDatabase;
 import deakin.gopher.guardian.R;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddNewPatientActivity extends AppCompatActivity {
+public class AddNewPatientActivity extends BaseActivity {
 
-  EditText name, address, underCare, photo, phone, dob;
+  EditText name, address, underCare, photo, phone, dob, medicareNo;
   Button btnAdd, btnBack;
 
   @Override
@@ -26,6 +25,7 @@ public class AddNewPatientActivity extends AppCompatActivity {
     phone = findViewById(R.id.txtPhone);
     photo = findViewById(R.id.urlPhoto);
     dob = findViewById(R.id.txtDoB);
+    medicareNo = findViewById(R.id.txtMedicareNumber);
 
     btnAdd = findViewById(R.id.btnAdd);
     btnBack = findViewById(R.id.btnBack);
@@ -51,10 +51,11 @@ public class AddNewPatientActivity extends AppCompatActivity {
     map.put("phone", phone.getText().toString());
     map.put("photo", photo.getText().toString());
     map.put("dob", dob.getText().toString());
+    map.put("medicareNo", medicareNo.getText().toString());
 
     FirebaseDatabase.getInstance()
         .getReference()
-        .child("patients")
+        .child("patient_profile")
         .push()
         .setValue(map)
         .addOnSuccessListener(
@@ -75,5 +76,6 @@ public class AddNewPatientActivity extends AppCompatActivity {
     dob.setText("");
     photo.setText("");
     phone.setText("");
+    medicareNo.setText("");
   }
 }

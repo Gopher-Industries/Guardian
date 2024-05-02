@@ -6,7 +6,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.RegistrationStatusMessage
 import deakin.gopher.guardian.model.login.EmailAddress
@@ -15,7 +16,7 @@ import deakin.gopher.guardian.model.register.RegistrationError
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -24,7 +25,6 @@ class RegisterActivity : AppCompatActivity() {
         val passwordConfirmation: EditText = findViewById(R.id.passwordConfirm)
         val backToLoginButton: Button = findViewById(R.id.backToLoginButton)
         val mRegisterBtn: Button = findViewById(R.id.registerBtn)
-        val mLoginBtn: Button = findViewById(R.id.loginRegisterBtn)
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
 
         mRegisterBtn.setOnClickListener {
@@ -51,11 +51,18 @@ class RegisterActivity : AppCompatActivity() {
             EmailPasswordAuthService(emailAddress, password)
                 .createAccount()
                 ?.addOnSuccessListener {
-                    Toast.makeText(
-                        this@RegisterActivity,
-                        RegistrationStatusMessage.Success.message,
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    val user = Firebase.auth.currentUser
+
+                    user!!.sendEmailVerification()
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Toast.makeText(
+                                    this@RegisterActivity,
+                                    RegistrationStatusMessage.Success.message,
+                                    Toast.LENGTH_SHORT,
+                                ).show()
+                            }
+                        }
 
                     NavigationService(this).toLogin()
                 }
@@ -66,10 +73,6 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT,
                     ).show()
                 }
-        }
-
-        mLoginBtn.setOnClickListener {
-            NavigationService(this).toLogin()
         }
 
         backToLoginButton.setOnClickListener {

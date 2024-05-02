@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/patient_list_backgroud"
+            android:textAlignment="center">
+
+            <ImageView
+                android:id="@+id/patient_list_menu_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="51dp"
+                android:layout_marginTop="65dp"
+                android:contentDescription="TODO"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/menu_button" />
+
+
+            <ImageView
+                android:id="@+id/patient_list_head_image"
+                android:layout_width="54dp"
+                android:layout_height="51dp"
+                android:layout_marginStart="94dp"
+                android:layout_marginTop="56dp"
+                android:contentDescription="TODO"
+                app:layout_constraintStart_toEndOf="@+id/patient_list_company_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/profile_icon_small" />
+
+            <ImageView
+                android:id="@+id/patient_list_company_icon"
+                android:layout_width="67dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="172dp"
+                android:layout_marginTop="44dp"
+                android:contentDescription="TODO"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/gopher_logo" />
+
+            <TextView
+                android:id="@+id/patient_list_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="115dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Patient Archive"
+                android:textColor="@android:color/white"
+                android:textSize="25sp"
+                android:translationZ="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/patient_list_company_icon" />
+
+            <SearchView
+                android:id="@+id/patient_list_searchView"
+                android:layout_width="375dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/white_rectangle_patient_list"
+                android:iconifiedByDefault="false"
+                android:queryHint="Search patients or others"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/patient_list_title" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/archived_patient_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/patient_list_searchView"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <include
+            android:id="@+id/nav_view"
+            layout="@layout/navigation_view" />
+    </androidx.drawerlayout.widget.DrawerLayout>
+</LinearLayout>
