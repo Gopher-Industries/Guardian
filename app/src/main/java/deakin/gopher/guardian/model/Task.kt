@@ -8,7 +8,7 @@ data class Task(
     val assignedNurse: String = "",
     val priority: Priority = Priority.MEDIUM,
     val patientId: String? = "",
-    val isCompleted: Boolean = false,
+    val completed: Boolean = false,
 )
 
 enum class Priority {

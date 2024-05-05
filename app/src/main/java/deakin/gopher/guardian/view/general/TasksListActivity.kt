@@ -22,6 +22,7 @@ import deakin.gopher.guardian.services.NavigationService
 class TasksListActivity : AppCompatActivity() {
     private lateinit var taskListAdapter: TaskListAdapter
     private lateinit var query: Query
+    private lateinit var tasks: List<Task>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +50,11 @@ class TasksListActivity : AppCompatActivity() {
         // Attach a ValueEventListener to update the list when data changes in the Firebase Database
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val tasks = mutableListOf<Task>()
+                tasks = mutableListOf<Task>()
                 for (taskSnapshot in dataSnapshot.children) {
                     val task = taskSnapshot.getValue(Task::class.java)
                     task?.let {
-                        tasks.add(it)
+                        (tasks as MutableList<Task>).add(it)
                     }
                 }
                 taskListAdapter.updateData(tasks)
@@ -72,10 +73,10 @@ class TasksListActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
-//                    val filteredTasks = tasks.filter { task ->
-//                        task.description.contains(newText, ignoreCase = true)
-//                    }
-//                    taskListAdapter.updateData(filteredTasks)
+                    val filteredTasks = tasks.filter { task ->
+                        task.description.contains(newText, ignoreCase = true)
+                    }
+                    taskListAdapter.updateData(filteredTasks)
                 }
                 return true
             }

@@ -14,6 +14,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <Button
+            android:id="@+id/task_description_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:alpha="0"
+            android:backgroundTint="@color/_bg__new_homepage___ek2_color"
+            android:text="" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,10 +30,11 @@
             android:padding="15dp">
 
             <ImageView
+                android:id="@+id/task_completed_icon"
                 android:layout_width="35dp"
                 android:layout_height="33dp"
                 android:contentDescription="TODO"
-                app:srcCompat="@drawable/red_circle" />
+                tools:srcCompat="@drawable/orange_circle" />
 
             <TextView
                 android:id="@+id/task_description_text_view"

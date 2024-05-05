@@ -1,13 +1,17 @@
 package deakin.gopher.guardian.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Task
+import deakin.gopher.guardian.view.general.TaskDetailActivity
 
 class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
     private val tasks: MutableList<Task> = mutableListOf()
@@ -27,16 +31,31 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
         position: Int,
     ) {
         holder.bind(tasks[position])
-        Log.d("TaskListAdapter", tasks[position].toString())
     }
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val descriptionTextView: TextView =
             itemView.findViewById(R.id.task_description_text_view)
+        private val viewTaskDetailsButton: Button = itemView.findViewById(R.id.task_description_button)
+        private val taskCompletedIcon: ImageView = itemView.findViewById(R.id.task_completed_icon)
 
+        init {
+            viewTaskDetailsButton.setOnClickListener {
+                val context = itemView.context
+                val task = tasks[adapterPosition]
+                val intent = Intent(context, TaskDetailActivity::class.java)
+                intent.putExtra("taskId", task.taskId)
+                context.startActivity(intent)
+            }
+        }
         fun bind(task: Task) {
             descriptionTextView.text = task.description
-            Log.d("TaskListAdapter", task.description)
+            if (task.completed)
+            {
+                taskCompletedIcon.setImageResource(R.drawable.green_circle)
+            } else {
+                taskCompletedIcon.setImageResource(R.drawable.red_circle)
+            }
         }
     }
 
