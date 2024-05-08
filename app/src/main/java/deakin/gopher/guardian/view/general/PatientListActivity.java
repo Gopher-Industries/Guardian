@@ -32,6 +32,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import deakin.gopher.guardian.DataBase.DataBase;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientListAdapter;
 import deakin.gopher.guardian.model.Patient;
@@ -130,6 +132,7 @@ public class PatientListActivity extends BaseActivity {
                                     intent = new Intent(PatientListActivity.this, userType.equals("admin") ? Homepage4admin.class : Homepage4caretaker.class);
                                     break;
                                 case R.id.nav_signout:
+                                    SignOut();
                                     FirebaseAuth.getInstance().signOut();
                                     startActivity(new Intent(PatientListActivity.this, LoginActivity.class));
                                     finish();
@@ -335,6 +338,12 @@ public class PatientListActivity extends BaseActivity {
             trashIcon.draw(c);
         }
     }
-
+    void SignOut()
+    {
+        DataBase dataBase =new DataBase(PatientListActivity.this);
+        dataBase.open();
+        dataBase.LogOut();
+        dataBase.close();
+    }
 
 }

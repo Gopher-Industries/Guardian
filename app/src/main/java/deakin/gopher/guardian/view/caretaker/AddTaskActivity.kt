@@ -26,6 +26,7 @@ import deakin.gopher.guardian.adapter.Adapter_for_TaskAdd
 import deakin.gopher.guardian.view.general.Homepage4caretaker
 import deakin.gopher.guardian.view.general.LoginActivity
 import com.google.firebase.database.Query
+import deakin.gopher.guardian.DataBase.DataBase
 import deakin.gopher.guardian.model.Task
 import java.util.Objects
 
@@ -87,7 +88,11 @@ class AddTaskActivity : AppCompatActivity() {
 
 
                             R.id.nav_signout -> {
+
+                                SignOut()
+
                                 FirebaseAuth.getInstance().signOut()
+
                                 startActivity(
                                     Intent(
                                         this@AddTaskActivity, LoginActivity::class.java
@@ -117,7 +122,13 @@ class AddTaskActivity : AppCompatActivity() {
 
 
     }
-
+    fun SignOut()
+    {
+        var dataBase = DataBase(this@AddTaskActivity)
+        dataBase.open()
+        dataBase.LogOut()
+        dataBase.close()
+    }
     val all_query: Query = FirebaseDatabase.getInstance().reference.child("Add_Task")
 
     val all_options = FirebaseRecyclerOptions.Builder<Task>()

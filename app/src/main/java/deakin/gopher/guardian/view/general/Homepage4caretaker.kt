@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import deakin.gopher.guardian.DataBase.DataBase
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.view.caretaker.AddTaskActivity
@@ -45,8 +46,12 @@ class Homepage4caretaker : BaseActivity() {
 
         // sign out button
         signOutButton.setOnClickListener {
-            EmailPasswordAuthService.signOut(this)
+
+
+          //  EmailPasswordAuthService.signOut(this)
+            SignOut()
             finish()
+
         }
 
         profileButton.setOnClickListener {
@@ -61,5 +66,18 @@ class Homepage4caretaker : BaseActivity() {
                 startActivity(AddTaskActivityIntent)
         }
 
+    }
+    fun SignOut()
+    {
+        var dataBase = DataBase(this@Homepage4caretaker)
+        dataBase.open()
+        dataBase.LogOut()
+        dataBase.close()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val MainActivityIntent = Intent(this@Homepage4caretaker, MainActivity::class.java)
+        startActivity(MainActivityIntent)
     }
 }
