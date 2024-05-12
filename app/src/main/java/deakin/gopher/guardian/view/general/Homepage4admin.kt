@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.services.EmailPasswordAuthService
+import deakin.gopher.guardian.services.NavigationService
 import deakin.gopher.guardian.view.patient.dailyreport.DailyReportActivity
 
 class Homepage4admin : BaseActivity() {
@@ -13,6 +14,7 @@ class Homepage4admin : BaseActivity() {
     private lateinit var patientListButton: Button
     private lateinit var settingsButton: Button
     private lateinit var signOutButton: Button
+    private lateinit var taskListButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +24,7 @@ class Homepage4admin : BaseActivity() {
         patientListButton = findViewById(R.id.patientListButton)
         settingsButton = findViewById(R.id.settingsButton)
         signOutButton = findViewById(R.id.sighOutButton)
+        taskListButton = findViewById(R.id.tasksButton_admin)
 
         // new Patient Button
         newPatientButton.setOnClickListener {
@@ -55,6 +58,10 @@ class Homepage4admin : BaseActivity() {
         signOutButton.setOnClickListener {
             EmailPasswordAuthService.signOut(this)
             finish()
+        }
+        // launch tasks list
+        taskListButton.setOnClickListener {
+            NavigationService(this).onLaunchTasks()
         }
     }
 }

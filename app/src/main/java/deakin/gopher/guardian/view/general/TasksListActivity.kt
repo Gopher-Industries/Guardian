@@ -28,6 +28,11 @@ class TasksListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tasks_list)
 
+        val taskListMenuButton: Button = findViewById(R.id.task_list_menu_button)
+        taskListMenuButton.setOnClickListener() {
+            finish()
+        }
+
         val addTaskButton: Button = findViewById(R.id.add_task_button)
         addTaskButton.setOnClickListener {
             startActivity(Intent(this, TaskAddActivity::class.java))
@@ -62,7 +67,6 @@ class TasksListActivity : AppCompatActivity() {
 
             override fun onCancelled(databaseError: DatabaseError) {
                 Log.e(TAG, "Error loading tasks from Firebase Database", databaseError.toException())
-                // Handle error (e.g., show error message to the user)
             }
         })
 
