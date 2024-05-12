@@ -10,6 +10,10 @@ import deakin.gopher.guardian.model.login.Password
 import android.util.Log  // Import statement for Log
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.view.general.LoginActivity
+import com.google.firebase.auth.FirebaseUser
+import java.util.Date
+import java.util.concurrent.TimeUnit
+import com.google.android.gms.tasks.Tasks
 
 class EmailPasswordAuthService(
     private val emailAddress: EmailAddress,
@@ -19,12 +23,25 @@ class EmailPasswordAuthService(
     private val userDataService = UserDataService()
     private val logTag = "EmailPwdAuthSvc"  // Shortened log tag
 
-    fun signIn(): Task<AuthResult>? {
+    fun signIn(): Task<AuthResult> {
         return try {
-            auth.signInWithEmailAndPassword(emailAddress.emailAddress, password.password)
+            val signInTask = auth.signInWithEmailAndPassword(emailAddress.emailAddress, password.password)
+            signInTask.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Sign-in succeeded, check for password expiry
+                    task.result?.user?.let { user ->
+                        checkPasswordExpiry(user.uid, user)
+                    }
+                } else {
+                    // Handle sign-in failure (log the error or notify the user)
+                    Log.e("EmailPasswordAuthServ", "Sign-in failed: ${task.exception?.message}")
+                }
+            }
+            signInTask
         } catch (e: Exception) {
             e.printStackTrace()
-            null
+            // We need to return a failed Task
+            Tasks.forException<AuthResult>(e)
         }
     }
 
@@ -65,6 +82,30 @@ class EmailPasswordAuthService(
                 } else {
                     // Failed to update password
                     Log.e(logTag, "Failed to update password: ${task.exception}")
+                }
+            }
+        }
+    }
+
+    fun checkPasswordExpiry(userId: String, user: FirebaseUser) {
+        userDataService.getLastPasswordChangeTimestamp(userId) { lastPasswordChangeTimestamp ->
+            if (lastPasswordChangeTimestamp != null) {
+                val lastChangeDate = Date(lastPasswordChangeTimestamp)
+                val currentDate = Date()
+                val diff = currentDate.time - lastChangeDate.time
+                val daysPassed = TimeUnit.MILLISECONDS.toDays(diff)
+                if (daysPassed > 90) {
+                    // Call the existing resetPassword method
+                    if (user.email != null) {
+                        resetPassword(EmailAddress(user.email!!))
+                    }
+                } else {
+                    Log.v("Auth", "Password is valid. Proceeding with login.")
+                }
+            } else {
+                // Assume password needs resetting if no timestamp is found
+                if (user.email != null) {
+                    resetPassword(EmailAddress(user.email!!))
                 }
             }
         }
