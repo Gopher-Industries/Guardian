@@ -23,24 +23,26 @@ class EmailPasswordAuthService(
     private val userDataService = UserDataService()
     private val logTag = "EmailPwdAuthSvc"  // Shortened log tag
 
+
     fun signIn(): Task<AuthResult> {
         return try {
+            // Attempt to sign in with Firebase Auth
             val signInTask = auth.signInWithEmailAndPassword(emailAddress.emailAddress, password.password)
+
+            // We add a listener, but remember the original task is still returned
             signInTask.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Sign-in succeeded, check for password expiry
                     task.result?.user?.let { user ->
                         checkPasswordExpiry(user.uid, user)
                     }
                 } else {
-                    // Handle sign-in failure (log the error or notify the user)
                     Log.e("EmailPasswordAuthServ", "Sign-in failed: ${task.exception?.message}")
                 }
             }
-            signInTask
+            signInTask  // This returns the original Task<AuthResult>
         } catch (e: Exception) {
             e.printStackTrace()
-            // We need to return a failed Task
+            // When an exception is caught, return a Task indicating failure
             Tasks.forException<AuthResult>(e)
         }
     }
