@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import deakin.gopher.guardian.DataBase.DataBase
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.services.EmailPasswordAuthService
+import deakin.gopher.guardian.view.caretaker.AddTaskActivity
 import deakin.gopher.guardian.view.caretaker.CaretakerProfileActivity
 
 class Homepage4caretaker : BaseActivity() {
@@ -13,6 +15,8 @@ class Homepage4caretaker : BaseActivity() {
     private lateinit var settingsButton: Button
     private lateinit var signOutButton: Button
     private lateinit var profileButton: Button
+    private lateinit var caretaker_AddTask: Button
+
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +26,7 @@ class Homepage4caretaker : BaseActivity() {
         settingsButton = findViewById(R.id.settingsButton3)
         signOutButton = findViewById(R.id.sighOutButton)
         profileButton = findViewById(R.id.caretaker_profile)
+        caretaker_AddTask=findViewById(R.id.caretaker_AddTask)
 
         // patient list button
         patientListButton.setOnClickListener {
@@ -41,8 +46,12 @@ class Homepage4caretaker : BaseActivity() {
 
         // sign out button
         signOutButton.setOnClickListener {
-            EmailPasswordAuthService.signOut(this)
+
+
+          //  EmailPasswordAuthService.signOut(this)
+            SignOut()
             finish()
+
         }
 
         profileButton.setOnClickListener {
@@ -50,5 +59,25 @@ class Homepage4caretaker : BaseActivity() {
                 Intent(this@Homepage4caretaker, CaretakerProfileActivity::class.java)
             startActivity(medicalDiagnosticsActivityIntent)
         }
+
+
+        caretaker_AddTask.setOnClickListener{
+            val AddTaskActivityIntent = Intent(this@Homepage4caretaker, AddTaskActivity::class.java)
+                startActivity(AddTaskActivityIntent)
+        }
+
+    }
+    fun SignOut()
+    {
+        var dataBase = DataBase(this@Homepage4caretaker)
+        dataBase.open()
+        dataBase.LogOut()
+        dataBase.close()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val MainActivityIntent = Intent(this@Homepage4caretaker, MainActivity::class.java)
+        startActivity(MainActivityIntent)
     }
 }

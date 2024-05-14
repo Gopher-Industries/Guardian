@@ -25,13 +25,11 @@ import deakin.gopher.guardian.view.general.PatientProfileActivity
 import java.util.Objects
 
 class PatientListAdapter(
-    /**
-     * Initialize a [RecyclerView.Adapter] that listens to a Firebase query. See [ ] for configuration options.
-     */
     private val context: Context,
     options: FirebaseRecyclerOptions<Patient?>,
     private val isArchivedList: Boolean,
 ) : FirebaseRecyclerAdapter<Patient?, MyViewHolder?>(options) {
+
     override fun onDataChanged() {
         super.onDataChanged()
         if (itemCount == 0) {
@@ -42,11 +40,7 @@ class PatientListAdapter(
     }
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(
-        holder: MyViewHolder,
-        position: Int,
-        model: Patient,
-    ) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int, model: Patient, ) {
         holder.patientName.text = "${model.firstName} ${model.middleName} ${model.lastName}"
         updateStatusIndicator(holder.statusIndicator, model.status)
         holder.bind(model, isArchivedList)
@@ -65,10 +59,11 @@ class PatientListAdapter(
                 context.startActivity(intent)
                 updatePatientStatus(model.patientId, model.status, model.needsAssistance)
             } else if (1 == role) {
-                // admin
+
                 val intent = Intent(context, PatientProfileActivity::class.java)
                 intent.putExtra("id", model.patientId)
                 context.startActivity(intent)
+
             }
         }
     }
