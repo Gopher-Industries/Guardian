@@ -23,7 +23,6 @@ import deakin.gopher.guardian.model.health.sortByDate
 import java.util.Date
 import java.util.UUID
 
-@Suppress("ktlint:standard:function-naming")
 @Composable
 fun HeartRateChart(heartRates: List<HeartRate>) {
     val getEntries =
@@ -42,23 +41,23 @@ fun HeartRateChart(heartRates: List<HeartRate>) {
             lineColor = customLineColor,
             lineThicknessDp = 1.0F,
             lineBackgroundShader =
-                DynamicShaders.fromBrush(
-                    brush =
-                        Brush.verticalGradient(
-                            listOf(
-                                Color(customLineColor),
-                                Color.White,
-                            ),
-                        ),
+            DynamicShaders.fromBrush(
+                brush =
+                Brush.verticalGradient(
+                    listOf(
+                        Color(customLineColor),
+                        Color.White,
+                    ),
                 ),
+            ),
         ),
     )
 
     Chart(
         chart =
-            lineChart(
-                lines = heartRateChartLineSpec,
-            ),
+        lineChart(
+            lines = heartRateChartLineSpec,
+        ),
         chartModelProducer = chartEntryModelProducer,
         startAxis = rememberStartAxis(),
         bottomAxis = rememberBottomAxis(),
@@ -66,7 +65,6 @@ fun HeartRateChart(heartRates: List<HeartRate>) {
     )
 }
 
-@Suppress("ktlint:standard:function-naming")
 @Preview(showBackground = true)
 @Composable
 fun HeartRateChartPreview() {

@@ -25,7 +25,6 @@ import deakin.gopher.guardian.view.patient.patientdata.heartrate.HeartRateRoutes
 import deakin.gopher.guardian.view.patient.patientdata.heartrate.ui.components.HeartRateInput
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Suppress("ktlint:standard:function-naming")
 @Composable
 fun AddHeartRateScreen(navController: NavController) {
     Scaffold(
@@ -42,10 +41,10 @@ fun AddHeartRateScreen(navController: NavController) {
                     }
                 },
                 colors =
-                    TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        titleContentColor = MaterialTheme.colorScheme.primary,
-                    ),
+                TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary,
+                ),
             )
         },
     ) { innerPadding ->
@@ -53,16 +52,15 @@ fun AddHeartRateScreen(navController: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding),
+            Modifier
+                .fillMaxSize()
+                .padding(innerPadding),
         ) {
             HeartRateInput()
         }
     }
 }
 
-@Suppress("ktlint:standard:function-naming")
 @Preview(showBackground = true)
 @Composable
 fun AddHeartRateScreenPreview() {

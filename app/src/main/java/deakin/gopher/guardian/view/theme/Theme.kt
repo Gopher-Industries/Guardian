@@ -29,7 +29,6 @@ private val LightColorScheme =
         tertiary = Pink40,
     )
 
-@Suppress("ktlint:standard:function-naming")
 @Composable
 fun GuardianTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),

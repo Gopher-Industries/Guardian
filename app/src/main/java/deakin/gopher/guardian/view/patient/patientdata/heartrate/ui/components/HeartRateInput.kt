@@ -26,7 +26,6 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.view.theme.GuardianTheme
 
 @ExperimentalMaterial3Api
-@Suppress("ktlint:standard:function-naming")
 @Composable
 fun HeartRateInput() {
     var heartRate by remember { mutableStateOf("") }
@@ -55,8 +54,8 @@ fun HeartRateInput() {
         DatePicker(
             state = selectedDate,
             modifier =
-                Modifier
-                    .padding(16.dp),
+            Modifier
+                .padding(16.dp),
         )
 
         Button(onClick = { /*TODO*/ }) {
@@ -66,7 +65,6 @@ fun HeartRateInput() {
 }
 
 @ExperimentalMaterial3Api
-@Suppress("ktlint:standard:function-naming")
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun HeartRateInputPreview() {

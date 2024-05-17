@@ -34,7 +34,6 @@ class HeartRateActivity : ComponentActivity() {
 }
 
 @Composable
-@Suppress("ktlint:standard:function-naming")
 fun HeartRateNavHost(navController: NavHostController = rememberNavController()) {
     NavHost(
         navController = navController,
