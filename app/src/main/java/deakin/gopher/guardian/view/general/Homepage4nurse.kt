@@ -3,6 +3,7 @@ package deakin.gopher.guardian.view.general
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import deakin.gopher.guardian.DataBase.DataBase
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
@@ -26,8 +27,20 @@ class Homepage4nurse : AppCompatActivity() {
 
         // sign out button
         signOutButton.setOnClickListener {
+            onLogoutClick()
             EmailPasswordAuthService.signOut(this)
             finish()
         }
+    }
+    fun onLogoutClick() {
+
+        var database = DataBase(this@Homepage4nurse)
+        database.open()
+        database.LogOut()
+        database.close()
+
+
+        EmailPasswordAuthService.signOut(this)
+        finish()
     }
 }

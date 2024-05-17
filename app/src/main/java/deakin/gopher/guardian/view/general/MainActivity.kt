@@ -6,9 +6,12 @@ import android.util.Log
 import android.widget.Button
 import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.FirebaseMessaging
+import deakin.gopher.guardian.DataBase.DataBase
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.model.login.RoleName
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.EmailPasswordAuthService
+import deakin.gopher.guardian.services.NavigationService
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,15 +36,66 @@ class MainActivity : BaseActivity() {
     }
 
     private fun onGetStartedClick() {
-        val sessionManager = SessionManager(this)
+
+
+
+        val dataBase= DataBase(this@MainActivity);
+        dataBase.open()
+       val login= dataBase.check_Login_Status()
+        dataBase.close();
+        if(login!=null && login.isLogin!=null && login.isLogin.equals("true"))
+        {
+            var UserType=login.userType.toString();
+
+            if(login.isLogin.equals("true"))
+            {
+                if(UserType.equals(resources.getString(R.string.caretaker_role_name)))
+                {
+                    startActivity(Intent(this@MainActivity, Homepage4caretaker::class.java))
+
+                }else if(UserType.equals(resources.getString(R.string.company_admin_role_name)))
+                {
+                    startActivity(Intent(this@MainActivity, Homepage4admin::class.java))
+
+                }
+                else if(UserType.equals(resources.getString(R.string.nurse_role_name)))
+                {
+                    startActivity(Intent(this@MainActivity, Homepage4nurse::class.java))
+
+                }
+            }
+            else{
+                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            }
+
+
+        }
+        else{
+
+            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+
+        }
+
+
+       /* val sessionManager = SessionManager(this)
         if (!sessionManager.isLoggedIn) {
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
         } else {
             startActivity(Intent(this@MainActivity, Homepage4caretaker::class.java))
-        }
+        }*/
+
+
+
     }
 
     private fun onLogoutClick() {
+
+        var database = DataBase(this@MainActivity)
+        database.open()
+        database.LogOut()
+        database.close()
+
+
         EmailPasswordAuthService.signOut(this)
         finish()
     }
