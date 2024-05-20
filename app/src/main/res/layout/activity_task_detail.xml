@@ -62,11 +62,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:background="@drawable/dialog_bg2"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/task_button_mark_complete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/task_detail_title">
 
         <!-- Task description -->
         <TextView
@@ -75,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/task_description_prefix"
-            android:textColor="@android:color/white"
+            android:textColor="@color/black"
             android:textSize="18sp" />
 
         <!-- Nurse name -->
@@ -85,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/assigned_nurse_prefix"
-            android:textColor="@android:color/white"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <!-- Priority -->
@@ -95,23 +96,54 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/priority_prefix"
-            android:textColor="@android:color/white"
+            android:textColor="@color/black"
             android:textSize="16sp" />
     </LinearLayout>
 
     <!-- Complete button -->
-    <Button
-        android:id="@+id/task_button_mark_complete"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#4CAF50"
-        android:text="Mark as Complete"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/task_button_mark_complete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#4CAF50"
+            android:text="Mark as Complete"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/task_button_mark_incomplete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/orange"
+            android:text="Mark as Incomplete"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/task_button_mark_delete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#F44336"
+            android:text="Delete"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
