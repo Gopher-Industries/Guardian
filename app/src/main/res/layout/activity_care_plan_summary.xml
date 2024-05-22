@@ -311,6 +311,7 @@
             android:background="@drawable/careplan_button"
             android:inputType="textMultiLine"
             android:text="@string/_7"
+            android:isIndicator = "true"
             app:layout_constraintStart_toStartOf="@+id/textView1311"
             app:layout_constraintTop_toBottomOf="@+id/textView1311" />
 

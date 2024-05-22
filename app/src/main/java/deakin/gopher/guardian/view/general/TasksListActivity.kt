@@ -33,7 +33,6 @@ class TasksListActivity : AppCompatActivity() {
         var taskListMenuBtn : ImageView = findViewById(R.id.task_list_manu_button);
         var drawerLayout : DrawerLayout = findViewById(R.id.drawer_layout);
 
-        //test 123
         navigationView.setItemIconTintList(null);
         taskListMenuBtn.setOnClickListener({
             drawerLayout.openDrawer(GravityCompat.START);
@@ -64,7 +63,7 @@ class TasksListActivity : AppCompatActivity() {
                     startActivity(
                         Intent(
                             this@TasksListActivity,
-                            TasksListActivity::class.java
+                            TaskAddActivity::class.java
                         )
                     )
                 }else if (R.id.nav_signout === id) {
@@ -75,7 +74,6 @@ class TasksListActivity : AppCompatActivity() {
                 true
             }
         });
-        //Test comment
         val taskListRecyclerView: RecyclerView = findViewById(R.id.task_list_recycleView)
         overviewCardview = findViewById(R.id.task_list_task_overview)
         val taskSearchView: SearchView = findViewById(R.id.task_list_searchView)

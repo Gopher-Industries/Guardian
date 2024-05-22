@@ -117,7 +117,7 @@ public class PatientProfileActivity extends BaseActivity {
               customHeader.setHeaderText("Patient Details");
               customHeader.setHeaderTopImageVisibility(View.GONE);
             } else {
-              customHeader.setHeaderText("Care Plan");
+              customHeader.setHeaderText("Care Plan Summary");
               customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);
               customHeader.setHeaderTopImageVisibility(View.VISIBLE);
             }
