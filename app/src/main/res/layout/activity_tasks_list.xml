@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="deakin.gopher.guardian.view.general.PatientProfileAddActivity">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/patient_list_backgroud"
@@ -11,30 +17,28 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".view.general.TasksListActivity">
 
-    <Button
-        android:id="@+id/task_list_menu_button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="56dp"
-        android:background="@drawable/menu_button"
-        android:backgroundTint="@color/white"
-        android:backgroundTintMode="src_atop"
-        android:contentDescription="TODO"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+            android:id="@+id/task_list_manu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="51dp"
+            android:layout_marginTop="65dp"
+            android:contentDescription="TODO"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/menu_button" />
 
 
     <ImageView
-        android:id="@+id/task_list_head_image"
-        android:layout_width="54dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="32dp"
-        android:contentDescription="TODO"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profile_icon_small" />
+            android:id="@+id/task_list_head_image"
+            android:layout_width="54dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="94dp"
+            android:layout_marginTop="56dp"
+            android:contentDescription="TODO"
+            app:layout_constraintStart_toEndOf="@+id/task_list_company_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/profile_icon_small" />
 
     <ImageView
             android:id="@+id/task_list_company_icon"
@@ -131,12 +135,45 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <ScrollView
+            android:id="@+id/task_list_scrollView"
+            android:layout_width="409dp"
+            android:layout_height="338dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_list_task_overview">
+
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/task_list_recycleView"
-                android:layout_width="409dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/task_list_task_overview"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+    </ScrollView>
+
+    <ImageView
+            android:id="@+id/imageView61"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="188dp"
+            android:contentDescription="TODO"
+            app:layout_constraintBottom_toTopOf="@+id/imageView62"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/three_point" />
+
+    <ImageButton
+        android:id="@+id/imageView62"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginBottom="13dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/edit_button_plus"
+        android:background="?attr/selectableItemBackgroundBorderless" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@id/nav_view"
+        layout="@layout/navigation_view" />
+</androidx.drawerlayout.widget.DrawerLayout>

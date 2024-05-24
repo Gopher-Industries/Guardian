@@ -11,6 +11,11 @@
             android:title="Home"
             />
         <item
+            android:id="@+id/add_task"
+            android:icon="@drawable/menu_data_entry"
+            android:title="Add Task" />
+
+        <item
             android:id="@+id/nav_signout"
             android:icon="@drawable/menu_signout"
             android:title="Sign Out" />

@@ -8,8 +8,7 @@
     android:layout_height="match_parent"
     tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true">
@@ -403,7 +402,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/careplan_button"
-                android:text="@string/_8pm_4pm"
+                android:text="@string/_8pm_4am"
                 android:textStyle="bold" />
 
             <RadioButton

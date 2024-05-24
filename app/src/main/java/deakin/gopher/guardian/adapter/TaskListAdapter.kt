@@ -13,16 +13,19 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Task
 import deakin.gopher.guardian.view.general.TaskDetailActivity
 
-class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
-    private val tasks: MutableList<Task> = mutableListOf()
+class TaskListAdapter(private var tasks: List<Task>) :
+    RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
+    init {
+        Log.d("TaskListAdapter", "Task Data Size: ${tasks.size}")
+    }
+    
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
     ): TaskViewHolder {
-        val view =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.task_list_item, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.task_list_item, parent, false)
         return TaskViewHolder(view)
     }
 
@@ -35,7 +38,12 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val descriptionTextView: TextView =
-            itemView.findViewById(R.id.task_description_text_view)
+            itemView.findViewById(R.id.task_description_text_view)s
+//        private val subDescriptionTextView: TextView =
+//            itemView.findViewById(R.id.tasksubDescEditText)
+//        private val patientIdTextView: TextView =
+//            itemView.findViewById(R.id.taskPatientIdEditText)
+
         private val viewTaskDetailsButton: Button = itemView.findViewById(R.id.task_description_button)
         private val taskCompletedIcon: ImageView = itemView.findViewById(R.id.task_completed_icon)
 
@@ -50,6 +58,8 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
         }
         fun bind(task: Task) {
             descriptionTextView.text = task.description
+//            subDescriptionTextView.text = task.subDescription
+//            patientIdTextView.text = task.patientId
             if (task.completed)
             {
                 taskCompletedIcon.setImageResource(R.drawable.green_circle)
@@ -62,6 +72,11 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
     override fun getItemCount(): Int {
         return tasks.size
     }
+
+    fun updateTaskList(newTasks: List<Task>) {
+        tasks = newTasks
+        notifyDataSetChanged()
+        Log.d("TaskListAdapter", "Updated Task Data Size: ${tasks.size}")
 
     fun updateData(newTasks: List<Task>) {
         tasks.clear()

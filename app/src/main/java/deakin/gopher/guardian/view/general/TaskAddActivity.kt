@@ -22,6 +22,9 @@ import deakin.gopher.guardian.util.DataListener
 
 class TaskAddActivity : AppCompatActivity() {
     private lateinit var taskDescriptionEditText: EditText
+    private lateinit var patientIdEditText: EditText
+    private lateinit var taskSubDesc : EditText
+    private var patient: Patient? = null
     private lateinit var assignedNurseEditText: EditText
     private lateinit var priorityRadioGroup: RadioGroup
     private lateinit var taskPriority: Priority
@@ -32,6 +35,8 @@ class TaskAddActivity : AppCompatActivity() {
         setContentView(R.layout.activity_task_add)
 
         taskDescriptionEditText = findViewById(R.id.taskDescriptionEditText)
+        taskSubDesc = findViewById(R.id.tasksubDescEditText)
+        patientIdEditText = findViewById(R.id.taskPatientIdEditText)
         assignedNurseEditText = findViewById(R.id.taskAssignedNurseEditText)
         priorityRadioGroup = findViewById(R.id.taskPriorityRadioGroup)
         priorityRadioGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -94,7 +99,57 @@ class TaskAddActivity : AppCompatActivity() {
     }
 
     private fun saveInFirebase() {
+
         val databaseRef = FirebaseDatabase.getInstance().reference
+        val caretakerTaskRef = databaseRef.child("caretaker_tasks")
+
+        val patientId = patientIdEditText.text.toString().trim()
+        val taskDescription = taskDescriptionEditText.text.toString().trim()
+        val taskSubDesc = taskSubDesc.text.toString().trim()
+
+        val newTask = Task(
+            taskId = "",
+            description = taskDescription,
+            subDescription = taskSubDesc,
+            patientId = patientId
+        )
+
+        val taskId = caretakerTaskRef.push().key ?: ""
+        newTask.taskId = taskId
+
+        //saving under care taker tasks
+        caretakerTaskRef.child(taskId).setValue(newTask).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                updatePatientTasks(patientId, taskId)
+                finish()
+            } else {
+                // Handle the error
+            }
+        }
+
+        //This for nurse tasks // TODO : need to operate for both caretaker and nurse
+//        val databaseRef = FirebaseDatabase.getInstance().reference
+//        val caretakerTaskRef = databaseRef.child("caretaker_tasks")
+//        val patientRef = databaseRef.child("patient_profile")
+//        val taskRef = databaseRef.child("tasks")
+//
+//        val patientId = patientIdEditText.text.toString().trim()
+//
+//        val newTask =
+//            Task(
+//                "",
+//                taskDescriptionEditText.text.toString().trim(),
+//                patient?.patientId ?: "",
+//            )
+//
+//        val taskId = taskRef.push().key ?: ""
+//        newTask.taskId = taskId
+//
+//        patient?.let { caretakerTaskRef.child(taskId!!).setValue(newTask) }
+//
+//        updatePatientTasks(patientId, taskId)
+//
+//        finish()
         val taskRef = databaseRef.child("nurse-tasks")
 
         val taskId = taskRef.push().key ?: ""

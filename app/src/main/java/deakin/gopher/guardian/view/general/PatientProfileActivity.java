@@ -61,7 +61,10 @@ public class PatientProfileActivity extends BaseActivity {
             if (patientId != null) {
                 deletePatient(patientId);
             } else {
-                Toast.makeText(PatientProfileActivity.this, "Error: Patient ID is null", Toast.LENGTH_SHORT).show();
+              customHeader.setHeaderText("Care Plan Summary");
+              customHeader.setHeaderTopImage(R.drawable.profile_avatar_men);
+              customHeader.setHeaderTopImageVisibility(View.VISIBLE);
+              Toast.makeText(PatientProfileActivity.this, "Error: Patient ID is null", Toast.LENGTH_SHORT).show();
             }
         });
 

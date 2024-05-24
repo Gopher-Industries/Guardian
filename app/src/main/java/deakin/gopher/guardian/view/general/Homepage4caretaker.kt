@@ -13,6 +13,7 @@ class Homepage4caretaker : BaseActivity() {
     private lateinit var settingsButton: Button
     private lateinit var signOutButton: Button
     private lateinit var profileButton: Button
+    private lateinit var taskListButton : Button
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +23,8 @@ class Homepage4caretaker : BaseActivity() {
         settingsButton = findViewById(R.id.settingsButton3)
         signOutButton = findViewById(R.id.sighOutButton)
         profileButton = findViewById(R.id.caretaker_profile)
+        taskListButton = findViewById(R.id.taskListButton)
+
 
         // patient list button
         patientListButton.setOnClickListener {
@@ -37,6 +40,12 @@ class Homepage4caretaker : BaseActivity() {
                 Intent(this@Homepage4caretaker, Setting::class.java)
             medicalDiagnosticsActivityIntent.putExtra("userType", "caretaker")
             startActivity(medicalDiagnosticsActivityIntent)
+        }
+
+        //tasklist button
+        taskListButton.setOnClickListener {
+            startActivity(
+            Intent(this@Homepage4caretaker, TasksListActivity::class.java))
         }
 
         // sign out button

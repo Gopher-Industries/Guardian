@@ -118,7 +118,7 @@
     <string name="diet_timings">Diet timings:</string>
     <string name="drink_likes">Drink Likes:</string>
     <string name="sleep_pattern">Sleep pattern:</string>
-    <string name="_8pm_4am">8PM - 4AM</string>
+    <string name="_8pm_4am">8pm - 4am</string>
     <string name="pain">Pain:</string>
     <string name="pain_score">Pain Score</string>
     <string name="behavioural_management">Behavioural Management</string>
@@ -355,6 +355,7 @@
     <string name="add_task">Add Task</string>
     <string name="task_list">Task List</string>
     <string name="saving_changes">Saving Changes?</string>
+    <string name="nurse_roster">Nurse Roster</string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
@@ -558,6 +559,7 @@
     <string name="log_out">LOG OUT</string>
     <string name="ward">Ward</string>
     <string name="caretaker_profile_edit">Caretaker Profile Edit</string>
+    <string name="addEdit_carePlan">Add/Edit Care Plan</string>
     <string name="navigation_drawer_open">Drawer Open</string>
     <string name="navigation_drawer_close">Drawer Closed</string>
     <string name="task_description_prefix">Task Description:</string>
