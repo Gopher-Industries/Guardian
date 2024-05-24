@@ -160,16 +160,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/three_point" />
 
-    <ImageView
-            android:id="@+id/imageView62"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="188dp"
-            android:layout_marginBottom="13dp"
-            android:contentDescription="TODO"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/edit_button_plus" />
+    <ImageButton
+        android:id="@+id/imageView62"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginBottom="13dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/edit_button_plus"
+        android:background="?attr/selectableItemBackgroundBorderless" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
     <include
         android:id="@id/nav_view"
