@@ -26,39 +26,37 @@ import java.util.UUID
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun HeartRateChart(heartRates: List<HeartRate>) {
-    val getEntries =
-        List(heartRates.size) { index ->
-            entryOf(
-                x = index.toFloat(),
-                y = heartRates[index].measurement.toFloat(),
-            )
-        }
+    // Sort heart rate data by measurement date
+    val sortedHeartRates = heartRates.sortedBy { it.measurementDate }
 
-    val chartEntryModelProducer = ChartEntryModelProducer(getEntries)
+    // Map heart rate data to chart entries
+    val entries = sortedHeartRates.mapIndexed { index, heartRate ->
+        entryOf(
+            x = heartRate.measurementDate.time.toFloat(), // Use timestamp as X-axis value
+            y = heartRate.measurement.toFloat(),
+        )
+    }
+
+    val chartEntryModelProducer = ChartEntryModelProducer(entries)
     val heartRateChartLineSpec = mutableListOf<LineChart.LineSpec>()
     val customLineColor = parseColor("#FF0B98C5")
     heartRateChartLineSpec.add(
         LineChart.LineSpec(
             lineColor = customLineColor,
             lineThicknessDp = 1.0F,
-            lineBackgroundShader =
-                DynamicShaders.fromBrush(
-                    brush =
-                        Brush.verticalGradient(
-                            listOf(
-                                Color(customLineColor),
-                                Color.White,
-                            ),
-                        ),
+            lineBackgroundShader = DynamicShaders.fromBrush(
+                brush = Brush.verticalGradient(
+                    listOf(
+                        Color(customLineColor),
+                        Color.White,
+                    ),
                 ),
+            ),
         ),
     )
 
     Chart(
-        chart =
-            lineChart(
-                lines = heartRateChartLineSpec,
-            ),
+        chart = lineChart(lines = heartRateChartLineSpec),
         chartModelProducer = chartEntryModelProducer,
         startAxis = rememberStartAxis(),
         bottomAxis = rememberBottomAxis(),

@@ -1,0 +1,406 @@
+ WIFI CHANNEL STATE INFORMATION (CSI) FOR HUMAN ACTIVITY RECOGNITION (HAR) USING ML/DL 
+
+Objective:
+Leverage Channel State Information (CSI) signals to create resilient and precise Human Activity Recognition (HAR) system by employing sophisticated Machine Learning (ML) and Deep Learning (DL) models.
+
+Roadmap (spans multiple cohorts):
+1. Data Context and Familiarization
+2. Data Preprocessing
+3. Model Research 
+4. Feature Extraction
+5. Model Building, Training and Evaluation
+
+
+Long-term goal (spans multiple cohorts):
+* Guardian AI’s long-term goal is to create a Human Activity Recognition (HAR) system through Machine Learning (ML) for non-hospital usage. 
+* Depending on future circumstances and new findings, future members may want to expand on the HAR system to incorporate more ambitious goals to align with the app’s features as per Guardian’s Executive Summary Document.
+
+- DATA FAMILIARIZATION
+
+Objective: Gain profound insight into Wi-Fi Channel State Information (CSI), fostering a comprehensive understanding of its nature, context, and domain. Research CSI signals to comprehend the methodology behind data collection and understand the meaning and context embedded in the numerical values.
+
+Tasks:
+* Research literature on Wi-Fi CSI to understand its basic principles, applications, and relevant methodologies.
+* Review documentation related to the collection process of the CSI signals including the hardware specifications, parameters and environmental conditions (refer to the paper from the author).
+* Understand fundamentals of CSI signals, including signal amplitude, phase, and frequency.
+* Understand the structure of the dataset, including variables and data types.
+* Investigate the specifics of the experiments conducted to gather Wi-Fi CSI signals including the activities performed and the duration of recording sessions.
+* Examine the numerical values embedded in the CSI signals to understand their meaning and importance.
+* Document findings below, such that future cohorts could continue the work with minimal loss.
+
+
+WI-FI CHANNEL STATE INFORMATION (CSI)
+CSI provides detailed information about the wireless channel between a transmitter and a receiver. This information includes data about how radio waves propagate through the environment.
+
+Amplitude: it represents how much the received signal's strength has been altered by the wireless channel. A higher magnitude indicates a stronger received signal, while a lower magnitude suggests a weaker signal.
+Phase: it represents how much the received signal's timing has been shifted by the wireless channel compared to the transmitted signal. Changes in phase can occur due to factors like signal reflections and multipath interference.
+Orthogonal frequency-division multiplexing is a method of data transmission where a single information stream is split among several closely spaced narrowband subchannel frequencies instead of a single Wideband channel frequency. Wi-Fi networks often use Orthogonal Frequency Division Multiplexing (OFDM) for data transmission. In OFDM, the data stream is divided into multiple subcarriers. Subcarriers are frequency components within the channel bandwidth used in OFDM-based communication systems like Wi-Fi. They enable efficient data transmission, adaptive modulation and coding, and resource allocation, all while maintaining orthogonality to prevent interference between subcarriers.
+How can we detect human activity in Wi-Fi signals? When a person moves within the Wi-Fi signal's path, their body may partially or completely block the signal. The human body can absorb and attenuate radiofrequency signals, causing a reduction in signal strength.
+PUBLIC DATABASE: Wireless sensing dataset for human activity recognition (HAR) https://figshare.com/articles/dataset/Wireless_sensing_dataset_for_human_activity_recognition_HAR_/20444538 
+
+HAR has been getting popular over the last decade due to its use in diverse industries including healthcare. Regarding extraction of features in the recognition of various human activities, WiFi CSI data has recently grown in popularity. Unlike, camaras and phones, Wi-Fi CSI data offers privacy preservation and non-invasive technology. 
+
+Dataset: “background”, “walk”, “sit”, “stand”, “liedown”, “standfromlie”, “bodyrotate”
+
+- DATA PREPROCESSING
+
+Objective: Ensure the data is in a clean, organized, and suitable format for subsequent analysis.  Addressing missing values, outliers, and inconsistencies, and preparing the data to maximize the effectiveness of ML/DL models.
+
+Tasks:
+* Identify and handle missing or incomplete data.
+* Check for outliers, noise and anomalies and decide how to address them. Some techniques are mentioned on CSI FOR HAR USING ML-DL.docx
+* Standardize or normalize data if necessary.
+* Apply dimensionality reduction techniques (such as PCA) to visualize high-dimensional data in lower-dimensional space.
+* Apply Fourier transforms or other complex-number-specific techniques to analyze the frequency components of the signals if necessary.
+
+Research Notes:
+* Even in a still environment, CSI values fluctuate as WiFi devices are susceptible to surrounding electromagnetic noises [5]. Internal state changes in WiFi devices (like transmission rate adaptation and transmission power adaptation) can also introduce impulse and burst noises [5].
+* Carrier Frequency Offset (CFO) is the dynamically changing difference in carrier frequencies between a pair of WiFi devices, which occurs due to the minor differences in hardware and factors such as temperature change [5]. This affects phase values such that it is hard to distinguish whether a phase change is due to environmental change or CFO [5].
+* Overall, due to the errors such as CFO, as well as Sampling Frequency Offset (SFO), the phase of WiFi CSI is rarely used for HAR [4]. Therefore, we will condense the complex number to the amplitude only.
+
+Amplitude is noisy and may not show distinctive features for different activities. Therefore, it is necessary to filter out the noise before feature extraction. Existing literature discussed several de-noising methods, which are listed below. Note that many literatures used multiple techniques in unison.
+
+* Low-pass filters (Butterworth filter or Elliptic filter)
+o Due to there being burst and impulse noises in CSI, which have high bandwidths, the low-pass filter cannot yield a smooth CSI stream [4]. 
+o Low-pass filters or median filters struggles when there are “bursts” of noise
+
+* The sampling rate that these methods require are more than WiFi frequency
+* Wavelet-based noise-removal 
+o Figure below shows raw amplitude (top) having undergone wavelet-based noise-removal (bottom)
+
+* PCA
+o When PCA is applied on temporal CSI (subcarrier data), the first three components are observed to explain 70–80% of the variance for all the activities [6].
+* Wang et. al [5] employed the next five PCs for feature extraction, after discarding the first. They also discovered that by removing PC1, the information due to the dynamic reflection coming from the mobile target is retained in other principal components [4]. 
+* Damodaran et al. [6] used only the second and the third PCs. This is the technique that we will be proceeding with considering that 2D
+
+
+- MODEL SELECTION
+
+Objective: Selecting the optimal ML/DL model for the classification of HAR based on a comprehensive analysis of existing literature and the distinctive characteristics of different models.
+
+Tasks:
+* Conduct an extensive review of existing literature on ML/DL models applied to HAR (already done).
+* Summarize key findings regarding the performance and suitability of various models for HAR tasks (already done).
+* Look for hyperparameter configurations, including learning rates, dropout rates, and layer architectures (the literature review can help us guidance, almost all articles detail the architectures and parameters).
+* Consider data splitting: 80-10-10, 70-30 or 80-20.
+* Implement cross-validation techniques on the training set if necessary.
+
+Research notes: 
+
+1. Related work using same type of data (Wi-Fi CSI signals): 
+
+** Article 1: 
+SenseFi: A Library and Benchmark on Deep-Learning-Empowered WiFi Human Sensing
+Codes: https://github.com/xyanchen/WiFi-CSI-Sensing-Benchmark/blob/main/UT_HAR_model.py  (Use UT_HAR_model.py) (Recommended to read)
+Dataset: UT-HAR (GitHub - ermongroup/Wifi_Activity_Recognition: Code for IEEE Communication Magazine (A Survey on Behaviour Recognition Using WiFi Channle State Information)) (Activities: lie down, fall, walk, pickup, run, sit down, stand up)
+
+Preprocessing: wavelet denoising (to filter the high-frequency noise in amplitudes)
+
+Models: MLP, CNN, ResNet18, ResNet50, ResNet101, RNN, Gated Recurrent Unit (GRU), LSTM, BiLSTM (All the codes are provided). 
+
+Accuracy:
+* MLP: 92%
+* CNN: 97.61%
+* ResNet18: 98.11%
+* ResNet50: 97.21%
+* ResNet101: 94.99%
+* RNN: 83.53%
+* GRU: 94.18%
+* LSTM: 87.18%
+* BiLSTM: 90.19%
+* They recommend CNN, GRU, and BiLSTM due to their high performance, low computational cost, and small number of parameters.
+* CNN and GRU involve fewer parameters and lower computational complexity.
+* ResNets (Very-deep networks)
+
+** Article 2:
+A Survey on Behaviour Recognition Using WiFi Channel State Information
+Codes: GitHub - ermongroup/Wifi_Activity_Recognition: Code for IEEE Communication Magazine (A Survey on Behaviour Recognition Using WiFi Channle State Information) CSI-Activity-Recognition 
+Dataset: GitHub - ermongroup/Wifi_Activity_Recognition: Code for IEEE Communication Magazine (A Survey on Behaviour Recognition Using WiFi Channle State Information) (Activities: Lay down, Fall, Walk, Run, Sit down, Stand up)  
+
+Preprocessing:  PCA on the CSI amplitude and  short-time Fourier transform (STFT) (They didn’t treat the data as images but converted to  extract features in the frequency domain). For LSTM, the raw CSI amplitude data is used (no preprocessing applied)
+
+Models: Random Forest, Hidden Markov Model and LSTM. (code for LSTM provided)
+
+Accuracy:
+* Random Forest: 88% (run)
+* Hidden Markov Model: 96% (run)
+* LSTM: 97% (run)
+
+* Due to the errors such as CFO and SFO, the phase of WiFi CSI has not been used.
+
+** Article 3:
+Human Activity Recognition based on Wi-Fi CSI Data -A Deep Neural Network Approach
+
+Code: GitHub - Retsediv/WIFI_CSI_based_HAR: Human Activity Recognition based on WiFi Channel State Information 
+Dataset: they collected their CSI data (Activities: standing, walking, get_down, sitting, get-up, lying, no-person)
+
+Pre-processing: outliers removal, Noise reduction based on Discrete Wavelet Transform.
+ 
+Models: InceptionTime model (architecture based on deep one-dimensional Convolutional Neural Network aimed at Time series classification problem) and LSTM. 
+
+Confusion matrix of LSTM-based model, results:
+* Standing: 51%
+* Walking: 72%
+* Get_down: 24%
+* Sitting: 82%
+* Get-up: 35%
+* Lying: 83%
+* No-person: 40%
+InceptionTime model is an ensemble of Inception networks followed by a Global Average Pooling layer and a Dense layer with a softmax activation function. 
+
+** Article 4:
+An Intelligent Non-Invasive Real Time Human Activity Recognition System for Next-Generation Healthcare
+Dataset: they collected their CSI data 
+
+Preprocessing: not detailed (clear samples converted to CSV format and labeled) 
+
+Models: Random Forest (RF), K-Nearest Neighbours (KNN), Support Vector Machine (SVM) and CNN
+
+Accuracy:
+* RF: 96.70%
+* KNN: 90.71%
+* SVM: 81.77%
+* CNN: 93.40%
+
+Other metrics: precision, recall and f1-score
+Random Forest tends to be less prone to overfitting compared to individual decision trees. 
+
+** Article 5:
+Device free human activity and fall recognition using WiFi channel state information
+Dataset: they collected their CSI data (Activities: sit, stand, run, walk and empty)
+
+Preprocessing: for SVM, denoising (using Discrete wavelet transform), PCA and feature extraction. For LSTM, just denoising. 
+
+Models: SVM and LSTM
+
+Confusion matrix of SVM, results:
+* sit: 45%
+* stand: 40%
+* run: 95%
+* walk: 80%
+* empty: 100%
+
+Confusion matrix of LSTM, results:
+* sit: 80%
+* stand: 100%
+* run: 95%
+* walk: 80%
+* empty: 100%
+
+SVM commonly used for HAR, however, presents low accuracy.
+
+** Article 6:
+WiFi CSI Based Passive Human Activity Recognition Using Attention Based BLSTM
+Dataset: publicly available dataset. (Activities:lie down, fall, walk, run, sit down and stand up). https://github.com/lcsig/Dataset-for-Wi-Fi-based-human-activity-recognition-in-LOS-and-NLOS-indoor-environments 
+
+Preprocessing: data restructuring (converting complex CSI values to real values), data balancing (undersampling), outliers removal (using Hampel filter), normalization and data windowing.
+
+Models: attention-based BiLSTM (ABiLSTM) 
+
+Confusion matrix, results:
+* lie down: 96%
+* fall:99%
+* walk: 98%
+* run: 98%
+* sit down: 95%
+* stand up: 98%
+ABLSTM is able to achieve the best recognition performance for all activities when compared with some benchmark approaches such as RF, LSTM and sparse auto-encoder (SAE).
+
+** Article 7:
+Human activity recognition from wi-fi CSI data using principal component-based wavelet CNN
+Dataset: they collected their CSI data
+
+Preprocessing: PCA and Discrete Wavelet Transform
+
+Models: Wavelet Convolutional Neural Network (WCNN), more suitable for real-time applications and is influenced by well-known architectures such as Residual Networks (ResNets) and Dense Convolutional Networks (DenseNets).
+ 
+Accuracy:
+* 95.50%
+Wavelet CNN uses DWT for feature 
+extraction and CNN for classi?cation
+
+** Article 8:
+Human Activity Recognition Using CSI Information with Nexmon  
+Dataset: they collected their CSI data (Activities: empty, lying, sit, sit-down, stand, stand-up, walk and fall) available https://ieee-dataport.org/open-access/csi-human-activity  
+ 
+Preprocessing: data cleaning (denoising and filtering for outliers removal) and PCA (The features represent the first two PCA) 
+ 
+Models: SVM and LSTM.  
+ 
+Confusion matrix for SVM, results: 
+* empty: 97.8% 
+* sit: 95.5% 
+* stand: 95.3% 
+* walk: 97.2% 
+ 
+Confusion matrix for LSTM, results: 
+* empty: 99.4% 
+* sit: 98.3% 
+* stand: 99.7% 
+* walk: 98.3% 
+ 
+They used an open-source tool called Nexmon CSI extraction. 
+
+
+2. Related work using the same type of data (Wi-fi CSI signals) and another approach: some researchers have converted CSI data into images-like format and calculate their spectrogram, scalograms or RGB-based image for image classification.
+Reason: “CSI data gathered from a single pair of antennas (Transmitter-receiver) are similar to a grayscale image with only one channel. Thus, the number of pairs of antennas is directly proportional to the resolution of the CSI data.” 
+
+** Article 9:
+OPERAnet, a multimodal activity recognition dataset acquired from radio frequency and vision-based sensors
+
+Code: (Data extraction tool) https://github.com/RogetK/ODDET 
+Dataset: https://figshare.com/articles/dataset/Dataset_for_Human_Activity_Recognition_using_Wi-Fi_Channel_State_Information_CSI_data/14386892/1 
+(Activities: walking, sitting, standing, lying, getting up, getting down, no activity)
+
+Preprocessing: denoising (using Discrete Wavelet Transform), PCA, and conversion to spectrograms (using STFT)
+
+Models: ResNet-18 CNN
+
+Accuracy:
+* bodyrotate: 100%
+* laydown: 71%
+* sit: 82%
+* stand: 94%
+* standff: 92%
+* walk: 100%
+A spectrogram represents the signal strength (amplitude) of the signal over time at various frequencies. Useful for feature extraction, helping to identify patterns associated with activities.
+
+** Article 10:
+Enhancing CSI-Based Human Activity Recognition by Edge Detection Techniques
+Dataset: three available CSI datasets
+
+Preprocessing: PCA, Normalization, and Linear Discriminant Analysis (LDA). Then, converted into RGB-based images, followed by different edge detection filters to highlight more features from the generated images. 
+
+Models: CNN, LSTM and BiLSTM
+
+Accuracy to plain RGB-based image:
+
+* CNN: 93.2%
+* LSTM: 84.5%
+* BiLSTM: 90.8%
+Filter used for edge detection: Sobel, Canny, Prewitt, and Laplacian of Gaussian 
+A CSI-Based Human Activity Recognition Using Deep Learning
+Dataset:
+
+Preprocessing: normalization between 0 and 255 to generate RGB images and resize to 64 × 64 
+
+Models: 1D-CNN, 2D-CNN, LSTM, and Bi-directional LSTM
+
+Accuracy: 
+* 1D-CNN: 87.4%
+* 2D-CNN: 95.5%
+* LSTM: 89.2%
+* BiLSTM: 94.7%
+
+Other metrics: confusion matrix. 
+ 
+BLSTM is one of the most successful DL algorithms in time-sequential analysis
+
+
+SUMMARY
+
+- PREPROCESSING 
+Essential: 
+Remove noise: applying low-pass filters (Butterworth filter or Elliptic filter), discrete wavelet transform or PCA. 
+Remove outliers. 
+ 
+Optional: 
+PCA for dimensionality reduction, if necessary. 
+For image classification, calculate the spectrograms (using Short-Time Fourier Transform), scalograms (using Continuous Wavelet Transform) or normalize (0-255). 
+
+ 
+- PROCESSING 
+ 
+Models: 
+Decision tree 
+Random Forest  
+K nearest Neighbours classifier 
+Support Vector Machine (popular) 
+Neural Networks (popular) 
+MLP 
+Bagging classifier 
+Extra trees  
+Super learner (ensemble model) 
+LSTM (popular) 
+Autoencoder 
+CNN (popular) 
+BiLSTM 
+Pretrained models (AlexNet, VGG16, ResNet18) 
+ 
+ 
+EVALUATION METRICS 
+ 
+Accuracy 
+Confusion matrix 
+Precision 
+Recall  
+F1-score 
+Sensitivity 
+Specificity 
+ 
+MODELS SELECTED: SVM, CNN and LSTM
+
+* CNN: 
+Pros: 
+* Preserves spatial information and uses shared weights for convolution kernels, which helps to reduce the number of parameters.  
+* Efficiency in image-based input processing. 
+* Adaptability and hierarchical feature extraction. 
+* Demand less preprocessing, ensuring rapid decision-making in real-time scenarios. 
+* Processes different features parallelly, it is faster than other methods and less complex in computations. 
+* Ideal for image-like data representations in spectrograms or time-frequency domains. 
+ 
+ 
+Cons: 
+* Assigns equal importance to all convolutions, that cannot be optimal when certain features are more relevant than others. However, it can be partially addressed using an attention mechanism, to dynamically focus on different parts of the input, assigning various degrees of importance to different regions. 
+* Are not well suited for the classification of temporal data. 
+* Prone to overfitting with limited data 
+ 
+
+* LSTM: 
+ 
+Pros: 
+* It processes raw data directly after denoising (no preprocessing required). 
+* Can “automatically” select the features from the data and therefore a manually designed feature extraction is no longer required.  
+* Well-suited for tasks where the order of events or patterns in time is crucial. 
+* It can hold temporal state information of the activity, resulting in better performance for similar activities such as lie down and sit down. 
+ 
+Cons: 
+* Prone to vanishing or exploding gradient problems during training, especially in deep networks. 
+
+
+REFERENCES
+
+[1] Taylor, W., Shah, S.A., Dashtipour, K., Zahid, A., Abbasi, Q.H. and Imran, M.A. (2020). An Intelligent Non-Invasive Real-Time Human Activity Recognition System for Next-Generation Healthcare. Sensors, 20(9), p.2653. doi:https://doi.org/10.3390/s20092653.
+?
+[2] Khan, M.Z., Taha, A., Taylor, W., Imran, M.A. and Abbasi, Q.H. (2022). Non-Invasive Localization Using Software-Defined Radios. IEEE Sensors Journal, 22(9), pp.9018–9026. doi:https://doi.org/10.1109/jsen.2022.3160796.
+?
+[3] Saeed, U., Syed Aziz Shah, Muhammad Zakir Khan, Abdullah Alhumaidi Alotaibi, Turke Althobaiti, Ramzan, N., Muhammad Ali Imran and Abbasi, Q.H. (2023). Software-Defined Radio-Based Contactless Localization for Diverse Human Activity Recognition. IEEE Sensors Journal, 23(11), pp.12041–12048. doi:https://doi.org/10.1109/jsen.2023.3265867.
+?
+[4] Damodaran, N., Haruni, E., Kokhkharova, M. and Schäfer, J. (2020). Device free human activity and fall recognition using WiFi channel state information (CSI). CCF Transactions on Pervasive Computing and Interaction, 2(1), pp.1–17. doi:https://doi.org/10.1007/s42486-020-00027-1.
+?
+[5] Zhuravchak, A., Kapshii, O. and Pournaras, E. (2022). Human Activity Recognition based on Wi-Fi CSI Data -A Deep Neural Network Approach. Procedia Computer Science, 198, pp.59–66. doi:https://doi.org/10.1016/j.procs.2021.12.211.
+?
+[6] Ishtiaque Ahmed Showmik, Tahsina Farah Sanam and Imtiaz, H. (2023). Human Activity Recognition from Wi-Fi CSI data using Principal Component-based Wavelet CNN. Digital Signal Processing, 138, pp.104056–104056. doi:https://doi.org/10.1016/j.dsp.2023.104056.
+?
+[7] Chen, Z., Zhang, L., Jiang, C., Cao, Z. and Cui, W. (2019). WiFi CSI Based Passive Human Activity Recognition Using Attention Based BLSTM. IEEE Transactions on Mobile Computing, 18(11), pp.2714–2724. doi:https://doi.org/10.1109/tmc.2018.2878233.
+?
+[8] Alsaify, B.A., Almazari, M.M., Alazrai, R. and Aldaoud, M.I. (2020). A dataset for Wi-Fi-based human activity recognition in line-of-sight and non-line-of-sight indoor environments. data.mendeley.com, [online] 1. doi:https://doi.org/10.17632/v38wjmz6f6.1.
+?
+[9] Schäfer, J., Barrsiwal, B.R., Kokhkharova, M., Adil, H. and Liebehenschel, J. (2021). Human Activity Recognition Using CSI Information with Nexmon. Applied Sciences, 11(19), p.8860. doi:https://doi.org/10.3390/app11198860.
+?
+[10] Shah, S.A., Ahmad, J., Masood, F., Shah, S.Y., Pervaiz, H., Taylor, W., Imran, M.A. and Abbasi, Q.H. (2021). Privacy-Preserving Wandering Behavior Sensing in Dementia Patients Using Modified Logistic and Dynamic Newton Leipnik Maps. IEEE Sensors Journal, 21(3), pp.3669–3679. doi:https://doi.org/10.1109/jsen.2020.3022564.
+?
+[11] Hossein Shahverdi, Nabati, M., Parisa Fard Moshiri, Reza Asvadi and Seyed Ali Ghorashi (2023). Enhancing CSI-Based Human Activity Recognition by Edge Detection Techniques. Information, 14(7), pp.404–404. doi:https://doi.org/10.3390/info14070404.
+?
+[12] Fard Moshiri, P., Shahbazian, R., Nabati, M. and Ghorashi, S.A. (2021). A CSI-Based Human Activity Recognition Using Deep Learning. Sensors, 21(21), p.7225. doi:https://doi.org/10.3390/s21217225.
+?
+[13] Lau, H.-S., McConville, R., Bocus, M.Z., Piechocki, R.J. and Raúl Santos-Rodríguez (2022). Self-Supervised WiFi-Based Activity Recognition. 2022 IEEE Globecom Workshops (GC Wkshps). doi:https://doi.org/10.1109/gcwkshps56602.2022.10008537.
+?
+[14] figshare.com. (2022). Wireless sensing dataset for human activity recognition (HAR). [online] doi:https://doi.org/10.6084/m9.figshare.20444538.v1.
+
+[15] Mohammud Junaid Bocus, Li, W., Vishwakarma, S., Kou, R., Tang, C., Woodbridge, K., Craddock, I.J., McConville, R., Santos-Rodriguez, R., Chetty, K. and Piechocki, R.J. (2021). OPERAnet, a multimodal activity recognition dataset acquired from radio frequency and vision-based sensors. 9(1). doi:https://doi.org/10.1038/s41597-022-01573-2.
+?
+[16] Li, W., Bocus, M.J., Tang, C., Piechocki, R.J., Woodbridge, K. and Chetty, K. (2022). On CSI and Passive Wi-Fi Radar for Opportunistic Physical Activity Recognition. IEEE Transactions on Wireless Communications, 21(1), pp.607–620. doi:https://doi.org/10.1109/twc.2021.3098526.
+?
+
+

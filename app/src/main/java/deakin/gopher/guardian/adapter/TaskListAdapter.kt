@@ -1,13 +1,17 @@
 package deakin.gopher.guardian.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Task
+import deakin.gopher.guardian.view.general.TaskDetailActivity
 
 class TaskListAdapter(private var tasks: List<Task>) :
     RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
@@ -15,7 +19,7 @@ class TaskListAdapter(private var tasks: List<Task>) :
     init {
         Log.d("TaskListAdapter", "Task Data Size: ${tasks.size}")
     }
-
+    
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -34,16 +38,34 @@ class TaskListAdapter(private var tasks: List<Task>) :
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val descriptionTextView: TextView =
-            itemView.findViewById(R.id.task_description_text_view)
+            itemView.findViewById(R.id.task_description_text_view)s
 //        private val subDescriptionTextView: TextView =
 //            itemView.findViewById(R.id.tasksubDescEditText)
 //        private val patientIdTextView: TextView =
 //            itemView.findViewById(R.id.taskPatientIdEditText)
 
+        private val viewTaskDetailsButton: Button = itemView.findViewById(R.id.task_description_button)
+        private val taskCompletedIcon: ImageView = itemView.findViewById(R.id.task_completed_icon)
+
+        init {
+            viewTaskDetailsButton.setOnClickListener {
+                val context = itemView.context
+                val task = tasks[adapterPosition]
+                val intent = Intent(context, TaskDetailActivity::class.java)
+                intent.putExtra("taskId", task.taskId)
+                context.startActivity(intent)
+            }
+        }
         fun bind(task: Task) {
             descriptionTextView.text = task.description
 //            subDescriptionTextView.text = task.subDescription
 //            patientIdTextView.text = task.patientId
+            if (task.completed)
+            {
+                taskCompletedIcon.setImageResource(R.drawable.green_circle)
+            } else {
+                taskCompletedIcon.setImageResource(R.drawable.red_circle)
+            }
         }
     }
 
@@ -55,5 +77,11 @@ class TaskListAdapter(private var tasks: List<Task>) :
         tasks = newTasks
         notifyDataSetChanged()
         Log.d("TaskListAdapter", "Updated Task Data Size: ${tasks.size}")
+
+    fun updateData(newTasks: List<Task>) {
+        tasks.clear()
+        tasks.addAll(newTasks)
+        notifyDataSetChanged()
     }
 }
+

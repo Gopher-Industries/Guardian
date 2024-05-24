@@ -1,10 +1,12 @@
 package deakin.gopher.guardian.view.general
 
+import android.content.ClipDescription
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -14,14 +16,18 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.GP
 import deakin.gopher.guardian.model.NextOfKin
 import deakin.gopher.guardian.model.Patient
+import deakin.gopher.guardian.model.Priority
 import deakin.gopher.guardian.model.Task
 import deakin.gopher.guardian.util.DataListener
 
-class TaskAddActivity : AppCompatActivity(), DataListener {
+class TaskAddActivity : AppCompatActivity() {
     private lateinit var taskDescriptionEditText: EditText
     private lateinit var patientIdEditText: EditText
     private lateinit var taskSubDesc : EditText
     private var patient: Patient? = null
+    private lateinit var assignedNurseEditText: EditText
+    private lateinit var priorityRadioGroup: RadioGroup
+    private lateinit var taskPriority: Priority
     private var task: Task? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +37,16 @@ class TaskAddActivity : AppCompatActivity(), DataListener {
         taskDescriptionEditText = findViewById(R.id.taskDescriptionEditText)
         taskSubDesc = findViewById(R.id.tasksubDescEditText)
         patientIdEditText = findViewById(R.id.taskPatientIdEditText)
+        assignedNurseEditText = findViewById(R.id.taskAssignedNurseEditText)
+        priorityRadioGroup = findViewById(R.id.taskPriorityRadioGroup)
+        priorityRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+            taskPriority = when (checkedId) {
+                R.id.taskPriorityRadioButtonLow -> Priority.LOW
+                R.id.taskPriorityRadioButtonMedium -> Priority.MEDIUM
+                R.id.taskPriorityRadioButtonHigh -> Priority.HIGH
+                else -> Priority.MEDIUM
+            }
+        }
         val submitButton: Button = findViewById(R.id.newTaskSubmitButton)
         submitButton.setOnClickListener {
             showSaveDialog()
@@ -51,30 +67,13 @@ class TaskAddActivity : AppCompatActivity(), DataListener {
         }
     }
 
-    override fun onDataFilled(
-        patient: Patient?,
-        nextOfKin1: NextOfKin?,
-        nextOfKin2: NextOfKin?,
-        gp1: GP?,
-        gp2: GP?,
-    ) { }
-
-    override fun onDataFinished(isFinished: Boolean?) {
-    }
-
     fun onTaskDataFilled(
-        patient: Patient,
         task: Task,
     ) {
-        if (null != patient) {
-            this.patient = patient
-        }
         if (null != task) {
             this.task = task
         }
     }
-
-    fun onDataFinihsed(isFinished: Boolean?) { }
 
     fun onTaskDataFinished(isFinished: Boolean?) {
         showSaveDialog()
@@ -151,13 +150,27 @@ class TaskAddActivity : AppCompatActivity(), DataListener {
 //        updatePatientTasks(patientId, taskId)
 //
 //        finish()
+        val taskRef = databaseRef.child("nurse-tasks")
+
+        val taskId = taskRef.push().key ?: ""
+
+        val newTask =
+            Task(
+                taskId,
+                taskDescriptionEditText.text.toString().trim(),
+                assignedNurseEditText.text.toString().trim(),
+                taskPriority,
+            )
+
+        taskRef.child(taskId).setValue(newTask)
+
+        finish()
     }
 
     private fun updatePatientTasks(
-        patientId: String,
         taskId: String,
     ) {
-        val patientTasksRef = FirebaseDatabase.getInstance().getReference("patients").child(patientId).child("tasks")
+        val patientTasksRef = FirebaseDatabase.getInstance().reference.child("nurse-tasks")
         patientTasksRef.child(taskId).setValue(true)
     }
 }

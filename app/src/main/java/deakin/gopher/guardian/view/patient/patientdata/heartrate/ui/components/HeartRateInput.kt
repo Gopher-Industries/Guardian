@@ -24,11 +24,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.view.theme.GuardianTheme
+import java.time.Instant
+import java.time.ZoneId
 
 @ExperimentalMaterial3Api
-@Suppress("ktlint:standard:function-naming")
 @Composable
-fun HeartRateInput() {
+fun HeartRateInput(onSaveHeartRate: (String, String) -> Unit) {
     var heartRate by remember { mutableStateOf("") }
     var selectedDate = rememberDatePickerState()
 
@@ -54,23 +55,30 @@ fun HeartRateInput() {
 
         DatePicker(
             state = selectedDate,
-            modifier =
-                Modifier
-                    .padding(16.dp),
+            modifier = Modifier.padding(16.dp),
         )
 
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = {
+            selectedDate.selectedDateMillis?.let { dateMillis ->
+                val formattedDate = Instant.ofEpochMilli(dateMillis)
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate()
+                    .toString()
+
+                onSaveHeartRate(heartRate, formattedDate)
+            }
+        }) {
             Text(text = "Save")
         }
+
     }
 }
 
 @ExperimentalMaterial3Api
-@Suppress("ktlint:standard:function-naming")
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun HeartRateInputPreview() {
     GuardianTheme {
-        HeartRateInput()
+        HeartRateInput { _, _ -> }
     }
 }

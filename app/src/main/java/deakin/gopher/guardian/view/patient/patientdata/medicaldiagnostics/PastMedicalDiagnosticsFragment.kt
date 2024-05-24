@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -121,6 +122,42 @@ class PastMedicalDiagnosticsFragment : Fragment {
         if (dataChecker()) {
             query.addListenerForSingleValueEvent(SaveInFirebaseListener())
         }
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setInfo()
+    }
+    private fun setInfo() {
+        val reference = FirebaseDatabase.getInstance().getReference("health_details")
+        val query = reference.orderByChild("patient_id").equalTo(patientId)
+
+        query.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (childSnapshot in snapshot.children) {
+                        val diagnostic = childSnapshot.getValue(MedicalDiagnostic::class.java)
+                        if (diagnostic != null && diagnostic.current == true) {
+                            updateUI(diagnostic)
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Firebase", "Error fetching data", error.toException())
+            }
+        })
+    }
+
+    private fun updateUI(diagnostic: MedicalDiagnostic) {
+        editTextArray[0]?.setText(diagnostic.name ?: "") // Name
+        editTextArray[1]?.setText(diagnostic.bloodPressure ?: "") // Blood Pressure
+        editTextArray[2]?.setText(diagnostic.patientTemp ?: "") // Patient Temperature
+        editTextArray[3]?.setText(diagnostic.glucoseLevel ?: "") // Glucose Level
+        editTextArray[4]?.setText(diagnostic.oxygenSaturation ?: "") // Oxygen Saturation
+        editTextArray[5]?.setText(diagnostic.pulseRate ?: "") // Pulse Rate
+        editTextArray[6]?.setText(diagnostic.respirationRate ?: "") // Respiration Rate
+        editTextArray[7]?.setText(diagnostic.bloodFatLevel ?: "") // Blood Fat Level
     }
 
     private fun dataChecker(): Boolean {

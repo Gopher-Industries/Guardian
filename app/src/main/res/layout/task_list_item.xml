@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="375dp"
@@ -14,6 +14,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <Button
+            android:id="@+id/task_description_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:alpha="0"
+            android:backgroundTint="@color/_bg__new_homepage___ek2_color"
+            android:text="" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,12 +30,11 @@
             android:padding="15dp">
 
             <ImageView
+                android:id="@+id/task_completed_icon"
                 android:layout_width="35dp"
                 android:layout_height="33dp"
                 android:contentDescription="TODO"
-                app:srcCompat="@drawable/red_circle"
-                tools:layout_editor_absoluteX="41dp"
-                tools:layout_editor_absoluteY="232dp" />
+                tools:srcCompat="@drawable/orange_circle" />
 
             <TextView
                 android:id="@+id/task_description_text_view"
@@ -42,12 +50,13 @@
             <ImageView
                 android:layout_width="26dp"
                 android:layout_height="31dp"
-                android:layout_marginLeft="140dp"
                 android:layout_marginTop="5dp"
+                android:layout_weight="1"
                 android:contentDescription="TODO"
-                app:srcCompat="@drawable/right_vector"
-                tools:layout_editor_absoluteX="337dp"
-                tools:layout_editor_absoluteY="234dp" />
+                android:scaleType="fitEnd"
+                app:srcCompat="@drawable/right_vector" />
+            <!--                tools:layout_editor_absoluteX="337dp"-->
+            <!--                tools:layout_editor_absoluteY="234dp" />-->
 
         </LinearLayout>
 

@@ -560,5 +560,11 @@
     <string name="ward">Ward</string>
     <string name="caretaker_profile_edit">Caretaker Profile Edit</string>
     <string name="addEdit_carePlan">Add/Edit Care Plan</string>
+    <string name="navigation_drawer_open">Drawer Open</string>
+    <string name="navigation_drawer_close">Drawer Closed</string>
+    <string name="task_description_prefix">Task Description:</string>
+    <string name="assigned_nurse_prefix">Assigned Nurse:</string>
+    <string name="priority_prefix">Priority:</string>
+    <string name="task_details_title">Task Details</string>
 </resources>
 
