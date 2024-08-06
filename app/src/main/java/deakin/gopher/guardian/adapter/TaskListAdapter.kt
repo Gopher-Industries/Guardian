@@ -13,13 +13,13 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Task
 import deakin.gopher.guardian.view.general.TaskDetailActivity
 
-class TaskListAdapter(private var tasks: List<Task>) :
+class TaskListAdapter(private var tasks: MutableList<Task>) :
     RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
     init {
         Log.d("TaskListAdapter", "Task Data Size: ${tasks.size}")
     }
-    
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -38,13 +38,10 @@ class TaskListAdapter(private var tasks: List<Task>) :
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val descriptionTextView: TextView =
-            itemView.findViewById(R.id.task_description_text_view)s
-//        private val subDescriptionTextView: TextView =
-//            itemView.findViewById(R.id.tasksubDescEditText)
-//        private val patientIdTextView: TextView =
-//            itemView.findViewById(R.id.taskPatientIdEditText)
+            itemView.findViewById(R.id.task_description_text_view)
 
-        private val viewTaskDetailsButton: Button = itemView.findViewById(R.id.task_description_button)
+        private val viewTaskDetailsButton: Button =
+            itemView.findViewById(R.id.task_description_button)
         private val taskCompletedIcon: ImageView = itemView.findViewById(R.id.task_completed_icon)
 
         init {
@@ -56,12 +53,10 @@ class TaskListAdapter(private var tasks: List<Task>) :
                 context.startActivity(intent)
             }
         }
+
         fun bind(task: Task) {
             descriptionTextView.text = task.description
-//            subDescriptionTextView.text = task.subDescription
-//            patientIdTextView.text = task.patientId
-            if (task.completed)
-            {
+            if (task.completed) {
                 taskCompletedIcon.setImageResource(R.drawable.green_circle)
             } else {
                 taskCompletedIcon.setImageResource(R.drawable.red_circle)
@@ -74,9 +69,10 @@ class TaskListAdapter(private var tasks: List<Task>) :
     }
 
     fun updateTaskList(newTasks: List<Task>) {
-        tasks = newTasks
+        tasks = newTasks.toMutableList()
         notifyDataSetChanged()
         Log.d("TaskListAdapter", "Updated Task Data Size: ${tasks.size}")
+    }
 
     fun updateData(newTasks: List<Task>) {
         tasks.clear()
@@ -84,4 +80,3 @@ class TaskListAdapter(private var tasks: List<Task>) :
         notifyDataSetChanged()
     }
 }
-

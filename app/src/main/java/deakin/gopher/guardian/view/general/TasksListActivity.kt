@@ -25,7 +25,7 @@ class TasksListActivity : AppCompatActivity() {
     private var taskListAdapter: TaskListAdapter? = null
     private var query: Query? = null
     private var overviewCardview: CardView? = null
-    private lateinit var plusButton : ImageButton
+    private lateinit var plusButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,19 +34,19 @@ class TasksListActivity : AppCompatActivity() {
         val taskListMenuBtn: ImageView = findViewById(R.id.task_list_manu_button)
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
 
-        plusButton = findViewById(R.id.imageView62);
+        plusButton = findViewById(R.id.imageView62)
         navigationView.setItemIconTintList(null)
         taskListMenuBtn.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
             navigationView.setNavigationItemSelectedListener { menuItem: MenuItem ->
                 val id = menuItem.itemId
                 when (id) {
-                    R.id.nav_home, R.id.nav_admin -> startActivity(
+                    R.id.nav_home -> startActivity(
                         Intent(this@TasksListActivity, Homepage4caretaker::class.java)
                     )
-                    R.id.nav_settings -> startActivity(
-                        Intent(this@TasksListActivity, Setting::class.java)
-                    )
+//                    R.id.nav_settings -> startActivity(
+//                        Intent(this@TasksListActivity, Setting::class.java)
+//                    )
                     R.id.add_task -> startActivity(
                         Intent(this@TasksListActivity, TaskAddActivity::class.java)
                     )
@@ -74,7 +74,7 @@ class TasksListActivity : AppCompatActivity() {
 
         // Initialize RecyclerView and Adapter
         taskListRecyclerView.layoutManager = GridLayoutManager(this@TasksListActivity, 1)
-        taskListAdapter = TaskListAdapter(emptyList())
+        taskListAdapter = TaskListAdapter(mutableListOf())
         taskListRecyclerView.adapter = taskListAdapter
 
         // Set up Firebase query
