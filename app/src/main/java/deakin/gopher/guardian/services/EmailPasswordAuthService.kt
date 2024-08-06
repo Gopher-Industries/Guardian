@@ -7,6 +7,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.Password
+import android.util.Log  // Import statement for Log
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.view.general.LoginActivity
 
@@ -16,6 +17,7 @@ class EmailPasswordAuthService(
 ) {
     private val auth = FirebaseAuth.getInstance()
     private val userDataService = UserDataService()
+    private val logTag = "EmailPwdAuthSvc"  // Shortened log tag
 
     fun signIn(): Task<AuthResult>? {
         return try {
@@ -41,11 +43,30 @@ class EmailPasswordAuthService(
                 val currentUser = auth.currentUser!!
                 currentUser.sendEmailVerification()
                 userDataService.create(currentUser.uid, emailAddress.emailAddress)
+                // Update the lastPasswordChange timestamp
+                userDataService.updateLastPasswordChangeTimestamp(currentUser.uid,
+                    System.currentTimeMillis())
                 registerResult
             }
         } catch (e: Exception) {
             e.printStackTrace()
             null
+        }
+    }
+
+    fun updatePassword(newPassword: String): Task<Void>? {
+        val currentUser = auth.currentUser
+        return currentUser?.let { user ->
+            user.updatePassword(newPassword).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Password update successful, update the timestamp
+                    userDataService.updateLastPasswordChangeTimestamp(user.uid, System.currentTimeMillis())
+                    Log.v(logTag, "Password updated successfully for User ${user.uid}")
+                } else {
+                    // Failed to update password
+                    Log.e(logTag, "Failed to update password: ${task.exception}")
+                }
+            }
         }
     }
 
