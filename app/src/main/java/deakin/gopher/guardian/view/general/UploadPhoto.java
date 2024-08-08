@@ -12,12 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
+import com.canhub.cropper.CropImage;
 import com.canhub.cropper.CropImageActivity;
 import com.canhub.cropper.CropImageContract;
 import com.canhub.cropper.CropImageContractOptions;
@@ -25,7 +24,6 @@ import com.canhub.cropper.CropImageOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.canhub.cropper.CropImage;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.view.patient.PatientAddFragment;
 import java.util.UUID;
@@ -54,14 +52,16 @@ public class UploadPhoto extends BaseActivity {
     storageReference = storage.getReference();
 
     final ImageView profile = findViewById(R.id.profile);
-    launcher = registerForActivityResult(new CropImageContract(), result -> {
-            if (result.isSuccessful()) {
-               final Uri croppedImageUri = result.getUriContent();
+    launcher =
+        registerForActivityResult(
+            new CropImageContract(),
+            result -> {
+              if (result.isSuccessful()) {
+                final Uri croppedImageUri = result.getUriContent();
                 profile.setImageURI(croppedImageUri);
                 uploadImageToFirebase(croppedImageUri);
-            }
-        }
-    );
+              }
+            });
 
     final Button takephoto = findViewById(R.id.takephoto);
     takephoto.setOnClickListener(
@@ -99,13 +99,13 @@ public class UploadPhoto extends BaseActivity {
   }
 
   private void startCrop(final Uri imagesUri) {
-      final Intent cropIntent = new Intent(this, CropImageActivity.class);
-      final Bundle bundle = new Bundle(2);
-      bundle.putParcelable(CropImage.CROP_IMAGE_EXTRA_SOURCE, imagesUri);
-      bundle.putParcelable(CropImage.CROP_IMAGE_EXTRA_OPTIONS, new CropImageOptions());
-      cropIntent.putExtra(CropImage.CROP_IMAGE_EXTRA_BUNDLE, bundle);
+    final Intent cropIntent = new Intent(this, CropImageActivity.class);
+    final Bundle bundle = new Bundle(2);
+    bundle.putParcelable(CropImage.CROP_IMAGE_EXTRA_SOURCE, imagesUri);
+    bundle.putParcelable(CropImage.CROP_IMAGE_EXTRA_OPTIONS, new CropImageOptions());
+    cropIntent.putExtra(CropImage.CROP_IMAGE_EXTRA_BUNDLE, bundle);
 
-      launcher.launch(new CropImageContractOptions(imagesUri, new CropImageOptions()));
+    launcher.launch(new CropImageContractOptions(imagesUri, new CropImageOptions()));
   }
 
   public void onCaptureButtonClick(final View view) {

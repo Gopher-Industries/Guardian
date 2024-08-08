@@ -1,7 +1,5 @@
 package deakin.gopher.guardian.model
 
-import android.webkit.WebSettings.RenderPriority
-
 data class Task(
     var taskId: String = "",
     val description: String = "",
@@ -14,5 +12,5 @@ data class Task(
 enum class Priority {
     LOW,
     MEDIUM,
-    HIGH
+    HIGH,
 }

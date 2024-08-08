@@ -63,15 +63,15 @@ class Homepage4admin : BaseActivity() {
             finish()
         }
 
-                // nurse roster button
-                nurseRosterButton.setOnClickListener {
-                    val nurseRosterActivityIntent =
-                        Intent(this@Homepage4admin, NurseRosterActivity::class.java)
-                    startActivity(nurseRosterActivityIntent)
-                    // launch tasks list
-                    taskListButton.setOnClickListener {
-                        NavigationService(this).onLaunchTasks()
-                    }
-                }
+        // nurse roster button
+        nurseRosterButton.setOnClickListener {
+            val nurseRosterActivityIntent =
+                Intent(this@Homepage4admin, NurseRosterActivity::class.java)
+            startActivity(nurseRosterActivityIntent)
+            // launch tasks list
+            taskListButton.setOnClickListener {
+                NavigationService(this).onLaunchTasks()
+            }
+        }
     }
 }

@@ -27,8 +27,12 @@ class UserDataService : FireStoreDataService() {
                 Log.e(dataServiceName, "Failed to create user $userId: $e")
             }
     }
+
     // Amending UserDataService to include last password change timestamp
-    fun updateLastPasswordChangeTimestamp(userId: String, timestamp: Long) {
+    fun updateLastPasswordChangeTimestamp(
+        userId: String,
+        timestamp: Long,
+    ) {
         usersCollection.document(userId).update("lastPasswordChange", timestamp)
             .addOnSuccessListener {
                 Log.v(dataServiceName, "Updated lastPasswordChange for User $userId")

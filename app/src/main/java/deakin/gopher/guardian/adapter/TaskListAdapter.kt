@@ -15,7 +15,6 @@ import deakin.gopher.guardian.view.general.TaskDetailActivity
 
 class TaskListAdapter(private var tasks: List<Task>) :
     RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
-
     init {
         Log.d("TaskListAdapter", "Task Data Size: ${tasks.size}")
     }
@@ -24,8 +23,9 @@ class TaskListAdapter(private var tasks: List<Task>) :
         parent: ViewGroup,
         viewType: Int,
     ): TaskViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.task_list_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.task_list_item, parent, false)
         return TaskViewHolder(view)
     }
 
@@ -87,4 +87,3 @@ class TaskListAdapter(private var tasks: List<Task>) :
         }
     }
 }
-

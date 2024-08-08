@@ -1,6 +1,5 @@
 package deakin.gopher.guardian.view.general
 
-import android.content.ClipDescription
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
@@ -13,17 +12,14 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.firebase.database.FirebaseDatabase
 import deakin.gopher.guardian.R
-import deakin.gopher.guardian.model.GP
-import deakin.gopher.guardian.model.NextOfKin
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.Priority
 import deakin.gopher.guardian.model.Task
-import deakin.gopher.guardian.util.DataListener
 
 class TaskAddActivity : AppCompatActivity() {
     private lateinit var taskDescriptionEditText: EditText
     private lateinit var patientIdEditText: EditText
-    private lateinit var taskSubDesc : EditText
+    private lateinit var taskSubDesc: EditText
     private var patient: Patient? = null
     private lateinit var assignedNurseEditText: EditText
     private lateinit var priorityRadioGroup: RadioGroup
@@ -40,12 +36,13 @@ class TaskAddActivity : AppCompatActivity() {
 //        assignedNurseEditText = findViewById(R.id.taskAssignedNurseEditText)
 //        priorityRadioGroup = findViewById(R.id.taskPriorityRadioGroup)
         priorityRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            taskPriority = when (checkedId) {
+            taskPriority =
+                when (checkedId) {
 //                R.id.taskPriorityRadioButtonLow -> Priority.LOW
 //                R.id.taskPriorityRadioButtonMedium -> Priority.MEDIUM
 //                R.id.taskPriorityRadioButtonHigh -> Priority.HIGH
-                else -> Priority.MEDIUM
-            }
+                    else -> Priority.MEDIUM
+                }
         }
         val submitButton: Button = findViewById(R.id.newTaskSubmitButton)
         submitButton.setOnClickListener {
@@ -67,9 +64,7 @@ class TaskAddActivity : AppCompatActivity() {
         }
     }
 
-    fun onTaskDataFilled(
-        task: Task,
-    ) {
+    fun onTaskDataFilled(task: Task) {
         if (null != task) {
             this.task = task
         }
@@ -99,7 +94,6 @@ class TaskAddActivity : AppCompatActivity() {
     }
 
     private fun saveInFirebase() {
-
         val databaseRef = FirebaseDatabase.getInstance().reference
         val caretakerTaskRef = databaseRef.child("caretaker_tasks")
 
@@ -110,7 +104,7 @@ class TaskAddActivity : AppCompatActivity() {
 //        val newTask = Task(
 //            taskId = "",
 //            description = taskDescription,
-////            subDescription = taskSubDesc,
+// //            subDescription = taskSubDesc,
 //            patientId = patientId
 //        )
 //
@@ -127,7 +121,7 @@ class TaskAddActivity : AppCompatActivity() {
 //            }
 //        }
 
-        //This for nurse tasks // TODO : need to operate for both caretaker and nurse
+        // This for nurse tasks // TODO : need to operate for both caretaker and nurse
 //        val databaseRef = FirebaseDatabase.getInstance().reference
 //        val caretakerTaskRef = databaseRef.child("caretaker_tasks")
 //        val patientRef = databaseRef.child("patient_profile")
@@ -167,9 +161,7 @@ class TaskAddActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun updatePatientTasks(
-        taskId: String,
-    ) {
+    private fun updatePatientTasks(taskId: String) {
         val patientTasksRef = FirebaseDatabase.getInstance().reference.child("nurse-tasks")
         patientTasksRef.child(taskId).setValue(true)
     }

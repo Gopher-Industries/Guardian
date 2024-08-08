@@ -18,15 +18,13 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import deakin.gopher.guardian.view.patient.patientdata.heartrate.HeartRateRoutes
 import deakin.gopher.guardian.view.patient.patientdata.heartrate.ui.components.HeartRateInput
-import androidx.compose.ui.platform.LocalContext
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.database.ktx.database
 
 @ExperimentalMaterial3Api
 @Composable
@@ -45,19 +43,21 @@ fun AddHeartRateScreen(navController: NavController) {
                         )
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
-                ),
+                colors =
+                    TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        titleContentColor = MaterialTheme.colorScheme.primary,
+                    ),
             )
         },
     ) { innerPadding ->
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
         ) {
             HeartRateInput(onSaveHeartRate = { heartRate, date ->
                 // Here you would add your Firebase save logic
