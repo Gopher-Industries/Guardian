@@ -41,12 +41,14 @@ class TasksListActivity : AppCompatActivity() {
             navigationView.setNavigationItemSelectedListener { menuItem: MenuItem ->
                 val id = menuItem.itemId
                 when (id) {
-                    R.id.nav_home, R.id.nav_admin -> startActivity(
+                    R.id.nav_home
+//                        , R.id.nav_admin
+                    -> startActivity(
                         Intent(this@TasksListActivity, Homepage4caretaker::class.java)
                     )
-                    R.id.nav_settings -> startActivity(
-                        Intent(this@TasksListActivity, Setting::class.java)
-                    )
+//                    R.id.nav_settings -> startActivity(
+//                        Intent(this@TasksListActivity, Setting::class.java)
+//                    )
                     R.id.add_task -> startActivity(
                         Intent(this@TasksListActivity, TaskAddActivity::class.java)
                     )

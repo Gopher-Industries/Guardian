@@ -37,13 +37,13 @@ class TaskAddActivity : AppCompatActivity() {
         taskDescriptionEditText = findViewById(R.id.taskDescriptionEditText)
         taskSubDesc = findViewById(R.id.tasksubDescEditText)
         patientIdEditText = findViewById(R.id.taskPatientIdEditText)
-        assignedNurseEditText = findViewById(R.id.taskAssignedNurseEditText)
-        priorityRadioGroup = findViewById(R.id.taskPriorityRadioGroup)
+//        assignedNurseEditText = findViewById(R.id.taskAssignedNurseEditText)
+//        priorityRadioGroup = findViewById(R.id.taskPriorityRadioGroup)
         priorityRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             taskPriority = when (checkedId) {
-                R.id.taskPriorityRadioButtonLow -> Priority.LOW
-                R.id.taskPriorityRadioButtonMedium -> Priority.MEDIUM
-                R.id.taskPriorityRadioButtonHigh -> Priority.HIGH
+//                R.id.taskPriorityRadioButtonLow -> Priority.LOW
+//                R.id.taskPriorityRadioButtonMedium -> Priority.MEDIUM
+//                R.id.taskPriorityRadioButtonHigh -> Priority.HIGH
                 else -> Priority.MEDIUM
             }
         }
@@ -107,25 +107,25 @@ class TaskAddActivity : AppCompatActivity() {
         val taskDescription = taskDescriptionEditText.text.toString().trim()
         val taskSubDesc = taskSubDesc.text.toString().trim()
 
-        val newTask = Task(
-            taskId = "",
-            description = taskDescription,
-            subDescription = taskSubDesc,
-            patientId = patientId
-        )
-
-        val taskId = caretakerTaskRef.push().key ?: ""
-        newTask.taskId = taskId
-
-        //saving under care taker tasks
-        caretakerTaskRef.child(taskId).setValue(newTask).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                updatePatientTasks(patientId, taskId)
-                finish()
-            } else {
-                // Handle the error
-            }
-        }
+//        val newTask = Task(
+//            taskId = "",
+//            description = taskDescription,
+////            subDescription = taskSubDesc,
+//            patientId = patientId
+//        )
+//
+//        val taskId = caretakerTaskRef.push().key ?: ""
+//        newTask.taskId = taskId
+//
+//        //saving under care taker tasks
+//        caretakerTaskRef.child(taskId).setValue(newTask).addOnCompleteListener { task ->
+//            if (task.isSuccessful) {
+//                updatePatientTasks(patientId, taskId)
+//                finish()
+//            } else {
+//                // Handle the error
+//            }
+//        }
 
         //This for nurse tasks // TODO : need to operate for both caretaker and nurse
 //        val databaseRef = FirebaseDatabase.getInstance().reference

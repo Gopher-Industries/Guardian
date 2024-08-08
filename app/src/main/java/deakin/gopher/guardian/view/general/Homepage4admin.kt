@@ -14,7 +14,7 @@ class Homepage4admin : BaseActivity() {
     private lateinit var patientListButton: Button
     private lateinit var settingsButton: Button
     private lateinit var signOutButton: Button
-    private lateinit var nurseRosterButton : Button
+    private lateinit var nurseRosterButton: Button
     private lateinit var taskListButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,7 @@ class Homepage4admin : BaseActivity() {
         settingsButton = findViewById(R.id.settingsButton)
         signOutButton = findViewById(R.id.sighOutButton)
         nurseRosterButton = findViewById(R.id.nurseRoseterButton)
-        taskListButton = findViewById(R.id.tasksButton_admin)
+//        taskListButton = findViewById(R.id.tasksButton_admin)
 
         // new Patient Button
         newPatientButton.setOnClickListener {
@@ -43,7 +43,8 @@ class Homepage4admin : BaseActivity() {
         }
         // patient list button
         patientListButton.setOnClickListener {
-            val medicalDiagnosticsActivityIntent = Intent(this@Homepage4admin, PatientListActivity::class.java)
+            val medicalDiagnosticsActivityIntent =
+                Intent(this@Homepage4admin, PatientListActivity::class.java)
             medicalDiagnosticsActivityIntent.putExtra("userType", "admin")
             startActivity(medicalDiagnosticsActivityIntent)
         }
@@ -60,16 +61,17 @@ class Homepage4admin : BaseActivity() {
         signOutButton.setOnClickListener {
             EmailPasswordAuthService.signOut(this)
             finish()
-        }s
-
-        // nurse roster button
-        nurseRosterButton.setOnClickListener {
-            val nurseRosterActivityIntent =
-                Intent(this@Homepage4admin, NurseRosterActivity::class.java)
-            startActivity(nurseRosterActivityIntent)
-        // launch tasks list
-        taskListButton.setOnClickListener {
-            NavigationService(this).onLaunchTasks()
         }
+
+                // nurse roster button
+                nurseRosterButton.setOnClickListener {
+                    val nurseRosterActivityIntent =
+                        Intent(this@Homepage4admin, NurseRosterActivity::class.java)
+                    startActivity(nurseRosterActivityIntent)
+                    // launch tasks list
+                    taskListButton.setOnClickListener {
+                        NavigationService(this).onLaunchTasks()
+                    }
+                }
     }
 }
