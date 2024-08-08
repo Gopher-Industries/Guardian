@@ -5,6 +5,7 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven { url='https://jcenter.bintray.com/'}
     }
 }
 
@@ -14,6 +15,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url='https://jcenter.bintray.com/'}
     }
 }
 rootProject.name = "Guardian"
