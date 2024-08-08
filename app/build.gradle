@@ -133,8 +133,10 @@ dependencies {
     implementation "androidx.camera:camera-view:1.0.0-alpha29"
     //ProfileCirle
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
     //CropImg
-    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+//    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    implementation("com.vanniktech:android-image-cropper:4.6.0")
 
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
 

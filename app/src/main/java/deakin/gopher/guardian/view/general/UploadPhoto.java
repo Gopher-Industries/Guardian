@@ -12,14 +12,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.canhub.cropper.CropImageActivity;
+import com.canhub.cropper.CropImageContract;
+import com.canhub.cropper.CropImageContractOptions;
+import com.canhub.cropper.CropImageOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
+import com.canhub.cropper.CropImage;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.view.patient.PatientAddFragment;
 import java.util.UUID;
@@ -29,10 +35,13 @@ public class UploadPhoto extends BaseActivity {
   private static final int REQUEST_CAMERA_PERMISSION = 200;
   private static final int REQUEST_IMAGE_CAPTURE = 1;
   private static final int REQUEST_IMAGE_PICK = 2;
+  private static final int REQUEST_IMAGE_CROP = 3;
   Uri imageuri;
   Uri imageUri2;
   private StorageReference storageReference;
   private boolean CapturePhoto;
+
+  private ActivityResultLauncher<CropImageContractOptions> launcher;
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -43,6 +52,16 @@ public class UploadPhoto extends BaseActivity {
 
     final FirebaseStorage storage = FirebaseStorage.getInstance();
     storageReference = storage.getReference();
+
+    final ImageView profile = findViewById(R.id.profile);
+    launcher = registerForActivityResult(new CropImageContract(), result -> {
+            if (result.isSuccessful()) {
+               final Uri croppedImageUri = result.getUriContent();
+                profile.setImageURI(croppedImageUri);
+                uploadImageToFirebase(croppedImageUri);
+            }
+        }
+    );
 
     final Button takephoto = findViewById(R.id.takephoto);
     takephoto.setOnClickListener(
@@ -80,7 +99,13 @@ public class UploadPhoto extends BaseActivity {
   }
 
   private void startCrop(final Uri imagesUri) {
-    CropImage.activity(imagesUri).setGuidelines(CropImageView.Guidelines.ON).start(this);
+      final Intent cropIntent = new Intent(this, CropImageActivity.class);
+      final Bundle bundle = new Bundle(2);
+      bundle.putParcelable(CropImage.CROP_IMAGE_EXTRA_SOURCE, imagesUri);
+      bundle.putParcelable(CropImage.CROP_IMAGE_EXTRA_OPTIONS, new CropImageOptions());
+      cropIntent.putExtra(CropImage.CROP_IMAGE_EXTRA_BUNDLE, bundle);
+
+      launcher.launch(new CropImageContractOptions(imagesUri, new CropImageOptions()));
   }
 
   public void onCaptureButtonClick(final View view) {
@@ -109,12 +134,7 @@ public class UploadPhoto extends BaseActivity {
 
     if (RESULT_OK == resultCode) {
       final ImageView profile = findViewById(R.id.profile);
-      if (CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE == requestCode) {
-        final CropImage.ActivityResult result = CropImage.getActivityResult(data);
-        final Uri croppedImageUri = result.getUri();
-        profile.setImageURI(croppedImageUri);
-        uploadImageToFirebase(croppedImageUri);
-      } else if (REQUEST_IMAGE_CAPTURE == requestCode) {
+      if (REQUEST_IMAGE_CAPTURE == requestCode) {
         if (CapturePhoto) {
           imageuri = data.getData();
           final Bitmap photoBitmap = (Bitmap) data.getExtras().get("data");

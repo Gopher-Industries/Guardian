@@ -2,7 +2,6 @@ buildscript {
     repositories {
         google()  // Google's Maven repository
         mavenCentral()  // Maven Central repository
-        maven { url = 'https://jcenter.bintray.com/' }
     }
 
     dependencies {
