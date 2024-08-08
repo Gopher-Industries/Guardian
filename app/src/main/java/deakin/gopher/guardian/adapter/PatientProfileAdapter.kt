@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.google.firebase.database.*
 import deakin.gopher.guardian.view.GP.GPProfileFragment
 import deakin.gopher.guardian.view.general.HealthDataForViewFragment
 import deakin.gopher.guardian.view.nextofkin.NextOfKinFragment
@@ -18,14 +17,14 @@ class PatientProfileAdapter(
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle,
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
-
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> {
                 val fragment = PatientProfileFragment()
-                val bundle = Bundle().apply {
-                    putString("patientId", patientId)
-                }
+                val bundle =
+                    Bundle().apply {
+                        putString("patientId", patientId)
+                    }
                 fragment.arguments = bundle
                 fragment
             }
@@ -41,6 +40,4 @@ class PatientProfileAdapter(
     override fun getItemCount(): Int {
         return 6
     }
-
-
 }

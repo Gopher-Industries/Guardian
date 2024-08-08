@@ -2,12 +2,12 @@ package deakin.gopher.guardian.services
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log // Import statement for Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.Password
-import android.util.Log  // Import statement for Log
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.view.general.LoginActivity
 
@@ -17,7 +17,7 @@ class EmailPasswordAuthService(
 ) {
     private val auth = FirebaseAuth.getInstance()
     private val userDataService = UserDataService()
-    private val logTag = "EmailPwdAuthSvc"  // Shortened log tag
+    private val logTag = "EmailPwdAuthSvc" // Shortened log tag
 
     fun signIn(): Task<AuthResult>? {
         return try {
@@ -44,8 +44,10 @@ class EmailPasswordAuthService(
                 currentUser.sendEmailVerification()
                 userDataService.create(currentUser.uid, emailAddress.emailAddress)
                 // Update the lastPasswordChange timestamp
-                userDataService.updateLastPasswordChangeTimestamp(currentUser.uid,
-                    System.currentTimeMillis())
+                userDataService.updateLastPasswordChangeTimestamp(
+                    currentUser.uid,
+                    System.currentTimeMillis(),
+                )
                 registerResult
             }
         } catch (e: Exception) {

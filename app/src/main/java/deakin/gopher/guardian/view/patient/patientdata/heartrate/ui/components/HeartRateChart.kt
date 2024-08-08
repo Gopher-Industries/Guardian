@@ -30,12 +30,14 @@ fun HeartRateChart(heartRates: List<HeartRate>) {
     val sortedHeartRates = heartRates.sortedBy { it.measurementDate }
 
     // Map heart rate data to chart entries
-    val entries = sortedHeartRates.mapIndexed { index, heartRate ->
-        entryOf(
-            x = heartRate.measurementDate.time.toFloat(), // Use timestamp as X-axis value
-            y = heartRate.measurement.toFloat(),
-        )
-    }
+    val entries =
+        sortedHeartRates.mapIndexed { index, heartRate ->
+            entryOf(
+                // Use timestamp as X-axis value
+                x = heartRate.measurementDate.time.toFloat(),
+                y = heartRate.measurement.toFloat(),
+            )
+        }
 
     val chartEntryModelProducer = ChartEntryModelProducer(entries)
     val heartRateChartLineSpec = mutableListOf<LineChart.LineSpec>()
@@ -44,14 +46,16 @@ fun HeartRateChart(heartRates: List<HeartRate>) {
         LineChart.LineSpec(
             lineColor = customLineColor,
             lineThicknessDp = 1.0F,
-            lineBackgroundShader = DynamicShaders.fromBrush(
-                brush = Brush.verticalGradient(
-                    listOf(
-                        Color(customLineColor),
-                        Color.White,
-                    ),
+            lineBackgroundShader =
+                DynamicShaders.fromBrush(
+                    brush =
+                        Brush.verticalGradient(
+                            listOf(
+                                Color(customLineColor),
+                                Color.White,
+                            ),
+                        ),
                 ),
-            ),
         ),
     )
 

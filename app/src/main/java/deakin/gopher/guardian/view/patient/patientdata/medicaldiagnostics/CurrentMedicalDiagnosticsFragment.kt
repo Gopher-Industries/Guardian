@@ -101,30 +101,36 @@ class CurrentMedicalDiagnosticsFragment : Fragment {
         return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         setInfo()
     }
+
     private fun setInfo() {
         val reference = FirebaseDatabase.getInstance().getReference("health_details")
         val query = reference.orderByChild("patient_id").equalTo(patientId)
 
-        query.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (childSnapshot in snapshot.children) {
-                        val diagnostic = childSnapshot.getValue(MedicalDiagnostic::class.java)
-                        if (diagnostic != null && diagnostic.current == true) {
-                            updateUI(diagnostic)
+        query.addValueEventListener(
+            object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        for (childSnapshot in snapshot.children) {
+                            val diagnostic = childSnapshot.getValue(MedicalDiagnostic::class.java)
+                            if (diagnostic != null && diagnostic.current == true) {
+                                updateUI(diagnostic)
+                            }
                         }
                     }
                 }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.e("Firebase", "Error fetching data", error.toException())
-            }
-        })
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("Firebase", "Error fetching data", error.toException())
+                }
+            },
+        )
     }
 
     private fun updateUI(diagnostic: MedicalDiagnostic) {

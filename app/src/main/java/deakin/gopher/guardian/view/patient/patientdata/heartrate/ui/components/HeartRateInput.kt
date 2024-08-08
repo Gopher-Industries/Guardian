@@ -60,17 +60,17 @@ fun HeartRateInput(onSaveHeartRate: (String, String) -> Unit) {
 
         Button(onClick = {
             selectedDate.selectedDateMillis?.let { dateMillis ->
-                val formattedDate = Instant.ofEpochMilli(dateMillis)
-                    .atZone(ZoneId.systemDefault())
-                    .toLocalDate()
-                    .toString()
+                val formattedDate =
+                    Instant.ofEpochMilli(dateMillis)
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate()
+                        .toString()
 
                 onSaveHeartRate(heartRate, formattedDate)
             }
         }) {
             Text(text = "Save")
         }
-
     }
 }
 
