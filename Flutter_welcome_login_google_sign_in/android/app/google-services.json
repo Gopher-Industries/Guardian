@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "274677794777",
+    "firebase_url": "https://sit-22t3-team-guardian-ce601c2-default-rtdb.firebaseio.com",
+    "project_id": "sit-22t3-team-guardian-ce601c2",
+    "storage_bucket": "sit-22t3-team-guardian-ce601c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274677794777:android:65b5c3d192878e11323bc8",
+        "android_client_info": {
+          "package_name": "com.example.loin_sign_in"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274677794777-fu1sosmmrqm4bgvmkf76gdc3v430d03v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOnd4RDSKMCUvB8OIQjrweenQZEYlD3UE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274677794777-fu1sosmmrqm4bgvmkf76gdc3v430d03v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274677794777:android:7106e93253bdfefb323bc8",
+        "android_client_info": {
+          "package_name": "com.example.tg_patient_profile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274677794777-fu1sosmmrqm4bgvmkf76gdc3v430d03v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOnd4RDSKMCUvB8OIQjrweenQZEYlD3UE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274677794777-fu1sosmmrqm4bgvmkf76gdc3v430d03v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
