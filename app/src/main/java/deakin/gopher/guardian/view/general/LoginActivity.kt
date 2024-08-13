@@ -30,12 +30,14 @@ import deakin.gopher.guardian.model.login.RoleName
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
+import deakin.gopher.guardian.services.UserDataService
 import deakin.gopher.guardian.view.hide
 import deakin.gopher.guardian.view.show
 
 class LoginActivity : BaseActivity() {
     private var userRole: RoleName = RoleName.Caretaker
     private lateinit var gsoClient: GoogleSignInClient
+    private val userDataService = UserDataService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,39 +87,71 @@ class LoginActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
-            EmailPasswordAuthService(
-                EmailAddress(emailInput),
-                Password(passwordInput),
-            ).also { authService ->
-                authService
-                    .signIn()
-                    ?.addOnSuccessListener {
-                        progressBar.show()
+            // Check if the account is locked before proceeding with login
+            userDataService.getLoginAttemptsByEmail(emailInput) { attempts, isLocked ->
+                if (isLocked) {
+                    // Account is locked
+                    progressBar.visibility = View.GONE
+                    showMessage("Account is locked. Password reset email sent to $emailInput")
+                    // Convert String to EmailAddress
+                    val emailAddress = EmailAddress(emailInput)
+                    EmailPasswordAuthService.resetPassword(emailAddress)
+                } else {
+                    // Proceed with login
+                    EmailPasswordAuthService(
+                        EmailAddress(emailInput),
+                        Password(passwordInput),
+                    ).also { authService ->
+                        authService
+                            .signIn()
+                            ?.addOnSuccessListener {
+                                progressBar.show()
 
-                        if (authService.isUserVerified().not()) {
-                            progressBar.hide()
-                            Toast.makeText(
-                                applicationContext,
-                                LoginAuthError.EmailNotVerified.messageId,
-                                Toast.LENGTH_SHORT,
-                            ).show()
-                            return@addOnSuccessListener
-                        }
+                                if (authService.isUserVerified().not()) {
+                                    progressBar.hide()
+                                    Toast.makeText(
+                                        applicationContext,
+                                        LoginAuthError.EmailNotVerified.messageId,
+                                        Toast.LENGTH_SHORT,
+                                    ).show()
+                                    return@addOnSuccessListener
+                                }
+                                userDataService.resetLoginAttemptsByEmail(emailInput)
+                                NavigationService(this).toHomeScreenForRole(userRole)
+                                progressBar.hide()
+                            }
+                            ?.addOnFailureListener { e: Exception ->
+                                // Increment login attempts on failure
+                                val newAttempts = attempts + 1
+                                val isLocked = newAttempts >= 3
+                                userDataService.setLoginAttemptsByEmail(
+                                    emailInput,
+                                    newAttempts,
+                                    isLocked
+                                )
+                                val attemptsRemaining = maxOf(3 - newAttempts, 0)
 
-                        NavigationService(this).toHomeScreenForRole(userRole)
-                        progressBar.hide()
+                                if (isLocked) {
+                                    showMessage("Account is locked. Password reset email sent to $emailInput")
+                                    // Convert String to EmailAddress
+                                    val emailAddress = EmailAddress(emailInput)
+                                    EmailPasswordAuthService.resetPassword(emailAddress)
+                                } else {
+                                    showMessage("Error: ${e.message}. $attemptsRemaining attempts remaining.")
+                                }
+
+                                progressBar.hide()
+                                Toast.makeText(
+                                    applicationContext,
+                                    getString(R.string.toast_login_error, e.message),
+                                    Toast.LENGTH_SHORT,
+                                ).show()
+                            }
                     }
-                    ?.addOnFailureListener { e: Exception ->
-                        progressBar.hide()
-                        Toast.makeText(
-                            applicationContext,
-                            getString(R.string.toast_login_error, e.message),
-                            Toast.LENGTH_SHORT,
-                        ).show()
-                    }
+                    val sessionManager = SessionManager(this)
+                    sessionManager.createLoginSession()
+                }
             }
-            val sessionManager = SessionManager(this)
-            sessionManager.createLoginSession()
         }
 
         mCreateBtn.setOnClickListener {
@@ -233,6 +267,9 @@ class LoginActivity : BaseActivity() {
             ).show()
         }
     }
+            private fun showMessage(message: String) {
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            }
 
     companion object {
         private const val RC_GOOGLE_SIGN_IN = 1000
