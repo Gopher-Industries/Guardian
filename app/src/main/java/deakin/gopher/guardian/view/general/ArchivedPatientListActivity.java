@@ -32,15 +32,12 @@ public class ArchivedPatientListActivity extends BaseActivity {
   private DrawerLayout drawerLayout;
   private ActionBarDrawerToggle toggle;
 
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_archived_patient_list);
 
     recyclerView = findViewById(R.id.archived_patient_recycler_view);
-
-
 
     final List<Patient> archivedPatients = new ArrayList<>();
     archivedPatients.add(new Patient("1", "John", "Doe"));
@@ -66,8 +63,8 @@ public class ArchivedPatientListActivity extends BaseActivity {
         });
     final FirebaseRecyclerOptions<Patient> options =
         new FirebaseRecyclerOptions.Builder<Patient>()
-                .setQuery(archivedQuery, Patient.class)
-                .build();
+            .setQuery(archivedQuery, Patient.class)
+            .build();
 
     SimpleArchivedPatientAdapter adapter = new SimpleArchivedPatientAdapter(archivedPatients);
     recyclerView.setAdapter(adapter);
@@ -75,39 +72,38 @@ public class ArchivedPatientListActivity extends BaseActivity {
 
     NavigationView navigationView = findViewById(R.id.nav_view);
     drawerLayout = findViewById(R.id.drawer_layout);
-    toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    toggle =
+        new ActionBarDrawerToggle(
+            this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     drawerLayout.addDrawerListener(toggle);
     toggle.syncState();
 
-    if(getSupportActionBar() != null)
-    {
+    if (getSupportActionBar() != null) {
       getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-    else
-    {
+    } else {
       Log.e("ActionBar", "The action bar is not available.");
     }
 
-    findViewById(R.id.patient_list_menu_button).setOnClickListener(view -> drawerLayout.openDrawer(GravityCompat.START));
+    findViewById(R.id.patient_list_menu_button)
+        .setOnClickListener(view -> drawerLayout.openDrawer(GravityCompat.START));
 
-    navigationView.setNavigationItemSelectedListener(item -> {
-      int id = item.getItemId();
-//
-//      if (id == R.id.nav_home) {
-//      }
-//
-//      if (id == R.id.nav_admin) {
-//      }
-//      if (id == R.id.nav_settings) {
-//      }
-//      if (id == R.id.nav_signout) {
-//      }
+    navigationView.setNavigationItemSelectedListener(
+        item -> {
+          int id = item.getItemId();
+          //
+          //      if (id == R.id.nav_home) {
+          //      }
+          //
+          //      if (id == R.id.nav_admin) {
+          //      }
+          //      if (id == R.id.nav_settings) {
+          //      }
+          //      if (id == R.id.nav_signout) {
+          //      }
 
-      drawerLayout.closeDrawer(GravityCompat.START);
-      return true;
-    });
-
-
+          drawerLayout.closeDrawer(GravityCompat.START);
+          return true;
+        });
   }
 
   @Override

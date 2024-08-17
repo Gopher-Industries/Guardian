@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.res.stringResource
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -45,8 +44,7 @@ class TaskDetailActivity : AppCompatActivity() {
                                 taskAssignedNurseTextView.setText(textnur)
                                 taskPriorityTextView.setText(textprior)
 
-                                if (task.completed)
-                                {
+                                if (task.completed) {
                                     completeButton.visibility = View.GONE
                                     incompleteButton.visibility = View.VISIBLE
                                 } else {
@@ -56,6 +54,7 @@ class TaskDetailActivity : AppCompatActivity() {
                             }
                         }
                     }
+
                     override fun onCancelled(databaseError: DatabaseError) {
                         Toast.makeText(
                             this@TaskDetailActivity,
@@ -65,6 +64,7 @@ class TaskDetailActivity : AppCompatActivity() {
                     }
                 },
             )
+
             fun markAsCompleted() {
                 val taskRef = FirebaseDatabase.getInstance().getReference("nurse-tasks").child(taskId)
                 taskRef.child("completed").setValue(true)
@@ -72,6 +72,7 @@ class TaskDetailActivity : AppCompatActivity() {
                 completeButton.visibility = View.GONE
                 incompleteButton.visibility = View.VISIBLE
             }
+
             fun markAsIncomplete() {
                 val taskRef = FirebaseDatabase.getInstance().getReference("nurse-tasks").child(taskId)
                 taskRef.child("completed").setValue(false)
@@ -79,6 +80,7 @@ class TaskDetailActivity : AppCompatActivity() {
                 incompleteButton.visibility = View.GONE
                 completeButton.visibility = View.VISIBLE
             }
+
             fun deleteTask() {
                 val taskRef =
                     FirebaseDatabase.getInstance().getReference("nurse-tasks").child(taskId)
@@ -91,16 +93,16 @@ class TaskDetailActivity : AppCompatActivity() {
                         Toast.makeText(this, "Failed to delete task", Toast.LENGTH_SHORT).show()
                     }
             }
-            completeButton.setOnClickListener() {
+            completeButton.setOnClickListener {
                 markAsCompleted()
             }
-            incompleteButton.setOnClickListener() {
+            incompleteButton.setOnClickListener {
                 markAsIncomplete()
             }
-            backButton.setOnClickListener() {
+            backButton.setOnClickListener {
                 finish()
             }
-            deleteButton.setOnClickListener() {
+            deleteButton.setOnClickListener {
                 deleteTask()
             }
         }

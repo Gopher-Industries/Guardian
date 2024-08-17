@@ -1,14 +1,11 @@
 package deakin.gopher.guardian.view.patient.careplan;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,13 +16,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.model.CarePlan;
-
 import java.util.HashMap;
+
 public class CarePlanActivity extends AppCompatActivity {
   final HashMap<CheckBox, String> supportRequirementsCheckBox = new HashMap<>();
   final HashMap<CheckBox, String> drinkLikesCheckBox = new HashMap<>();
@@ -39,7 +34,7 @@ public class CarePlanActivity extends AppCompatActivity {
   HashMap<RadioButton, String> nutritionRadioButtons = new HashMap<>();
 
   RadioGroup dietTimeRadioGroup;
-  HashMap<RadioButton,String> dietTimeRadioButtons = new HashMap<>();
+  HashMap<RadioButton, String> dietTimeRadioButtons = new HashMap<>();
 
   RadioGroup sleepPatternRadioGroup;
   HashMap<RadioButton, String> sleepPatternRadioButtons = new HashMap<>();
@@ -68,14 +63,12 @@ public class CarePlanActivity extends AppCompatActivity {
     carePlanMenuButton.setOnClickListener(
         v -> {
           drawerLayout.openDrawer(GravityCompat.START);
-        }
-    );
+        });
 
-    //careplan type
+    // careplan type
     carePlanTypeRadioGroup = findViewById(R.id.carePlanTypeRGroup);
     carePlanTypesRadioButtons.put((RadioButton) findViewById(R.id.radioButton2), "Home");
     carePlanTypesRadioButtons.put((RadioButton) findViewById(R.id.radioButton), "Hospital");
-
 
     nutritionRadioGroup = findViewById(R.id.nutritionHydrationRGroup);
     nutritionRadioButtons.put((RadioButton) findViewById(R.id.radioButton6), "Yes");
@@ -87,22 +80,22 @@ public class CarePlanActivity extends AppCompatActivity {
     dietTimeRadioButtons.put((RadioButton) findViewById(R.id.radioButton5), "12PM-LN");
     dietTimeRadioButtons.put((RadioButton) findViewById(R.id.radioButton10), "6PM-DN");
 
-      sleepPatternRadioGroup = findViewById(R.id.sleepPatternsRGroup);
-      sleepPatternRadioButtons.put((RadioButton) findViewById(R.id.radioButton61), "10PM-6AM");
-      sleepPatternRadioButtons.put((RadioButton) findViewById(R.id.radioButton71), "8PM-4AM");
-      sleepPatternRadioButtons.put((RadioButton) findViewById(R.id.radioButton81), "11PM-7AM");
+    sleepPatternRadioGroup = findViewById(R.id.sleepPatternsRGroup);
+    sleepPatternRadioButtons.put((RadioButton) findViewById(R.id.radioButton61), "10PM-6AM");
+    sleepPatternRadioButtons.put((RadioButton) findViewById(R.id.radioButton71), "8PM-4AM");
+    sleepPatternRadioButtons.put((RadioButton) findViewById(R.id.radioButton81), "11PM-7AM");
 
-      painScoreRadioGroup = findViewById(R.id.ratingGroup);
-      painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton21)), "1");
-      painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton22)), "2");
-      painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton23)), "3");
-      painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton24)), "4");
-      painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton25)), "5");
-      painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton26)), "6");
-      painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton27)), "7");
-      painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton28)), "8");
-      painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton29)), "9");
-      painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton30)), "10");
+    painScoreRadioGroup = findViewById(R.id.ratingGroup);
+    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton21)), "1");
+    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton22)), "2");
+    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton23)), "3");
+    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton24)), "4");
+    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton25)), "5");
+    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton26)), "6");
+    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton27)), "7");
+    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton28)), "8");
+    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton29)), "9");
+    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton30)), "10");
 
     // support requirements
     supportRequirementsCheckBox.put((CheckBox) findViewById(R.id.selfCareCheckBox), "Self Care");
@@ -111,12 +104,12 @@ public class CarePlanActivity extends AppCompatActivity {
     supportRequirementsCheckBox.put((CheckBox) findViewById(R.id.bathroomCheckBox), "Bathroom");
     supportRequirementsCheckBox.put((CheckBox) findViewById(R.id.shoppingCheckBox), "Shopping");
 
-    //drinks
+    // drinks
     drinkLikesCheckBox.put((CheckBox) findViewById(R.id.coffeeCheckBox), "Coffee");
     drinkLikesCheckBox.put((CheckBox) findViewById(R.id.teaCheckBox), "Tea");
     drinkLikesCheckBox.put((CheckBox) findViewById(R.id.waterCheckBox), "Water");
 
-    //pain
+    // pain
     painCheckBox.put((CheckBox) findViewById(R.id.chronicCheckBox), "Chronic");
     painCheckBox.put((CheckBox) findViewById(R.id.massageRequiredCheckBox), "Massage Required");
     painCheckBox.put((CheckBox) findViewById(R.id.pillowSupportCheckBox), "Pillow Support");
@@ -135,14 +128,13 @@ public class CarePlanActivity extends AppCompatActivity {
     behavioralManagementCheckBox.put(
         (CheckBox) findViewById(R.id.lightsOnBathroomCB), "Lights on Bathroom");
 
-      // Firebase initialization
-      FirebaseDatabase database = FirebaseDatabase.getInstance();
-      carePlanRef = database.getReference("careplan");
-      // Load care plan summary data from Firebase
-      if(!"".equals(patientId) && null != patientId) {
-          loadCarePlanDataForPatient(patientId);
-      }
-
+    // Firebase initialization
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    carePlanRef = database.getReference("careplan");
+    // Load care plan summary data from Firebase
+    if (!"".equals(patientId) && null != patientId) {
+      loadCarePlanDataForPatient(patientId);
+    }
 
     submitButton.setOnClickListener(
         v -> {
@@ -152,13 +144,14 @@ public class CarePlanActivity extends AppCompatActivity {
           builder.setPositiveButton(
               "YES",
               (dialog, whichButton) -> {
-                  CarePlan updatedCarePlan = createUpdatedCarePlan();
-                  // Save the updated CarePlan to Firebase
-                  saveCarePlanToFirebase(updatedCarePlan);
+                CarePlan updatedCarePlan = createUpdatedCarePlan();
+                // Save the updated CarePlan to Firebase
+                saveCarePlanToFirebase(updatedCarePlan);
 
-//                final Intent intent =
-//                    new Intent(getApplicationContext(), CarePlanSummaryActivity.class);
-//                startActivity(intent);
+                //                final Intent intent =
+                //                    new Intent(getApplicationContext(),
+                // CarePlanSummaryActivity.class);
+                //                startActivity(intent);
               });
           builder.setNegativeButton("No", null);
 
@@ -176,144 +169,148 @@ public class CarePlanActivity extends AppCompatActivity {
         });
   }
 
-    private void loadCarePlanDataForPatient(final String patientId) {
-        DatabaseReference patientRef = carePlanRef.child(patientId);
-        patientRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    CarePlan carePlan = dataSnapshot.getValue(CarePlan.class);
-                    if (carePlan != null) {
+  private void loadCarePlanDataForPatient(final String patientId) {
+    DatabaseReference patientRef = carePlanRef.child(patientId);
+    patientRef.addListenerForSingleValueEvent(
+        new ValueEventListener() {
+          @Override
+          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            if (dataSnapshot.exists()) {
+              CarePlan carePlan = dataSnapshot.getValue(CarePlan.class);
+              if (carePlan != null) {
 
-                        String carePlanType = carePlan.getCarePlanType();
-                        selectRadioButton(carePlanTypeRadioGroup, carePlanTypesRadioButtons, carePlanType);
+                String carePlanType = carePlan.getCarePlanType();
+                selectRadioButton(carePlanTypeRadioGroup, carePlanTypesRadioButtons, carePlanType);
 
-                        String nutriHydration = carePlan.getNutritionHydration();
-                        selectRadioButton(nutritionRadioGroup, nutritionRadioButtons, nutriHydration);
+                String nutriHydration = carePlan.getNutritionHydration();
+                selectRadioButton(nutritionRadioGroup, nutritionRadioButtons, nutriHydration);
 
-                        String dietTime = carePlan.getDietTimings();
-                        selectRadioButton(dietTimeRadioGroup, dietTimeRadioButtons, dietTime);
+                String dietTime = carePlan.getDietTimings();
+                selectRadioButton(dietTimeRadioGroup, dietTimeRadioButtons, dietTime);
 
-                        String sleepPattern = carePlan.getSleepPattern();
-                        selectRadioButton(sleepPatternRadioGroup, sleepPatternRadioButtons, sleepPattern);
+                String sleepPattern = carePlan.getSleepPattern();
+                selectRadioButton(sleepPatternRadioGroup, sleepPatternRadioButtons, sleepPattern);
 
-                        String painScore = String.valueOf(carePlan.getPainScore());
-                        selectRadioButton(painScoreRadioGroup, painScoreRadioButtons, painScore);
+                String painScore = String.valueOf(carePlan.getPainScore());
+                selectRadioButton(painScoreRadioGroup, painScoreRadioButtons, painScore);
 
-                        // Pre-fill support requirements checkboxes
-                        for (CheckBox checkBox : supportRequirementsCheckBox.keySet()) {
-                            String requirement = supportRequirementsCheckBox.get(checkBox);
-                            if (carePlan.getSupportRequirement().contains(requirement)) {
-                                checkBox.setChecked(true);
-                            }
-                        }
-
-                        // Pre-fill drink likes checkboxes
-                        for (CheckBox checkBox : drinkLikesCheckBox.keySet()) {
-                            String drink = drinkLikesCheckBox.get(checkBox);
-                            if (carePlan.getDrinkLikings().contains(drink)) {
-                                checkBox.setChecked(true);
-                            }
-                        }
-
-                        // Pre-fill pain checkboxes
-                        for (CheckBox checkBox : painCheckBox.keySet()) {
-                            String pain = painCheckBox.get(checkBox);
-                            if (carePlan.getPainCategories().contains(pain)) {
-                                checkBox.setChecked(true);
-                            }
-                        }
-
-                        // Pre-fill behavioral management checkboxes
-                        for (CheckBox checkBox : behavioralManagementCheckBox.keySet()) {
-                            String behavior = behavioralManagementCheckBox.get(checkBox);
-                            if (carePlan.getBehavioralManagement().contains(behavior)) {
-                                checkBox.setChecked(true);
-                            }
-                        }
-
-                    }
+                // Pre-fill support requirements checkboxes
+                for (CheckBox checkBox : supportRequirementsCheckBox.keySet()) {
+                  String requirement = supportRequirementsCheckBox.get(checkBox);
+                  if (carePlan.getSupportRequirement().contains(requirement)) {
+                    checkBox.setChecked(true);
+                  }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Handle error
+                // Pre-fill drink likes checkboxes
+                for (CheckBox checkBox : drinkLikesCheckBox.keySet()) {
+                  String drink = drinkLikesCheckBox.get(checkBox);
+                  if (carePlan.getDrinkLikings().contains(drink)) {
+                    checkBox.setChecked(true);
+                  }
+                }
+
+                // Pre-fill pain checkboxes
+                for (CheckBox checkBox : painCheckBox.keySet()) {
+                  String pain = painCheckBox.get(checkBox);
+                  if (carePlan.getPainCategories().contains(pain)) {
+                    checkBox.setChecked(true);
+                  }
+                }
+
+                // Pre-fill behavioral management checkboxes
+                for (CheckBox checkBox : behavioralManagementCheckBox.keySet()) {
+                  String behavior = behavioralManagementCheckBox.get(checkBox);
+                  if (carePlan.getBehavioralManagement().contains(behavior)) {
+                    checkBox.setChecked(true);
+                  }
+                }
+              }
             }
+          }
+
+          @Override
+          public void onCancelled(@NonNull DatabaseError error) {
+            // Handle error
+          }
         });
+  }
+
+  private String getSelectedRadioButtonValue(
+      RadioGroup radioGroup, HashMap<RadioButton, String> radioButtons) {
+    int selectedId = radioGroup.getCheckedRadioButtonId();
+    if (selectedId != -1) {
+      RadioButton radioButton = findViewById(selectedId);
+      return radioButtons.get(radioButton);
+    }
+    return null;
+  }
+
+  private void selectRadioButton(
+      RadioGroup radioGroup, HashMap<RadioButton, String> radioButtons, String selectedValue) {
+    for (RadioButton radioButton : radioButtons.keySet()) {
+      if (radioButtons.get(radioButton).equals(selectedValue)) {
+        radioGroup.check(radioButton.getId());
+        break;
+      }
+    }
+  }
+
+  private CarePlan createUpdatedCarePlan() {
+    CarePlan carePlan = new CarePlan();
+
+    // Set care plan type
+    carePlan.setCarePlanType(
+        getSelectedRadioButtonValue(carePlanTypeRadioGroup, carePlanTypesRadioButtons));
+
+    // Set nutrition hydration
+    carePlan.setNutritionHydration(
+        getSelectedRadioButtonValue(nutritionRadioGroup, nutritionRadioButtons));
+
+    // Set diet timings
+    carePlan.setDietTimings(getSelectedRadioButtonValue(dietTimeRadioGroup, dietTimeRadioButtons));
+
+    // Set sleep pattern
+    carePlan.setSleepPattern(
+        getSelectedRadioButtonValue(sleepPatternRadioGroup, sleepPatternRadioButtons));
+
+    // Set pain score
+    String painScore = getSelectedRadioButtonValue(painScoreRadioGroup, painScoreRadioButtons);
+    if (painScore != null) {
+      carePlan.setPainScore(Integer.parseInt(painScore));
     }
 
-    private String getSelectedRadioButtonValue(RadioGroup radioGroup, HashMap<RadioButton, String> radioButtons) {
-        int selectedId = radioGroup.getCheckedRadioButtonId();
-        if (selectedId != -1) {
-            RadioButton radioButton = findViewById(selectedId);
-            return radioButtons.get(radioButton);
-        }
-        return null;
+    // Set support requirements checkboxes
+    carePlan.setSupportRequirement(getCheckedItemsAsString(supportRequirementsCheckBox));
+
+    // Set drink likes checkboxes
+    carePlan.setDrinkLikings(getCheckedItemsAsString(drinkLikesCheckBox));
+
+    // Set pain checkboxes
+    carePlan.setPainCategories(getCheckedItemsAsString(painCheckBox));
+
+    // Set behavioral management checkboxes
+    carePlan.setBehavioralManagement(getCheckedItemsAsString(behavioralManagementCheckBox));
+
+    return carePlan;
+  }
+
+  private String getCheckedItemsAsString(HashMap<CheckBox, String> checkBoxHashMap) {
+    StringBuilder stringBuilder = new StringBuilder();
+    for (CheckBox checkBox : checkBoxHashMap.keySet()) {
+      if (checkBox.isChecked()) {
+        stringBuilder.append(checkBoxHashMap.get(checkBox)).append(", ");
+      }
     }
-
-    private void selectRadioButton(RadioGroup radioGroup, HashMap<RadioButton, String> radioButtons, String selectedValue) {
-        for (RadioButton radioButton : radioButtons.keySet()) {
-            if (radioButtons.get(radioButton).equals(selectedValue)) {
-                radioGroup.check(radioButton.getId());
-                break;
-            }
-        }
+    // Remove trailing comma and space if any
+    if (stringBuilder.length() > 0) {
+      stringBuilder.setLength(stringBuilder.length() - 2);
     }
+    return stringBuilder.toString();
+  }
 
-    private CarePlan createUpdatedCarePlan() {
-        CarePlan carePlan = new CarePlan();
-
-        // Set care plan type
-        carePlan.setCarePlanType(getSelectedRadioButtonValue(carePlanTypeRadioGroup, carePlanTypesRadioButtons));
-
-        // Set nutrition hydration
-        carePlan.setNutritionHydration(getSelectedRadioButtonValue(nutritionRadioGroup, nutritionRadioButtons));
-
-        // Set diet timings
-        carePlan.setDietTimings(getSelectedRadioButtonValue(dietTimeRadioGroup, dietTimeRadioButtons));
-
-        // Set sleep pattern
-        carePlan.setSleepPattern(getSelectedRadioButtonValue(sleepPatternRadioGroup, sleepPatternRadioButtons));
-
-        // Set pain score
-        String painScore = getSelectedRadioButtonValue(painScoreRadioGroup, painScoreRadioButtons);
-        if (painScore != null) {
-            carePlan.setPainScore(Integer.parseInt(painScore));
-        }
-
-        // Set support requirements checkboxes
-        carePlan.setSupportRequirement(getCheckedItemsAsString(supportRequirementsCheckBox));
-
-        // Set drink likes checkboxes
-        carePlan.setDrinkLikings(getCheckedItemsAsString(drinkLikesCheckBox));
-
-        // Set pain checkboxes
-        carePlan.setPainCategories(getCheckedItemsAsString(painCheckBox));
-
-        // Set behavioral management checkboxes
-        carePlan.setBehavioralManagement(getCheckedItemsAsString(behavioralManagementCheckBox));
-
-        return carePlan;
-    }
-
-    private String getCheckedItemsAsString(HashMap<CheckBox, String> checkBoxHashMap) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (CheckBox checkBox : checkBoxHashMap.keySet()) {
-            if (checkBox.isChecked()) {
-                stringBuilder.append(checkBoxHashMap.get(checkBox)).append(", ");
-            }
-        }
-        // Remove trailing comma and space if any
-        if (stringBuilder.length() > 0) {
-            stringBuilder.setLength(stringBuilder.length() - 2);
-        }
-        return stringBuilder.toString();
-    }
-
-    private void saveCarePlanToFirebase(CarePlan carePlan) {
-        // Update care plan in Firebase
-        carePlanRef.child(patientId).setValue(carePlan);
-    }
-
+  private void saveCarePlanToFirebase(CarePlan carePlan) {
+    // Update care plan in Firebase
+    carePlanRef.child(patientId).setValue(carePlan);
+  }
 }

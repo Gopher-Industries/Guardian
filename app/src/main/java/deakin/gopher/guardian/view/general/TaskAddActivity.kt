@@ -1,6 +1,5 @@
 package deakin.gopher.guardian.view.general
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -33,9 +32,10 @@ class TaskAddActivity : AppCompatActivity() {
         patientIdEditText = findViewById(R.id.taskPatientIdEditText)
 
         priorityRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            taskPriority = when (checkedId) {
-                else -> Priority.MEDIUM
-            }
+            taskPriority =
+                when (checkedId) {
+                    else -> Priority.MEDIUM
+                }
         }
 
         val submitButton: Button = findViewById(R.id.newTaskSubmitButton)
@@ -78,13 +78,14 @@ class TaskAddActivity : AppCompatActivity() {
         val taskSubDesc = taskSubDescEditText.text.toString().trim()
         val assignedNurse = assignedNurseEditText.text.toString().trim()
 
-        val newTask = Task(
-            taskId = "",
-            description = taskDescription,
-            assignedNurse = assignedNurse,
-            priority = taskPriority,
-            patientId = patientId
-        )
+        val newTask =
+            Task(
+                taskId = "",
+                description = taskDescription,
+                assignedNurse = assignedNurse,
+                priority = taskPriority,
+                patientId = patientId,
+            )
 
         val taskId = caretakerTaskRef.push().key ?: ""
         newTask.taskId = taskId

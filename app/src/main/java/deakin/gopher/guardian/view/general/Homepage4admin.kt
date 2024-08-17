@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Button
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.services.EmailPasswordAuthService
-import deakin.gopher.guardian.services.NavigationService
 import deakin.gopher.guardian.view.patient.dailyreport.DailyReportActivity
 
 class Homepage4admin : BaseActivity() {

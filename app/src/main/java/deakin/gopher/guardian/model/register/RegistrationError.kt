@@ -4,10 +4,12 @@ import deakin.gopher.guardian.R
 
 sealed class RegistrationError(val messageResourceId: Int) {
     data object EmptyEmail : RegistrationError(R.string.validation_empty_email)
+
     data object InvalidEmail :
         RegistrationError(R.string.validation_invalid_email_address)
 
     data object EmptyPassword : RegistrationError(R.string.validation_empty_password)
+
     data object PasswordTooShort :
         RegistrationError(R.string.validation_password_weak)
 
