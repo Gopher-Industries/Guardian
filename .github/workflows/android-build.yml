@@ -1,0 +1,29 @@
+name: AndroidBuild
+
+on:
+  pull_request:
+    branches: [ master ]
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.2.2
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+
+      - name: Run Gradle Build
+        run: ./gradlew build
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4.3.6
+        with:
+          name: GuardianApp.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
