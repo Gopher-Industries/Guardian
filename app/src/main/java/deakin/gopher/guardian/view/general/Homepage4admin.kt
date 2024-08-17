@@ -15,7 +15,6 @@ class Homepage4admin : BaseActivity() {
     private lateinit var settingsButton: Button
     private lateinit var signOutButton: Button
     private lateinit var nurseRosterButton: Button
-    private lateinit var taskListButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +25,6 @@ class Homepage4admin : BaseActivity() {
         settingsButton = findViewById(R.id.settingsButton)
         signOutButton = findViewById(R.id.sighOutButton)
         nurseRosterButton = findViewById(R.id.nurseRoseterButton)
-//        taskListButton = findViewById(R.id.tasksButton_admin)
 
         // new Patient Button
         newPatientButton.setOnClickListener {
@@ -68,10 +66,6 @@ class Homepage4admin : BaseActivity() {
             val nurseRosterActivityIntent =
                 Intent(this@Homepage4admin, NurseRosterActivity::class.java)
             startActivity(nurseRosterActivityIntent)
-            // launch tasks list
-            taskListButton.setOnClickListener {
-                NavigationService(this).onLaunchTasks()
-            }
         }
     }
 }
