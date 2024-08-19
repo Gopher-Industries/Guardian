@@ -50,7 +50,7 @@ public class UploadPhoto extends BaseActivity {
 
     final FirebaseStorage storage = FirebaseStorage.getInstance();
     storageReference = storage.getReference();
-
+// just a dummy comment
     final ImageView profile = findViewById(R.id.profile);
     launcher =
         registerForActivityResult(
