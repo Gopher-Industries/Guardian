@@ -178,7 +178,7 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
         phoneNumber ?: "",
         email ?: "",
         fax ?: "",
-          null.toString() 
+          null.toString()
       )
     } else {
       gp?.apply {
