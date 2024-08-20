@@ -41,10 +41,10 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
           viewPager2 = requireActivity().findViewById(R.id.dataForViewViewPager)
           val rootView = inflater.inflate(R.layout.fragment_gp_add, container, false)
 
-          val left_button: Button = rootView.findViewById(R.id.gp_add_polygon_left)
-  val right_button: Button = rootView.findViewById(R.id.gp_add_polygon_right)
-  val next_button: Button = rootView.findViewById(R.id.gp_add_NextButton)
-  val prev_button: Button = rootView.findViewById(R.id.gp_add_PrevButton)
+          val leftButton: Button = rootView.findViewById(R.id.gp_add_polygon_left)
+  val rightButton: Button = rootView.findViewById(R.id.gp_add_polygon_right)
+  val nextButton: Button = rootView.findViewById(R.id.gp_add_NextButton)
+  val prevButton: Button = rootView.findViewById(R.id.gp_add_PrevButton)
 
   firstNameInput = rootView.findViewById(R.id.input_gp_FirstName)
   middleNameInput = rootView.findViewById(R.id.input_gp_MiddleName)
@@ -105,13 +105,13 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
   }
 
   if (status == 2) {
-    left_button.setBackgroundResource(R.drawable.polygon_3)
-    right_button.setBackgroundResource(R.drawable.polygon_4)
+    leftButton.setBackgroundResource(R.drawable.polygon_3)
+    rightButton.setBackgroundResource(R.drawable.polygon_4)
   } else {
-    next_button.setText(R.string.next)
+    nextButton.setText(R.string.next)
   }
 
-  right_button.setOnClickListener {
+  rightButton.setOnClickListener {
     if (status == 1) {
       if (dataChecker()) {
         saveGp()
@@ -120,7 +120,7 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
     }
   }
 
-  left_button.setOnClickListener {
+  leftButton.setOnClickListener {
     if (status == 2) {
       if (dataChecker()) {
         saveGp()
@@ -129,7 +129,7 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
     }
   }
 
-  next_button.setOnClickListener {
+  nextButton.setOnClickListener {
     if (dataChecker()) {
       saveGp()
       if (status == 1) {
@@ -154,7 +154,7 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
     }
   }
 
-  prev_button.setOnClickListener {
+  prevButton.setOnClickListener {
     if (dataChecker()) {
       saveGp()
       scrollPage(false)

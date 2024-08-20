@@ -58,22 +58,22 @@ class NoKAddFragment : Fragment {
         phoneInput = rootView.findViewById(R.id.input_nok_PhoneNumber)
         emailInput = rootView.findViewById(R.id.input_nok_EmailAdress)
 
-        val step1_button = rootView.findViewById<Button>(R.id.step1)
-        val step2_button = rootView.findViewById<Button>(R.id.step2)
-        val step3_button = rootView.findViewById<Button>(R.id.step3)
-        val step4_button = rootView.findViewById<Button>(R.id.step4)
-        val step5_button = rootView.findViewById<Button>(R.id.step5)
+        val step1Button = rootView.findViewById<Button>(R.id.step1)
+        val step2Button = rootView.findViewById<Button>(R.id.step2)
+        val step3Button = rootView.findViewById<Button>(R.id.step3)
+        val step4Button = rootView.findViewById<Button>(R.id.step4)
+        val step5Button = rootView.findViewById<Button>(R.id.step5)
 
         if (1 == status) {
-            step2_button.setBackgroundResource(R.drawable.roundshapeseletebtn)
-            step3_button.setBackgroundResource(R.drawable.roundshapebtn)
+            step2Button.setBackgroundResource(R.drawable.roundshapeseletebtn)
+            step3Button.setBackgroundResource(R.drawable.roundshapebtn)
         }
         if (2 == status) {
-            step3_button.setBackgroundResource(R.drawable.roundshapeseletebtn)
-            step2_button.setBackgroundResource(R.drawable.roundshapebtn)
+            step3Button.setBackgroundResource(R.drawable.roundshapeseletebtn)
+            step2Button.setBackgroundResource(R.drawable.roundshapebtn)
         }
 
-        step1_button.setOnClickListener { view: View? ->
+        step1Button.setOnClickListener { view: View? ->
             if (dataChecker()) {
                 saveNextofKin()
                 // int nextPage = viewPager2.getCurrentItem()-1;
@@ -84,7 +84,7 @@ class NoKAddFragment : Fragment {
             }
         }
 
-        step2_button.setOnClickListener { view: View? ->
+        step2Button.setOnClickListener { view: View? ->
             if (dataChecker()) {
                 saveNextofKin()
 
@@ -94,7 +94,7 @@ class NoKAddFragment : Fragment {
 
             }
         }
-        step3_button.setOnClickListener { view: View? ->
+        step3Button.setOnClickListener { view: View? ->
             if (dataChecker()) {
                 saveNextofKin()
                 // int nextPage = viewPager2.getCurrentItem()+1;
@@ -104,7 +104,7 @@ class NoKAddFragment : Fragment {
 
             }
         }
-        step4_button.setOnClickListener { view: View? ->
+        step4Button.setOnClickListener { view: View? ->
             if (dataChecker()) {
                 saveNextofKin()
                 // int nextPage = viewPager2.getCurrentItem()+2;
@@ -114,7 +114,7 @@ class NoKAddFragment : Fragment {
 
             }
         }
-        step5_button.setOnClickListener { view: View? ->
+        step5Button.setOnClickListener { view: View? ->
             if (dataChecker()) {
                 saveNextofKin()
                 // int nextPage = viewPager2.getCurrentItem()+3;
@@ -132,7 +132,7 @@ class NoKAddFragment : Fragment {
         rightButton.setOnClickListener { view: View? ->
             if (1 == status) {
                 // for now I keep 2 next of kins and 2 gps waiting to be add
-                // but defaultly adding 1 nok and 1gp, after alick right arrow the second one shows up
+                // but default adding 1 nok and 1gp, after alick right arrow the second one shows up
                 // is better
                 if (dataChecker()) {
                     saveNextofKin()
