@@ -2,7 +2,6 @@ package deakin.gopher.guardian.view.gp
 
 import android.content.Context
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,13 +19,13 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
   private var gp: GP? = null
   private var dataListener: DataListener? = null
 
-  private lateinit var first_name_input: EditText
-  private lateinit var middle_name_input: EditText
-  private lateinit var last_name_input: EditText
-  private lateinit var clinic_address_input: EditText
-  private lateinit var phone_number_input: EditText
-  private lateinit var email_input: EditText
-  private lateinit var fax_input: EditText
+  private lateinit var firstNameInput: EditText
+  private lateinit var middleNameInput: EditText
+  private lateinit var lastNameInput: EditText
+  private lateinit var clinicAddressInput: EditText
+  private lateinit var phoneNumberInput: EditText
+  private lateinit var emailInput: EditText
+  private lateinit var faxInput: EditText
 
   private var firstName: String? = null
   private var middleName: String? = null
@@ -47,58 +46,58 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
   val next_button: Button = rootView.findViewById(R.id.gp_add_NextButton)
   val prev_button: Button = rootView.findViewById(R.id.gp_add_PrevButton)
 
-  first_name_input = rootView.findViewById(R.id.input_gp_FirstName)
-  middle_name_input = rootView.findViewById(R.id.input_gp_MiddleName)
-  last_name_input = rootView.findViewById(R.id.input_gp_LastName)
-  clinic_address_input = rootView.findViewById(R.id.input_gp_ClinicAddress)
-  phone_number_input = rootView.findViewById(R.id.input_gp_Phone)
-  email_input = rootView.findViewById(R.id.input_gp_Email)
-  fax_input = rootView.findViewById(R.id.input_gp_Fax)
+  firstNameInput = rootView.findViewById(R.id.input_gp_FirstName)
+  middleNameInput = rootView.findViewById(R.id.input_gp_MiddleName)
+  lastNameInput = rootView.findViewById(R.id.input_gp_LastName)
+  clinicAddressInput = rootView.findViewById(R.id.input_gp_ClinicAddress)
+  phoneNumberInput = rootView.findViewById(R.id.input_gp_Phone)
+  emailInput = rootView.findViewById(R.id.input_gp_Email)
+  faxInput = rootView.findViewById(R.id.input_gp_Fax)
 
-  val step1_button: Button = rootView.findViewById(R.id.step1)
-  val step2_button: Button = rootView.findViewById(R.id.step2)
-  val step3_button: Button = rootView.findViewById(R.id.step3)
-  val step4_button: Button = rootView.findViewById(R.id.step4)
-  val step5_button: Button = rootView.findViewById(R.id.step5)
+  val step1Button: Button = rootView.findViewById(R.id.step1)
+  val step2Button: Button = rootView.findViewById(R.id.step2)
+  val step3Button: Button = rootView.findViewById(R.id.step3)
+  val step4Button: Button = rootView.findViewById(R.id.step4)
+  val step5Button: Button = rootView.findViewById(R.id.step5)
 
   if (status == 1) {
-    step4_button.setBackgroundResource(R.drawable.roundshapeseletebtn)
-    step5_button.setBackgroundResource(R.drawable.roundshapebtn)
+    step4Button.setBackgroundResource(R.drawable.roundshapeseletebtn)
+    step5Button.setBackgroundResource(R.drawable.roundshapebtn)
   }
   if (status == 2) {
-    step5_button.setBackgroundResource(R.drawable.roundshapeseletebtn)
-    step4_button.setBackgroundResource(R.drawable.roundshapebtn)
+    step5Button.setBackgroundResource(R.drawable.roundshapeseletebtn)
+    step4Button.setBackgroundResource(R.drawable.roundshapebtn)
   }
 
-  step1_button.setOnClickListener {
+  step1Button.setOnClickListener {
     if (dataChecker()) {
       saveGp()
       viewPager2.setCurrentItem(0, true)
     }
   }
 
-  step2_button.setOnClickListener {
+  step2Button.setOnClickListener {
     if (dataChecker()) {
       saveGp()
       viewPager2.setCurrentItem(1, true)
     }
   }
 
-  step3_button.setOnClickListener {
+  step3Button.setOnClickListener {
     if (dataChecker()) {
       saveGp()
       viewPager2.setCurrentItem(2, true)
     }
   }
 
-  step4_button.setOnClickListener {
+  step4Button.setOnClickListener {
     if (dataChecker()) {
       saveGp()
       viewPager2.setCurrentItem(3, true)
     }
   }
 
-  step5_button.setOnClickListener {
+  step5Button.setOnClickListener {
     if (dataChecker()) {
       saveGp()
       viewPager2.setCurrentItem(4, true)
@@ -199,29 +198,29 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
   }
 
   private fun dataChecker(): Boolean {
-    firstName = first_name_input.text.toString()
-    middleName = middle_name_input.text.toString()
-    lastName = last_name_input.text.toString()
-    clinicAddress = clinic_address_input.text.toString()
-    phoneNumber = phone_number_input.text.toString()
-    email = email_input.text.toString()
-    fax = fax_input.text.toString()
+    firstName = firstNameInput.text.toString()
+    middleName = middleNameInput.text.toString()
+    lastName = lastNameInput.text.toString()
+    clinicAddress = clinicAddressInput.text.toString()
+    phoneNumber = phoneNumberInput.text.toString()
+    email = emailInput.text.toString()
+    fax = faxInput.text.toString()
 
     return when {
       firstName.isNullOrEmpty() -> {
-        setErrorAndReturn(first_name_input, "First name is Required.")
+        setErrorAndReturn(firstNameInput, "First name is Required.")
         false
       }
       lastName.isNullOrEmpty() -> {
-        setErrorAndReturn(last_name_input, "Last name is Required.")
+        setErrorAndReturn(lastNameInput, "Last name is Required.")
         false
       }
       clinicAddress.isNullOrEmpty() -> {
-        setErrorAndReturn(clinic_address_input, "Clinic address is Required.")
+        setErrorAndReturn(clinicAddressInput, "Clinic address is Required.")
         false
       }
       phoneNumber.isNullOrEmpty() -> {
-        setErrorAndReturn(phone_number_input, "Phone number is Required.")
+        setErrorAndReturn(phoneNumberInput, "Phone number is Required.")
         false
       }
             else -> true
