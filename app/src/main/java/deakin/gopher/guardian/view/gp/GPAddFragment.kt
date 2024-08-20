@@ -172,13 +172,13 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
   private fun saveGp() {
     if (gp == null) {
       gp = GP(
-        firstName ?: "",  // Default to empty string if null
+        firstName ?: "",
         middleName ?: "",
         lastName ?: "",
         phoneNumber ?: "",
         email ?: "",
         fax ?: "",
-          null.toString()  // Assuming photo can be null
+          null.toString() 
       )
     } else {
       gp?.apply {
