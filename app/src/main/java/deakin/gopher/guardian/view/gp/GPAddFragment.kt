@@ -1,4 +1,4 @@
-package deakin.gopher.guardian.view.GP
+package deakin.gopher.guardian.view.gp
 
 import android.content.Context
 import android.os.Bundle

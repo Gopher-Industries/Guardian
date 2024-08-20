@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import deakin.gopher.guardian.view.GP.GPProfileFragment
+import deakin.gopher.guardian.view.gp.GPProfileFragment
 import deakin.gopher.guardian.view.general.HealthDataForViewFragment
 import deakin.gopher.guardian.view.nextofkin.NextOfKinFragment
 import deakin.gopher.guardian.view.patient.careplan.CarePlanSummaryActivityFragment
