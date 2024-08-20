@@ -51,7 +51,7 @@ public class UploadPhoto extends BaseActivity {
     final FirebaseStorage storage = FirebaseStorage.getInstance();
     storageReference = storage.getReference();
 
-    final ImageView profile = findViewById(R.id.profile);
+//    final ImageView profile = findViewById(R.id.profile);
     launcher =
         registerForActivityResult(
             new CropImageContract(),
