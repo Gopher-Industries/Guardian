@@ -95,14 +95,14 @@ public class CarePlanSummaryActivityFragment extends Fragment {
             if (dataSnapshot.exists()) {
               CarePlan carePlan = dataSnapshot.getValue(CarePlan.class);
               if (carePlan != null) {
-                carePlanSummaryTextView.setText(carePlan.getCarePlanType());
-                carePlanNutHyd.setText(carePlan.getNutritionHydration());
-                suppReq.setText(carePlan.getSupportRequirement());
-                dietTime.setText(carePlan.getDietTimings());
-                drinkLike.setText(carePlan.getDrinkLikings());
-                sleepPat.setText(carePlan.getSleepPattern());
-                ratingBar.setRating((float) carePlan.getPainScore() / 2);
-                behaveMng.setText(carePlan.getBehavioralManagement());
+                carePlanSummaryTextView.setText(carePlan.carePlanType);
+                carePlanNutHyd.setText(carePlan.nutritionHydration);
+                suppReq.setText(carePlan.supportRequirement);
+                dietTime.setText(carePlan.dietTimings);
+                drinkLike.setText(carePlan.drinkLikings);
+                sleepPat.setText(carePlan.sleepPattern);
+                ratingBar.setRating((float) carePlan.painScore / 2);
+                behaveMng.setText(carePlan.behavioralManagement);
               }
             } else {
               carePlanSummaryTextView.setText("Add new one");

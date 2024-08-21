@@ -38,12 +38,8 @@ class NoKAddFragment : Fragment {
         this.status = status
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View? {
         viewPager2 = requireActivity().findViewById(R.id.dataForViewViewPager)
         val rootView = inflater.inflate(R.layout.fragment_nok_add, container, false)
