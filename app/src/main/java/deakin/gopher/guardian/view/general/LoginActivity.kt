@@ -64,6 +64,7 @@ class LoginActivity : BaseActivity() {
 
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.web_client_id))
                 .requestEmail()
                 .build()
         gsoClient = GoogleSignIn.getClient(this, gso)
@@ -202,10 +203,11 @@ class LoginActivity : BaseActivity() {
         data: Intent?,
     ) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (requestCode == RC_GOOGLE_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
+        } else {
+            Toast.makeText(this, "Google Login Fail...", Toast.LENGTH_SHORT).show()
         }
     }
 
