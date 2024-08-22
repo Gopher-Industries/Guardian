@@ -1,7 +1,6 @@
 package deakin.gopher.guardian.model
 
-class CarePlan  // Constructors, getters, and setters
-{
+class CarePlan { // Constructors, getters, and setters
     @JvmField
     var behavioralManagement: String? = null
 

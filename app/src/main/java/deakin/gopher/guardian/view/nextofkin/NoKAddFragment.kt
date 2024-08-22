@@ -39,7 +39,9 @@ class NoKAddFragment : Fragment {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         viewPager2 = requireActivity().findViewById(R.id.dataForViewViewPager)
         val rootView = inflater.inflate(R.layout.fragment_nok_add, container, false)
@@ -76,7 +78,6 @@ class NoKAddFragment : Fragment {
                 if (viewPager2 != null) {
                     viewPager2!!.setCurrentItem(0, true)
                 }
-
             }
         }
 
@@ -87,7 +88,6 @@ class NoKAddFragment : Fragment {
                 if (viewPager2 != null) {
                     viewPager2!!.setCurrentItem(1, true)
                 }
-
             }
         }
         step3Button.setOnClickListener { view: View? ->
@@ -97,7 +97,6 @@ class NoKAddFragment : Fragment {
                 if (viewPager2 != null) {
                     viewPager2!!.setCurrentItem(2, true)
                 }
-
             }
         }
         step4Button.setOnClickListener { view: View? ->
@@ -107,7 +106,6 @@ class NoKAddFragment : Fragment {
                 if (viewPager2 != null) {
                     viewPager2!!.setCurrentItem(3, true)
                 }
-
             }
         }
         step5Button.setOnClickListener { view: View? ->
@@ -117,7 +115,6 @@ class NoKAddFragment : Fragment {
                 if (viewPager2 != null) {
                     viewPager2!!.setCurrentItem(4, true)
                 }
-
             }
         }
 
@@ -164,25 +161,27 @@ class NoKAddFragment : Fragment {
     }
 
     private fun scrollPage(isNextPage: Boolean) {
-        val nextPage = if (isNextPage) {
-            viewPager2!!.currentItem + 1
-        } else {
-            viewPager2!!.currentItem - 1
-        }
+        val nextPage =
+            if (isNextPage) {
+                viewPager2!!.currentItem + 1
+            } else {
+                viewPager2!!.currentItem - 1
+            }
         viewPager2!!.setCurrentItem(nextPage, true)
     }
 
     private fun saveNextofKin() {
         if (null == nextofKin) {
-            nextofKin = NextOfKin(
-                firstName!!,
-                middleName!!,
-                lastName!!,
-                address!!,
-                phoneNumber!!,
-                email!!,
-                null
-            )
+            nextofKin =
+                NextOfKin(
+                    firstName!!,
+                    middleName!!,
+                    lastName!!,
+                    address!!,
+                    phoneNumber!!,
+                    email!!,
+                    null,
+                )
         } else {
             nextofKin!!.setFirstName(firstName!!)
             nextofKin!!.setMiddleName(middleName!!)
@@ -226,7 +225,10 @@ class NoKAddFragment : Fragment {
         return true
     }
 
-    private fun setErrorAndReturn(editText: EditText?, s: CharSequence) {
+    private fun setErrorAndReturn(
+        editText: EditText?,
+        s: CharSequence,
+    ) {
         editText!!.error = s
     }
 

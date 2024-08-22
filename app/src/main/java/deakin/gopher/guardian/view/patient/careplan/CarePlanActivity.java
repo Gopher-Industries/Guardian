@@ -260,16 +260,19 @@ public class CarePlanActivity extends AppCompatActivity {
     CarePlan carePlan = new CarePlan();
 
     // Set care plan type
-    carePlan.carePlanType = getSelectedRadioButtonValue(carePlanTypeRadioGroup, carePlanTypesRadioButtons);
+    carePlan.carePlanType =
+        getSelectedRadioButtonValue(carePlanTypeRadioGroup, carePlanTypesRadioButtons);
 
     // Set nutrition hydration
-    carePlan.nutritionHydration = getSelectedRadioButtonValue(nutritionRadioGroup, nutritionRadioButtons);
+    carePlan.nutritionHydration =
+        getSelectedRadioButtonValue(nutritionRadioGroup, nutritionRadioButtons);
 
     // Set diet timings
     carePlan.dietTimings = getSelectedRadioButtonValue(dietTimeRadioGroup, dietTimeRadioButtons);
 
     // Set sleep pattern
-    carePlan.sleepPattern = getSelectedRadioButtonValue(sleepPatternRadioGroup, sleepPatternRadioButtons);
+    carePlan.sleepPattern =
+        getSelectedRadioButtonValue(sleepPatternRadioGroup, sleepPatternRadioButtons);
 
     // Set pain score
     String painScore = getSelectedRadioButtonValue(painScoreRadioGroup, painScoreRadioButtons);

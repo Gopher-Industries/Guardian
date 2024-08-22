@@ -36,7 +36,9 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
     private var fax: String? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
         viewPager2 = requireActivity().findViewById(R.id.dataForViewViewPager)
         val rootView = inflater.inflate(R.layout.fragment_gp_add, container, false)
@@ -171,15 +173,16 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
 
     private fun saveGp() {
         if (gp == null) {
-            gp = GP(
-                firstName ?: "",
-                middleName ?: "",
-                lastName ?: "",
-                phoneNumber ?: "",
-                email ?: "",
-                fax ?: "",
-                null.toString()
-            )
+            gp =
+                GP(
+                    firstName ?: "",
+                    middleName ?: "",
+                    lastName ?: "",
+                    phoneNumber ?: "",
+                    email ?: "",
+                    fax ?: "",
+                    null.toString(),
+                )
         } else {
             gp?.apply {
                 firstName = this@GPAddFragment.firstName ?: ""
@@ -231,17 +234,20 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
         }
     }
 
-    private fun setErrorAndReturn(editText: EditText, message: CharSequence) {
+    private fun setErrorAndReturn(
+        editText: EditText,
+        message: CharSequence,
+    ) {
         editText.error = message
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        dataListener = try {
-            context as DataListener
-        } catch (e: ClassCastException) {
-            throw ClassCastException("$context must implement DataListener")
-        }
+        dataListener =
+            try {
+                context as DataListener
+            } catch (e: ClassCastException) {
+                throw ClassCastException("$context must implement DataListener")
+            }
     }
 }
-
