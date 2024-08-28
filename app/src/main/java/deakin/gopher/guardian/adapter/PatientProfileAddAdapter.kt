@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import deakin.gopher.guardian.view.GP.GPAddFragment
+import deakin.gopher.guardian.view.gp.GPAddFragment
 import deakin.gopher.guardian.view.nextofkin.NoKAddFragment
 import deakin.gopher.guardian.view.patient.PatientAddFragment
 
