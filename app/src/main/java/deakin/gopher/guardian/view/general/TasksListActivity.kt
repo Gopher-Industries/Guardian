@@ -1,5 +1,6 @@
 package deakin.gopher.guardian.view.general
 
+import android.app.DownloadManager
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -27,7 +28,7 @@ import deakin.gopher.guardian.services.NavigationService
 
 class TasksListActivity : AppCompatActivity() {
     private var taskListAdapter: TaskListAdapter? = null
-    private var query: Query? = null
+    private var query: DownloadManager.Query? = null
     private var overviewCardview: CardView? = null
     private lateinit var plusButton: ImageButton
 
