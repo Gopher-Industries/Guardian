@@ -47,5 +47,6 @@
     <color name="dark_text_color">#FFFFFF</color>
     <color name="dark_secondary_color">#3D3D3D</color>
     <color name="dark_secondary_variant_color">#000000</color>
+    <color name="loading_page_icon_bg_color">#FDFCFC</color>
 
 </resources>

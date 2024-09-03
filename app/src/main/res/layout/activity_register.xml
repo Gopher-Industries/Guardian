@@ -6,46 +6,65 @@
     android:layout_height="match_parent"
     tools:context="deakin.gopher.guardian.view.general.RegisterActivity">
 
+    <ImageView
+        android:id="@+id/agedCareImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/Email"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/agedcare_icon"
+        />
+
     <EditText
         android:id="@+id/Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
         android:autofillHints=""
-        android:ems="10"
+        android:ems="18"
+        android:layout_marginBottom="15dp"
         android:hint="@string/enter_email_address"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/password"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textAppearance="@style/CustomAutofillTextAppearance"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/edit_text_border_register"
+        android:drawableEnd="@drawable/question_mark"/>
 
     <EditText
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="15dp"
         android:autofillHints=""
-        android:ems="10"
+        android:ems="18"
         android:hint="@string/enter_password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/passwordConfirm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="@style/CustomAutofillTextAppearance"
+        android:background="@drawable/edit_text_border_register"
+        android:drawableEnd="@drawable/question_mark"/>
 
     <EditText
         android:id="@+id/passwordConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="15dp"
         android:autofillHints=""
-        android:ems="10"
+        android:ems="18"
         android:hint="@string/confirm_password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/registerBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="@style/CustomAutofillTextAppearance"
+        android:background="@drawable/edit_text_border_register"/>
 
     <Button
         android:id="@+id/registerBtn"
