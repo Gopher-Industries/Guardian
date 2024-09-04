@@ -31,7 +31,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/gopher_logo" />
+                app:srcCompat="@drawable/gopher_logo"
+                />
 
             <TextView
                 android:id="@+id/textView2"
@@ -39,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="@string/login_welcome"
+                android:text="Account Authentication"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -57,6 +58,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,25 +66,40 @@
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="46dp">
 
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/agedcare_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/enterPinText" />
+
             <TextView
                 android:id="@+id/enterPinText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Enter PIN code"
+                android:text="Verification Code"
                 android:textColor="@color/black"
                 android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@id/logoImageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="182dp" />
+                tools:layout_editor_absoluteY="180dp" />
+
+
+
 
             <TextView
                 android:id="@+id/checkEmailText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="Please check your email for the code."
+                android:text="Type the code that was sent to your email to verify."
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -100,26 +117,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/checkEmailText">
 
-                <EditText
-                    android:id="@+id/pin_digit_1" />
 
                 <EditText
-                    android:id="@+id/pin_digit_2" />
+                    android:id="@+id/pin_digit_2"
+                style="@style/poppinsfontstyle"
+                />
 
                 <EditText
-                    android:id="@+id/pin_digit_3" />
+                    android:id="@+id/pin_digit_3"
+                    android:fontFamily="@font/poppins"
+                    />
 
                 <EditText
                     android:id="@+id/pin_digit_4"
-                    style="@style/PinCodeEditText" />
+                    style="@style/poppinsfontstyle"
+                    />
 
                 <EditText
                     android:id="@+id/pin_digit_5"
-                    style="@style/PinCodeEditText" />
+                    android:fontFamily="@font/poppins"
+                    />
 
                 <EditText
                     android:id="@+id/pin_digit_6"
-                    style="@style/PinCodeEditText" />
+                    android:fontFamily="@font/poppins"
+                    />
 
             </LinearLayout>
             <LinearLayout

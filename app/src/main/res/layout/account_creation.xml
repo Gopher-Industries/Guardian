@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="deakin.gopher.guardian.view.general.LoginActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:layout_marginTop="-40dp"
+        app:cardBackgroundColor="@color/TG_blue"
+        app:cardCornerRadius="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/content_description_gopher_logo"
+                app:layout_constraintBottom_toTopOf="@+id/textView2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/gopher_logo"
+                />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Account Creation"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="46dp">
+
+            <EditText
+                android:id="@+id/Fullname"
+                style="@style/Widget.AppCompat.EditText"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:autofillHints=""
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:focusable="auto"
+                android:hint="Full Name"
+                android:inputType="textPersonName"
+                android:textColor="@android:color/darker_gray"
+                tools:layout_editor_absoluteX="37dp"
+                tools:layout_editor_absoluteY="124dp" />
+
+            <EditText
+                android:id="@+id/Username"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:autofillHints=""
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:focusable="auto"
+                android:hint="Username (unique)"
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/darker_gray"
+                android:textStyle="normal"
+                tools:layout_editor_absoluteX="35dp"
+                tools:layout_editor_absoluteY="172dp" />
+
+            <EditText
+                android:id="@+id/Email"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:autofillHints=""
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:focusable="auto"
+                android:hint="Email address (unique)"
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/darker_gray"
+                android:textStyle="normal"
+                tools:layout_editor_absoluteX="36dp"
+                tools:layout_editor_absoluteY="217dp" />
+
+            <EditText
+                android:id="@+id/ConfirmPassword"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:autofillHints=""
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:focusable="auto"
+                android:hint="Confirm Password"
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/darker_gray"
+                android:textStyle="normal"
+                tools:layout_editor_absoluteX="36dp"
+                tools:layout_editor_absoluteY="313dp" />
+
+            <EditText
+                android:id="@+id/Password"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:autofillHints=""
+                android:background="@drawable/edit_text_border"
+                android:ems="10"
+                android:focusable="auto"
+                android:hint="Password"
+                android:inputType="textEmailAddress"
+                android:textColor="@android:color/darker_gray"
+                android:textStyle="normal"
+                tools:layout_editor_absoluteX="36dp"
+                tools:layout_editor_absoluteY="265dp" />
+
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/agedcare_icon"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <LinearLayout
+                android:id="@+id/pinCodeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="290dp"/>
+            <LinearLayout
+                android:id="@+id/passwordLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/Email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp">
+
+
+            <ImageView
+                android:id="@+id/passwordVisibilityToggle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="Toggle password visibility"
+                android:padding="8dp"
+                android:src="@drawable/eye_off"
+                tools:layout_editor_absoluteX="278dp"
+                tools:layout_editor_absoluteY="265dp" />
+
+            <ImageView
+                android:id="@+id/passwordVisibilityToggle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="Toggle password visibility"
+                android:padding="8dp"
+                android:src="@drawable/eye_off"
+                tools:layout_editor_absoluteX="281dp"
+                tools:layout_editor_absoluteY="313dp" />
+
+            <Button
+                android:id="@+id/loginBtn"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:backgroundTint="@color/TG_blue"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Create Account"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:cornerRadius="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="372dp" />
+
+            <Button
+                android:id="@+id/loginBtn"
+                android:layout_width="200dp"
+                android:layout_height="5dp0dp"
+                android:backgroundTint="@color/TG_blue"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Back to Login"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:cornerRadius="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="416dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="527dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description_corner_blue_flower_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/shapes1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
