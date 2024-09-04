@@ -566,5 +566,13 @@
     <string name="assigned_nurse_prefix">Assigned Nurse:</string>
     <string name="priority_prefix">Priority:</string>
     <string name="task_details_title">Task Details</string>
+    <string name="this_code_is_valid_for_the_next_30_seconds_a_new_code_will_be_generated_when_it_expires">This code is valid for the next 30 seconds. A new code will be generated when it expires.</string>
+    <string name="resend">Resend</string>
+    <string name="please_check_your_email_for_the_code">Please check your email for the code.</string>
+    <string name="enter_pin_code">Enter PIN code</string>
+    <string name="full_name">Full Name</string>
+    <string name="username_unique">Username (unique)</string>
+    <string name="email_address_unique">Email address (unique)</string>
+    <string name="password">Password</string>
 </resources>
 
