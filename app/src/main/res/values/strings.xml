@@ -566,5 +566,18 @@
     <string name="assigned_nurse_prefix">Assigned Nurse:</string>
     <string name="priority_prefix">Priority:</string>
     <string name="task_details_title">Task Details</string>
+    <!-- Strings for Module Titles and Descriptions -->
+    <string name="module1_title">Module 1: Basic Caregiving Skills</string>
+    <string name="module2_title">Module 2: Advanced Medical Procedures</string>
+    <string name="module3_title">Module 3: Emotional Support and Communication</string>
+
+    <string name="module1_description">This foundational module is designed to introduce caregivers to the essential skills required for day-to-day caregiving. It covers the basics of client care, hygiene, nutrition, and safety.</string>
+    <string name="module2_description">This module provides in-depth training on more complex medical procedures that caregivers may need to perform. It includes topics like medication administration, wound care, and monitoring vital signs.</string>
+    <string name="module3_description">This module focuses on the emotional and psychological aspects of caregiving. It teaches caregivers how to provide emotional support to clients, communicate effectively, and manage stress.</string>
+    <!-- String resources for Welcome Onboard and Get Started -->
+    <string name="welcome_onboard">Welcome Onboard</string>
+    <string name="training">Training</string>
+
+
 </resources>
 
