@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.MedicalDiagnostic
+import deakin.gopher.guardian.view.general.BloodPressureActivity
 import deakin.gopher.guardian.view.patient.patientdata.heartrate.HeartRateActivity
 
 class CurrentMedicalDiagnosticsFragment : Fragment {
@@ -51,6 +53,7 @@ class CurrentMedicalDiagnosticsFragment : Fragment {
     private lateinit var editTextArray: Array<EditText?>
     private lateinit var editButtonArray: Array<Button?>
     private lateinit var patientId: String
+    private lateinit var llBlood: LinearLayout
 
     constructor()
     constructor(patientId: String?) {
@@ -69,6 +72,13 @@ class CurrentMedicalDiagnosticsFragment : Fragment {
             inflater.inflate(R.layout.fragment_current_medical_diagnostics, container, false)
         editTextArray = arrayOfNulls(editTextIds.size)
         editButtonArray = arrayOfNulls(editButtonIds.size)
+
+        llBlood = rootView.findViewById(R.id.llBloodPressure)
+        llBlood.setOnClickListener {
+            var intent = Intent(context, BloodPressureActivity::class.java)
+            startActivity(intent)
+        }
+
         for (i in editTextIds.indices) {
             editTextArray[i] = rootView.findViewById(editTextIds[i])
             editButtonArray[i] = rootView.findViewById(editButtonIds[i])
@@ -97,6 +107,8 @@ class CurrentMedicalDiagnosticsFragment : Fragment {
                 startActivity(it)
             }
         }
+
+
 
         return rootView
     }

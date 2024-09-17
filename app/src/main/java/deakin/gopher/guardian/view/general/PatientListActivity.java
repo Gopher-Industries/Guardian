@@ -200,53 +200,32 @@ public class PatientListActivity extends BaseActivity {
             if (s.isEmpty()) {
               query = FirebaseDatabase.getInstance().getReference().child("patient_profile");
             } else {
-              query =
-                  FirebaseDatabase.getInstance()
-                      .getReference()
-                      .child("patient_profile")
-                      .orderByChild("userId")
-                      .equalTo(currentUserId);
+                query = FirebaseDatabase.getInstance()
+                        .getReference()
+                        .child("patient_profile")
+                        .orderByChild("name")
+                        .startAt(s)
+                        .endAt(s + "\uf8ff");
             }
-            final FirebaseRecyclerOptions<Patient> options =
-                new FirebaseRecyclerOptions.Builder<Patient>()
-                    .setQuery(
-                        query,
-                        snapshot -> {
-                          final Patient patient =
-                              new Patient(
-                                  snapshot.getKey(),
-                                  snapshot.child("name").getValue().toString(),
-                                  snapshot.child("last_name").getValue().toString());
-                          final Object middle_name = snapshot.child("middle_name").getValue();
-                          if (null != middle_name) patient.middleName = middle_name.toString();
-                          return patient;
-                        })
-                    .build();
-            patientListAdapter = new PatientListAdapter(PatientListActivity.this, options, false);
-            query.addListenerForSingleValueEvent(
-                new ValueEventListener() {
-                  @Override
-                  public void onDataChange(@NonNull final DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                      patientListAdapter =
-                          new PatientListAdapter(PatientListActivity.this, options, false);
-                      patient_list_recyclerView.setLayoutManager(
-                          new GridLayoutManager(PatientListActivity.this, 1));
-                      patient_list_recyclerView.setAdapter(patientListAdapter);
-                      patientListAdapter.startListening();
-                    } else {
-                      patient_list_recyclerView.setLayoutManager(
-                          new GridLayoutManager(PatientListActivity.this, 1));
-                      patient_list_recyclerView.setAdapter(
-                          new PatientListAdapter(PatientListActivity.this, options, false));
-                    }
-                  }
 
-                  @Override
-                  public void onCancelled(@NonNull final DatabaseError error) {}
-                });
+              FirebaseRecyclerOptions<Patient> options = new FirebaseRecyclerOptions.Builder<Patient>()
+                      .setQuery(query, snapshot -> {
+                          String firstname = snapshot.child("name").getValue(String.class);
+                          String lastname = snapshot.child("last_name").getValue(String.class);
 
-            return true;
+                          if (firstname == null) firstname = "";
+                          if (lastname == null) lastname = "";
+
+                          return new Patient(snapshot.getKey(), firstname, lastname);
+                      })
+                      .build();
+
+              patientListAdapter = new PatientListAdapter(PatientListActivity.this, options, false);
+              patient_list_recyclerView.setLayoutManager(new GridLayoutManager(PatientListActivity.this, 1));
+              patient_list_recyclerView.setAdapter(patientListAdapter);
+              patientListAdapter.startListening();
+
+              return true;
           }
         });
   }

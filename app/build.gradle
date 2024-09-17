@@ -170,6 +170,9 @@ dependencies {
 
     // Jetpack Compose navigation
     implementation("androidx.navigation:navigation-compose:2.7.5")
+
+    // pieChart
+    implementation "com.github.PhilJay:MPAndroidChart:v3.1.0"
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -1,9 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.general.BloodPressureActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--    <TextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginTop="15dp"-->
+    <!--        android:fontFamily="sans-serif-black"-->
+    <!--        android:text="blood_pressure"-->
+    <!--        android:textColor="#3d3d3d"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvBlood_pressure"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="39dp"-->
+    <!--        android:layout_marginHorizontal="16dp"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:background="@drawable/rectangle_drop_shadow"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:paddingStart="10dp"-->
+    <!--        android:text=""-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="20sp" />-->
+
+    <!--    <TextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginTop="15dp"-->
+    <!--        android:fontFamily="sans-serif-black"-->
+    <!--        android:text="bloodfast_level"-->
+    <!--        android:textColor="#3d3d3d"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName13"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName13" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvBloodfast_level"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="39dp"-->
+    <!--        android:layout_marginHorizontal="16dp"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:background="@drawable/rectangle_drop_shadow"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:paddingStart="10dp"-->
+    <!--        android:text=""-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="20sp" />-->
+
+    <!--    <TextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginTop="15dp"-->
+    <!--        android:fontFamily="sans-serif-black"-->
+    <!--        android:text="glicose_level"-->
+    <!--        android:textColor="#3d3d3d"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvGlicose_level"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="39dp"-->
+    <!--        android:layout_marginHorizontal="16dp"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:background="@drawable/rectangle_drop_shadow"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:paddingStart="10dp"-->
+    <!--        android:text=""-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="20sp" />-->
+
+    <!--    <TextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginTop="15dp"-->
+    <!--        android:fontFamily="sans-serif-black"-->
+    <!--        android:text="oxygen_saturation"-->
+    <!--        android:textColor="#3d3d3d"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvOxygen_saturation"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="39dp"-->
+    <!--        android:layout_marginHorizontal="16dp"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:background="@drawable/rectangle_drop_shadow"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:paddingStart="10dp"-->
+    <!--        android:text=""-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="20sp" />-->
+
+    <!--    <TextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginTop="15dp"-->
+    <!--        android:fontFamily="sans-serif-black"-->
+    <!--        android:text="patient_temp"-->
+    <!--        android:textColor="#3d3d3d"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvPatient_temp"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="39dp"-->
+    <!--        android:layout_marginHorizontal="16dp"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:background="@drawable/rectangle_drop_shadow"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:paddingStart="10dp"-->
+    <!--        android:text=""-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="20sp" />-->
+
+    <!--    <TextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginTop="15dp"-->
+    <!--        android:fontFamily="sans-serif-black"-->
+    <!--        android:text="pulse_rate"-->
+    <!--        android:textColor="#3d3d3d"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvPulse_rate"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="39dp"-->
+    <!--        android:layout_marginHorizontal="16dp"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:background="@drawable/rectangle_drop_shadow"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:paddingStart="10dp"-->
+    <!--        android:text=""-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="20sp" />-->
+
+
+    <!--    <TextView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="16dp"-->
+    <!--        android:layout_marginTop="15dp"-->
+    <!--        android:fontFamily="sans-serif-black"-->
+    <!--        android:text="respiration_rate"-->
+    <!--        android:textColor="#3d3d3d"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvRespiration_rate"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="39dp"-->
+    <!--        android:layout_marginHorizontal="16dp"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:background="@drawable/rectangle_drop_shadow"-->
+    <!--        android:gravity="center_vertical"-->
+    <!--        android:paddingStart="10dp"-->
+    <!--        android:text=""-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="20sp" />-->
+
+    <EditText
+        android:id="@+id/etSystolic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16sp"
+        android:layout_marginTop="20dp"
+        android:hint="Enter Systolic (mm Hg)"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/etDiastolic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16sp"
+        android:layout_marginTop="20dp"
+        android:hint="Enter Diastolic (mm Hg)"
+        android:inputType="number" />
+
+    <!-- Show Data Button -->
+    <Button
+        android:id="@+id/btnShowData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16sp"
+        android:layout_marginTop="20dp"
+        android:text="Submite" />
+
+    <!-- Line Chart -->
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:background="#F8F9FA"
+        android:elevation="4dp" />
+
+
+</LinearLayout>

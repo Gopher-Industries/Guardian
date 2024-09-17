@@ -62,14 +62,16 @@
         android:background="@color/box_border" />
 
     <LinearLayout
+        android:id="@+id/llBloodPressure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/currentMedicalDiagnosticsBloodPressureContainer"
-            android:layout_width="376dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <TextView
@@ -97,6 +99,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/currentMedicalDiagnosticsNameHeadingTextView" />
+
         </LinearLayout>
 
         <Button
@@ -105,6 +108,14 @@
             android:layout_height="20dp"
             android:layout_gravity="center"
             android:background="@drawable/pencil" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/right_arrow_2" />
+
     </LinearLayout>
 
     <View
