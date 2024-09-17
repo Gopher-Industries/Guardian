@@ -199,7 +199,6 @@
     <string name="test_side_menu">Test: Side Menu</string>
     <string name="patients_overview">Patients Overview</string>
     <string name="patient_profile">Patient Profile</string>
-    <string name="medication_details">Medication Details</string>
     <string name="first_name">First name</string>
     <string name="marilyn">Marilyn</string>
     <string name="middle_name">Middle Name</string>
@@ -567,35 +566,5 @@
     <string name="assigned_nurse_prefix">Assigned Nurse:</string>
     <string name="priority_prefix">Priority:</string>
     <string name="task_details_title">Task Details</string>
-    <string name="this_code_is_valid_for_the_next_30_seconds_a_new_code_will_be_generated_when_it_expires">This code is valid for the next 30 seconds. A new code will be generated when it expires.</string>
-    <string name="resend">Resend</string>
-    <string name="please_check_your_email_for_the_code">Please check your email for the code.</string>
-    <string name="enter_pin_code">Enter PIN code</string>
-    <string name="full_name">Full Name</string>
-    <string name="username_unique">Username (unique)</string>
-    <string name="email_address_unique">Email address (unique)</string>
-    <string name="password">Password</string>
-    <string name="forgot_the_password">Forgot the password</string>
-    <string name="enter_email_address_for_reset">Enter the email address should we use to reset your password.</string>
-    <string name="email_address">Email address</string>
-    <string name="create_your_new_password">Create Your New Password</string>
-    <string name="create_new_password">Create New Password</string>
-    <string name="hidden_password">•••••••••</string>
-    <string name="text_continue">Continue</string>
-    <string name="log_in_success">Log in Success</string>
-    <string name="splash">splash</string>
-    <string name="gopher_heart">gopher heart</string>
-    <string name="verify_check">verify check</string>
-    <string name="medication_info">Text explaining what the medicine does and how it works.</string>
-    <string name="warning_adverse_reaction">Warning about adverse reactions</string>
-    <string name="prescription_warning">Only take this medicine if you have a prescription</string>
-    <string name="need_info">Need more info?</string>
-    <string name="ask_doctor">Remember to always ask a doctor if you are unsure</string>
-    <string name="need_more_info">Need more information about your medication?</string>
-    <string-array name="dropdown_items">
-        <item>Azithromycin</item>
-        <item>Levothyroxine</item>
-        <item>Lisinopril</item>
-    </string-array>
 </resources>
 
