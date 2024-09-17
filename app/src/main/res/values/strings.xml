@@ -199,6 +199,7 @@
     <string name="test_side_menu">Test: Side Menu</string>
     <string name="patients_overview">Patients Overview</string>
     <string name="patient_profile">Patient Profile</string>
+    <string name="medication_details">Medication Details</string>
     <string name="first_name">First name</string>
     <string name="marilyn">Marilyn</string>
     <string name="middle_name">Middle Name</string>
@@ -585,5 +586,16 @@
     <string name="splash">splash</string>
     <string name="gopher_heart">gopher heart</string>
     <string name="verify_check">verify check</string>
+    <string name="medication_info">Text explaining what the medicine does and how it works.</string>
+    <string name="warning_adverse_reaction">Warning about adverse reactions</string>
+    <string name="prescription_warning">Only take this medicine if you have a prescription</string>
+    <string name="need_info">Need more info?</string>
+    <string name="ask_doctor">Remember to always ask a doctor if you are unsure</string>
+    <string name="need_more_info">Need more information about your medication?</string>
+    <string-array name="dropdown_items">
+        <item>Azithromycin</item>
+        <item>Levothyroxine</item>
+        <item>Lisinopril</item>
+    </string-array>
 </resources>
 

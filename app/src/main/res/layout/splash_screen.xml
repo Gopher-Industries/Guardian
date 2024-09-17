@@ -29,6 +29,4 @@
             android:indeterminate="true"
             android:visibility="visible" />
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
