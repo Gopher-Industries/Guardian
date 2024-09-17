@@ -91,7 +91,7 @@
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="124dp"
+        android:layout_marginStart="224dp"
         android:layout_marginTop="388dp"
         android:elevation="20dp"
         android:fontFamily="@font/poppins_bold"
@@ -111,6 +111,34 @@
         app:iconSize="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/trainingButton"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="388dp"
+        android:elevation="20dp"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center"
+        android:paddingStart="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="16dp"
+        android:stateListAnimator="@animator/button_state_list_animator"
+        android:text="@string/training"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:backgroundTint="@color/deep_blue"
+        app:cornerRadius="16dp"
+        app:icon="@drawable/training"
+        app:iconGravity="top"
+        app:iconPadding="10dp"
+        app:iconSize="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView"
+        tools:ignore="RtlSymmetry" />
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/caretaker_profile"
