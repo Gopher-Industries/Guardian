@@ -637,6 +637,7 @@
     <string name="splash">splash</string>
     <string name="gopher_heart">gopher heart</string>
     <string name="verify_check">verify check</string>
+    <string name="login_pin">Login PIN</string>
     <string name="medication_info">Text explaining what the medicine does and how it works.</string>
     <string name="warning_adverse_reaction">Warning about adverse reactions</string>
     <string name="prescription_warning">Only take this medicine if you have a prescription</string>

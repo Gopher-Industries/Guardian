@@ -134,6 +134,8 @@
         <activity
             android:name=".view.general.LoginActivity"
             android:exported="false" />
+        <activity android:name=".view.general.PinCodeActivity"
+            android:exported="false" />
         <activity
             android:name=".view.general.AddNewPatientActivity"
             android:exported="false" /> <!-- Kussay: may we need to change the start up page into login page -->
