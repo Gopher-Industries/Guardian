@@ -616,6 +616,25 @@
     <!-- Remote changes: Strings for welcome onboard and training -->
     <string name="welcome_onboard">Welcome Onboard</string>
     <string name="training">Training</string>
-
+  
+    <string name="this_code_is_valid_for_the_next_30_seconds_a_new_code_will_be_generated_when_it_expires">This code is valid for the next 30 seconds. A new code will be generated when it expires.</string>
+    <string name="resend">Resend</string>
+    <string name="please_check_your_email_for_the_code">Please check your email for the code.</string>
+    <string name="enter_pin_code">Enter PIN code</string>
+    <string name="full_name">Full Name</string>
+    <string name="username_unique">Username (unique)</string>
+    <string name="email_address_unique">Email address (unique)</string>
+    <string name="password">Password</string>
+    <string name="forgot_the_password">Forgot the password</string>
+    <string name="enter_email_address_for_reset">Enter the email address should we use to reset your password.</string>
+    <string name="email_address">Email address</string>
+    <string name="create_your_new_password">Create Your New Password</string>
+    <string name="create_new_password">Create New Password</string>
+    <string name="hidden_password">•••••••••</string>
+    <string name="text_continue">Continue</string>
+    <string name="log_in_success">Log in Success</string>
+    <string name="splash">splash</string>
+    <string name="gopher_heart">gopher heart</string>
+    <string name="verify_check">verify check</string>
 </resources>
 
