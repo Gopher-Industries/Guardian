@@ -30,7 +30,6 @@
     </androidx.cardview.widget.CardView>
 
 
-
     <ImageView
         android:id="@+id/caretakerImage"
         android:layout_width="72dp"
