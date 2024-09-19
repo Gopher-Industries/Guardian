@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.TrainingActivity
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.view.caretaker.CaretakerProfileActivity
 
@@ -14,6 +15,7 @@ class Homepage4caretaker : BaseActivity() {
     private lateinit var signOutButton: Button
     private lateinit var profileButton: Button
     private lateinit var taskListButton: Button
+    private lateinit var trainingButton: Button
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +26,7 @@ class Homepage4caretaker : BaseActivity() {
         signOutButton = findViewById(R.id.sighOutButton)
         profileButton = findViewById(R.id.caretaker_profile)
         taskListButton = findViewById(R.id.taskListButton)
+        trainingButton = findViewById(R.id.trainingButton)
 
         // patient list button
         patientListButton.setOnClickListener {
@@ -58,6 +61,13 @@ class Homepage4caretaker : BaseActivity() {
             val medicalDiagnosticsActivityIntent =
                 Intent(this@Homepage4caretaker, CaretakerProfileActivity::class.java)
             startActivity(medicalDiagnosticsActivityIntent)
+        }
+
+        // training button
+        trainingButton.setOnClickListener {
+            startActivity(
+                Intent(this@Homepage4caretaker, TrainingActivity::class.java),
+            )
         }
     }
 }

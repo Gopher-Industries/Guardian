@@ -14,7 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup,android:label"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        tools:ignore="ExtraText">
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TrainingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".training2"
+            android:exported="false"></activity>
+        <activity
+            android:name=".training"
+            android:exported="false" />
         <activity
             android:name=".view.patient.patientdata.heartrate.HeartRateActivity"
             android:exported="false"
@@ -35,13 +48,12 @@
         <activity
             android:name=".view.general.Homepage4nurse"
             android:exported="false" />
-
-        <activity android:name=".view.general.TaskDetailActivity"
+        <activity
+            android:name=".view.general.TaskDetailActivity"
             android:exported="false" />
-
-        <activity android:name=".view.general.TaskAddActivity"
+        <activity
+            android:name=".view.general.TaskAddActivity"
             android:exported="false" />
-
         <activity
             android:name=".view.general.UploadPhoto"
             android:exported="false" />
@@ -143,8 +155,27 @@
         <activity
             android:name=".view.patient.PatientDashboardActivity"
             android:exported="false" />
-        <activity android:name="deakin.gopher.guardian.view.general.TasksListActivity"
-            android:exported="false"/>
+        <activity
+            android:name=".view.general.TasksListActivity"
+            android:exported="false" />
+
+        <activity android:name=".ModulesActivity" />
+
+
+        <activity android:name=".Module1CoursesActivity" />
+        <activity android:name=".HomecareInductionActivity" />
+        <activity android:name=".InfectionControlActivity" />
+        <activity android:name=".SupportingMealtimesActivity" />
+
+
+        <activity android:name=".Module2CoursesActivity" />
+        <activity android:name=".MedicationTechniqueActivity" />
+        <activity android:name=".MedicationSafetyActivity" />
+
+        <activity android:name=".Module3CoursesActivity" />
+        <activity android:name=".InspiringLeadershipEIActivity" />
+        <activity android:name=".EmotionalIntelligenceCommunicationActivity" />
+
 
         <service
             android:name=".model.FirebaseMessagingService"
