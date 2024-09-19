@@ -19,7 +19,9 @@ import deakin.gopher.guardian.services.NavigationService
 class RegisterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.account_creation)
+        val mFullName: EditText= findViewById(R.id.Fullname)
+        val mUsername: EditText= findViewById(R.id.Username)
         val mEmail: EditText = findViewById(R.id.Email)
         val mPassword: EditText = findViewById(R.id.password)
         val passwordConfirmation: EditText = findViewById(R.id.passwordConfirm)

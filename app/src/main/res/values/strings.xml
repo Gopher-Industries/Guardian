@@ -585,5 +585,6 @@
     <string name="splash">splash</string>
     <string name="gopher_heart">gopher heart</string>
     <string name="verify_check">verify check</string>
+    <string name="login_pin">Login PIN</string>
 </resources>
 
