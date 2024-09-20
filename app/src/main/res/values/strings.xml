@@ -356,6 +356,10 @@
     <string name="task_list">Task List</string>
     <string name="saving_changes">Saving Changes?</string>
     <string name="nurse_roster">Nurse Roster</string>
+    <string name="blood_pressure_current">128/85 bpm</string>
+    <string name="blood_pressure_tip">Blood Pressure Tip</string>
+    <string name="current">Current</string>
+    <string name="daily">Daily</string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
