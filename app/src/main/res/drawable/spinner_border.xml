@@ -1,0 +1,17 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Blue border -->
+    <stroke android:width="2dp" android:color="#2987E6" />
+
+    <!-- Background color -->
+    <solid android:color="@android:color/transparent" />
+
+    <!-- Top rounded corners, square bottom corners -->
+    <corners
+        android:topLeftRadius="8dp"
+        android:topRightRadius="8dp"
+        android:bottomLeftRadius="0dp"
+        android:bottomRightRadius="0dp" />
+
+</shape>
