@@ -15,10 +15,8 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val getStartedButton = findViewById<Button>(R.id.getStartedButton)
-        val logoutButton = findViewById<Button>(R.id.logoutButton)
 
         getStartedButton.setOnClickListener { _ -> onGetStartedClick() }
-        logoutButton.setOnClickListener { _ -> onLogoutClick() }
 
         FirebaseMessaging.getInstance()
             .token

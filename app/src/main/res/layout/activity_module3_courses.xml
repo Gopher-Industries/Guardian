@@ -28,7 +28,7 @@
                 android:id="@+id/inspiringLeadershipEI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/inspiring_leadership_ei"
+                tools:text="inspiring_leadership_ei"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:clickable="true"

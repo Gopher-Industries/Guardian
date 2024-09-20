@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class InspiringLeadershipEIActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inspiring_leadership_ei);  // Create a layout for this course
+        setContentView(R.layout.activity_inspiring_leadership);  // Create a layout for this course
     }
 }

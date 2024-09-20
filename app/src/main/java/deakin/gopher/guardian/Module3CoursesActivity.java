@@ -16,7 +16,6 @@ public class Module3CoursesActivity extends AppCompatActivity {
         // Find TextViews for each course
         TextView inspiringLeadershipEI = findViewById(R.id.inspiringLeadershipEI);
         TextView emotionalIntelligenceCommunication = findViewById(R.id.emotionalIntelligenceCommunication);
-        TextView inspiringLeadershipEI_2 = findViewById(R.id.inspiringLeadershipEI_2);
 
         // Set onClickListeners for each course
 
@@ -34,15 +33,6 @@ public class Module3CoursesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Module3CoursesActivity.this, EmotionalIntelligenceCommunicationActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        // Inspiring Leadership through Emotional Intelligence (Second Course)
-        inspiringLeadershipEI_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Module3CoursesActivity.this, InspiringLeadershipEIActivity_2.class);
                 startActivity(intent);
             }
         });
