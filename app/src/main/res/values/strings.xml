@@ -199,7 +199,6 @@
     <string name="test_side_menu">Test: Side Menu</string>
     <string name="patients_overview">Patients Overview</string>
     <string name="patient_profile">Patient Profile</string>
-    <string name="medication_details">Medication Details</string>
     <string name="first_name">First name</string>
     <string name="marilyn">Marilyn</string>
     <string name="middle_name">Middle Name</string>
@@ -357,6 +356,10 @@
     <string name="task_list">Task List</string>
     <string name="saving_changes">Saving Changes?</string>
     <string name="nurse_roster">Nurse Roster</string>
+    <string name="blood_pressure_current">128/85 bpm</string>
+    <string name="blood_pressure_tip">Blood Pressure Tip</string>
+    <string name="current">Current</string>
+    <string name="daily">Daily</string>
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
@@ -567,87 +570,18 @@
     <string name="assigned_nurse_prefix">Assigned Nurse:</string>
     <string name="priority_prefix">Priority:</string>
     <string name="task_details_title">Task Details</string>
-
-    <!-- Local changes: Welcome to the training module -->
-    <string name="welcome_to_training">Welcome to the Training Module</string>
-
-    <!-- Local module titles -->
-    <string name="module_1">Module 1: Basic Caregiving Skills</string>
-    <string name="module_2">Module 2: Advanced Medical Procedures</string>
-    <string name="module_3">Module 3: Emotional Support and Communication</string>
-
-    <!-- Remote changes: Module titles using different naming conventions -->
-
+    <!-- Strings for Module Titles and Descriptions -->
     <string name="module1_title">Module 1: Basic Caregiving Skills</string>
     <string name="module2_title">Module 2: Advanced Medical Procedures</string>
     <string name="module3_title">Module 3: Emotional Support and Communication</string>
 
-    <!-- Module descriptions from the remote changes -->
     <string name="module1_description">This foundational module is designed to introduce caregivers to the essential skills required for day-to-day caregiving. It covers the basics of client care, hygiene, nutrition, and safety.</string>
     <string name="module2_description">This module provides in-depth training on more complex medical procedures that caregivers may need to perform. It includes topics like medication administration, wound care, and monitoring vital signs.</string>
     <string name="module3_description">This module focuses on the emotional and psychological aspects of caregiving. It teaches caregivers how to provide emotional support to clients, communicate effectively, and manage stress.</string>
-
-    <!-- Local changes: Strings for welcome message and additional sections -->
-    <string name="welcome_message">Welcome to Guardian’s Online Learning Hub!</string>
-    <string name="welcome_description">Here, you can access and complete mandatory e-learning modules, as well as enroll in additional training courses available in the ‘Training Library’.\n\nWhether you’re completing training for the first time, refreshing your knowledge, or exploring further learning opportunities, we hope you enjoy your experience.\n\nUpon successfully completing a course, you will receive your certificate via email.\n\nIf you have any questions, please email us at training@guardian.org.au.\n\nThank you and enjoy your learning journey!</string>
-
-    <string name="inspiring_leadership">Inspiring Leadership through Emotional Intelligence</string>
-    <string name="inspiring_leadership_description">This section covers key aspects of emotional intelligence for inspiring leadership.</string>
-
-    <string name="emotional_intelligence_communication">• Emotional Intelligence and Communication</string>
-    <string name="emotional_intelligence_communication_description">This section covers the role of emotional intelligence in effective communication.</string>
-
-    <string name="medication_administration_title">Introduction to Medication Administration Technique</string>
-    <string name="medication_administration_description">This section covers the basics of administering medication safely and effectively.</string>
-
-    <string name="medication_safety_title">Medication Safety and Special Consideration</string>
-    <string name="medication_safety_description">This section covers safety protocols and special considerations in medication administration.</string>
-
-    <string name="homecare_induction">• Homecare Induction</string>
-    <string name="homecare_induction_description">This section covers essential homecare induction techniques.</string>
-
-    <string name="infection_control">• Infection Control</string>
-    <string name="infection_control_description">This section covers essential infection control techniques.</string>
-
-    <string name="supporting_mealtimes">• Supporting Mealtimes</string>
-    <string name="supporting_mealtimes_description">This section covers essential techniques for supporting mealtimes.</string>
-
-    <string name="start_button_text">Start</string>
-
-    <!-- Remote changes: Strings for welcome onboard and training -->
+    <!-- String resources for Welcome Onboard and Get Started -->
     <string name="welcome_onboard">Welcome Onboard</string>
     <string name="training">Training</string>
-  
-    <string name="this_code_is_valid_for_the_next_30_seconds_a_new_code_will_be_generated_when_it_expires">This code is valid for the next 30 seconds. A new code will be generated when it expires.</string>
-    <string name="resend">Resend</string>
-    <string name="please_check_your_email_for_the_code">Please check your email for the code.</string>
-    <string name="enter_pin_code">Enter PIN code</string>
-    <string name="full_name">Full Name</string>
-    <string name="username_unique">Username (unique)</string>
-    <string name="email_address_unique">Email address (unique)</string>
-    <string name="password">Password</string>
-    <string name="forgot_the_password">Forgot the password</string>
-    <string name="enter_email_address_for_reset">Enter the email address should we use to reset your password.</string>
-    <string name="email_address">Email address</string>
-    <string name="create_your_new_password">Create Your New Password</string>
-    <string name="create_new_password">Create New Password</string>
-    <string name="hidden_password">•••••••••</string>
-    <string name="text_continue">Continue</string>
-    <string name="log_in_success">Log in Success</string>
-    <string name="splash">splash</string>
-    <string name="gopher_heart">gopher heart</string>
-    <string name="verify_check">verify check</string>
-    <string name="login_pin">Login PIN</string>
-    <string name="medication_info">Text explaining what the medicine does and how it works.</string>
-    <string name="warning_adverse_reaction">Warning about adverse reactions</string>
-    <string name="prescription_warning">Only take this medicine if you have a prescription</string>
-    <string name="need_info">Need more info?</string>
-    <string name="ask_doctor">Remember to always ask a doctor if you are unsure</string>
-    <string name="need_more_info">Need more information about your medication?</string>
-    <string-array name="dropdown_items">
-        <item>Azithromycin</item>
-        <item>Levothyroxine</item>
-        <item>Lisinopril</item>
-    </string-array>
+
+
 </resources>
 
