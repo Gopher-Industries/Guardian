@@ -48,7 +48,7 @@ class RegisterActivity : BaseActivity() {
                     passwordInput,
                     passwordConfirmInput,
                     nameInput,
-                    roleInput
+                    roleInput,
                 )
 
             if (registrationError != null) {
@@ -66,54 +66,47 @@ class RegisterActivity : BaseActivity() {
             val password = Password(passwordInput)
             val role = findViewById<MaterialButton>(roleInput).text.toString().lowercase()
 
-            val request = RegisterRequest(
-                email = emailAddress.emailAddress,
-                password = password.password,
-                name = nameInput,
-                role = role
-            )
+            val request =
+                RegisterRequest(
+                    email = emailAddress.emailAddress,
+                    password = password.password,
+                    name = nameInput,
+                    role = role,
+                )
 
             val call = ApiClient.apiService.register(request)
 
-            call.enqueue(object : Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    progressBar.isVisible = false
-                    if (response.isSuccessful) {
-                        // Handle successful registration
-                        showMessage(RegistrationStatusMessage.Success.toString())
-                        NavigationService(this@RegisterActivity).toLogin()
-                    } else {
-                        // Handle error
-                        showMessage(
-                            RegistrationStatusMessage.Failure.toString() + " : ${
-                                response.errorBody().toString()
-                            }"
-                        )
+            call.enqueue(
+                object : Callback<User> {
+                    override fun onResponse(
+                        call: Call<User>,
+                        response: Response<User>,
+                    ) {
+                        progressBar.isVisible = false
+                        if (response.isSuccessful) {
+                            // Handle successful registration
+                            showMessage(RegistrationStatusMessage.Success.toString())
+                            NavigationService(this@RegisterActivity).toLogin()
+                        } else {
+                            // Handle error
+                            showMessage(
+                                RegistrationStatusMessage.Failure.toString() + " : ${
+                                    response.errorBody()
+                                }",
+                            )
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    // Handle failure
-                    progressBar.isVisible = false
-                    showMessage(RegistrationStatusMessage.Failure.toString() + " : ${t.message}")
-                }
-            })
-
-//            EmailPasswordAuthService(emailAddress, password).createAccount()?
-            //            .addOnSuccessListener {
-//                val user = Firebase.auth.currentUser
-//
-//                user!!.sendEmailVerification()
-//                    .addOnCompleteListener { task ->
-//                        if (task.isSuccessful) {
-//                            showMessage(RegistrationStatusMessage.Success.toString())
-//                        }
-//                    }
-//
-//                NavigationService(this).toLogin()
-//            }?.addOnFailureListener { e: Exception ->
-//                showMessage(RegistrationStatusMessage.Failure.toString() + " : ${e.message}")
-//            }
+                    override fun onFailure(
+                        call: Call<User>,
+                        t: Throwable,
+                    ) {
+                        // Handle failure
+                        progressBar.isVisible = false
+                        showMessage(RegistrationStatusMessage.Failure.toString() + " : ${t.message}")
+                    }
+                },
+            )
         }
 
         backToLoginButton.setOnClickListener {

@@ -24,10 +24,10 @@
             android:name=".TrainingActivity"
             android:exported="false" />
         <activity
-            android:name=".training2"
+            android:name=".Training2"
             android:exported="false"></activity>
         <activity
-            android:name=".training"
+            android:name=".Training"
             android:exported="false" />
         <activity
             android:name=".view.patient.patientdata.heartrate.HeartRateActivity"
