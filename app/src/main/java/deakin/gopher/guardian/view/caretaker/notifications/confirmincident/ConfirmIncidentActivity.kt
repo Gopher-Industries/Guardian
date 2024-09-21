@@ -40,7 +40,9 @@ class ConfirmIncidentActivity : BaseActivity() {
         // Create an ArrayAdapter using the string array and a default Spinner layout
         val hospitalAdapter =
             ArrayAdapter.createFromResource(
-                applicationContext, R.array.hospital_list_array, R.layout.spinner_layout
+                applicationContext,
+                R.array.hospital_list_array,
+                R.layout.spinner_layout,
             )
 
         // Apply the adapter to the Spinner
@@ -55,13 +57,14 @@ class ConfirmIncidentActivity : BaseActivity() {
                     parentView: AdapterView<*>,
                     selectedItemView: View,
                     position: Int,
-                    id: Long
+                    id: Long,
                 ) {
                     hospitalSelection = parentView.getItemAtPosition(position).toString()
                 }
 
                 override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-            })
+            },
+        )
     }
 
     fun onConfirmIncidentCancelClick(view: View?) {
@@ -72,7 +75,10 @@ class ConfirmIncidentActivity : BaseActivity() {
 
     class SpinnerActivity : Activity(), AdapterView.OnItemSelectedListener {
         override fun onItemSelected(
-            parent: AdapterView<*>?, view: View, pos: Int, id: Long
+            parent: AdapterView<*>?,
+            view: View,
+            pos: Int,
+            id: Long,
         ) {
         }
 

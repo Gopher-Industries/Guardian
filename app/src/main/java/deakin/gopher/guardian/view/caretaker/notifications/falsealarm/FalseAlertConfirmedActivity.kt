@@ -32,7 +32,8 @@ class FalseAlertConfirmedActivity : BaseActivity() {
         falseAlertMenuButton?.setOnClickListener(
             View.OnClickListener { v: View? ->
                 drawerLayout.openDrawer(GravityCompat.START)
-            })
+            },
+        )
     }
 
     private fun showDialog() {

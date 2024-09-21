@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class HomecareInductionActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homecare_induction);
-    }
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_homecare_induction);
+  }
 }

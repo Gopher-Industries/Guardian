@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".training2"
+    tools:context=".Training2"
     android:padding="16dp">
 
     <!-- ScrollView to allow scrolling through the content -->

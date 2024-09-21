@@ -18,4 +18,10 @@ sealed class RegistrationError(val messageResourceId: Int) {
 
     data object PasswordsFailConfirmation :
         RegistrationError(R.string.validation_error_passwords_do_not_match)
+
+    data object EmptyName :
+        RegistrationError(R.string.validation_empty_name)
+
+    data object EmptyRole :
+        RegistrationError(R.string.validation_empty_role)
 }

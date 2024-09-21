@@ -8,24 +8,31 @@ import androidx.appcompat.app.AppCompatActivity
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.login.RoleName
 import deakin.gopher.guardian.services.NavigationService
-import kotlinx.coroutines.*
-import retrofit2.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.POST
 
 // Define the API interface
 interface PinValidationApi {
     @POST("validate_pin")
-    suspend fun validatePin(@Body pinRequest: PinRequest): PinResponse
+    suspend fun validatePin(
+        @Body pinRequest: PinRequest,
+    ): PinResponse
 }
 
 // Data classes for request and response
 data class PinRequest(val pin: String)
+
 data class PinResponse(val isValid: Boolean)
 
 class PinCodeActivity : AppCompatActivity() {
     private lateinit var api: PinValidationApi
-    private lateinit var userRole : RoleName
+    private lateinit var userRole: RoleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +41,11 @@ class PinCodeActivity : AppCompatActivity() {
         userRole = intent.getSerializableExtra("role") as RoleName
 
         // Initialize Retrofit and create API instance
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://your-api-base-url.com/") // Replace with your actual API base URL
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        val retrofit =
+            Retrofit.Builder()
+                .baseUrl("https://your-api-base-url.com/") // Replace with your actual API base URL
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
 
         api = retrofit.create(PinValidationApi::class.java)
 
@@ -50,7 +58,8 @@ class PinCodeActivity : AppCompatActivity() {
         val submitButton = findViewById<Button>(R.id.loginBtn)
 
         submitButton.setOnClickListener {
-            val pin = pinDigit1.text.toString() +
+            val pin =
+                pinDigit1.text.toString() +
                     pinDigit2.text.toString() +
                     pinDigit3.text.toString() +
                     pinDigit4.text.toString() +
@@ -89,9 +98,10 @@ class PinCodeActivity : AppCompatActivity() {
         return
         CoroutineScope(Dispatchers.Main).launch {
             try {
-                val response = withContext(Dispatchers.IO) {
-                    api.validatePin(PinRequest(pin))
-                }
+                val response =
+                    withContext(Dispatchers.IO) {
+                        api.validatePin(PinRequest(pin))
+                    }
 
                 if (response.isValid) {
                     NavigationService(this@PinCodeActivity).toPinCodeActivity(userRole)

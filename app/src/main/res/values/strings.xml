@@ -327,6 +327,7 @@
     <string name="company_admin_role_name">Company Admin</string>
     <string name="nurse_role_name">Nurse</string>
     <string name="login_role_selection_prompt">Login as:</string>
+    <string name="register_role_selection_prompt">Register as:</string>
     <string name="password_hint">Enter password</string>
     <string name="login_register_btn">Register</string>
     <string name="login_google_btn">Sign in with Google</string>
@@ -348,6 +349,8 @@
     <string name="tasks_label">Tasks</string>
     <string name="validation_error_passwords_do_not_match">Passwords do not match</string>
     <string name="validation_empty_confirmed_password">Password confirmation must not be empty</string>
+    <string name="validation_empty_name">Name must not be empty</string>
+    <string name="validation_empty_role">Please select a role</string>
     <string name="previous">previous</string>
     <string name="registration_success">Verification Email Has been Sent</string>
     <string name="registration_failure">Registration Failed</string>
