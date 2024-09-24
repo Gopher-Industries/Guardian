@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16sp"
+    android:layout_marginBottom="15dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civUser"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/female_new" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14sp"
+        android:layout_toEndOf="@+id/civUser"
+        android:text="Randy Paul Lorem Ipsum is simply dummy text “of the printing and typesetting”."
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginStart="14sp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/civUser"
+        android:text="19 Jul 2022"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tvDate"
+        android:layout_marginTop="20sp"
+        android:background="#DDE0E5" />
+
+</RelativeLayout>

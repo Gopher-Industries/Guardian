@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".view.nurse.NurseSettingsActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/dark_new" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/back_arrow_new"
+                app:tint="@color/white" />
+
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="42dp"
+                android:src="@drawable/female_new" />
+
+
+            <ImageView
+                android:layout_width="28sp"
+                android:layout_height="28sp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/sun_light"
+                app:tint="@color/white" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Sarah Brown"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="sarahbrown@deakin.edu.au"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginHorizontal="30sp"-->
+        <!--            android:layout_marginTop="50dp"-->
+        <!--            android:orientation="horizontal">-->
+
+        <!--            <ImageView-->
+        <!--                android:layout_width="32dp"-->
+        <!--                android:layout_height="32dp"-->
+        <!--                android:src="@drawable/settings_new" />-->
+
+
+        <!--            <TextView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_gravity="center_vertical"-->
+        <!--                android:layout_marginStart="10dp"-->
+        <!--                android:fontFamily="sans-serif-black"-->
+        <!--                android:text="Settings"-->
+        <!--                android:textColor="@color/black"-->
+        <!--                android:textSize="16sp"-->
+        <!--                app:drawableEndCompat="@drawable/play_new" />-->
+
+        <!--        </LinearLayout>-->
+
+        <LinearLayout
+            android:id="@+id/llNotification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30sp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/notification_new"
+                app:tint="@color/white" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Notifications"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:drawableEndCompat="@drawable/play_new" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPatientDailyReport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30sp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/daily_report_icon"
+                app:tint="@color/white" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Patient Daily Report"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:drawableEndCompat="@drawable/play_new" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30sp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/info_new"
+                app:tint="@color/white" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:fontFamily="sans-serif-black"
+                android:text="About"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:drawableEndCompat="@drawable/play_new" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30sp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/question_new"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Help"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:drawableEndCompat="@drawable/play_new" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30sp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/logout_new"
+                app:tint="@color/white" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Sign Out"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:drawableEndCompat="@drawable/play_new" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

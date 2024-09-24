@@ -8,8 +8,7 @@
     android:layout_height="match_parent"
     tools:context="deakin.gopher.guardian.view.patient.dailyreport.DailyReportActivity">
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="393dp"
     android:layout_height="851dp"
     android:textAlignment="center">

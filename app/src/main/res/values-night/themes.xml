@@ -1,13 +1,12 @@
 <resources>
-
-    <!-- Dark mode theme -->
-    <style name="Theme.TeamGuardians" parent="Theme.AppCompat.NoActionBar">
+    <style name="Theme.TeamGuardians.DayNight." parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/dark_primary_color</item>
         <item name="colorPrimaryVariant">@color/dark_primary_variant_color</item>
-        <item name="colorOnPrimary">@color/dark_primary_color</item>
-        <!-- Customize other dark mode attributes here -->
+        <item name="colorOnPrimary">@color/TG_blue</item>
+        <item name="colorSecondary">@color/dark_secondary_color</item>
+        <item name="colorOnSecondary">@color/TG_blue</item>
+
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textColorPrimary">@color/white</item>
     </style>
-
 </resources>

@@ -1,11 +1,13 @@
 package deakin.gopher.guardian.view.general
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
+import deakin.gopher.guardian.view.nurse.NurseSettingsActivity
 
 class Homepage4nurse : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +23,9 @@ class Homepage4nurse : AppCompatActivity() {
 
         // settings button
         settingsButton.setOnClickListener {
-            NavigationService(this).onSettings()
+//            NavigationService(this).onSettings()
+            val intent = Intent(this, NurseSettingsActivity::class.java)
+            startActivity(intent)
         }
 
         // sign out button

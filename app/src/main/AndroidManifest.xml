@@ -16,6 +16,15 @@
         tools:replace="android:allowBackup,android:label"
         tools:targetApi="31">
         <activity
+            android:name=".view.nurse.NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.nurse.NurseSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.nurse.DailyReportActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.general.BloodPressureActivity"
             android:exported="false" />
         <activity

@@ -566,5 +566,6 @@
     <string name="assigned_nurse_prefix">Assigned Nurse:</string>
     <string name="priority_prefix">Priority:</string>
     <string name="task_details_title">Task Details</string>
+    <string name="auto_populate_caretaker_name_id">Auto populate caretaker name/ID</string>
 </resources>
 

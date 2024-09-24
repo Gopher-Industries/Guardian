@@ -33,5 +33,16 @@ class SessionManager(private val _context: Context) {
     companion object {
         private const val PREF_NAME = "LoginPref"
         private const val IS_LOGIN = "IsLoggedIn"
+        private const val TOKEN_SAVED = "isTokenSaved"
+    }
+
+    fun setToken(token: String?) {
+        editor.putString("token", token)
+        editor.putBoolean(TOKEN_SAVED, true)
+        editor.apply()
+    }
+
+    fun getToken(): String? {
+        return pref.getString("token", "")
     }
 }

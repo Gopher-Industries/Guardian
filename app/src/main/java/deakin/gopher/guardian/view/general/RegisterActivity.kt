@@ -17,9 +17,12 @@ import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
 
 class RegisterActivity : BaseActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
         val mEmail: EditText = findViewById(R.id.Email)
         val mPassword: EditText = findViewById(R.id.password)
         val passwordConfirmation: EditText = findViewById(R.id.passwordConfirm)
