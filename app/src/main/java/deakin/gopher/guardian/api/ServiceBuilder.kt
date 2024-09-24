@@ -15,7 +15,9 @@ import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 object ServiceBuilder {
-    var sessionManager: SessionManager? = null
+
+    @SuppressLint("StaticFieldLeak")
+    var sessionManager: SessionManager? =  null
     private var retrofit: Retrofit? = null
 
 
