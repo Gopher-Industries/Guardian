@@ -97,10 +97,12 @@ class LoginActivity : BaseActivity() {
                     Toast.makeText(this@LoginActivity, "Please enter password", Toast.LENGTH_SHORT)
                         .show()
                 } else {
+
                     val loginParam = LoginParam()
                     loginParam.email = mEmail.text.toString()
                     loginParam.password = mPassword.text.toString()
                     loginApi(loginParam)
+
                 }
             } else {
                 progressBar.show()
