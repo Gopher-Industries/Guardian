@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit
 
 object ServiceBuilder {
 
+
     @SuppressLint("StaticFieldLeak")
     var sessionManager: SessionManager? =  null
     private var retrofit: Retrofit? = null
