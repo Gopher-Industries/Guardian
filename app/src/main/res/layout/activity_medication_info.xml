@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:translationZ="20dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="@string/medication_details"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="20sp"
             android:layout_marginTop="100dp"
@@ -106,7 +106,7 @@
                     android:id="@+id/dropdownText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/medication_info"
+                    android:text=""
                     android:textColor="@color/text_heading_color"
                     android:textSize="25sp"
                     android:textStyle="bold"
@@ -150,7 +150,7 @@
                 android:id="@+id/cardText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/warning_adverse_reaction"
+                android:text=""
                 android:textColor="@android:color/black"
                 android:textSize="14sp"/>
 
@@ -192,7 +192,7 @@
                     android:id="@+id/cardText2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/prescription_warning"
+                    android:text=""
                     android:textColor="@android:color/black"
                     android:textSize="14sp"/>
             </LinearLayout>
@@ -233,7 +233,7 @@
                     android:id="@+id/cardText3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ask_doctor"
+                    android:text=""
                     android:textColor="@android:color/black"
                     android:textSize="14sp"/>
 
@@ -250,7 +250,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/needInfoText"
-            android:text="@string/need_info"
+            android:text=""
             android:textColor="@color/text_heading_color"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -292,7 +292,7 @@
                     android:id="@+id/cardText4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ask_doctor"
+                    android:text=""
                     android:textColor="@android:color/black"
                     android:textSize="14sp"/>
             </LinearLayout>
@@ -333,7 +333,7 @@
                     android:id="@+id/cardText5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/need_more_info"
+                    android:text=""
                     android:textColor="@android:color/black"
                     android:textSize="14sp"/>
             </LinearLayout>

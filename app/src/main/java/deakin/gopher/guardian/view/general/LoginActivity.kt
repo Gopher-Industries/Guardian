@@ -3,6 +3,7 @@ package deakin.gopher.guardian.view.general
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -12,6 +13,8 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
+import com.amin.muteapp.api.ServiceBuilder
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -21,7 +24,12 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.gson.Gson
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.api.nurse.model.LoginResponse
+import deakin.gopher.guardian.api.nurse.model.NurseRegisterResponse
+import deakin.gopher.guardian.api.nurse.param.LoginParam
+import deakin.gopher.guardian.model.RegistrationStatusMessage
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.LoginAuthError
 import deakin.gopher.guardian.model.login.LoginValidationError
@@ -30,19 +38,31 @@ import deakin.gopher.guardian.model.login.RoleName
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
+import deakin.gopher.guardian.services.api.ApiService
 import deakin.gopher.guardian.view.hide
 import deakin.gopher.guardian.view.show
+import org.apache.commons.httpclient.HttpStatus
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : BaseActivity() {
     private var userRole: RoleName = RoleName.Caretaker
     private lateinit var gsoClient: GoogleSignInClient
+    private lateinit var progressBar: ProgressBar
+    var sessionManager: SessionManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        sessionManager = SessionManager(this@LoginActivity)
+
+
         val mEmail: EditText = findViewById(R.id.Email)
         val mPassword: EditText = findViewById(R.id.password)
-        val progressBar: ProgressBar = findViewById(R.id.progressBar)
+        progressBar = findViewById(R.id.progressBar)
         val loginButton: Button = findViewById(R.id.loginBtn)
         val loginGoogleButton: SignInButton = findViewById(R.id.loginGoogleBtn)
         val mCreateBtn: Button = findViewById(R.id.loginRegisterBtn)
@@ -69,55 +89,70 @@ class LoginActivity : BaseActivity() {
         gsoClient = GoogleSignIn.getClient(this, gso)
 
         loginButton.setOnClickListener {
-            progressBar.show()
-            val emailInput = mEmail.text.toString().trim { it <= ' ' }
-            val passwordInput = mPassword.text.toString().trim { it <= ' ' }
+            if (userRole == RoleName.Nurse) {
+                if (mEmail.text.toString().isEmpty()) {
+                    Toast.makeText(this@LoginActivity, "Please enter email", Toast.LENGTH_SHORT)
+                        .show()
+                } else if (mPassword.text.toString().isEmpty()) {
+                    Toast.makeText(this@LoginActivity, "Please enter password", Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    val loginParam = LoginParam()
+                    loginParam.email = mEmail.text.toString()
+                    loginParam.password = mPassword.text.toString()
+                    loginApi(loginParam)
+                }
+            } else {
+                progressBar.show()
+                val emailInput = mEmail.text.toString().trim { it <= ' ' }
+                val passwordInput = mPassword.text.toString().trim { it <= ' ' }
 
-            val loginValidationError = validateInputs(emailInput, passwordInput)
+                val loginValidationError = validateInputs(emailInput, passwordInput)
 
-            if (loginValidationError != null) {
-                progressBar.hide()
-                Toast.makeText(
-                    applicationContext,
-                    loginValidationError.messageResoureId,
-                    Toast.LENGTH_LONG,
-                ).show()
-                return@setOnClickListener
-            }
+                if (loginValidationError != null) {
+                    progressBar.hide()
+                    Toast.makeText(
+                        applicationContext,
+                        loginValidationError.messageResoureId,
+                        Toast.LENGTH_LONG,
+                    ).show()
+                    return@setOnClickListener
+                }
 
-            EmailPasswordAuthService(
-                EmailAddress(emailInput),
-                Password(passwordInput),
-            ).also { authService ->
-                authService
-                    .signIn()
-                    ?.addOnSuccessListener {
-                        progressBar.show()
+                EmailPasswordAuthService(
+                    EmailAddress(emailInput),
+                    Password(passwordInput),
+                ).also { authService ->
+                    authService
+                        .signIn()
+                        ?.addOnSuccessListener {
+                            progressBar.show()
 
-                        if (authService.isUserVerified().not()) {
+                            if (authService.isUserVerified().not()) {
+                                progressBar.hide()
+                                Toast.makeText(
+                                    applicationContext,
+                                    LoginAuthError.EmailNotVerified.messageId,
+                                    Toast.LENGTH_SHORT,
+                                ).show()
+                                return@addOnSuccessListener
+                            }
+
+                            NavigationService(this).toPinCodeActivity(userRole)
+                            progressBar.hide()
+                        }
+                        ?.addOnFailureListener { e: Exception ->
                             progressBar.hide()
                             Toast.makeText(
                                 applicationContext,
-                                LoginAuthError.EmailNotVerified.messageId,
+                                getString(R.string.toast_login_error, e.message),
                                 Toast.LENGTH_SHORT,
                             ).show()
-                            return@addOnSuccessListener
                         }
-
-                        NavigationService(this).toPinCodeActivity(userRole)
-                        progressBar.hide()
-                    }
-                    ?.addOnFailureListener { e: Exception ->
-                        progressBar.hide()
-                        Toast.makeText(
-                            applicationContext,
-                            getString(R.string.toast_login_error, e.message),
-                            Toast.LENGTH_SHORT,
-                        ).show()
-                    }
+                }
+                val sessionManager = SessionManager(this)
+                sessionManager.createLoginSession()
             }
-            val sessionManager = SessionManager(this)
-            sessionManager.createLoginSession()
         }
 
         mCreateBtn.setOnClickListener {
@@ -169,6 +204,51 @@ class LoginActivity : BaseActivity() {
             passwordResetDialog.create().show()
         }
     }
+
+    private fun loginApi(loginParam: LoginParam) {
+        progressBar.show()
+        val apiservice = ServiceBuilder.buildService(this)?.create(ApiService::class.java)
+        val call = apiservice?.login(loginParam)
+        call?.enqueue(
+            object : Callback<LoginResponse> {
+                override fun onResponse(
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>,
+                ) {
+                    if (response.code() == HttpStatus.SC_OK && response.isSuccessful && response.body() != null) {
+                        // Handle successful registration
+                        Log.e("Responsee---->", Gson().toJson(response.body()))
+                        response.body()!!.message?.let { it1 -> showMessage(it1) }
+                        sessionManager?.setToken(response.body()!!.token)
+                        sessionManager?.getUserModel = response.body()
+                        NavigationService(this@LoginActivity).toHomeScreenForRole(userRole)
+                    } else if (response.code() == HttpStatus.SC_BAD_REQUEST) {
+                        // Handle error
+                        val errorBody = response.errorBody()!!.string()
+                        val jsonObject = JSONObject(errorBody)
+                        val errorMessage = jsonObject.optString("error")
+                        Toast.makeText(this@LoginActivity, errorMessage, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    progressBar.hide()
+                }
+
+                override fun onFailure(
+                    call: Call<LoginResponse>,
+                    t: Throwable,
+                ) {
+                    // Handle failure
+                    progressBar.hide()
+                    showMessage(RegistrationStatusMessage.Failure.toString() + " : ${t.message}")
+                }
+            },
+        )
+    }
+
+    private fun showMessage(message: String) {
+        Toast.makeText(this@LoginActivity, message, Toast.LENGTH_SHORT).show()
+    }
+
 
     private fun validateInputs(
         rawEmail: String?,

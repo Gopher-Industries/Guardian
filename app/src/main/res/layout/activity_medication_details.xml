@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:translationZ="20dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="@string/medication_details"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:layout_marginTop="100dp"

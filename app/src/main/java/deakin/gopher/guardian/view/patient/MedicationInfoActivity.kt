@@ -15,7 +15,7 @@ class MedicationInfoActivity : AppCompatActivity() {
         val spinner: Spinner = findViewById(R.id.dropdownSpinner)
 
         // Get the string array from resources
-        val items = resources.getStringArray(R.array.dropdown_items)
+        val items = resources.getStringArray(R.array.age_group_array)
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
