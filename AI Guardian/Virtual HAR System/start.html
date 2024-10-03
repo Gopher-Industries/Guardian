@@ -6,8 +6,9 @@
     <title>Hospital Activity Simulator - Setup</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f4f8;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: bolder;
+            background-color: #e0efff;
             margin: 0;
             padding: 0;
             display: flex;
@@ -16,21 +17,24 @@
             height: 100vh;
         }
         .container {
-            background-color: white;
+            background-color: rgba(131, 195, 255, 0.87);
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.322);
+            max-width: 600px;
+            width: 100%;
         }
         h1 {
-            color: #2c3e50;
+            color: #041d3f;
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.5rem
         }
         label {
             display: block;
             margin-bottom: 0.5rem;
-            color: #34495e;
+            color: #161e27;
             font-weight: bold;
+            font-size: large;
         }
         select {
             width: 100%;
@@ -44,21 +48,29 @@
         input[type="submit"] {
             width: 100%;
             padding: 0.75rem;
-            background-color: #54a3ec;
+            background-color: #0e4c86;
             color: white;
             border: none;
             border-radius: 4px;
-            font-size: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
         input[type="submit"]:hover {
-            background-color: #54a3ec;
+            background-color: #043d72;
+        }
+        #logo {
+            display: block;
+            margin: 0 auto 1.5rem;
+            max-width: 100px;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <img id="logo" src="{{ url_for('static', filename='Logo.png') }}" alt="Hospital Simulator Logo" onerror="handleImageError(this)">
         <h1>Hospital Activity Simulator Setup</h1>
         <form action="{{ url_for('simulator') }}" method="post">
             <label for="patientType">Patient Type:</label>
@@ -79,5 +91,6 @@
             <input type="submit" value="Start Simulation">
         </form>
     </div>
+
 </body>
 </html>
