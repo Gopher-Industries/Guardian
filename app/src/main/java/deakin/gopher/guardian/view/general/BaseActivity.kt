@@ -1,35 +1,34 @@
-package deakin.gopher.guardian.view.general;
+package deakin.gopher.guardian.view.general
 
-import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
-import deakin.gopher.guardian.model.login.SessionManager;
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import deakin.gopher.guardian.model.login.SessionManager
+import deakin.gopher.guardian.model.login.SessionManager.isLoggedIn
+import deakin.gopher.guardian.model.login.SessionManager.logoutUser
+import deakin.gopher.guardian.model.login.SessionManager.updateLastActiveTime
 
-public abstract class BaseActivity extends AppCompatActivity {
+abstract class BaseActivity : AppCompatActivity() {
+    override fun onResume() {
+        super.onResume()
 
-  @Override
-  protected void onResume() {
-    super.onResume();
+        // Check for user session expiry and timeout
+        if (isLoggedIn) {
+            val lastActiveTime: Long = SessionManager.getLastActiveTime()
+            val currentTime = System.currentTimeMillis()
+            val expiryTime = (30 * 60 * 1000).toLong()
 
-    // Check for user session expiry and timeout
-    final SessionManager sessionManager = new SessionManager(this);
-    if (sessionManager.isLoggedIn()) {
-      final long lastActiveTime = sessionManager.getLastActiveTime();
-      final long currentTime = System.currentTimeMillis();
-      final long expiryTime = 30 * 60 * 1000;
-
-      if (expiryTime < currentTime - lastActiveTime) {
-        sessionManager.logoutUser();
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
-      } else {
-        sessionManager.updateLastActiveTime();
-      }
+            if (expiryTime < currentTime - lastActiveTime) {
+                logoutUser()
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            } else {
+                updateLastActiveTime()
+            }
+        }
     }
-  }
 
-  @Override
-  protected void onPause() {
-    super.onPause();
-    new SessionManager(this).updateLastActiveTime();
-  }
+    override fun onPause() {
+        super.onPause()
+        updateLastActiveTime()
+    }
 }

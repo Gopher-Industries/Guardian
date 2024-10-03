@@ -13,9 +13,9 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.RegistrationStatusMessage
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.Password
+import deakin.gopher.guardian.model.register.AuthResponse
 import deakin.gopher.guardian.model.register.RegisterRequest
 import deakin.gopher.guardian.model.register.RegistrationError
-import deakin.gopher.guardian.model.register.User
 import deakin.gopher.guardian.services.NavigationService
 import deakin.gopher.guardian.services.api.ApiClient
 import retrofit2.Call
@@ -77,10 +77,10 @@ class RegisterActivity : BaseActivity() {
             val call = ApiClient.apiService.register(request)
 
             call.enqueue(
-                object : Callback<User> {
+                object : Callback<AuthResponse> {
                     override fun onResponse(
-                        call: Call<User>,
-                        response: Response<User>,
+                        call: Call<AuthResponse>,
+                        response: Response<AuthResponse>,
                     ) {
                         progressBar.isVisible = false
                         if (response.isSuccessful) {
@@ -98,19 +98,19 @@ class RegisterActivity : BaseActivity() {
                     }
 
                     override fun onFailure(
-                        call: Call<User>,
+                        call: Call<AuthResponse>,
                         t: Throwable,
                     ) {
                         // Handle failure
                         progressBar.isVisible = false
-                        showMessage(RegistrationStatusMessage.Failure.toString() + " : ${t.message}")
+                        showMessage(RegistrationStatusMessage.Failure.toString() + ": ${t.message}")
                     }
                 },
             )
         }
 
         backToLoginButton.setOnClickListener {
-            NavigationService(this).toLogin()
+            finish()
         }
     }
 
