@@ -585,6 +585,95 @@
     <string name="welcome_onboard">Welcome Onboard</string>
     <string name="training">Training</string>
 
+    <!-- Account Creation -->
+    <string name="full_name">Full Name</string>
+    <string name="email_address_unique">Email Address (Unique)</string>
+    <string name="password">Password</string>
 
+    <!-- Emotional Intelligence Communication Activity -->
+    <string name="emotional_intelligence_communication">Emotional Intelligence Communication</string>
+    <string name="emotional_intelligence_communication_description">Develop your communication skills and emotional intelligence.</string>
+    <string name="start_button_text">Start</string>
+
+    <!-- Homecare Induction Activity -->
+    <string name="homecare_induction">Homecare Induction</string>
+    <string name="homecare_induction_description">Induction course for homecare procedures and protocols.</string>
+
+    <!-- Infection Control Activity -->
+    <string name="infection_control">Infection Control</string>
+    <string name="infection_control_description">Learn about infection prevention and control methods.</string>
+
+    <!-- Inspiring Leadership Activity -->
+    <string name="inspiring_leadership">Inspiring Leadership</string>
+    <string name="inspiring_leadership_description">Become a leader who inspires and motivates.</string>
+
+    <!-- Medication Administration Activity -->
+    <string name="medication_administration_title">Medication Administration</string>
+    <string name="medication_administration_description">Understand safe and effective medication administration practices.</string>
+
+    <!-- Medication Details Activity -->
+    <string name="medication_details">Medication Details</string>
+
+    <!-- Medication Info Activity -->
+    <string name="medication_info">Medication Information</string>
+    <string name="warning_adverse_reaction">Warning: Adverse Reaction</string>
+    <string name="prescription_warning">Prescription Warning</string>
+    <string name="ask_doctor">Consult your doctor if unsure</string>
+    <string name="need_info">Need more information?</string>
+    <string name="need_more_info">Need more information?</string>
+
+    <!-- Medication Safety Activity -->
+    <string name="medication_safety_title">Medication Safety</string>
+    <string name="medication_safety_description">Guidelines for safe medication practices</string>
+
+    <!-- Module 1 Courses Activity -->
+    <string name="supporting_mealtimes">Supporting Mealtimes</string>
+
+    <!-- Supporting Mealtimes Activity -->
+    <string name="supporting_mealtimes_description">Best practices for assisting with mealtimes</string>
+
+    <!-- Training Activity -->
+    <string name="welcome_to_training">Welcome to Training</string>
+    <string name="module_1">Module 1</string>
+    <string name="module_2">Module 2</string>
+    <string name="module_3">Module 3</string>
+
+    <!-- Welcome Activity -->
+    <string name="welcome_message">Welcome to the App</string>
+    <string name="welcome_description">Your journey to better care starts here</string>
+
+    <!-- Create New Password -->
+    <string name="create_new_password">Create New Password</string>
+    <string name="create_your_new_password">Enter a new password to secure your account</string>
+
+        <!-- Create New Password -->
+        <string name="hidden_password">Hidden Password</string>
+        <string name="text_continue">Continue</string>
+
+        <!-- Forgot the Password -->
+        <string name="email_address">Email Address</string>
+        <string name="forgot_the_password">Forgot the Password?</string>
+        <string name="enter_email_address_for_reset">Enter your email address to reset your password</string>
+
+        <!-- Loading Log In -->
+        <string name="log_in_success">Log In Successful</string>
+        <string name="verify_check">Verification Check</string>
+
+        <!-- Loading Splash -->
+        <string name="gopher_heart">Gopher Heart</string>
+        <string name="splash">Splash Screen</string>
+
+        <!-- Login Enter PIN -->
+        <string name="enter_pin_code">Enter PIN Code</string>
+        <string name="please_check_your_email_for_the_code">Please check your email for the code</string>
+        <string name="this_code_is_valid_for_the_next_30_seconds_a_new_code_will_be_generated_when_it_expires">This code is valid for the next 30 seconds. A new code will be generated when it expires.</string>
+        <string name="resend">Resend</string>
+
+    <string-array name="dropdown_items">
+        <item>Item 1</item>
+        <item>Item 2</item>
+        <item>Item 3</item>
+        <item>Item 4</item>
+    </string-array>
 </resources>
 
