@@ -31,8 +31,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun onGetStartedClick() {
-        val sessionManager = SessionManager(this)
-        if (!sessionManager.isLoggedIn) {
+        if (!SessionManager.isLoggedIn) {
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
         } else {
             startActivity(Intent(this@MainActivity, Homepage4caretaker::class.java))

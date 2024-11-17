@@ -3,51 +3,32 @@ package deakin.gopher.guardian.view.general
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.model.ApiErrorResponse
+import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.login.RoleName
+import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.NavigationService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.POST
-
-// Define the API interface
-interface PinValidationApi {
-    @POST("validate_pin")
-    suspend fun validatePin(
-        @Body pinRequest: PinRequest,
-    ): PinResponse
-}
-
-// Data classes for request and response
-data class PinRequest(val pin: String)
-
-data class PinResponse(val isValid: Boolean)
+import deakin.gopher.guardian.services.api.ApiClient
+import deakin.gopher.guardian.view.hide
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PinCodeActivity : AppCompatActivity() {
-    private lateinit var api: PinValidationApi
     private lateinit var userRole: RoleName
+    private val userEmail = SessionManager.getCurrentUser().email
+
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_enter_pin)
-        val bundle: Bundle? = intent.extras
         userRole = intent.getSerializableExtra("role") as RoleName
-
-        // Initialize Retrofit and create API instance
-        val retrofit =
-            Retrofit.Builder()
-                .baseUrl("https://your-api-base-url.com/") // Replace with your actual API base URL
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-        api = retrofit.create(PinValidationApi::class.java)
 
         val pinDigit1 = findViewById<EditText>(R.id.pin_digit_1)
         val pinDigit2 = findViewById<EditText>(R.id.pin_digit_2)
@@ -56,6 +37,8 @@ class PinCodeActivity : AppCompatActivity() {
         val pinDigit5 = findViewById<EditText>(R.id.pin_digit_5)
         val pinDigit6 = findViewById<EditText>(R.id.pin_digit_6)
         val submitButton = findViewById<Button>(R.id.loginBtn)
+        val resendButton = findViewById<Button>(R.id.resendText)
+        progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
         submitButton.setOnClickListener {
             val pin =
@@ -68,50 +51,87 @@ class PinCodeActivity : AppCompatActivity() {
             if (pin.length == 6) {
                 validatePin(pin)
             } else {
-                showError("Please enter a 6-digit PIN")
+                showMessage("Please enter a 6-digit PIN")
             }
         }
+
+        resendButton.setOnClickListener {
+            sendPin()
+        }
+        resendButton.performClick()
+    }
+
+    private fun sendPin() {
+        val call = ApiClient.apiService.sendPin(userEmail)
+        call.enqueue(
+            object : Callback<BaseModel> {
+                override fun onResponse(
+                    call: Call<BaseModel>,
+                    response: Response<BaseModel>,
+                ) {
+                    progressBar.hide()
+                    if (response.isSuccessful && response.body() != null) {
+                        showMessage(response.body()!!.apiMessage ?: "Pin sent tou your email")
+                    } else {
+                        // Handle error
+                        val errorResponse =
+                            Gson().fromJson(
+                                response.errorBody()?.string(),
+                                ApiErrorResponse::class.java,
+                            )
+                        showMessage(errorResponse.apiError ?: response.message())
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<BaseModel>,
+                    t: Throwable,
+                ) {
+                    // Handle failure
+                    progressBar.hide()
+                    showMessage("Error sending PIN: ${t.message}")
+                }
+            },
+        )
     }
 
     private fun validatePin(pin: String) {
-        if (pin == "123456") {
-            showError("PIN cannot be 123456")
-            return
-        }
-
-        if (pin.all { it == pin[0] }) {
-            showError("PIN cannot be 6 repeated digits")
-            return
-        }
-
-        // If local validation passes, check against the database
-        checkPinAgainstDatabase(pin)
-    }
-
-    private fun showError(message: String) {
-        Toast.makeText(this@PinCodeActivity, message, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun checkPinAgainstDatabase(pin: String) {
-        NavigationService(this@PinCodeActivity).toPinCodeActivity(userRole)
-        finish()
-        return
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                val response =
-                    withContext(Dispatchers.IO) {
-                        api.validatePin(PinRequest(pin))
+        val call = ApiClient.apiService.verifyPin(userEmail, pin)
+        call.enqueue(
+            object : Callback<BaseModel> {
+                override fun onResponse(
+                    call: Call<BaseModel>,
+                    response: Response<BaseModel>,
+                ) {
+                    progressBar.hide()
+                    if (response.isSuccessful && response.body() != null) {
+                        showMessage(response.body()!!.apiMessage ?: "Pin verified successfully")
+                        NavigationService(this@PinCodeActivity).toHomeScreenForRole(userRole)
+                        finish()
+                    } else {
+                        // Handle error
+                        val errorResponse =
+                            Gson().fromJson(
+                                response.errorBody()?.string(),
+                                ApiErrorResponse::class.java,
+                            )
+                        showMessage(errorResponse.apiError ?: response.message())
                     }
-
-                if (response.isValid) {
-                    NavigationService(this@PinCodeActivity).toPinCodeActivity(userRole)
-                    finish()
-                } else {
-                    showError("Invalid PIN")
                 }
-            } catch (e: Exception) {
-                showError("Error validating PIN: ${e.message}")
-            }
-        }
+
+                override fun onFailure(
+                    call: Call<BaseModel>,
+                    t: Throwable,
+                ) {
+                    // Handle failure
+                    progressBar.hide()
+                    showMessage("Error validating PIN: ${t.message}")
+                }
+            },
+        )
+    }
+
+    private fun showMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

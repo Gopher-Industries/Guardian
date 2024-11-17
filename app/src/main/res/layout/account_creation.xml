@@ -79,100 +79,83 @@
                 tools:layout_editor_absoluteY="16dp" />
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                app:expandedHintEnabled="false"
-                app:placeholderText="Jane Doe">
+                android:layout_height="wrap_content">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/Fullname"
-                    style="@style/Widget.AppCompat.EditText"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="12dp"
                     android:autofillHints=""
-                    android:background="@drawable/edit_text_border"
                     android:ems="10"
                     android:focusable="auto"
                     android:hint="@string/full_name"
                     android:inputType="textPersonName"
-                    android:paddingHorizontal="16dp"
-                    tools:layout_editor_absoluteX="37dp"
-                    tools:layout_editor_absoluteY="124dp" />
+                    android:paddingHorizontal="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                app:expandedHintEnabled="false"
-                app:placeholderText="Jane.Doe@goherindustries.com">
+                android:layout_height="wrap_content">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/Email"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="12dp"
                     android:autofillHints=""
-                    android:background="@drawable/edit_text_border"
                     android:ems="10"
                     android:focusable="auto"
-                    android:hint="@string/email_address_unique"
+                    android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:paddingHorizontal="16dp"
-                    android:textStyle="normal"
-                    tools:layout_editor_absoluteX="36dp"
-                    tools:layout_editor_absoluteY="217dp" />
+                    android:textStyle="normal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                app:expandedHintEnabled="false"
-                app:passwordToggleEnabled="true"
-                app:placeholderText="************">
+                app:passwordToggleEnabled="true">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="12dp"
                     android:autofillHints=""
-                    android:background="@drawable/edit_text_border"
                     android:ems="10"
                     android:focusable="auto"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:textStyle="normal"
-                    tools:layout_editor_absoluteX="36dp"
-                    tools:layout_editor_absoluteY="265dp" />
+                    android:textStyle="normal" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                app:expandedHintEnabled="false"
-                app:passwordToggleEnabled="true"
-                app:placeholderText="************">
+                app:passwordToggleEnabled="true">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/passwordConfirm"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="12dp"
                     android:autofillHints=""
-                    android:background="@drawable/edit_text_border"
                     android:ems="10"
                     android:focusable="auto"
                     android:hint="@string/confirm_password"
                     android:inputType="textPassword"
-                    android:textStyle="normal"
-                    tools:layout_editor_absoluteX="36dp"
-                    tools:layout_editor_absoluteY="313dp" />
+                    android:textStyle="normal" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

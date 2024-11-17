@@ -61,7 +61,7 @@ class EmailPasswordAuthService(
 
         fun signOut(context: Context) {
             try {
-                SessionManager(context).logoutUser()
+                SessionManager.logoutUser()
                 FirebaseAuth.getInstance().signOut()
                 context.startActivity(Intent(context, LoginActivity::class.java))
             } catch (e: Exception) {

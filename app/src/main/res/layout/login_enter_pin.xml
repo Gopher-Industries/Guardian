@@ -69,14 +69,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
+                android:paddingVertical="64dp"
                 android:text="@string/enter_pin_code"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="parent"
-                android:paddingVertical="64dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteY="182dp" />
 
             <TextView
@@ -174,10 +174,11 @@
                 android:id="@+id/codeValidityText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/this_code_is_valid_for_the_next_30_seconds_a_new_code_will_be_generated_when_it_expires"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:text="@string/otp_message"
                 android:textAlignment="center"
                 android:textColor="@color/black"
+                android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -200,8 +201,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/codeValidityText" />
 
-            <TextView
+            <Button
                 android:id="@+id/resendText"
+                style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -211,6 +213,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/loginBtn" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/resendText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

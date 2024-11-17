@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".GuardianApplication"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -178,6 +179,7 @@
         <activity android:name=".Module3CoursesActivity" />
         <activity android:name=".InspiringLeadershipEIActivity" />
         <activity android:name=".EmotionalIntelligenceCommunicationActivity" />
+        <activity android:name="deakin.gopher.guardian.view.general.NurseRosterActivity" />
 
 
         <service
