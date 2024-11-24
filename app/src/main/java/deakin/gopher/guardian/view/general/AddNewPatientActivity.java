@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddNewPatientActivity extends BaseActivity {
-  String userId =
-      FirebaseAuth.getInstance().getCurrentUser().getUid(); // Get the current user's UID
 
   EditText name, address, underCare, photo, phone, dob, medicareNo;
   Button btnAdd, btnBack;
@@ -48,7 +46,6 @@ public class AddNewPatientActivity extends BaseActivity {
 
   private void insertData() {
     final Map<String, Object> map = new HashMap<>();
-    map.put("userId", userId); // Include the userId in the map
     map.put("name", name.getText().toString());
     map.put("address", address.getText().toString());
     map.put("underCare", underCare.getText().toString());

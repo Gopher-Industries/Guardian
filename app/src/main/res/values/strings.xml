@@ -588,6 +588,7 @@
     <string name="gopher_heart">gopher heart</string>
     <string name="verify_check">verify check</string>
     <string name="otp_message">This code is valid for the next 15 minutes.</string>
+    <string name="countdown_message">You can request for a new PIN in: </string>
     <string name="resend">Resend</string>
     <string name="please_check_your_email_for_the_code">Please check your email for the code.</string>
     <string name="enter_pin_code">Enter PIN code</string>
@@ -645,5 +646,9 @@
         <item>Lisinopril</item>
     </string-array>
 
+    <plurals name="resend_countdown_seconds">
+        <item quantity="one">%d second</item>
+        <item quantity="other">%d seconds</item>
+    </plurals>
 </resources>
 
