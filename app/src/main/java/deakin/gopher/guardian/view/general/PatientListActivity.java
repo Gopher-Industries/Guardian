@@ -44,7 +44,6 @@ public class PatientListActivity extends BaseActivity {
   Query query;
   SearchView patient_searchView;
   ImageView patientListMenuButton;
-  String currentUserId;
 
   private final Handler handler = new Handler();
   private final Runnable updateRunnable =
@@ -80,7 +79,6 @@ public class PatientListActivity extends BaseActivity {
     setContentView(R.layout.activity_patient_list);
     patient_list_recyclerView = findViewById(R.id.patient_list_recycleView);
     final ImageView addPatientIcon = findViewById(R.id.imageView62);
-    currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid(); // Get current user UID
     final Button viewArchivedButton = findViewById(R.id.button_view_archived);
     viewArchivedButton.setOnClickListener(
         new View.OnClickListener() {
@@ -151,8 +149,8 @@ public class PatientListActivity extends BaseActivity {
         FirebaseDatabase.getInstance()
             .getReference()
             .child("patient_profile")
-            .orderByChild("userId")
-            .equalTo(currentUserId);
+            .orderByChild("userId");
+//            .equalTo(currentUserId);
 
     final FirebaseRecyclerOptions<Patient> all_options =
         new FirebaseRecyclerOptions.Builder<Patient>()
@@ -204,8 +202,8 @@ public class PatientListActivity extends BaseActivity {
                   FirebaseDatabase.getInstance()
                       .getReference()
                       .child("patient_profile")
-                      .orderByChild("userId")
-                      .equalTo(currentUserId);
+                      .orderByChild("userId");
+//                      .equalTo(currentUserId);
             }
             final FirebaseRecyclerOptions<Patient> options =
                 new FirebaseRecyclerOptions.Builder<Patient>()
