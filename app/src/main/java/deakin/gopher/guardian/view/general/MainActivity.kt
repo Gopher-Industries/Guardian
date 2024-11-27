@@ -16,18 +16,23 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         val getStartedButton = findViewById<Button>(R.id.getStartedButton)
 
-        getStartedButton.setOnClickListener { _ -> onGetStartedClick() }
+           getStartedButton.setOnClickListener { _ -> onGetStartedClick() }
 
-        FirebaseMessaging.getInstance()
-            .token
-            .addOnCompleteListener { task: Task<String?> ->
-                if (task.isSuccessful) {
-                    val token = task.result
-                    Log.d("FCM Token", token ?: "Token is null")
-                } else {
-                    Log.w("MainActivity", "Fetching FCM registration token failed", task.exception)
-                }
-            }
+            FirebaseMessaging.getInstance()
+                 .token
+                 .addOnCompleteListener { task: Task<String?> ->
+                     if (task.isSuccessful) {
+                         val token = task.result
+                         Log.d("FCM Token", token ?: "Token is null")
+                     } else {
+                         Log.w("MainActivity", "Fetching FCM registration token failed", task.exception)
+                     }
+                 }
+
+
+        getStartedButton.setOnClickListener{
+            startActivity(Intent(this@MainActivity, Homepage4caretaker::class.java))
+        }
     }
 
     private fun onGetStartedClick() {
