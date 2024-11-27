@@ -3,6 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- For reading images -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+    <!-- For reading videos -->
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+
+    <!-- For reading audio -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+
+    <!-- Add WRITE permissions only if necessary -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
+    <!-- Add the permission here -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".GuardianApplication"
@@ -64,9 +77,6 @@
             android:exported="false" />
         <activity
             android:name=".view.caretaker.notifications.confirmincident.ConfirmIncidentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.caretaker.notifications.FallAlertActivity"
             android:exported="false" />
         <activity
             android:name=".view.caretaker.CaretakerDashboardActivity"
@@ -180,6 +190,8 @@
         <activity android:name=".InspiringLeadershipEIActivity" />
         <activity android:name=".EmotionalIntelligenceCommunicationActivity" />
         <activity android:name="deakin.gopher.guardian.view.general.NurseRosterActivity" />
+        <activity android:name=".view.FallDetection.FallDetectionActivity" />
+        <activity android:name=".view.FallDetection.FallAlertActivity" />
 
 
         <service
