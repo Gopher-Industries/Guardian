@@ -8,6 +8,5 @@ public class NurseRosterActivity extends BaseActivity {
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_nurse_roster);
-    
   }
 }
