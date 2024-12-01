@@ -1,7 +1,9 @@
 package deakin.gopher.guardian.services
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import deakin.gopher.guardian.model.login.RoleName
 import deakin.gopher.guardian.view.general.Homepage4admin
 import deakin.gopher.guardian.view.general.Homepage4caretaker
@@ -103,5 +105,24 @@ class NavigationService(val activity: Activity) {
         val intent = Intent(activity.applicationContext, PinCodeActivity::class.java)
         intent.putExtra("role", roleName)
         activity.startActivity(intent)
+    }
+
+    class NavigationHelper(private val context: Context) {
+        fun navigateToRoleDashboard(role: String) {
+            val intent =
+                when (role) {
+                    "Caretaker" -> Intent(context, Homepage4caretaker::class.java)
+                    "Nurse" -> Intent(context, Homepage4nurse::class.java)
+                    "Admin" -> Intent(context, Homepage4admin::class.java)
+                    else -> {
+                        Toast.makeText(context, "Unknown role", Toast.LENGTH_SHORT).show()
+                        return
+                    }
+                }
+            context.startActivity(intent)
+            if (context is Activity) {
+                (context as Activity).finish()
+            }
+        }
     }
 }
