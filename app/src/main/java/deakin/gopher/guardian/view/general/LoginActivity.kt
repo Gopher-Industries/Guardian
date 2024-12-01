@@ -1,18 +1,19 @@
 package deakin.gopher.guardian.view.general
 
 import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ProgressBar
+import android.widget.RadioGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.services.NavigationService
@@ -42,20 +43,22 @@ class LoginActivity : BaseActivity() {
         auth = FirebaseAuth.getInstance()
 
         // Google Sign-In Configuration
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
+        val gso =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
         gsoClient = GoogleSignIn.getClient(this, gso)
 
         // Role Selection
         loginRoleRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            userRole = when (checkedId) {
-                R.id.admin_radioButton -> "Admin"
-                R.id.caretaker_radioButton -> "Caretaker"
-                R.id.nurse_radioButton -> "Nurse"
-                else -> "Caretaker"
-            }
+            userRole =
+                when (checkedId) {
+                    R.id.admin_radioButton -> "Admin"
+                    R.id.caretaker_radioButton -> "Caretaker"
+                    R.id.nurse_radioButton -> "Nurse"
+                    else -> "Caretaker"
+                }
         }
 
         // Login Button Listener
@@ -106,7 +109,11 @@ class LoginActivity : BaseActivity() {
         }
     }
 
-    private fun loginUser(email: String, password: String, progressBar: ProgressBar) {
+    private fun loginUser(
+        email: String,
+        password: String,
+        progressBar: ProgressBar,
+    ) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             progressBar.visibility = View.GONE
             if (task.isSuccessful) {
@@ -128,7 +135,12 @@ class LoginActivity : BaseActivity() {
         }
     }
 
-    private fun registerUser(email: String, password: String, role: String, progressBar: ProgressBar) {
+    private fun registerUser(
+        email: String,
+        password: String,
+        role: String,
+        progressBar: ProgressBar,
+    ) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             progressBar.visibility = View.GONE
             if (task.isSuccessful) {
