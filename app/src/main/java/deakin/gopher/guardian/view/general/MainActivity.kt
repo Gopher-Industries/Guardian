@@ -9,6 +9,8 @@ import com.google.firebase.messaging.FirebaseMessaging
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.EmailPasswordAuthService
+import deakin.gopher.guardian.view.FallDetection.FallAlertActivity
+import deakin.gopher.guardian.view.caretaker.notifications.confirmincident.ConfirmIncidentActivity
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

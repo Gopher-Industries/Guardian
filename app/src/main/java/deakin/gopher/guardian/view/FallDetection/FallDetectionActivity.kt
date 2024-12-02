@@ -1,5 +1,6 @@
 package deakin.gopher.guardian.view.FallDetection
 
+import android.Manifest
 import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaMetadataRetriever
@@ -10,6 +11,8 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.annotation.RawRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
@@ -33,11 +36,17 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.core.app.ActivityCompat
 
 
 @UnstableApi
 class FallDetectionActivity :  AppCompatActivity(), Player.Listener {
-    var fallAlertMenuButton: ImageView? = null
     private lateinit var binding: ActivityFallDetectionBinding
 
     private val exoPlayer by lazy {
@@ -67,6 +76,8 @@ class FallDetectionActivity :  AppCompatActivity(), Player.Listener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fall_detection)
+
+        createNotificationChannel()
 
         binding = ActivityFallDetectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -168,6 +179,10 @@ class FallDetectionActivity :  AppCompatActivity(), Player.Listener {
             Log.d(TAG, "Fall detected!")
             // Update UI or trigger an alert
             binding.fallAlertTextView.text = "Fall detected!"
+
+            // Send a notification
+            sendFallNotification()
+
             val fallAlertActivityIntent =
                     Intent(this@FallDetectionActivity, FallAlertActivity::class.java)
             startActivity(fallAlertActivityIntent)
@@ -250,5 +265,97 @@ class FallDetectionActivity :  AppCompatActivity(), Player.Listener {
         super.onDestroy()
         exoPlayer.release()
     }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channelName = "Fall Alerts"
+            val channelDescription = "Notifications for detected falls"
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel("FALL_ALERTS", channelName, importance).apply {
+                description = channelDescription
+            }
+
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    // Function to send a notification
+    private fun sendFallNotification() {
+        val notificationId = 1
+        val channelId = "FALL_ALERTS"
+
+        // Check for POST_NOTIFICATIONS permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // Request the permission if not granted
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    1 // Request code
+                )
+                return // Exit function until permission is granted
+            }
+        }
+
+        // Create PendingIntent for notification click action
+        val notificationIntent = Intent(this, FallAlertActivity::class.java)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            notificationIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        // Create NotificationChannel
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Fall Alerts",
+                NotificationManager.IMPORTANCE_HIGH
+            ).apply {
+                description = "Notifications for detected falls"
+            }
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        // Build the notification
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.fall_notification_icon_foreground)
+            .setContentTitle("Fall Detected!")
+            .setContentText("A fall was detected. Tap to check details.")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
+            .setContentIntent(pendingIntent)
+
+        // Display the notification
+        val notificationManager = NotificationManagerCompat.from(this)
+        notificationManager.notify(notificationId, notificationBuilder.build())
+    }
+
+    // Handle runtime permission request results
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.d(TAG, "Notification permission granted")
+                sendFallNotification() // Retry sending the notification
+            } else {
+                Log.d(TAG, "Notification permission denied")
+            }
+        }
+    }
+
 
 }

@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
     <!-- Add the permission here -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:name=".GuardianApplication"
@@ -192,6 +193,7 @@
         <activity android:name="deakin.gopher.guardian.view.general.NurseRosterActivity" />
         <activity android:name=".view.FallDetection.FallDetectionActivity" />
         <activity android:name=".view.FallDetection.FallAlertActivity" />
+        <activity android:name="deakin.gopher.guardian.view.caretaker.notifications.confirmincident.CallAmbulanceActivity" />
 
 
         <service

@@ -28,11 +28,6 @@ class CaretakerDashboardActivity : BaseActivity() {
         startActivity(medicalDiagnosticsActivityIntent)
     }
 
-    fun onSelectAPatientClick(view: View?) {
-        val patientProfileListIntent =
-            Intent(this@CaretakerDashboardActivity, PatientListActivity::class.java)
-        startActivity(patientProfileListIntent)
-    }
 
     fun onMonitorPatientClick(view: View?) {
         val patientProfileListIntent =

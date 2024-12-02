@@ -185,6 +185,8 @@ dependencies {
     /* GLIDE */
     implementation 'com.github.bumptech.glide:glide:4.16.0'
 
+    implementation "androidx.core:core-ktx:1.12.0"
+
     /* EXOPLAYER */
     def media3_version = "1.1.1"
     implementation "androidx.media3:media3-exoplayer:$media3_version"

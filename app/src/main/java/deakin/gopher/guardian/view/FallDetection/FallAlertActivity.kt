@@ -37,7 +37,6 @@ import kotlin.time.toDuration
 
 @UnstableApi
 class FallAlertActivity :  AppCompatActivity(), Player.Listener {
-    var fallAlertMenuButton: ImageView? = null
     private lateinit var binding: ActivityPoseDetectVideoBinding
 
     private val exoPlayer by lazy {
@@ -81,9 +80,9 @@ class FallAlertActivity :  AppCompatActivity(), Player.Listener {
         val falseAlarmButton = findViewById<ImageButton>(R.id.falseAlarmButton)
 
         confirmIncidentButton.setOnClickListener { v: View? ->
-            val medicalDiagnosticsActivityIntent =
+            val confirmIncidentActivityIntent =
                 Intent(this@FallAlertActivity, ConfirmIncidentActivity::class.java)
-            startActivity(medicalDiagnosticsActivityIntent)
+            startActivity(confirmIncidentActivityIntent)
         }
 
         falseAlarmButton.setOnClickListener { v: View? ->
@@ -176,13 +175,6 @@ class FallAlertActivity :  AppCompatActivity(), Player.Listener {
         binding.graphicOverlayVideo.setImageSourceInfo(bitmap.width, bitmap.height, false)
         binding.graphicOverlayVideo.clear()
         binding.graphicOverlayVideo.add(PoseGraphic(binding.graphicOverlayVideo, pose))
-
-        /* lifecycleScope.launch(Dispatchers.Default) {
-             val exerciseResult = poseClassifierProcessor.getExerciseResult(pose)
-             withContext(Dispatchers.Main) {
-                 setExerciseStatistics(exerciseResult, binding.pushUps, binding.squads)
-             }
-         }*/
 
         // Analyze the pose to detect falls
         val fallDetected = detectFall(pose)

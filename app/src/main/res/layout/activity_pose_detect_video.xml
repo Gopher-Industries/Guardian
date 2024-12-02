@@ -122,7 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
         android:fontFamily="sans-serif-black"
-        android:text="@string/patient_benjamin_hogan"
+        android:text="@string/patient_zoe_tang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -192,23 +192,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="sans-serif-black"
-        android:text="@string/benjamin_hogan_is_seemingly_unconscious"
+        android:text="@string/zoe_tang_took_a_fall"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView14" />
 
     <ImageView
         android:id="@+id/imageView16"
-        android:layout_width="319dp"
-        android:layout_height="167dp"
-        android:layout_marginStart="53dp"
-        android:layout_marginEnd="40dp"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/rectangle_drop_shadow"
         android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView14"
-        app:srcCompat="@drawable/rectangle1687" />
+        app:layout_constraintTop_toBottomOf="@id/imageView14" />
 
     <TextView
         android:id="@+id/textView28"
@@ -217,16 +218,6 @@
         android:layout_marginStart="38dp"
         android:layout_marginTop="4dp"
         android:text="@string/no_movement_detected_over_15_minutes"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@+id/imageView16"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
-
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:text="@string/usual_naptime_1_30pm_2_20pm"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/imageView16"
         app:layout_constraintTop_toBottomOf="@+id/textView26" />
@@ -258,22 +249,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="18dp"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/detected"
         app:layout_constraintStart_toStartOf="@+id/imageView16"
         app:layout_constraintTop_toBottomOf="@+id/imageView14" />
-
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="9dp"
-        android:text="@string/lying_in_an_unsual_place"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@+id/imageView16"
-        app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/textView24"
@@ -282,18 +262,18 @@
         android:layout_marginStart="38dp"
         android:layout_marginTop="7dp"
         android:maxWidth="240dp"
-        android:text="@string/resembling_sleeping_behaviour_in_an_unusual_time"
+        android:text="@string/recorded_time"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/imageView16"
-        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+        app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
     <TextView
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="38dp"
         android:layout_marginTop="3dp"
-        android:text="@string/usual_bedtime_10_30pm_6_30am"
+        android:text="@string/lying_face_down"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/imageView16"
         app:layout_constraintTop_toBottomOf="@+id/textView24" />
@@ -302,7 +282,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -313,24 +293,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
+            android:layout_marginTop="10dp"
             android:contentDescription="TODO"
             app:srcCompat="@drawable/false_alarm" />
-
-        <ImageButton
-            android:id="@+id/imageButton5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-5dp"
-            android:background="#FFFFFF"
-            android:contentDescription="TODO"
-            android:translationZ="100dp"
-            app:srcCompat="@drawable/call" />
 
         <ImageButton
             android:id="@+id/confirmIncidentButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
+            android:layout_marginTop="11dp"
             android:contentDescription="TODO"
             app:srcCompat="@drawable/confirm_incident" />
     </LinearLayout>
