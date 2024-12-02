@@ -6,42 +6,59 @@
     android:background="@drawable/dialog_bg2"
     android:textAlignment="center">
 
-    <Button
-        android:id="@+id/okButtonFalseAlert"
-        android:layout_width="150dp"
+        <ImageView
+            android:id="@+id/imageView33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:contentDescription="TODO"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/checkedusermale" />
+
+    <TextView
+        android:id="@+id/name9"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/TG_blue"
-        android:text="@string/ok"
-        android:textColor="@color/white"
-        android:textStyle="normal|bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/false_alert_confirmed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+        app:layout_constraintTop_toBottomOf="@id/imageView33" />
 
     <TextView
         android:id="@+id/textView34"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:maxWidth="250dp"
-        android:text="@string/false_alert_noted_and_benjamin_s_activity_profile_has_been_updated_n_n_all_admins_have_been_notified"
+        android:text="@string/false_alert_noted_and_zoe_s_activity_profile_has_been_updated_n_n_all_admins_have_been_notified"
         android:textAlignment="center"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name9" />
 
-    <TextView
-        android:id="@+id/name9"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/okButtonFalseAlert"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/false_alert_confirmed"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/TG_blue"
+        android:text="@string/ok"
+        android:textColor="@color/white"
+        android:textStyle="normal|bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView34"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

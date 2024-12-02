@@ -12,8 +12,9 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import deakin.gopher.guardian.R
-import deakin.gopher.guardian.view.caretaker.CaretakerDashboardActivity
+import deakin.gopher.guardian.view.FallDetection.FallAlertActivity
 import deakin.gopher.guardian.view.general.BaseActivity
+import deakin.gopher.guardian.view.general.Homepage4caretaker
 
 class ConfirmIncidentActivity : BaseActivity() {
     var hospitalSpinner: Spinner? = null
@@ -69,8 +70,14 @@ class ConfirmIncidentActivity : BaseActivity() {
 
     fun onConfirmIncidentCancelClick(view: View?) {
         val medicalDiagnosticsActivityIntent =
-            Intent(this@ConfirmIncidentActivity, CaretakerDashboardActivity::class.java)
+            Intent(this@ConfirmIncidentActivity, FallAlertActivity::class.java)
         startActivity(medicalDiagnosticsActivityIntent)
+    }
+
+    fun onConfirmIncidentClick(view: View?) {
+        val callAmbulanceActivityIntent =
+            Intent(this@ConfirmIncidentActivity, CallAmbulanceActivity::class.java)
+        startActivity(callAmbulanceActivityIntent)
     }
 
     class SpinnerActivity : Activity(), AdapterView.OnItemSelectedListener {
