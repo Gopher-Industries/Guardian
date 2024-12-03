@@ -47,11 +47,11 @@ class PinCodeActivity : AppCompatActivity() {
         submitButton.setOnClickListener {
             val pin =
                 pinDigit1.text.toString() +
-                        pinDigit2.text.toString() +
-                        pinDigit3.text.toString() +
-                        pinDigit4.text.toString() +
-                        pinDigit5.text.toString() +
-                        pinDigit6.text.toString()
+                    pinDigit2.text.toString() +
+                    pinDigit3.text.toString() +
+                    pinDigit4.text.toString() +
+                    pinDigit5.text.toString() +
+                    pinDigit6.text.toString()
             if (pin.length == 6) {
                 validatePin(pin)
             } else {
@@ -154,10 +154,12 @@ class PinCodeActivity : AppCompatActivity() {
         object : CountDownTimer(90000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val secondsLeft = millisUntilFinished / 1000
-                val countdownText = resources.getQuantityString(
-                    R.plurals.resend_countdown_seconds,
-                    secondsLeft.toInt(), secondsLeft
-                )
+                val countdownText =
+                    resources.getQuantityString(
+                        R.plurals.resend_countdown_seconds,
+                        secondsLeft.toInt(),
+                        secondsLeft,
+                    )
                 countdownTimer.text = countdownText
             }
 
