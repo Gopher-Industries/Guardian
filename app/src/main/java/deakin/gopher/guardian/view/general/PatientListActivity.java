@@ -150,7 +150,7 @@ public class PatientListActivity extends BaseActivity {
             .getReference()
             .child("patient_profile")
             .orderByChild("userId");
-//            .equalTo(currentUserId);
+    //            .equalTo(currentUserId);
 
     final FirebaseRecyclerOptions<Patient> all_options =
         new FirebaseRecyclerOptions.Builder<Patient>()
@@ -203,7 +203,7 @@ public class PatientListActivity extends BaseActivity {
                       .getReference()
                       .child("patient_profile")
                       .orderByChild("userId");
-//                      .equalTo(currentUserId);
+              //                      .equalTo(currentUserId);
             }
             final FirebaseRecyclerOptions<Patient> options =
                 new FirebaseRecyclerOptions.Builder<Patient>()
