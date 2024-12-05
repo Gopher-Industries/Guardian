@@ -1,11 +1,15 @@
 package deakin.gopher.guardian.view.general
 
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
 import com.google.gson.Gson
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.ApiErrorResponse
@@ -57,6 +61,7 @@ class PinCodeActivity : AppCompatActivity() {
 
         resendButton.setOnClickListener {
             sendPin()
+            startResendCooldown()
         }
         resendButton.performClick()
     }
@@ -133,5 +138,37 @@ class PinCodeActivity : AppCompatActivity() {
 
     private fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun startResendCooldown() {
+        val countdownTimerContainer = findViewById<LinearLayoutCompat>(R.id.containerCountdown)
+        val countdownTimer = findViewById<TextView>(R.id.countdownTimer)
+        val resendButton = findViewById<Button>(R.id.resendText)
+
+        // Disable the resend button
+        resendButton.isEnabled = false
+        resendButton.setTextColor(resources.getColor(R.color.gray2))
+        countdownTimerContainer.visibility = View.VISIBLE
+
+        // Countdown for 1 minute 30 seconds (90,000ms)
+        object : CountDownTimer(90000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val secondsLeft = millisUntilFinished / 1000
+                val countdownText =
+                    resources.getQuantityString(
+                        R.plurals.resend_countdown_seconds,
+                        secondsLeft.toInt(),
+                        secondsLeft,
+                    )
+                countdownTimer.text = countdownText
+            }
+
+            override fun onFinish() {
+                // Enable the resend button
+                resendButton.isEnabled = true
+                resendButton.setTextColor(resources.getColor(R.color.TG_blue))
+                countdownTimerContainer.visibility = View.GONE
+            }
+        }.start()
     }
 }
