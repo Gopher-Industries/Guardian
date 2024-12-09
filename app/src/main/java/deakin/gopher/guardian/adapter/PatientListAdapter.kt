@@ -42,6 +42,7 @@ class PatientListAdapter(
     }
 
     @SuppressLint("SetTextI18n")
+    // In PatientListAdapter
     override fun onBindViewHolder(
         holder: MyViewHolder,
         position: Int,
@@ -51,13 +52,12 @@ class PatientListAdapter(
         updateStatusIndicator(holder.statusIndicator, model.status)
         holder.bind(model, isArchivedList)
         Log.d("PatientListAdapter", "Patient ID: " + model.patientId)
+
         holder.patientItem.setOnClickListener { view: View? ->
             val sharedPreferences = context.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
             val role = sharedPreferences.getInt("login_role", -1)
             if (0 == role || -1 == role) {
-                Log.d("PatientListAdapter", "Before toggle: " + model.status)
                 model.examinePatient()
-                Log.d("PatientListAdapter", "After toggle: " + model.status)
                 updateStatusIndicator(holder.statusIndicator, model.status)
                 notifyItemChanged(position)
                 val intent = Intent(context, PatientProfileActivity::class.java)
@@ -65,13 +65,14 @@ class PatientListAdapter(
                 context.startActivity(intent)
                 updatePatientStatus(model.patientId, model.status, model.needsAssistance)
             } else if (1 == role) {
-                // admin
-                val intent = Intent(context, PatientProfileActivity::class.java)
-                intent.putExtra("id", model.patientId)
+                // admin: Open detailed view of the patient
+                val intent = Intent(context, PatientOverviewActivity::class.java)
+                intent.putExtra("PATIENT_ID", model.patientId)
                 context.startActivity(intent)
             }
         }
     }
+
 
     private fun updateStatusIndicator(
         statusIndicator: ImageView,

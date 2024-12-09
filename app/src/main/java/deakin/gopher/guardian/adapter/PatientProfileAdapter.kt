@@ -33,11 +33,13 @@ class PatientProfileAdapter(
             3 -> MedicalDiagnosticsFragment(patientId)
             4 -> HealthDataForViewFragment()
             5 -> CarePlanSummaryActivityFragment(patientId)
+            6 -> TaskHistoryFragment(patientId) //new fragment for task history
+            7 -> CarePlanProgressFragment(patientId) //new fragment for care plan progess
             else -> HealthDataForViewFragment()
         }
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return 8 //updated to include the new fragments
     }
 }

@@ -49,6 +49,14 @@ class Patient {
     @JvmField
     var isArchived: Boolean = false
 
+    // New properties added
+    @JvmField
+    var healthData: Map<String, Any> = emptyMap()  // Health data for the patient
+    @JvmField
+    var taskHistory: List<String> = emptyList()  // List of tasks associated with the patient
+    @JvmField
+    var carePlanProgress: Map<String, Any> = emptyMap()  // Progress of the care plan
+
     constructor(patientId: String?, firstName: String, lastName: String) {
         this.patientId = patientId
         this.firstName = firstName
