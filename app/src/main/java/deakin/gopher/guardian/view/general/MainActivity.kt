@@ -31,6 +31,20 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Check if the user is logged in
+        if (SessionManager.isLoggedIn) {
+            try {
+                val currentUser = SessionManager.getCurrentUser()
+                val userId = SessionManager.getUserId()  // Get the userId
+                Log.d("MainActivity", "Current user ID: $userId")
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Error retrieving current user: ${e.message}")
+            }
+        } else {
+            Log.d("MainActivity", "User not logged in")
+        }
+
+
         // Existing button setup
         val getStartedButton = findViewById<Button>(R.id.getStartedButton)
         getStartedButton.setOnClickListener { onGetStartedClick() }
@@ -86,16 +100,21 @@ class MainActivity : BaseActivity() {
     private fun sendMessage() {
         val messageContent = editTextMessage.text.toString().trim()
         if (messageContent.isNotEmpty()) {
-            val message = Message(SessionManager.userId, "recipientUserId", messageContent, Date())
-            db.collection("messages")
-                .add(message)
-                .addOnSuccessListener {
-                    editTextMessage.text.clear()  // Clear input field
-                    loadMessages()  // Refresh message list
-                }
-                .addOnFailureListener {
-                    Toast.makeText(this, "Error sending message", Toast.LENGTH_SHORT).show()
-                }
+            val userId = SessionManager.getUserId()  // Get the user ID using the SessionManager method
+            if (userId != null) {
+                val message = Message(userId, "recipientUserId", messageContent, Date())
+                db.collection("messages")
+                    .add(message)
+                    .addOnSuccessListener {
+                        editTextMessage.text.clear()  // Clear input field
+                        loadMessages()  // Refresh message list
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Error sending message", Toast.LENGTH_SHORT).show()
+                    }
+            } else {
+                Toast.makeText(this, "User is not logged in", Toast.LENGTH_SHORT).show()
+            }
         } else {
             Toast.makeText(this, "Message cannot be empty", Toast.LENGTH_SHORT).show()
         }
@@ -114,5 +133,6 @@ class MainActivity : BaseActivity() {
         finish()
     }
 }
+
 
 

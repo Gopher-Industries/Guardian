@@ -1,4 +1,12 @@
 package deakin.gopher.guardian
 
-class MyApplication {
+import android.app.Application
+import deakin.gopher.guardian.model.login.SessionManager
+
+class MyApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        // Initialize SessionManager
+        SessionManager.init(applicationContext)
+    }
 }

@@ -1,31 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Health Data Section -->
+    <!-- Health Data -->
     <TextView
         android:id="@+id/health_data_text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Health Data"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:paddingBottom="8dp"/>
 
-    <!-- Task History Section -->
+    <!-- Task History -->
     <TextView
         android:id="@+id/task_history_text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Task History"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:paddingBottom="8dp"/>
 
-    <!-- Care Plan Progress Chart (GraphView) -->
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/progress_chart"
-        android:layout_width="match_parent"
-        android:layout_height="250dp" />
-</LinearLayout>
+    <!-- API Data -->
+    <TextView
+        android:id="@+id/api_data_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="API Data"
+        android:textSize="18sp"
+        android:paddingBottom="8dp"/>
 
+</LinearLayout>
