@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Health Data -->
+    <TextView
+        android:id="@+id/health_data_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Health Data"
+        android:textSize="18sp"
+        android:paddingBottom="8dp"/>
+
+    <!-- Task History -->
+    <TextView
+        android:id="@+id/task_history_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Task History"
+        android:textSize="18sp"
+        android:paddingBottom="8dp"/>
+
+    <!-- API Data -->
+    <TextView
+        android:id="@+id/api_data_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="API Data"
+        android:textSize="18sp"
+        android:paddingBottom="8dp"/>
+
+</LinearLayout>
