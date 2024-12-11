@@ -11,14 +11,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.adapter.MessageAdapter
-import deakin.gopher.guardian.communication.Message // Import Message class
-
-import java.util.Date
+import deakin.gopher.guardian.communication.Message
+import deakin.gopher.guardian.services.api.ApiClient
+import com.google.gson.Gson
+import okhttp3.ResponseBody
+import com.google.gson.reflect.TypeToken
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : BaseActivity() {
     private lateinit var recyclerViewMessages: RecyclerView
@@ -43,7 +46,6 @@ class MainActivity : BaseActivity() {
         } else {
             Log.d("MainActivity", "User not logged in")
         }
-
 
         // Existing button setup
         val getStartedButton = findViewById<Button>(R.id.getStartedButton)
@@ -77,45 +79,49 @@ class MainActivity : BaseActivity() {
     }
 
     private fun loadMessages() {
-        db.collection("messages")
-            .orderBy("timestamp", Query.Direction.ASCENDING)
-            .limit(20)  // Limit the number of messages for better performance
-            .addSnapshotListener { querySnapshot, e ->
-                if (e != null) {
-                    Toast.makeText(this, "Error loading messages", Toast.LENGTH_SHORT).show()
-                    return@addSnapshotListener
-                }
-                messageList.clear()
-                querySnapshot?.forEach { document ->
-                    val sender = document.getString("senderId") ?: ""
-                    val receiver = document.getString("receiverId") ?: ""
-                    val messageContent = document.getString("messageContent") ?: ""
-                    val timestamp = document.getDate("timestamp")
-                    messageList.add(Message(sender, receiver, messageContent, timestamp))
-                }
-                messageAdapter.notifyDataSetChanged()
-            }
+        val url = "https://guardian-backend-kz54.onrender.com/messages"
+        // Use an HTTP client like Retrofit or OkHttp
+        ApiClient.get(url, { response ->
+            messageList.clear()
+            val messages = response.toMessageList()  // Parse response into Message objects
+            messageList.addAll(messages)
+            messageAdapter.notifyDataSetChanged()
+        }, { error ->
+            Toast.makeText(this, "Error loading messages", Toast.LENGTH_SHORT).show()
+        })
     }
 
     private fun sendMessage() {
-        val messageContent = editTextMessage.text.toString().trim()
+        // Ensure the message content is non-null
+        val messageContent: String = editTextMessage.text.toString().trim()
+
         if (messageContent.isNotEmpty()) {
-            val userId = SessionManager.getUserId()  // Get the user ID using the SessionManager method
-            if (userId != null) {
-                val message = Message(userId, "recipientUserId", messageContent, Date())
-                db.collection("messages")
-                    .add(message)
-                    .addOnSuccessListener {
-                        editTextMessage.text.clear()  // Clear input field
-                        loadMessages()  // Refresh message list
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(this, "Error sending message", Toast.LENGTH_SHORT).show()
-                    }
-            } else {
-                Toast.makeText(this, "User is not logged in", Toast.LENGTH_SHORT).show()
+            // Convert Date to String format
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+            val formattedDate = dateFormat.format(Date())
+
+            // Make sure the recipient user ID and the message content are non-null
+            val recipientUserId = "recipientUserId" // Replace this with actual user ID logic
+            val userId: String = SessionManager.getUserId() ?: run {
+                // Handle the case where userId is null, for example by showing an error message
+                Toast.makeText(this, "User ID is null", Toast.LENGTH_SHORT).show()
+                return  // Exit the function if the user ID is null
             }
+
+            // Construct the Message object
+            val message = Message(userId, recipientUserId, messageContent, formattedDate)
+
+            // Ensure ApiClient.post() handles non-null strings
+            ApiClient.post("https://guardian-backend-kz54.onrender.com/messages", message, { response ->
+                // Clear the message input field
+                editTextMessage.text.clear()
+                loadMessages()  // Refresh message list
+            }, { error ->
+                // Show error if the message couldn't be sent
+                Toast.makeText(this, "Error sending message", Toast.LENGTH_SHORT).show()
+            })
         } else {
+            // Show error if the message is empty
             Toast.makeText(this, "Message cannot be empty", Toast.LENGTH_SHORT).show()
         }
     }
@@ -132,6 +138,14 @@ class MainActivity : BaseActivity() {
         EmailPasswordAuthService.signOut(this)
         finish()
     }
+
+    private fun ResponseBody.toMessageList(): List<Message> {
+        val json = this.string() ?: return emptyList()  // Safely handle null string
+        val gson = Gson()
+        val type = object : TypeToken<List<Message>>() {}.type
+        return gson.fromJson(json, type)
+    }
+
 }
 
 
