@@ -8,28 +8,20 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Url
-import deakin.gopher.guardian.communication.Message
+import deakin.gopher.guardian.communication.Message  // Importing the Message class
 
 // Singleton object for Retrofit client
 object RetrofitClient {
-    // Base URL for API
     private const val BASE_URL = "https://guardian-backend-kz54.onrender.com/api/v1/"
 
-    // Create an interceptor to log network requests/responses for debugging
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    // OkHttpClient to handle network calls with the interceptor
     private val client = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .build()
 
-    // Lazy initialization of Retrofit
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -39,16 +31,15 @@ object RetrofitClient {
     }
 }
 
-// Singleton object for making API calls
 object ApiClient {
-    // Access the API service through Retrofit
+    @JvmStatic
     val apiService: ApiService by lazy {
         RetrofitClient.retrofit.create(ApiService::class.java)
     }
 
-    // Get request
+    // Retrofit GET request
     fun get(url: String, onSuccess: (response: ResponseBody) -> Unit, onError: (error: Throwable) -> Unit) {
-        val call = apiService.getMessages(url) // <-- Correct method call
+        val call = apiService.getMessages(url)
         call.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
@@ -64,9 +55,9 @@ object ApiClient {
         })
     }
 
-    // Post request
+    // Retrofit POST request with Message object
     fun post(url: String, message: Message, onSuccess: (response: ResponseBody) -> Unit, onError: (error: Throwable) -> Unit) {
-        val call = apiService.sendMessage(url, message) // <-- Correct method call
+        val call = apiService.sendMessage(url, message)
         call.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
@@ -81,14 +72,28 @@ object ApiClient {
             }
         })
     }
-}
 
-// ApiService interface to define API endpoints
-interface ApiService {
+    // New method for deleting a patient
+    fun deletePatient(patientId: String, onSuccess: (response: ResponseBody) -> Unit, onError: (error: Throwable) -> Unit) {
+        val call = apiService.deletePatient(patientId)
+        call.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    onSuccess(response.body()!!)
+                } else {
+                    onError(Throwable("Error: ${response.code()}"))
+                }
+            }
 
-    @GET
-    fun getMessages(@Url url: String): Call<ResponseBody> // <-- Correct endpoint for GET request
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                onError(t)
+            }
+        })
+    }
 
-    @POST
-    fun sendMessage(@Url url: String, @Body message: Message): Call<ResponseBody> // <-- Correct endpoint for POST request
+
+    // This method is not needed in this case as you already have RetrofitClient.retrofit
+    fun getClient(): Retrofit {
+        return RetrofitClient.retrofit
+    }
 }

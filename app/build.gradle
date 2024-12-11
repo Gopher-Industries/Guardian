@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.5.1'
+        classpath 'com.android.tools.build:gradle:8.7.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:1.9.20"
     }
@@ -77,8 +77,8 @@ spotless {
 dependencies {
 
     // Retrofit and OkHttp for API calls
-    implementation("com.squareup.retrofit2:retrofit:2.11.0")  // Retrofit dependency
-    implementation("com.squareup.retrofit2:converter-gson:2.11.0")  // Gson converter for Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
 
     // Gson library (added)
@@ -147,8 +147,6 @@ dependencies {
     // Jetpack Compose navigation
     implementation("androidx.navigation:navigation-compose:2.7.7")
 }
-
-
 
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.android.application'

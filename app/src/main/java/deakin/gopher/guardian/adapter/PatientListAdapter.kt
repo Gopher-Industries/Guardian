@@ -14,9 +14,6 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.firebase.ui.database.FirebaseRecyclerAdapter
-import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.database.FirebaseDatabase
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.PatientStatus
@@ -26,48 +23,41 @@ import java.util.Objects
 
 class PatientListAdapter(
     private val context: Context,
-    options: FirebaseRecyclerOptions<Patient?>,
-    private val isArchivedList: Boolean,
-) : FirebaseRecyclerAdapter<Patient?, PatientListAdapter.MyViewHolder>(options) {
+    private val patientList: MutableList<Patient>,  // Change this to MutableList
+    private val isArchivedList: Boolean
+) : RecyclerView.Adapter<PatientListAdapter.MyViewHolder>() {
 
-    override fun onDataChanged() {
-        super.onDataChanged()
-        if (itemCount == 0) {
-            Log.d("PatientListAdapter", "No archived patients found.")
-        } else {
-            Log.d("PatientListAdapter", "Archived patients loaded: $itemCount")
-        }
+    // Call this to update the list with new data
+    fun updateData(newList: List<Patient>) {
+        patientList.clear()  // This works now because the list is mutable
+        patientList.addAll(newList)  // This also works with a mutable list
+        notifyDataSetChanged()
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(
         holder: MyViewHolder,
-        position: Int,
-        model: Patient
+        position: Int
     ) {
+        val model = patientList[position] // Use the correct position from the mutable list
         holder.patientName.text = "${model.firstName} ${model.middleName} ${model.lastName}"
         updateStatusIndicator(holder.statusIndicator, model.status)
         holder.bind(model, isArchivedList)
-        Log.d("PatientListAdapter", "Patient ID: ${model.patientId}")
+    }
 
-        holder.patientItem.setOnClickListener { view ->
-            val sharedPreferences = context.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
-            val role = sharedPreferences.getInt("login_role", -1)
+    override fun getItemCount(): Int {
+        return patientList.size
+    }
 
-            if (role == 0 || role == -1) {
-                model.examinePatient()
-                updateStatusIndicator(holder.statusIndicator, model.status)
-                notifyItemChanged(position)
-                val intent = Intent(context, PatientProfileActivity::class.java)
-                intent.putExtra("patientId", model.patientId)
-                context.startActivity(intent)
-                updatePatientStatus(model.patientId, model.status, model.needsAssistance)
-            } else if (role == 1) {
-                val intent = Intent(context, PatientOverviewActivity::class.java)
-                intent.putExtra("PATIENT_ID", model.patientId)
-                context.startActivity(intent)
-            }
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.activity_patient_list_item, parent, false)
+        return MyViewHolder(view, context)
+    }
+
+    // Method to update patient status when clicking
+    private fun updatePatientStatus(patientId: String?, newStatus: PatientStatus, needsAssistance: Boolean) {
+        // API call logic to update patient status (replace Firebase call)
     }
 
     private fun updateStatusIndicator(statusIndicator: ImageView, status: PatientStatus) {
@@ -77,61 +67,6 @@ class PatientListAdapter(
             ContextCompat.getColor(context, R.color.green)
         }
         statusIndicator.setColorFilter(statusColor)
-        val pulseAnimation = AnimationUtils.loadAnimation(context, R.anim.scale_animation)
-        statusIndicator.startAnimation(pulseAnimation)
-    }
-
-    private fun updatePatientStatus(patientId: String?, newStatus: PatientStatus, needsAssistance: Boolean) {
-        if (patientId.isNullOrEmpty()) {
-            Log.e("UpdateStatus", "Invalid patient ID.")
-            return
-        }
-        val patientsRef = FirebaseDatabase.getInstance().getReference("patients")
-        patientsRef.child(patientId)
-            .child("status")
-            .setValue(newStatus.toString())
-            .addOnSuccessListener {
-                Log.d("UpdateStatus", "Patient status updated successfully.")
-            }
-            .addOnFailureListener { e ->
-                Log.e("UpdateStatus", "Failed to update patient status.", e)
-            }
-        patientsRef.child(patientId).child("needsAssistance").setValue(needsAssistance)
-    }
-
-    private fun getStatusColor(patient: Patient): Int {
-        val oneHourMillis: Long = 3600000  // 1 hour in milliseconds
-        val currentTime = System.currentTimeMillis()
-        return if (currentTime - patient.lastExaminedTimestamp > oneHourMillis) {
-            ContextCompat.getColor(context, R.color.orange)
-        } else {
-            if (patient.status == PatientStatus.REQUIRES_ASSISTANCE) {
-                ContextCompat.getColor(context, R.color.red)
-            } else {
-                ContextCompat.getColor(context, R.color.green)
-            }
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.activity_patient_list_item, parent, false)
-        return MyViewHolder(view, context)
-    }
-
-    fun deleteItem(position: Int) {
-        val itemRef = getRef(position)
-        itemRef.removeValue()
-            .addOnSuccessListener {
-                Toast.makeText(
-                    context,
-                    "Deleted successfully, click on archive to restore",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(context, "Error during deletion", Toast.LENGTH_LONG).show()
-            }
     }
 
     class MyViewHolder(itemView: View, private val context: Context) : RecyclerView.ViewHolder(itemView) {
@@ -155,16 +90,7 @@ class PatientListAdapter(
         }
 
         private fun restorePatient(patient: Patient) {
-            val patientRef = patient.getPatientId()?.let {
-                FirebaseDatabase.getInstance().reference.child("patients").child(it)
-            }
-            patientRef?.child("isArchived")?.setValue(false)
-                ?.addOnSuccessListener {
-                    Log.d("PatientListAdapter", "Patient restored successfully.")
-                }
-                ?.addOnFailureListener {
-                    Log.e("PatientListAdapter", "Failed to restore patient.")
-                }
+            // API logic to restore patient (replace Firebase code)
         }
 
         private fun viewPatientDetails(patient: Patient, context: Context) {
