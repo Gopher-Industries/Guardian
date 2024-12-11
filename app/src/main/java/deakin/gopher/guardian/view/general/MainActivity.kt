@@ -4,20 +4,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.fragment.app.commit
 import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.FirebaseMessaging
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.EmailPasswordAuthService
+import deakin.gopher.guardian.view.AdminNotificationsFragment
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val getStartedButton = findViewById<Button>(R.id.getStartedButton)
+        getStartedButton.setOnClickListener { onGetStartedClick() }
 
-        getStartedButton.setOnClickListener { _ -> onGetStartedClick() }
-
+        // Fetch FCM token
         FirebaseMessaging.getInstance()
             .token
             .addOnCompleteListener { task: Task<String?> ->
@@ -34,7 +37,11 @@ class MainActivity : BaseActivity() {
         if (!SessionManager.isLoggedIn) {
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
         } else {
-            startActivity(Intent(this@MainActivity, Homepage4caretaker::class.java))
+            // Load AdminNotificationsFragment when the user is logged in
+            supportFragmentManager.commit {
+                replace(R.id.fragment_container, AdminNotificationsFragment())
+                addToBackStack(null)  // Optional: Allow back navigation
+            }
         }
     }
 
