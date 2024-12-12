@@ -37,10 +37,10 @@ class PatientOverviewActivity : AppCompatActivity() {
     private fun fetchPatientData(patientId: String) {
         // Here, you would normally fetch data from Firebase
         // Just a sample patient object
-        val patient = Patient(patientId, "John", "Doe")
+        val patient = Patient(patientId = patientId, firstName = " ", lastName = " ")
 
         // Simulate patient data
-        patient.dob = "1994-05-16" // Example date of birth in YYYY-MM-DD format
+        patient.dob = " " // Example date of birth in YYYY-MM-DD format
 
         displayData(patient)
     }

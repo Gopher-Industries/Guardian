@@ -11,6 +11,8 @@ import deakin.gopher.guardian.view.nextofkin.NextOfKinFragment
 import deakin.gopher.guardian.view.patient.careplan.CarePlanSummaryActivityFragment
 import deakin.gopher.guardian.view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsFragment
 import deakin.gopher.guardian.view.patient.patientdata.patient.PatientProfileFragment
+import deakin.gopher.guardian.view.general.TaskHistoryFragment
+import deakin.gopher.guardian.view.general.CarePlanProgressFragment
 
 class PatientProfileAdapter(
     private val patientId: String,

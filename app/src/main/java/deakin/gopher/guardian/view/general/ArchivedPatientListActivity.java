@@ -1,6 +1,5 @@
 package deakin.gopher.guardian.view.general;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import androidx.annotation.NonNull;
@@ -9,72 +8,56 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-import deakin.gopher.guardian.R;
-import deakin.gopher.guardian.adapter.PatientListAdapter;
-import deakin.gopher.guardian.adapter.SimpleArchivedPatientAdapter;
-import deakin.gopher.guardian.model.Patient;
 import java.util.ArrayList;
 import java.util.List;
+import deakin.gopher.guardian.R;
+import deakin.gopher.guardian.adapter.SimpleArchivedPatientAdapter;
+import deakin.gopher.guardian.model.Patient;
+import deakin.gopher.guardian.model.PatientStatus;
 
-@SuppressLint("Registered")
 public class ArchivedPatientListActivity extends BaseActivity {
-
-  private RecyclerView recyclerView;
-  private PatientListAdapter adapter;
-  private DrawerLayout drawerLayout;
-  private ActionBarDrawerToggle toggle;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_archived_patient_list);
 
-    recyclerView = findViewById(R.id.archived_patient_recycler_view);
+    RecyclerView recyclerView = findViewById(R.id.archived_patient_recycler_view);
 
+    // Create mock data for archived patients
     final List<Patient> archivedPatients = new ArrayList<>();
-    archivedPatients.add(new Patient("1", "John", "Doe"));
-    archivedPatients.add(new Patient("2", "Jane", "Doe"));
 
-    DatabaseReference patientRef = FirebaseDatabase.getInstance().getReference().child("patients");
-    Query archivedQuery = patientRef.orderByChild("is_Archived").equalTo(true);
-    archivedQuery.addListenerForSingleValueEvent(
-        new ValueEventListener() {
-          @Override
-          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            if (dataSnapshot.exists()) {
-              Log.d("FirebaseTest", "Archived patients found: " + dataSnapshot.getChildrenCount());
-            } else {
-              Log.d("FirebaseTest", "No archived patients found.");
-            }
-          }
+    // Create Patient objects using setters
+    Patient patient1 = new Patient();
+    patient1.setPatientId("1");
+    patient1.setAddress("123 Main St");
+    patient1.setDob("1990-01-01");
+    patient1.setFirstName("John");
+    patient1.setLastName("Doe");
+    patient1.setStatus(PatientStatus.REQUIRES_ASSISTANCE);
+    patient1.setArchived(true);
+    archivedPatients.add(patient1);
 
-          @Override
-          public void onCancelled(@NonNull DatabaseError databaseError) {
-            Log.e("FirebaseTest", "Error fetching data", databaseError.toException());
-          }
-        });
-    final FirebaseRecyclerOptions<Patient> options =
-        new FirebaseRecyclerOptions.Builder<Patient>()
-            .setQuery(archivedQuery, Patient.class)
-            .build();
+    Patient patient2 = new Patient();
+    patient2.setPatientId("2");
+    patient2.setAddress("456 Elm St");
+    patient2.setDob("1985-05-05");
+    patient2.setFirstName("Jane");
+    patient2.setLastName("Doe");
+    patient2.setStatus(PatientStatus.REQUIRES_ASSISTANCE);
+    patient2.setArchived(true);
+    archivedPatients.add(patient2);
 
+    // Set up the RecyclerView with the adapter
     SimpleArchivedPatientAdapter adapter = new SimpleArchivedPatientAdapter(archivedPatients);
     recyclerView.setAdapter(adapter);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+    // Set up Navigation Drawer
     NavigationView navigationView = findViewById(R.id.nav_view);
-    drawerLayout = findViewById(R.id.drawer_layout);
-    toggle =
-        new ActionBarDrawerToggle(
-            this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     drawerLayout.addDrawerListener(toggle);
     toggle.syncState();
 
@@ -84,46 +67,17 @@ public class ArchivedPatientListActivity extends BaseActivity {
       Log.e("ActionBar", "The action bar is not available.");
     }
 
-    findViewById(R.id.patient_list_menu_button)
-        .setOnClickListener(view -> drawerLayout.openDrawer(GravityCompat.START));
+    findViewById(R.id.patient_list_menu_button).setOnClickListener(view -> drawerLayout.openDrawer(GravityCompat.START));
 
-    navigationView.setNavigationItemSelectedListener(
-        item -> {
-          int id = item.getItemId();
-          //
-          //      if (id == R.id.nav_home) {
-          //      }
-          //
-          //      if (id == R.id.nav_admin) {
-          //      }
-          //      if (id == R.id.nav_settings) {
-          //      }
-          //      if (id == R.id.nav_signout) {
-          //      }
-
-          drawerLayout.closeDrawer(GravityCompat.START);
-          return true;
-        });
-  }
-
-  @Override
-  protected void onStart() {
-    super.onStart();
-    if (adapter != null) {
-      adapter.startListening();
-    }
-  }
-
-  @Override
-  protected void onStop() {
-    super.onStop();
-    if (adapter != null) {
-      adapter.stopListening();
-    }
+    navigationView.setNavigationItemSelectedListener(item -> {
+      drawerLayout.closeDrawer(GravityCompat.START);
+      return true;
+    });
   }
 
   @Override
   public void onBackPressed() {
+    DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
     if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
       drawerLayout.closeDrawer(GravityCompat.START);
     } else {
@@ -131,3 +85,5 @@ public class ArchivedPatientListActivity extends BaseActivity {
     }
   }
 }
+
+

@@ -76,13 +76,25 @@ spotless {
 
 dependencies {
 
+    // Firebase Dependencies
+    implementation platform('com.google.firebase:firebase-bom:33.1.2')
+    implementation 'com.google.firebase:firebase-database:21.0.0'
+    implementation 'com.google.firebase:firebase-storage:21.0.0'
+    implementation 'com.google.firebase:firebase-auth:23.0.0'
+    implementation 'com.google.firebase:firebase-firestore:25.0.0'
+    implementation 'com.google.firebase:firebase-messaging:24.0.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:25.0.0'
+
+    // FirebaseUI for RecyclerView integration
+    implementation 'com.firebaseui:firebase-ui-database:8.0.1'
+
     // Retrofit and OkHttp for API calls
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
 
-    // Gson library (added)
-    implementation 'com.google.code.gson:gson:2.8.9'  // Gson library
+    // Gson library
+    implementation 'com.google.code.gson:gson:2.8.9'
 
     // AndroidX libraries
     implementation 'androidx.appcompat:appcompat:1.7.0'

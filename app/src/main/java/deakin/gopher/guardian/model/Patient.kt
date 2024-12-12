@@ -7,16 +7,16 @@ enum class PatientStatus {
 }
 
 data class Patient(
-    var patientId: String? = null,
-    var address: String? = null,
-    var dob: String? = null,
+    var patientId: String = "",
+    var address: String = "",
+    var dob: String = "",
     var patientName: String? = null,
     var phone: String? = null,
     var photo: String? = null,
     var underCare: String? = null,
-    var firstName: String,
+    var firstName: String = "",
     var middleName: String? = null,
-    var lastName: String,
+    var lastName: String = "",
     var medicareNo: String? = null,
     var westernAffairsNo: String? = null,
     var nokId1: String? = null,
@@ -32,7 +32,21 @@ data class Patient(
     var carePlanProgress: Map<String, Any> = emptyMap(),
     var id: String? = null
 ) {
-    // Archive or unarchive a patient
+    // Secondary constructor for simplified initialization
+    constructor(
+        patientId: String,
+        firstName: String,
+        lastName: String,
+        isArchived: Boolean
+    ) : this(
+        patientId = patientId,
+        firstName = firstName,
+        lastName = lastName,
+        isArchived = isArchived,
+        needsAssistance = true,
+        status = PatientStatus.REQUIRES_ASSISTANCE
+    )
+
     fun archivePatient() {
         isArchived = true
     }
@@ -41,7 +55,6 @@ data class Patient(
         isArchived = false
     }
 
-    // Examine a patient and update their status
     fun examinePatient() {
         if (status == PatientStatus.REQUIRES_ASSISTANCE) {
             status = PatientStatus.NO_ASSISTANCE_REQUIRED
@@ -50,21 +63,8 @@ data class Patient(
     }
 
     override fun toString(): String {
-        return "Patient(" +
-                "patientId='$patientId', " +
-                "address='$address', " +
-                "dob='$dob', " +
-                "patientName='$patientName', " +
-                "phone='$phone', " +
-                "photo='$photo', " +
-                "underCare='$underCare', " +
-                "firstName='$firstName', " +
-                "middleName='$middleName', " +
-                "lastName='$lastName', " +
-                "medicareNo='$medicareNo', " +
-                "westernAffairsNo='$westernAffairsNo', " +
-                "isArchived=$isArchived" +
-                ")"
+        return "Patient(patientId='$patientId', firstName='$firstName', lastName='$lastName', isArchived=$isArchived)"
     }
 }
+
 

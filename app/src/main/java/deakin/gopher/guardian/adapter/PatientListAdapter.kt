@@ -81,7 +81,7 @@ class PatientListAdapter(
 
         @SuppressLint("SetTextI18n")
         fun bind(patient: Patient, isArchivedList: Boolean) {
-            patientName.text = "${patient.getFirstName()} ${patient.getLastName()}"
+            patientName.text = "${patient.firstName} ${patient.lastName}"
             if (isArchivedList) {
                 actionButton.setOnClickListener { restorePatient(patient) }
             } else {
@@ -95,7 +95,7 @@ class PatientListAdapter(
 
         private fun viewPatientDetails(patient: Patient, context: Context) {
             val intent = Intent(context, PatientProfileActivity::class.java)
-            intent.putExtra("PATIENT_ID", patient.getPatientId())
+            intent.putExtra("PATIENT_ID", patient.patientId) // Directly access the property
             context.startActivity(intent)
         }
     }
