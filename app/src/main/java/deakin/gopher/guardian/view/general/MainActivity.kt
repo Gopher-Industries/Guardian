@@ -11,6 +11,8 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.view.AdminNotificationsFragment
+import deakin.gopher.guardian.view.FallDetection.FallAlertActivity
+import deakin.gopher.guardian.view.caretaker.notifications.confirmincident.ConfirmIncidentActivity
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +20,10 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         val getStartedButton = findViewById<Button>(R.id.getStartedButton)
-        getStartedButton.setOnClickListener { onGetStartedClick() }
+        getStartedButton.setOnClickListener {
+            onGetStartedClick()
+            startActivity(Intent(this@MainActivity, Homepage4caretaker::class.java))
+        }
 
         // Fetch FCM token
         FirebaseMessaging.getInstance()
@@ -50,3 +55,4 @@ class MainActivity : BaseActivity() {
         finish()
     }
 }
+
