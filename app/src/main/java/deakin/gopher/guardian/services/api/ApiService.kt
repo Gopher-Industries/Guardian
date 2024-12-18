@@ -10,33 +10,33 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface ApiService {
-    @POST("auth/register")
+    @POST("api/v1/auth/register")
     fun register(
         @Body request: RegisterRequest,
     ): Call<AuthResponse>
 
     @FormUrlEncoded
-    @POST("auth/login")
+    @POST("api/v1/auth/login")
     fun login(
         @Field("email") email: String,
         @Field("password") password: String,
     ): Call<AuthResponse>
 
     @FormUrlEncoded
-    @POST("auth/send-pin")
+    @POST("api/v1/auth/send-pin")
     fun sendPin(
         @Field("email") email: String,
     ): Call<BaseModel>
 
     @FormUrlEncoded
-    @POST("auth/verify-pin")
+    @POST("api/v1/auth/verify-pin")
     fun verifyPin(
         @Field("email") email: String,
         @Field("otp") pin: String,
     ): Call<BaseModel>
 
     @FormUrlEncoded
-    @POST("auth/reset-password-request")
+    @POST("api/v1/auth/reset-password-request")
     fun requestPasswordReset(
         @Field("email") email: String,
     ): Call<BaseModel>
