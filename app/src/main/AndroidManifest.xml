@@ -132,10 +132,10 @@
             android:exported="false" />
         <activity
             android:name=".view.general.RegisterActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".view.general.LoginActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity android:name=".view.general.PinCodeActivity"
             android:exported="false" />
         <activity

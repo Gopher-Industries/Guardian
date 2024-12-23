@@ -13,6 +13,7 @@
     <string name="edit_patient_data_string">Edit Patient Data</string>
     <string name="view_activity_data_string">View Activity Data</string>
     <string name="associate_radar_string">Associate Radar</string>
+
     <!-- TODO: Remove or change this placeholder text -->
 
     <string name="title_activity_test">TestActivity</string>
