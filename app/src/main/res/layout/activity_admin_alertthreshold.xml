@@ -31,7 +31,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"
-                    android:contentDescription="@string/app_logo_description"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -55,8 +55,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/rounded_rectangle_background"
-                    android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
                     android:padding="8dp"
                     android:text="12 DEC   13 DEC   14 DEC   15 DEC"
@@ -104,7 +102,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:fontFamily="@font/poppins_regular"
                             android:text="CPU Usage"
                             android:textSize="14sp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -157,7 +154,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:fontFamily="@font/poppins_regular"
                             android:text="Memory Usage"
                             android:textSize="14sp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -195,4 +191,4 @@
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>c
+</androidx.constraintlayout.widget.ConstraintLayout>
