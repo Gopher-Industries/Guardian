@@ -20,10 +20,6 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         val getStartedButton = findViewById<Button>(R.id.getStartedButton)
-        getStartedButton.setOnClickListener {
-            onGetStartedClick()
-            startActivity(Intent(this@MainActivity, Homepage4caretaker::class.java))
-        }
 
         // Fetch FCM token
         FirebaseMessaging.getInstance()
@@ -36,6 +32,11 @@ class MainActivity : BaseActivity() {
                     Log.w("MainActivity", "Fetching FCM registration token failed", task.exception)
                 }
             }
+
+        // Set button click listener
+        getStartedButton.setOnClickListener {
+            onGetStartedClick()
+        }
     }
 
     private fun onGetStartedClick() {
@@ -45,7 +46,7 @@ class MainActivity : BaseActivity() {
             // Load AdminNotificationsFragment when the user is logged in
             supportFragmentManager.commit {
                 replace(R.id.fragment_container, AdminNotificationsFragment())
-                addToBackStack(null)  // Optional: Allow back navigation
+                addToBackStack(null) // Optional: Allow back navigation
             }
         }
     }
@@ -55,4 +56,3 @@ class MainActivity : BaseActivity() {
         finish()
     }
 }
-
