@@ -24,7 +24,7 @@
     <color name="ellipse_9_color">#C4C4C4</color>
     <color name="gray">#F3F3F3</color>
     <color name="default_text">#808080</color>
-
+    <color name="alert_gray">#F3F3F3</color>
     <color name="text_heading_color">#3D3D3D</color>
     <color name="text_input_color">#666262</color>
     <color name="box_border">#E0DDDD</color>
