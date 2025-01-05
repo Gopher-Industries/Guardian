@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+<<<<<<< HEAD
     android:layout_height="match_parent"
     android:background="#F8F8F8">
+=======
+    android:layout_height="match_parent">
+>>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+<<<<<<< HEAD
         android:padding="0dp">
 
         <!-- Header Section -->
@@ -58,10 +63,46 @@
         </RelativeLayout>
 
         <!-- Tab Section -->
+=======
+        android:padding="16dp">
+
+        <!-- Health Data Section -->
+        <TextView
+            android:id="@+id/health_data_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Health Data"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Task History Section -->
+        <TextView
+            android:id="@+id/task_history_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Task History"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="8dp" />
+
+        <!-- API Data Section -->
+        <TextView
+            android:id="@+id/api_data_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="API Data"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Row 1: Blood Pressure and Glucose Level -->
+>>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+<<<<<<< HEAD
             android:background="#FFFFFF"
             android:padding="8dp"
             android:elevation="2dp">
@@ -171,5 +212,80 @@
             <!-- Additional rows can follow the same format for consistency -->
 
         </LinearLayout>
+=======
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/image_blood_pressure"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:src="@drawable/blood_pressure_graph"
+                android:contentDescription="Blood Pressure Graph"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:id="@+id/image_glucose_level"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:src="@drawable/glucose_level_graph"
+                android:contentDescription="Glucose Level Graph"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <!-- Row 2: Oxygen Saturation and Heart Rate -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/image_oxygen_saturation"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:src="@drawable/o2_saturation_graph"
+                android:contentDescription="Oxygen Saturation Graph"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:id="@+id/image_heart_rate"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:src="@drawable/patient_temperature_graph"
+                android:contentDescription="Patient Temperature Graph"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <!-- Row 3: Pulse Rate and Respiration Rate -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/image_pulse_rate"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:src="@drawable/pulse_rate_graph"
+                android:contentDescription="Pulse Rate Graph"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:id="@+id/image_respiration_rate"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_weight="1"
+                android:src="@drawable/respiration_rate_graph"
+                android:contentDescription="Respiration Rate Graph"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+>>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
     </LinearLayout>
 </ScrollView>

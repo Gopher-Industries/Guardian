@@ -68,7 +68,5 @@ class EmailPasswordAuthService(
                 e.printStackTrace()
             }
         }
-
-
     }
 }

@@ -3,6 +3,7 @@ package deakin.gopher.guardian.services.api
 import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.register.AuthResponse
 import deakin.gopher.guardian.model.register.RegisterRequest
+<<<<<<< HEAD
 import deakin.gopher.guardian.communication.Message
 import deakin.gopher.guardian.model.NextOfKin
 import deakin.gopher.guardian.model.GP
@@ -12,18 +13,22 @@ import deakin.gopher.guardian.model.patientdata.healthdata.PatientHealthData
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.ResponseBody
+=======
+>>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
 import retrofit2.http.POST
+<<<<<<< HEAD
 import retrofit2.http.DELETE
 import retrofit2.http.Path
 import retrofit2.http.Url
 import java.util.concurrent.TimeUnit
+=======
+>>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
 
 interface ApiService {
     // Authentication endpoints
@@ -47,6 +52,7 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("auth/reset-password-request")
+<<<<<<< HEAD
     fun requestPasswordReset(@Field("email") email: String): Call<BaseModel>
 
     // CRUD operations for patients
@@ -103,3 +109,9 @@ interface ApiService {
     }
 }
 
+=======
+    fun requestPasswordReset(
+        @Field("email") email: String,
+    ): Call<BaseModel>
+}
+>>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
