@@ -8,19 +8,15 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import deakin.gopher.guardian.communication.Message  // Importing the Message class
+import deakin.gopher.guardian.communication.Message
 
 // Singleton object for Retrofit client
 object RetrofitClient {
-    private const val BASE_URL = "https://guardian-backend-kz54.onrender.com/api/v1/"
+    private const val BASE_URL = "http://10.0.2.2:3000/api/v1/"
 
-    private val loggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
-    }
-
-    private val client = OkHttpClient.Builder()
-        .addInterceptor(loggingInterceptor)
-        .build()
+    private val client = OkHttpClient()
+    private val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    private val clientBuilder = client.newBuilder().addInterceptor(interceptor)
 
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
@@ -91,8 +87,7 @@ object ApiClient {
         })
     }
 
-
-    // This method is not needed in this case as you already have RetrofitClient.retrofit
+    // Optional: Method to get the Retrofit instance if needed
     fun getClient(): Retrofit {
         return RetrofitClient.retrofit
     }

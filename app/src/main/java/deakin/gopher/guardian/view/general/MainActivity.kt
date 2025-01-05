@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.adapter.MessageAdapter
@@ -32,7 +33,6 @@ class MainActivity : BaseActivity() {
         // Check if the user is logged in
         if (SessionManager.isLoggedIn) {
             try {
-                val currentUser = SessionManager.getCurrentUser()
                 val userId = SessionManager.getUserId()  // Get the userId
                 Log.d("MainActivity", "Current user ID: $userId")
             } catch (e: Exception) {
@@ -42,16 +42,15 @@ class MainActivity : BaseActivity() {
             Log.d("MainActivity", "User not logged in")
         }
 
-        // Existing button setup
+        // Setup buttons and chat components
         val getStartedButton = findViewById<Button>(R.id.getStartedButton)
         getStartedButton.setOnClickListener { onGetStartedClick() }
 
-        // New chat components
         recyclerViewMessages = findViewById(R.id.recyclerViewMessages)
         editTextMessage = findViewById(R.id.editTextMessage)
+
         setupRecyclerView()
 
-        // Button to send messages
         findViewById<Button>(R.id.buttonSend).setOnClickListener { sendMessage() }
 
         loadMessages()  // Load existing messages
@@ -65,7 +64,6 @@ class MainActivity : BaseActivity() {
 
     private fun loadMessages() {
         val url = "https://guardian-backend-kz54.onrender.com/messages"
-        // Use an HTTP client like Retrofit or OkHttp
         ApiClient.get(url, { response ->
             messageList.clear()
             val messages = response.toMessageList()  // Parse response into Message objects
@@ -94,9 +92,10 @@ class MainActivity : BaseActivity() {
             // Make the API call to send the message
             ApiClient.post("https://guardian-backend-kz54.onrender.com/messages", message, { response ->
                 editTextMessage.text.clear()  // Clear the input field
+                Snackbar.make(findViewById(android.R.id.content), "Message sent successfully", Snackbar.LENGTH_SHORT).show()
                 loadMessages()  // Refresh message list
             }, { error ->
-                Toast.makeText(this, "Error sending message", Toast.LENGTH_SHORT).show()
+                Snackbar.make(findViewById(android.R.id.content), "Error sending message", Snackbar.LENGTH_SHORT).show()
             })
         } else {
             Toast.makeText(this, "Message cannot be empty", Toast.LENGTH_SHORT).show()
@@ -118,6 +117,3 @@ class MainActivity : BaseActivity() {
         return gson.fromJson(json, type)
     }
 }
-
-
-
