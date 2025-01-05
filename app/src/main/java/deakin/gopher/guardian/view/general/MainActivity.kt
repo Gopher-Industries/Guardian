@@ -8,43 +8,42 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.tasks.Task
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.login.SessionManager
+import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.adapter.MessageAdapter
-import deakin.gopher.guardian.communication.Message
-import deakin.gopher.guardian.services.api.ApiClient
-import com.google.gson.Gson
-import okhttp3.ResponseBody
-import com.google.gson.reflect.TypeToken
-import java.text.SimpleDateFormat
-import java.util.*
+import deakin.gopher.guardian.communication.Message // Import Message class
+
+import java.util.Date
 
 class MainActivity : BaseActivity() {
     private lateinit var recyclerViewMessages: RecyclerView
     private lateinit var messageAdapter: MessageAdapter
     private val messageList = mutableListOf<Message>()
     private lateinit var editTextMessage: EditText
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Check if the user is logged in
-        if (SessionManager.isLoggedIn) {
-            try {
-                val currentUser = SessionManager.getCurrentUser()
-                val userId = SessionManager.getUserId()  // Get the userId
-                Log.d("MainActivity", "Current user ID: $userId")
-            } catch (e: Exception) {
-                Log.e("MainActivity", "Error retrieving current user: ${e.message}")
-            }
-        } else {
-            Log.d("MainActivity", "User not logged in")
-        }
-
         // Existing button setup
         val getStartedButton = findViewById<Button>(R.id.getStartedButton)
         getStartedButton.setOnClickListener { onGetStartedClick() }
+
+        // Firebase Messaging setup
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task: Task<String?> ->
+            if (task.isSuccessful) {
+                val token = task.result
+                Log.d("FCM Token", token ?: "Token is null")
+            } else {
+                Log.w("MainActivity", "Fetching FCM registration token failed", task.exception)
+            }
+        }
 
         // New chat components
         recyclerViewMessages = findViewById(R.id.recyclerViewMessages)
@@ -64,40 +63,39 @@ class MainActivity : BaseActivity() {
     }
 
     private fun loadMessages() {
-        val url = "https://guardian-backend-kz54.onrender.com/messages"
-        // Use an HTTP client like Retrofit or OkHttp
-        ApiClient.get(url, { response ->
-            messageList.clear()
-            val messages = response.toMessageList()  // Parse response into Message objects
-            messageList.addAll(messages)
-            messageAdapter.notifyDataSetChanged()
-        }, { error ->
-            Toast.makeText(this, "Error loading messages", Toast.LENGTH_SHORT).show()
-        })
+        db.collection("messages")
+            .orderBy("timestamp", Query.Direction.ASCENDING)
+            .limit(20)  // Limit the number of messages for better performance
+            .addSnapshotListener { querySnapshot, e ->
+                if (e != null) {
+                    Toast.makeText(this, "Error loading messages", Toast.LENGTH_SHORT).show()
+                    return@addSnapshotListener
+                }
+                messageList.clear()
+                querySnapshot?.forEach { document ->
+                    val sender = document.getString("senderId") ?: ""
+                    val receiver = document.getString("receiverId") ?: ""
+                    val messageContent = document.getString("messageContent") ?: ""
+                    val timestamp = document.getDate("timestamp")
+                    messageList.add(Message(sender, receiver, messageContent, timestamp))
+                }
+                messageAdapter.notifyDataSetChanged()
+            }
     }
 
     private fun sendMessage() {
-        val messageContent: String = editTextMessage.text.toString().trim()
-
+        val messageContent = editTextMessage.text.toString().trim()
         if (messageContent.isNotEmpty()) {
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-            val formattedDate = dateFormat.format(Date())
-
-            val recipientUserId = "recipientUserId" // Replace this with actual user ID logic
-            val userId: String = SessionManager.getUserId() ?: run {
-                Toast.makeText(this, "User ID is null", Toast.LENGTH_SHORT).show()
-                return
-            }
-
-            val message = Message(userId, recipientUserId, messageContent, formattedDate)
-
-            // Make the API call to send the message
-            ApiClient.post("https://guardian-backend-kz54.onrender.com/messages", message, { response ->
-                editTextMessage.text.clear()  // Clear the input field
-                loadMessages()  // Refresh message list
-            }, { error ->
-                Toast.makeText(this, "Error sending message", Toast.LENGTH_SHORT).show()
-            })
+            val message = Message(SessionManager.userId, "recipientUserId", messageContent, Date())
+            db.collection("messages")
+                .add(message)
+                .addOnSuccessListener {
+                    editTextMessage.text.clear()  // Clear input field
+                    loadMessages()  // Refresh message list
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Error sending message", Toast.LENGTH_SHORT).show()
+                }
         } else {
             Toast.makeText(this, "Message cannot be empty", Toast.LENGTH_SHORT).show()
         }
@@ -111,13 +109,10 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun ResponseBody.toMessageList(): List<Message> {
-        val json = this.string() ?: return emptyList()  // Safely handle null string
-        val gson = Gson()
-        val type = object : TypeToken<List<Message>>() {}.type
-        return gson.fromJson(json, type)
+    private fun onLogoutClick() {
+        EmailPasswordAuthService.signOut(this)
+        finish()
     }
 }
-
 
 

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".GuardianApplication"
@@ -19,7 +18,6 @@
         tools:replace="android:allowBackup,android:label"
         tools:targetApi="31"
         tools:ignore="ExtraText">
-
         <activity
             android:name=".WelcomeActivity"
             android:exported="false" />
@@ -135,30 +133,23 @@
         <activity
             android:name=".view.general.RegisterActivity"
             android:exported="false" />
-
-        <!-- Set LoginActivity as the launcher -->
         <activity
             android:name=".view.general.LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <!-- Admin Dashboard Activity -->
-        <activity
-            android:name=".view.general.AdminDashboardActivity"
             android:exported="false" />
-
         <activity android:name=".view.general.PinCodeActivity"
             android:exported="false" />
         <activity
             android:name=".view.general.AddNewPatientActivity"
-            android:exported="false" />
+            android:exported="false" /> <!-- Kussay: may we need to change the start up page into login page -->
         <activity
             android:name=".view.general.MainActivity"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- These are here only for UI testing -->
         <activity
             android:name=".view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity"
             android:exported="false" />
@@ -171,18 +162,26 @@
         <activity
             android:name=".view.general.TasksListActivity"
             android:exported="false" />
+
         <activity android:name=".ModulesActivity" />
+
+
         <activity android:name=".Module1CoursesActivity" />
         <activity android:name=".HomecareInductionActivity" />
         <activity android:name=".InfectionControlActivity" />
         <activity android:name=".SupportingMealtimesActivity" />
+
+
         <activity android:name=".Module2CoursesActivity" />
         <activity android:name=".MedicationTechniqueActivity" />
         <activity android:name=".MedicationSafetyActivity" />
+
         <activity android:name=".Module3CoursesActivity" />
         <activity android:name=".InspiringLeadershipEIActivity" />
         <activity android:name=".EmotionalIntelligenceCommunicationActivity" />
         <activity android:name="deakin.gopher.guardian.view.general.NurseRosterActivity" />
+
+
         <service
             android:name=".model.FirebaseMessagingService"
             android:exported="false">
@@ -190,8 +189,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
 </manifest>

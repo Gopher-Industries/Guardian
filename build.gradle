@@ -1,19 +1,20 @@
 buildscript {
     repositories {
-        google()  // Google's Maven repository
-        mavenCentral()  // Maven Central repository
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 
     dependencies {
-        classpath 'com.google.gms:google-services:4.4.2'
+        classpath 'com.android.tools.build:gradle:8.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20"
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:1.9.20"
+        classpath 'com.google.gms:google-services:4.4.2'
     }
 }
 
 plugins {
-    id 'com.android.application' version '8.7.2' apply false
-    id 'com.android.library' version '8.7.2' apply false
+    id 'com.android.application' version '8.1.0' apply false
+    id 'com.android.library' version '8.1.0' apply false
     id 'org.jetbrains.kotlin.android' version '1.9.20' apply false
 }
 
@@ -21,5 +22,3 @@ tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
 
-allprojects {
-}
