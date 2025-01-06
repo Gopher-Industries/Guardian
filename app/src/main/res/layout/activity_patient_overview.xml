@@ -1,218 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-<<<<<<< HEAD
     android:layout_height="match_parent"
     android:background="#F8F8F8">
-=======
-    android:layout_height="match_parent">
->>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-<<<<<<< HEAD
-        android:padding="0dp">
-
-        <!-- Header Section -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:background="#2196F3">
-
-            <ImageView
-                android:id="@+id/menu_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_menu"
-                android:contentDescription="Menu Icon"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true" />
-
-            <ImageView
-                android:id="@+id/logo_icon"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/gopher_logo"
-                android:contentDescription="App Logo"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" />
-
-            <ImageView
-                android:id="@+id/profile_picture"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/profile_avatar_men"
-                android:contentDescription="Profile Picture"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true" />
-
-            <TextView
-                android:id="@+id/header_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Patient's Health Data"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:layout_below="@id/logo_icon"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp" />
-        </RelativeLayout>
-
-        <!-- Tab Section -->
-=======
         android:padding="16dp">
 
-        <!-- Health Data Section -->
-        <TextView
-            android:id="@+id/health_data_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Health Data"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Task History Section -->
-        <TextView
-            android:id="@+id/task_history_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Task History"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="8dp" />
-
-        <!-- API Data Section -->
-        <TextView
-            android:id="@+id/api_data_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="API Data"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="16dp" />
-
         <!-- Row 1: Blood Pressure and Glucose Level -->
->>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-<<<<<<< HEAD
-            android:background="#FFFFFF"
-            android:padding="8dp"
-            android:elevation="2dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Current"
-                android:background="@drawable/tab_selected_background"
-                android:padding="8dp"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Daily"
-                android:padding="8dp"
-                android:textColor="#757575"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Last 15 Days"
-                android:padding="8dp"
-                android:textColor="#757575"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <!-- Main Content -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <!-- Row 1: Blood Pressure and Glucose Level -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="18dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:background="@drawable/card_background"
-                    android:padding="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:elevation="4dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Blood Pressure"
-                        android:textColor="#757575"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="123/85 bpm"
-                        android:textColor="#000000"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:background="@drawable/card_background"
-                    android:padding="16dp"
-                    android:layout_marginStart="8dp"
-                    android:elevation="4dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Glucose Level"
-                        android:textColor="#757575"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="12.6 mmol/L"
-                        android:textColor="#000000"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Additional rows can follow the same format for consistency -->
-
-        </LinearLayout>
-=======
             android:layout_marginBottom="16dp">
 
             <ImageView
@@ -285,7 +87,5 @@
                 android:contentDescription="Respiration Rate Graph"
                 android:layout_marginStart="8dp" />
         </LinearLayout>
-
->>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
     </LinearLayout>
 </ScrollView>

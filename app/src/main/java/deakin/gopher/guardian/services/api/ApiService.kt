@@ -3,7 +3,6 @@ package deakin.gopher.guardian.services.api
 import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.register.AuthResponse
 import deakin.gopher.guardian.model.register.RegisterRequest
-<<<<<<< HEAD
 import deakin.gopher.guardian.communication.Message
 import deakin.gopher.guardian.model.NextOfKin
 import deakin.gopher.guardian.model.GP
@@ -13,22 +12,12 @@ import deakin.gopher.guardian.model.patientdata.healthdata.PatientHealthData
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.ResponseBody
-=======
->>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-<<<<<<< HEAD
-import retrofit2.http.DELETE
-import retrofit2.http.Path
-import retrofit2.http.Url
+import retrofit2.http.*
+
 import java.util.concurrent.TimeUnit
-=======
->>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
 
 interface ApiService {
     // Authentication endpoints
@@ -39,7 +28,7 @@ interface ApiService {
     @POST("auth/login")
     fun login(
         @Field("email") email: String,
-        @Field("password") password: String,
+        @Field("password") password: String
     ): Call<AuthResponse>
 
     @FormUrlEncoded
@@ -48,11 +37,13 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("auth/verify-pin")
-    fun verifyPin(@Field("email") email: String, @Field("otp") pin: String): Call<BaseModel>
+    fun verifyPin(
+        @Field("email") email: String,
+        @Field("otp") pin: String
+    ): Call<BaseModel>
 
     @FormUrlEncoded
     @POST("auth/reset-password-request")
-<<<<<<< HEAD
     fun requestPasswordReset(@Field("email") email: String): Call<BaseModel>
 
     // CRUD operations for patients
@@ -86,7 +77,7 @@ interface ApiService {
     fun sendMessage(@Url url: String, @Body message: Message): Call<ResponseBody>
 
     companion object {
-        private const val BASE_URL = "http://localhost:3000/"
+        private const val BASE_URL = "http://10.0.2.2:3000/api/v1"
 
         fun create(): ApiService {
             val loggingInterceptor = HttpLoggingInterceptor().apply {
@@ -108,10 +99,3 @@ interface ApiService {
         }
     }
 }
-
-=======
-    fun requestPasswordReset(
-        @Field("email") email: String,
-    ): Call<BaseModel>
-}
->>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4

@@ -42,6 +42,16 @@ object SessionManager {
             ?: throw UserNotAuthenticatedException("User not found")
     }
 
+    // New method to get the User ID
+    fun getUserId(): String? {
+        return try {
+            val user = getCurrentUser()
+            user.id // Refers to the `id` property in the User class
+        } catch (e: UserNotAuthenticatedException) {
+            null
+        }
+    }
+
     private fun setCurrentUser(user: User) {
         setObject(KEY_CURRENT_USER, user)
     }
@@ -91,3 +101,4 @@ object SessionManager {
         editor.remove(key).apply()
     }
 }
+

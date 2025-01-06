@@ -4,18 +4,17 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-<<<<<<< HEAD
 import deakin.gopher.guardian.communication.Message
-=======
->>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 object RetrofitClient {
-<<<<<<< HEAD
+
+    //    private const val BASE_URL = "http://10.0.2.2:3000/api/v1/"
     private const val BASE_URL = "http://10.0.2.2:3000/api/v1/"
-=======
-//    private const val BASE_URL = "http://10.0.2.2:3000/api/v1/"
-    private const val BASE_URL = "https://guardian-backend-kz54.onrender.com/api/v1/"
->>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
 
     private val client = OkHttpClient()
     private val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -34,7 +33,7 @@ object ApiClient {
     val apiService: ApiService by lazy {
         RetrofitClient.retrofit.create(ApiService::class.java)
     }
-<<<<<<< HEAD
+
 
     // Retrofit GET request
     fun get(url: String, onSuccess: (response: ResponseBody) -> Unit, onError: (error: Throwable) -> Unit) {
@@ -94,6 +93,4 @@ object ApiClient {
     fun getClient(): Retrofit {
         return RetrofitClient.retrofit
     }
-=======
->>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
 }

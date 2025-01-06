@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="deakin.gopher.guardian.view.general.MainActivity">
 
-    <!-- Existing CardView -->
+    <!-- Header CardView -->
     <androidx.cardview.widget.CardView
         android:id="@+id/medicalDiaganosticsHeaderCardView"
         android:layout_width="0dp"
@@ -40,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:contentDescription="TODO"
+                android:contentDescription="Header Logo"
                 app:layout_constraintBottom_toTopOf="@+id/medicalDiagnosticsTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,19 +50,18 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Existing ImageView -->
+    <!-- Existing Main Content -->
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="123dp"
         android:layout_height="125dp"
         android:layout_marginTop="24dp"
-        android:contentDescription="TODO"
+        android:contentDescription="Main Icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView"
         app:srcCompat="@drawable/fbc_agedcare_icon_" />
 
-    <!-- Existing TextView -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
@@ -75,7 +75,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <!-- RecyclerView for messages -->
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMessages"
         android:layout_width="0dp"
@@ -86,16 +86,16 @@
         app:layout_constraintBottom_toTopOf="@+id/sendMessageLayout"
         android:scrollbars="vertical" />
 
-    <!-- Bottom message input layout -->
+    <!-- Bottom Layout for Message Input -->
     <RelativeLayout
         android:id="@+id/sendMessageLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <EditText
             android:id="@+id/editTextMessage"
@@ -105,17 +105,17 @@
             android:layout_alignParentStart="true"
             android:hint="Type a message"
             android:padding="12dp"
-            android:background="@drawable/rounded_corner_edittext"/>
+            android:background="@drawable/rounded_corner_edittext" />
 
         <Button
             android:id="@+id/buttonSend"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_alignParentEnd="true"
-            android:text="Send"/>
+            android:text="Send" />
     </RelativeLayout>
 
-    <!-- Get Started Button (Added) -->
+    <!-- Get Started Button -->
     <Button
         android:id="@+id/getStartedButton"
         android:layout_width="wrap_content"
@@ -124,17 +124,132 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="16dp" />
 
-    <!-- Existing Header Icon -->
-    <ImageView
-        android:id="@+id/headerMenuIcon"
-        android:layout_width="wrap_content"
+    <!-- New Profile and Settings Section -->
+    <ScrollView
+        android:id="@+id/scrollViewProfileSettings"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="TODO"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/shapes1" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/getStartedButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Profile Section -->
+            <TextView
+                android:text="Profile Details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name" />
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone Number"
+                android:inputType="phone" />
+
+            <Button
+                android:id="@+id/btn_save_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save Profile"
+                android:layout_marginTop="8dp" />
+
+            <!-- Password Section -->
+            <TextView
+                android:text="Change Password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/et_old_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Old Password"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/et_new_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="New Password"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/et_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirm Password"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/btn_save_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save Password"
+                android:layout_marginTop="8dp" />
+
+            <!-- Notification Preferences Section -->
+            <TextView
+                android:text="Notification Preferences"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_email_notifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email Notifications" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_sms_notifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SMS Notifications" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_push_notifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Push Notifications" />
+
+            <Button
+                android:id="@+id/btn_save_notifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save Changes"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

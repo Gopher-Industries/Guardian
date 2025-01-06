@@ -3,26 +3,21 @@ package deakin.gopher.guardian.view.general
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-<<<<<<< HEAD
-import com.google.android.material.snackbar.Snackbar
-=======
 import com.google.android.gms.tasks.Task
-import com.google.firebase.messaging.FirebaseMessaging
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
->>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
+import com.google.firebase.messaging.FirebaseMessaging
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.adapter.MessageAdapter
+import deakin.gopher.guardian.communication.Message
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.EmailPasswordAuthService
-import deakin.gopher.guardian.adapter.MessageAdapter
-import deakin.gopher.guardian.communication.Message // Import Message class
-
-import java.util.Date
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : BaseActivity() {
     private lateinit var recyclerViewMessages: RecyclerView
@@ -35,11 +30,10 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-<<<<<<< HEAD
         // Check if the user is logged in
         if (SessionManager.isLoggedIn) {
             try {
-                val userId = SessionManager.getUserId()  // Get the userId
+                val userId = SessionManager.getUserId() ?: "Unknown User"
                 Log.d("MainActivity", "Current user ID: $userId")
             } catch (e: Exception) {
                 Log.e("MainActivity", "Error retrieving current user: ${e.message}")
@@ -48,14 +42,17 @@ class MainActivity : BaseActivity() {
             Log.d("MainActivity", "User not logged in")
         }
 
-        // Setup buttons and chat components
-        val getStartedButton = findViewById<Button>(R.id.getStartedButton)
-        getStartedButton.setOnClickListener { onGetStartedClick() }
+        // Setup UI components
+        findViewById<Button>(R.id.getStartedButton).setOnClickListener { onGetStartedClick() }
 
-=======
-        // Existing button setup
-        val getStartedButton = findViewById<Button>(R.id.getStartedButton)
-        getStartedButton.setOnClickListener { onGetStartedClick() }
+        recyclerViewMessages = findViewById(R.id.recyclerViewMessages)
+        editTextMessage = findViewById(R.id.editTextMessage)
+        setupRecyclerView()
+
+        findViewById<Button>(R.id.buttonSend).setOnClickListener { sendMessage() }
+        findViewById<Button>(R.id.btn_save_profile).setOnClickListener { saveProfile() }
+        findViewById<Button>(R.id.btn_save_password).setOnClickListener { changePassword() }
+        findViewById<Button>(R.id.btn_save_notifications).setOnClickListener { saveNotificationPreferences() }
 
         // Firebase Messaging setup
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task: Task<String?> ->
@@ -67,16 +64,7 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        // New chat components
->>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
-        recyclerViewMessages = findViewById(R.id.recyclerViewMessages)
-        editTextMessage = findViewById(R.id.editTextMessage)
-
-        setupRecyclerView()
-
-        findViewById<Button>(R.id.buttonSend).setOnClickListener { sendMessage() }
-
-        loadMessages()  // Load existing messages
+        loadMessages() // Load existing messages
     }
 
     private fun setupRecyclerView() {
@@ -86,20 +74,9 @@ class MainActivity : BaseActivity() {
     }
 
     private fun loadMessages() {
-<<<<<<< HEAD
-        val url = "https://guardian-backend-kz54.onrender.com/messages"
-        ApiClient.get(url, { response ->
-            messageList.clear()
-            val messages = response.toMessageList()  // Parse response into Message objects
-            messageList.addAll(messages)
-            messageAdapter.notifyDataSetChanged()
-        }, { error ->
-            Toast.makeText(this, "Error loading messages", Toast.LENGTH_SHORT).show()
-        })
-=======
         db.collection("messages")
             .orderBy("timestamp", Query.Direction.ASCENDING)
-            .limit(20)  // Limit the number of messages for better performance
+            .limit(20)
             .addSnapshotListener { querySnapshot, e ->
                 if (e != null) {
                     Toast.makeText(this, "Error loading messages", Toast.LENGTH_SHORT).show()
@@ -110,52 +87,82 @@ class MainActivity : BaseActivity() {
                     val sender = document.getString("senderId") ?: ""
                     val receiver = document.getString("receiverId") ?: ""
                     val messageContent = document.getString("messageContent") ?: ""
-                    val timestamp = document.getDate("timestamp")
+                    val timestamp = document.getString("timestamp") ?: ""
                     messageList.add(Message(sender, receiver, messageContent, timestamp))
                 }
                 messageAdapter.notifyDataSetChanged()
             }
->>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
     }
 
     private fun sendMessage() {
         val messageContent = editTextMessage.text.toString().trim()
         if (messageContent.isNotEmpty()) {
-<<<<<<< HEAD
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-            val formattedDate = dateFormat.format(Date())
-
-            val recipientUserId = "recipientUserId" // Replace this with actual user ID logic
             val userId: String = SessionManager.getUserId() ?: run {
                 Toast.makeText(this, "User ID is null", Toast.LENGTH_SHORT).show()
                 return
             }
 
-            val message = Message(userId, recipientUserId, messageContent, formattedDate)
+            // Format the current date as a string
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+            val formattedDate = dateFormat.format(Date())
 
-            // Make the API call to send the message
-            ApiClient.post("https://guardian-backend-kz54.onrender.com/messages", message, { response ->
-                editTextMessage.text.clear()  // Clear the input field
-                Snackbar.make(findViewById(android.R.id.content), "Message sent successfully", Snackbar.LENGTH_SHORT).show()
-                loadMessages()  // Refresh message list
-            }, { error ->
-                Snackbar.make(findViewById(android.R.id.content), "Error sending message", Snackbar.LENGTH_SHORT).show()
-            })
-=======
-            val message = Message(SessionManager.userId, "recipientUserId", messageContent, Date())
+            // Create a new Message object
+            val message = Message(
+                senderId = userId,
+                recipientUserId = "recipientUserId", // Replace with actual recipient logic
+                content = messageContent,
+                date = formattedDate
+            )
+
+            // Add message to Firestore
             db.collection("messages")
                 .add(message)
                 .addOnSuccessListener {
-                    editTextMessage.text.clear()  // Clear input field
-                    loadMessages()  // Refresh message list
+                    editTextMessage.text.clear() // Clear the input field
+                    Toast.makeText(this, "Message sent successfully!", Toast.LENGTH_SHORT).show()
+                    loadMessages() // Reload messages to reflect the new message
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, "Error sending message", Toast.LENGTH_SHORT).show()
                 }
->>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
         } else {
             Toast.makeText(this, "Message cannot be empty", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun saveProfile() {
+        val name = findViewById<EditText>(R.id.et_name).text.toString()
+        val email = findViewById<EditText>(R.id.et_email).text.toString()
+        val phone = findViewById<EditText>(R.id.et_phone).text.toString()
+
+        if (name.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+        } else {
+            // Save profile details (Firebase or API integration)
+            Toast.makeText(this, "Profile saved successfully!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun changePassword() {
+        val oldPassword = findViewById<EditText>(R.id.et_old_password).text.toString()
+        val newPassword = findViewById<EditText>(R.id.et_new_password).text.toString()
+        val confirmPassword = findViewById<EditText>(R.id.et_confirm_password).text.toString()
+
+        if (newPassword != confirmPassword) {
+            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+        } else {
+            // Change password logic (Firebase or API integration)
+            Toast.makeText(this, "Password updated successfully!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun saveNotificationPreferences() {
+        val emailNotif = findViewById<Switch>(R.id.switch_email_notifications).isChecked
+        val smsNotif = findViewById<Switch>(R.id.switch_sms_notifications).isChecked
+        val pushNotif = findViewById<Switch>(R.id.switch_push_notifications).isChecked
+
+        // Save preferences logic (Firebase or API integration)
+        Toast.makeText(this, "Notification preferences saved successfully!", Toast.LENGTH_SHORT).show()
     }
 
     private fun onGetStartedClick() {
@@ -171,8 +178,3 @@ class MainActivity : BaseActivity() {
         finish()
     }
 }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 4a7fb6e1ccd9a05f8a3a7f255dcb3c26923860d4
