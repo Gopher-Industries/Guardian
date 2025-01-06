@@ -20,6 +20,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/clear_all_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:text="Clear All Tasks"
+        tools:layout_editor_absoluteX="218dp"
+        tools:layout_editor_absoluteY="404dp" />
+
     <ImageView
         android:id="@+id/task_detail_head_image"
         android:layout_width="54dp"
@@ -102,6 +112,16 @@
     </LinearLayout>
 
     <!-- Complete button -->
+
+    <Button
+        android:id="@+id/task_button_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="Edit Task"
+        tools:layout_editor_absoluteX="51dp"
+        tools:layout_editor_absoluteY="404dp" />
+
     <LinearLayout
         android:id="@+id/buttons_container"
         android:layout_width="0dp"

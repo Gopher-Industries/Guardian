@@ -53,11 +53,9 @@
                         android:id="@+id/tasksubDescEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="16dp"
-                        android:layout_marginTop="16dp"
-                        android:hint="Sub Description
-    "
-                        android:inputType="textMultiLine" />
+                        android:layout_margin="16dp"
+                        android:hint="Sub Description"
+                        android:inputType="textMultiLine"/>
 
                     <EditText
                         android:id="@+id/taskPatientIdEditText"
@@ -68,6 +66,32 @@
                         android:hint="Patient ID
     "
                         android:inputType="textMultiLine" />
+                    <RadioGroup
+                        android:id="@+id/priorityRadioGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radio_high"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="High Priority" />
+
+                        <RadioButton
+                            android:id="@+id/radio_medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Medium Priority"
+                            android:checked="true" />
+
+                        <RadioButton
+                            android:id="@+id/radio_low"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Low Priority" />
+                    </RadioGroup>
 
                     <Button
                         android:id="@+id/newTaskSubmitButton"
