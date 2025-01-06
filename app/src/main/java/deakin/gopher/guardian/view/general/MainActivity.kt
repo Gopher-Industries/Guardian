@@ -7,8 +7,6 @@ import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.tasks.Task
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.messaging.FirebaseMessaging
@@ -16,7 +14,6 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.adapter.MessageAdapter
 import deakin.gopher.guardian.communication.Message
 import deakin.gopher.guardian.model.login.SessionManager
-import deakin.gopher.guardian.services.EmailPasswordAuthService
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -31,42 +28,31 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Check if the user is logged in
-        if (SessionManager.isLoggedIn) {
-            try {
-                val userId = SessionManager.getUserId() ?: "Unknown User"
-                Log.d("MainActivity", "Current user ID: $userId")
-                showContent() // Show Profile, Settings, and Messaging sections
-            } catch (e: Exception) {
-                Log.e("MainActivity", "Error retrieving current user: ${e.message}")
-            }
-        } else {
-            hideContent() // Show only "Get Started" button
-        }
-
-        // Setup UI components
-        findViewById<Button>(R.id.getStartedButton).setOnClickListener { onGetStartedClick() }
-
         recyclerViewMessages = findViewById(R.id.recyclerViewMessages)
         editTextMessage = findViewById(R.id.editTextMessage)
-        setupRecyclerView()
 
-        findViewById<Button>(R.id.buttonSend).setOnClickListener { sendMessage() }
-        findViewById<Button>(R.id.btn_save_profile).setOnClickListener { saveProfile() }
-        findViewById<Button>(R.id.btn_save_password).setOnClickListener { changePassword() }
-        findViewById<Button>(R.id.btn_save_notifications).setOnClickListener { saveNotificationPreferences() }
-
-        // Firebase Messaging setup
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task: Task<String?> ->
-            if (task.isSuccessful) {
-                val token = task.result
-                Log.d("FCM Token", token ?: "Token is null")
-            } else {
-                Log.w("MainActivity", "Fetching FCM registration token failed", task.exception)
-            }
+        findViewById<Button>(R.id.getStartedButton).setOnClickListener {
+            onGetStartedClick()
         }
 
-        loadMessages() // Load existing messages
+        setupRecyclerView()
+        loadMessages()
+
+        findViewById<Button>(R.id.buttonSend).setOnClickListener {
+            sendMessage()
+        }
+
+        findViewById<Button>(R.id.btn_save_profile).setOnClickListener {
+            saveProfile()
+        }
+
+        findViewById<Button>(R.id.btn_save_password).setOnClickListener {
+            changePassword()
+        }
+
+        findViewById<Button>(R.id.btn_save_notifications).setOnClickListener {
+            saveNotificationPreferences()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -78,12 +64,12 @@ class MainActivity : BaseActivity() {
     private fun loadMessages() {
         db.collection("messages")
             .orderBy("timestamp", Query.Direction.ASCENDING)
-            .limit(20)
             .addSnapshotListener { querySnapshot, e ->
                 if (e != null) {
                     Toast.makeText(this, "Error loading messages", Toast.LENGTH_SHORT).show()
                     return@addSnapshotListener
                 }
+
                 messageList.clear()
                 querySnapshot?.forEach { document ->
                     val sender = document.getString("senderId") ?: ""
@@ -99,17 +85,14 @@ class MainActivity : BaseActivity() {
     private fun sendMessage() {
         val messageContent = editTextMessage.text.toString().trim()
         if (messageContent.isNotEmpty()) {
-            val userId: String = SessionManager.getUserId() ?: run {
-                Toast.makeText(this, "User ID is null", Toast.LENGTH_SHORT).show()
-                return
-            }
+            val userId: String = SessionManager.getUserId() ?: return
 
             val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
             val formattedDate = dateFormat.format(Date())
 
             val message = Message(
                 senderId = userId,
-                recipientUserId = "recipientUserId", // Replace with actual recipient logic
+                recipientUserId = "recipientUserId",
                 content = messageContent,
                 date = formattedDate
             )
@@ -118,7 +101,6 @@ class MainActivity : BaseActivity() {
                 .add(message)
                 .addOnSuccessListener {
                     editTextMessage.text.clear()
-                    Toast.makeText(this, "Message sent successfully!", Toast.LENGTH_SHORT).show()
                     loadMessages()
                 }
                 .addOnFailureListener {
@@ -162,25 +144,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun onGetStartedClick() {
-        if (!SessionManager.isLoggedIn) {
-            startActivity(Intent(this, LoginActivity::class.java))
-        } else {
-            showContent()
-        }
-    }
-
-    private fun showContent() {
-        findViewById<ScrollView>(R.id.scrollViewProfileSettings).visibility = View.VISIBLE
-        findViewById<RecyclerView>(R.id.recyclerViewMessages).visibility = View.VISIBLE
-        findViewById<RelativeLayout>(R.id.sendMessageLayout).visibility = View.VISIBLE
-        findViewById<Button>(R.id.getStartedButton).visibility = View.GONE
-    }
-
-    private fun hideContent() {
-        findViewById<ScrollView>(R.id.scrollViewProfileSettings).visibility = View.GONE
-        findViewById<RecyclerView>(R.id.recyclerViewMessages).visibility = View.GONE
-        findViewById<RelativeLayout>(R.id.sendMessageLayout).visibility = View.GONE
-        findViewById<Button>(R.id.getStartedButton).visibility = View.VISIBLE
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 }
-

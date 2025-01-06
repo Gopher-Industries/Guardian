@@ -50,18 +50,32 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Profile and Settings Section -->
+    <!-- Aged Care Icon -->
+    <ImageView
+        android:id="@+id/agedCareIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="Aged Care Icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/getStartedButton"
+        app:layout_constraintVertical_bias="0.6"
+        app:srcCompat="@drawable/agedcare_icon" />
+
+    <!-- Get Started Button -->
     <Button
         android:id="@+id/getStartedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
         android:text="Get Started"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintTop_toBottomOf="@+id/agedCareIcon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
 
+    <!-- Profile and Settings Section -->
     <ScrollView
         android:id="@+id/scrollViewProfileSettings"
         android:layout_width="match_parent"
@@ -193,11 +207,11 @@
         android:id="@+id/recyclerViewMessages"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/scrollViewProfileSettings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/sendMessageLayout"
+        android:visibility="gone"
         android:scrollbars="vertical" />
 
     <!-- Bottom Layout for Message Input -->
