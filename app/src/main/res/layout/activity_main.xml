@@ -50,88 +50,23 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Existing Main Content -->
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="123dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="24dp"
-        android:contentDescription="Main Icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView"
-        app:srcCompat="@drawable/fbc_agedcare_icon_" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="64dp"
-        android:text="@string/main_activity_solgan"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <!-- RecyclerView -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewMessages"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/sendMessageLayout"
-        android:scrollbars="vertical" />
-
-    <!-- Bottom Layout for Message Input -->
-    <RelativeLayout
-        android:id="@+id/sendMessageLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <EditText
-            android:id="@+id/editTextMessage"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_toLeftOf="@+id/buttonSend"
-            android:layout_alignParentStart="true"
-            android:hint="Type a message"
-            android:padding="12dp"
-            android:background="@drawable/rounded_corner_edittext" />
-
-        <Button
-            android:id="@+id/buttonSend"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_alignParentEnd="true"
-            android:text="Send" />
-    </RelativeLayout>
-
-    <!-- Get Started Button -->
+    <!-- Profile and Settings Section -->
     <Button
         android:id="@+id/getStartedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
         android:text="Get Started"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-    <!-- New Profile and Settings Section -->
     <ScrollView
         android:id="@+id/scrollViewProfileSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/getStartedButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -252,4 +187,44 @@
                 android:layout_marginTop="8dp" />
         </LinearLayout>
     </ScrollView>
+
+    <!-- Messaging Section -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMessages"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/scrollViewProfileSettings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/sendMessageLayout"
+        android:scrollbars="vertical" />
+
+    <!-- Bottom Layout for Message Input -->
+    <RelativeLayout
+        android:id="@+id/sendMessageLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <EditText
+            android:id="@+id/editTextMessage"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_toLeftOf="@+id/buttonSend"
+            android:layout_alignParentStart="true"
+            android:hint="Type a message"
+            android:padding="12dp"
+            android:background="@drawable/rounded_corner_edittext" />
+
+        <Button
+            android:id="@+id/buttonSend"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:text="Send" />
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

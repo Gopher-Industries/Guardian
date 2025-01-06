@@ -3,6 +3,7 @@ package deakin.gopher.guardian.view.general
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,11 +36,12 @@ class MainActivity : BaseActivity() {
             try {
                 val userId = SessionManager.getUserId() ?: "Unknown User"
                 Log.d("MainActivity", "Current user ID: $userId")
+                showContent() // Show Profile, Settings, and Messaging sections
             } catch (e: Exception) {
                 Log.e("MainActivity", "Error retrieving current user: ${e.message}")
             }
         } else {
-            Log.d("MainActivity", "User not logged in")
+            hideContent() // Show only "Get Started" button
         }
 
         // Setup UI components
@@ -102,11 +104,9 @@ class MainActivity : BaseActivity() {
                 return
             }
 
-            // Format the current date as a string
             val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
             val formattedDate = dateFormat.format(Date())
 
-            // Create a new Message object
             val message = Message(
                 senderId = userId,
                 recipientUserId = "recipientUserId", // Replace with actual recipient logic
@@ -114,13 +114,12 @@ class MainActivity : BaseActivity() {
                 date = formattedDate
             )
 
-            // Add message to Firestore
             db.collection("messages")
                 .add(message)
                 .addOnSuccessListener {
-                    editTextMessage.text.clear() // Clear the input field
+                    editTextMessage.text.clear()
                     Toast.makeText(this, "Message sent successfully!", Toast.LENGTH_SHORT).show()
-                    loadMessages() // Reload messages to reflect the new message
+                    loadMessages()
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, "Error sending message", Toast.LENGTH_SHORT).show()
@@ -138,7 +137,6 @@ class MainActivity : BaseActivity() {
         if (name.isEmpty() || email.isEmpty() || phone.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
         } else {
-            // Save profile details (Firebase or API integration)
             Toast.makeText(this, "Profile saved successfully!", Toast.LENGTH_SHORT).show()
         }
     }
@@ -151,7 +149,6 @@ class MainActivity : BaseActivity() {
         if (newPassword != confirmPassword) {
             Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
         } else {
-            // Change password logic (Firebase or API integration)
             Toast.makeText(this, "Password updated successfully!", Toast.LENGTH_SHORT).show()
         }
     }
@@ -161,7 +158,6 @@ class MainActivity : BaseActivity() {
         val smsNotif = findViewById<Switch>(R.id.switch_sms_notifications).isChecked
         val pushNotif = findViewById<Switch>(R.id.switch_push_notifications).isChecked
 
-        // Save preferences logic (Firebase or API integration)
         Toast.makeText(this, "Notification preferences saved successfully!", Toast.LENGTH_SHORT).show()
     }
 
@@ -169,12 +165,22 @@ class MainActivity : BaseActivity() {
         if (!SessionManager.isLoggedIn) {
             startActivity(Intent(this, LoginActivity::class.java))
         } else {
-            startActivity(Intent(this, Homepage4caretaker::class.java))
+            showContent()
         }
     }
 
-    private fun onLogoutClick() {
-        EmailPasswordAuthService.signOut(this)
-        finish()
+    private fun showContent() {
+        findViewById<ScrollView>(R.id.scrollViewProfileSettings).visibility = View.VISIBLE
+        findViewById<RecyclerView>(R.id.recyclerViewMessages).visibility = View.VISIBLE
+        findViewById<RelativeLayout>(R.id.sendMessageLayout).visibility = View.VISIBLE
+        findViewById<Button>(R.id.getStartedButton).visibility = View.GONE
+    }
+
+    private fun hideContent() {
+        findViewById<ScrollView>(R.id.scrollViewProfileSettings).visibility = View.GONE
+        findViewById<RecyclerView>(R.id.recyclerViewMessages).visibility = View.GONE
+        findViewById<RelativeLayout>(R.id.sendMessageLayout).visibility = View.GONE
+        findViewById<Button>(R.id.getStartedButton).visibility = View.VISIBLE
     }
 }
+
