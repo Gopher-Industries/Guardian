@@ -10,7 +10,6 @@ import android.widget.TextView;
 import deakin.gopher.guardian.R;
 
 public class CustomHeader extends FrameLayout {
-
   public ImageView menuButton;
   private ImageView headerLogo;
   private ImageView headerProfileIcon;
@@ -18,17 +17,22 @@ public class CustomHeader extends FrameLayout {
   private TextView headerTextView;
   private View headerCard;
 
-  public CustomHeader(final Context context) {
+  public CustomHeader(Context context) {
     super(context);
     init(context, null);
   }
 
-  public CustomHeader(final Context context, final AttributeSet attrs) {
+  public CustomHeader(Context context, AttributeSet attrs) {
     super(context, attrs);
     init(context, attrs);
   }
 
-  private void init(final Context context, final AttributeSet attrs) {
+  public CustomHeader(Context context, AttributeSet attrs, int defStyleAttr) {
+    super(context, attrs, defStyleAttr);
+    init(context, attrs);
+  }
+
+  private void init(Context context, AttributeSet attrs) {
     LayoutInflater.from(context).inflate(R.layout.custom_header, this, true);
 
     headerLogo = findViewById(R.id.headerGuardiansLogo);
@@ -39,19 +43,19 @@ public class CustomHeader extends FrameLayout {
     headerTopImage = findViewById(R.id.headerTopImage);
   }
 
-  public void setHeaderTopImage(final int resource) {
+  public void setHeaderTopImage(int resource) {
     headerTopImage.setImageResource(resource);
   }
 
-  public void setHeaderTopImageVisibility(final int visible) {
+  public void setHeaderTopImageVisibility(int visible) {
     headerTopImage.setVisibility(visible);
   }
 
-  public void setHeaderText(final String text) {
+  public void setHeaderText(String text) {
     headerTextView.setText(text);
   }
 
-  public void setHeaderHeight(final int height) {
+  public void setHeaderHeight(int height) {
     headerCard.getLayoutParams().height = height;
     headerCard.requestLayout();
   }

@@ -28,10 +28,6 @@ class MainActivity : BaseActivity() {
                     Log.w("MainActivity", "Fetching FCM registration token failed", task.exception)
                 }
             }
-
-        getStartedButton.setOnClickListener {
-            startActivity(Intent(this@MainActivity, Homepage4caretaker::class.java))
-        }
     }
 
     private fun onGetStartedClick() {

@@ -2,14 +2,19 @@ package deakin.gopher.guardian.view.general
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.FirebaseDatabase
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.adapter.TaskListAdapter
+import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.Task
+import deakin.gopher.guardian.services.api.ApiClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 class TasksListActivity : AppCompatActivity() {
     private lateinit var taskListAdapter: TaskListAdapter
 
@@ -17,36 +22,50 @@ class TasksListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tasks_list)
 
-        val addTaskButton: Button = findViewById(R.id.add_task_button)
-        val clearAllButton: Button = findViewById(R.id.clear_all_button)
-
-        addTaskButton.setOnClickListener {
-            startActivity(Intent(this, TaskAddActivity::class.java))
-        }
-
-        clearAllButton.setOnClickListener {
-            clearAllTasks()
-        }
-
         val recyclerView: RecyclerView = findViewById(R.id.task_list_recycleView)
-        recyclerView.layoutManager = GridLayoutManager(this, 1)
-        taskListAdapter = TaskListAdapter(mutableListOf())
-        recyclerView.adapter = taskListAdapter
+        setupRecyclerView(recyclerView)
 
         fetchTasks()
     }
 
-    private fun fetchTasks() {
-        val taskRef = FirebaseDatabase.getInstance().reference.child("caretaker_tasks")
-        taskRef.get().addOnSuccessListener { snapshot ->
-            val taskList = snapshot.children.mapNotNull { it.getValue(Task::class.java) }
-            taskListAdapter.updateTaskList(taskList)
-        }
+    private fun setupRecyclerView(recyclerView: RecyclerView) {
+        taskListAdapter =
+            TaskListAdapter(mutableListOf()) { taskId ->
+                navigateToTaskDetail(taskId)
+            }
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = taskListAdapter
     }
-    private fun clearAllTasks() {
-        val taskRef = FirebaseDatabase.getInstance().reference.child("caretaker_tasks")
-        taskRef.removeValue().addOnSuccessListener {
-            taskListAdapter.updateTaskList(emptyList())
-        }
+
+    private fun fetchTasks() {
+        ApiClient.apiService.getAllTasks().enqueue(
+            object : Callback<BaseModel<List<Task>>> {
+                override fun onResponse(
+                    call: Call<BaseModel<List<Task>>>,
+                    response: Response<BaseModel<List<Task>>>,
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.data?.let { tasks ->
+                            taskListAdapter.updateTaskList(tasks)
+                        } ?: Toast.makeText(this@TasksListActivity, "No tasks found", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@TasksListActivity, "Failed to fetch tasks", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<BaseModel<List<Task>>>,
+                    t: Throwable,
+                ) {
+                    Toast.makeText(this@TasksListActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
+                }
+            },
+        )
+    }
+
+    private fun navigateToTaskDetail(taskId: String) {
+        val intent = Intent(this, TaskDetailActivity::class.java)
+        intent.putExtra("taskId", taskId)
+        startActivity(intent)
     }
 }

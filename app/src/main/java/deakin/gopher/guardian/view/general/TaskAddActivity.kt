@@ -1,15 +1,21 @@
 package deakin.gopher.guardian.view.general
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.database.FirebaseDatabase
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.Priority
 import deakin.gopher.guardian.model.Task
+import deakin.gopher.guardian.services.api.ApiClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TaskAddActivity : AppCompatActivity() {
     private lateinit var taskDescriptionEditText: EditText
@@ -24,72 +30,114 @@ class TaskAddActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_add)
 
+        // Initialize views
         taskDescriptionEditText = findViewById(R.id.taskDescriptionEditText)
         taskSubDescEditText = findViewById(R.id.tasksubDescEditText)
         patientIdEditText = findViewById(R.id.taskPatientIdEditText)
+        assignedNurseEditText = findViewById(R.id.assignedNurseEditText)
+        priorityRadioGroup = findViewById(R.id.priorityRadioGroup)
 
+        // Handle editing existing task
         taskId = intent.getStringExtra("taskId")
         if (taskId != null) {
             loadTaskForEditing(taskId!!)
         }
 
-        priorityRadioGroup = findViewById(R.id.priorityRadioGroup)
+        // Handle priority changes
         priorityRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            taskPriority = when (checkedId) {
-                R.id.radio_high -> Priority.HIGH
-                R.id.radio_low -> Priority.LOW
-                else -> Priority.MEDIUM
-            }
+            taskPriority =
+                when (checkedId) {
+                    R.id.radio_high -> Priority.HIGH
+                    R.id.radio_low -> Priority.LOW
+                    else -> Priority.MEDIUM
+                }
         }
 
-        val submitButton: Button = findViewById(R.id.newTaskSubmitButton)
-        submitButton.setOnClickListener {
+        // Save button click listener
+        findViewById<Button>(R.id.newTaskSubmitButton).setOnClickListener {
             showSaveDialog()
         }
     }
 
     private fun loadTaskForEditing(taskId: String) {
-        val taskRef = FirebaseDatabase.getInstance().reference.child("caretaker_tasks").child(taskId)
-        taskRef.get().addOnSuccessListener { snapshot ->
-            val task = snapshot.getValue(Task::class.java)
-            if (task != null) {
-                taskDescriptionEditText.setText(task.description)
-                patientIdEditText.setText(task.patientId)
-                taskSubDescEditText.setText(task.taskSubDesc)
-                assignedNurseEditText.setText(task.assignedNurse)
-                taskPriority = task.priority
-            }
-        }
+        ApiClient.apiService.getTaskById(taskId).enqueue(
+            object : Callback<BaseModel<Task>> {
+                override fun onResponse(
+                    call: Call<BaseModel<Task>>,
+                    response: Response<BaseModel<Task>>,
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.data?.let { task ->
+                            taskDescriptionEditText.setText(task.description)
+                            patientIdEditText.setText(task.patientId)
+                            taskSubDescEditText.setText(task.taskSubDesc)
+                            assignedNurseEditText.setText(task.assignedNurse)
+                            taskPriority = task.priority
+                        }
+                    } else {
+                        Toast.makeText(this@TaskAddActivity, "Failed to load task", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<BaseModel<Task>>,
+                    t: Throwable,
+                ) {
+                    Toast.makeText(this@TaskAddActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
+                }
+            },
+        )
     }
 
     private fun showSaveDialog() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Save Changes")
-        builder.setPositiveButton("Yes") { _, _ -> saveInFirebase() }
-        builder.setNegativeButton("No", null)
-        builder.create().show()
+        AlertDialog.Builder(this)
+            .setTitle("Save Task")
+            .setPositiveButton("Yes") { _, _ -> saveTask() }
+            .setNegativeButton("No", null)
+            .create()
+            .show()
     }
 
-    private fun saveInFirebase() {
-        val databaseRef = FirebaseDatabase.getInstance().reference
-        val caretakerTaskRef = databaseRef.child("caretaker_tasks")
+    private fun saveTask() {
+        val task =
+            Task(
+                taskId = taskId ?: "",
+                description = taskDescriptionEditText.text.toString().trim(),
+                assignedNurse = assignedNurseEditText.text.toString().trim(),
+                priority = taskPriority,
+                patientId = patientIdEditText.text.toString().trim(),
+                taskSubDesc = taskSubDescEditText.text.toString().trim(),
+            )
 
-        val patientId = patientIdEditText.text.toString().trim()
-        val taskDescription = taskDescriptionEditText.text.toString().trim()
-        val taskSubDesc = taskSubDescEditText.text.toString().trim()
-        val assignedNurse = assignedNurseEditText.text.toString().trim()
+        val apiCall: Call<BaseModel<Task>> =
+            if (taskId != null) {
+                ApiClient.apiService.updateTask(taskId!!, task)
+            } else {
+                ApiClient.apiService.createTask(task)
+            }
 
-        val task = Task(
-            taskId = taskId ?: caretakerTaskRef.push().key!!,
-            description = taskDescription,
-            assignedNurse = assignedNurse,
-            priority = taskPriority,
-            patientId = patientId,
-            taskSubDesc = taskSubDesc
+        apiCall.enqueue(
+            object : Callback<BaseModel<Task>> {
+                override fun onResponse(
+                    call: Call<BaseModel<Task>>,
+                    response: Response<BaseModel<Task>>,
+                ) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@TaskAddActivity, "Task saved successfully", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@TaskAddActivity, TasksListActivity::class.java))
+                        finish()
+                    } else {
+                        Toast.makeText(this@TaskAddActivity, "Failed to save task", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<BaseModel<Task>>,
+                    t: Throwable,
+                ) {
+                    Toast.makeText(this@TaskAddActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
+                }
+            },
         )
-
-        caretakerTaskRef.child(task.taskId).setValue(task).addOnCompleteListener {
-            finish()
-        }
     }
 }

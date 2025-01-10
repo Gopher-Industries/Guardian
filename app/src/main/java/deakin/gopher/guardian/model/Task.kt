@@ -1,7 +1,9 @@
 package deakin.gopher.guardian.model
 
 enum class Priority {
-    HIGH, MEDIUM, LOW
+    HIGH,
+    MEDIUM,
+    LOW,
 }
 
 data class Task(
@@ -11,5 +13,5 @@ data class Task(
     var priority: Priority = Priority.MEDIUM,
     var patientId: String = "",
     var taskSubDesc: String = "",
-    var completed: Boolean = false
+    var completed: Boolean = false,
 )

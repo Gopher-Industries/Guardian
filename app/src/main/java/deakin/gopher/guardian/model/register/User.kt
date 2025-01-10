@@ -1,7 +1,6 @@
 package deakin.gopher.guardian.model.register
 
 import com.google.gson.annotations.SerializedName
-import deakin.gopher.guardian.model.BaseModel
 
 data class User(
     @SerializedName("id") val id: String,
@@ -20,4 +19,4 @@ data class RegisterRequest(
 data class AuthResponse(
     @SerializedName("user") val user: User,
     @SerializedName("token") val token: String,
-) : BaseModel()
+)

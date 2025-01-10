@@ -7,8 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="deakin.gopher.guardian.view.general.PatientProfileAddActivity">
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/patient_list_backgroud"
         android:textAlignment="center"
@@ -162,15 +162,15 @@
 
     <ImageButton
         android:id="@+id/imageView62"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="188dp"
-        android:layout_marginBottom="13dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginBottom="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/edit_button_plus"
-        android:background="?attr/selectableItemBackgroundBorderless" />
+        app:srcCompat="@drawable/edit_button_plus" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
     <include

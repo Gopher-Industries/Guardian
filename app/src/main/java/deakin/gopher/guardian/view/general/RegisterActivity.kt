@@ -10,7 +10,7 @@ import androidx.core.view.isVisible
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import deakin.gopher.guardian.R
-import deakin.gopher.guardian.model.RegistrationStatusMessage
+import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.Password
 import deakin.gopher.guardian.model.register.AuthResponse
@@ -26,6 +26,7 @@ class RegisterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.account_creation)
+
         val mFullName: EditText = findViewById(R.id.Fullname)
         val mEmail: EditText = findViewById(R.id.Email)
         val mPassword: EditText = findViewById(R.id.password)
@@ -36,10 +37,10 @@ class RegisterActivity : BaseActivity() {
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
 
         mRegisterBtn.setOnClickListener {
-            val emailInput = mEmail.text.toString().trim { it <= ' ' }
-            val passwordInput = mPassword.text.toString().trim { it <= ' ' }
-            val passwordConfirmInput = passwordConfirmation.text.toString().trim { it <= ' ' }
-            val nameInput = mFullName.text.toString().trim { it <= ' ' }
+            val emailInput = mEmail.text.toString().trim()
+            val passwordInput = mPassword.text.toString().trim()
+            val passwordConfirmInput = passwordConfirmation.text.toString().trim()
+            val nameInput = mFullName.text.toString().trim()
             val roleInput = roleButton.checkedButtonId
 
             val registrationError =
@@ -54,7 +55,7 @@ class RegisterActivity : BaseActivity() {
             if (registrationError != null) {
                 Toast.makeText(
                     applicationContext,
-                    registrationError.messageResourceId,
+                    getString(registrationError.messageResourceId),
                     Toast.LENGTH_LONG,
                 ).show()
                 return@setOnClickListener
@@ -75,35 +76,29 @@ class RegisterActivity : BaseActivity() {
                 )
 
             val call = ApiClient.apiService.register(request)
-
             call.enqueue(
-                object : Callback<AuthResponse> {
+                object : Callback<BaseModel<AuthResponse>> {
                     override fun onResponse(
-                        call: Call<AuthResponse>,
-                        response: Response<AuthResponse>,
+                        call: Call<BaseModel<AuthResponse>>,
+                        response: Response<BaseModel<AuthResponse>>,
                     ) {
                         progressBar.isVisible = false
                         if (response.isSuccessful) {
-                            // Handle successful registration
-                            showMessage(RegistrationStatusMessage.Success.toString())
-                            NavigationService(this@RegisterActivity).toLogin()
+                            response.body()?.data?.let {
+                                showMessage("Registration successful")
+                                NavigationService(this@RegisterActivity).toLogin()
+                            } ?: showMessage("Registration failed: Missing user data")
                         } else {
-                            // Handle error
-                            showMessage(
-                                RegistrationStatusMessage.Failure.toString() + " : ${
-                                    response.errorBody()
-                                }",
-                            )
+                            showMessage("Registration failed: ${response.message()}")
                         }
                     }
 
                     override fun onFailure(
-                        call: Call<AuthResponse>,
+                        call: Call<BaseModel<AuthResponse>>,
                         t: Throwable,
                     ) {
-                        // Handle failure
                         progressBar.isVisible = false
-                        showMessage(RegistrationStatusMessage.Failure.toString() + ": ${t.message}")
+                        showMessage("Error: ${t.localizedMessage}")
                     }
                 },
             )
@@ -121,44 +116,20 @@ class RegisterActivity : BaseActivity() {
         rawName: String?,
         roleInput: Int,
     ): RegistrationError? {
-        if (rawEmail.isNullOrEmpty()) {
-            return RegistrationError.EmptyEmail
-        }
-
+        if (rawEmail.isNullOrEmpty()) return RegistrationError.EmptyEmail
         val emailAddress = EmailAddress(rawEmail)
-        if (emailAddress.isValid().not()) {
-            return RegistrationError.InvalidEmail
-        }
-
-        if (rawPassword.isNullOrEmpty()) {
-            return RegistrationError.EmptyPassword
-        }
-
+        if (!emailAddress.isValid()) return RegistrationError.InvalidEmail
+        if (rawPassword.isNullOrEmpty()) return RegistrationError.EmptyPassword
         val password = Password(rawPassword)
-        if (password.isValid().not()) {
-            return RegistrationError.PasswordTooShort
-        }
-
-        if (rawConfirmedPassword.isNullOrEmpty()) {
-            return RegistrationError.EmptyConfirmedPassword
-        }
-
-        if (password.confirmWith(rawConfirmedPassword).not()) {
-            return RegistrationError.PasswordsFailConfirmation
-        }
-
-        if (rawName.isNullOrEmpty()) {
-            return RegistrationError.EmptyName
-        }
-
-        if (roleInput == View.NO_ID) {
-            return RegistrationError.EmptyRole
-        }
-
+        if (!password.isValid()) return RegistrationError.PasswordTooShort
+        if (rawConfirmedPassword.isNullOrEmpty()) return RegistrationError.EmptyConfirmedPassword
+        if (!password.confirmWith(rawConfirmedPassword)) return RegistrationError.PasswordsFailConfirmation
+        if (rawName.isNullOrEmpty()) return RegistrationError.EmptyName
+        if (roleInput == View.NO_ID) return RegistrationError.EmptyRole
         return null
     }
 
     private fun showMessage(message: String) {
-        Toast.makeText(this@RegisterActivity, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
