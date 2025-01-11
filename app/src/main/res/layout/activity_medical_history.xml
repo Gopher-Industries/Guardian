@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.general.AddMedicalHistoryActivity">
+
+    <!-- Header Section with Blue Background and Gopher Logo -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/headerCard"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/TG_blue"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Gopher Logo -->
+            <ImageView
+                android:id="@+id/gopherLogo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/gopher_logo"
+                android:contentDescription="Gopher Logo"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp" />
+
+            <!-- Page Title -->
+            <TextView
+                android:id="@+id/headerTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Medical History"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/gopherLogo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Input Fields and Buttons -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/headerCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Patient Name Input -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Patient Name"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/inputPatientName"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Enter patient name"
+                android:padding="12dp"
+                android:background="@drawable/input_background"
+                android:layout_marginTop="4dp" />
+
+            <!-- Medical Condition Input -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Medical Condition"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/inputMedicalCondition"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Enter medical condition"
+                android:padding="12dp"
+                android:background="@drawable/input_background"
+                android:layout_marginTop="4dp" />
+
+            <!-- Treatment Details Input -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Treatment Details"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/inputTreatmentDetails"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Enter treatment details"
+                android:padding="12dp"
+                android:background="@drawable/input_background"
+                android:layout_marginTop="4dp" />
+
+            <!-- Doctor Notes Input -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Doctor's Notes"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/inputDoctorNotes"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Enter doctor's notes"
+                android:padding="12dp"
+                android:background="@drawable/input_background"
+                android:layout_marginTop="4dp" />
+
+            <!-- Submit Button -->
+            <Button
+                android:id="@+id/buttonSubmitMedicalHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit Medical History"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/TG_blue"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

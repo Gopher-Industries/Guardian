@@ -33,11 +33,12 @@ class CarePlanAdapter(private val carePlans: List<CarePlan>) :
         private val progressBar: ProgressBar = itemView.findViewById(R.id.carePlanProgressBar)
 
         fun bind(carePlan: CarePlan) {
-            patientName.text = carePlan.patientId
-            title.text = carePlan.title
-            assignedNurse.text = carePlan.assignedNurse
-            status.text = carePlan.status
+            patientName.text = carePlan.patientId ?: "Unknown Patient"
+            title.text = carePlan.title ?: "Untitled"
+            assignedNurse.text = carePlan.assignedNurse ?: "Unassigned"
+            status.text = "Status: ${carePlan.status ?: "Pending"}"
             progressBar.progress = carePlan.completionRate
         }
+
     }
 }

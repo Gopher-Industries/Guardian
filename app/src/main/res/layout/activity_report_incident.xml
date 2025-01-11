@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.general.ReportIncidentActivity">
+
+    <!-- Header Section with Blue Background and Gopher Logo -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/headerCard"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/TG_blue"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Gopher Logo -->
+            <ImageView
+                android:id="@+id/gopherLogo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/gopher_logo"
+                android:contentDescription="Gopher Logo"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp" />
+
+            <!-- Page Title -->
+            <TextView
+                android:id="@+id/headerTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Report Incident"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/gopherLogo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Input Fields and Buttons -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/headerCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Incident Title Input -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Incident Title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp" />
+
+            <EditText
+                android:id="@+id/inputIncidentTitle"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Enter incident title"
+                android:background="@drawable/input_background"
+                android:padding="12dp"
+                android:layout_marginTop="4dp" />
+
+            <!-- Incident Description Input -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Incident Description"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/inputIncidentDescription"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:hint="Enter incident description"
+                android:background="@drawable/input_background"
+                android:padding="12dp"
+                android:layout_marginTop="4dp"
+                android:gravity="top" />
+
+            <!-- Incident Date Input -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Incident Date"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/inputIncidentDate"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Enter incident date"
+                android:background="@drawable/input_background"
+                android:padding="12dp"
+                android:layout_marginTop="4dp" />
+
+            <!-- Location Input -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Location"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp" />
+
+            <EditText
+                android:id="@+id/inputIncidentLocation"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Enter location"
+                android:background="@drawable/input_background"
+                android:padding="12dp"
+                android:layout_marginTop="4dp" />
+
+            <!-- Submit Button -->
+            <Button
+                android:id="@+id/buttonSubmitIncident"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit Incident"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/TG_blue"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

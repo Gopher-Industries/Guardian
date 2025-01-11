@@ -557,6 +557,13 @@
         <item>2027</item>
         <item>2028</item>
     </string-array>
+
+    <string-array name="priority_levels">
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+    </string-array>
+
     <string name="title_activity_add_heart_rate">AddHeartRate</string>
     <string name="title_activity_heart_rate">HeartRateActivity</string>
     <string name="heart_rate_date_and_time">Date and Time</string>

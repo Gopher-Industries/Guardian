@@ -184,9 +184,16 @@
         <activity android:name="deakin.gopher.guardian.view.general.NurseRosterActivity" />
 
         <activity android:name=".view.general.HealthDataActivity" />
-        <activity android:name=".view.general.CarePlanActivity" />
         <activity android:name=".view.general.TaskHistoryActivity" />
         <activity android:name=".view.general.NotificationsActivity" />
+
+        <activity android:name=".view.general.AddTaskActivity" />
+        <activity android:name=".view.general.AddNoteActivity" />
+        <activity android:name=".view.general.ReportIncidentActivity" />
+        <activity android:name=".view.general.AddMedicalHistoryActivity" />
+        <activity android:name=".view.admin.AdminCarePlanManagementActivity" />
+        <activity android:name=".view.patient.careplan.CarePlanActivity" />
+
 
 
 
