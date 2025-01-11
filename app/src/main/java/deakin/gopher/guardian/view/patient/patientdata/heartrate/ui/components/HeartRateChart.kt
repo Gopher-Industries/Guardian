@@ -47,15 +47,15 @@ fun HeartRateChart(heartRates: List<HeartRate>) {
             lineColor = customLineColor,
             lineThicknessDp = 1.0F,
             lineBackgroundShader =
-                DynamicShaders.fromBrush(
-                    brush =
-                        Brush.verticalGradient(
-                            listOf(
-                                Color(customLineColor),
-                                Color.White,
-                            ),
-                        ),
+            DynamicShaders.fromBrush(
+                brush =
+                Brush.verticalGradient(
+                    listOf(
+                        Color(customLineColor),
+                        Color.White,
+                    ),
                 ),
+            ),
         ),
     )
 

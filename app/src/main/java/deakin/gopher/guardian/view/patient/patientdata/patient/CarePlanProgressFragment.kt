@@ -16,10 +16,7 @@ class CarePlanProgressFragment : Fragment() {
     private lateinit var carePlanProgressAdapter: CarePlanProgressAdapter
     private val progressList = mutableListOf<String>() // Replace with actual care plan progress data
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_care_plan_progress, container, false)
         carePlanProgressRecyclerView = rootView.findViewById(R.id.recycler_view_care_plan_progress)

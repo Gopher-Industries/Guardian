@@ -4,7 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.security.keystore.UserNotAuthenticatedException
 import com.google.gson.Gson
-import deakin.gopher.guardian.model.register.User
+import deakin.gopher.guardian.model.User
+
 import java.lang.reflect.Type
 
 object SessionManager {
@@ -22,10 +23,7 @@ object SessionManager {
         editor = pref.edit()
     }
 
-    fun createLoginSession(
-        user: User,
-        token: String,
-    ) {
+    fun createLoginSession(user: User, token: String) {
         setCurrentUser(user)
         setObject(KEY_TOKEN, token)
         editor.putBoolean(IS_LOGIN, true)
@@ -77,18 +75,12 @@ object SessionManager {
         return pref.getLong(KEY_LAST_ACTIVE_TIME, 0)
     }
 
-    private fun setObject(
-        key: String,
-        `object`: Any?,
-    ) {
+    private fun setObject(key: String, `object`: Any?) {
         val objectJson = if (`object` != null) Gson().toJson(`object`) else null
         editor.putString(key, objectJson).apply()
     }
 
-    private fun <T> getObject(
-        key: String,
-        objectType: Type,
-    ): T? {
+    private fun <T> getObject(key: String, objectType: Type): T? {
         val objectJson = pref.getString(key, null)
         return if (objectJson != null) {
             Gson().fromJson(objectJson, objectType)
@@ -101,4 +93,3 @@ object SessionManager {
         editor.remove(key).apply()
     }
 }
-

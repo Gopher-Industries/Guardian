@@ -1,199 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="deakin.gopher.guardian.view.patient.patientdata.patient.PatientProfileFragment"
-        tools:layout_editor_absoluteY="200dp">
-
-    <!-- Background ImageView -->
-    <ImageView
-            android:id="@+id/backgroundImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="TODO"
-            android:src="@drawable/background_logo" />
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <LinearLayout
-            android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Top Navigation Bar -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:background="#2196F3"
+            android:padding="16dp">
 
-
-        <TextView
-                android:id="@+id/FirstName"
-                android:layout_width="133dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/first_name"
-                android:textColor="@color/black"
-                android:textSize="16sp"
+            <!-- Back Arrow -->
+            <ImageView
+                android:id="@+id/backArrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/left_arrow_icon"
+                android:contentDescription="@string/back_arrow_description"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
-
-        <TextView
-                android:id="@+id/txtFirstName"
-                android:layout_width="365dp"
-                android:layout_height="wrap_content"
+            <!-- Menu Icon -->
+            <ImageView
+                android:id="@+id/menuIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_menu"
+                android:contentDescription="@string/menu_icon_description"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp"
-                android:text="Hello"
+                app:layout_constraintStart_toEndOf="@id/backArrow"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <!-- Logo -->
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/gopher_logo"
+                android:contentDescription="@string/logo_description"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                android:background="@android:color/white"/>
 
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E5E5E5" />
-
-        <TextView
-                android:id="@+id/MiddleName"
-                android:layout_width="250dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/middle_name"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/carePlanSummary" />
-
-        <TextView
-                android:id="@+id/txtMiddleName"
-                android:layout_width="365dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E5E5E5" />
-
-        <TextView
-                android:id="@+id/LastName"
-                android:layout_width="250dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/last_name"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nutritionHydrationSummary" />
-
-
-        <TextView
-                android:id="@+id/txtLastName"
-                android:layout_width="365dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp"
-                android:inputType="textMultiLine"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E5E5E5" />
-
-        <TextView
-                android:id="@+id/DateOfBirth"
-                android:layout_width="250dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/date_of_birth"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/supportReqSummary" />
-
-        <TextView
-                android:id="@+id/txtDateOfBirth"
-                android:layout_width="365dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dateOfBirth" />
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E5E5E5" />
-
-        <TextView
-                android:id="@+id/medicareNumber"
-                android:layout_width="133dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/medicare_no"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dietTimingSummary" />
-
-        <TextView
-                android:id="@+id/txtMedicareNumber"
-                android:layout_width="365dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp"
-                android:inputType="textMultiLine"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView131" />
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E5E5E5" />
-
-        <TextView
-                android:id="@+id/WesternAffairsNumber"
+            <!-- Title -->
+            <TextView
+                android:id="@+id/headerTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/western_affairs_no"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/drinkLikesSummary" />
-
-        <TextView
-                android:id="@+id/txtWesternAffairsNumber"
-                android:layout_width="365dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp"
-                android:backgroundTint="#ECECEC"
+                android:text="@string/patient_health_data"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/logo"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView61" />
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp" />
 
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E5E5E5" />
+            <!-- Profile Picture -->
+            <ImageView
+                android:id="@+id/profilePicture"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/profile"
+                android:contentDescription="@string/profile_picture_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Tabs Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tabCurrent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/current_tab"
+                android:gravity="center"
+                android:background="@drawable/tab_selected"
+                android:padding="8dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"/>
+
+            <TextView
+                android:id="@+id/tabDaily"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/daily_tab"
+                android:gravity="center"
+                android:background="@drawable/tab_unselected"
+                android:padding="8dp"
+                android:textSize="16sp"
+                android:textColor="#E0E0E0"/>
+
+            <TextView
+                android:id="@+id/tabLast15Days"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/last_15_days_tab"
+                android:gravity="center"
+                android:background="@drawable/tab_unselected"
+                android:padding="8dp"
+                android:textSize="16sp"
+                android:textColor="#E0E0E0"/>
+        </LinearLayout>
+
+        <!-- Grid Section -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/gridMetrics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <!-- Row 1: Blood Pressure and Patient Temperature -->
+            <LinearLayout
+                android:id="@+id/layoutBloodPressure"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:background="@drawable/metric_card"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/imageBloodPressure"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/blood_pressure_graph"
+                    android:contentDescription="@string/blood_pressure_description" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutTemperature"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:background="@drawable/metric_card"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toEndOf="@id/layoutBloodPressure"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/imagePatientTemperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/patient_temperature_graph"
+                    android:contentDescription="@string/temperature_description" />
+            </LinearLayout>
+
+            <!-- Row 2: Glucose Level and Oxygen Saturation -->
+            <LinearLayout
+                android:id="@+id/layoutGlucoseLevel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:background="@drawable/metric_card"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layoutBloodPressure"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/imageGlucoseLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/glucose_level_graph"
+                    android:contentDescription="@string/glucose_level_description" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutOxygenSaturation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:background="@drawable/metric_card"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toEndOf="@id/layoutGlucoseLevel"
+                app:layout_constraintTop_toBottomOf="@id/layoutTemperature"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/imageOxygenSaturation"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/o2_saturation_graph"
+                    android:contentDescription="@string/oxygen_saturation_description" />
+            </LinearLayout>
+
+            <!-- Row 3: Pulse Rate and Respiration Rate -->
+            <LinearLayout
+                android:id="@+id/layoutPulseRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:background="@drawable/metric_card"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layoutGlucoseLevel"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/imagePulseRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/pulse_rate_graph"
+                    android:contentDescription="@string/pulse_rate_description" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutRespirationRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:background="@drawable/metric_card"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintStart_toEndOf="@id/layoutPulseRate"
+                app:layout_constraintTop_toBottomOf="@id/layoutOxygenSaturation"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/imageRespirationRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/respiration_rate_graph"
+                    android:contentDescription="@string/respiration_rate_description" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-</FrameLayout>
+</ScrollView>

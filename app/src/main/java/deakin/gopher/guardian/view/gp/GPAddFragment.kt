@@ -35,11 +35,7 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
     private var email: String? = null
     private var fax: String? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewPager2 = requireActivity().findViewById(R.id.dataForViewViewPager)
         val rootView = inflater.inflate(R.layout.fragment_gp_add, container, false)
 
@@ -234,10 +230,7 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
         }
     }
 
-    private fun setErrorAndReturn(
-        editText: EditText,
-        message: CharSequence,
-    ) {
+    private fun setErrorAndReturn(editText: EditText, message: CharSequence) {
         editText.error = message
     }
 

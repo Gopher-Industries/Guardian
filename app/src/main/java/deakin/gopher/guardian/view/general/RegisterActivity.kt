@@ -10,11 +10,12 @@ import androidx.core.view.isVisible
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.model.AuthResponse
+import deakin.gopher.guardian.model.RegisterRequest
 import deakin.gopher.guardian.model.RegistrationStatusMessage
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.Password
-import deakin.gopher.guardian.model.register.AuthResponse
-import deakin.gopher.guardian.model.register.RegisterRequest
+
 import deakin.gopher.guardian.model.register.RegistrationError
 import deakin.gopher.guardian.services.NavigationService
 import deakin.gopher.guardian.services.api.ApiClient
@@ -78,10 +79,7 @@ class RegisterActivity : BaseActivity() {
 
             call.enqueue(
                 object : Callback<AuthResponse> {
-                    override fun onResponse(
-                        call: Call<AuthResponse>,
-                        response: Response<AuthResponse>,
-                    ) {
+                    override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
                         progressBar.isVisible = false
                         if (response.isSuccessful) {
                             // Handle successful registration
@@ -97,10 +95,7 @@ class RegisterActivity : BaseActivity() {
                         }
                     }
 
-                    override fun onFailure(
-                        call: Call<AuthResponse>,
-                        t: Throwable,
-                    ) {
+                    override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
                         // Handle failure
                         progressBar.isVisible = false
                         showMessage(RegistrationStatusMessage.Failure.toString() + ": ${t.message}")
@@ -114,13 +109,7 @@ class RegisterActivity : BaseActivity() {
         }
     }
 
-    private fun validateInputs(
-        rawEmail: String?,
-        rawPassword: String?,
-        rawConfirmedPassword: String?,
-        rawName: String?,
-        roleInput: Int,
-    ): RegistrationError? {
+    private fun validateInputs(rawEmail: String?, rawPassword: String?, rawConfirmedPassword: String?, rawName: String?, roleInput: Int): RegistrationError? {
         if (rawEmail.isNullOrEmpty()) {
             return RegistrationError.EmptyEmail
         }

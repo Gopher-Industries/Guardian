@@ -38,11 +38,7 @@ class NoKAddFragment : Fragment {
         this.status = status
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewPager2 = requireActivity().findViewById(R.id.dataForViewViewPager)
         val rootView = inflater.inflate(R.layout.fragment_nok_add, container, false)
         val leftButton = rootView.findViewById<Button>(R.id.nok_add_polygon_left)
@@ -225,10 +221,7 @@ class NoKAddFragment : Fragment {
         return true
     }
 
-    private fun setErrorAndReturn(
-        editText: EditText?,
-        s: CharSequence,
-    ) {
+    private fun setErrorAndReturn(editText: EditText?, s: CharSequence) {
         editText!!.error = s
     }
 

@@ -6,91 +6,56 @@ enum class PatientStatus {
     NO_ASSISTANCE_REQUIRED,
 }
 
-class Patient {
-    @JvmField
-    var patientId: String? = null
-    var address: String? = null
-
-    @JvmField
-    var dob: String? = null
-    var patientName: String? = null
-    var phone: String? = null
-    var photo: String? = null
-    var underCare: String? = null
-
-    @JvmField
-    var firstName: String
-
-    @JvmField
-    var middleName: String? = null
-
-    @JvmField
-    var lastName: String
-
-    @JvmField
-    var medicareNo: String? = null
-
-    @JvmField
-    var westernAffairsNo: String? = null
-    var nokId1: String? = null
-    var nokId2: String? = null
-    var gpId1: String? = null
-    var gpId2: String? = null
-
-    @JvmField
-    var lastExaminedTimestamp: Long = 0
-
-    @JvmField
-    var needsAssistance: Boolean
-
-    @JvmField
-    var status: PatientStatus
-
-    @JvmField
-    var isArchived: Boolean = false
-
-    // New properties added
-    @JvmField
-    var healthData: Map<String, Any> = emptyMap()  // Health data for the patient
-    @JvmField
-    var taskHistory: List<String> = emptyList()  // List of tasks associated with the patient
-    @JvmField
-    var carePlanProgress: Map<String, Any> = emptyMap()  // Progress of the care plan
-
-    constructor(patientId: String?, firstName: String, lastName: String) {
-        this.patientId = patientId
-        this.firstName = firstName
-        this.lastName = lastName
-        status = PatientStatus.REQUIRES_ASSISTANCE
-        needsAssistance = true
-    }
-
-    // constructor for adding a patient
+class Patient(
+    var patientId: String? = null,
+    var address: String? = null,
+    var dob: String? = null,
+    var patientName: String? = null,
+    var phone: String? = null,
+    var photo: String? = null,
+    var underCare: String? = null,
+    var firstName: String = "",
+    var middleName: String? = null,
+    var lastName: String = "",
+    var medicareNo: String? = null,
+    var westernAffairsNo: String? = null,
+    var nokId1: String? = null,
+    var nokId2: String? = null,
+    var gpId1: String? = null,
+    var gpId2: String? = null,
+    var lastExaminedTimestamp: Long = 0,
+    var needsAssistance: Boolean = true,
+    var status: PatientStatus = PatientStatus.REQUIRES_ASSISTANCE,
+    var isArchived: Boolean = false,
+    var healthData: Map<String, Any> = emptyMap(),
+    var taskHistory: List<String> = emptyList(),
+    var carePlanProgress: Map<String, Any> = emptyMap()
+) {
     constructor(
-        dob: String?,
+        dateOfBirth: String,
         firstName: String,
-        middleName: String?,
+        middleName: String,
         lastName: String,
-        medicareNo: String?,
-        westernAffairsNo: String?,
-        nokId1: String?,
-        nokId2: String?,
-        gpId1: String?,
-        gpId2: String?,
-    ) {
-        this.dob = dob
+        medicareNo: String,
+        westernAffairsNo: String,
+        o: String,
+        o1: String,
+        o2: String,
+        o3: String
+    ) : this() {
+        this.dob = dateOfBirth
         this.firstName = firstName
         this.middleName = middleName
         this.lastName = lastName
         this.medicareNo = medicareNo
         this.westernAffairsNo = westernAffairsNo
-        this.nokId1 = nokId1
-        this.nokId2 = nokId2
-        this.gpId1 = gpId1
-        this.gpId2 = gpId2
-        status = PatientStatus.REQUIRES_ASSISTANCE
-        needsAssistance = true
+        this.nokId1 = o
+        this.nokId2 = o1
+        this.gpId1 = o2
+        this.gpId2 = o3
+
     }
+
 
     fun archivePatient() {
         isArchived = true
@@ -101,27 +66,11 @@ class Patient {
     }
 
     private fun getIsArchived(): String {
-        return if (isArchived) {
-            "True"
-        } else {
-            "False"
-        }
-    }
-
-    fun getFirstName(): String {
-        return this.firstName
-    }
-
-    fun getLastName(): String {
-        return this.lastName
-    }
-
-    fun getPatientId(): String? {
-        return this.patientId
+        return if (isArchived) "True" else "False"
     }
 
     fun examinePatient() {
-        if (PatientStatus.REQUIRES_ASSISTANCE == status) {
+        if (status == PatientStatus.REQUIRES_ASSISTANCE) {
             status = PatientStatus.NO_ASSISTANCE_REQUIRED
             needsAssistance = false
         }
@@ -129,43 +78,20 @@ class Patient {
 
     override fun toString(): String {
         return (
-            "Patient{" +
-                "address='" +
-                address +
-                '\'' +
-                ", dob='" +
-                dob +
-                '\'' +
-                ", patient_name='" +
-                patientName +
-                '\'' +
-                ", phone='" +
-                phone +
-                '\'' +
-                ", photo='" +
-                photo +
-                '\'' +
-                ", underCare='" +
-                underCare +
-                '\'' +
-                ", first_name='" +
-                firstName +
-                '\'' +
-                ", middle_name='" +
-                middleName +
-                '\'' +
-                ", last_name='" +
-                lastName +
-                '\'' +
-                ", medicareNo='" +
-                medicareNo +
-                '\'' +
-                ", westernAffairNo='" +
-                westernAffairsNo +
-                '\'' +
-                ", isArchived='" +
-                getIsArchived() +
-                '}'
-        )
+                "Patient{" +
+                        "address='" + address + '\'' +
+                        ", dob='" + dob + '\'' +
+                        ", patient_name='" + patientName + '\'' +
+                        ", phone='" + phone + '\'' +
+                        ", photo='" + photo + '\'' +
+                        ", underCare='" + underCare + '\'' +
+                        ", first_name='" + firstName + '\'' +
+                        ", middle_name='" + middleName + '\'' +
+                        ", last_name='" + lastName + '\'' +
+                        ", medicareNo='" + medicareNo + '\'' +
+                        ", westernAffairNo='" + westernAffairsNo + '\'' +
+                        ", isArchived='" + getIsArchived() + '\'' +
+                        '}'
+                )
     }
 }

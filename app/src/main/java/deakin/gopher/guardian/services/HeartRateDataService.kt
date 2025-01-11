@@ -1,17 +1,20 @@
 package deakin.gopher.guardian.services
 
 import android.util.Log
+import com.google.firebase.firestore.FirebaseFirestore
 import deakin.gopher.guardian.model.health.HeartRate
 import java.util.Date
 import java.util.UUID
 
-class HeartRateDataService : FireStoreDataService() {
-    override val collectionName: String
+
+class HeartRateDataService  {
+     val collectionName: String
         get() = "heartRate"
-    override val dataServiceName: String
+     val dataServiceName: String
         get() = "HeartRateDataService"
 
     fun create(heartRate: HeartRate) {
+        val fireStore =FirebaseFirestore.getInstance()
         fireStore
             .collection(collectionName)
             .document(heartRate.heartRateId.toString())
@@ -32,9 +35,8 @@ class HeartRateDataService : FireStoreDataService() {
     }
 
     fun get(heartRateId: UUID): HeartRate? {
-        val result =
-            fireStore
-                .collection(collectionName)
+        val fireStore =FirebaseFirestore.getInstance()
+              val result=fireStore .collection(collectionName)
                 .document(heartRateId.toString())
                 .get()
 
@@ -55,3 +57,4 @@ class HeartRateDataService : FireStoreDataService() {
         }
     }
 }
+

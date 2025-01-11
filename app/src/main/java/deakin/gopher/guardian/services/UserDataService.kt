@@ -1,30 +1,39 @@
 package deakin.gopher.guardian.services
 
 import android.util.Log
+import deakin.gopher.guardian.model.AuthResponse
+import deakin.gopher.guardian.model.RegisterRequest
 
-class UserDataService : FireStoreDataService() {
-    val usersCollection = fireStore.collection(collectionName)
-    override val collectionName: String
-        get() = "users"
+import deakin.gopher.guardian.services.api.ApiClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-    override val dataServiceName: String
-        get() = "UserDataService"
+class UserDataService {
+    private val apiService = ApiClient.apiService
 
-    fun create(
-        userId: String,
-        email: String,
-    ) {
-        usersCollection.document(userId).set(
-            hashMapOf(
-                "userId" to userId,
-                "email" to email,
-            ),
+    fun create(userId: String, email: String, name: String, password: String, role: String) {
+        // Create a RegisterRequest object without including userId
+        val request = RegisterRequest(
+            email = email,
+            name = name,
+            password = password,
+            role = role,
         )
-            .addOnSuccessListener {
-                Log.v(dataServiceName, "Created User $userId")
+
+        apiService.register(request).enqueue(object : Callback<AuthResponse> {
+            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+                if (response.isSuccessful) {
+                    // Log the userId for debugging, even though it's not part of the request
+                    Log.v("UserDataService", "Created User $userId successfully: ${response.body()}")
+                } else {
+                    Log.e("UserDataService", "Failed to create user $userId: ${response.errorBody()?.string()}")
+                }
             }
-            .addOnFailureListener { e ->
-                Log.e(dataServiceName, "Failed to create user $userId: $e")
+
+            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+                Log.e("UserDataService", "API call failed for userId $userId: $t")
             }
+        })
     }
 }

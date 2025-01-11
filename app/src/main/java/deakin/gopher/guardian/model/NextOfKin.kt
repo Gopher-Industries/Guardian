@@ -58,6 +58,6 @@ data class NextOfKin(
                 photo +
                 '\'' +
                 '}'
-        )
+            )
     }
 }

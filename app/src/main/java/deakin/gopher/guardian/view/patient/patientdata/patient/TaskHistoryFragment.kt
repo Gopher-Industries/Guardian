@@ -16,10 +16,7 @@ class TaskHistoryFragment : Fragment() {
     private lateinit var taskHistoryAdapter: TaskHistoryAdapter
     private val taskList = mutableListOf<String>() // Replace with your data model if needed
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_task_history, container, false)
         taskHistoryRecyclerView = rootView.findViewById(R.id.recycler_view_task_history)

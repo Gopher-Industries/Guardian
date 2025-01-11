@@ -10,8 +10,8 @@ class MedicalDiagnosticsViewPagerAdapter(
     private val patientId: String,
     private val parentFragment: MedicalDiagnosticsFragment,
 ) : FragmentStateAdapter(
-        parentFragment,
-    ) {
+    parentFragment,
+) {
     override fun createFragment(position: Int): Fragment {
         if (position == 0) {
             val currentFragment = CurrentMedicalDiagnosticsFragment(patientId)

@@ -19,20 +19,14 @@ class TaskListAdapter(private var tasks: MutableList<Task>) :
         Log.d("TaskListAdapter", "Task Data Size: ${tasks.size}")
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): TaskViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val view =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.task_list_item, parent, false)
         return TaskViewHolder(view)
     }
 
-    override fun onBindViewHolder(
-        holder: TaskViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bind(tasks[position])
     }
 

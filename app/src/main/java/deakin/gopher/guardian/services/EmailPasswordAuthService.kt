@@ -2,46 +2,38 @@ package deakin.gopher.guardian.services
 
 import android.content.Context
 import android.content.Intent
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.Password
 import deakin.gopher.guardian.model.login.SessionManager
+import deakin.gopher.guardian.services.api.ApiClient
+import deakin.gopher.guardian.services.api.ApiService
+
 import deakin.gopher.guardian.view.general.LoginActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import retrofit2.Response
 
 class EmailPasswordAuthService(
     private val emailAddress: EmailAddress,
     private val password: Password,
 ) {
-    private val auth = FirebaseAuth.getInstance()
-    private val userDataService = UserDataService()
+    private val apiService: ApiService =ApiClient.apiService
 
-    fun signIn(): Task<AuthResult>? {
+    suspend fun signIn(): Response<Any>? {
         return try {
-            auth.signInWithEmailAndPassword(emailAddress.emailAddress, password.password)
+            withContext(Dispatchers.IO) {
+                apiService.signIn(emailAddress.emailAddress, password.password)
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             null
         }
     }
 
-    fun isUserVerified(): Boolean {
-        return auth.currentUser?.isEmailVerified ?: false
-    }
-
-    fun createAccount(): Task<AuthResult>? {
+    suspend fun createAccount(): Response<Any>? {
         return try {
-            val registerResult =
-                auth.createUserWithEmailAndPassword(emailAddress.emailAddress, password.password)
-
-            if (auth.currentUser == null) {
-                registerResult
-            } else {
-                val currentUser = auth.currentUser!!
-                currentUser.sendEmailVerification()
-                userDataService.create(currentUser.uid, emailAddress.emailAddress)
-                registerResult
+            withContext(Dispatchers.IO) {
+                apiService.createAccount(emailAddress.emailAddress, password.password)
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -50,9 +42,12 @@ class EmailPasswordAuthService(
     }
 
     companion object {
-        fun resetPassword(emailAddress: EmailAddress): Task<Void>? {
+        suspend fun resetPassword(emailAddress: EmailAddress): Response<Any>? {
             return try {
-                FirebaseAuth.getInstance().sendPasswordResetEmail(emailAddress.emailAddress)
+                withContext(Dispatchers.IO) {
+                    ApiClient.apiService
+                        .resetPassword(emailAddress.emailAddress)
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
                 null
@@ -62,7 +57,7 @@ class EmailPasswordAuthService(
         fun signOut(context: Context) {
             try {
                 SessionManager.logoutUser()
-                FirebaseAuth.getInstance().signOut()
+                // Perform any backend logout logic if needed
                 context.startActivity(Intent(context, LoginActivity::class.java))
             } catch (e: Exception) {
                 e.printStackTrace()

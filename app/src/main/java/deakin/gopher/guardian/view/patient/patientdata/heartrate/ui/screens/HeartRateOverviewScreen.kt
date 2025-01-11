@@ -35,10 +35,7 @@ import deakin.gopher.guardian.view.theme.GuardianTheme
 @Suppress("ktlint:standard:function-naming")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HeartRateOverviewScreen(
-    heartRates: List<HeartRate>,
-    navController: NavController,
-) {
+fun HeartRateOverviewScreen(heartRates: List<HeartRate>, navController: NavController) {
     GuardianTheme {
         Scaffold(
             topBar = {
@@ -54,10 +51,10 @@ fun HeartRateOverviewScreen(
                         }
                     },
                     colors =
-                        topAppBarColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer,
-                            titleContentColor = MaterialTheme.colorScheme.primary,
-                        ),
+                    topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        titleContentColor = MaterialTheme.colorScheme.primary,
+                    ),
                 )
             },
             floatingActionButton = {
@@ -76,9 +73,9 @@ fun HeartRateOverviewScreen(
                     Text(
                         text = "Patient Average: ${heartRates.average()}",
                         modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 16.dp),
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp),
                         textAlign = TextAlign.Center,
                     )
                 }
@@ -86,9 +83,9 @@ fun HeartRateOverviewScreen(
         ) { innerPadding ->
             Column(
                 modifier =
-                    Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding),
+                Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
             ) {
                 HeartRateChart(heartRates = heartRates)
             }
@@ -108,3 +105,4 @@ fun HeartRateScreenPreview() {
     val navController = rememberNavController()
     HeartRateOverviewScreen(heartRates, navController)
 }
+

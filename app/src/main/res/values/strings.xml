@@ -645,5 +645,51 @@
         <item>Lisinopril</item>
     </string-array>
 
+    <string name="background_image_description">Background image description</string>
+    <string name="edit_button">Edit</string>
+    <string name="medical_diagnostics_tabs">Medical Diagnostics Tabs</string>
+    <string name="left_navigation_button">Previous</string>
+    <string name="right_navigation_button">Next</string>
+    <string name="enter_date_of_birth">Enter date of birth</string>
+    <string name="enter_phone_number">Enter phone number</string>
+    <string name="enter_email">Enter email</string>
+    <string name="metric_detail_image_description">Detailed metric visualization</string>
+        <!-- Existing strings -->
+
+        <!-- Strings for Patient Health Data -->
+        <string name="back_arrow_description">Navigate back</string>
+        <string name="menu_icon_description">Open menu</string>
+        <string name="logo_description">Gopher logo</string>
+       <string name="patient_health_data">Patient’s Health Data</string>
+        <string name="profile_picture_description">Profile picture of the user</string>
+        <string name="header_title">Patient’s Health Data</string>
+        <string name="current_tab">Current</string>
+        <string name="daily_tab">Daily</string>
+        <string name="last_15_days_tab">Last 15 Days</string>
+
+        <string name="blood_pressure_description">Blood Pressure Graph</string>
+        <string name="temperature_description">Patient Temperature Graph</string>
+        <string name="glucose_level_description">Glucose Level Graph</string>
+        <string name="oxygen_saturation_description">Oxygen Saturation Graph</string>
+        <string name="pulse_rate_description">Pulse Rate Graph</string>
+        <string name="respiration_rate_description">Respiration Rate Graph</string>
+
+        <!-- Titles for metric details -->
+        <string name="blood_pressure_title">Blood Pressure</string>
+        <string name="temperature_title">Patient Temperature</string>
+        <string name="glucose_level_title">Glucose Level</string>
+        <string name="oxygen_saturation_title">Oxygen Saturation</string>
+        <string name="pulse_rate_title">Pulse Rate</string>
+        <string name="respiration_rate_title">Respiration Rate</string>
+
+        <!-- Explanations for metric details -->
+        <string name="blood_pressure_explanation">This graph shows the blood pressure levels over time. Blood pressure indicates the force of blood against the walls of your arteries.</string>
+        <string name="temperature_explanation">This graph shows the patient’s body temperature trends. It helps monitor for fever or hypothermia.</string>
+        <string name="glucose_level_explanation">This graph represents the glucose levels in the patient’s blood, essential for managing diabetes or other conditions.</string>
+        <string name="oxygen_saturation_explanation">This graph displays oxygen saturation levels, which indicate how well oxygen is being distributed to the body.</string>
+        <string name="pulse_rate_explanation">This graph shows the patient’s heart rate, which reflects cardiovascular health and physical activity levels.</string>
+        <string name="respiration_rate_explanation">This graph tracks the patient’s respiration rate, showing the number of breaths taken per minute.</string>
+
+
 </resources>
 

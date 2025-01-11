@@ -10,7 +10,8 @@ import deakin.gopher.guardian.R
 class CarePlanProgressAdapter(private val progressList: List<String>) : RecyclerView.Adapter<CarePlanProgressAdapter.CarePlanProgressViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarePlanProgressViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_care_plan_progress, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_care_plan_progress, parent, false)
         return CarePlanProgressViewHolder(view)
     }
 

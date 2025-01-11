@@ -5,5 +5,5 @@ data class PatientHealthData(
     val heartRate: List<Float>,
     val glucoseLevel: List<Float>,
     val oxygenSaturation: List<Float>,
-    val respirationRate: List<Float>
+    val respirationRate: List<Float>,
 )

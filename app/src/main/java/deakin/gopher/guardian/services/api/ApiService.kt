@@ -1,35 +1,29 @@
 package deakin.gopher.guardian.services.api
 
-import deakin.gopher.guardian.model.BaseModel
-import deakin.gopher.guardian.model.register.AuthResponse
-import deakin.gopher.guardian.model.register.RegisterRequest
 import deakin.gopher.guardian.communication.Message
-import deakin.gopher.guardian.model.NextOfKin
-import deakin.gopher.guardian.model.GP
+import deakin.gopher.guardian.model.AuthResponse
+import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.Patient
-import deakin.gopher.guardian.model.MedicalDiagnostic
-import deakin.gopher.guardian.model.patientdata.healthdata.PatientHealthData
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+import deakin.gopher.guardian.model.RegisterRequest
+import deakin.gopher.guardian.model.Notification
+import deakin.gopher.guardian.model.MessageRequest
+import deakin.gopher.guardian.model.MessageResponse
+import deakin.gopher.guardian.model.CarePlan
+
 import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.Response
 import retrofit2.http.*
 
-import java.util.concurrent.TimeUnit
-
 interface ApiService {
-    // Authentication endpoints
+
+    // Authentication
     @POST("auth/register")
     fun register(@Body request: RegisterRequest): Call<AuthResponse>
 
     @FormUrlEncoded
     @POST("auth/login")
-    fun login(
-        @Field("email") email: String,
-        @Field("password") password: String
-    ): Call<AuthResponse>
+    fun login(@Field("email") email: String, @Field("password") password: String): Call<AuthResponse>
 
     @FormUrlEncoded
     @POST("auth/send-pin")
@@ -37,65 +31,58 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("auth/verify-pin")
-    fun verifyPin(
-        @Field("email") email: String,
-        @Field("otp") pin: String
-    ): Call<BaseModel>
+    fun verifyPin(@Field("email") email: String, @Field("otp") pin: String): Call<BaseModel>
 
     @FormUrlEncoded
     @POST("auth/reset-password-request")
     fun requestPasswordReset(@Field("email") email: String): Call<BaseModel>
 
-    // CRUD operations for patients
-    @DELETE("patients/{Id}")
-    fun deletePatient(@Path("Id") patientId: String): Call<ResponseBody>
+    @POST("auth/signin")
+    suspend fun signIn(@Field("email") email: String, @Field("password") password: String): Response<Any>
 
-    @POST("patients")
-    fun createPatient(@Body patient: Patient): Call<Void>
+    @POST("auth/signup")
+    suspend fun createAccount(@Field("email") email: String, @Field("password") password: String): Response<Any>
 
-    // Fetch health data for a specific patient
-    @GET("patients/{id}/healthdata")
-    fun getPatientHealthData(@Path("id") patientId: String): Call<PatientHealthData>
+    @POST("auth/reset-password")
+    suspend fun resetPassword(@Field("email") email: String): Response<Any>
 
-    // Next of Kin
-    @POST("nextofkin")
-    fun createNextOfKin(@Body nextOfKin: NextOfKin): Call<Void>
+    @POST("auth/googleSignIn")
+    fun googleSignIn(@Body idToken: String): Call<AuthResponse>
 
-    // GP
-    @POST("gp")
-    fun createGP(@Body gp: GP): Call<Void>
+    // Notifications
+    @GET("api/notifications")
+    fun getNotifications(): Call<List<Notification>>
 
-    // Medical Diagnostic
-    @POST("diagnostic")
-    fun createMedicalDiagnostic(@Body diagnostic: MedicalDiagnostic): Call<Void>
+    @POST("api/notifications/{id}/markRead")
+    fun markNotificationAsRead(@Path("id") notificationId: Int): Call<BaseModel>
 
-    // Messaging endpoints
-    @GET
-    fun getMessages(@Url url: String): Call<ResponseBody>
+    @DELETE("api/notifications/{id}")
+    fun deleteNotification(@Path("id") notificationId: Int): Call<BaseModel>
 
-    @POST
-    fun sendMessage(@Url url: String, @Body message: Message): Call<ResponseBody>
+    // Messaging
+    @POST("api/sendMessage")
+    fun sendMessage(@Body request: Message): Call<MessageResponse>
 
-    companion object {
-        private const val BASE_URL = "http://10.0.2.2:3000/api/v1"
+    // Patients (Existing Methods)
+    @GET("patients")
+    fun getPatients(): Call<List<Patient>>
 
-        fun create(): ApiService {
-            val loggingInterceptor = HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            }
+    @GET("patients/search")
+    fun searchPatients(@Query("query") query: String): Call<List<Patient>>
 
-            val client = OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .build()
+    @DELETE("patients/{id}")
+    fun deletePatient(@Path("id") patientId: String): Call<ResponseBody>
 
-            return Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(ApiService::class.java)
-        }
-    }
+    @GET("patients/{id}")
+    fun getPatient(@Path("id") patientId: String): Call<Patient>
+
+    @GET("careplans")
+    fun getCarePlans(): Call<List<CarePlan>>
+
+    @GET("api/getMessage")
+    fun getMessages():Call<List<Message>>
+
 }
+
+
+

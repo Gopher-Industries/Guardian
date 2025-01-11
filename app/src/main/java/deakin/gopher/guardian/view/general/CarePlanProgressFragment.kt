@@ -10,37 +10,31 @@ import androidx.recyclerview.widget.RecyclerView
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.adapter.CarePlanProgressAdapter
 
-class CarePlanProgressFragment(private val patientId: String) : Fragment() {
+class CarePlanProgressFragment : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: CarePlanProgressAdapter
+    private var patientId: String? = null
 
-    // Sample data for testing
-    private val progressList = listOf(
-        "Milestone 1: Completed",
-        "Milestone 2: In Progress",
-        "Milestone 3: Pending"
-    )
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        patientId = arguments?.getString("patientId")
+    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for Care Plan Progress
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_care_plan_progress, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize RecyclerView
-        recyclerView = view.findViewById(R.id.recycler_view_care_plan_progress)
+        val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view_care_plan_progress)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        // Set up adapter
-        adapter = CarePlanProgressAdapter(progressList) // Replace with actual data fetched using `patientId`
-        recyclerView.adapter = adapter
+        val progressList = listOf(
+            "Milestone 1: Completed",
+            "Milestone 2: In Progress",
+            "Milestone 3: Pending",
+        ) // Replace with actual API data using patientId
+
+        recyclerView.adapter = CarePlanProgressAdapter(progressList)
     }
 }
-

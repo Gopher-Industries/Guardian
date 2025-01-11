@@ -9,18 +9,12 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Medication
 
 class MedicationAdapter(private val medications: List<Medication>) : RecyclerView.Adapter<MedicationAdapter.MedicationViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): MedicationViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicationViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_medicine, parent, false)
         return MedicationViewHolder(view)
     }
 
-    override fun onBindViewHolder(
-        holder: MedicationViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: MedicationViewHolder, position: Int) {
         val medication = medications[position]
         holder.bind(medication)
     }

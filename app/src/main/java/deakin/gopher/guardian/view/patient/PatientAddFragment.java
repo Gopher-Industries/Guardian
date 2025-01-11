@@ -24,11 +24,11 @@ public class PatientAddFragment extends Fragment {
   private static final String ARG_PARAM1 = "param1";
   private static final String ARG_PARAM2 = "param2";
   private EditText first_name,
-      middle_name,
-      last_name,
-      date_of_birth,
-      medicare_no,
-      western_affairs_no;
+          middle_name,
+          last_name,
+          date_of_birth,
+          medicare_no,
+          western_affairs_no;
   private Patient patient;
   private DataListener dataListener;
   private String dateOfBirth = "";
@@ -56,7 +56,7 @@ public class PatientAddFragment extends Fragment {
   @SuppressLint({"MissingInflatedId", "NewApi"})
   @Override
   public View onCreateView(
-      final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+          final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     final View rootView = inflater.inflate(R.layout.fragment_patient_add, container, false);
     final Button next_button = rootView.findViewById(R.id.patient_add_NextButton);
@@ -74,58 +74,58 @@ public class PatientAddFragment extends Fragment {
     final Button step5_button = rootView.findViewById(R.id.step5);
 
     step2_button.setOnClickListener(
-        view -> {
-          if (dataChecker()) {
-            savePatient();
-            final int nextPage = viewPager2.getCurrentItem() + 1;
-            viewPager2.setCurrentItem(nextPage, true);
-          }
-        });
+            view -> {
+              if (dataChecker()) {
+                savePatient();
+                final int nextPage = viewPager2.getCurrentItem() + 1;
+                viewPager2.setCurrentItem(nextPage, true);
+              }
+            });
     step3_button.setOnClickListener(
-        view -> {
-          if (dataChecker()) {
-            savePatient();
-            final int nextPage = viewPager2.getCurrentItem() + 2;
-            viewPager2.setCurrentItem(nextPage, true);
-          }
-        });
+            view -> {
+              if (dataChecker()) {
+                savePatient();
+                final int nextPage = viewPager2.getCurrentItem() + 2;
+                viewPager2.setCurrentItem(nextPage, true);
+              }
+            });
     step4_button.setOnClickListener(
-        view -> {
-          if (dataChecker()) {
-            savePatient();
-            final int nextPage = viewPager2.getCurrentItem() + 3;
-            viewPager2.setCurrentItem(nextPage, true);
-          }
-        });
+            view -> {
+              if (dataChecker()) {
+                savePatient();
+                final int nextPage = viewPager2.getCurrentItem() + 3;
+                viewPager2.setCurrentItem(nextPage, true);
+              }
+            });
     step5_button.setOnClickListener(
-        view -> {
-          if (dataChecker()) {
-            savePatient();
-            final int nextPage = viewPager2.getCurrentItem() + 4;
-            viewPager2.setCurrentItem(nextPage, true);
-          }
-        });
+            view -> {
+              if (dataChecker()) {
+                savePatient();
+                final int nextPage = viewPager2.getCurrentItem() + 4;
+                viewPager2.setCurrentItem(nextPage, true);
+              }
+            });
 
     // step1
 
     next_button.setOnClickListener(
-        view -> {
-          if (dataChecker()) {
-            savePatient();
-            final int nextPage = viewPager2.getCurrentItem() + 1;
-            viewPager2.setCurrentItem(nextPage, true);
-          }
-        });
+            view -> {
+              if (dataChecker()) {
+                savePatient();
+                final int nextPage = viewPager2.getCurrentItem() + 1;
+                viewPager2.setCurrentItem(nextPage, true);
+              }
+            });
 
     viewPager2.registerOnPageChangeCallback(
-        new ViewPager2.OnPageChangeCallback() {
-          @Override
-          public void onPageSelected(final int position) {
-            super.onPageSelected(position);
-            // once scroll, save data
-            savePatient();
-          }
-        });
+            new ViewPager2.OnPageChangeCallback() {
+              @Override
+              public void onPageSelected(final int position) {
+                super.onPageSelected(position);
+                // once scroll, save data
+                savePatient();
+              }
+            });
 
     return rootView;
   }
@@ -140,11 +140,10 @@ public class PatientAddFragment extends Fragment {
 
     if (null == patient) {
       if (!TextUtils.isEmpty(firstName)
-          && !TextUtils.isEmpty(lastName)
-          && !TextUtils.isEmpty(dateOfBirth)
-          && !TextUtils.isEmpty(medicareNo)) {
-        patient =
-            new Patient(
+              && !TextUtils.isEmpty(lastName)
+              && !TextUtils.isEmpty(dateOfBirth)
+              && !TextUtils.isEmpty(medicareNo)) {
+        patient = new Patient(
                 dateOfBirth,
                 firstName,
                 middleName,
@@ -155,22 +154,26 @@ public class PatientAddFragment extends Fragment {
                 null,
                 null,
                 null);
+
+
+
+
       }
     } else {
-      patient.firstName = TextUtils.isEmpty(firstName) ? patient.firstName : firstName;
-      patient.middleName = TextUtils.isEmpty(middleName) ? patient.middleName : middleName;
-      patient.lastName = TextUtils.isEmpty(lastName) ? patient.lastName : lastName;
-      patient.medicareNo = TextUtils.isEmpty(medicareNo) ? patient.medicareNo : medicareNo;
-      patient.dob = TextUtils.isEmpty(dateOfBirth) ? patient.dob : dateOfBirth;
-      patient.westernAffairsNo =
-          TextUtils.isEmpty(westernAffairsNo) ? patient.westernAffairsNo : westernAffairsNo;
+      patient.setFirstName( TextUtils.isEmpty(firstName) ? patient.getFirstName() : firstName);
+      patient.setMiddleName(TextUtils.isEmpty(middleName) ? patient.getMiddleName() : middleName);
+      patient.setLastName(TextUtils.isEmpty(lastName) ? patient.getLastName() : lastName);
+      patient.setMiddleName(TextUtils.isEmpty(medicareNo) ? patient.getMedicareNo() : medicareNo);
+      patient.setDob( TextUtils.isEmpty(dateOfBirth) ? patient.getDob() : dateOfBirth);
+      patient.setWesternAffairsNo(
+              TextUtils.isEmpty(westernAffairsNo) ? patient.getWesternAffairsNo() : westernAffairsNo);
     }
 
     if (patient != null) {
       dataListener.onDataFilled(patient, null, null, null, null);
     } else {
       Toast.makeText(getContext(), "Please fill in the required fields.", Toast.LENGTH_SHORT)
-          .show();
+              .show();
     }
   }
 
@@ -214,3 +217,4 @@ public class PatientAddFragment extends Fragment {
     }
   }
 }
+

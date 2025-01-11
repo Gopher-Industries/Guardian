@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import deakin.gopher.guardian.view.general.CarePlanProgressFragment
 import deakin.gopher.guardian.view.general.HealthDataForViewFragment
+import deakin.gopher.guardian.view.general.TaskHistoryFragment
 import deakin.gopher.guardian.view.gp.GPProfileFragment
 import deakin.gopher.guardian.view.nextofkin.NextOfKinFragment
 import deakin.gopher.guardian.view.patient.careplan.CarePlanSummaryActivityFragment
@@ -17,29 +19,24 @@ class PatientProfileAdapter(
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle,
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
+
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> {
-                val fragment = PatientProfileFragment()
-                val bundle =
-                    Bundle().apply {
-                        putString("patientId", patientId)
-                    }
-                fragment.arguments = bundle
-                fragment
-            }
+            0 -> PatientProfileFragment()
             1 -> NextOfKinFragment()
             2 -> GPProfileFragment()
-            3 -> MedicalDiagnosticsFragment(patientId)
+            3 -> MedicalDiagnosticsFragment()
             4 -> HealthDataForViewFragment()
-            5 -> CarePlanSummaryActivityFragment(patientId)
-            6 -> TaskHistoryFragment(patientId) //new fragment for task history
-            7 -> CarePlanProgressFragment(patientId) //new fragment for care plan progess
+            5 -> CarePlanSummaryActivityFragment()
+            6 -> TaskHistoryFragment()
+            7 -> CarePlanProgressFragment()
             else -> HealthDataForViewFragment()
+        }.apply {
+            arguments = Bundle().apply { putString("patientId", patientId) }
         }
     }
 
     override fun getItemCount(): Int {
-        return 8 //updated to include the new fragments
+        return 8 // Total fragments
     }
 }

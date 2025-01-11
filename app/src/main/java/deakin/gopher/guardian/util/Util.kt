@@ -19,11 +19,7 @@ object Util {
     const val TOKENS = "tokens"
     const val DEVICE_TOKEN = "device_token"
 
-    fun updateDeviceToken(
-        context: Context?,
-        token: String,
-        username: String?,
-    ) {
+    fun updateDeviceToken(context: Context?, token: String, username: String?) {
         val rootRef = FirebaseDatabase.getInstance().reference // get root node of the firebase
         val databaseReference =
             rootRef.child(TOKENS).child(
@@ -40,10 +36,7 @@ object Util {
             }
     }
 
-    fun createToast(
-        context: Context?,
-        message: CharSequence?,
-    ) {
+    fun createToast(context: Context?, message: CharSequence?) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 

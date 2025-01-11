@@ -65,10 +65,7 @@ class PinCodeActivity : AppCompatActivity() {
         val call = ApiClient.apiService.sendPin(userEmail)
         call.enqueue(
             object : Callback<BaseModel> {
-                override fun onResponse(
-                    call: Call<BaseModel>,
-                    response: Response<BaseModel>,
-                ) {
+                override fun onResponse(call: Call<BaseModel>, response: Response<BaseModel>) {
                     progressBar.hide()
                     if (response.isSuccessful && response.body() != null) {
                         showMessage(response.body()!!.apiMessage ?: "Pin sent tou your email")
@@ -83,10 +80,7 @@ class PinCodeActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(
-                    call: Call<BaseModel>,
-                    t: Throwable,
-                ) {
+                override fun onFailure(call: Call<BaseModel>, t: Throwable) {
                     // Handle failure
                     progressBar.hide()
                     showMessage("Error sending PIN: ${t.message}")
@@ -99,10 +93,7 @@ class PinCodeActivity : AppCompatActivity() {
         val call = ApiClient.apiService.verifyPin(userEmail, pin)
         call.enqueue(
             object : Callback<BaseModel> {
-                override fun onResponse(
-                    call: Call<BaseModel>,
-                    response: Response<BaseModel>,
-                ) {
+                override fun onResponse(call: Call<BaseModel>, response: Response<BaseModel>) {
                     progressBar.hide()
                     if (response.isSuccessful && response.body() != null) {
                         showMessage(response.body()!!.apiMessage ?: "Pin verified successfully")
@@ -119,10 +110,7 @@ class PinCodeActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(
-                    call: Call<BaseModel>,
-                    t: Throwable,
-                ) {
+                override fun onFailure(call: Call<BaseModel>, t: Throwable) {
                     // Handle failure
                     progressBar.hide()
                     showMessage("Error validating PIN: ${t.message}")

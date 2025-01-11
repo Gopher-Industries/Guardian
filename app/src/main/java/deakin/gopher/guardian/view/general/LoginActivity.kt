@@ -3,6 +3,7 @@ package deakin.gopher.guardian.view.general
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -19,8 +20,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.gson.Gson
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.ApiErrorResponse
@@ -29,7 +28,9 @@ import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.LoginValidationError
 import deakin.gopher.guardian.model.login.RoleName
 import deakin.gopher.guardian.model.login.SessionManager
-import deakin.gopher.guardian.model.register.AuthResponse
+import deakin.gopher.guardian.model.User
+import deakin.gopher.guardian.model.AuthResponse
+import deakin.gopher.guardian.model.RegisterRequest
 import deakin.gopher.guardian.services.NavigationService
 import deakin.gopher.guardian.services.api.ApiClient
 import deakin.gopher.guardian.view.hide
@@ -45,6 +46,16 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        // Bypass login for testing
+        val isDebugMode = true // Set to false in production
+        if (isDebugMode) {
+            val intent = Intent(this, PatientListActivity::class.java)
+            startActivity(intent)
+            finish() // Close the LoginActivity
+            return
+        }
+
         val mEmail: EditText = findViewById(R.id.Email)
         val mPassword: EditText = findViewById(R.id.password)
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
@@ -54,29 +65,27 @@ class LoginActivity : BaseActivity() {
         val forgotTextLink: TextView = findViewById(R.id.forgotPassword)
         val loginRoleRadioGroup: RadioGroup = findViewById(R.id.login_role_radioGroup)
 
-        loginRoleRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+        loginRoleRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             val radioButton: RadioButton = findViewById(checkedId)
 
             // Set the user role based on the selected radio button
-            userRole =
-                when (checkedId) {
-                    R.id.admin_radioButton -> RoleName.Admin
-                    R.id.caretaker_radioButton -> RoleName.Caretaker
-                    R.id.nurse_radioButton -> RoleName.Nurse
-                    else -> RoleName.Caretaker
-                }
+            userRole = when (checkedId) {
+                R.id.admin_radioButton -> RoleName.Admin
+                R.id.caretaker_radioButton -> RoleName.Caretaker
+                R.id.nurse_radioButton -> RoleName.Nurse
+                else -> RoleName.Caretaker
+            }
         }
 
-        val gso =
-            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build()
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
         gsoClient = GoogleSignIn.getClient(this, gso)
 
         loginButton.setOnClickListener {
             progressBar.show()
-            val emailInput = mEmail.text.toString().trim { it <= ' ' }
-            val passwordInput = mPassword.text.toString().trim { it <= ' ' }
+            val emailInput = mEmail.text.toString().trim()
+            val passwordInput = mPassword.text.toString().trim()
 
             val loginValidationError = validateInputs(emailInput)
 
@@ -85,47 +94,40 @@ class LoginActivity : BaseActivity() {
                 Toast.makeText(
                     applicationContext,
                     loginValidationError.messageResoureId,
-                    Toast.LENGTH_LONG,
+                    Toast.LENGTH_LONG
                 ).show()
                 return@setOnClickListener
             }
 
             val call = ApiClient.apiService.login(emailInput, passwordInput)
 
-            call.enqueue(
-                object : Callback<AuthResponse> {
-                    override fun onResponse(
-                        call: Call<AuthResponse>,
-                        response: Response<AuthResponse>,
-                    ) {
-                        progressBar.hide()
-                        if (response.isSuccessful && response.body() != null) {
-                            // Handle successful login
-                            val user = response.body()!!.user
-                            val token = response.body()!!.token
+            call.enqueue(object : Callback<AuthResponse> {
+                override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+                    progressBar.hide()
+                    if (response.isSuccessful && response.body() != null) {
+                        val user = response.body()?.user
+                        val token = response.body()?.token
+                        if (user != null && token != null) {
                             SessionManager.createLoginSession(user, token)
-                            NavigationService(this@LoginActivity).toPinCodeActivity(userRole)
-                        } else {
-                            // Handle error
-                            val errorResponse =
-                                Gson().fromJson(
-                                    response.errorBody()?.string(),
-                                    ApiErrorResponse::class.java,
-                                )
-                            showMessage(errorResponse.apiError ?: response.message())
+                            val intent = Intent(this@LoginActivity, PatientListActivity::class.java)
+                            startActivity(intent)
+                            finish()
                         }
+                    } else {
+                        val errorResponse = Gson().fromJson(
+                            response.errorBody()?.string(),
+                            ApiErrorResponse::class.java
+                        )
+                        showMessage(errorResponse.apiError ?: response.message())
                     }
+                }
 
-                    override fun onFailure(
-                        call: Call<AuthResponse>,
-                        t: Throwable,
-                    ) {
-                        // Handle failure
-                        progressBar.hide()
-                        showMessage(getString(R.string.toast_login_error, t.message))
-                    }
-                },
-            )
+                override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+                    progressBar.hide()
+                    Log.e("Login", "API call failed: ${t.message}")
+                    showMessage(getString(R.string.toast_login_error, t.message))
+                }
+            })
         }
 
         mCreateBtn.setOnClickListener {
@@ -148,13 +150,13 @@ class LoginActivity : BaseActivity() {
             }
 
             passwordResetDialog.setPositiveButton(
-                getString(R.string.yes),
+                getString(R.string.yes)
             ) { _: DialogInterface?, _: Int ->
                 val mail = resetMail.text.toString()
                 sendResetPasswordEmail(mail)
             }
             passwordResetDialog.setNegativeButton(
-                getString(R.string.no),
+                getString(R.string.no)
             ) { _: DialogInterface?, _: Int -> }
             passwordResetDialog.create().show()
         }
@@ -177,42 +179,30 @@ class LoginActivity : BaseActivity() {
         val call = ApiClient.apiService.requestPasswordReset(userEmail)
         call.enqueue(
             object : Callback<BaseModel> {
-                override fun onResponse(
-                    call: Call<BaseModel>,
-                    response: Response<BaseModel>,
-                ) {
+                override fun onResponse(call: Call<BaseModel>, response: Response<BaseModel>) {
                     if (response.isSuccessful && response.body() != null) {
                         showMessage(
                             response.body()!!.apiMessage
-                                ?: getString(R.string.toast_reset_link_sent_to_your_email),
+                                ?: getString(R.string.toast_reset_link_sent_to_your_email)
                         )
                     } else {
-                        // Handle error
-                        val errorResponse =
-                            Gson().fromJson(
-                                response.errorBody()?.string(),
-                                ApiErrorResponse::class.java,
-                            )
+                        val errorResponse = Gson().fromJson(
+                            response.errorBody()?.string(),
+                            ApiErrorResponse::class.java
+                        )
                         showMessage(errorResponse.apiError ?: response.message())
                     }
                 }
 
-                override fun onFailure(
-                    call: Call<BaseModel>,
-                    t: Throwable,
-                ) {
+                override fun onFailure(call: Call<BaseModel>, t: Throwable) {
                     showMessage("Error sending password reset link: ${t.message}")
                 }
-            },
+            }
         )
     }
 
     @Deprecated("Deprecated in Java")
-    override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?,
-    ) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == RC_GOOGLE_SIGN_IN) {
@@ -224,14 +214,37 @@ class LoginActivity : BaseActivity() {
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
-            val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-            val auth = FirebaseAuth.getInstance()
-            auth.signInWithCredential(credential).addOnCompleteListener { authTask ->
-                if (authTask.isSuccessful) {
-                    NavigationService(this).toHomeScreenForRole(userRole)
-                } else {
-                    showMessage(getString(R.string.toast_login_error, authTask.exception?.message))
-                }
+            val idToken = account.idToken
+
+            if (idToken != null) {
+                val call = ApiClient.apiService.googleSignIn(idToken)
+
+                call.enqueue(object : Callback<AuthResponse> {
+                    override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+                        if (response.isSuccessful && response.body() != null) {
+                            val user = response.body()?.user
+                            val token = response.body()?.token
+                            if (user != null && token != null) {
+                                SessionManager.createLoginSession(user, token)
+                                val intent = Intent(this@LoginActivity, PatientListActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                        } else {
+                            val errorResponse = Gson().fromJson(
+                                response.errorBody()?.string(),
+                                ApiErrorResponse::class.java
+                            )
+                            showMessage(errorResponse.apiError ?: response.message())
+                        }
+                    }
+
+                    override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+                        showMessage(getString(R.string.toast_login_error, t.message))
+                    }
+                })
+            } else {
+                showMessage(getString(R.string.toast_login_error, "ID Token is null"))
             }
         } catch (e: ApiException) {
             showMessage(getString(R.string.toast_login_error, e.message))
@@ -246,3 +259,4 @@ class LoginActivity : BaseActivity() {
         private const val RC_GOOGLE_SIGN_IN = 1000
     }
 }
+

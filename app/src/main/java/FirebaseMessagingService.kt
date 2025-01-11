@@ -30,19 +30,13 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         createNotification(title, message)
     }
 
-    private fun createNotification(
-        title: String,
-        message: String,
-    ) {
+    private fun createNotification(title: String, message: String) {
         val notification = buildNotification(title, message)
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(NOTIFICATION_ID, notification)
     }
 
-    private fun buildNotification(
-        title: String,
-        message: String,
-    ): Notification {
+    private fun buildNotification(title: String, message: String): Notification {
         val intent = Intent(applicationContext, ActivitySuggestionActivity::class.java)
         val pendingIntent =
             PendingIntent.getActivity(
@@ -88,3 +82,4 @@ class FirebaseMessagingService : FirebaseMessagingService() {
         private const val NOTIFICATION_ID = 999
     }
 }
+

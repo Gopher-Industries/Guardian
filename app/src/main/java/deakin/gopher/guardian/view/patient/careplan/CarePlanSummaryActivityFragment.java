@@ -41,18 +41,26 @@ public class CarePlanSummaryActivityFragment extends Fragment {
 
   View view;
 
-  public CarePlanSummaryActivityFragment(final String patientId) {
-    this.patientId = patientId;
+  public static CarePlanSummaryActivityFragment newInstance(String patientId) {
+    CarePlanSummaryActivityFragment fragment = new CarePlanSummaryActivityFragment();
+    Bundle args = new Bundle();
+    args.putString("patientId", patientId);
+    fragment.setArguments(args);
+    return fragment;
   }
 
   @Nullable
   @Override
   public View onCreateView(
-      @NonNull LayoutInflater inflater,
-      @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
+          @NonNull LayoutInflater inflater,
+          @Nullable ViewGroup container,
+          @Nullable Bundle savedInstanceState) {
 
     view = inflater.inflate(R.layout.fragment_careplan_summary, container, false);
+
+    if (getArguments() != null) {
+      patientId = getArguments().getString("patientId");
+    }
 
     editButton = view.findViewById(R.id.save);
     carePlanSummaryTextView = view.findViewById(R.id.carePlanSummary);
@@ -67,16 +75,12 @@ public class CarePlanSummaryActivityFragment extends Fragment {
 
     // Set onClickListener for editButton
     editButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            // Open CarePlanActivity
-            final CarePlanActivity carePlanActivity = new CarePlanActivity();
-            final Intent intent = new Intent(getActivity(), carePlanActivity.getClass());
-            intent.putExtra("patientId", patientId);
-            startActivity(intent);
-          }
-        });
+            v -> {
+              // Open CarePlanActivity
+              Intent intent = new Intent(getActivity(), CarePlanActivity.class);
+              intent.putExtra("patientId", patientId);
+              startActivity(intent);
+            });
 
     // Firebase initialization
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -89,36 +93,36 @@ public class CarePlanSummaryActivityFragment extends Fragment {
   private void loadCarePlanDataForPatient(final String patientId) {
     DatabaseReference patientRef = carePlanRef.child(patientId);
     patientRef.addListenerForSingleValueEvent(
-        new ValueEventListener() {
-          @Override
-          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            if (dataSnapshot.exists()) {
-              CarePlan carePlan = dataSnapshot.getValue(CarePlan.class);
-              if (carePlan != null) {
-                carePlanSummaryTextView.setText(carePlan.carePlanType);
-                carePlanNutHyd.setText(carePlan.nutritionHydration);
-                suppReq.setText(carePlan.supportRequirement);
-                dietTime.setText(carePlan.dietTimings);
-                drinkLike.setText(carePlan.drinkLikings);
-                sleepPat.setText(carePlan.sleepPattern);
-                ratingBar.setRating((float) carePlan.painScore / 2);
-                behaveMng.setText(carePlan.behavioralManagement);
+            new ValueEventListener() {
+              @Override
+              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                  CarePlan carePlan = dataSnapshot.getValue(CarePlan.class);
+                  if (carePlan != null) {
+                    carePlanSummaryTextView.setText(carePlan.getCarePlanType());
+                    carePlanNutHyd.setText(carePlan.getNutritionHydration());
+                    suppReq.setText(carePlan.getSupportRequirement());
+                    dietTime.setText(carePlan.getDietTimings());
+                    drinkLike.setText(carePlan.getDrinkLikings());
+                    sleepPat.setText(carePlan.getSleepPattern());
+                    ratingBar.setRating((float) carePlan.getPainScore() / 2);
+                    behaveMng.setText(carePlan.getBehavioralManagement());
+                  }
+                } else {
+                  carePlanSummaryTextView.setText("Add new one");
+                  carePlanNutHyd.setVisibility(View.GONE);
+                  suppReq.setVisibility(View.GONE);
+                  dietTime.setVisibility(View.GONE);
+                  drinkLike.setVisibility(View.GONE);
+                  sleepPat.setVisibility(View.GONE);
+                }
               }
-            } else {
-              carePlanSummaryTextView.setText("Add new one");
-              carePlanNutHyd.setVisibility(View.GONE);
-              suppReq.setVisibility(View.GONE);
-              dietTime.setVisibility(View.GONE);
-              drinkLike.setVisibility(View.GONE);
-              sleepPat.setVisibility(View.GONE);
-            }
-          }
 
-          @Override
-          public void onCancelled(@NonNull DatabaseError error) {
-            // Handle error
-          }
-        });
+              @Override
+              public void onCancelled(@NonNull DatabaseError error) {
+                // Handle error
+              }
+            });
   }
 
   // Interface to notify data load status

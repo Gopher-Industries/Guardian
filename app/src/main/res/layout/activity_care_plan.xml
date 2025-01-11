@@ -18,11 +18,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- New Care Plan Title Added -->
+        <TextView
+            android:id="@+id/care_plan_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Care Plan"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/headerCard"
             android:layout_width="411dp"
             android:layout_height="149dp"
-            android:layout_marginTop="-20dp"
+            android:layout_marginTop="40dp"
             android:translationZ="-20dp"
             app:cardBackgroundColor="@color/TG_blue"
             app:cardCornerRadius="30dp"

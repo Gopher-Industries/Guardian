@@ -1,31 +1,23 @@
 package deakin.gopher.guardian.model
 
-class CarePlan { // Constructors, getters, and setters
-    @JvmField
-    var behavioralManagement: String? = null
+data class CarePlan(
+    // Existing fields
+    var behavioralManagement: String? = null,
+    var carePlanType: String? = null,
+    var dietTimings: String? = null,
+    var drinkLikings: String? = null,
+    var nutritionHydration: String? = null,
+    var painCategories: String? = null,
+    var painScore: Int = 0,
+    var patientId: String? = null,
+    var sleepPattern: String? = null,
+    var supportRequirement: String? = null,
 
-    @JvmField
-    var carePlanType: String? = null
+    // New fields for Care Plan List
+    var title: String? = null, // Title of the care plan
+    var assignedNurse: String? = null, // Nurse or caretaker assigned to the plan
+    var status: String? = null, // Status (e.g., "In Progress", "Completed")
+    var completionRate: Int = 0 // Percentage of completion
+)
 
-    @JvmField
-    var dietTimings: String? = null
 
-    @JvmField
-    var drinkLikings: String? = null
-
-    @JvmField
-    var nutritionHydration: String? = null
-
-    @JvmField
-    var painCategories: String? = null
-
-    @JvmField
-    var painScore: Int = 0
-    var patientId: String? = null
-
-    @JvmField
-    var sleepPattern: String? = null
-
-    @JvmField
-    var supportRequirement: String? = null
-}

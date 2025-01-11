@@ -8,21 +8,23 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import deakin.gopher.guardian.R
 
-class TaskHistoryFragment(private val patientId: String) : Fragment() {
+class TaskHistoryFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for Task History
+    private var patientId: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        patientId = arguments?.getString("patientId")
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_task_history, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Example: Set up RecyclerView
         val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view_task_history)
+        // Setup RecyclerView and Adapter using `patientId` if needed
     }
 }

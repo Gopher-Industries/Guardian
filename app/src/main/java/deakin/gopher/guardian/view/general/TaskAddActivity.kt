@@ -19,7 +19,7 @@ class TaskAddActivity : AppCompatActivity() {
     private lateinit var patientIdEditText: EditText
     private lateinit var taskSubDescEditText: EditText
     private lateinit var assignedNurseEditText: EditText
-    private lateinit var priorityRadioGroup: RadioGroup
+    //    private lateinit var priorityRadioGroup: RadioGroup
     private var taskPriority: Priority = Priority.MEDIUM
     private var task: Task? = null
 
@@ -31,12 +31,12 @@ class TaskAddActivity : AppCompatActivity() {
         taskSubDescEditText = findViewById(R.id.tasksubDescEditText)
         patientIdEditText = findViewById(R.id.taskPatientIdEditText)
 
-        priorityRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            taskPriority =
-                when (checkedId) {
-                    else -> Priority.MEDIUM
-                }
-        }
+//        priorityRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+//            taskPriority =
+//                when (checkedId) {
+//                    else -> Priority.MEDIUM
+//                }
+//        }
 
         val submitButton: Button = findViewById(R.id.newTaskSubmitButton)
         submitButton.setOnClickListener {

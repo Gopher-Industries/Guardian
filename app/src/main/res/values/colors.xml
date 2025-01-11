@@ -51,5 +51,7 @@
 
     <color name="blue">#2196F3</color>
 
+    <color name="tab_unselected_text">#9E9E9E</color>
+
 
 </resources>

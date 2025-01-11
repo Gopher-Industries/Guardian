@@ -46,10 +46,7 @@ class MedicationDetailsActivity : AppCompatActivity() {
         setupRecyclerView(recyclerViewEvening, eveningMedications)
     }
 
-    private fun setupRecyclerView(
-        recyclerView: RecyclerView,
-        medications: List<Medication>,
-    ) {
+    private fun setupRecyclerView(recyclerView: RecyclerView, medications: List<Medication>) {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = MedicationAdapter(medications)
     }

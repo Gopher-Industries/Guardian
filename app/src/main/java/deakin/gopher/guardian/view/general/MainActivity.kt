@@ -3,123 +3,155 @@ package deakin.gopher.guardian.view.general
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Switch
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.google.firebase.messaging.FirebaseMessaging
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.adapter.MessageAdapter
+import deakin.gopher.guardian.adapter.CarePlanAdapter
 import deakin.gopher.guardian.communication.Message
+import deakin.gopher.guardian.model.CarePlan
+import deakin.gopher.guardian.services.api.ApiClient
+import deakin.gopher.guardian.services.api.ApiService
 import deakin.gopher.guardian.model.login.SessionManager
-import java.text.SimpleDateFormat
-import java.util.*
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import deakin.gopher.guardian.model.MessageResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : BaseActivity() {
+    // Firebase variables (retained but not actively used)
+    private val db = FirebaseFirestore.getInstance()
+
+    // API variables for messages
     private lateinit var recyclerViewMessages: RecyclerView
     private lateinit var messageAdapter: MessageAdapter
     private val messageList = mutableListOf<Message>()
-    private lateinit var editTextMessage: EditText
-    private val db = FirebaseFirestore.getInstance()
+
+    // API variables for care plans
+    private lateinit var recyclerViewCarePlans: RecyclerView
+    private lateinit var carePlanAdapter: CarePlanAdapter
+    private val carePlanList = mutableListOf<CarePlan>()
+
+    // API clien
+    private val apiService: ApiService = ApiClient.apiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // API message setup
         recyclerViewMessages = findViewById(R.id.recyclerViewMessages)
-        editTextMessage = findViewById(R.id.editTextMessage)
+        setupMessageRecyclerView()
+        loadMessagesFromApi()
 
+        // API care plan setup
+        recyclerViewCarePlans = findViewById(R.id.recyclerViewCarePlans)
+        setupCarePlanRecyclerView()
+        loadCarePlansFromApi()
+
+        // Button click listeners
         findViewById<Button>(R.id.getStartedButton).setOnClickListener {
             onGetStartedClick()
         }
-
-        setupRecyclerView()
-        loadMessages()
-
         findViewById<Button>(R.id.buttonSend).setOnClickListener {
             sendMessage()
         }
-
         findViewById<Button>(R.id.btn_save_profile).setOnClickListener {
             saveProfile()
         }
-
         findViewById<Button>(R.id.btn_save_password).setOnClickListener {
             changePassword()
         }
-
         findViewById<Button>(R.id.btn_save_notifications).setOnClickListener {
             saveNotificationPreferences()
         }
     }
 
-    private fun setupRecyclerView() {
+    // API message setup
+    private fun setupMessageRecyclerView() {
         messageAdapter = MessageAdapter(messageList)
         recyclerViewMessages.layoutManager = LinearLayoutManager(this)
         recyclerViewMessages.adapter = messageAdapter
     }
 
-    private fun loadMessages() {
-        db.collection("messages")
-            .orderBy("timestamp", Query.Direction.ASCENDING)
-            .addSnapshotListener { querySnapshot, e ->
-                if (e != null) {
-                    Toast.makeText(this, "Error loading messages", Toast.LENGTH_SHORT).show()
-                    return@addSnapshotListener
+    private fun loadMessagesFromApi() {
+        apiService.getMessages().enqueue(object : Callback<List<Message>> {
+            override fun onResponse(call: Call<List<Message>>, response: Response<List<Message>>) {
+                if (response.isSuccessful && response.body() != null) {
+                    messageList.clear()
+                    messageList.addAll(response.body()!!)
+                    messageAdapter.notifyDataSetChanged()
+                } else {
+                    Toast.makeText(this@MainActivity, "Failed to load messages", Toast.LENGTH_SHORT).show()
                 }
-
-                messageList.clear()
-                querySnapshot?.forEach { document ->
-                    val sender = document.getString("senderId") ?: ""
-                    val receiver = document.getString("receiverId") ?: ""
-                    val messageContent = document.getString("messageContent") ?: ""
-                    val timestamp = document.getString("timestamp") ?: ""
-                    messageList.add(Message(sender, receiver, messageContent, timestamp))
-                }
-                messageAdapter.notifyDataSetChanged()
             }
+
+            override fun onFailure(call: Call<List<Message>>, t: Throwable) {
+                Log.e("MainActivity", "Error fetching messages: ${t.message}")
+                Toast.makeText(this@MainActivity, "Error fetching messages", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
+    // API care plan setup
+    private fun setupCarePlanRecyclerView() {
+        carePlanAdapter = CarePlanAdapter(carePlanList)
+        recyclerViewCarePlans.layoutManager = LinearLayoutManager(this)
+        recyclerViewCarePlans.adapter = carePlanAdapter
+    }
+
+    private fun loadCarePlansFromApi() {
+        apiService.getCarePlans().enqueue(object : Callback<List<CarePlan>> {
+            override fun onResponse(call: Call<List<CarePlan>>, response: Response<List<CarePlan>>) {
+                if (response.isSuccessful && response.body() != null) {
+                    carePlanList.clear()
+                    carePlanList.addAll(response.body()!!)
+                    carePlanAdapter.notifyDataSetChanged()
+                } else {
+                    Toast.makeText(this@MainActivity, "Failed to load care plans", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<CarePlan>>, t: Throwable) {
+                Log.e("MainActivity", "Error fetching care plans: ${t.message}")
+                Toast.makeText(this@MainActivity, "Error fetching care plans", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    // Send message via API
     private fun sendMessage() {
-        val messageContent = editTextMessage.text.toString().trim()
+        val messageContent = findViewById<EditText>(R.id.editTextMessage).text.toString().trim()
         if (messageContent.isNotEmpty()) {
-            val userId: String = SessionManager.getUserId() ?: return
+            val userId = SessionManager.getUserId() ?: return
+            val message = Message(senderId = userId, recipientUserId= "recipientUserId", messageContent = messageContent)
 
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-            val formattedDate = dateFormat.format(Date())
+            apiService.sendMessage(message).enqueue(object : Callback<MessageResponse> {
 
-            val message = Message(
-                senderId = userId,
-                recipientUserId = "recipientUserId",
-                content = messageContent,
-                date = formattedDate
-            )
+                override fun onResponse(p0: Call<MessageResponse>, response: Response<MessageResponse>) {
+                    if (response.isSuccessful) {
+                        findViewById<EditText>(R.id.editTextMessage).text.clear()
+                        loadMessagesFromApi()
+                        Toast.makeText(this@MainActivity, "Message sent successfully", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@MainActivity, "Failed to send message", Toast.LENGTH_SHORT).show()
+                    }
 
-            db.collection("messages")
-                .add(message)
-                .addOnSuccessListener {
-                    editTextMessage.text.clear()
-                    loadMessages()
                 }
-                .addOnFailureListener {
-                    Toast.makeText(this, "Error sending message", Toast.LENGTH_SHORT).show()
+
+                override fun onFailure(p0: Call<MessageResponse>, p1: Throwable) {
+                    Log.e("MainActivity", "Error sending message: ${p1.message}")
+                    Toast.makeText(this@MainActivity, "Error sending message", Toast.LENGTH_SHORT).show()
                 }
+            })
         } else {
             Toast.makeText(this, "Message cannot be empty", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun saveProfile() {
-        val name = findViewById<EditText>(R.id.et_name).text.toString()
-        val email = findViewById<EditText>(R.id.et_email).text.toString()
-        val phone = findViewById<EditText>(R.id.et_phone).text.toString()
-
-        if (name.isEmpty() || email.isEmpty() || phone.isEmpty()) {
-            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "Profile saved successfully!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -143,7 +175,25 @@ class MainActivity : BaseActivity() {
         Toast.makeText(this, "Notification preferences saved successfully!", Toast.LENGTH_SHORT).show()
     }
 
+    private fun saveProfile() {
+        val name = findViewById<EditText>(R.id.et_name).text.toString()
+        val email = findViewById<EditText>(R.id.et_email).text.toString()
+        val phone = findViewById<EditText>(R.id.et_phone).text.toString()
+
+        if (name.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Profile saved successfully!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun onGetStartedClick() {
-        startActivity(Intent(this, LoginActivity::class.java))
+        try {
+            val intent = Intent(this, PatientListActivity::class.java)
+            startActivity(intent)
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error navigating to PatientListActivity", e)
+            Toast.makeText(this, "Navigation Error: ${e.message}", Toast.LENGTH_LONG).show()
+        }
     }
 }
