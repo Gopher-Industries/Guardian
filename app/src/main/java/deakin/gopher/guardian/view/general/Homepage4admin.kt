@@ -3,8 +3,10 @@ package deakin.gopher.guardian.view.general
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.LinearLayout
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.services.EmailPasswordAuthService
+import deakin.gopher.guardian.view.admin.AdminCarePlanManagementActivity
 import deakin.gopher.guardian.view.patient.dailyreport.DailyReportActivity
 
 class Homepage4admin : BaseActivity() {
@@ -14,6 +16,7 @@ class Homepage4admin : BaseActivity() {
     private lateinit var settingsButton: Button
     private lateinit var signOutButton: Button
     private lateinit var nurseRosterButton: Button
+    private lateinit var settingsAdminButton: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +27,7 @@ class Homepage4admin : BaseActivity() {
         settingsButton = findViewById(R.id.settingsButton)
         signOutButton = findViewById(R.id.sighOutButton)
         nurseRosterButton = findViewById(R.id.nurseRoseterButton)
+        settingsAdminButton = findViewById(R.id.settingsAdminButton)
 
         // new Patient Button
         newPatientButton.setOnClickListener {
@@ -64,6 +68,11 @@ class Homepage4admin : BaseActivity() {
         nurseRosterButton.setOnClickListener {
             val nurseRosterActivityIntent =
                 Intent(this@Homepage4admin, NurseRosterActivity::class.java)
+            startActivity(nurseRosterActivityIntent)
+        }
+        settingsAdminButton.setOnClickListener {
+            val nurseRosterActivityIntent =
+                Intent(this@Homepage4admin, AdminCarePlanManagementActivity::class.java)
             startActivity(nurseRosterActivityIntent)
         }
     }

@@ -81,6 +81,43 @@ public class PatientListActivity extends BaseActivity {
 
         // Configure RecyclerView
         patientListAdapter = new PatientListAdapter(this, patientList, false);
+        findViewById(R.id.button_view_patient_1).setOnClickListener(v -> {
+
+
+            Intent intent =
+                    new Intent(
+                            this, PatientProfileActivity.class);
+
+
+
+
+            if (intent != null) {
+                startActivity(intent);
+
+            }
+        });
+        findViewById(R.id.button_view_patient_2).setOnClickListener(v -> {
+            Intent intent =
+                    new Intent(
+                            this, PatientProfileActivity.class);
+
+            if (intent != null) {
+                startActivity(intent);
+
+            }
+        });
+        findViewById(R.id.button_view_patient_3).setOnClickListener(v -> {
+            Intent intent =
+                    new Intent(
+                            this, PatientProfileActivity.class);
+
+
+
+
+            startActivity(intent);
+
+        });
+
         patient_list_recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         patient_list_recyclerView.setAdapter(patientListAdapter);
 

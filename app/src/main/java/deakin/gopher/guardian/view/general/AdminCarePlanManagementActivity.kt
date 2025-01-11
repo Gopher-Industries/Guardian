@@ -13,6 +13,7 @@ import deakin.gopher.guardian.adapter.CarePlanAdapter
 import deakin.gopher.guardian.model.CarePlan
 import deakin.gopher.guardian.services.api.ApiClient
 import deakin.gopher.guardian.services.api.ApiService
+import deakin.gopher.guardian.view.general.AddMedicalHistoryActivity
 import deakin.gopher.guardian.view.patient.careplan.CarePlanActivity
 import deakin.gopher.guardian.view.general.AddTaskActivity
 import deakin.gopher.guardian.view.general.AddNoteActivity
@@ -55,7 +56,7 @@ class AdminCarePlanManagementActivity : AppCompatActivity() {
         }
 
         findViewById<CardView>(R.id.iconMedicalHistory).setOnClickListener {
-            val intent = Intent(this, CarePlanActivity::class.java)
+            val intent = Intent(this, AddMedicalHistoryActivity::class.java)
             intent.putExtra("patientId", "samplePatientId") // Replace with actual patient ID
             startActivity(intent)
         }

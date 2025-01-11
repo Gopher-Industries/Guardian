@@ -83,6 +83,7 @@ class LoginActivity : BaseActivity() {
         gsoClient = GoogleSignIn.getClient(this, gso)
 
         loginButton.setOnClickListener {
+
             progressBar.show()
             val emailInput = mEmail.text.toString().trim()
             val passwordInput = mPassword.text.toString().trim()
@@ -259,4 +260,3 @@ class LoginActivity : BaseActivity() {
         private const val RC_GOOGLE_SIGN_IN = 1000
     }
 }
-

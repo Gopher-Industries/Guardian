@@ -189,7 +189,7 @@ class MainActivity : BaseActivity() {
 
     private fun onGetStartedClick() {
         try {
-            val intent = Intent(this, PatientListActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         } catch (e: Exception) {
             Log.e("MainActivity", "Error navigating to PatientListActivity", e)
@@ -197,3 +197,4 @@ class MainActivity : BaseActivity() {
         }
     }
 }
+

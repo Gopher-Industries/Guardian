@@ -192,10 +192,6 @@
         <activity android:name=".view.general.ReportIncidentActivity" />
         <activity android:name=".view.general.AddMedicalHistoryActivity" />
         <activity android:name=".view.admin.AdminCarePlanManagementActivity" />
-        <activity android:name=".view.patient.careplan.CarePlanActivity" />
-
-
-
 
         <!--
         <service

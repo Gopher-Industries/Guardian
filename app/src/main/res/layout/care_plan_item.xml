@@ -15,7 +15,7 @@
             android:id="@+id/patientName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="John Doe"
+            android:text="Patient Name: Daniel Steve"
             android:textStyle="bold"
             android:textSize="18sp" />
 
@@ -23,7 +23,7 @@
             android:id="@+id/carePlanTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Care Plan Title"
+            android:text="Care Plan : Post-Surgery Recovery"
             android:textSize="16sp" />
 
         <TextView
@@ -44,4 +44,5 @@
             android:layout_height="wrap_content"
             android:progress="70" />
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>
