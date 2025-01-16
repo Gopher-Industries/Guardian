@@ -647,6 +647,7 @@
     <string name="confirm_button_text">CONFIRM</string>
     <string name="add_a_note">ADD A NOTE:</string>
     <string name="yes_false_alert">Yes</string>
+    <string name="choose_a_module">Choose a Module</string>
     <string name="is_this_false_alert">IS THIS A FALSE ALERT?</string>
     <string name="do_you_confirm_the_fall">DO YOU CONFIRM THE FALL?</string>
     <string name="call">CALL</string>
