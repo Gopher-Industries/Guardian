@@ -12,6 +12,7 @@ import com.google.android.material.navigation.NavigationView
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.view.caretaker.CaretakerDashboardActivity
 import deakin.gopher.guardian.view.general.BaseActivity
+import deakin.gopher.guardian.view.general.Homepage4caretaker
 
 class FalseAlertConfirmedActivity : BaseActivity() {
     var falseAlertMenuButton: ImageView? = null
@@ -43,7 +44,7 @@ class FalseAlertConfirmedActivity : BaseActivity() {
         val okButtonFalseAlert = dialog.findViewById<Button>(R.id.okButtonFalseAlert)
         okButtonFalseAlert.setOnClickListener { v: View? ->
             val intent =
-                Intent(applicationContext, CaretakerDashboardActivity::class.java)
+                Intent(applicationContext, Homepage4caretaker::class.java)
             startActivity(intent)
             finish()
         }

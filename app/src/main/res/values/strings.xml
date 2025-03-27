@@ -45,9 +45,9 @@
 
 
     <!-- Below are all strings previously hardcoded added here using the quick function -->
-    <string name="confirm_incident_text"> ·   Lying in an unsual place. \n \n ·   Resembling sleeping behaviour in an unusual time \n \n      ·   <b>Usual bedtime</b>: 10:30pm - 6:30am \n \n      ·   <b>Recorder bedtime</b>: 10:30pm - 6:30am \n \n ·   No movement detected over 15 minutes</string>
-    <string name="confirm_incident_verified_by"><b>Incident verified by:</b> <font fgcolor="#FF0B98C5"> Georgia Blakeney</font></string>
-    <string name="false_alert_verified_by"><b>False alert verified by:</b> <font fgcolor="#FF0B98C5"> Georgia Blakeney</font></string>
+    <string name="confirm_incident_text">  ·   <b>Recorded Time</b>: 09:49 \n \n ·   Lying face down. \n \n             ·   No movement detected over 15 minutes</string>
+    <string name="confirm_incident_verified_by"><b>Incident verified by:</b> <font fgcolor="#FF0B98C5"> Jay Reece</font></string>
+    <string name="false_alert_verified_by"><b>False alert verified by:</b> <font fgcolor="#FF0B98C5"> Jay Reece</font></string>
 
     <string name="add_new_patient">Add new patient</string>
     <string name="name">Name</string>
@@ -136,11 +136,11 @@
     <string name="st_vincent_s_public_hospital_melbourne">St. Vincent\'s Public Hospital Melbourne</string>
     <string name="sign_out">Sign Out</string>
     <string name="confirm_incident">Confirm Incident</string>
+    <string name="confirm_false_alert">Confirm False Alert</string>
     <string name="alert">! Alert</string>
     <string name="recorded_time_09_49_am">Recorded time: 09:49 AM</string>
-    <string name="benjamin_hogan_is_seemingly_unconscious">Benjamin Hogan is seemingly unconscious</string>
-    <string name="verification_time_09_49_am">Verification time: 09:49 AM</string>
-    <string name="quick_message">Quick Message</string>
+    <string name="zoe_tang_took_a_fall">Zoe Tang had just taken a fall!</string>
+    <string name="verification_time_09_49_am">Verification time: 09:51 AM</string>
     <string name="provide_a_manual_input">Provide a Manual Input</string>
     <string name="add_your_input_here">Add your input here..</string>
     <string name="cancel">Cancel</string>
@@ -164,13 +164,13 @@
     <string name="patient_x_daily_report">Patient X Daily Report</string>
     <string name="current_status">Current Status</string>
     <string name="exclamation">!</string>
-    <string name="patient_benjamin_hogan">Patient : Benjamin Hogan</string>
+    <string name="patient_zoe_tang">Patient : Zoe Tang</string>
     <string name="no_movement_detected_over_15_minutes">· No movement detected over 15 minutes</string>
     <string name="usual_naptime_1_30pm_2_20pm">· Usual naptime: 1:30pm - 2:20pm</string>
     <string name="detected">Detected</string>
     <string name="lying_in_an_unsual_place">· Lying in an unsual place.</string>
-    <string name="resembling_sleeping_behaviour_in_an_unusual_time">· Resembling sleeping behaviour in an unusual time</string>
-    <string name="usual_bedtime_10_30pm_6_30am">· Usual bedtime: 10:30pm - 6:30am</string>
+    <string name="lying_face_down">· Lying face down.</string>
+    <string name="recorded_time">· <b>Recorded Time</b>: 09:49</string>
     <string name="provide_feedback">Provide Feedback</string>
     <string name="enter_your_feedback">Enter your feedback...</string>
     <string name="submit_feedback">Submit Feedback</string>
@@ -307,7 +307,7 @@
     <string name="last_15_days">Last 15 Days</string>
     <string name="abigail_lindeman_status">Abigail Lindeman ( Status: )</string>
     <string name="needs_follow_up">Needs follow up</string>
-    <string name="false_alert_noted_and_benjamin_s_activity_profile_has_been_updated_n_n_all_admins_have_been_notified">False Alert Noted And Benjamin\'s Activity Profile Has Been Updated \n \n All admins have been notified.</string>
+    <string name="false_alert_noted_and_zoe_s_activity_profile_has_been_updated_n_n_all_admins_have_been_notified">False Alert Noted And Zoe Tang\'s Activity Profile Has Been Updated \n \n All admins have been notified.</string>
     <string name="false_alert_confirmed">False Alert Confirmed!</string>
     <string name="user">User</string>
     <string name="address_colon">Address:</string>
@@ -640,6 +640,16 @@
     <string name="need_info">Need more info?</string>
     <string name="ask_doctor">Remember to always ask a doctor if you are unsure</string>
     <string name="need_more_info">Need more information about your medication?</string>
+    <string name="monitor_patient">Monitor a Patient</string>
+    <string name="patient_monitoring">Monitor Patient</string>
+    <string name="monitoring">MONITOR</string>
+    <string name="patient_benjamin_hogan">Benjamin Hogan</string>
+    <string name="confirm_button_text">CONFIRM</string>
+    <string name="add_a_note">ADD A NOTE:</string>
+    <string name="yes_false_alert">Yes</string>
+    <string name="is_this_false_alert">IS THIS A FALSE ALERT?</string>
+    <string name="do_you_confirm_the_fall">DO YOU CONFIRM THE FALL?</string>
+    <string name="call">CALL</string>
     <string-array name="dropdown_items">
         <item>Azithromycin</item>
         <item>Levothyroxine</item>
