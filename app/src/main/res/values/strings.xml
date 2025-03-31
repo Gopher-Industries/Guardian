@@ -4,6 +4,14 @@
     <string name="main_activity_solgan">Take care of your patients</string>
 
     <string name="web_client_id">274677794777-fu1sosmmrqm4bgvmkf76gdc3v430d03v.apps.googleusercontent.com</string>
+    <string name="submit_button_text">Submit</string>
+    <string name="task_description_hint">Task Description</string>
+    <string name="sub_description_hint">Sub Description</string>
+    <string name="assigned_nurse_hint">Assigned Nurse</string>
+    <string name="patient_id_hint">Patient ID</string>
+    <string name="high_priority">High Priority</string>
+    <string name="medium_priority">Medium Priority</string>
+    <string name="low_priority">Low Priority</string>
 
     <string name="ek_img_content">ExportKit Image</string>
     <string name="welcome__marilyn___string">Welcome, Marilyn !</string>
@@ -13,6 +21,7 @@
     <string name="edit_patient_data_string">Edit Patient Data</string>
     <string name="view_activity_data_string">View Activity Data</string>
     <string name="associate_radar_string">Associate Radar</string>
+
     <!-- TODO: Remove or change this placeholder text -->
 
     <string name="title_activity_test">TestActivity</string>

@@ -143,10 +143,10 @@
             android:exported="false" />
         <activity
             android:name=".view.general.RegisterActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".view.general.LoginActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity android:name=".view.general.PinCodeActivity"
             android:exported="false" />
         <activity
@@ -157,7 +157,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- These are here only for UI testing -->

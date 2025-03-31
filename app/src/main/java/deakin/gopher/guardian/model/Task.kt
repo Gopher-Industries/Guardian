@@ -1,16 +1,17 @@
 package deakin.gopher.guardian.model
 
+enum class Priority {
+    HIGH,
+    MEDIUM,
+    LOW,
+}
+
 data class Task(
     var taskId: String = "",
-    val description: String = "",
-    val assignedNurse: String = "",
-    val priority: Priority = Priority.MEDIUM,
-    val patientId: String? = "",
-    val completed: Boolean = false,
+    var description: String = "",
+    var assignedNurse: String = "",
+    var priority: Priority = Priority.MEDIUM,
+    var patientId: String = "",
+    var taskSubDesc: String = "",
+    var completed: Boolean = false,
 )
-
-enum class Priority {
-    LOW,
-    MEDIUM,
-    HIGH,
-}

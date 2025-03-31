@@ -69,16 +69,15 @@ class PinCodeActivity : AppCompatActivity() {
     private fun sendPin() {
         val call = ApiClient.apiService.sendPin(userEmail)
         call.enqueue(
-            object : Callback<BaseModel> {
+            object : Callback<BaseModel<Unit>> { // Specify <Unit> as the type argument
                 override fun onResponse(
-                    call: Call<BaseModel>,
-                    response: Response<BaseModel>,
+                    call: Call<BaseModel<Unit>>,
+                    response: Response<BaseModel<Unit>>,
                 ) {
                     progressBar.hide()
-                    if (response.isSuccessful && response.body() != null) {
-                        showMessage(response.body()!!.apiMessage ?: "Pin sent tou your email")
+                    if (response.isSuccessful) {
+                        showMessage("Pin sent to your email")
                     } else {
-                        // Handle error
                         val errorResponse =
                             Gson().fromJson(
                                 response.errorBody()?.string(),
@@ -89,10 +88,9 @@ class PinCodeActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(
-                    call: Call<BaseModel>,
+                    call: Call<BaseModel<Unit>>,
                     t: Throwable,
                 ) {
-                    // Handle failure
                     progressBar.hide()
                     showMessage("Error sending PIN: ${t.message}")
                 }
@@ -103,18 +101,17 @@ class PinCodeActivity : AppCompatActivity() {
     private fun validatePin(pin: String) {
         val call = ApiClient.apiService.verifyPin(userEmail, pin)
         call.enqueue(
-            object : Callback<BaseModel> {
+            object : Callback<BaseModel<Unit>> { // Specify <Unit> as the type argument
                 override fun onResponse(
-                    call: Call<BaseModel>,
-                    response: Response<BaseModel>,
+                    call: Call<BaseModel<Unit>>,
+                    response: Response<BaseModel<Unit>>,
                 ) {
                     progressBar.hide()
-                    if (response.isSuccessful && response.body() != null) {
-                        showMessage(response.body()!!.apiMessage ?: "Pin verified successfully")
+                    if (response.isSuccessful) {
+                        showMessage("Pin verified successfully")
                         NavigationService(this@PinCodeActivity).toHomeScreenForRole(userRole)
                         finish()
                     } else {
-                        // Handle error
                         val errorResponse =
                             Gson().fromJson(
                                 response.errorBody()?.string(),
@@ -125,10 +122,9 @@ class PinCodeActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(
-                    call: Call<BaseModel>,
+                    call: Call<BaseModel<Unit>>,
                     t: Throwable,
                 ) {
-                    // Handle failure
                     progressBar.hide()
                     showMessage("Error validating PIN: ${t.message}")
                 }

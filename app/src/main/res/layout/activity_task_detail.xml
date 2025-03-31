@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/patient_list_backgroud"
@@ -7,18 +8,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Back Button -->
+
+    <!-- Clear All Button -->
+
+    <!-- Head Image -->
+
     <Button
         android:id="@+id/task_detail_back_button"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="65dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="68dp"
         android:background="@drawable/back_arrow"
         android:backgroundTint="@color/white"
         android:contentDescription="TODO"
         android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/clear_all_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Clear All Tasks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/containerLayout" />
 
     <ImageView
         android:id="@+id/task_detail_head_image"
@@ -31,6 +50,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/profile_icon_small" />
 
+    <!-- Company Icon -->
     <ImageView
         android:id="@+id/task_detail_company_icon"
         android:layout_width="67dp"
@@ -42,6 +62,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/gopher_logo" />
 
+    <!-- Title -->
     <TextView
         android:id="@+id/task_detail_title"
         android:layout_width="wrap_content"
@@ -57,6 +78,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_detail_company_icon" />
 
+    <!-- Container Layout -->
     <LinearLayout
         android:id="@+id/containerLayout"
         android:layout_width="0dp"
@@ -65,7 +87,6 @@
         android:background="@drawable/dialog_bg2"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/buttons_container"
-        app:layout_constraintVertical_bias="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_detail_title">
@@ -101,7 +122,22 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <!-- Complete button -->
+    <!-- Edit Task Button -->
+
+    <!-- Buttons Container -->
+
+    <Button
+        android:id="@+id/task_button_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="20dp"
+        android:text="Edit Task"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/containerLayout" />
+
     <LinearLayout
         android:id="@+id/buttons_container"
         android:layout_width="0dp"
@@ -113,6 +149,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <!-- Mark Complete Button -->
         <Button
             android:id="@+id/task_button_mark_complete"
             android:layout_width="match_parent"
@@ -124,6 +161,7 @@
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
+        <!-- Mark Incomplete Button -->
         <Button
             android:id="@+id/task_button_mark_incomplete"
             android:layout_width="match_parent"
@@ -135,6 +173,7 @@
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
+        <!-- Delete Button -->
         <Button
             android:id="@+id/task_button_mark_delete"
             android:layout_width="match_parent"
@@ -146,6 +185,4 @@
             android:textColor="@android:color/white"
             android:textStyle="bold" />
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,18 +1,21 @@
 package deakin.gopher.guardian.view.general
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.firebase.database.FirebaseDatabase
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.Priority
 import deakin.gopher.guardian.model.Task
+import deakin.gopher.guardian.services.api.ApiClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class TaskAddActivity : AppCompatActivity() {
     private lateinit var taskDescriptionEditText: EditText
@@ -21,91 +24,120 @@ class TaskAddActivity : AppCompatActivity() {
     private lateinit var assignedNurseEditText: EditText
     private lateinit var priorityRadioGroup: RadioGroup
     private var taskPriority: Priority = Priority.MEDIUM
-    private var task: Task? = null
+    private var taskId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_add)
 
+        // Initialize views
         taskDescriptionEditText = findViewById(R.id.taskDescriptionEditText)
         taskSubDescEditText = findViewById(R.id.tasksubDescEditText)
         patientIdEditText = findViewById(R.id.taskPatientIdEditText)
+        assignedNurseEditText = findViewById(R.id.assignedNurseEditText)
+        priorityRadioGroup = findViewById(R.id.priorityRadioGroup)
 
+        // Handle editing existing task
+        taskId = intent.getStringExtra("taskId")
+        if (taskId != null) {
+            loadTaskForEditing(taskId!!)
+        }
+
+        // Handle priority changes
         priorityRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             taskPriority =
                 when (checkedId) {
+                    R.id.radio_high -> Priority.HIGH
+                    R.id.radio_low -> Priority.LOW
                     else -> Priority.MEDIUM
                 }
         }
 
-        val submitButton: Button = findViewById(R.id.newTaskSubmitButton)
-        submitButton.setOnClickListener {
+        // Save button click listener
+        findViewById<Button>(R.id.newTaskSubmitButton).setOnClickListener {
             showSaveDialog()
         }
+    }
 
-        val customHeader: CustomHeader = findViewById(R.id.taskCustomHeader)
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+    private fun loadTaskForEditing(taskId: String) {
+        ApiClient.apiService.getTaskById(taskId).enqueue(
+            object : Callback<BaseModel<Task>> {
+                override fun onResponse(
+                    call: Call<BaseModel<Task>>,
+                    response: Response<BaseModel<Task>>,
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.data?.let { task ->
+                            taskDescriptionEditText.setText(task.description)
+                            patientIdEditText.setText(task.patientId)
+                            taskSubDescEditText.setText(task.taskSubDesc)
+                            assignedNurseEditText.setText(task.assignedNurse)
+                            taskPriority = task.priority
+                        }
+                    } else {
+                        Toast.makeText(this@TaskAddActivity, "Failed to load task", Toast.LENGTH_SHORT).show()
+                    }
+                }
 
-        customHeader.setHeaderHeight(450)
-        customHeader.setHeaderText(getString(R.string.add_task))
-        customHeader.setHeaderTopImageVisibility(View.VISIBLE)
-        customHeader.setHeaderTopImage(R.drawable.add_image_button)
-
-        customHeader.menuButton.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
+                override fun onFailure(
+                    call: Call<BaseModel<Task>>,
+                    t: Throwable,
+                ) {
+                    Toast.makeText(this@TaskAddActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
+                }
+            },
+        )
     }
 
     private fun showSaveDialog() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle(getString(R.string.saving_changes))
-        builder.setPositiveButton(getString(R.string.yes)) { _, _ -> saveInFirebase() }
-        builder.setNegativeButton(getString(R.string.no), null)
-        val dialog = builder.create()
-        dialog.setOnShowListener {
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.colorGreen))
-            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.colorRed))
-        }
-        dialog.show()
+        AlertDialog.Builder(this)
+            .setTitle("Save Task")
+            .setPositiveButton("Yes") { _, _ -> saveTask() }
+            .setNegativeButton("No", null)
+            .create()
+            .show()
     }
 
-    private fun saveInFirebase() {
-        val databaseRef = FirebaseDatabase.getInstance().reference
-        val caretakerTaskRef = databaseRef.child("caretaker_tasks")
-
-        val patientId = patientIdEditText.text.toString().trim()
-        val taskDescription = taskDescriptionEditText.text.toString().trim()
-        val taskSubDesc = taskSubDescEditText.text.toString().trim()
-        val assignedNurse = assignedNurseEditText.text.toString().trim()
-
-        val newTask =
+    private fun saveTask() {
+        val task =
             Task(
-                taskId = "",
-                description = taskDescription,
-                assignedNurse = assignedNurse,
+                taskId = taskId ?: "",
+                description = taskDescriptionEditText.text.toString().trim(),
+                assignedNurse = assignedNurseEditText.text.toString().trim(),
                 priority = taskPriority,
-                patientId = patientId,
+                patientId = patientIdEditText.text.toString().trim(),
+                taskSubDesc = taskSubDescEditText.text.toString().trim(),
             )
 
-        val taskId = caretakerTaskRef.push().key ?: ""
-        newTask.taskId = taskId
-
-        caretakerTaskRef.child(taskId).setValue(newTask).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                updatePatientTasks(taskId)
-                finish()
+        val apiCall: Call<BaseModel<Task>> =
+            if (taskId != null) {
+                ApiClient.apiService.updateTask(taskId!!, task)
             } else {
-                // Handle the error
+                ApiClient.apiService.createTask(task)
             }
-        }
 
-        // Save under nurse tasks as well
-        val nurseTaskRef = databaseRef.child("nurse_tasks")
-        nurseTaskRef.child(taskId).setValue(newTask)
-    }
+        apiCall.enqueue(
+            object : Callback<BaseModel<Task>> {
+                override fun onResponse(
+                    call: Call<BaseModel<Task>>,
+                    response: Response<BaseModel<Task>>,
+                ) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@TaskAddActivity, "Task saved successfully", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this@TaskAddActivity, TasksListActivity::class.java))
+                        finish()
+                    } else {
+                        Toast.makeText(this@TaskAddActivity, "Failed to save task", Toast.LENGTH_SHORT).show()
+                    }
+                }
 
-    private fun updatePatientTasks(taskId: String) {
-        val patientTasksRef = FirebaseDatabase.getInstance().reference.child("patient_tasks")
-        patientTasksRef.child(taskId).setValue(true)
+                override fun onFailure(
+                    call: Call<BaseModel<Task>>,
+                    t: Throwable,
+                ) {
+                    Toast.makeText(this@TaskAddActivity, "Error: ${t.message}", Toast.LENGTH_LONG).show()
+                }
+            },
+        )
     }
 }
