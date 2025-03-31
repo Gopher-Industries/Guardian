@@ -6,7 +6,7 @@
 // import androidx.core.view.ViewCompat
 // import androidx.core.view.WindowInsetsCompat
 
-// class TrainingActivity : AppCompatActivity() {
+// class Training2 : AppCompatActivity() {
 //     override fun onCreate(savedInstanceState: Bundle?) {
 //         super.onCreate(savedInstanceState)
 //         enableEdgeToEdge()
@@ -29,14 +29,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 
-class TrainingActivity : AppCompatActivity() {
+class TrainingActivity2 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_training)
-
-        // Enable edge-to-edge layout
-        enableEdgeToEdge()
+        setContentView(R.layout.activity_training2)
 
         // Adjust padding for system bars
         findViewById<android.view.View>(R.id.main)?.let { mainView ->
@@ -52,31 +49,22 @@ class TrainingActivity : AppCompatActivity() {
             }
         }
 
-        // Initialize buttons
+        // Initialize buttons and set up click listeners
         val module1Button: Button = findViewById(R.id.module1Button)
         val module2Button: Button = findViewById(R.id.module2Button)
         val module3Button: Button = findViewById(R.id.module3Button)
 
-        // Set up click listeners
         module1Button.setOnClickListener {
-            showToast("Module 1 Selected")
+            showToast("Module 1 Started")
         }
 
         module2Button.setOnClickListener {
-            showToast("Module 2 Selected")
+            showToast("Module 2 Started")
         }
 
         module3Button.setOnClickListener {
-            showToast("Module 3 Selected")
+            showToast("Module 3 Started")
         }
-    }
-
-    /**
-     * Enables edge-to-edge layout for immersive experience.
-     */
-    private fun enableEdgeToEdge() {
-        window.decorView.systemUiVisibility =
-            android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE or android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
     }
 
     /**
