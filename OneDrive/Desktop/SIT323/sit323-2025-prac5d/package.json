@@ -1,0 +1,13 @@
+{
+    "name": "sit323-2025-prac5d",
+    "version": "1.0.0",
+    "description": "SIT323 5.2D task - Docker deployment",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "dependencies": {
+      "express": "^4.18.2"
+    }
+  }
+  
