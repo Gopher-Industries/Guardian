@@ -4,10 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import deakin.gopher.guardian.R
-import deakin.gopher.guardian.view.FallDetection.FallAlertActivity
-import deakin.gopher.guardian.view.FallDetection.FallDetectionActivity
+import deakin.gopher.guardian.view.falldetection.FallAlertActivity
+import deakin.gopher.guardian.view.falldetection.FallDetectionActivity
 import deakin.gopher.guardian.view.general.BaseActivity
-import deakin.gopher.guardian.view.general.PatientListActivity
 import deakin.gopher.guardian.view.general.PatientProfileActivity
 
 class CaretakerDashboardActivity : BaseActivity() {
@@ -27,7 +26,6 @@ class CaretakerDashboardActivity : BaseActivity() {
             Intent(this@CaretakerDashboardActivity, FallAlertActivity::class.java)
         startActivity(medicalDiagnosticsActivityIntent)
     }
-
 
     fun onMonitorPatientClick(view: View?) {
         val patientProfileListIntent =

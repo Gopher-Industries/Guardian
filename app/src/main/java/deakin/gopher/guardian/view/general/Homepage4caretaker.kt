@@ -7,8 +7,8 @@ import android.widget.Button
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.TrainingActivity
 import deakin.gopher.guardian.services.EmailPasswordAuthService
-import deakin.gopher.guardian.view.FallDetection.FallDetectionActivity
 import deakin.gopher.guardian.view.caretaker.CaretakerProfileActivity
+import deakin.gopher.guardian.view.falldetection.FallDetectionActivity
 
 class Homepage4caretaker : BaseActivity() {
     private lateinit var patientListButton: Button

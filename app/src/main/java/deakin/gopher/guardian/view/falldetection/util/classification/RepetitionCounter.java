@@ -1,8 +1,6 @@
-package deakin.gopher.guardian.view.FallDetection.util.classification;
+package deakin.gopher.guardian.view.falldetection.util.classification;
 
-/**
- * Counts reps for the give class.
- */
+/** Counts reps for the give class. */
 public class RepetitionCounter {
   // These thresholds can be tuned in conjunction with the Top K values in {@link PoseClassifier}.
   // The default Top K value is 10 so the range here is [0-10].
