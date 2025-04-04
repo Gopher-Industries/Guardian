@@ -6,7 +6,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="deakin.gopher.guardian.view.FallDetection.FallAlertActivity">
+    tools:context="deakin.gopher.guardian.view.falldetection.FallAlertActivity">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -156,7 +156,7 @@
             app:srcCompat="@drawable/outline_cancel_24" />
     </androidx.media3.ui.PlayerView>
 
-    <deakin.gopher.guardian.view.FallDetection.ui.GraphicOverlay
+    <deakin.gopher.guardian.view.falldetection.ui.GraphicOverlay
         android:id="@+id/graphic_overlay_video"
         app:layout_constraintTop_toBottomOf="@+id/imageView9"
         app:layout_constraintStart_toStartOf="parent"
