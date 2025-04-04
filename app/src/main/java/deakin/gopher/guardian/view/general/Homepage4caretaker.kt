@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import androidx.annotation.OptIn
+import androidx.media3.common.util.UnstableApi
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.TrainingActivity
 import deakin.gopher.guardian.services.EmailPasswordAuthService
@@ -67,9 +69,7 @@ class Homepage4caretaker : BaseActivity() {
         }
 
         monitorButton.setOnClickListener {
-            val fallDetectionActivityIntent =
-                Intent(this@Homepage4caretaker, FallDetectionActivity::class.java)
-            startActivity(fallDetectionActivityIntent)
+            startFallDetectionActivity()
         }
 
         // training button
@@ -78,5 +78,12 @@ class Homepage4caretaker : BaseActivity() {
                 Intent(this@Homepage4caretaker, TrainingActivity::class.java),
             )
         }
+    }
+
+    @OptIn(UnstableApi::class)
+    fun startFallDetectionActivity() {
+        val fallDetectionActivityIntent =
+            Intent(this@Homepage4caretaker, FallDetectionActivity::class.java)
+        startActivity(fallDetectionActivityIntent)
     }
 }

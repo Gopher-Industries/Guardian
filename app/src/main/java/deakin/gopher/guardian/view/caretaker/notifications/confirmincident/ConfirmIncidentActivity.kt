@@ -8,8 +8,10 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.Spinner
+import androidx.annotation.OptIn
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.media3.common.util.UnstableApi
 import com.google.android.material.navigation.NavigationView
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.view.falldetection.FallAlertActivity
@@ -67,6 +69,7 @@ class ConfirmIncidentActivity : BaseActivity() {
         )
     }
 
+    @OptIn(UnstableApi::class)
     fun onConfirmIncidentCancelClick(view: View?) {
         val medicalDiagnosticsActivityIntent =
             Intent(this@ConfirmIncidentActivity, FallAlertActivity::class.java)
