@@ -14,7 +14,7 @@ import com.google.gson.Gson
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.ApiErrorResponse
 import deakin.gopher.guardian.model.BaseModel
-import deakin.gopher.guardian.model.login.RoleName
+import deakin.gopher.guardian.model.login.Role
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.NavigationService
 import deakin.gopher.guardian.services.api.ApiClient
@@ -24,7 +24,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class PinCodeActivity : AppCompatActivity() {
-    private lateinit var userRole: RoleName
+    private lateinit var userRole: Role
     private val userEmail = SessionManager.getCurrentUser().email
 
     private lateinit var progressBar: ProgressBar
@@ -32,7 +32,7 @@ class PinCodeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_enter_pin)
-        userRole = intent.getSerializableExtra("role") as RoleName
+        userRole = intent.getSerializableExtra("role") as Role
 
         val pinDigit1 = findViewById<EditText>(R.id.pin_digit_1)
         val pinDigit2 = findViewById<EditText>(R.id.pin_digit_2)
