@@ -27,7 +27,7 @@ import deakin.gopher.guardian.model.ApiErrorResponse
 import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.LoginValidationError
-import deakin.gopher.guardian.model.login.RoleName
+import deakin.gopher.guardian.model.login.Role
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.model.register.AuthResponse
 import deakin.gopher.guardian.services.NavigationService
@@ -39,7 +39,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class LoginActivity : BaseActivity() {
-    private var userRole: RoleName = RoleName.Caretaker
     private lateinit var gsoClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,20 +51,6 @@ class LoginActivity : BaseActivity() {
         val loginGoogleButton: SignInButton = findViewById(R.id.loginGoogleBtn)
         val mCreateBtn: Button = findViewById(R.id.loginRegisterBtn)
         val forgotTextLink: TextView = findViewById(R.id.forgotPassword)
-        val loginRoleRadioGroup: RadioGroup = findViewById(R.id.login_role_radioGroup)
-
-        loginRoleRadioGroup.setOnCheckedChangeListener { group, checkedId ->
-            val radioButton: RadioButton = findViewById(checkedId)
-
-            // Set the user role based on the selected radio button
-            userRole =
-                when (checkedId) {
-                    R.id.admin_radioButton -> RoleName.Admin
-                    R.id.caretaker_radioButton -> RoleName.Caretaker
-                    R.id.nurse_radioButton -> RoleName.Nurse
-                    else -> RoleName.Caretaker
-                }
-        }
 
         val gso =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -104,7 +89,7 @@ class LoginActivity : BaseActivity() {
                             val user = response.body()!!.user
                             val token = response.body()!!.token
                             SessionManager.createLoginSession(user, token)
-                            NavigationService(this@LoginActivity).toPinCodeActivity(userRole)
+                            NavigationService(this@LoginActivity).toPinCodeActivity(user.role)
                         } else {
                             // Handle error
                             val errorResponse =
@@ -228,7 +213,7 @@ class LoginActivity : BaseActivity() {
             val auth = FirebaseAuth.getInstance()
             auth.signInWithCredential(credential).addOnCompleteListener { authTask ->
                 if (authTask.isSuccessful) {
-                    NavigationService(this).toHomeScreenForRole(userRole)
+                    NavigationService(this).toHomeScreenForRole(Role.Caretaker)
                 } else {
                     showMessage(getString(R.string.toast_login_error, authTask.exception?.message))
                 }

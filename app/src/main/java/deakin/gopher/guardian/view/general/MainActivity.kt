@@ -4,11 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.FirebaseMessaging
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.model.login.Role
 import deakin.gopher.guardian.model.login.SessionManager
-import deakin.gopher.guardian.services.EmailPasswordAuthService
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,22 +29,26 @@ class MainActivity : BaseActivity() {
                     Log.w("MainActivity", "Fetching FCM registration token failed", task.exception)
                 }
             }
-
-        getStartedButton.setOnClickListener {
-            startActivity(Intent(this@MainActivity, Homepage4caretaker::class.java))
-        }
     }
 
     private fun onGetStartedClick() {
         if (!SessionManager.isLoggedIn) {
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
         } else {
-            startActivity(Intent(this@MainActivity, Homepage4caretaker::class.java))
-        }
-    }
+            // Retrieve the user roleName from SessionManager
+            val userRole = SessionManager.getCurrentUser().role
 
-    private fun onLogoutClick() {
-        EmailPasswordAuthService.signOut(this)
-        finish()
+            when (userRole) {
+                Role.Admin -> {
+                    startActivity(Intent(this@MainActivity, Homepage4admin::class.java))
+                }
+                Role.Caretaker -> {
+                    startActivity(Intent(this@MainActivity, Homepage4caretaker::class.java))
+                }
+                Role.Nurse -> {
+                    startActivity(Intent(this@MainActivity, Homepage4nurse::class.java))
+                }
+            }
+        }
     }
 }
