@@ -3,6 +3,7 @@ package deakin.gopher.guardian.view.general
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.FirebaseMessaging
@@ -49,4 +50,6 @@ class MainActivity : BaseActivity() {
         EmailPasswordAuthService.signOut(this)
         finish()
     }
+
+    fun onBackButtonClicked(view: View) {}
 }

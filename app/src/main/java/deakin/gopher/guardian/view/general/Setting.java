@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.Switch;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
@@ -40,6 +42,8 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     settingsNotificationButton = findViewById(R.id.settings_notification_button);
     settingsAppUpdateButton = findViewById(R.id.settings_app_update_button);
     settingsFeedbackButton = findViewById(R.id.settings_feedback_button);
+
+
 
     settingsAppUpdateButton.setOnClickListener(this);
     settingsFeedbackButton.setOnClickListener(this);
@@ -144,26 +148,50 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     final AlertDialog.Builder builder = new AlertDialog.Builder(this);
     builder.setTitle("Provide Feedback");
 
+    // Create RatingBar
+    final RatingBar ratingBar = new RatingBar(this);
+    ratingBar.setNumStars(5);
+    ratingBar.setStepSize(0.5f);
+    ratingBar.setLayoutParams(new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT));
+
+    // Create EditText for feedback
     final EditText feedbackEditText = new EditText(this);
     feedbackEditText.setHint("Enter your feedback...");
-    builder.setView(feedbackEditText);
 
+    // Create a layout to hold both RatingBar and EditText
+    LinearLayout layout = new LinearLayout(this);
+    layout.setOrientation(LinearLayout.VERTICAL);
+    layout.setPadding(16, 16, 16, 16);
+    layout.addView(ratingBar); // Add the RatingBar to the layout
+    layout.addView(feedbackEditText); // Add the EditText to the layout
+
+    builder.setView(layout); // Set the custom layout with RatingBar and EditText
+
+    // Set the Positive (Submit) Button
     builder.setPositiveButton(
-        "Submit",
-        (dialog, which) -> {
-          final String feedback = feedbackEditText.getText().toString();
-          if (!feedback.isEmpty()) {
-            showToast("Feedback submitted: " + feedback);
-          } else {
-            showToast("Please enter your feedback");
-          }
-        });
+            "Submit",
+            (dialog, which) -> {
+              final String feedback = feedbackEditText.getText().toString();
+              final float rating = ratingBar.getRating();
+              if (!feedback.isEmpty()) {
+                // Show Toast thanking the user and displaying their rating
+                Toast.makeText(this, "Thank you for your feedback! Rating: " + rating, Toast.LENGTH_SHORT).show();
+                // Optionally, handle the feedback submission logic (send to server, etc.)
+              } else {
+                showToast("Please enter your feedback");
+              }
+            });
 
+    // Set the Negative (Cancel) Button
     builder.setNegativeButton("Cancel", null);
 
+    // Create and show the dialog
     final AlertDialog dialog = builder.create();
     dialog.show();
   }
+
 
   private void showToast(final CharSequence message) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -174,4 +202,8 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     super.onResume();
     initializeSwitchStates();
   }
+
+    public void onBackButtonClicked(View view) {
+      onBackPressed();
+    }
 }

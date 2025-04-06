@@ -251,4 +251,8 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
                         Toast.LENGTH_SHORT)
                     .show());
   }
+
+    public void onBackButtonClicked(View view) {
+      onBackPressed();
+    }
 }

@@ -464,21 +464,6 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/currentMedicalDiagnosticsBloodfatLevelTextView"
-                android:layout_width="365dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="1dp"
-                android:autofillHints=""
-                android:background="@null"
-                android:inputType="text"
-                android:text="@string/high"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/currentMedicalDiagnosticsNameHeadingTextView" />
-
 
         </LinearLayout>
 
@@ -495,5 +480,20 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/box_border" />
+
+    <EditText
+        android:id="@+id/currentMedicalDiagnosticsBloodfatLevelTextView"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="1dp"
+        android:autofillHints=""
+        android:background="@null"
+        android:inputType="text"
+        android:text="@string/high"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentMedicalDiagnosticsNameHeadingTextView" />
 
 </LinearLayout>

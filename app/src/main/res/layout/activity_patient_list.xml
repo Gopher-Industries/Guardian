@@ -18,17 +18,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
 
+
         <ImageView
             android:id="@+id/patient_list_menu_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="51dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="64dp"
             android:contentDescription="TODO"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/menu_button" />
-
 
         <ImageView
             android:id="@+id/patient_list_head_image"
@@ -124,6 +124,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/add_new_96" />
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="onBackButtonClicked" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

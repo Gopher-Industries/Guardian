@@ -6,16 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Training2"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:ignore="MissingConstraints">
 
     <!-- ScrollView to allow scrolling through the content -->
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,14 +26,6 @@
             android:padding="16dp">
 
             <!-- Module 1 -->
-            <TextView
-                android:id="@+id/module1Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="Module 1: Basic Caregiving Skills"
-                android:textSize="20sp"
-                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/module1Description"
@@ -42,6 +36,7 @@
                 android:textSize="16sp" />
 
             <!-- Module 2 -->
+
             <TextView
                 android:id="@+id/module2Title"
                 android:layout_width="wrap_content"
@@ -77,6 +72,20 @@
                 android:text="This module focuses on the emotional and psychological aspects of caregiving. It teaches caregivers how to provide emotional support to clients, communicate effectively, and manage stress."
                 android:textSize="16sp" />
 
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Back"
+                android:onClick="onBackButtonClicked"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
         </LinearLayout>
     </ScrollView>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

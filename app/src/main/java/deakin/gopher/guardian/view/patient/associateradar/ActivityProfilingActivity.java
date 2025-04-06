@@ -71,4 +71,8 @@ public class ActivityProfilingActivity extends AppCompatActivity {
       activityProfilingLayout.addView(statusView);
     }
   }
+
+    public void onBackButtonClicked(View view) {
+      onBackPressed();
+    }
 }
