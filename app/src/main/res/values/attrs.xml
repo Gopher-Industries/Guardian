@@ -2,5 +2,9 @@
     <declare-styleable name="FullscreenAttrs">
         <attr name="fullscreenBackgroundColor" format="color" />
         <attr name="fullscreenTextColor" format="color" />
+        <attr name="settingsBarColor" format="color" />
+        <attr name="settingheadColor" format="color" />
+        <attr name="mainpage" format="color"/>
+        <attr name="hamburger" format="color"/>
     </declare-styleable>
 </resources>

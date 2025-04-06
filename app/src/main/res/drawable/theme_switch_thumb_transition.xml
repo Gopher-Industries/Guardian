@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transition xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Initial state: Sun (Light Mode) -->
+    <item android:drawable="@drawable/ic_sun" />
+    <!-- End state: Moon (Night Mode) -->
+    <item android:drawable="@drawable/ic_moon" />
+</transition>
