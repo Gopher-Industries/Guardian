@@ -191,8 +191,8 @@
         <activity android:name=".InspiringLeadershipEIActivity" />
         <activity android:name=".EmotionalIntelligenceCommunicationActivity" />
         <activity android:name="deakin.gopher.guardian.view.general.NurseRosterActivity" />
-        <activity android:name=".view.FallDetection.FallDetectionActivity" />
-        <activity android:name=".view.FallDetection.FallAlertActivity" />
+        <activity android:name=".view.falldetection.FallDetectionActivity" />
+        <activity android:name=".view.falldetection.FallAlertActivity" />
         <activity android:name="deakin.gopher.guardian.view.caretaker.notifications.confirmincident.CallAmbulanceActivity" />
 
 
