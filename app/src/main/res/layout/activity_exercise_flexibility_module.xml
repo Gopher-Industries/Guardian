@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:contentDescription="Gopher logo"
+                android:contentDescription="@string/content_description_gopher_logo"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Scrollable Content -->
     <ScrollView
         android:id="@+id/contentScrollView"
         android:layout_width="0dp"
@@ -76,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/strength_exercise1"
+                android:text="@string/flexibility_exercise1"
                 android:textColor="#000000"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -84,12 +83,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/walking2"
+                android:id="@+id/stretching"
                 android:layout_width="38dp"
                 android:layout_height="32dp"
-                android:layout_marginTop="8dp"
-                android:contentDescription="walking exercise icon"
-                android:src="@drawable/walking2"
+                android:layout_marginTop="4dp"
+                android:contentDescription="@string/flexibility_exercise1"
+                android:src="@drawable/stretching"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -100,23 +99,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="72dp"
                 android:layout_marginEnd="30dp"
                 android:lineSpacingExtra="5dp"
-                android:text="@string/cardio_exercise2"
+                android:text="@string/flexibility_exercise2"
                 android:textColor="#000000"
                 android:textSize="12sp"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/buttonTopGuideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.70" />
 
 
             <Button
@@ -132,9 +125,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/backButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.207"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/buttonTopGuideline"
-                app:layout_constraintVertical_bias="0.774" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/markCompleteButton"
@@ -149,9 +140,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/backButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.803"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/buttonTopGuideline"
-                app:layout_constraintVertical_bias="0.774" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/backButton"
