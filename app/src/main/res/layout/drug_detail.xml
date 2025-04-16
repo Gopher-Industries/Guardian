@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F8F8F8"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
+
+        <ImageView
+            android:id="@+id/patient_list_menu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="51dp"
+            android:layout_marginTop="65dp"
+            android:contentDescription="TODO"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/blue_menu" />
+
+
+        <ImageView
+            android:id="@+id/patient_list_head_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="TODO"
+            app:layout_constraintStart_toEndOf="@+id/patient_list_company_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/man" />
+
+        <ImageView
+            android:id="@+id/patient_list_company_icon"
+            android:layout_width="107dp"
+            android:layout_height="107dp"
+            android:layout_marginStart="142dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="TODO"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/drug_main_ic" />
+
+
+        <ImageView
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/drug_detail1"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <ImageView
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/drug_detail2"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="179dp" />
+
+
+        <ImageView
+            android:layout_width="390dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/warning_ic"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="453dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="430dp"
+            android:layout_height="151dp"
+            android:src="@drawable/rounded_bottom_bar"
+            tools:layout_editor_absoluteX="2dp"
+            tools:layout_editor_absoluteY="805dp" />
+
+        <ImageView
+            android:layout_width="87dp"
+            android:layout_height="76dp"
+            android:src="@drawable/activty"
+            tools:layout_editor_absoluteX="38dp"
+            tools:layout_editor_absoluteY="808dp" />
+
+        <ImageView
+            android:layout_width="144dp"
+            android:layout_height="90dp"
+            android:src="@drawable/drug_ic"
+            tools:layout_editor_absoluteX="267dp"
+            tools:layout_editor_absoluteY="803dp" />
+
+        <ImageView
+            android:layout_width="123dp"
+            android:layout_height="75dp"
+            android:src="@drawable/stock_outline_ic"
+            tools:layout_editor_absoluteX="140dp"
+            tools:layout_editor_absoluteY="808dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

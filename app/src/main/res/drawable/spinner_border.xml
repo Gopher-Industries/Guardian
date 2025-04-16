@@ -2,16 +2,39 @@
     android:shape="rectangle">
 
     <!-- Blue border -->
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 415cf9d (initial commit)
     <stroke android:width="2dp" android:color="#2987E6" />
 
     <!-- Background color -->
     <solid android:color="@android:color/transparent" />
+<<<<<<< HEAD
+=======
+=======
+    <stroke android:width="2dp" android:color="#FFF" />
+
+    <!-- Background color -->
+    <solid android:color="#fff" />
+>>>>>>> 25b79e1 (initial commit)
+>>>>>>> 415cf9d (initial commit)
 
     <!-- Top rounded corners, square bottom corners -->
     <corners
         android:topLeftRadius="8dp"
         android:topRightRadius="8dp"
+<<<<<<< HEAD
         android:bottomLeftRadius="0dp"
         android:bottomRightRadius="0dp" />
+=======
+<<<<<<< HEAD
+        android:bottomLeftRadius="0dp"
+        android:bottomRightRadius="0dp" />
+=======
+        android:bottomLeftRadius="8dp"
+        android:bottomRightRadius="8dp" />
+>>>>>>> 25b79e1 (initial commit)
+>>>>>>> 415cf9d (initial commit)
 
 </shape>

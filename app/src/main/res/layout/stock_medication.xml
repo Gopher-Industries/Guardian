@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
+
+        <ImageView
+            android:id="@+id/patient_list_menu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="51dp"
+            android:layout_marginTop="65dp"
+            android:contentDescription="TODO"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/blue_menu" />
+
+
+        <SearchView
+            android:id="@+id/patient_list_searchView"
+            android:layout_width="375dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/border"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search..."
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="160dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/patient_list_recycleView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/patient_list_searchView">
+
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/blue_list"
+            tools:layout_editor_absoluteX="113dp"
+            tools:layout_editor_absoluteY="256dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Out of Stock Medications "
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="91dp"
+            tools:layout_editor_absoluteY="457dp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="2.   Panadol "
+            android:textSize="16dp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="147dp"
+            tools:layout_editor_absoluteY="568dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="1.   Brufen "
+            android:textSize="16dp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="157dp"
+            tools:layout_editor_absoluteY="540dp" />
+
+        <ImageView
+            android:layout_width="430dp"
+            android:layout_height="151dp"
+            android:src="@drawable/rounded_bottom_bar"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="807dp" />
+
+        <ImageView
+            android:layout_width="148dp"
+            android:layout_height="91dp"
+            android:src="@drawable/stock_ic"
+            tools:layout_editor_absoluteX="143dp"
+            tools:layout_editor_absoluteY="807dp" />
+
+        <ImageView
+            android:layout_width="87dp"
+            android:layout_height="76dp"
+            android:src="@drawable/activty"
+            tools:layout_editor_absoluteX="36dp"
+            tools:layout_editor_absoluteY="811dp" />
+
+        <ImageView
+            android:layout_width="109dp"
+            android:layout_height="84dp"
+            android:src="@drawable/callander"
+            tools:layout_editor_absoluteX="288dp"
+            tools:layout_editor_absoluteY="804dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

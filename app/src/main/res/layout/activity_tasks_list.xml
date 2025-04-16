@@ -7,8 +7,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="deakin.gopher.guardian.view.general.PatientProfileAddActivity">
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/patient_list_backgroud"
         android:textAlignment="center"
@@ -38,7 +41,8 @@
             android:contentDescription="TODO"
             app:layout_constraintStart_toEndOf="@+id/task_list_company_icon"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/profile_icon_small" />
+            app:srcCompat="@drawable/pharmacist_ic" />
+
 
     <ImageView
             android:id="@+id/task_list_company_icon"
@@ -57,14 +61,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="@string/task_list"
+        android:text="Patient List(Pharmacist)"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="25sp"
+        android:textSize="20sp"
+
         android:translationZ="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_list_company_icon" />
+
+
 
     <SearchView
         android:id="@+id/task_list_searchView"
@@ -84,13 +91,12 @@
             android:layout_width="375dp"
             android:layout_height="64dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             app:cardCornerRadius="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/task_list_searchView">
 
         <Button
-            android:id="@+id/add_task_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -99,14 +105,12 @@
             android:text="" />
 
         <LinearLayout
-                android:id="@+id/task_list_overview_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:padding="15dp">
 
             <ImageView
-                    android:id="@+id/imageView55"
                     android:layout_width="35dp"
                     android:layout_height="33dp"
                     android:contentDescription="TODO"
@@ -118,17 +122,358 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="6dp"
                 android:fontFamily="sans-serif-black"
-                android:text="@string/add_task"
+                android:text="Patients Overview"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <ImageView
-                android:id="@+id/imageView64"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginLeft="190dp"
+                android:layout_marginLeft="135dp"
                 android:contentDescription="TODO"
-                app:srcCompat="@drawable/add_image_button"
+                app:srcCompat="@drawable/right_arrow_blue"
+                tools:layout_editor_absoluteX="337dp"
+                tools:layout_editor_absoluteY="234dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="375dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_list_searchView">
+
+        <Button
+            android:id="@+id/add_task_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:alpha="0"
+            android:backgroundTint="@color/_bg__new_homepage___ek2_color"
+            android:text="" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+
+
+            <ImageView
+                android:id="@+id/imageView55"
+                android:layout_width="35dp"
+                android:layout_height="33dp"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/red_circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Patient Name 1"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <ImageView
+
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="150dp"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/right_arrow_blue"
+                tools:layout_editor_absoluteX="337dp"
+                tools:layout_editor_absoluteY="234dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="375dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="180dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_list_searchView">
+
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:alpha="0"
+            android:backgroundTint="@color/_bg__new_homepage___ek2_color"
+            android:text="" />
+
+        <LinearLayout
+            android:id="@+id/task_list_overview_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <ImageView
+
+                android:layout_width="35dp"
+                android:layout_height="33dp"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/red_circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Patient Name 2"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <ImageView
+
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="150dp"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/right_arrow_blue"
+                tools:layout_editor_absoluteX="337dp"
+                tools:layout_editor_absoluteY="234dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="375dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="340dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_list_searchView">
+
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:alpha="0"
+            android:backgroundTint="@color/_bg__new_homepage___ek2_color"
+            android:text="" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <ImageView
+
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/green_circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Patient Name 4"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <ImageView
+
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="150dp"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/right_arrow_blue"
+                tools:layout_editor_absoluteX="337dp"
+                tools:layout_editor_absoluteY="234dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="375dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="260dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_list_searchView">
+
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:alpha="0"
+            android:backgroundTint="@color/_bg__new_homepage___ek2_color"
+            android:text="" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <ImageView
+
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/item_list_of_patient" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Patient Name 3"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <ImageView
+
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="150dp"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/right_arrow_blue"
+                tools:layout_editor_absoluteX="337dp"
+                tools:layout_editor_absoluteY="234dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="375dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="420dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_list_searchView">
+
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:alpha="0"
+            android:backgroundTint="@color/_bg__new_homepage___ek2_color"
+            android:text="" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <ImageView
+
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/green_circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Patient Name 5"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <ImageView
+
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="150dp"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/right_arrow_blue"
+                tools:layout_editor_absoluteX="337dp"
+                tools:layout_editor_absoluteY="234dp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="375dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="500dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_list_searchView">
+
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:alpha="0"
+            android:backgroundTint="@color/_bg__new_homepage___ek2_color"
+            android:text="" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+            <ImageView
+
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/green_circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="6dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Patient Name 6"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="150dp"
+                android:contentDescription="TODO"
+                app:srcCompat="@drawable/right_arrow_blue"
                 tools:layout_editor_absoluteX="337dp"
                 tools:layout_editor_absoluteY="234dp" />
 
@@ -173,7 +518,8 @@
         android:background="?attr/selectableItemBackgroundBorderless" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-    <include
-        android:id="@id/nav_view"
-        layout="@layout/navigation_view" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.drawerlayout.widget.DrawerLayout>

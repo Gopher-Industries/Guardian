@@ -30,7 +30,15 @@ public class PatientProfileActivity extends BaseActivity {
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+<<<<<<< HEAD
     setContentView(R.layout.activity_patient_profile);
+=======
+<<<<<<< HEAD
+    setContentView(R.layout.activity_patient_profile);
+=======
+    setContentView(R.layout.pharmacist_profile);
+>>>>>>> 25b79e1 (initial commit)
+>>>>>>> 415cf9d (initial commit)
     final Intent intent = getIntent();
 
     final TabLayout tabLayout = findViewById(R.id.dataForViewTabLayout);

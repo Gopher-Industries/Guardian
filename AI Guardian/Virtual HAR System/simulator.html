@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,4 +36,83 @@
     </script>
     <script src="{{ url_for('static', filename='js/simulator.js') }}"></script>
 </body>
+=======
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Hospital Activity Simulator</title>
+    <style>
+        body { margin: 0; overflow: hidden; font-family: Arial, sans-serif; }
+        #info { position: absolute; top: 10px; width: 100%; text-align: center; color: white; }
+        #controls { position: absolute; bottom: 10px; width: 100%; text-align: center; }
+        button { margin: 5px; padding: 5px 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h1>3D Hospital Activity Simulator</h1>
+        <div id="dataOutput"></div>
+    </div>
+    <div id="controls">
+        <button id="walkBtn">Walk</button>
+        <button id="kneelBtn">Kneel</button>
+        <button id="sitBtn">Sit</button>
+        <button id="standBtn">Stand</button>
+        <button id="liedownBtn">Lie Down</button>
+        <button id="exportBtn">Export Data</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script id="simulationData" type="application/json">
+        {
+            "patientType": "{{ patient_type }}",
+            "roomType": "{{ room_type }}",
+            "patientData": {{ patient_data | tojson | safe }},
+            "roomData": {{ room_data | tojson | safe }}
+        }
+    </script>
+    <script src="{{ url_for('static', filename='js/simulator.js') }}"></script>
+</body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Hospital Activity Simulator</title>
+    <style>
+        body { margin: 0; overflow: hidden; font-family: Arial, sans-serif; }
+        #info { position: absolute; top: 10px; width: 100%; text-align: center; color: white; }
+        #controls { position: absolute; bottom: 10px; width: 100%; text-align: center; }
+        button { margin: 5px; padding: 5px 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h1>3D Hospital Activity Simulator</h1>
+        <div id="dataOutput"></div>
+    </div>
+    <div id="controls">
+        <button id="walkBtn">Walk</button>
+        <button id="kneelBtn">Kneel</button>
+        <button id="sitBtn">Sit</button>
+        <button id="standBtn">Stand</button>
+        <button id="liedownBtn">Lie Down</button>
+        <button id="exportBtn">Export Data</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script id="simulationData" type="application/json">
+        {
+            "patientType": "{{ patient_type }}",
+            "roomType": "{{ room_type }}",
+            "patientData": {{ patient_data | tojson | safe }},
+            "roomData": {{ room_data | tojson | safe }}
+        }
+    </script>
+    <script src="{{ url_for('static', filename='js/simulator.js') }}"></script>
+</body>
+>>>>>>> 25b79e1 (initial commit)
+>>>>>>> 415cf9d (initial commit)
 </html>

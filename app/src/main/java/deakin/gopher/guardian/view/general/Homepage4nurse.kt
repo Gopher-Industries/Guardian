@@ -10,7 +10,15 @@ import deakin.gopher.guardian.services.NavigationService
 class Homepage4nurse : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+<<<<<<< HEAD
         setContentView(R.layout.activity_homepage4nurse)
+=======
+<<<<<<< HEAD
+        setContentView(R.layout.activity_homepage4nurse)
+=======
+        setContentView(R.layout.activity_homepage4pharmacist)
+>>>>>>> 25b79e1 (initial commit)
+>>>>>>> 415cf9d (initial commit)
         val tasksButton: Button = findViewById(R.id.tasksButton_nurse)
         val settingsButton: Button = findViewById(R.id.settingsButton_nurse)
         val signOutButton: Button = findViewById(R.id.sighOutButton_nurse)

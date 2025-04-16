@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="deakin.gopher.guardian.view.general.LoginActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="0dp"
+        android:layout_height="410dp"
+        android:layout_marginTop="-40dp"
+        app:cardBackgroundColor="@color/TG_blue"
+        app:cardCornerRadius="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:contentDescription="@string/content_description_gopher_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.402"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/gopher_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="calender"
+                android:textColor="#FFF"
+                android:textSize="18dp"
+                tools:layout_editor_absoluteX="140dp"
+                tools:layout_editor_absoluteY="122dp" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:src="@drawable/pharmacist_ic"
+                tools:layout_editor_absoluteX="304dp"
+                tools:layout_editor_absoluteY="60dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/menu_button"
+                tools:layout_editor_absoluteX="42dp"
+                tools:layout_editor_absoluteY="92dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:src="@drawable/calender"
+                tools:layout_editor_absoluteX="-38dp"
+                tools:layout_editor_absoluteY="160dp">
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp">
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dr_ic"
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="535dp" />
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dr_ic"
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="444dp" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_fill_right"
+        tools:layout_editor_absoluteX="312dp"
+        tools:layout_editor_absoluteY="474dp" />
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dr_ic"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="626dp" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_fill_right"
+        tools:layout_editor_absoluteX="312dp"
+        tools:layout_editor_absoluteY="656dp" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_fill_right"
+        tools:layout_editor_absoluteX="310dp"
+        tools:layout_editor_absoluteY="566dp" />
+
+    <ImageView
+        android:layout_width="430dp"
+        android:layout_height="151dp"
+        android:src="@drawable/rounded_bottom_bar"
+        tools:layout_editor_absoluteX="-10dp"
+        tools:layout_editor_absoluteY="807dp" />
+
+    <ImageView
+        android:layout_width="106dp"
+        android:layout_height="99dp"
+        android:src="@drawable/pai_ic"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="799dp" />
+
+    <ImageView
+        android:layout_width="151dp"
+        android:layout_height="92dp"
+        android:src="@drawable/calender_active_ic"
+        tools:layout_editor_absoluteX="264dp"
+        tools:layout_editor_absoluteY="804dp" />
+
+    <ImageView
+        android:layout_width="87dp"
+        android:layout_height="76dp"
+        android:src="@drawable/activty"
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="811dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
