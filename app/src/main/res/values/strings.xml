@@ -1,5 +1,5 @@
-<resources>
-    <string name="app_name">TG_Patient_Profile</string>
+    <resources>
+<string name="app_name">TG_Patient_Profile</string>
 
     <string name="main_activity_solgan">Take care of your patients</string>
 
@@ -324,7 +324,7 @@
     <string name="enter_an_email_adress">Enter an email adress</string>
 
     <string name="caretaker_role_name">Caretaker</string>
-    <string name="company_admin_role_name">Company Admin</string>
+    <string name="company_admin_role_name">Admin</string>
     <string name="nurse_role_name">Nurse</string>
     <string name="login_role_selection_prompt">Login as:</string>
     <string name="register_role_selection_prompt">Register as:</string>
@@ -363,6 +363,7 @@
     <string name="blood_pressure_tip">Blood Pressure Tip</string>
     <string name="current">Current</string>
     <string name="daily">Daily</string>
+
 
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
@@ -650,6 +651,42 @@
     <string name="is_this_false_alert">IS THIS A FALSE ALERT?</string>
     <string name="do_you_confirm_the_fall">DO YOU CONFIRM THE FALL?</string>
     <string name="call">CALL</string>
+
+    <!-- Patient Manual -->
+    <string name="patient_manual">Patient Manual</string>
+    <string name="patient_manual_greeting">Your healthy journey starts with one small step!</string>
+    <string name="patient_manual_benefits">Benefits of Exercising</string>
+    <string name="patient_manual_safety">Safety Guidelines</string>
+    <string name="patient_manual_navigate">How to Navigate through the Exercise plans</string>
+    <string name="patient_manual_progress">How to Track Progress</string>
+    <string name="benefits_of_exercising">Benefits of Exercising</string>
+    <string name="benefits_greeting">There are several benefits why exercising is important for you and here is why</string>
+    <string name="benefits_list">Bone Health\nEnergy Increase\nAllows Flexibility\nWeight Loss\nBoosts Immunity\nPrevent falls\nImproved mood\nCognitive Function\nRelieves Osteoarthritis Pain\nBetter Cardiovascular Health\nImproved Sleep</string>
+    <string name="navigation_guide">Exercise Plan Navigation Guide</string>
+    <string name="navigate_instructions">1. At the Exercise Plan portal, select what kind of exercise you want.\n2. Follow the plan.\n3. You can exit anytime.</string>
+    <string name="how_to_track_progress">How to Track Progress</string>
+    <string name="progress_instruction1">Navigate to the Exercise Plan page and you will find three tabs: To Do, In Progress, and Completed.</string>
+    <string name="progress_instruction2">Each plan includes several components. When a section is opened, its checkbox will automatically be marked as completed.</string>
+    <string name="safety_guidelines">Safety Guidelines</string>
+    <string name="safety_guidelines1">1. Consult with your nurse before doing the exercise plans.\n2. Warm up before you start.\n3. Take breaks and stay hydrated.\n4. Wear appropriate clothing and footwear.\n5. Exercise in a safe environment with enough space to move freely.\n6. Exercise at your own pace.\n7. STOP immediately if experiencing dizziness, pain or shortness of breath.\n8. Call your nurse if assistance is needed.</string>
+    <!-- Exercise Portal -->
+    <string name="exercise_portal">Exercise Portal</string>
+    <string name="strength_exercise1">Strength Exercise</string>
+    <string name="strength_exercise2">1. Chair Squats: Sit and stand without using hands (10–15 reps).\n2. Wall Push-Ups: Push against a wall for upper body strength (10–15 reps).\n3. Bicep Curls: Use light weights or water bottles (10–15 reps per arm).\n4. Leg Raises: Extend one leg while seated, then lower (10–15 reps per leg).\n5. Toe Stands: Rise onto toes and lower to strengthen calves (10–15 reps).\n6. Seated Rows: Use resistance bands to pull back while seated, strengthening the back and shoulders (10–15 reps).\n7. Lateral Arm Raises: Lift light weights to shoulder height, working on the arms and shoulders (10–15 reps).\n8. Heel Slides: While seated, slide your heel back and forth on the floor to improve knee flexibility and strength (10–15 reps).\n9. Step-Ups: Step up and down on a stable platform to build leg strength and balance (10 reps per leg).</string>
+    <string name="flexibility_exercise1">Flexibility Exercise</string>
+    <string name="flexibility_exercise2">1. Neck Stretch: Tilt head to the side, hold 10–15 sec per side, repeat 2–3 times.\n2. Shoulder Rolls: Roll shoulders forward and backward 10 times each.\n3. Chest Stretch: Pull hands behind back, hold for 15–30 sec, repeat 2 times.\n4. Spinal Twist: Twist torso, hold 10 sec per side, repeat 2–3 times.\n5. Hamstring Stretch: Lean forward on extended leg, hold 15 sec per leg, repeat 2–3 times.\n6. Ankle Circles: Rotate ankle 10 times clockwise, 10 times counterclockwise per foot.\n7. Hip Flexor Stretch: Step back, press hips forward, hold 15–20 sec per side, repeat 2 times.\n8. Calf Stretch: Step back, press heel down, hold 15–20 sec per side, repeat 2–3 times.</string>
+    <string name="cardio_exercise1">Cardio Exercise</string>
+    <string name="cardio_exercise2">1. Gentle Walking: Walk at a steady pace indoors or outdoors (15–20 mins).\n2. Seated Marching: Lift knees alternately while seated (10–15 mins).\n3. Step Touch: Step side-to-side while lightly swinging arms (10–15 mins).\n4. Arm Swings: Swing arms while stepping in place for light cardio (10–15 mins).\n5. Heel Digs: Tap your heels forward alternately while seated or standing (10–15 mins).\n6. Low-Impact Dancing: Move gently to favorite music (10–15 mins).\n7. Seated Jumping Jacks: Extend arms and legs alternately while seated (10–15 reps).</string>
+    <string name="breathing_exercise1">Breathing Exercise</string>
+    <string name="breathing_exercise2">1. Diaphragmatic Breathing: Deep inhale through the nose, expanding the belly, and slow exhale through the mouth (5 mins).\n2. Pursed-Lip Breathing: Inhale through the nose, exhale slowly through pursed lips (5 mins).\n3. Breath Counting: Count each inhale and exhale to focus on rhythm (5–10 mins).\n4. Alternate Nostril Breathing: Close one nostril, inhale through the other, then switch (5 mins).\n5. Box Breathing: Inhale for 4 seconds, hold for 4, exhale for 4, hold for 4 (5 mins).\n6. Humming Breath: Inhale deeply and hum while exhaling to relax (5 mins).\n7. 4-7-8 Breathing: Inhale for 4 seconds, hold for 7, exhale for 8 to calm the body (5 mins).</string>
+    <string name="balance_exercise1">Balance Exercise</string>
+    <string name="balance_exercise2">1. Single-Leg Stand: Lift one foot while holding onto a stable surface (10 secs per leg, 10 reps).\n2. Heel-to-Toe Walk: Walk in a straight line, placing one foot directly in front of the other (10 steps).\n3. Side Leg Lifts: Lift one leg to the side while holding a chair for support (10 reps per leg).\n4. Rock the Boat: Stand with feet apart and shift weight from one foot to the other (10–15 reps).\n5. Tandem Stance: Stand with one foot directly in front of the other for balance (hold 10 secs).\n6. Weight Shifting: Slowly shift your weight from heels to toes while standing (10 reps).\n7. Clock Reach: Stand on one foot and extend the opposite arm to touch \"12, 3, 6, and 9 o’clock\" positions (5 rounds per foot).</string>
+    <string name="save_for_later">Save for Later</string>
+    <string name="completed">Completed</string>
+    <string name="todo">To Do</string>
+    <string name="mark_as_complete">Mark as Complete</string>
+
+
     <string-array name="dropdown_items">
         <item>Azithromycin</item>
         <item>Levothyroxine</item>

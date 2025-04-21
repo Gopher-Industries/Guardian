@@ -1,4 +1,4 @@
-package deakin.gopher.guardian.view.FallDetection.util
+package deakin.gopher.guardian.view.falldetection.util
 
 import android.content.Context
 import android.content.Intent
@@ -23,17 +23,25 @@ fun Context.openActivity(openThis: Class<out AppCompatActivity>) {
 }
 
 fun ImageView.load(imageUrl: String) {
-    val requestOptions = RequestOptions().override(480, 360) // Set the minimum width and height
-        .centerCrop() // Crop the image if needed to fit the dimensions
+    // Set the minimum width and height
+    val requestOptions =
+        RequestOptions().override(480, 360)
+            // Crop the image if needed to fit the dimensions
+            .centerCrop()
 
-    Glide.with(this.context) // Use the context of the ImageView
+    // Use the context of the ImageView
+    Glide.with(this.context)
         .load(imageUrl)
         .apply(requestOptions)
-        .diskCacheStrategy(DiskCacheStrategy.ALL) // Cache the image
+        // Cache the image
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
         .into(this)
 }
 
-fun ImageView.load(@DrawableRes drawableId: Int, onLoad: (Drawable) -> Unit = {}) {
+fun ImageView.load(
+    @DrawableRes drawableId: Int,
+    onLoad: (Drawable) -> Unit = {},
+) {
     val requestOptions =
         RequestOptions().centerCrop() // Crop the image if needed to fit the dimensions
 
@@ -41,56 +49,64 @@ fun ImageView.load(@DrawableRes drawableId: Int, onLoad: (Drawable) -> Unit = {}
         .load(drawableId)
         .apply(requestOptions)
         .diskCacheStrategy(DiskCacheStrategy.ALL) // Cache the image
-        .listener(object : RequestListener<Drawable> {
-            override fun onLoadFailed(
-                e: GlideException?,
-                model: Any?,
-                target: Target<Drawable>,
-                isFirstResource: Boolean,
-            ): Boolean {
-                return false
-            }
+        .listener(
+            object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>,
+                    isFirstResource: Boolean,
+                ): Boolean {
+                    return false
+                }
 
-            override fun onResourceReady(
-                resource: Drawable,
-                model: Any,
-                target: Target<Drawable>?,
-                dataSource: DataSource,
-                isFirstResource: Boolean,
-            ): Boolean {
-                onLoad(resource)
-                return false
-            }
-        })
+                override fun onResourceReady(
+                    resource: Drawable,
+                    model: Any,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource,
+                    isFirstResource: Boolean,
+                ): Boolean {
+                    onLoad(resource)
+                    return false
+                }
+            },
+        )
         .into(this)
 }
 
 fun getInputImageFrom(
     bitmap: Bitmap,
-    rotationDegrees: Int = 0
+    rotationDegrees: Int = 0,
 ): InputImage {
     return InputImage.fromBitmap(bitmap, rotationDegrees)
 }
 
-fun getInputImageFrom(context: Context, uri: Uri): InputImage {
+fun getInputImageFrom(
+    context: Context,
+    uri: Uri,
+): InputImage {
     return InputImage.fromFilePath(context, uri)
 }
 
 fun getInputImageFrom(
-    byteBuffer: ByteBuffer, bitmap: Bitmap, rotationDegrees: Int
+    byteBuffer: ByteBuffer,
+    bitmap: Bitmap,
+    rotationDegrees: Int,
 ): InputImage {
     return InputImage.fromByteBuffer(
         byteBuffer,
         bitmap.width,
         bitmap.height,
         rotationDegrees,
-        InputImage.IMAGE_FORMAT_NV21 // or IMAGE_FORMAT_YV12
+        // IMAGE_FORMAT_NV21 or IMAGE_FORMAT_YV12
+        InputImage.IMAGE_FORMAT_NV21,
     )
 }
 
 fun Context.toast(
     message: String,
-    duration: Int = android.widget.Toast.LENGTH_SHORT
+    duration: Int = android.widget.Toast.LENGTH_SHORT,
 ) {
     android.widget.Toast.makeText(this, message, duration).show()
 }

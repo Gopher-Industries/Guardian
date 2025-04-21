@@ -1,21 +1,17 @@
+package deakin.gopher.guardian.view.falldetection.util.classification;
 
-package deakin.gopher.guardian.view.FallDetection.util.classification;
-
-import static deakin.gopher.guardian.view.FallDetection.util.classification.Utils.average;
-import static deakin.gopher.guardian.view.FallDetection.util.classification.Utils.l2Norm2D;
-import static deakin.gopher.guardian.view.FallDetection.util.classification.Utils.multiplyAll;
-import static deakin.gopher.guardian.view.FallDetection.util.classification.Utils.subtract;
-import static deakin.gopher.guardian.view.FallDetection.util.classification.Utils.subtractAll;
+import static deakin.gopher.guardian.view.falldetection.util.classification.Utils.average;
+import static deakin.gopher.guardian.view.falldetection.util.classification.Utils.l2Norm2D;
+import static deakin.gopher.guardian.view.falldetection.util.classification.Utils.multiplyAll;
+import static deakin.gopher.guardian.view.falldetection.util.classification.Utils.subtract;
+import static deakin.gopher.guardian.view.falldetection.util.classification.Utils.subtractAll;
 
 import com.google.mlkit.vision.common.PointF3D;
 import com.google.mlkit.vision.pose.PoseLandmark;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Generates embedding for given list of Pose landmarks.
- */
+/** Generates embedding for given list of Pose landmarks. */
 public class PoseEmbedding {
   // Multiplier to apply to the torso to get minimal body size. Picked this by experimentation.
   private static final float TORSO_MULTIPLIER = 2.5f;
@@ -28,8 +24,8 @@ public class PoseEmbedding {
   private static List<PointF3D> normalize(List<PointF3D> landmarks) {
     List<PointF3D> normalizedLandmarks = new ArrayList<>(landmarks);
     // Normalize translation.
-    PointF3D center = average(
-        landmarks.get(PoseLandmark.LEFT_HIP), landmarks.get(PoseLandmark.RIGHT_HIP));
+    PointF3D center =
+        average(landmarks.get(PoseLandmark.LEFT_HIP), landmarks.get(PoseLandmark.RIGHT_HIP));
     subtractAll(center, normalizedLandmarks);
 
     // Normalize scale.
@@ -43,12 +39,12 @@ public class PoseEmbedding {
   private static float getPoseSize(List<PointF3D> landmarks) {
     // Note: This approach uses only 2D landmarks to compute pose size as using Z wasn't helpful
     // in our experimentation but you're welcome to tweak.
-    PointF3D hipsCenter = average(
-        landmarks.get(PoseLandmark.LEFT_HIP), landmarks.get(PoseLandmark.RIGHT_HIP));
+    PointF3D hipsCenter =
+        average(landmarks.get(PoseLandmark.LEFT_HIP), landmarks.get(PoseLandmark.RIGHT_HIP));
 
-    PointF3D shouldersCenter = average(
-        landmarks.get(PoseLandmark.LEFT_SHOULDER),
-        landmarks.get(PoseLandmark.RIGHT_SHOULDER));
+    PointF3D shouldersCenter =
+        average(
+            landmarks.get(PoseLandmark.LEFT_SHOULDER), landmarks.get(PoseLandmark.RIGHT_SHOULDER));
 
     float torsoSize = l2Norm2D(subtract(hipsCenter, shouldersCenter));
 
@@ -73,15 +69,13 @@ public class PoseEmbedding {
 
     // We group our distances by number of joints between the pairs.
     // One joint.
-    embedding.add(subtract(
-        average(lm.get(PoseLandmark.LEFT_HIP), lm.get(PoseLandmark.RIGHT_HIP)),
-        average(lm.get(PoseLandmark.LEFT_SHOULDER), lm.get(PoseLandmark.RIGHT_SHOULDER))
-    ));
+    embedding.add(
+        subtract(
+            average(lm.get(PoseLandmark.LEFT_HIP), lm.get(PoseLandmark.RIGHT_HIP)),
+            average(lm.get(PoseLandmark.LEFT_SHOULDER), lm.get(PoseLandmark.RIGHT_SHOULDER))));
 
-    embedding.add(subtract(
-        lm.get(PoseLandmark.LEFT_SHOULDER), lm.get(PoseLandmark.LEFT_ELBOW)));
-    embedding.add(subtract(
-        lm.get(PoseLandmark.RIGHT_SHOULDER), lm.get(PoseLandmark.RIGHT_ELBOW)));
+    embedding.add(subtract(lm.get(PoseLandmark.LEFT_SHOULDER), lm.get(PoseLandmark.LEFT_ELBOW)));
+    embedding.add(subtract(lm.get(PoseLandmark.RIGHT_SHOULDER), lm.get(PoseLandmark.RIGHT_ELBOW)));
 
     embedding.add(subtract(lm.get(PoseLandmark.LEFT_ELBOW), lm.get(PoseLandmark.LEFT_WRIST)));
     embedding.add(subtract(lm.get(PoseLandmark.RIGHT_ELBOW), lm.get(PoseLandmark.RIGHT_WRIST)));
@@ -93,10 +87,8 @@ public class PoseEmbedding {
     embedding.add(subtract(lm.get(PoseLandmark.RIGHT_KNEE), lm.get(PoseLandmark.RIGHT_ANKLE)));
 
     // Two joints.
-    embedding.add(subtract(
-        lm.get(PoseLandmark.LEFT_SHOULDER), lm.get(PoseLandmark.LEFT_WRIST)));
-    embedding.add(subtract(
-        lm.get(PoseLandmark.RIGHT_SHOULDER), lm.get(PoseLandmark.RIGHT_WRIST)));
+    embedding.add(subtract(lm.get(PoseLandmark.LEFT_SHOULDER), lm.get(PoseLandmark.LEFT_WRIST)));
+    embedding.add(subtract(lm.get(PoseLandmark.RIGHT_SHOULDER), lm.get(PoseLandmark.RIGHT_WRIST)));
 
     embedding.add(subtract(lm.get(PoseLandmark.LEFT_HIP), lm.get(PoseLandmark.LEFT_ANKLE)));
     embedding.add(subtract(lm.get(PoseLandmark.RIGHT_HIP), lm.get(PoseLandmark.RIGHT_ANKLE)));
@@ -106,10 +98,8 @@ public class PoseEmbedding {
     embedding.add(subtract(lm.get(PoseLandmark.RIGHT_HIP), lm.get(PoseLandmark.RIGHT_WRIST)));
 
     // Five joints.
-    embedding.add(subtract(
-        lm.get(PoseLandmark.LEFT_SHOULDER), lm.get(PoseLandmark.LEFT_ANKLE)));
-    embedding.add(subtract(
-        lm.get(PoseLandmark.RIGHT_SHOULDER), lm.get(PoseLandmark.RIGHT_ANKLE)));
+    embedding.add(subtract(lm.get(PoseLandmark.LEFT_SHOULDER), lm.get(PoseLandmark.LEFT_ANKLE)));
+    embedding.add(subtract(lm.get(PoseLandmark.RIGHT_SHOULDER), lm.get(PoseLandmark.RIGHT_ANKLE)));
 
     embedding.add(subtract(lm.get(PoseLandmark.LEFT_HIP), lm.get(PoseLandmark.LEFT_WRIST)));
     embedding.add(subtract(lm.get(PoseLandmark.RIGHT_HIP), lm.get(PoseLandmark.RIGHT_WRIST)));
