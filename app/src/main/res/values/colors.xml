@@ -49,4 +49,6 @@
     <color name="dark_secondary_variant_color">#000000</color>
     <color name="loading_page_icon_bg_color">#FDFCFC</color>
 
+    <!-- Add the missing light_gray color -->
+    <color name="light_gray">#D3D3D3</color>
 </resources>
