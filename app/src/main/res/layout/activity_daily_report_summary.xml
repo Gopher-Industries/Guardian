@@ -138,7 +138,5 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include
-        android:id="@id/nav_view"
-        layout="@layout/navigation_view" />
+
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -18,7 +18,16 @@
         <item
             android:id="@+id/nav_signout"
             android:icon="@drawable/menu_signout"
+<<<<<<< HEAD
             android:title="Sign Out" />
+=======
+<<<<<<< HEAD
+            android:title="Sign Out" />
+=======
+            android:title="Sign Out"
+            android:numericModifiers="ALT"/>
+>>>>>>> 25b79e1 (initial commit)
+>>>>>>> 415cf9d (initial commit)
 
     </group>
 </menu>

@@ -8,6 +8,13 @@ buildscript {
         classpath 'com.android.tools.build:gradle:8.5.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:1.9.20"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 25b79e1 (initial commit)
+>>>>>>> 415cf9d (initial commit)
     }
 }
 
@@ -202,6 +209,14 @@ dependencies {
     implementation "androidx.camera:camera-video:${camerax_version}"
     implementation "androidx.camera:camera-view:${camerax_version}"
     implementation "androidx.camera:camera-extensions:${camerax_version}"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+>>>>>>> 25b79e1 (initial commit)
+>>>>>>> 415cf9d (initial commit)
 }
 
 apply plugin: 'com.google.gms.google-services'
