@@ -209,6 +209,8 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".view.general.DashboardActivity"/>
+        <activity android:name=".view.general.ActivityLogActivity" />
+
     </application>
 
 </manifest>
