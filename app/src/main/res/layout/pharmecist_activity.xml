@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
+
+
+        <ImageView
+            android:id="@+id/patient_list_menu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="48dp"
+            android:contentDescription="TODO"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/left_arrow" />
+
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="348dp"
+            android:layout_marginTop="44dp"
+            android:contentDescription="TODO"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/moon_ic" />
+
+        <ImageView
+            android:id="@+id/patient_list_head_image"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="48dp"
+            android:contentDescription="TODO"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/man"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Andrew"
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_bold"
+            tools:layout_editor_absoluteX="149dp"
+            tools:layout_editor_absoluteY="248dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Andrew@deakin.edu.au"
+            android:textColor="@color/TG_blue"
+            tools:layout_editor_absoluteX="122dp"
+            tools:layout_editor_absoluteY="290dp" />
+
+        <View
+
+            android:layout_width="150dp"
+            android:layout_height="2dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/TG_blue"
+            tools:layout_editor_absoluteX="122dp"
+            tools:layout_editor_absoluteY="311dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/patient_list_recycleView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="232dp">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+        <ImageView
+            android:layout_width="221dp"
+            android:layout_height="83dp"
+            android:src="@drawable/bell_ic"
+            tools:layout_editor_absoluteX="70dp"
+            tools:layout_editor_absoluteY="511dp" />
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="83dp"
+            android:src="@drawable/help_ic"
+            tools:layout_editor_absoluteX="63dp"
+            tools:layout_editor_absoluteY="594dp" />
+
+        <ImageView
+            android:layout_width="213dp"
+            android:layout_height="79dp"
+            android:src="@drawable/settings_ic"
+            tools:layout_editor_absoluteX="57dp"
+            tools:layout_editor_absoluteY="359dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/arrow_fill_right"
+            tools:layout_editor_absoluteX="306dp"
+            tools:layout_editor_absoluteY="623dp" />
+
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="78dp"
+            android:src="@drawable/about_ic"
+            tools:layout_editor_absoluteX="57dp"
+            tools:layout_editor_absoluteY="438dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/arrow_fill_right"
+            tools:layout_editor_absoluteX="306dp"
+            tools:layout_editor_absoluteY="459dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/arrow_fill_right"
+            tools:layout_editor_absoluteX="306dp"
+            tools:layout_editor_absoluteY="382dp" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/arrow_fill_right"
+            tools:layout_editor_absoluteX="306dp"
+            tools:layout_editor_absoluteY="539dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shapes"
+            tools:layout_editor_absoluteX="237dp"
+            tools:layout_editor_absoluteY="730dp" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="83dp"
+            android:src="@drawable/sign_out_ic"
+            tools:layout_editor_absoluteX="58dp"
+            tools:layout_editor_absoluteY="677dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

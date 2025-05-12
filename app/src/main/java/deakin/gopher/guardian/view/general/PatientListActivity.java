@@ -76,7 +76,15 @@ public class PatientListActivity extends BaseActivity {
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+<<<<<<< HEAD
     setContentView(R.layout.activity_patient_list);
+=======
+<<<<<<< HEAD
+    setContentView(R.layout.activity_patient_list);
+=======
+    setContentView(R.layout.activity_summary);
+>>>>>>> 25b79e1 (initial commit)
+>>>>>>> 415cf9d (initial commit)
     patient_list_recyclerView = findViewById(R.id.patient_list_recycleView);
     final ImageView addPatientIcon = findViewById(R.id.imageView62);
     final Button viewArchivedButton = findViewById(R.id.button_view_archived);

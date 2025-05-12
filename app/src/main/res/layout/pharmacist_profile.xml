@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
+
+        <ImageView
+            android:id="@+id/patient_list_menu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="51dp"
+            android:layout_marginTop="65dp"
+            android:contentDescription="TODO"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/blue_menu" />
+
+
+        <ImageView
+            android:id="@+id/patient_list_head_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="TODO"
+            app:layout_constraintStart_toEndOf="@+id/patient_list_company_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/man" />
+
+        <ImageView
+            android:id="@+id/patient_list_company_icon"
+            android:layout_width="107dp"
+            android:layout_height="107dp"
+            android:layout_marginStart="142dp"
+            android:layout_marginTop="24dp"
+            android:contentDescription="TODO"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/act1" />
+
+
+        <SearchView
+            android:id="@+id/patient_list_searchView"
+            android:layout_width="375dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="24dp"
+            android:background="@drawable/border"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search patients or others"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="144dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/patient_list_recycleView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/patient_list_searchView">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <LinearLayout
+            android:layout_width="421dp"
+            android:layout_height="120dp"
+            android:background="#3B0B98C5"
+            android:orientation="vertical"
+            android:padding="10dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="252dp">
+
+
+            <!-- Name section -->
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/microsoftteams_image__3__2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="-90dp"
+                android:text="Florence Scott"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Message section -->
+
+            <!-- Bottom text (possibly a timestamp) -->
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="31dp"
+                android:layout_marginLeft="300dp"
+                android:layout_marginTop="-23dp"
+                android:layout_marginBottom="70dp"
+                android:text="10:31am  " />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="-70dp"
+                android:text="Hey, Richard updated allergies section ASAP"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="421dp"
+            android:layout_height="120dp"
+            android:background="#FFF"
+            android:orientation="vertical"
+            android:padding="10dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="372dp">
+
+
+            <!-- Name section -->
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/microsoftteams_image__3__2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="-90dp"
+                android:text="Florence Scott"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Message section -->
+
+            <!-- Bottom text (possibly a timestamp) -->
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="300dp"
+                android:layout_marginTop="-23dp"
+                android:layout_marginBottom="70dp"
+                android:text="10:31am 19/17" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="-70dp"
+                android:text="Hey, Richard updated allergies section ASAP"
+                android:textColor="#3D3D3D"
+                android:textSize="16sp" />
+
+            <View
+
+                android:layout_width="280dp"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="10dp"
+                android:background="#CCCCCC" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="421dp"
+            android:layout_height="120dp"
+            android:background="#FFF"
+            android:orientation="vertical"
+            android:padding="10dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="492dp">
+
+
+            <!-- Name section -->
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/microsoftteams_image__3__2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="-90dp"
+                android:text="Florence Scott"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Message section -->
+
+            <!-- Bottom text (possibly a timestamp) -->
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="300dp"
+                android:layout_marginTop="-23dp"
+                android:layout_marginBottom="70dp"
+                android:text="10:31am 18/7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="-70dp"
+                android:text="Hey, Richard updated allergies section ASAP"
+                android:textColor="#3D3D3D"
+                android:textSize="16sp" />
+
+            <View
+
+                android:layout_width="280dp"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="10dp"
+                android:background="#CCCCCC" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="421dp"
+            android:layout_height="120dp"
+            android:background="#FFF"
+            android:orientation="vertical"
+            android:padding="10dp"
+            tools:layout_editor_absoluteX="4dp"
+            tools:layout_editor_absoluteY="612dp">
+
+
+            <!-- Name section -->
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/microsoftteams_image__3__2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="-90dp"
+                android:text="Florence Scott"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Message section -->
+
+            <!-- Bottom text (possibly a timestamp) -->
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="300dp"
+                android:layout_marginTop="-23dp"
+                android:layout_marginBottom="70dp"
+                android:text="10:31am 15/7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="110dp"
+                android:layout_marginTop="-70dp"
+                android:text="Hey, Richard updated allergies section ASAP"
+                android:textColor="#3D3D3D"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/bottom_line"
+                android:layout_width="280dp"
+                android:layout_height="2dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="10dp"
+                android:background="#CCCCCC" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="430dp"
+            android:layout_height="151dp"
+            android:src="@drawable/rounded_bottom_bar"
+            tools:layout_editor_absoluteX="4dp"
+            tools:layout_editor_absoluteY="810dp" />
+
+        <ImageView
+            android:layout_width="107dp"
+            android:layout_height="107dp"
+            android:src="@drawable/pai_ic"
+            tools:layout_editor_absoluteX="162dp"
+            tools:layout_editor_absoluteY="796dp" />
+
+        <ImageView
+            android:layout_width="109dp"
+            android:layout_height="84dp"
+            android:src="@drawable/callander"
+            tools:layout_editor_absoluteX="280dp"
+            tools:layout_editor_absoluteY="807dp" />
+
+        <ImageView
+            android:layout_width="139dp"
+            android:layout_height="106dp"
+            android:src="@drawable/actvty_menu_ic"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="799dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
