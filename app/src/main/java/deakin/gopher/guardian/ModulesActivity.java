@@ -45,4 +45,6 @@ public class ModulesActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+
 }

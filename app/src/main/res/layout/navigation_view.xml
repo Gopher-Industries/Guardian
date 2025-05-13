@@ -8,4 +8,4 @@
     android:background="@drawable/menu_background"
     app:headerLayout="@layout/nav_header"
     app:menu="@menu/nav_menu"
-    app:itemTextAppearance="@style/menu_text_style"/>
+    app:itemTextAppearance="@style/menu_text_style" />

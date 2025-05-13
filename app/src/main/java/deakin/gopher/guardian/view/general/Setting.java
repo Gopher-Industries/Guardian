@@ -38,12 +38,10 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     setContentView(R.layout.activity_setting);
     String userType = getIntent().getStringExtra("userType");
 
-    settingsThemeButton = findViewById(R.id.settings_theme_button);
-    settingsNotificationButton = findViewById(R.id.settings_notification_button);
-    settingsAppUpdateButton = findViewById(R.id.settings_app_update_button);
-    settingsFeedbackButton = findViewById(R.id.settings_feedback_button);
-
-
+//    settingsThemeButton = findViewById(R.id.settings_theme_button);
+//    settingsNotificationButton = findViewById(R.id.settings_menu_button);
+//    settingsAppUpdateButton = findViewById(R.id.settings_app_update_button);
+//    settingsFeedbackButton = findViewById(R.id.settings_feedback_button);
 
     settingsAppUpdateButton.setOnClickListener(this);
     settingsFeedbackButton.setOnClickListener(this);
@@ -52,16 +50,10 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
     navigationView.setItemIconTintList(null);
 
-    settingsMenuButton.setOnClickListener(
-        v -> {
-          drawerLayout.openDrawer(GravityCompat.START);
-        });
+    settingsMenuButton.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
 
-    final ConstraintLayout settingsThemeButton = findViewById(R.id.settings_theme_button);
-
-    notificationSwitch = findViewById(R.id.notification_switch);
-    notificationSwitch.setOnCheckedChangeListener(
-        (buttonView, isChecked) -> handleNotificationSwitch(isChecked));
+//    notificationSwitch = findViewById(R.id.notification_switch);
+    notificationSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> handleNotificationSwitch(isChecked));
 
     themeSwitch = findViewById(R.id.theme_switch);
     themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> handleThemeSwitch(isChecked));
@@ -70,9 +62,9 @@ public class Setting extends BaseActivity implements View.OnClickListener {
 
   @Override
   public void onClick(final View v) {
-    if (R.id.settings_feedback_button == v.getId()) {
-      showFeedbackDialog();
-    }
+//    if (R.id.settings_feedback_button == v.getId()) {
+//      showFeedbackDialog();
+//    }
   }
 
   private void initializeSwitchStates() {
@@ -96,30 +88,27 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     menu.clear();
 
     navigationView.inflateMenu(R.menu.nav_menu);
-    navigationView.setNavigationItemSelectedListener(
-        menuItem -> {
-          Intent intent = null;
-          switch (menuItem.getItemId()) {
-            case R.id.nav_home:
-              intent =
-                  new Intent(
-                      Setting.this,
-                      userType.equals("admin") ? Homepage4admin.class : Homepage4caretaker.class);
-              break;
-            case R.id.nav_signout:
-              FirebaseAuth.getInstance().signOut();
-              startActivity(new Intent(Setting.this, LoginActivity.class));
-              finish();
-          }
+    navigationView.setNavigationItemSelectedListener(menuItem -> {
+      Intent intent = null;
+      switch (menuItem.getItemId()) {
+        case R.id.nav_home:
+          intent = new Intent(Setting.this,
+                  userType.equals("admin") ? Homepage4admin.class : Homepage4caretaker.class);
+          break;
+        case R.id.nav_signout:
+          FirebaseAuth.getInstance().signOut();
+          startActivity(new Intent(Setting.this, LoginActivity.class));
+          finish();
+      }
 
-          if (intent != null) {
-            startActivity(intent);
-          }
+      if (intent != null) {
+        startActivity(intent);
+      }
 
-          DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-          drawerLayout.closeDrawer(GravityCompat.START);
-          return true;
-        });
+      DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+      drawerLayout.closeDrawer(GravityCompat.START);
+      return true;
+    });
   }
 
   private void handleThemeSwitch(final boolean isChecked) {
@@ -134,21 +123,18 @@ public class Setting extends BaseActivity implements View.OnClickListener {
   }
 
   private void showNotification() {
-    if (Build.VERSION_CODES.O <= Build.VERSION.SDK_INT) {
-      final NotificationChannel channel =
-          new NotificationChannel(
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      NotificationChannel channel = new NotificationChannel(
               "channel_id", "Channel Name", NotificationManager.IMPORTANCE_DEFAULT);
-      final NotificationManager notificationManager = getSystemService(NotificationManager.class);
+      NotificationManager notificationManager = getSystemService(NotificationManager.class);
       notificationManager.createNotificationChannel(channel);
     }
   }
 
-  // feedback
   private void showFeedbackDialog() {
     final AlertDialog.Builder builder = new AlertDialog.Builder(this);
     builder.setTitle("Provide Feedback");
 
-    // Create RatingBar
     final RatingBar ratingBar = new RatingBar(this);
     ratingBar.setNumStars(5);
     ratingBar.setStepSize(0.5f);
@@ -156,42 +142,32 @@ public class Setting extends BaseActivity implements View.OnClickListener {
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT));
 
-    // Create EditText for feedback
     final EditText feedbackEditText = new EditText(this);
     feedbackEditText.setHint("Enter your feedback...");
 
-    // Create a layout to hold both RatingBar and EditText
     LinearLayout layout = new LinearLayout(this);
     layout.setOrientation(LinearLayout.VERTICAL);
     layout.setPadding(16, 16, 16, 16);
-    layout.addView(ratingBar); // Add the RatingBar to the layout
-    layout.addView(feedbackEditText); // Add the EditText to the layout
+    layout.addView(ratingBar);
+    layout.addView(feedbackEditText);
 
-    builder.setView(layout); // Set the custom layout with RatingBar and EditText
+    builder.setView(layout);
 
-    // Set the Positive (Submit) Button
-    builder.setPositiveButton(
-            "Submit",
-            (dialog, which) -> {
-              final String feedback = feedbackEditText.getText().toString();
-              final float rating = ratingBar.getRating();
-              if (!feedback.isEmpty()) {
-                // Show Toast thanking the user and displaying their rating
-                Toast.makeText(this, "Thank you for your feedback! Rating: " + rating, Toast.LENGTH_SHORT).show();
-                // Optionally, handle the feedback submission logic (send to server, etc.)
-              } else {
-                showToast("Please enter your feedback");
-              }
-            });
+    builder.setPositiveButton("Submit", (dialog, which) -> {
+      final String feedback = feedbackEditText.getText().toString();
+      final float rating = ratingBar.getRating();
+      if (!feedback.isEmpty()) {
+        Toast.makeText(this, "Thank you for your feedback! Rating: " + rating, Toast.LENGTH_SHORT).show();
+      } else {
+        showToast("Please enter your feedback");
+      }
+    });
 
-    // Set the Negative (Cancel) Button
     builder.setNegativeButton("Cancel", null);
 
-    // Create and show the dialog
     final AlertDialog dialog = builder.create();
     dialog.show();
   }
-
 
   private void showToast(final CharSequence message) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -203,7 +179,7 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     initializeSwitchStates();
   }
 
-    public void onBackButtonClicked(View view) {
-      onBackPressed();
-    }
+  public void onBackButtonClicked(View view) {
+    onBackPressed();
+  }
 }

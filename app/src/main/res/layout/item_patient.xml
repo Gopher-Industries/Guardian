@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    tools:context=".adapter.PatientListAdapter">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- Status Indicator -->
+        <ImageView
+            android:id="@+id/statusIndicator"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="Patient status indicator" />
+
+        <!-- Patient Name -->
+        <TextView
+            android:id="@+id/patientName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Patient Name"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
+        <!-- Action Button (Optional) -->
+        <ImageView
+            android:id="@+id/actionButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_forward"
+            android:contentDescription="Action button" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

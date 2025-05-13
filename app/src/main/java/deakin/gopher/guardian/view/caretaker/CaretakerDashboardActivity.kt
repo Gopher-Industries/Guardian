@@ -7,31 +7,33 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.view.FallDetection.FallAlertActivity
 import deakin.gopher.guardian.view.FallDetection.FallDetectionActivity
 import deakin.gopher.guardian.view.general.BaseActivity
-import deakin.gopher.guardian.view.general.PatientListActivity
 import deakin.gopher.guardian.view.general.PatientProfileActivity
 
 class CaretakerDashboardActivity : BaseActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_caretaker_dashboard)
     }
 
+    override fun openProfileActivity() {
+        val intent = Intent(this, CaretakerProfileActivity::class.java)
+        startActivity(intent)
+    }
+
     fun onHealthDataClick(view: View?) {
-        val healthDataActivityIntent =
-            Intent(this@CaretakerDashboardActivity, PatientProfileActivity::class.java)
-        startActivity(healthDataActivityIntent)
+        startActivity(Intent(this, PatientProfileActivity::class.java))
     }
 
     fun onNotificationsClick(view: View?) {
-        val medicalDiagnosticsActivityIntent =
-            Intent(this@CaretakerDashboardActivity, FallAlertActivity::class.java)
-        startActivity(medicalDiagnosticsActivityIntent)
+        startActivity(Intent(this, FallAlertActivity::class.java))
     }
 
-
     fun onMonitorPatientClick(view: View?) {
-        val patientProfileListIntent =
-            Intent(this@CaretakerDashboardActivity, FallDetectionActivity::class.java)
-        startActivity(patientProfileListIntent)
+        startActivity(Intent(this, FallDetectionActivity::class.java))
+    }
+
+    fun onProfileClick(view: View?) {
+        openProfileActivity()
     }
 }

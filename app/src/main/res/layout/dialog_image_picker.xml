@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="horizontal"
+        android:fillViewport="false">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Image 1 -->
+            <ImageView
+                android:id="@+id/image1"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginEnd="12dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sample1"
+                android:contentDescription="Profile Image 1" />
+
+            <!-- Image 2 -->
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginEnd="12dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sample2"
+                android:contentDescription="Profile Image 2" />
+
+            <!-- Image 3 -->
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginEnd="12dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sample3"
+                android:contentDescription="Profile Image 3" />
+
+            <!-- Add Button -->
+            <ImageView
+                android:id="@+id/imageAdd"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_add_image"
+                android:contentDescription="Add New Image" />
+        </LinearLayout>
+    </HorizontalScrollView>
+</LinearLayout>

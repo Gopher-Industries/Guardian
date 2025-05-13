@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.FirebaseDatabase
+import deakin.gopher.guardian.model.FirebaseMessagingService
 
 object Util {
     const val DAILY_REPORT_LODGED = "daily_report_lodged"
@@ -20,7 +21,7 @@ object Util {
     const val DEVICE_TOKEN = "device_token"
 
     fun updateDeviceToken(
-        context: Context?,
+        context: FirebaseMessagingService,
         token: String,
         username: String?,
     ) {

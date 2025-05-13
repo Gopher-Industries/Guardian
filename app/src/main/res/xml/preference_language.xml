@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:key="app_language"
+        android:title="App Language"
+        android:summary="Select the language you prefer"
+        android:entries="@array/language_names"
+        android:entryValues="@array/language_values"
+        android:defaultValue="en" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="check_box_preference_1"
+        android:title="Check box preference" />
+    <ListPreference
+        android:defaultValue="1"
+        android:entries="@array/preferred_language_array"
+        android:entryValues="@array/preferred_language_array"
+        android:key="list_preference_1"
+        android:title="List preference" />
+
+</PreferenceScreen>

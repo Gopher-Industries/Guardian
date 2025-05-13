@@ -280,22 +280,23 @@ public class PatientListActivity extends BaseActivity {
       final int position = viewHolder.getBindingAdapterPosition();
       new AlertDialog.Builder(viewHolder.itemView.getContext())
           .setTitle("Delete Patient")
-          .setMessage("Are you sure you want to delete this patient?")
-          .setPositiveButton(
-              "Yes",
-              (dialog, which) -> {
-                ((PatientListAdapter)
-                        Objects.requireNonNull(patient_list_recyclerView.getAdapter()))
-                    .deleteItem(position);
-              })
-          .setNegativeButton(
-              "No",
-              (dialog, which) -> {
-                Objects.requireNonNull(patient_list_recyclerView.getAdapter())
-                    .notifyItemChanged(position);
-              })
-          .create()
-          .show();
+          .setMessage("Are you sure you want to delete this patient?");
+//          .setPositiveButton(
+//              "Yes",
+//              (dialog, which) -> {
+//                ((PatientListAdapter)
+//
+//                        Objects.requireNonNull(patient_list_recyclerView.getAdapter()
+//                                .deleteItem(position);
+//              })
+//          .setNegativeButton(
+//              "No",
+//              (dialog, which) -> {
+//                Objects.requireNonNull(patient_list_recyclerView.getAdapter())
+//                    .notifyItemChanged(position);
+//              })
+//          .create()
+//          .show();
     }
 
     @Override

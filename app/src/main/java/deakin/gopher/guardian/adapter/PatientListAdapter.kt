@@ -18,26 +18,34 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.FirebaseDatabase
 import deakin.gopher.guardian.R
-import deakin.gopher.guardian.adapter.PatientListAdapter.MyViewHolder
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.PatientStatus
 import deakin.gopher.guardian.view.general.PatientProfileActivity
 import java.util.Objects
 
+
+
 class PatientListAdapter(
-    /**
-     * Initialize a [RecyclerView.Adapter] that listens to a Firebase query. See [ ] for configuration options.
-     */
     private val context: Context,
-    options: FirebaseRecyclerOptions<Patient?>,
+    options: FirebaseRecyclerOptions<Patient>,
     private val isArchivedList: Boolean,
-) : FirebaseRecyclerAdapter<Patient?, MyViewHolder?>(options) {
+) : FirebaseRecyclerAdapter<Patient, PatientListAdapter.MyViewHolder>(options) {
+
+    // This method is required by FirebaseRecyclerAdapter
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        // Inflate the item layout (the layout for each patient item)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_patient, parent, false)
+
+        // Return the ViewHolder with the inflated view
+        return MyViewHolder(view)
+    }
+
     override fun onDataChanged() {
         super.onDataChanged()
         if (itemCount == 0) {
-            Log.d("PatientListAdapter", "No archived patients found.")
+            Log.d("PatientListAdapter", "No patients found.")
         } else {
-            Log.d("PatientListAdapter", "Archived patients loaded: $itemCount")
+            Log.d("PatientListAdapter", "Patients loaded: $itemCount")
         }
     }
 
@@ -47,175 +55,121 @@ class PatientListAdapter(
         position: Int,
         model: Patient,
     ) {
-        holder.patientName.text = "${model.firstName} ${model.middleName} ${model.lastName}"
+        // Ensure model.firstName, model.middleName, and model.lastName are not null
+        val fullName = "${model.firstName ?: ""} ${model.middleName ?: ""} ${model.lastName ?: ""}".trim()
+        holder.patientName.text = fullName
+
+        // Update status indicator based on patient status
         updateStatusIndicator(holder.statusIndicator, model.status)
-        holder.bind(model, isArchivedList)
-        Log.d("PatientListAdapter", "Patient ID: " + model.patientId)
-        holder.patientItem.setOnClickListener { view: View? ->
+
+        Log.d("PatientListAdapter", "Patient ID: ${model.patientId}")
+
+        // On click action for patient item
+        holder.patientItem.setOnClickListener {
             val sharedPreferences = context.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
             val role = sharedPreferences.getInt("login_role", -1)
-            if (0 == role || -1 == role) {
-                Log.d("PatientListAdapter", "Before toggle: " + model.status)
+
+            val intent = Intent(context, PatientProfileActivity::class.java)
+            if (role == 0 || role == -1) {
+                Log.d("PatientListAdapter", "Before toggle: ${model.status}")
                 model.examinePatient()
-                Log.d("PatientListAdapter", "After toggle: " + model.status)
+                Log.d("PatientListAdapter", "After toggle: ${model.status}")
+
                 updateStatusIndicator(holder.statusIndicator, model.status)
-                notifyItemChanged(position)
-                val intent = Intent(context, PatientProfileActivity::class.java)
+
                 intent.putExtra("patientId", model.patientId)
                 context.startActivity(intent)
+
                 updatePatientStatus(model.patientId, model.status, model.needsAssistance)
-            } else if (1 == role) {
-                // admin
-                val intent = Intent(context, PatientProfileActivity::class.java)
-                intent.putExtra("id", model.patientId)
+
+            } else if (role == 1) {
+                intent.putExtra("patientId", model.patientId)
                 context.startActivity(intent)
             }
         }
+
+        // Action button logic based on archived list
+        if (isArchivedList) {
+            holder.actionButton.setOnClickListener {
+                restorePatient(model)
+            }
+        } else {
+            holder.actionButton.setOnClickListener {
+                viewPatientDetails(model, context)
+            }
+        }
     }
 
+    // Update the status indicator color and animation based on patient status
     private fun updateStatusIndicator(
         statusIndicator: ImageView,
-        status: PatientStatus,
+        status: PatientStatus?,
     ) {
-        val statusColor =
-            if (PatientStatus.REQUIRES_ASSISTANCE === status) {
-                ContextCompat.getColor(
-                    context,
-                    R.color.red,
-                )
-            } else {
-                ContextCompat.getColor(context, R.color.green)
-            }
+        val statusColor = when (status) {
+            PatientStatus.REQUIRES_ASSISTANCE -> ContextCompat.getColor(context, R.color.red)
+            PatientStatus.NEEDS_CHECKUP -> ContextCompat.getColor(context, R.color.orange)
+            PatientStatus.OK -> ContextCompat.getColor(context, R.color.green)
+            else -> ContextCompat.getColor(context, R.color.green)
+        }
         statusIndicator.setColorFilter(statusColor)
-        val pulseAnimation =
-            AnimationUtils.loadAnimation(
-                context,
-                R.anim.scale_animation,
-            )
-        statusIndicator.startAnimation(pulseAnimation)
+
+        if (status == PatientStatus.REQUIRES_ASSISTANCE || status == PatientStatus.NEEDS_CHECKUP) {
+            val pulseAnimation = AnimationUtils.loadAnimation(context, R.anim.scale_animation)
+            statusIndicator.startAnimation(pulseAnimation)
+        } else {
+            statusIndicator.clearAnimation()
+        }
     }
 
+    // Update the status and needsAssistance field in Firebase
     private fun updatePatientStatus(
         patientId: String?,
-        newStatus: PatientStatus,
-        needsAssistance: Boolean,
+        newStatus: PatientStatus?,
+        needsAssistance: Boolean?,
     ) {
+        if (patientId == null) {
+            Log.e("UpdateStatus", "Patient ID is null, cannot update status.")
+            return
+        }
+
         val patientsRef = FirebaseDatabase.getInstance().getReference("patients")
-        patientsRef
-            .child(patientId!!)
-            .child("status")
-            .setValue(newStatus.toString())
-            .addOnSuccessListener {
-                Log.d(
-                    "UpdateStatus",
-                    "Patient status updated successfully.",
-                )
-            }
-            .addOnFailureListener { e: Exception? ->
-                Log.e(
-                    "UpdateStatus",
-                    "Failed to update patient status.",
-                    e,
-                )
-            }
-        patientsRef.child(patientId).child("needsAssistance").setValue(needsAssistance)
-    }
+        val patientRef = patientsRef.child(patientId)
 
-    private fun getStatusColor(patient: Patient): Int {
-        val oneHourMillis: Long = 60000
-        val currentTime = System.currentTimeMillis()
-        return if (currentTime - patient.lastExaminedTimestamp > oneHourMillis) {
-            ContextCompat.getColor(context, R.color.orange)
-        } else {
-            if (PatientStatus.REQUIRES_ASSISTANCE ===
-                Objects.requireNonNull(
-                    patient.status,
-                )
-            ) {
-                ContextCompat.getColor(context, R.color.red)
-            } else {
-                ContextCompat.getColor(context, R.color.green)
-            }
-        }
-    }
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int,
-    ): MyViewHolder {
-        val view =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.activity_patient_list_item, parent, false)
-        return MyViewHolder(view, context)
-    }
-
-    fun deleteItem(position: Int) {
-        val itemRef = getRef(position)
-        itemRef
-            .removeValue()
-            .addOnSuccessListener {
-                Toast.makeText(
-                    context,
-                    "Deleted successfully, click on archive to restore",
-                    Toast.LENGTH_LONG,
-                )
-                    .show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(
-                    context,
-                    "Error during deletion",
-                    Toast.LENGTH_LONG,
-                ).show()
-            }
-    }
-
-    class MyViewHolder(itemView: View, private val context: Context) :
-        RecyclerView.ViewHolder(itemView) {
-        val patientName: TextView
-        val patientItem: CardView
-        val statusIndicator: ImageView
-        private val actionButton: ImageView
-
-        init {
-            patientName = itemView.findViewById(R.id.patient_list_name)
-            patientItem = itemView.findViewById(R.id.patient_list_patient_item)
-            statusIndicator = itemView.findViewById(R.id.patient_status_indicator)
-            actionButton = itemView.findViewById(R.id.patient_list_arrow)
-            Log.d("PatientListAdapter", "Indicator loaded $statusIndicator")
-        }
-
-        @SuppressLint("SetTextI18n")
-        fun bind(
-            patient: Patient,
-            isArchivedList: Boolean,
-        ) {
-            patientName.text = "${patient.getFirstName()} ${patient.getLastName()}"
-            if (isArchivedList) {
-                actionButton.setOnClickListener { v: View? -> restorePatient(patient) }
-            } else {
-                actionButton.setOnClickListener { v: View? -> viewPatientDetails(patient, context) }
-            }
-        }
-
-        private fun restorePatient(patient: Patient) {
-            val patientRef =
-                patient.getPatientId()?.let {
-                    FirebaseDatabase.getInstance()
-                        .reference
-                        .child("patients")
-                        .child(it)
+        newStatus?.let {
+            patientRef.child("status").setValue(it.toString())
+                .addOnSuccessListener {
+                    Log.d("UpdateStatus", "Patient status updated successfully to $it.")
                 }
-            patientRef?.child("isArchived")?.setValue(false)
+                .addOnFailureListener { e: Exception ->
+                    Log.e("UpdateStatus", "Failed to update patient status.", e)
+                }
         }
 
-        private fun viewPatientDetails(
-            patient: Patient,
-            context: Context,
-        ) {
-            val intent = Intent(context, PatientProfileActivity::class.java)
-            intent.putExtra("PATIENT_ID", patient.getPatientId())
-            context.startActivity(intent)
+        needsAssistance?.let {
+            patientRef.child("needsAssistance").setValue(it)
+                .addOnSuccessListener {
+                    Log.d("UpdateStatus", "Patient needsAssistance updated successfully to $it.")
+                }
+                .addOnFailureListener { e: Exception ->
+                    Log.e("UpdateStatus", "Failed to update patient needsAssistance.", e)
+                }
         }
+    }
+
+    // Optional methods for patient restoration or viewing patient details
+    private fun restorePatient(patient: Patient) {
+        // Implementation for restoring a patient
+    }
+
+    private fun viewPatientDetails(patient: Patient, context: Context) {
+        // Implementation for viewing patient details
+    }
+
+    // ViewHolder inner class to bind views
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val patientName: TextView = view.findViewById(R.id.patientName)
+        val statusIndicator: ImageView = view.findViewById(R.id.statusIndicator)
+        val patientItem: CardView = view.findViewById(R.id.patientItem)
+        val actionButton: ImageView = view.findViewById(R.id.actionButton)
     }
 }

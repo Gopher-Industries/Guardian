@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         tools:context="deakin.gopher.guardian.view.general.Setting">
 
+        <!-- Settings header card view -->
         <androidx.cardview.widget.CardView
             android:id="@+id/settings_header_card_view"
             android:layout_width="0dp"
@@ -28,6 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <!-- Settings menu button -->
                 <ImageView
                     android:id="@+id/settings_menu_button"
                     android:layout_width="33dp"
@@ -39,6 +41,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/menu_button" />
 
+                <!-- Settings title -->
                 <TextView
                     android:id="@+id/medicalDiagnosticsTitleTextView"
                     android:layout_width="wrap_content"
@@ -52,6 +55,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent" />
 
+                <!-- Settings icon -->
                 <View
                     android:id="@+id/settingsIcon"
                     android:layout_width="86dp"
@@ -64,6 +68,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent" />
 
+                <!-- Back button -->
                 <Button
                     android:id="@+id/backButton"
                     android:layout_width="wrap_content"
@@ -73,18 +78,10 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Back"
-                    android:onClick="onBackButtonClicked"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- Theme button -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/settings_theme_button"
             android:layout_width="match_parent"
@@ -97,11 +94,10 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/settings_header_card_view">
 
-
             <TextView
                 android:id="@+id/theme_button_title"
                 android:layout_width="wrap_content"
-                android:layout_height="20sp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:fontFamily="@font/poppins"
                 android:text="@string/night_mode"
@@ -117,133 +113,10 @@
                 android:id="@+id/theme_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/settings_notification_button"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/settings_button_background"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_theme_button">
-
-            <TextView
-                android:id="@+id/notification_button_title"
-                android:layout_width="wrap_content"
-                android:layout_height="20sp"
-                android:layout_marginStart="25dp"
-                android:fontFamily="@font/poppins"
-                android:text="@string/notifications"
-                android:textColor="#FFFFFF"
-                android:textFontWeight="400"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Switch
-                android:id="@+id/notification_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="196dp"
-                android:layout_marginEnd="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/notification_button_title"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/settings_app_update_button"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/settings_button_background"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_notification_button">
-
-            <TextView
-                android:id="@+id/app_update_button_title"
-                android:layout_width="wrap_content"
-                android:layout_height="20sp"
-                android:layout_marginStart="25dp"
-                android:fontFamily="@font/poppins"
-                android:text="@string/app_update"
-                android:textColor="#FFFFFF"
-                android:textFontWeight="400"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/app_update_button_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:contentDescription="TODO"
-                android:src="@drawable/settings_arrow"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/settings_feedback_button"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/settings_button_background"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_app_update_button">
-
-            <TextView
-                android:id="@+id/feedback_button_title"
-                android:layout_width="wrap_content"
-                android:layout_height="20sp"
-                android:layout_marginStart="25dp"
-                android:fontFamily="@font/poppins"
-                android:text="@string/feedback"
-                android:textColor="#FFFFFF"
-                android:textFontWeight="400"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/feedback_button_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:contentDescription="TODO"
-                android:src="@drawable/settings_arrow"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <include
-        android:id="@id/nav_view"
-        layout="@layout/navigation_view" />
 </androidx.drawerlayout.widget.DrawerLayout>

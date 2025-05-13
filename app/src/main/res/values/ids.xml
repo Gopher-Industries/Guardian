@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="patientItem" type="id" />
+    <item name="txtEmegencyContact" type="id" />
+    <item name="saveBtn" type="id" />
+    <item name="layoutUnderCare" type="id" />
+    <item name="layoutMedicare" type="id" />
+    <item name="layoutPhone" type="id" />
+    <item name="layoutDob" type="id" />
+    <item name="layoutAddress" type="id" />
+    <item name="layoutName" type="id" />
+    <item name="editButton" type="id" />
+</resources>

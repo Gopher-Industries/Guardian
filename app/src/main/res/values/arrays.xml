@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="language_names" />
+<!--    <string-array name="language_values" />-->
+    <string-array name="language_options" />
+</resources>

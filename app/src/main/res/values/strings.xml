@@ -502,12 +502,20 @@
 
     <string-array name="preferred_language_array">
         <item>English</item>
-        <item>Arabic</item>
+        <item>French</item>
+        <item>Spanish</item>
+        <item>Arabic</item>a
         <item>Chinese</item>
         <item>Hindi</item>
         <item>Italian</item>
         <item>Greek</item>
         <item>Vietnamese</item>
+    </string-array>
+
+    <string-array name="language_values">
+        <item>en</item>
+        <item>hi</item>
+        <item>es</item>
     </string-array>
 
     <string-array name="program_type_array">
@@ -650,6 +658,7 @@
     <string name="is_this_false_alert">IS THIS A FALSE ALERT?</string>
     <string name="do_you_confirm_the_fall">DO YOU CONFIRM THE FALL?</string>
     <string name="call">CALL</string>
+    <string name="choose_language" />
     <string-array name="dropdown_items">
         <item>Azithromycin</item>
         <item>Levothyroxine</item>
