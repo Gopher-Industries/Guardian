@@ -1,12 +1,15 @@
-package deakin.gopher.guardian.view.falldetection.util.classification;
+package deakin.gopher.guardian.view.FallDetection.util.classification;
 
 import static com.google.common.primitives.Floats.max;
 
 import com.google.mlkit.vision.common.PointF3D;
+
 import java.util.List;
 import java.util.ListIterator;
 
-/** Utility methods for operations on {@link PointF3D}. */
+/**
+ * Utility methods for operations on {@link PointF3D}.
+ */
 public class Utils {
   private Utils() {}
 

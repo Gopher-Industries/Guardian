@@ -15,7 +15,7 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.view.general.BaseActivity
 import deakin.gopher.guardian.view.general.Homepage4caretaker
 
-class CallAmbulanceActivity : BaseActivity() {
+class CallAmbulanceActivity : BaseActivity(){
     var hospitalSpinner: Spinner? = null
     var hospitalSelection: String? = null
     var confirmIncidentMenuButton: ImageView? = null
@@ -72,6 +72,7 @@ class CallAmbulanceActivity : BaseActivity() {
             Intent(this@CallAmbulanceActivity, Homepage4caretaker::class.java)
         startActivity(medicalDiagnosticsActivityIntent)
     }
+
 
     class SpinnerActivity : Activity(), AdapterView.OnItemSelectedListener {
         override fun onItemSelected(

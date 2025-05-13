@@ -2,12 +2,10 @@ package deakin.gopher.guardian.view.general;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -24,11 +22,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
 import deakin.gopher.guardian.R;
 
 public class Setting extends BaseActivity implements View.OnClickListener {
@@ -95,66 +88,12 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     configureNavigationDrawer(userType);
   }
 
-  private void showUpToDateDialog() {
-    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setTitle("App Update");
-    builder.setMessage("Your app is up to date!");
-    builder.setPositiveButton("OK", null);
-    builder.show();
-  }
-
-
-  private void showNewUpdateDialog() {
-    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setTitle("App Update Available");
-    builder.setMessage("A new version is available. Please update to the latest version!");
-
-    builder.setPositiveButton("Update", (dialog, which) -> {
-      showToast("Redirecting to update...");
-    });
-
-    builder.setNegativeButton("Later", null);
-    builder.show();
-  }
-
-
-
-  private void checkForUpdates() {
-    final ProgressDialog progressDialog = new ProgressDialog(this);
-    progressDialog.setMessage("Checking for updates...");
-    progressDialog.setCancelable(false);
-    progressDialog.show();
-
-    new Handler().postDelayed(() -> {
-      progressDialog.dismiss();
-
-      // Simulate random check: true = update available, false = up to date
-      boolean updateAvailable = Math.random() < 0.5; // 50% chance
-
-      if (updateAvailable) {
-        showNewUpdateDialog();
-      } else {
-        showUpToDateDialog();
-      }
-    }, 2000); // simulate 2-second network check
-  }
-
-
   @Override
   public void onClick(final View v) {
     if (v.getId() == R.id.settings_feedback_button) {
       showFeedbackDialog();
-    } else if (R.id.settings_app_update_button == v.getId()) {
-      checkForUpdates();
     }
-
-
   }
-
-  private void showCheckingForUpdatesMessage() {
-    showToast("Checking for updates...");
-  }
-
 
   private void initializeSwitchStates() {
     final SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
@@ -340,4 +279,3 @@ private void handleThemeSwitch(final boolean isChecked) {
     initializeSwitchStates();
   }
 }
-

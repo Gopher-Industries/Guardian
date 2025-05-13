@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package deakin.gopher.guardian.view.falldetection.util.classification;
+package deakin.gopher.guardian.view.FallDetection.util.classification;
 
 import static java.util.Collections.max;
 
@@ -48,14 +48,13 @@ public class ClassificationResult {
       return null;
     }
     return max(
-            classConfidences.entrySet(),
-            (entry1, entry2) -> (int) (entry1.getValue() - entry2.getValue()))
+        classConfidences.entrySet(),
+        (entry1, entry2) -> (int) (entry1.getValue() - entry2.getValue()))
         .getKey();
   }
 
   public void incrementClassConfidence(String className) {
-    classConfidences.put(
-        className,
+    classConfidences.put(className,
         classConfidences.containsKey(className) ? classConfidences.get(className) + 1 : 1);
   }
 

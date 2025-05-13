@@ -1,13 +1,18 @@
-package deakin.gopher.guardian.view.falldetection.util.classification;
+
+
+package deakin.gopher.guardian.view.FallDetection.util.classification;
 
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Looper;
 import android.util.Log;
+
 import androidx.annotation.WorkerThread;
+
 import com.google.common.base.Preconditions;
 import com.google.mlkit.vision.pose.Pose;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,7 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/** Accepts a stream of {@link Pose} for classification and Rep counting. */
+/**
+ * Accepts a stream of {@link Pose} for classification and Rep counting.
+ */
 public class PoseClassifierProcessor {
   private static final String TAG = "PoseClassifierProcessor";
   private static final String POSE_SAMPLES_FILE = "pose/fitness_pose_samples.csv";
@@ -25,7 +32,9 @@ public class PoseClassifierProcessor {
   // for your pose samples.
   private static final String PUSHUPS_CLASS = "pushups_down";
   private static final String SQUATS_CLASS = "squats_down";
-  private static final String[] POSE_CLASSES = {PUSHUPS_CLASS, SQUATS_CLASS};
+  private static final String[] POSE_CLASSES = {
+    PUSHUPS_CLASS, SQUATS_CLASS
+  };
 
   private final boolean isStreamMode;
 
@@ -49,8 +58,8 @@ public class PoseClassifierProcessor {
   private void loadPoseSamples(Context context) {
     List<PoseSample> poseSamples = new ArrayList<>();
     try {
-      BufferedReader reader =
-          new BufferedReader(new InputStreamReader(context.getAssets().open(POSE_SAMPLES_FILE)));
+      BufferedReader reader = new BufferedReader(
+          new InputStreamReader(context.getAssets().open(POSE_SAMPLES_FILE)));
       String csvLine = reader.readLine();
       while (csvLine != null) {
         // If line is not a valid {@link PoseSample}, we'll get null and skip adding to the list.
@@ -75,8 +84,9 @@ public class PoseClassifierProcessor {
    * Given a new {@link Pose} input, returns a list of formatted {@link String}s with Pose
    * classification results.
    *
-   * <p>Currently it returns up to 2 strings as following: 0: PoseClass : X reps 1: PoseClass :
-   * [0.0-1.0] confidence
+   * <p>Currently it returns up to 2 strings as following:
+   * 0: PoseClass : X reps
+   * 1: PoseClass : [0.0-1.0] confidence
    */
   @WorkerThread
   public List<String> getPoseResult(Pose pose) {
@@ -102,8 +112,8 @@ public class PoseClassifierProcessor {
           // Play a fun beep when rep counter updates.
           ToneGenerator tg = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
           tg.startTone(ToneGenerator.TONE_PROP_BEEP);
-          lastRepResult =
-              String.format(Locale.US, "%s : %d reps", repCounter.getClassName(), repsAfter);
+          lastRepResult = String.format(
+              Locale.US, "%s : %d reps", repCounter.getClassName(), repsAfter);
           break;
         }
       }
@@ -113,16 +123,16 @@ public class PoseClassifierProcessor {
     // Add maxConfidence class of current frame to result if pose is found.
     if (!pose.getAllPoseLandmarks().isEmpty()) {
       String maxConfidenceClass = classification.getMaxConfidenceClass();
-      String maxConfidenceClassResult =
-          String.format(
-              Locale.US,
-              "%s : %.2f confidence",
-              maxConfidenceClass,
-              classification.getClassConfidence(maxConfidenceClass)
-                  / poseClassifier.confidenceRange());
+      String maxConfidenceClassResult = String.format(
+          Locale.US,
+          "%s : %.2f confidence",
+          maxConfidenceClass,
+          classification.getClassConfidence(maxConfidenceClass)
+              / poseClassifier.confidenceRange());
       result.add(maxConfidenceClassResult);
     }
 
     return result;
   }
+
 }

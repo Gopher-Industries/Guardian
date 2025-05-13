@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-package deakin.gopher.guardian.view.falldetection.util.classification;
+package deakin.gopher.guardian.view.FallDetection.util.classification;
 
 import android.os.SystemClock;
+
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingDeque;
 
-/** Runs EMA smoothing over a window with given stream of pose classification results. */
+/**
+ * Runs EMA smoothing over a window with given stream of pose classification results.
+ */
 public class EMASmoothing {
   private static final int DEFAULT_WINDOW_SIZE = 10;
   private static final float DEFAULT_ALPHA = 0.2f;

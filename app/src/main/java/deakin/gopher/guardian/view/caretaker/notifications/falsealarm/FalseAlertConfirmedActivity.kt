@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.view.caretaker.CaretakerDashboardActivity
 import deakin.gopher.guardian.view.general.BaseActivity
 import deakin.gopher.guardian.view.general.Homepage4caretaker
 

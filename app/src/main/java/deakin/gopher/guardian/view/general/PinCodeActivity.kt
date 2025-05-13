@@ -101,14 +101,6 @@ class PinCodeActivity : AppCompatActivity() {
     }
 
     private fun validatePin(pin: String) {
-        // Dummy pass for pin: 000000
-        if (pin.equals("000000")) {
-            showMessage("Pin verified successfully")
-            NavigationService(this@PinCodeActivity).toHomeScreenForRole(userRole)
-            finish()
-            return
-        }
-
         val call = ApiClient.apiService.verifyPin(userEmail, pin)
         call.enqueue(
             object : Callback<BaseModel> {
