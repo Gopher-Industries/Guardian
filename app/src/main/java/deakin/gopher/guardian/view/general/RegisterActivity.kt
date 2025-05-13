@@ -66,13 +66,12 @@ class RegisterActivity : BaseActivity() {
             val password = Password(passwordInput)
             val role = findViewById<MaterialButton>(roleInput).text.toString().lowercase()
 
-            val request =
-                RegisterRequest(
-                    email = emailAddress.emailAddress,
-                    password = password.password,
-                    name = nameInput,
-                    role = role,
-                )
+            val request = RegisterRequest(
+                fullname = nameInput,
+                email = emailAddress.emailAddress,
+                password = password.password,
+                role = role,
+            )
 
             val call = ApiClient.apiService.register(request)
 
@@ -85,15 +84,12 @@ class RegisterActivity : BaseActivity() {
                         progressBar.isVisible = false
                         if (response.isSuccessful) {
                             // Handle successful registration
-                            showMessage(RegistrationStatusMessage.Success.toString())
+                            showMessage("User successfully registered.")
                             NavigationService(this@RegisterActivity).toLogin()
                         } else {
                             // Handle error
-                            showMessage(
-                                RegistrationStatusMessage.Failure.toString() + " : ${
-                                    response.errorBody()
-                                }",
-                            )
+                            val errorMessage = response.errorBody()?.string() ?: "Unknown error"
+                            showMessage("Registration failed: $errorMessage")
                         }
                     }
 
@@ -103,7 +99,7 @@ class RegisterActivity : BaseActivity() {
                     ) {
                         // Handle failure
                         progressBar.isVisible = false
-                        showMessage(RegistrationStatusMessage.Failure.toString() + ": ${t.message}")
+                        showMessage("Registration failed: ${t.message}")
                     }
                 },
             )

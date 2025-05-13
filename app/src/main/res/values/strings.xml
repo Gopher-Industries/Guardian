@@ -21,7 +21,8 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="choose_diff_patient">&lt; Choose a Different Patient</string>
-
+    <string name="menu">Menu</string>
+    <string name="app_update_arrow">App Update Arrow</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="status_ok">(Status: <font fgcolor="#00FFFF">OK</font>)</string>
@@ -42,7 +43,8 @@
     <string name="welcome_caretaker">Welcome, Caretaker</string>
     <string name="welcome_admin">Welcome, Administrator</string>
     <string name="welcome_nurse">Welcome, Nurse</string>
-
+    <string name="confirmation">Confirmation</string>
+    <string name="confirmation_message">Do you want to save this task?</string>
 
     <!-- Below are all strings previously hardcoded added here using the quick function -->
     <string name="confirm_incident_text">  ·   <b>Recorded Time</b>: 09:49 \n \n ·   Lying face down. \n \n             ·   No movement detected over 15 minutes</string>

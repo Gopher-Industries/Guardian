@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:background="@drawable/menu_background"
+    android:background="?attr/hamburger"
     app:headerLayout="@layout/nav_header"
     app:menu="@menu/nav_menu"
     app:itemTextAppearance="@style/menu_text_style" />

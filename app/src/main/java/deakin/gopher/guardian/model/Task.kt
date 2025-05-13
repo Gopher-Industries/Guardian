@@ -2,12 +2,15 @@ package deakin.gopher.guardian.model
 
 data class Task(
     var taskId: String = "",
+    val title: String = "",
     val description: String = "",
     val assignedNurse: String = "",
-    val priority: Priority = Priority.MEDIUM,
-    val patientId: String? = "",
-    val completed: Boolean = false,
+    val priority: Priority,
+    val completed: Boolean,
+    val patientId: String = "",
+    val dueDate: String = ""
 )
+
 
 enum class Priority {
     LOW,

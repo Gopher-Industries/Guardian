@@ -27,7 +27,7 @@
         android:label="Guardians"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/Theme.TeamGuardians"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:label"
         tools:targetApi="31"
@@ -60,7 +60,9 @@
             android:exported="false" />
         <activity
             android:name=".view.general.Homepage4caretaker"
+            android:theme="@style/Theme.TeamGuardians"
             android:exported="false" />
+
         <activity
             android:name=".view.general.Homepage4nurse"
             android:exported="false" />
@@ -197,6 +199,8 @@
 <!--        <activity android:name=".view.falldetection.FallDetectionActivity" />-->
 <!--        <activity android:name=".view.falldetection.FallAlertActivity" />-->
         <activity android:name="deakin.gopher.guardian.view.caretaker.notifications.confirmincident.CallAmbulanceActivity" />
+
+        <activity android:name=".view.general.ChatBotActivity" />
 
 
         <service

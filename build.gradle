@@ -1,19 +1,21 @@
-// Top-level build.gradle file
 buildscript {
+    repositories {
+        google()  // Google's Maven repository
+        mavenCentral()  // Maven Central repository
+    }
+
     dependencies {
-        // Google services (Firebase, etc.)
-        classpath 'com.google.gms:google-services:4.3.15'  // Use latest version of Google Services plugin
-        // Kotlin Gradle Plugin
+        classpath 'com.google.gms:google-services:4.4.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.20"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:1.9.20"
+
+
     }
 }
 
 plugins {
-    // Android Application plugin
-    id 'com.android.application' version '8.9.1' apply false
-    // Android Library plugin
-    id 'com.android.library' version '8.9.1' apply false
-    // Kotlin Android plugin
+    id 'com.android.application' version '8.5.1' apply false
+    id 'com.android.library' version '8.5.1' apply false
     id 'org.jetbrains.kotlin.android' version '1.9.20' apply false
 }
 
@@ -21,11 +23,5 @@ tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
 
-// The repositories are now defined in settings.gradle,
-// so this allprojects block for repositories is no longer needed.
-// allprojects {
-//     repositories {
-//         google()  // Google's Maven repository
-//         mavenCentral()  // Maven Central repository
-//     }
-// }
+allprojects {
+}
