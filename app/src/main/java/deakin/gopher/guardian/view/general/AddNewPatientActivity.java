@@ -31,16 +31,26 @@ public class AddNewPatientActivity extends BaseActivity {
     btnBack = findViewById(R.id.btnBack);
 
     btnAdd.setOnClickListener(
-        v -> {
-          insertData();
-          clearAll();
-        });
+            v -> {
+              if (validateInputs()) {
+                insertData();
+              }
+            });
 
-    btnBack.setOnClickListener(
-        v -> {
-          // finish();
-          onBackPressed();
-        });
+    btnBack.setOnClickListener(v -> onBackPressed());
+  }
+
+  private boolean validateInputs() {
+    if (name.getText().toString().trim().isEmpty()
+            || address.getText().toString().trim().isEmpty()
+            || underCare.getText().toString().trim().isEmpty()
+            || phone.getText().toString().trim().isEmpty()
+            || dob.getText().toString().trim().isEmpty()
+            || medicareNo.getText().toString().trim().isEmpty()) {
+      Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT).show();
+      return false;
+    }
+    return true;
   }
 
   private void insertData() {
@@ -54,19 +64,18 @@ public class AddNewPatientActivity extends BaseActivity {
     map.put("medicareNo", medicareNo.getText().toString());
 
     FirebaseDatabase.getInstance()
-        .getReference()
-        .child("patient_profile")
-        .push()
-        .setValue(map)
-        .addOnSuccessListener(
-            unused ->
-                Toast.makeText(AddNewPatientActivity.this, "New patient added", Toast.LENGTH_SHORT)
-                    .show())
-        .addOnFailureListener(
-            e ->
-                Toast.makeText(
-                        AddNewPatientActivity.this, "Error adding patient", Toast.LENGTH_SHORT)
-                    .show());
+            .getReference()
+            .child("patient_profile")
+            .push()
+            .setValue(map)
+            .addOnSuccessListener(unused -> {
+              // ✅ This is the success message that appears when patient data is saved
+              Toast.makeText(AddNewPatientActivity.this, "Patient information saved!", Toast.LENGTH_SHORT).show();
+              clearAll();
+            })
+            .addOnFailureListener(e -> {
+              Toast.makeText(AddNewPatientActivity.this, "Error adding patient", Toast.LENGTH_SHORT).show();
+            });
   }
 
   private void clearAll() {
