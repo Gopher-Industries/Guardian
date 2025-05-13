@@ -31,7 +31,7 @@ public class Setting extends BaseActivity implements View.OnClickListener {
   private ConstraintLayout settingsAppUpdateButton;
   private ConstraintLayout settingsFeedbackButton;
   private Switch notificationSwitch;
-  private Switch themeSwitch;
+  private Switch themeSwitch; //Aryansharma@1017&
   private ImageView settingsMenuButton;
 
   @Override

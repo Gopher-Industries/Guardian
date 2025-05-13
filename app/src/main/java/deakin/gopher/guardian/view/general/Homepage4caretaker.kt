@@ -87,8 +87,13 @@ package deakin.gopher.guardian.view.general
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
+import android.view.animation.Animation
+import android.view.View
+import android.view.animation.AnimationUtils
 import android.os.Bundle
 import android.widget.Button
+import com.airbnb.lottie.LottieAnimationView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatDelegate
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.TrainingActivity
@@ -104,6 +109,7 @@ class Homepage4caretaker : BaseActivity() {
     private lateinit var taskListButton: Button
     private lateinit var trainingButton: Button
     private lateinit var monitorButton: Button
+    private lateinit var chatBotGreeting: TextView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -130,6 +136,26 @@ class Homepage4caretaker : BaseActivity() {
         taskListButton = findViewById(R.id.taskListButton)
         trainingButton = findViewById(R.id.trainingButton)
         monitorButton = findViewById(R.id.monitorButton)
+        chatBotGreeting = findViewById(R.id.chatBotGreeting)
+
+        // Apply the pop-out animation to the greeting text
+        val popOutAnimation: Animation = AnimationUtils.loadAnimation(this, R.anim.popout)
+        chatBotGreeting.startAnimation(popOutAnimation)
+
+
+//         For the redirecting of the chatbot
+
+        val chatBotAnimation = findViewById<LottieAnimationView>(R.id.chatBotAnimation)
+        val chatBotGreeting = findViewById<TextView>(R.id.chatBotGreeting)
+
+        val redirectToChat = View.OnClickListener {
+            val intent = Intent(this, ChatBotActivity::class.java)
+            startActivity(intent)
+        }
+
+        chatBotAnimation.setOnClickListener(redirectToChat)
+        chatBotGreeting.setOnClickListener(redirectToChat)
+
 
         // patient list button
         patientListButton.setOnClickListener {

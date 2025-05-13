@@ -3,136 +3,103 @@ package deakin.gopher.guardian.view.general
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.SearchView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.Query
-import com.google.firebase.database.ValueEventListener
 import deakin.gopher.guardian.R
-import deakin.gopher.guardian.adapter.TaskListAdapter
-import deakin.gopher.guardian.model.Task
-import deakin.gopher.guardian.services.NavigationService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class TasksListActivity : AppCompatActivity() {
-    private var taskListAdapter: TaskListAdapter? = null
-    private var query: Query? = null
-    private var overviewCardview: CardView? = null
-    private lateinit var plusButton: ImageButton
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var navigationView: NavigationView
+    private lateinit var menuButton: ImageView
+    private lateinit var addTaskButton: MaterialButton
+
+    private lateinit var cardView: CardView
+    private lateinit var expandIcon: ImageView
+    private lateinit var descText: TextView
+    private lateinit var assignedText: TextView
+    private var isExpanded: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tasks_list)
-        val navigationView: NavigationView = findViewById(R.id.nav_view)
-        val taskListMenuBtn: ImageView = findViewById(R.id.task_list_manu_button)
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
 
-        plusButton = findViewById(R.id.imageView62)
-        navigationView.setItemIconTintList(null)
-        taskListMenuBtn.setOnClickListener {
+        // Drawer setup
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.nav_view)
+        menuButton = findViewById(R.id.task_list_manu_button)
+
+        // Handle nav drawer toggle
+        menuButton.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
-            navigationView.setNavigationItemSelectedListener { menuItem: MenuItem ->
-                val id = menuItem.itemId
-                when (id) {
-                    R.id.nav_home ->
-                        startActivity(
-                            Intent(this@TasksListActivity, Homepage4caretaker::class.java),
-                        )
-//                    R.id.nav_settings -> startActivity(
-//                        Intent(this@TasksListActivity, Setting::class.java)
-//                    )
-                    R.id.add_task ->
-                        startActivity(
-                            Intent(this@TasksListActivity, TaskAddActivity::class.java),
-                        )
-                    R.id.nav_signout -> {
-                        FirebaseAuth.getInstance().signOut()
-                        startActivity(Intent(this@TasksListActivity, LoginActivity::class.java))
-                        finish()
-                    }
+        }
+
+        // Handle navigation item selections
+        navigationView.setNavigationItemSelectedListener { menuItem: MenuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this@TasksListActivity, Homepage4caretaker::class.java))
                 }
-                true
+                R.id.add_task -> {
+                    startActivity(Intent(this@TasksListActivity, TaskAddActivity::class.java))
+                }
+                R.id.nav_signout -> {
+                    FirebaseAuth.getInstance().signOut()
+                    startActivity(Intent(this@TasksListActivity, LoginActivity::class.java))
+                    finish()
+                }
             }
+            drawerLayout.closeDrawers()
+            true
         }
 
-        plusButton.setOnClickListener {
-            NavigationService(this).onLaunchTaskCreator()
-        }
-
-        val taskListRecyclerView: RecyclerView = findViewById(R.id.task_list_recycleView)
-        overviewCardview = findViewById(R.id.task_list_task_overview)
-        val taskSearchView: SearchView = findViewById(R.id.task_list_searchView)
-        val addTaskButton: Button = findViewById(R.id.add_task_button)
+        // Handle Add Task button
+        addTaskButton = findViewById(R.id.add_task_material_button)
         addTaskButton.setOnClickListener {
-            NavigationService(this).onLaunchTaskCreator()
+            val intent = Intent(this@TasksListActivity, TaskAddActivity::class.java)
+            startActivity(intent)
         }
 
-        // Initialize RecyclerView and Adapter
-        taskListRecyclerView.layoutManager = GridLayoutManager(this@TasksListActivity, 1)
-        taskListAdapter = TaskListAdapter(mutableListOf())
-        taskListRecyclerView.adapter = taskListAdapter
+        // Handle Card Expand/Collapse logic
+        cardView = findViewById(R.id.demo_task_card)
+        expandIcon = findViewById(R.id.expand_icon)
+        descText = findViewById(R.id.task_desc)
+        assignedText = findViewById(R.id.task_assigned)
 
-        // Set up Firebase query
-        query = FirebaseDatabase.getInstance().reference.child("caretaker_tasks")
+        expandIcon.setOnClickListener {
+            isExpanded = !isExpanded
+            descText.visibility = if (isExpanded) TextView.VISIBLE else TextView.GONE
+            assignedText.visibility = if (isExpanded) TextView.VISIBLE else TextView.GONE
+            expandIcon.setImageResource(
+                if (isExpanded) R.drawable.ic_expand_less else R.drawable.ic_expand_more
+            )
+        }
 
-        // Fetch and display data from Firebase
-        fetchDataFromFirebase()
+        // Optional: Handle SearchView query
+        val searchView: SearchView = findViewById(R.id.task_list_searchView)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Toast.makeText(this@TasksListActivity, "Searching for: $query", Toast.LENGTH_SHORT).show()
+                return false
+            }
 
-        taskSearchView.setOnQueryTextListener(
-            object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(s: String?): Boolean {
-                    return false
-                }
-
-                override fun onQueryTextChange(s: String?): Boolean {
-                    query =
-                        if (s.isNullOrEmpty()) {
-                            FirebaseDatabase.getInstance().reference.child("caretaker_tasks")
-                        } else {
-                            FirebaseDatabase.getInstance()
-                                .reference
-                                .child("caretaker_tasks")
-                                .orderByChild("description")
-                                .startAt(s)
-                                .endAt(s + "\uf8ff")
-                                .limitToFirst(10)
-                        }
-                    fetchDataFromFirebase()
-                    return true
-                }
-            },
-        )
-    }
-
-    private fun fetchDataFromFirebase() {
-        query?.addValueEventListener(
-            object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val taskList = mutableListOf<Task>()
-                    for (taskSnapshot in dataSnapshot.children) {
-                        val task = taskSnapshot.getValue(Task::class.java)
-                        if (task != null) {
-                            taskList.add(task)
-                        }
-                    }
-                    taskListAdapter?.updateTaskList(taskList)
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    // Handle possible errors.
-                }
-            },
-        )
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Implement real-time filtering if needed
+                return false
+            }
+        })
     }
 }

@@ -2,40 +2,65 @@ package deakin.gopher.guardian.view.general
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RadioGroup
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.FirebaseDatabase
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Priority
 import deakin.gopher.guardian.model.Task
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog
+import java.util.*
 
 class TaskAddActivity : AppCompatActivity() {
-    private lateinit var taskDescriptionEditText: EditText
-    private lateinit var patientIdEditText: EditText
-    private lateinit var taskSubDescEditText: EditText
-    private lateinit var assignedNurseEditText: EditText
+    private lateinit var taskDescriptionEditText: TextInputEditText
+    private lateinit var patientIdEditText: TextInputEditText
+    private lateinit var assignedNurseEditText: TextInputEditText
+    private lateinit var dueDateEditText: TextInputEditText
+    private lateinit var taskTitleEditText: TextInputEditText
     private lateinit var priorityRadioGroup: RadioGroup
     private var taskPriority: Priority = Priority.MEDIUM
-    private var task: Task? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_add)
 
+        // Initialize input fields
+        taskTitleEditText = findViewById(R.id.taskTitleEditText)
         taskDescriptionEditText = findViewById(R.id.taskDescriptionEditText)
-        taskSubDescEditText = findViewById(R.id.tasksubDescEditText)
         patientIdEditText = findViewById(R.id.taskPatientIdEditText)
+        assignedNurseEditText = findViewById(R.id.taskAssignedToEditText)
+        dueDateEditText = findViewById(R.id.taskDueDateEditText)
+        priorityRadioGroup = findViewById(R.id.priorityRadioGroup) // Ensure this exists in XML
+
+        // Set up the DatePicker when the field is clicked
+        dueDateEditText.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val datePickerDialog = DatePickerDialog.newInstance(
+                { _, year, monthOfYear, dayOfMonth ->
+                    val date = "$year-${monthOfYear + 1}-$dayOfMonth"
+                    dueDateEditText.setText(date)
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
+
+            // Customize the date picker dialog
+            datePickerDialog.setThemeDark(true) // Optional dark theme
+            datePickerDialog.show(supportFragmentManager, "DatePicker")
+        }
 
         priorityRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            taskPriority =
-                when (checkedId) {
-                    else -> Priority.MEDIUM
-                }
+            taskPriority = when (checkedId) {
+                R.id.priorityHigh -> Priority.HIGH
+                R.id.priorityLow -> Priority.LOW
+                else -> Priority.MEDIUM
+            }
         }
 
         val submitButton: Button = findViewById(R.id.newTaskSubmitButton)
@@ -63,8 +88,8 @@ class TaskAddActivity : AppCompatActivity() {
         builder.setNegativeButton(getString(R.string.no), null)
         val dialog = builder.create()
         dialog.setOnShowListener {
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.colorGreen))
-            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.colorRed))
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.colorGreen, theme))
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.colorRed, theme))
         }
         dialog.show()
     }
@@ -73,21 +98,29 @@ class TaskAddActivity : AppCompatActivity() {
         val databaseRef = FirebaseDatabase.getInstance().reference
         val caretakerTaskRef = databaseRef.child("caretaker_tasks")
 
-        val patientId = patientIdEditText.text.toString().trim()
+        val taskTitle = taskTitleEditText.text.toString().trim()
         val taskDescription = taskDescriptionEditText.text.toString().trim()
-        val taskSubDesc = taskSubDescEditText.text.toString().trim()
+        val patientId = patientIdEditText.text.toString().trim()
         val assignedNurse = assignedNurseEditText.text.toString().trim()
 
-        val newTask =
-            Task(
-                taskId = "",
-                description = taskDescription,
-                assignedNurse = assignedNurse,
-                priority = taskPriority,
-                patientId = patientId,
-            )
+        // Optional: Input validation
+        if (taskTitle.isEmpty() || taskDescription.isEmpty() || patientId.isEmpty()) {
+            Toast.makeText(this, "Please fill all required fields", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        val taskId = caretakerTaskRef.push().key ?: ""
+        val newTask = Task(
+            taskId = "",
+            title = taskTitle,
+            description = taskDescription,
+            assignedNurse = assignedNurse,
+            priority = taskPriority,
+            patientId = patientId,
+            dueDate = dueDateEditText.text.toString().trim(),
+            completed = false
+        )
+
+        val taskId = caretakerTaskRef.push().key ?: return
         newTask.taskId = taskId
 
         caretakerTaskRef.child(taskId).setValue(newTask).addOnCompleteListener { task ->
@@ -95,17 +128,17 @@ class TaskAddActivity : AppCompatActivity() {
                 updatePatientTasks(taskId)
                 finish()
             } else {
-                // Handle the error
+                Toast.makeText(this, "Failed to save task", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Save under nurse tasks as well
-        val nurseTaskRef = databaseRef.child("nurse_tasks")
-        nurseTaskRef.child(taskId).setValue(newTask)
+        databaseRef.child("nurse_tasks").child(taskId).setValue(newTask)
     }
 
     private fun updatePatientTasks(taskId: String) {
-        val patientTasksRef = FirebaseDatabase.getInstance().reference.child("patient_tasks")
-        patientTasksRef.child(taskId).setValue(true)
+        FirebaseDatabase.getInstance().reference
+            .child("patient_tasks")
+            .child(taskId)
+            .setValue(true)
     }
 }

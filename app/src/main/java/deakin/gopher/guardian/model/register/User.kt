@@ -13,7 +13,7 @@ data class User(
 data class RegisterRequest(
     @SerializedName("email") val email: String,
     @SerializedName("password") val password: String,
-    @SerializedName("fullname") val name: String,
+    @SerializedName("fullname") val fullname: String,
     @SerializedName("role") val role: String,
 )
 
