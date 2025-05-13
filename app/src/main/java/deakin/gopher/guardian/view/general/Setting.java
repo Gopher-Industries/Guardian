@@ -71,19 +71,31 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     configureNavigationDrawer(userType);
   }
 
-  private void showUpdateDialog()
-  {
+  private void showUpToDateDialog() {
     AlertDialog.Builder builder = new AlertDialog.Builder(this);
     builder.setTitle("App Update");
     builder.setMessage("Your app is up to date!");
-
     builder.setPositiveButton("OK", null);
-
     builder.show();
   }
 
-  private void checkForUpdates()
-  {
+
+  private void showNewUpdateDialog() {
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("App Update Available");
+    builder.setMessage("A new version is available. Please update to the latest version!");
+
+    builder.setPositiveButton("Update", (dialog, which) -> {
+      showToast("Redirecting to update...");
+    });
+
+    builder.setNegativeButton("Later", null);
+    builder.show();
+  }
+
+
+
+  private void checkForUpdates() {
     final ProgressDialog progressDialog = new ProgressDialog(this);
     progressDialog.setMessage("Checking for updates...");
     progressDialog.setCancelable(false);
@@ -91,9 +103,18 @@ public class Setting extends BaseActivity implements View.OnClickListener {
 
     new Handler().postDelayed(() -> {
       progressDialog.dismiss();
-      showUpdateDialog();
+
+      // Simulate random check: true = update available, false = up to date
+      boolean updateAvailable = Math.random() < 0.5; // 50% chance
+
+      if (updateAvailable) {
+        showNewUpdateDialog();
+      } else {
+        showUpToDateDialog();
+      }
     }, 2000); // simulate 2-second network check
   }
+
 
   @Override
   public void onClick(final View v) {
@@ -215,3 +236,4 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     initializeSwitchStates();
   }
 }
+
