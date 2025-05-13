@@ -1,6 +1,5 @@
-package deakin.gopher.guardian.view.FallDetection
+package deakin.gopher.guardian.view.falldetection
 
-import android.Manifest
 import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaMetadataRetriever
@@ -8,11 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
-import android.widget.ImageView
 import androidx.annotation.RawRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
@@ -24,30 +20,22 @@ import com.google.mlkit.vision.pose.PoseDetector
 import com.google.mlkit.vision.pose.PoseLandmark
 import com.google.mlkit.vision.pose.accurate.AccuratePoseDetectorOptions
 import deakin.gopher.guardian.R
-import deakin.gopher.guardian.databinding.ActivityFallDetectionBinding
-import deakin.gopher.guardian.view.FallDetection.ui.PoseGraphic
-import deakin.gopher.guardian.view.FallDetection.util.classification.PoseClassifierProcessor
-import deakin.gopher.guardian.view.FallDetection.util.getInputImageFrom
+import deakin.gopher.guardian.databinding.ActivityPoseDetectVideoBinding
 import deakin.gopher.guardian.view.caretaker.notifications.confirmincident.ConfirmIncidentActivity
 import deakin.gopher.guardian.view.caretaker.notifications.falsealarm.FalseAlertConfirmedActivity
+import deakin.gopher.guardian.view.falldetection.ui.PoseGraphic
+import deakin.gopher.guardian.view.falldetection.util.classification.PoseClassifierProcessor
+import deakin.gopher.guardian.view.falldetection.util.getInputImageFrom
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.pm.PackageManager
-import android.os.Build
-import androidx.core.app.ActivityCompat
-
 
 @UnstableApi
-class FallDetectionActivity :  AppCompatActivity(), Player.Listener {
-    private lateinit var binding: ActivityFallDetectionBinding
+class FallAlertActivity : AppCompatActivity(), Player.Listener {
+    private lateinit var binding: ActivityPoseDetectVideoBinding
 
     private val exoPlayer by lazy {
         ExoPlayer.Builder(this)
@@ -70,22 +58,33 @@ class FallDetectionActivity :  AppCompatActivity(), Player.Listener {
     private var job: Job? = null
 
     private val poseClassifierProcessor: PoseClassifierProcessor by lazy {
-        PoseClassifierProcessor(this@FallDetectionActivity ,true)
+        PoseClassifierProcessor(this@FallAlertActivity, true)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_fall_detection)
+        setContentView(R.layout.activity_pose_detect_video)
 
-        createNotificationChannel()
-
-        binding = ActivityFallDetectionBinding.inflate(layoutInflater)
+        binding = ActivityPoseDetectVideoBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setPlayer()
         loadAndPrepareVideo()
         initClearButton()
 
+        val confirmIncidentButton = findViewById<ImageButton>(R.id.confirmIncidentButton)
+        val falseAlarmButton = findViewById<ImageButton>(R.id.falseAlarmButton)
 
+        confirmIncidentButton.setOnClickListener { v: View? ->
+            val confirmIncidentActivityIntent =
+                Intent(this@FallAlertActivity, ConfirmIncidentActivity::class.java)
+            startActivity(confirmIncidentActivityIntent)
+        }
+
+        falseAlarmButton.setOnClickListener { v: View? ->
+            val medicalDiagnosticsActivityIntent =
+                Intent(this@FallAlertActivity, FalseAlertConfirmedActivity::class.java)
+            startActivity(medicalDiagnosticsActivityIntent)
+        }
     }
 
     private fun setPlayer() {
@@ -99,7 +98,7 @@ class FallDetectionActivity :  AppCompatActivity(), Player.Listener {
         retriever.setDataSource(
             assetFileDescriptor.fileDescriptor,
             assetFileDescriptor.startOffset,
-            assetFileDescriptor.length
+            assetFileDescriptor.length,
         )
 
         val video = getRawResourceUriString(R.raw.fall1)
@@ -114,7 +113,9 @@ class FallDetectionActivity :  AppCompatActivity(), Player.Listener {
         }
     }
 
-    private fun getRawResourceUriString(@RawRes rawResourceId: Int): String {
+    private fun getRawResourceUriString(
+        @RawRes rawResourceId: Int,
+    ): String {
         val packageName = packageName
         return "android.resource://$packageName/raw/" + resources.getResourceEntryName(rawResourceId)
     }
@@ -128,12 +129,13 @@ class FallDetectionActivity :  AppCompatActivity(), Player.Listener {
 
     private fun startProcessJobIfNeeded(isPlaying: Boolean) {
         if (job == null && isPlaying) {
-            job = lifecycleScope.launch {
-                while (isActive) {
-                    processFrame()
-                    delay(50)
+            job =
+                lifecycleScope.launch {
+                    while (isActive) {
+                        processFrame()
+                        delay(50)
+                    }
                 }
-            }
         }
     }
 
@@ -155,12 +157,15 @@ class FallDetectionActivity :  AppCompatActivity(), Player.Listener {
     private fun getCurrentFrame(): Bitmap? {
         val currentPosMillis = exoPlayer.currentPosition.toDuration(DurationUnit.MILLISECONDS)
         val currentPosMicroSec = currentPosMillis.inWholeMicroseconds
-        val currentFrame =  retriever.getFrameAtTime(currentPosMicroSec, MediaMetadataRetriever.OPTION_CLOSEST)
-        val bitmap = currentFrame?: return null
+        val currentFrame = retriever.getFrameAtTime(currentPosMicroSec, MediaMetadataRetriever.OPTION_CLOSEST)
+        val bitmap = currentFrame ?: return null
         return Bitmap.createScaledBitmap(bitmap, binding.playerView.width, binding.playerView.height, false)
     }
 
-    private fun onPoseDetectionSucceeded(pose: Pose?, bitmap: Bitmap) {
+    private fun onPoseDetectionSucceeded(
+        pose: Pose?,
+        bitmap: Bitmap,
+    ) {
         val pose = pose ?: return
         val allPose = pose.allPoseLandmarks
         if (allPose.isEmpty()) {
@@ -172,20 +177,12 @@ class FallDetectionActivity :  AppCompatActivity(), Player.Listener {
         binding.graphicOverlayVideo.clear()
         binding.graphicOverlayVideo.add(PoseGraphic(binding.graphicOverlayVideo, pose))
 
-
         // Analyze the pose to detect falls
         val fallDetected = detectFall(pose)
         if (fallDetected) {
             Log.d(TAG, "Fall detected!")
             // Update UI or trigger an alert
             binding.fallAlertTextView.text = "Fall detected!"
-
-            // Send a notification
-            sendFallNotification()
-
-            val fallAlertActivityIntent =
-                    Intent(this@FallDetectionActivity, FallAlertActivity::class.java)
-            startActivity(fallAlertActivityIntent)
         } else {
             binding.fallAlertTextView.text = "No fall detected"
         }
@@ -207,27 +204,46 @@ class FallDetectionActivity :  AppCompatActivity(), Player.Listener {
             return false
         }
 
+        // Log positions of key landmarks
+        Log.d(TAG, "Left Shoulder: (${leftShoulder.position.x}, ${leftShoulder.position.y})")
+        Log.d(TAG, "Right Shoulder: (${rightShoulder.position.x}, ${rightShoulder.position.y})")
+        Log.d(TAG, "Left Hip: (${leftHip.position.x}, ${leftHip.position.y})")
+        Log.d(TAG, "Right Hip: (${rightHip.position.x}, ${rightHip.position.y})")
+        Log.d(TAG, "Left Knee: (${leftKnee.position.x}, ${leftKnee.position.y})")
+        Log.d(TAG, "Right Knee: (${rightKnee.position.x}, ${rightKnee.position.y})")
+
         // Calculate midpoints for shoulders and hips
         val shoulderMidpointY = (leftShoulder.position.y + rightShoulder.position.y) / 2
         val hipMidpointY = (leftHip.position.y + rightHip.position.y) / 2
 
+        // Log midpoints
+        Log.d(TAG, "Shoulder Midpoint Y: $shoulderMidpointY")
+        Log.d(TAG, "Hip Midpoint Y: $hipMidpointY")
+
         // Calculate the vertical distance between shoulders and hips
         val torsoVerticalDistance = Math.abs(shoulderMidpointY - hipMidpointY)
+        Log.d(TAG, "Torso Vertical Distance: $torsoVerticalDistance")
 
         // Calculate torso angle (simplified approximation)
-        val torsoAngle = Math.toDegrees(
-            Math.atan2(
-                (hipMidpointY - shoulderMidpointY).toDouble(),
-                Math.abs(leftShoulder.position.x - leftHip.position.x).toDouble() // Approximation for torso horizontal distance
+        val torsoAngle =
+            Math.toDegrees(
+                Math.atan2(
+                    (hipMidpointY - shoulderMidpointY).toDouble(),
+                    // Approximation for torso horizontal distance
+                    Math.abs(leftShoulder.position.x - leftHip.position.x).toDouble(),
+                ),
             )
-        )
+        Log.d(TAG, "Torso Angle: $torsoAngle")
 
         // Detect forward fall based on rapid angle change and proximity to the ground
         val isTorsoHorizontal = torsoAngle < TORSO_HORIZONTAL_THRESHOLD
         val isNearGround = hipMidpointY > GROUND_LEVEL_THRESHOLD
+        Log.d(TAG, "Is Torso Horizontal: $isTorsoHorizontal")
+        Log.d(TAG, "Is Near Ground: $isNearGround")
 
         // Check if knees are close to the ground (lying posture)
         val kneesCloseToGround = (leftKnee.position.y > GROUND_LEVEL_THRESHOLD && rightKnee.position.y > GROUND_LEVEL_THRESHOLD)
+        Log.d(TAG, "Knees Close to Ground: $kneesCloseToGround")
 
         // Final fall detection logic
         return isTorsoHorizontal && isNearGround && kneesCloseToGround
@@ -239,13 +255,9 @@ class FallDetectionActivity :  AppCompatActivity(), Player.Listener {
         private const val GROUND_LEVEL_THRESHOLD = 650.0 // Pixels; tweak based on video resolution
     }
 
-
-
     private fun onPoseDetectionFailed(e: Exception) {
         Log.e(TAG, "onPoseDetectionFailed: $e")
     }
-
-
 
     override fun onPause() {
         super.onPause()
@@ -265,97 +277,4 @@ class FallDetectionActivity :  AppCompatActivity(), Player.Listener {
         super.onDestroy()
         exoPlayer.release()
     }
-
-    private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channelName = "Fall Alerts"
-            val channelDescription = "Notifications for detected falls"
-            val importance = NotificationManager.IMPORTANCE_HIGH
-            val channel = NotificationChannel("FALL_ALERTS", channelName, importance).apply {
-                description = channelDescription
-            }
-
-            // Register the channel with the system
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-    }
-
-    // Function to send a notification
-    private fun sendFallNotification() {
-        val notificationId = 1
-        val channelId = "FALL_ALERTS"
-
-        // Check for POST_NOTIFICATIONS permission
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                // Request the permission if not granted
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
-                    1 // Request code
-                )
-                return // Exit function until permission is granted
-            }
-        }
-
-        // Create PendingIntent for notification click action
-        val notificationIntent = Intent(this, FallAlertActivity::class.java)
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(
-            this,
-            0,
-            notificationIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        // Create NotificationChannel
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                channelId,
-                "Fall Alerts",
-                NotificationManager.IMPORTANCE_HIGH
-            ).apply {
-                description = "Notifications for detected falls"
-            }
-            val notificationManager = getSystemService(NotificationManager::class.java)
-            notificationManager.createNotificationChannel(channel)
-        }
-
-        // Build the notification
-        val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.fall_notification_icon_foreground)
-            .setContentTitle("Fall Detected!")
-            .setContentText("A fall was detected. Tap to check details.")
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setAutoCancel(true)
-            .setContentIntent(pendingIntent)
-
-        // Display the notification
-        val notificationManager = NotificationManagerCompat.from(this)
-        notificationManager.notify(notificationId, notificationBuilder.build())
-    }
-
-    // Handle runtime permission request results
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 1) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d(TAG, "Notification permission granted")
-                sendFallNotification() // Retry sending the notification
-            } else {
-                Log.d(TAG, "Notification permission denied")
-            }
-        }
-    }
-
-
 }

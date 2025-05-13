@@ -67,26 +67,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
-    <Button
-        android:id="@+id/button6"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onHealthDataClick"
-        android:text="@string/test_health_data"
-        android:textSize="10sp"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="471dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/monitorPatientTextView"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <Button
-        android:id="@+id/caretakerDashboardNotificationsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onNotificationsClick"
-        android:text="@string/test_notifications"
-        android:textSize="10sp"
-        tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="413dp" />
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onHealthDataClick"
+            android:text="@string/test_health_data"
+            android:textSize="10sp" />
 
+        <Button
+            android:id="@+id/caretakerDashboardNotificationsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onNotificationsClick"
+            android:text="@string/test_notifications"
+            android:textSize="10sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

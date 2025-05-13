@@ -1,16 +1,12 @@
-package deakin.gopher.guardian.view.FallDetection.util.classification;
+package deakin.gopher.guardian.view.falldetection.util.classification;
 
 import android.util.Log;
-
 import com.google.common.base.Splitter;
 import com.google.mlkit.vision.common.PointF3D;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Reads Pose samples from a csv file.
- */
+/** Reads Pose samples from a csv file. */
 public class PoseSample {
   private static final String TAG = "PoseSample";
   private static final int NUM_LANDMARKS = 33;
