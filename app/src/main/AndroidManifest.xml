@@ -195,6 +195,11 @@
         <activity android:name=".view.falldetection.FallAlertActivity" />
         <activity android:name="deakin.gopher.guardian.view.caretaker.notifications.confirmincident.CallAmbulanceActivity" />
 
+        <activity
+            android:name=".PatientExerciseModules"
+            android:exported="false"
+            android:label="Patient Exercise Modules" />
+
 
         <service
             android:name=".model.FirebaseMessagingService"
