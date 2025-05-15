@@ -64,67 +64,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="32dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="@string/login_role_selection_prompt"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-
-                <RadioGroup
-                    android:id="@+id/login_role_radioGroup"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="32dp"
-                    android:layout_weight="1"
-                    android:checkedButton="@id/caretaker_radioButton">
-
-                    <RadioButton
-                        android:id="@+id/caretaker_radioButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:minHeight="48dp"
-                        android:text="@string/caretaker_role_name" />
-
-                    <RadioButton
-                        android:id="@+id/admin_radioButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:minHeight="48dp"
-                        android:text="@string/company_admin_role_name" />
-
-                    <RadioButton
-                        android:id="@+id/nurse_radioButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins_bold"
-                        android:minHeight="48dp"
-                        android:text="@string/nurse_role_name" />
-                </RadioGroup>
-
-            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

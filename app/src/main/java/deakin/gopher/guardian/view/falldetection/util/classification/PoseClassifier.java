@@ -1,20 +1,18 @@
-package deakin.gopher.guardian.view.FallDetection.util.classification;
+package deakin.gopher.guardian.view.falldetection.util.classification;
 
-import static deakin.gopher.guardian.view.FallDetection.util.classification.PoseEmbedding.getPoseEmbedding;
-import static deakin.gopher.guardian.view.FallDetection.util.classification.Utils.maxAbs;
-import static deakin.gopher.guardian.view.FallDetection.util.classification.Utils.multiply;
-import static deakin.gopher.guardian.view.FallDetection.util.classification.Utils.multiplyAll;
-import static deakin.gopher.guardian.view.FallDetection.util.classification.Utils.subtract;
-import static deakin.gopher.guardian.view.FallDetection.util.classification.Utils.sumAbs;
+import static deakin.gopher.guardian.view.falldetection.util.classification.PoseEmbedding.getPoseEmbedding;
+import static deakin.gopher.guardian.view.falldetection.util.classification.Utils.maxAbs;
+import static deakin.gopher.guardian.view.falldetection.util.classification.Utils.multiply;
+import static deakin.gopher.guardian.view.falldetection.util.classification.Utils.multiplyAll;
+import static deakin.gopher.guardian.view.falldetection.util.classification.Utils.subtract;
+import static deakin.gopher.guardian.view.falldetection.util.classification.Utils.sumAbs;
 import static java.lang.Float.max;
 import static java.lang.Math.min;
 
 import android.util.Pair;
-
 import com.google.mlkit.vision.common.PointF3D;
 import com.google.mlkit.vision.pose.Pose;
 import com.google.mlkit.vision.pose.PoseLandmark;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -41,8 +39,11 @@ public class PoseClassifier {
     this(poseSamples, MAX_DISTANCE_TOP_K, MEAN_DISTANCE_TOP_K, AXES_WEIGHTS);
   }
 
-  public PoseClassifier(List<PoseSample> poseSamples, int maxDistanceTopK,
-      int meanDistanceTopK, PointF3D axesWeights) {
+  public PoseClassifier(
+      List<PoseSample> poseSamples,
+      int maxDistanceTopK,
+      int meanDistanceTopK,
+      PointF3D axesWeights) {
     this.poseSamples = poseSamples;
     this.maxDistanceTopK = maxDistanceTopK;
     this.meanDistanceTopK = meanDistanceTopK;
@@ -85,7 +86,6 @@ public class PoseClassifier {
     List<PointF3D> embedding = getPoseEmbedding(landmarks);
     List<PointF3D> flippedEmbedding = getPoseEmbedding(flippedLandmarks);
 
-
     // Classification is done in two stages:
     //  * First we pick top-K samples by MAX distance. It allows to remove samples that are almost
     //    the same as given pose, but maybe has few joints bent in the other direction.
@@ -93,8 +93,8 @@ public class PoseClassifier {
     //    that are closest by average.
 
     // Keeps max distance on top so we can pop it when top_k size is reached.
-    PriorityQueue<Pair<PoseSample, Float>> maxDistances = new PriorityQueue<>(
-        maxDistanceTopK, (o1, o2) -> -Float.compare(o1.second, o2.second));
+    PriorityQueue<Pair<PoseSample, Float>> maxDistances =
+        new PriorityQueue<>(maxDistanceTopK, (o1, o2) -> -Float.compare(o1.second, o2.second));
     // Retrieve top K poseSamples by least distance to remove outliers.
     for (PoseSample poseSample : poseSamples) {
       List<PointF3D> sampleEmbedding = poseSample.getEmbedding();
@@ -122,8 +122,8 @@ public class PoseClassifier {
     }
 
     // Keeps higher mean distances on top so we can pop it when top_k size is reached.
-    PriorityQueue<Pair<PoseSample, Float>> meanDistances = new PriorityQueue<>(
-        meanDistanceTopK, (o1, o2) -> -Float.compare(o1.second, o2.second));
+    PriorityQueue<Pair<PoseSample, Float>> meanDistances =
+        new PriorityQueue<>(meanDistanceTopK, (o1, o2) -> -Float.compare(o1.second, o2.second));
     // Retrive top K poseSamples by least mean distance to remove outliers.
     for (Pair<PoseSample, Float> sampleDistances : maxDistances) {
       PoseSample poseSample = sampleDistances.first;
@@ -132,10 +132,11 @@ public class PoseClassifier {
       float originalSum = 0;
       float flippedSum = 0;
       for (int i = 0; i < embedding.size(); i++) {
-        originalSum += sumAbs(multiply(
-            subtract(embedding.get(i), sampleEmbedding.get(i)), axesWeights));
-        flippedSum += sumAbs(
-            multiply(subtract(flippedEmbedding.get(i), sampleEmbedding.get(i)), axesWeights));
+        originalSum +=
+            sumAbs(multiply(subtract(embedding.get(i), sampleEmbedding.get(i)), axesWeights));
+        flippedSum +=
+            sumAbs(
+                multiply(subtract(flippedEmbedding.get(i), sampleEmbedding.get(i)), axesWeights));
       }
       // Set the mean distance as min of original and flipped mean distances.
       float meanDistance = min(originalSum, flippedSum) / (embedding.size() * 2);

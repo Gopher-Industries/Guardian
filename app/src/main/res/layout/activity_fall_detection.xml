@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="deakin.gopher.guardian.view.FallDetection.FallDetectionActivity">
+    tools:context="deakin.gopher.guardian.view.falldetection.FallDetectionActivity">
 
     <androidx.media3.ui.PlayerView
         android:id="@+id/player_view"
@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         app:resize_mode="fill" />
 
-    <deakin.gopher.guardian.view.FallDetection.ui.GraphicOverlay
+    <deakin.gopher.guardian.view.falldetection.ui.GraphicOverlay
         android:id="@+id/graphic_overlay_video"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

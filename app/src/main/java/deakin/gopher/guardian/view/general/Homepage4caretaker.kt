@@ -5,11 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import deakin.gopher.guardian.PatientExerciseModules
+import androidx.annotation.OptIn
+import androidx.media3.common.util.UnstableApi
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.TrainingActivity
 import deakin.gopher.guardian.services.EmailPasswordAuthService
-import deakin.gopher.guardian.view.FallDetection.FallDetectionActivity
 import deakin.gopher.guardian.view.caretaker.CaretakerProfileActivity
+import deakin.gopher.guardian.view.falldetection.FallDetectionActivity
 
 class Homepage4caretaker : BaseActivity() {
     private lateinit var patientListButton: Button
@@ -70,9 +72,7 @@ class Homepage4caretaker : BaseActivity() {
         }
 
         monitorButton.setOnClickListener {
-            val fallDetectionActivityIntent =
-                Intent(this@Homepage4caretaker, FallDetectionActivity::class.java)
-            startActivity(fallDetectionActivityIntent)
+            startFallDetectionActivity()
         }
 
         // training button
@@ -90,5 +90,12 @@ class Homepage4caretaker : BaseActivity() {
                     )
 
         }
+    }
+
+    @OptIn(UnstableApi::class)
+    fun startFallDetectionActivity() {
+        val fallDetectionActivityIntent =
+            Intent(this@Homepage4caretaker, FallDetectionActivity::class.java)
+        startActivity(fallDetectionActivityIntent)
     }
 }
