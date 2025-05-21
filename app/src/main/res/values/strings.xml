@@ -218,10 +218,11 @@
     <string name="back_to_login">Back to Login</string>
     <string name="already_registered_login_here">Already Registered ? Login Here</string>
     <string name="account_creation">Account Creation</string>
-    <string name="night_mode">Night Mode</string>
+    <string name="night_mode">Theme Change</string>
     <string name="change">Change</string>
-    <string name="app_update">App Update</string>
+    <string name="app_reset">Reset Training Module</string>
     <string name="feedback">Feedback</string>
+    <string name="about_us">About Us</string>
     <string name="standing">Standing</string>
     <string name="naverage_walking_time_hours_per_day_1_5_nmost_walked_in_a_day_hours_2_5_nleast_walked_in_a_day_hours_0_25_naverage_walking_speed_5_km_hr_nmaximum_walking_speed_10_km_hr_n">\nAverage walking time (hours per day): 1.5 \nMost walked in a day (hours): 2.5 \nLeast walked in a day (hours): 0.25 \nAverage walking speed: 5 km/hr \nMaximum walking speed: 10 km/hr\n</string>
     <string name="suggestion">Suggestion</string>
