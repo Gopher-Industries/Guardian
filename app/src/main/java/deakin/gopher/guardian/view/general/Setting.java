@@ -84,8 +84,6 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     }
   }
 
-
-
   private void initializeSwitchStates() {
     final SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
     boolean isNightMode = sharedPreferences.getBoolean("night_mode", false);
@@ -190,79 +188,91 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     layout.addView(wordCounter);
 
     // Add text watcher for word count
-    feedbackEditText.addTextChangedListener(new TextWatcher() {
-      @Override
-      public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+    feedbackEditText.addTextChangedListener(
+        new TextWatcher() {
+          @Override
+          public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
-      @Override
-      public void onTextChanged(CharSequence s, int start, int before, int count) {
-        String text = s.toString();
-        int words = text.trim().isEmpty() ? 0 : text.split("\\s+").length;
-        wordCounter.setText(words + "/100 words");
-      }
+          @Override
+          public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String text = s.toString();
+            int words = text.trim().isEmpty() ? 0 : text.split("\\s+").length;
+            wordCounter.setText(words + "/100 words");
+          }
 
-      @Override
-      public void afterTextChanged(Editable s) {}
-    });
+          @Override
+          public void afterTextChanged(Editable s) {}
+        });
 
     builder.setView(layout);
 
     builder.setPositiveButton(
-            "Submit",
-            (dialog, which) -> {
-              final String firstName = firstNameEditText.getText().toString();
-              final String lastName = lastNameEditText.getText().toString();
-              final String email = emailEditText.getText().toString();
-              final String feedback = feedbackEditText.getText().toString();
+        "Submit",
+        (dialog, which) -> {
+          final String firstName = firstNameEditText.getText().toString();
+          final String lastName = lastNameEditText.getText().toString();
+          final String email = emailEditText.getText().toString();
+          final String feedback = feedbackEditText.getText().toString();
 
-              // Check word count
-              int wordCount = feedback.trim().isEmpty() ? 0 : feedback.split("\\s+").length;
+          // Check word count
+          int wordCount = feedback.trim().isEmpty() ? 0 : feedback.split("\\s+").length;
 
-              if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !feedback.isEmpty()) {
-                if (wordCount <= 100) {
-                  showToast("Feedback submitted");
-                } else {
-                  showToast("Feedback must be 100 words or less");
-                }
-              } else {
-                showToast("Please fill all fields");
-              }
-            });
+          if (!firstName.isEmpty()
+              && !lastName.isEmpty()
+              && !email.isEmpty()
+              && !feedback.isEmpty()) {
+            if (wordCount <= 100) {
+              showToast("Feedback submitted");
+            } else {
+              showToast("Feedback must be 100 words or less");
+            }
+          } else {
+            showToast("Please fill all fields");
+          }
+        });
 
     builder.setNegativeButton("Cancel", null);
 
     final AlertDialog dialog = builder.create();
     dialog.show();
   }
+
   private void showToast(final CharSequence message) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
   }
 
   private void showResetConfirmationDialog() {
     new AlertDialog.Builder(this)
-            .setTitle("Reset Training Module")
-            .setMessage("This will reset all the training modules in your profile. This action cannot be reversed.")
-            .setPositiveButton("OK", (dialog, which) -> {
+        .setTitle("Reset Training Module")
+        .setMessage(
+            "This will reset all the training modules in your profile. This action cannot be reversed.")
+        .setPositiveButton(
+            "OK",
+            (dialog, which) -> {
               // Add your reset logic here
               showToast("Training modules reset");
             })
-            .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
-            .create()
-            .show();
+        .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+        .create()
+        .show();
   }
-    private void signOut() {
-      new AlertDialog.Builder(this)
-              .setTitle("Sign Out")
-              .setMessage("Are you sure you want to sign out?")
-              .setPositiveButton("Yes", (dialog, which) -> {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(Setting.this, LoginActivity.class));
-                finish();
-              })
-              .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
-              .create()
-              .show();
-    }
+
+  private void signOut() {
+    new AlertDialog.Builder(this)
+        .setTitle("Sign Out")
+        .setMessage("Are you sure you want to sign out?")
+        .setPositiveButton(
+            "Yes",
+            (dialog, which) -> {
+              FirebaseAuth.getInstance().signOut();
+              startActivity(new Intent(Setting.this, LoginActivity.class));
+              finish();
+            })
+        .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+        .create()
+        .show();
+  }
+
   @Override
   protected void onResume() {
     super.onResume();
