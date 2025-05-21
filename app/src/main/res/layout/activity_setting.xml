@@ -7,9 +7,7 @@
     android:layout_height="match_parent"
     tools:context="deakin.gopher.guardian.view.general.Setting">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="deakin.gopher.guardian.view.general.Setting">
@@ -17,7 +15,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/settings_header_card_view"
             android:layout_width="0dp"
-            android:layout_height="220dp"
+            android:layout_height="180dp"
             android:layout_marginTop="-40dp"
             app:cardBackgroundColor="@color/TG_blue"
             app:cardCornerRadius="40dp"
@@ -45,27 +43,26 @@
                     android:id="@+id/medicalDiagnosticsTitleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="18dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="@string/settings"
+                    android:text="@string/profile"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent" />
 
-                <View
-                    android:id="@+id/settingsIcon"
-                    android:layout_width="86dp"
-                    android:layout_height="86dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginBottom="0dp"
-                    android:background="@drawable/settings_title_icon"
-                    android:elevation="4dp"
+                <ImageView
+                    android:id="@+id/headerGuardiansLogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:contentDescription="TODO"
                     app:layout_constraintBottom_toTopOf="@+id/medicalDiagnosticsTitleTextView"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
-
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/gopher_logo" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -151,7 +148,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/settings_app_update_button"
+            android:id="@+id/settings_reset_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="15dp"
@@ -163,12 +160,12 @@
             app:layout_constraintTop_toBottomOf="@+id/settings_notification_button">
 
             <TextView
-                android:id="@+id/app_update_button_title"
+                android:id="@+id/app_reset_title"
                 android:layout_width="wrap_content"
                 android:layout_height="20sp"
                 android:layout_marginStart="25dp"
                 android:fontFamily="@font/poppins"
-                android:text="@string/app_update"
+                android:text="@string/app_reset"
                 android:textColor="#FFFFFF"
                 android:textFontWeight="400"
                 android:textSize="16sp"
@@ -177,7 +174,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/app_update_button_arrow"
+                android:id="@+id/app_reset_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
@@ -198,7 +195,7 @@
             android:background="@drawable/settings_button_background"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_app_update_button">
+            app:layout_constraintTop_toBottomOf="@+id/settings_reset_button">
 
             <TextView
                 android:id="@+id/feedback_button_title"
@@ -225,6 +222,92 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/settings_about_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/settings_button_background"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settings_feedback_button">
+
+            <TextView
+                android:id="@+id/about_button_title"
+                android:layout_width="wrap_content"
+                android:layout_height="20sp"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/about_us"
+                android:textColor="#FFFFFF"
+                android:textFontWeight="400"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/about_button_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:contentDescription="TODO"
+                android:src="@drawable/settings_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/settings_signout_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/settings_button_background"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settings_about_button">
+
+            <TextView
+                android:id="@+id/signout_button_title"
+                android:layout_width="wrap_content"
+                android:layout_height="20sp"
+                android:layout_marginStart="25dp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/sign_out"
+                android:textColor="#FFFFFF"
+                android:textFontWeight="400"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/signout_button_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:contentDescription="TODO"
+                android:src="@drawable/settings_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/headerMenuIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="TODO"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/shapes1" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
