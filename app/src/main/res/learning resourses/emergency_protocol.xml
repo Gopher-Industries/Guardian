@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fast access to emergency response steps."
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="247dp" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="446dp"
+        android:layout_height="258dp"
+        app:srcCompat="@drawable/blue_background"
+        tools:layout_editor_absoluteX="-18dp"
+        tools:layout_editor_absoluteY="-2dp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Learning Resorces"
+        android:textColor="@color/white"
+        android:textSize="18dp
+"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="159dp" />
+
+    <ImageView
+        android:id="@+id/imageView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/learning_main"
+        tools:layout_editor_absoluteY="79dp" />
+
+    <ImageView
+        android:id="@+id/imageView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.559"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/btn_img"
+        tools:layout_editor_absoluteY="275dp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emergency Protocols"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView30" />
+
+
+    <ImageView
+        android:id="@+id/imageView47"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/shapes"
+        tools:layout_editor_absoluteX="257dp"
+        tools:layout_editor_absoluteY="746dp" />
+
+    <ImageView
+        android:id="@+id/imageView69"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/back_blue_rect"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="718dp" />
+
+    <ImageView
+        android:id="@+id/imageView66"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/back_blue_rect"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="339dp" />
+
+    <ImageView
+        android:id="@+id/imageView67"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/back_blue_rect"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="465dp" />
+
+    <ImageView
+        android:id="@+id/imageView68"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/back_blue_rect"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="591dp" />
+
+    <ImageView
+        android:id="@+id/imageView70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/old_man_couph"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="353dp" />
+
+    <ImageView
+        android:id="@+id/imageView71"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/old_women"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="609dp" />
+
+    <ImageView
+        android:id="@+id/imageView72"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/falling"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="482dp" />
+
+    <ImageView
+        android:id="@+id/imageView73"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/cpr"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="730dp" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seizure"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="601dp" />
+
+    <TextView
+        android:id="@+id/textView46"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CPR"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="727dp" />
+
+    <TextView
+        android:id="@+id/textView43"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choking"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="343dp" />
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fall"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="474dp" />
+
+    <ImageView
+        android:id="@+id/imageView75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/small_line"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="362dp" />
+
+    <ImageView
+        android:id="@+id/imageView77"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/small_line"
+        tools:layout_editor_absoluteX="156dp"
+        tools:layout_editor_absoluteY="620dp" />
+
+    <ImageView
+        android:id="@+id/imageView78"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/small_line"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="746dp" />
+
+    <ImageView
+        android:id="@+id/imageView76"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/small_line"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="493dp" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="211dp"
+        android:layout_height="87dp"
+        android:text="If a person is choking and cannot speak, cough, or breathe, the caregiver should immediately begin, if the person is conscious. Stand behind the person, wrap your arms around their waist, make a fist just above their navel,upward thrusts to force the object out of the airway."
+        tools:layout_editor_absoluteX="156dp"
+        tools:layout_editor_absoluteY="367dp"
+        android:textColor="@color/white"
+        android:textSize="10.2dp"/>
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="211dp"
+        android:layout_height="87dp"
+        android:text="A fall can be serious, especially for elderly or mobility-impaired individuals, and must be handled with caution and care by a caretaker. If a patient falls, stay calm and do not move them immediately.First, check if they are conscious and ask if they feel pain anywhere."
+        android:textColor="@color/white"
+        android:textSize="10.2dp"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="495dp" />
+
+    <TextView
+        android:id="@+id/textView44"
+        android:layout_width="220dp"
+        android:layout_height="74dp"
+        android:text="A seizure can be frightening, but knowing how to respond calmly and correctly is essential for any caretaker. If someone is having a seizure, do not try to hold them down or put anything in their mouth.Instead, gently guide them to the floor if they're standing, and turn them onto their side to help keep the airway clear."
+        android:textColor="@color/white"
+        android:textSize="10.2dp"
+        tools:layout_editor_absoluteX="156dp"
+        tools:layout_editor_absoluteY="626dp" />
+
+    <TextView
+        android:id="@+id/textView47"
+        android:layout_width="220dp"
+        android:layout_height="74dp"
+        android:text="Cardiopulmonary resuscitation (CPR) is a life-saving emergency procedure performed when a person’s heart stops beating or they stop breathing. For a caretaker, knowing how to perform CPR can make the difference between life and death.If you find someone unresponsive and not breathing normally"
+        android:textColor="@color/white"
+        android:textSize="10.2dp"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="752dp" />
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Read more..."
+        android:textSize="10dp"
+        tools:layout_editor_absoluteX="311dp"
+        tools:layout_editor_absoluteY="440dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/textView41"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Read more..."
+        android:textColor="@color/black"
+        android:textSize="10dp"
+        tools:layout_editor_absoluteX="311dp"
+        tools:layout_editor_absoluteY="568dp" />
+
+    <TextView
+        android:id="@+id/textView45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Read more..."
+        android:textColor="@color/black"
+        android:textSize="10dp"
+        tools:layout_editor_absoluteX="311dp"
+        tools:layout_editor_absoluteY="699dp" />
+
+    <TextView
+        android:id="@+id/textView48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Read more..."
+        android:textColor="@color/black"
+        android:textSize="10dp"
+        tools:layout_editor_absoluteX="311dp"
+        tools:layout_editor_absoluteY="826dp" />
+
+    <ImageView
+        android:id="@+id/imageView79"
+        android:layout_width="80dp"
+        android:layout_height="38dp"
+        app:srcCompat="@drawable/blue_button_rounded"
+        tools:layout_editor_absoluteX="182dp"
+        tools:layout_editor_absoluteY="847dp" />
+
+    <TextView
+        android:id="@+id/textView49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        app:layout_constraintEnd_toEndOf="@+id/imageView79"
+        app:layout_constraintStart_toStartOf="@+id/imageView79"
+        tools:layout_editor_absoluteY="854dp"
+        android:textColor="@color/white"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

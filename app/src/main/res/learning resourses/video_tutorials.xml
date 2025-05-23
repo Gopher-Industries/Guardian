@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show detailed care procedures in simple steps."
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="282dp" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="446dp"
+        android:layout_height="258dp"
+        app:srcCompat="@drawable/blue_background"
+        tools:layout_editor_absoluteX="-18dp"
+        tools:layout_editor_absoluteY="-2dp" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Learning Resorces"
+        android:textColor="@color/white"
+        android:textSize="18dp
+"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="159dp" />
+
+    <ImageView
+        android:id="@+id/imageView29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/learning_main"
+        tools:layout_editor_absoluteY="79dp" />
+
+    <ImageView
+        android:id="@+id/imageView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/btn_img"
+        tools:layout_editor_absoluteY="315dp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Proedure Guide"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView30" />
+
+
+    <ImageView
+        android:id="@+id/imageView65"
+        android:layout_width="343dp"
+        android:layout_height="460dp"
+        android:src="@drawable/rectangle_18310"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="384dp" />
+
+    <ImageView
+        android:id="@+id/imageView47"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/shapes"
+        tools:layout_editor_absoluteX="257dp"
+        tools:layout_editor_absoluteY="746dp" />
+
+
+    <ImageView
+        android:id="@+id/imageView52"
+        android:layout_width="97dp"
+        android:layout_height="115dp"
+        android:src="@drawable/v_diaper"
+        tools:layout_editor_absoluteX="231dp"
+        tools:layout_editor_absoluteY="463dp" />
+
+    <ImageView
+        android:id="@+id/imageView48"
+        android:layout_width="97dp"
+        android:layout_height="115dp"
+        app:srcCompat="@drawable/Tool"
+        tools:layout_editor_absoluteX="76dp"
+        tools:layout_editor_absoluteY="463dp" />
+
+    <ImageView
+        android:id="@+id/imageView56"
+        android:layout_width="134dp"
+        android:layout_height="166dp"
+        app:srcCompat="@drawable/v_rect"
+        tools:layout_editor_absoluteX="215dp"
+        tools:layout_editor_absoluteY="446dp" />
+
+    <ImageView
+        android:id="@+id/imageView50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/play_dark_ic"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="498dp" />
+
+    <ImageView
+        android:id="@+id/imageView49"
+        android:layout_width="134dp"
+        android:layout_height="166dp"
+        app:srcCompat="@drawable/v_rect"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="446dp" />
+
+    <ImageView
+        android:id="@+id/imageView58"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/play_dark_ic"
+        tools:layout_editor_absoluteX="251dp"
+        tools:layout_editor_absoluteY="498dp" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="83dp"
+        android:layout_height="34dp"
+        android:text="Changing adult diapers"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="235dp"
+        tools:layout_editor_absoluteY="570dp" />
+
+    <ImageView
+        android:id="@+id/imageView54"
+        android:layout_width="97dp"
+        android:layout_height="115dp"
+        app:srcCompat="@drawable/v_wheel"
+        tools:layout_editor_absoluteX="231dp"
+        tools:layout_editor_absoluteY="640dp" />
+
+    <ImageView
+        android:id="@+id/imageView51"
+        android:layout_width="134dp"
+        android:layout_height="166dp"
+        app:srcCompat="@drawable/v_rect"
+        tools:layout_editor_absoluteX="215dp"
+        tools:layout_editor_absoluteY="624dp" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="129dp"
+        android:layout_height="33dp"
+        android:text="Transferring a patient to a wheelchair"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="227dp"
+        tools:layout_editor_absoluteY="747dp" />
+
+    <ImageView
+        android:id="@+id/imageView57"
+        android:layout_width="97dp"
+        android:layout_height="115dp"
+        app:srcCompat="@drawable/v_bp"
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="640dp" />
+
+    <ImageView
+        android:id="@+id/imageView53"
+        android:layout_width="134dp"
+        android:layout_height="166dp"
+        app:srcCompat="@drawable/v_rect"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="624dp" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="83dp"
+        android:layout_height="34dp"
+        android:text="Blood pressure monitor"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="746dp" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tool and Equipments"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="569dp" />
+
+    <ImageView
+        android:id="@+id/imageView59"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/play_dark_ic"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="674dp" />
+
+    <ImageView
+        android:id="@+id/imageView60"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/play_dark_ic"
+        tools:layout_editor_absoluteX="257dp"
+        tools:layout_editor_absoluteY="674dp" />
+
+    <ImageView
+        android:id="@+id/imageView63"
+        android:layout_width="41dp"
+        android:layout_height="35dp"
+        app:srcCompat="@drawable/v_next"
+        tools:layout_editor_absoluteX="308dp"
+        tools:layout_editor_absoluteY="798dp" />
+
+    <ImageView
+        android:id="@+id/imageView64"
+        android:layout_width="38dp"
+        android:layout_height="35dp"
+        app:srcCompat="@drawable/v_prev"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="798dp" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="previous"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="805dp" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        tools:layout_editor_absoluteX="276dp"
+        tools:layout_editor_absoluteY="805dp" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vedio Tutorials"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="402dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
