@@ -1,7 +1,11 @@
 package deakin.gopher.guardian.model
 
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
 data class Task(
-    var taskId: String = "",
+    @SerializedName("_id")
+    val taskId: String? = null,
     val title: String = "",
     val description: String = "",
     val assignedNurse: String = "",
@@ -9,8 +13,8 @@ data class Task(
     val completed: Boolean,
     val patientId: String = "",
     val dueDate: String = ""
-)
 
+) : Serializable
 
 enum class Priority {
     LOW,

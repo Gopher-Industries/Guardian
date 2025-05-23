@@ -33,8 +33,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">Profile</string>
     <string name="notifications">Notifications</string>
-    <string name="collection">Collection</string>
     <string name="inbox">Inbox</string>
+    <string name="collection">Collection</string>
+    <string name="complete_task">Complete</string>
+    <string name="incomplete_task">Incomplete</string>
+    <string name="delete_task">Delete</string>
     <string name="new_user">New User</string>
     <string name="support">Support</string>
     <string name="about">About</string>

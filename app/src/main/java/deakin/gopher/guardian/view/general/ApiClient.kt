@@ -6,7 +6,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
 object ApiClient {
-    private const val BASE_URL = "https://guardian-backend-opal.vercel.app/api/v1/"
+    private const val BASE_URL = "base_url"
 
     private val logger = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY

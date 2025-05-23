@@ -33,8 +33,13 @@
     <color name="colorAccent">@color/light_blue_A200</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorGreen">#32CD32</color>
     <color name="colorRed">#FF0000</color>
+    <color name="light_gray">#DDDDDD</color>
+    <color name="extra_light_gray">#F9F9F9</color>
+    <color name="colorGreen">#4CAF50</color>  <!-- success -->
+    <color name="colorError">#F44336</color>  <!-- error/red -->
+
+
 
     <color name="homepageButtonsEnd">#FF2F83AA</color>
     <color name="homepageButtonsStart">#FF54C5F4</color>

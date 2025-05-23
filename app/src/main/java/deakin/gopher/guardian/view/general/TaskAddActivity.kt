@@ -8,15 +8,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.database.FirebaseDatabase
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Priority
 import deakin.gopher.guardian.model.Task
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
-import com.wdullaer.materialdatetimepicker.time.TimePickerDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import com.google.android.material.snackbar.Snackbar
+import androidx.core.content.ContextCompat // for colors
 import java.util.*
 
 class TaskAddActivity : AppCompatActivity() {
+
     private lateinit var taskDescriptionEditText: TextInputEditText
     private lateinit var patientIdEditText: TextInputEditText
     private lateinit var assignedNurseEditText: TextInputEditText
@@ -24,6 +29,8 @@ class TaskAddActivity : AppCompatActivity() {
     private lateinit var taskTitleEditText: TextInputEditText
     private lateinit var priorityRadioGroup: RadioGroup
     private var taskPriority: Priority = Priority.MEDIUM
+
+    private val taskApiService = ApiClient.retrofit.create(TaskApiService::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +42,8 @@ class TaskAddActivity : AppCompatActivity() {
         patientIdEditText = findViewById(R.id.taskPatientIdEditText)
         assignedNurseEditText = findViewById(R.id.taskAssignedToEditText)
         dueDateEditText = findViewById(R.id.taskDueDateEditText)
-        priorityRadioGroup = findViewById(R.id.priorityRadioGroup) // Ensure this exists in XML
+        priorityRadioGroup = findViewById(R.id.priorityRadioGroup)
 
-        // Set up the DatePicker when the field is clicked
         dueDateEditText.setOnClickListener {
             val calendar = Calendar.getInstance()
             val datePickerDialog = DatePickerDialog.newInstance(
@@ -49,9 +55,7 @@ class TaskAddActivity : AppCompatActivity() {
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
             )
-
-            // Customize the date picker dialog
-            datePickerDialog.setThemeDark(true) // Optional dark theme
+            datePickerDialog.setThemeDark(true)
             datePickerDialog.show(supportFragmentManager, "DatePicker")
         }
 
@@ -84,7 +88,7 @@ class TaskAddActivity : AppCompatActivity() {
     private fun showSaveDialog() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(getString(R.string.saving_changes))
-        builder.setPositiveButton(getString(R.string.yes)) { _, _ -> saveInFirebase() }
+        builder.setPositiveButton(getString(R.string.yes)) { _, _ -> saveTaskViaApi() }
         builder.setNegativeButton(getString(R.string.no), null)
         val dialog = builder.create()
         dialog.setOnShowListener {
@@ -94,51 +98,65 @@ class TaskAddActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun saveInFirebase() {
-        val databaseRef = FirebaseDatabase.getInstance().reference
-        val caretakerTaskRef = databaseRef.child("caretaker_tasks")
-
+    private fun saveTaskViaApi() {
         val taskTitle = taskTitleEditText.text.toString().trim()
         val taskDescription = taskDescriptionEditText.text.toString().trim()
         val patientId = patientIdEditText.text.toString().trim()
         val assignedNurse = assignedNurseEditText.text.toString().trim()
+        val dueDate = dueDateEditText.text.toString().trim()
 
-        // Optional: Input validation
         if (taskTitle.isEmpty() || taskDescription.isEmpty() || patientId.isEmpty()) {
             Toast.makeText(this, "Please fill all required fields", Toast.LENGTH_SHORT).show()
             return
         }
 
         val newTask = Task(
-            taskId = "",
+            taskId = null, // DO NOT include it, MongoDB will generate it
             title = taskTitle,
             description = taskDescription,
             assignedNurse = assignedNurse,
             priority = taskPriority,
             patientId = patientId,
-            dueDate = dueDateEditText.text.toString().trim(),
+            dueDate = dueDate,
             completed = false
         )
 
-        val taskId = caretakerTaskRef.push().key ?: return
-        newTask.taskId = taskId
 
-        caretakerTaskRef.child(taskId).setValue(newTask).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                updatePatientTasks(taskId)
-                finish()
-            } else {
-                Toast.makeText(this, "Failed to save task", Toast.LENGTH_SHORT).show()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = taskApiService.createTask(newTask)
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        val drawerLayout = findViewById<View>(R.id.drawer_layout)
+
+                        Snackbar.make(drawerLayout, "Task saved successfully", Snackbar.LENGTH_SHORT)
+                            .setBackgroundTint(ContextCompat.getColor(this@TaskAddActivity, R.color.colorGreen))
+                            .setTextColor(ContextCompat.getColor(this@TaskAddActivity, android.R.color.white))
+                            .addCallback(object : Snackbar.Callback() {
+                                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                                    super.onDismissed(transientBottomBar, event)
+                                    finish()
+                                }
+                            })
+                            .show()
+
+                    } else {
+                        Snackbar.make(findViewById<View>(R.id.drawer_layout), "Failed to save task: ${response.code()}", Snackbar.LENGTH_SHORT)
+                            .setBackgroundTint(ContextCompat.getColor(this@TaskAddActivity, R.color.colorError))  // define colorError or use red
+                            .setTextColor(ContextCompat.getColor(this@TaskAddActivity, android.R.color.white))
+                            .show()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    val drawerLayout = findViewById<View>(R.id.drawer_layout)
+                    Snackbar.make(drawerLayout, "Error: ${e.localizedMessage}", Snackbar.LENGTH_SHORT)
+                        .setBackgroundTint(ContextCompat.getColor(this@TaskAddActivity, R.color.colorError))
+                        .setTextColor(ContextCompat.getColor(this@TaskAddActivity, android.R.color.white))
+                        .show()
+                }
             }
         }
 
-        databaseRef.child("nurse_tasks").child(taskId).setValue(newTask)
-    }
-
-    private fun updatePatientTasks(taskId: String) {
-        FirebaseDatabase.getInstance().reference
-            .child("patient_tasks")
-            .child(taskId)
-            .setValue(true)
     }
 }

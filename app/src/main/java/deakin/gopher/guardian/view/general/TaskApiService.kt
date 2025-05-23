@@ -1,34 +1,17 @@
 package deakin.gopher.guardian.view.general
 
+import deakin.gopher.guardian.model.Task
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-
-data class TaskRequest(
-    val title: String,
-    val description: String,
-    val patientId: String,
-    val dueDate: String,
-    val assignedTo: String? = null,
-)
-
-data class TaskResponse(
-    val _id: String,
-    val title: String,
-    val description: String,
-    val patientId: String,
-    val dueDate: String,
-    val assignedTo: String?,
-)
+import retrofit2.http.*
 
 interface TaskApiService {
-    @POST("admin/tasks")
-    suspend fun createTask(
-        @Header("Authorization") token: String,
-        @Body task: TaskRequest,
-    ): Response<TaskResponse>
+    @POST("tasks")
+    suspend fun createTask(@Body task: Task): Response<Task>
 
-    // (Optional: Add GET for fetching tasks if needed)
+    @GET("tasks")
+    suspend fun getAllTasks(): Response<List<Task>>
+
+    @DELETE("tasks/{id}")
+    suspend fun deleteTask(@Path("id") id: String): Response<Unit>
+
 }

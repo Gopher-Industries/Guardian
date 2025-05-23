@@ -1,151 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/patient_list_backgroud"
-    android:textAlignment="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/task_detail_back_button"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="65dp"
-        android:background="@drawable/back_arrow"
-        android:backgroundTint="@color/white"
-        android:contentDescription="TODO"
-        android:text=""
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/task_detail_head_image"
-        android:layout_width="54dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="94dp"
-        android:layout_marginTop="56dp"
-        android:contentDescription="TODO"
-        app:layout_constraintStart_toEndOf="@+id/task_detail_company_icon"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profile_icon_small" />
-
-    <ImageView
-        android:id="@+id/task_detail_company_icon"
-        android:layout_width="67dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="44dp"
-        android:contentDescription="TODO"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gopher_logo" />
-
+    <!-- Example TextView for task title -->
     <TextView
-        android:id="@+id/task_detail_title"
+        android:id="@+id/taskTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Task Title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Example TextView for task details -->
+    <TextView
+        android:id="@+id/taskDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Task Details go here..."
+        android:textSize="16sp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/taskTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Icon Buttons container -->
+    <LinearLayout
+        android:id="@+id/buttonLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/task_details_title"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="25sp"
-        android:translationZ="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_detail_company_icon" />
-
-    <LinearLayout
-        android:id="@+id/containerLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@drawable/dialog_bg2"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/buttons_container"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_detail_title">
-
-        <!-- Task description -->
-        <TextView
-            android:id="@+id/task_detail_description_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/task_description_prefix"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <!-- Nurse name -->
-        <TextView
-            android:id="@+id/task_text_view_nurse_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/assigned_nurse_prefix"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <!-- Priority -->
-        <TextView
-            android:id="@+id/task_text_view_priority"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/priority_prefix"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-    </LinearLayout>
-
-    <!-- Complete button -->
-    <LinearLayout
-        android:id="@+id/buttons_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp"
         android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <Button
-            android:id="@+id/task_button_mark_complete"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="#4CAF50"
-            android:text="Mark as Complete"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
+        <!-- Complete task icon button -->
+        <!-- Complete task icon button -->
+        <ImageButton
+            android:id="@+id/completeButton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/complete_task"
+            android:src="@drawable/ic_check_circle"
+            android:tint="@color/black_overlay" />
 
-        <Button
-            android:id="@+id/task_button_mark_incomplete"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/orange"
-            android:text="Mark as Incomplete"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
+        <!-- Incomplete task icon button -->
+        <ImageButton
+            android:id="@+id/incompleteButton"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/incomplete_task"
+            android:src="@drawable/ic_radio_button_unchecked"
+            android:tint="@color/black_overlay" />
 
-        <Button
-            android:id="@+id/task_button_mark_delete"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="#F44336"
-            android:text="Delete"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
+        <!-- Delete task icon button -->
+        <ImageButton
+            android:id="@+id/deleteButton"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_margin="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/delete_task"
+            android:src="@drawable/ic_delete"
+            android:tint="@color/black_overlay" />
+
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
