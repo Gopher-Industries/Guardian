@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView154"
+        android:layout_width="417dp"
+        android:layout_height="226dp"
+        app:srcCompat="@drawable/blue_background"
+        tools:layout_editor_absoluteX="-4dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/textView104"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Setting"
+        android:textColor="@color/TG_blue"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="393dp" />
+
+    <ImageView
+        android:id="@+id/imageView158"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/back_circle"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="567dp" />
+
+    <ImageView
+        android:id="@+id/imageView156"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/back_circle"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="650dp" />
+
+    <ImageView
+        android:id="@+id/imageView157"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/back_circle"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="485dp" />
+
+    <ImageView
+        android:id="@+id/imageView159"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/nurse_pass"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="497dp" />
+
+    <ImageView
+        android:id="@+id/imageView160"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/nurse_bell"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="579dp" />
+
+    <ImageView
+        android:id="@+id/imageView161"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/nurse_call"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="659dp" />
+
+    <ImageView
+        android:id="@+id/imageView162"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/big_line"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="692dp" />
+
+    <ImageView
+        android:id="@+id/imageView164"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/big_line"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="611dp" />
+
+    <ImageView
+        android:id="@+id/imageView163"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/big_line"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="529dp" />
+
+    <TextView
+        android:id="@+id/textView105"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="497dp" />
+
+    <TextView
+        android:id="@+id/textView106"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notification preferences"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="579dp" />
+
+    <TextView
+        android:id="@+id/textView107"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Help center"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        tools:layout_editor_absoluteX="93dp"
+        tools:layout_editor_absoluteY="659dp" />
+
+    <ImageView
+        android:id="@+id/imageView165"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/shapes"
+        tools:layout_editor_absoluteX="261dp"
+        tools:layout_editor_absoluteY="741dp" />
+
+    <ImageView
+        android:id="@+id/imageView166"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/nurse_big_set"
+        tools:layout_editor_absoluteY="243dp" />
+
+    <ImageView
+        android:id="@+id/imageView167"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/imageView154"
+        app:layout_constraintStart_toStartOf="@+id/imageView154"
+        app:srcCompat="@drawable/gopher_logo"
+        tools:layout_editor_absoluteY="92dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
