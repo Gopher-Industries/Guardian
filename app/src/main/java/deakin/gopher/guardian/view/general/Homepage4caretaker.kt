@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import deakin.gopher.guardian.PatientExerciseModules
 import androidx.annotation.OptIn
 import androidx.media3.common.util.UnstableApi
+import deakin.gopher.guardian.PatientExerciseModules
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.TrainingActivity
 import deakin.gopher.guardian.services.EmailPasswordAuthService
@@ -80,15 +80,13 @@ class Homepage4caretaker : BaseActivity() {
             startActivity(
                 Intent(this@Homepage4caretaker, TrainingActivity::class.java),
             )
-
         }
 
         //  exercise portal button
-                exercisePortalButton.setOnClickListener {
-                    startActivity(
-                        Intent(this@Homepage4caretaker, PatientExerciseModules::class.java),
-                    )
-
+        exercisePortalButton.setOnClickListener {
+            startActivity(
+                Intent(this@Homepage4caretaker, PatientExerciseModules::class.java),
+            )
         }
     }
 
