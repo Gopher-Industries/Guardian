@@ -14,12 +14,13 @@ import androidx.fragment.app.Fragment
  * Fragment that handles both the exercise portal and detail views
  */
 class PatientExercisePortalFragment : Fragment() {
-
     private var currentExerciseType: String? = null
     private var currentTabState: TabState = TabState.TO_DO
 
     enum class TabState {
-        TO_DO, IN_PROGRESS, COMPLETED
+        TO_DO,
+        IN_PROGRESS,
+        COMPLETED,
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,24 +34,22 @@ class PatientExercisePortalFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-
         return if (currentExerciseType == null) {
-
             val view = inflater.inflate(R.layout.activity_exercise_main_portal, container, false)
             setupPortalView(view)
             view
         } else {
-
-            val layoutResId = when (currentExerciseType) {
-                "flexibility" -> R.layout.activity_exercise_flexibility_module
-                "strength" -> R.layout.activity_exercise_strength_module
-                //"breathing" -> R.layout.activity_exercise_breathing_module //PR not yet approved
-                //"balance" -> R.layout.activity_exercise_balance_module //PR not yet approved
-                "cardio" -> R.layout.activity_exercise_cardio_module
-                else -> R.layout.activity_exercise_flexibility_module
-            }
+            val layoutResId =
+                when (currentExerciseType) {
+                    "flexibility" -> R.layout.activity_exercise_flexibility_module
+                    "strength" -> R.layout.activity_exercise_strength_module
+                    // "breathing" -> R.layout.activity_exercise_breathing_module //PR not yet approved
+                    // "balance" -> R.layout.activity_exercise_balance_module //PR not yet approved
+                    "cardio" -> R.layout.activity_exercise_cardio_module
+                    else -> R.layout.activity_exercise_flexibility_module
+                }
             val view = inflater.inflate(layoutResId, container, false)
             setupExerciseDetailView(view)
             view
@@ -65,12 +64,9 @@ class PatientExercisePortalFragment : Fragment() {
         }
     }
 
-
     private fun setupPortalView(view: View) {
         try {
-
             currentTabState = TabState.TO_DO
-
 
             view.findViewById<CardView>(R.id.flexibilityCard)?.setOnClickListener {
                 navigateToExercise("flexibility")
@@ -92,7 +88,6 @@ class PatientExercisePortalFragment : Fragment() {
                 navigateToExercise("cardio")
             }
 
-
             view.findViewById<TextView>(R.id.tabToDo)?.setOnClickListener {
                 setActiveTab(view, it as TextView)
                 currentTabState = TabState.TO_DO
@@ -111,24 +106,22 @@ class PatientExercisePortalFragment : Fragment() {
                 updateExerciseVisibility(view, TabState.COMPLETED)
             }
 
-
             view.findViewById<Button>(R.id.backButton)?.setOnClickListener {
-
                 activity?.finish()
             }
-
 
             setActiveTab(view, view.findViewById(R.id.tabToDo)!!)
             updateExerciseVisibility(view, TabState.TO_DO)
         } catch (e: Exception) {
-
             e.printStackTrace()
         }
     }
 
-    private fun updateExerciseVisibility(view: View, tabState: TabState) {
+    private fun updateExerciseVisibility(
+        view: View,
+        tabState: TabState,
+    ) {
         val sharedPreferences = requireActivity().getSharedPreferences("exercise_prefs", 0)
-
 
         val flexibilityCard = view.findViewById<CardView>(R.id.flexibilityCard)
         val strengthCard = view.findViewById<CardView>(R.id.strengthCard)
@@ -136,19 +129,20 @@ class PatientExercisePortalFragment : Fragment() {
         val balanceCard = view.findViewById<CardView>(R.id.balanceCard)
         val cardioCard = view.findViewById<CardView>(R.id.cardioCard)
 
-
-        fun updateCardVisibility(card: CardView?, exerciseType: String) {
+        fun updateCardVisibility(
+            card: CardView?,
+            exerciseType: String,
+        ) {
             val isCompleted = sharedPreferences.getBoolean("completed_$exerciseType", false)
             val isSaved = sharedPreferences.getBoolean("saved_$exerciseType", false)
 
-
-            card?.visibility = when (tabState) {
-                TabState.TO_DO -> if (!isCompleted && !isSaved) View.VISIBLE else View.GONE
-                TabState.IN_PROGRESS -> if (isSaved && !isCompleted) View.VISIBLE else View.GONE
-                TabState.COMPLETED -> if (isCompleted) View.VISIBLE else View.GONE
-            }
+            card?.visibility =
+                when (tabState) {
+                    TabState.TO_DO -> if (!isCompleted && !isSaved) View.VISIBLE else View.GONE
+                    TabState.IN_PROGRESS -> if (isSaved && !isCompleted) View.VISIBLE else View.GONE
+                    TabState.COMPLETED -> if (isCompleted) View.VISIBLE else View.GONE
+                }
         }
-
 
         updateCardVisibility(flexibilityCard, "flexibility")
         updateCardVisibility(strengthCard, "strength")
@@ -157,52 +151,47 @@ class PatientExercisePortalFragment : Fragment() {
         updateCardVisibility(cardioCard, "cardio")
     }
 
-
     private fun setupExerciseDetailView(view: View) {
         try {
-
             view.findViewById<Button>(R.id.saveForLaterButton)?.setOnClickListener {
-
                 val exerciseName = view.findViewById<TextView>(R.id.benefits_exercising)?.text.toString() ?: ""
 
                 Toast.makeText(
                     requireContext(),
                     "$exerciseName saved for later",
-                    Toast.LENGTH_SHORT
+                    Toast.LENGTH_SHORT,
                 ).show()
 
-
-                val sharedPreferences = requireActivity().getSharedPreferences(
-                    "exercise_prefs",
-                    0
-                )
+                val sharedPreferences =
+                    requireActivity().getSharedPreferences(
+                        "exercise_prefs",
+                        0,
+                    )
                 sharedPreferences.edit()
-                    .putBoolean("saved_${currentExerciseType}", true)
-                    .putBoolean("completed_${currentExerciseType}", false) // Ensure it's not marked as completed
+                    .putBoolean("saved_$currentExerciseType", true)
+                    .putBoolean("completed_$currentExerciseType", false) // Ensure it's not marked as completed
                     .apply()
-
 
                 navigateBackToPortal()
             }
 
             view.findViewById<Button>(R.id.markCompleteButton)?.setOnClickListener {
-
                 val exerciseName = view.findViewById<TextView>(R.id.benefits_exercising)?.text.toString() ?: ""
 
                 Toast.makeText(
                     requireContext(),
                     "$exerciseName marked as complete",
-                    Toast.LENGTH_SHORT
+                    Toast.LENGTH_SHORT,
                 ).show()
 
-
-                val sharedPreferences = requireActivity().getSharedPreferences(
-                    "exercise_prefs",
-                    0
-                )
+                val sharedPreferences =
+                    requireActivity().getSharedPreferences(
+                        "exercise_prefs",
+                        0,
+                    )
                 sharedPreferences.edit()
-                    .putBoolean("completed_${currentExerciseType}", true)
-                    .putBoolean("saved_${currentExerciseType}", false)
+                    .putBoolean("completed_$currentExerciseType", true)
+                    .putBoolean("saved_$currentExerciseType", false)
                     .apply()
 
                 // Go back to portal
@@ -211,31 +200,31 @@ class PatientExercisePortalFragment : Fragment() {
 
             view.findViewById<Button>(R.id.backButton)?.setOnClickListener {
                 // Reset the exercise to "To Do" when back button is pressed
-                val sharedPreferences = requireActivity().getSharedPreferences(
-                    "exercise_prefs",
-                    0
-                )
+                val sharedPreferences =
+                    requireActivity().getSharedPreferences(
+                        "exercise_prefs",
+                        0,
+                    )
                 sharedPreferences.edit()
-                    .putBoolean("saved_${currentExerciseType}", false)
-                    .putBoolean("completed_${currentExerciseType}", false)
+                    .putBoolean("saved_$currentExerciseType", false)
+                    .putBoolean("completed_$currentExerciseType", false)
                     .apply()
-
 
                 navigateBackToPortal()
             }
         } catch (e: Exception) {
-
             e.printStackTrace()
         }
     }
 
-
     private fun navigateToExercise(exerciseType: String) {
-        val fragment = PatientExercisePortalFragment().apply {
-            arguments = Bundle().apply {
-                putString("exercise_type", exerciseType)
+        val fragment =
+            PatientExercisePortalFragment().apply {
+                arguments =
+                    Bundle().apply {
+                        putString("exercise_type", exerciseType)
+                    }
             }
-        }
 
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
@@ -243,17 +232,17 @@ class PatientExercisePortalFragment : Fragment() {
             .commit()
     }
 
-
     private fun navigateBackToPortal() {
         requireActivity().supportFragmentManager.popBackStack()
     }
 
-    private fun setActiveTab(view: View, activeTab: TextView) {
-
+    private fun setActiveTab(
+        view: View,
+        activeTab: TextView,
+    ) {
         val tabToDo = view.findViewById<TextView>(R.id.tabToDo)
         val tabInProgress = view.findViewById<TextView>(R.id.tabInProgress)
         val tabCompleted = view.findViewById<TextView>(R.id.tabCompleted)
-
 
         tabToDo?.background = null
         tabInProgress?.background = null
@@ -263,13 +252,11 @@ class PatientExercisePortalFragment : Fragment() {
         tabInProgress?.setTextColor(resources.getColor(android.R.color.black))
         tabCompleted?.setTextColor(resources.getColor(android.R.color.black))
 
-
         activeTab.setBackgroundResource(R.drawable.tab_selected)
         activeTab.setTextColor(resources.getColor(android.R.color.white))
     }
 
     companion object {
-
         fun newInstance(exerciseType: String? = null): PatientExercisePortalFragment {
             val fragment = PatientExercisePortalFragment()
             if (exerciseType != null) {
