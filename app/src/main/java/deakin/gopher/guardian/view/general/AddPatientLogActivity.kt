@@ -33,7 +33,7 @@ class AddPatientLogActivity : BaseActivity() {
             "Reading",
             "Went outdoors",
             "Meditation",
-            "Other"
+            "Other",
         )
 
     override fun onCreate(savedInstanceState: Bundle?) {
