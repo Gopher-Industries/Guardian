@@ -1,163 +1,61 @@
 package deakin.gopher.guardian.model
 
-enum class PatientStatus {
-    REQUIRES_ASSISTANCE,
-    NOT_EXAMINED,
-    NO_ASSISTANCE_REQUIRED,
+import com.google.gson.annotations.SerializedName
+import deakin.gopher.guardian.model.register.User
+import java.io.Serializable
+import java.time.Instant
+import java.time.LocalDate
+import java.time.Period
+import java.time.ZoneId
+
+data class Patient(
+    @SerializedName("_id") val id: String,
+    @SerializedName("fullname") val fullname: String,
+    @SerializedName("photoUrl") val photoUrl: String,
+    @SerializedName("dateOfBirth") val dateOfBirth: String,
+    @SerializedName("age") val _age: Int,
+    @SerializedName("gender") val gender: String,
+    @SerializedName("healthConditions") val healthConditions: List<String>,
+    @SerializedName("caretaker") val caretaker: User,
+    @SerializedName("assignedNurses") val assignedNurses: List<User>,
+) : Serializable {
+    val age: Int
+        get() {
+            return calculateAge(dateOfBirth, _age)
+        }
 }
 
-class Patient {
-    @JvmField
-    var patientId: String? = null
-    var address: String? = null
-
-    @JvmField
-    var dob: String? = null
-    var patientName: String? = null
-    var phone: String? = null
-    var photo: String? = null
-    var underCare: String? = null
-
-    @JvmField
-    var firstName: String
-
-    @JvmField
-    var middleName: String? = null
-
-    @JvmField
-    var lastName: String
-
-    @JvmField
-    var medicareNo: String? = null
-
-    @JvmField
-    var westernAffairsNo: String? = null
-    var nokId1: String? = null
-    var nokId2: String? = null
-    var gpId1: String? = null
-    var gpId2: String? = null
-
-    @JvmField
-    var lastExaminedTimestamp: Long = 0
-
-    @JvmField
-    var needsAssistance: Boolean
-
-    @JvmField
-    var status: PatientStatus
-
-    @JvmField
-    var isArchived: Boolean = false
-
-    constructor(patientId: String?, firstName: String, lastName: String) {
-        this.patientId = patientId
-        this.firstName = firstName
-        this.lastName = lastName
-        status = PatientStatus.REQUIRES_ASSISTANCE
-        needsAssistance = true
+// Helper function to calculate age
+private fun calculateAge(
+    dateOfBirthString: String?,
+    defaultAge: Int = 0,
+): Int {
+    if (dateOfBirthString.isNullOrEmpty()) {
+        return defaultAge // Or throw an IllegalArgumentException, or handle as needed
     }
+    return try {
+        val birthInstant = Instant.parse(dateOfBirthString)
+        val birthDate = birthInstant.atZone(ZoneId.systemDefault()).toLocalDate()
 
-    // constructor for adding a patient
-    constructor(
-        dob: String?,
-        firstName: String,
-        middleName: String?,
-        lastName: String,
-        medicareNo: String?,
-        westernAffairsNo: String?,
-        nokId1: String?,
-        nokId2: String?,
-        gpId1: String?,
-        gpId2: String?,
-    ) {
-        this.dob = dob
-        this.firstName = firstName
-        this.middleName = middleName
-        this.lastName = lastName
-        this.medicareNo = medicareNo
-        this.westernAffairsNo = westernAffairsNo
-        this.nokId1 = nokId1
-        this.nokId2 = nokId2
-        this.gpId1 = gpId1
-        this.gpId2 = gpId2
-        status = PatientStatus.REQUIRES_ASSISTANCE
-        needsAssistance = true
-    }
-
-    fun archivePatient() {
-        isArchived = true
-    }
-
-    fun unarchivePatient() {
-        isArchived = false
-    }
-
-    private fun getIsArchived(): String {
-        return if (isArchived) {
-            "True"
-        } else {
-            "False"
-        }
-    }
-
-    fun getFirstName(): String {
-        return this.firstName
-    }
-
-    fun getLastName(): String {
-        return this.lastName
-    }
-
-    fun getPatientId(): String? {
-        return this.patientId
-    }
-
-    fun examinePatient() {
-        if (PatientStatus.REQUIRES_ASSISTANCE == status) {
-            status = PatientStatus.NO_ASSISTANCE_REQUIRED
-            needsAssistance = false
-        }
-    }
-
-    override fun toString(): String {
-        return (
-            "Patient{" +
-                "address='" +
-                address +
-                '\'' +
-                ", dob='" +
-                dob +
-                '\'' +
-                ", patient_name='" +
-                patientName +
-                '\'' +
-                ", phone='" +
-                phone +
-                '\'' +
-                ", photo='" +
-                photo +
-                '\'' +
-                ", underCare='" +
-                underCare +
-                '\'' +
-                ", first_name='" +
-                firstName +
-                '\'' +
-                ", middle_name='" +
-                middleName +
-                '\'' +
-                ", last_name='" +
-                lastName +
-                '\'' +
-                ", medicareNo='" +
-                medicareNo +
-                '\'' +
-                ", westernAffairNo='" +
-                westernAffairsNo +
-                '\'' +
-                ", isArchived='" +
-                getIsArchived() +
-                '}'
-        )
+        val currentDate = LocalDate.now()
+        Period.between(birthDate, currentDate).years
+    } catch (e: Exception) {
+        println("Error parsing date of birth: ${e.message}")
+        defaultAge // Or throw an exception
     }
 }
+
+data class AddPatientResponse(
+    @SerializedName("patient") val patient: Patient,
+) : BaseModel()
+
+data class PatientActivity(
+    @SerializedName("activityType") val activityName: String,
+    @SerializedName("activityTimestamp") val timestamp: String,
+    @SerializedName("nurse") val loggedBy: String,
+    @SerializedName("comment") val comment: String,
+)
+
+data class AddPatientActivityResponse(
+    @SerializedName("activity") val activity: PatientActivity,
+) : BaseModel()

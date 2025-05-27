@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/activity_half_margin"
+    android:layout_marginVertical="@dimen/activity_quarter_margin">
+
+    <View
+        android:id="@+id/colourIndicator"
+        android:layout_width="@dimen/activity_quarter_margin"
+        android:layout_height="0dp"
+        android:background="@color/deep_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/activity_horizontal_margin"
+        android:paddingVertical="@dimen/activity_half_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/colourIndicator"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvActivityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_description"
+            android:textStyle="bold"
+            tools:text="Breakfast" />
+
+        <TextView
+            android:id="@+id/tvTimestampLogger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/default_text"
+            android:textSize="@dimen/text_size_small"
+            tools:text="Today, 8:15 AM - Logged by Jennifer Smith" />
+
+        <TextView
+            android:id="@+id/tvComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_half_margin"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_caption"
+            tools:text="Had oatmeal with banana and a cup of tea. Ate well." />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

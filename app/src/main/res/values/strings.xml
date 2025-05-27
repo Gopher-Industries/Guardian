@@ -1,5 +1,5 @@
-    <resources>
-<string name="app_name">TG_Patient_Profile</string>
+<resources>
+    <string name="app_name">TG_Patient_Profile</string>
 
     <string name="main_activity_solgan">Take care of your patients</string>
 
@@ -49,7 +49,7 @@
     <string name="confirm_incident_verified_by"><b>Incident verified by:</b> <font fgcolor="#FF0B98C5"> Jay Reece</font></string>
     <string name="false_alert_verified_by"><b>False alert verified by:</b> <font fgcolor="#FF0B98C5"> Jay Reece</font></string>
 
-    <string name="add_new_patient">Add new patient</string>
+    <string name="add_new_patient">Add New Patient</string>
     <string name="name">Name</string>
     <string name="address">Address</string>
     <string name="date_of_birth">Date of Birth</string>
@@ -57,6 +57,15 @@
     <string name="under_care_of">Under Care of</string>
     <string name="photo">Photo</string>
     <string name="save">Save</string>
+    <string name="log_activity">Log Activity</string>
+    <string name="activity_type">Activity Type</string>
+    <string name="specify_activity">Specify Activity</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="add_comment">Add a Comment…</string>
+    <string name="reporting_as">Reporting As</string>
+    <string name="assign_nurse">Assign Nurse</string>
+    <string name="assigned_nurses">Assigned Nurses</string>
     <string name="back">Back</string>
     <string name="health_details">Health Details</string>
     <string name="care_plan">Care Plan</string>
@@ -175,6 +184,7 @@
     <string name="enter_your_feedback">Enter your feedback...</string>
     <string name="submit_feedback">Submit Feedback</string>
     <string name="new_patient">New Patient</string>
+    <string name="my_patients">My Patients</string>
     <string name="daily_report">Daily Report</string>
     <string name="patient_list">Patient List</string>
     <string name="settings">Settings</string>
@@ -229,6 +239,7 @@
     <string name="add_image">Add Image</string>
     <string name="crop_image">Crop Image</string>
     <string name="take_photo">Take Photo</string>
+    <string name="select_photo">Select Photo</string>
     <string name="select_from_gallery">Select from gallery</string>
     <string name="patient_details">Patient details</string>
     <string name="marilyn_bvaton">Marilyn Bvaton</string>
@@ -350,7 +361,10 @@
     <string name="validation_error_passwords_do_not_match">Passwords do not match</string>
     <string name="validation_empty_confirmed_password">Password confirmation must not be empty</string>
     <string name="validation_empty_name">Name must not be empty</string>
+    <string name="validation_empty_dob">Date of Birth must not be empty</string>
     <string name="validation_empty_role">Please select a role</string>
+    <string name="validation_empty_gender">Please select a gender</string>
+    <string name="validation_empty_activity_type">Please fill in the Activity Type</string>
     <string name="previous">previous</string>
     <string name="registration_success">Verification Email Has been Sent</string>
     <string name="registration_failure">Registration Failed</string>
@@ -526,6 +540,9 @@
         <item>Rural</item>
     </string-array>
 
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
     <string-array name="sex_array">
         <item>Male</item>
         <item>Female</item>
@@ -685,6 +702,12 @@
     <string name="completed">Completed</string>
     <string name="todo">To Do</string>
     <string name="mark_as_complete">Mark as Complete</string>
+    <string name="empty_patient_list">You have not added any Patients yet.\nTap + to add.</string>
+    <string name="empty_assigned_nurses_list">You have not assigned any Nurses to this Patient yet.\nTap + to add.</string>
+    <string name="empty_patient_activity">No activity has been recorded for this Patient yet.</string>
+    <string name="patient_photo">Patient photo</string>
+    <string name="more_options">More Options</string>
+    <string name="add_activity">Add Activity</string>
 
 
     <string-array name="dropdown_items">

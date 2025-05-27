@@ -142,6 +142,12 @@
             android:name=".view.general.PatientListActivity"
             android:exported="false" />
         <activity
+            android:name=".view.general.PatientDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.general.AddPatientLogActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.general.RegisterActivity"
             android:exported="false" />
         <activity

@@ -18,9 +18,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import deakin.gopher.guardian.R;
-import deakin.gopher.guardian.adapter.PatientListAdapter;
+import deakin.gopher.guardian.adapter.ArchivedPatientListAdapter;
 import deakin.gopher.guardian.adapter.SimpleArchivedPatientAdapter;
-import deakin.gopher.guardian.model.Patient;
+import deakin.gopher.guardian.model.PatientOldArchive;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +28,7 @@ import java.util.List;
 public class ArchivedPatientListActivity extends BaseActivity {
 
   private RecyclerView recyclerView;
-  private PatientListAdapter adapter;
+  private ArchivedPatientListAdapter adapter;
   private DrawerLayout drawerLayout;
   private ActionBarDrawerToggle toggle;
 
@@ -39,9 +39,9 @@ public class ArchivedPatientListActivity extends BaseActivity {
 
     recyclerView = findViewById(R.id.archived_patient_recycler_view);
 
-    final List<Patient> archivedPatients = new ArrayList<>();
-    archivedPatients.add(new Patient("1", "John", "Doe"));
-    archivedPatients.add(new Patient("2", "Jane", "Doe"));
+    final List<PatientOldArchive> archivedPatients = new ArrayList<>();
+    archivedPatients.add(new PatientOldArchive("1", "John", "Doe"));
+    archivedPatients.add(new PatientOldArchive("2", "Jane", "Doe"));
 
     DatabaseReference patientRef = FirebaseDatabase.getInstance().getReference().child("patients");
     Query archivedQuery = patientRef.orderByChild("is_Archived").equalTo(true);
@@ -61,9 +61,9 @@ public class ArchivedPatientListActivity extends BaseActivity {
             Log.e("FirebaseTest", "Error fetching data", databaseError.toException());
           }
         });
-    final FirebaseRecyclerOptions<Patient> options =
-        new FirebaseRecyclerOptions.Builder<Patient>()
-            .setQuery(archivedQuery, Patient.class)
+    final FirebaseRecyclerOptions<PatientOldArchive> options =
+        new FirebaseRecyclerOptions.Builder<PatientOldArchive>()
+            .setQuery(archivedQuery, PatientOldArchive.class)
             .build();
 
     SimpleArchivedPatientAdapter adapter = new SimpleArchivedPatientAdapter(archivedPatients);
