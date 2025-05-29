@@ -10,9 +10,9 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.adapter.SimpleArchivedPatientAdapter.PatientViewHolder
-import deakin.gopher.guardian.model.Patient
+import deakin.gopher.guardian.model.PatientOldArchive
 
-class SimpleArchivedPatientAdapter(private val patients: List<Patient>) :
+class SimpleArchivedPatientAdapter(private val patients: List<PatientOldArchive>) :
     RecyclerView.Adapter<PatientViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -49,7 +49,7 @@ class SimpleArchivedPatientAdapter(private val patients: List<Patient>) :
         }
 
         @SuppressLint("SetTextI18n")
-        fun bind(patient: Patient) {
+        fun bind(patient: PatientOldArchive) {
             patientName.text = "${patient.getFirstName()} ${patient.getLastName()}"
         }
     }

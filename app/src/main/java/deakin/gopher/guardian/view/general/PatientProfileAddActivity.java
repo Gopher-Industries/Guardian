@@ -17,13 +17,13 @@ import deakin.gopher.guardian.adapter.PatientProfileAddAdapter;
 import deakin.gopher.guardian.model.GP;
 import deakin.gopher.guardian.model.MedicalDiagnostic;
 import deakin.gopher.guardian.model.NextOfKin;
-import deakin.gopher.guardian.model.Patient;
+import deakin.gopher.guardian.model.PatientOldArchive;
 import deakin.gopher.guardian.util.DataListener;
 
 public class PatientProfileAddActivity extends BaseActivity implements DataListener {
 
   private CustomHeader customHeader;
-  private Patient patient;
+  private PatientOldArchive patient;
   private NextOfKin nextOfKin1, nextOfKin2;
   private GP gp1, gp2;
 
@@ -84,7 +84,7 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
 
   @Override
   public void onDataFilled(
-      final Patient patient,
+      final PatientOldArchive patient,
       final NextOfKin nextOfKin1,
       final NextOfKin nextOfKin2,
       final GP gp1,

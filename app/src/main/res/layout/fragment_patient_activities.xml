@@ -7,45 +7,31 @@
     android:layout_height="match_parent"
     tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/deep_blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/menu_patient_list"
-        app:title="@string/my_patients"
-        app:titleCentered="true"
-        app:titleTextColor="@android:color/white" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewPatients"
+        android:id="@+id/recyclerViewActivities"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:paddingVertical="@dimen/activity_horizontal_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:itemCount="4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        tools:listitem="@layout/item_patient" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="4"
+        tools:listitem="@layout/item_nurse" />
 
     <TextView
         android:id="@+id/tvEmptyMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/empty_patient_list"
+        android:text="@string/empty_patient_activity"
         android:textSize="16sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -53,18 +39,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/content_description_corner_blue_flower_shape"
+        app:backgroundTint="@color/TG_blue"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:icon="@drawable/add_new"
+        app:iconTint="@color/white"
+        android:textColor="@color/white"
+        android:text="@string/add_activity"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/shapes" />
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:id="@+id/fabAddActivity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

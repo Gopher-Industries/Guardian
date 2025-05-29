@@ -18,12 +18,12 @@ class Homepage4nurse : AppCompatActivity() {
         val titleText: TextView = findViewById(R.id.medicalDiagnosticsTitleTextView)
         titleText.append(" ${user.name.split(" ").getOrNull(0) ?: ""}")
 
-        val tasksButton: Button = findViewById(R.id.tasksButton_nurse)
+        val patientsButton: Button = findViewById(R.id.patientsButton_nurse)
         val settingsButton: Button = findViewById(R.id.settingsButton_nurse)
         val signOutButton: Button = findViewById(R.id.sighOutButton_nurse)
 
-        tasksButton.setOnClickListener {
-            NavigationService(this).onLaunchTasks()
+        patientsButton.setOnClickListener {
+            NavigationService(this).onLaunchPatientList()
         }
 
         // settings button
