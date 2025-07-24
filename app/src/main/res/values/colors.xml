@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="off_white">#F5F5F5</color>
     <color name="TG_blue">#FF0B98C5</color>
+    <color name="TG_blue_2">#3B9CD7</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
     <color name="light_blue_A200">#FF40C4FF</color>
@@ -53,4 +54,9 @@
     <color name="dark_secondary_variant_color">#000000</color>
     <color name="loading_page_icon_bg_color">#FDFCFC</color>
 
+    <color name="flexibility_bg">#E6E6FA</color>  <!-- Very light lavender -->
+    <color name="strength_bg">#FFFCF5E0</color>     <!-- Light yellow -->
+    <color name="breathing_bg">#FFE8F8E8</color>    <!-- Light mint green -->
+    <color name="balance_bg">#FFF0F8FF</color>      <!-- Very light blue -->
+    <color name="cardio_bg">#FFFFE8E8</color>       <!-- Light pink -->
 </resources>

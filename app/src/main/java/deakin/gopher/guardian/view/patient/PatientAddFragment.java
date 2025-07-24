@@ -16,7 +16,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 import deakin.gopher.guardian.R;
-import deakin.gopher.guardian.model.Patient;
+import deakin.gopher.guardian.model.PatientOldArchive;
 import deakin.gopher.guardian.util.DataListener;
 
 public class PatientAddFragment extends Fragment {
@@ -29,7 +29,7 @@ public class PatientAddFragment extends Fragment {
       date_of_birth,
       medicare_no,
       western_affairs_no;
-  private Patient patient;
+  private PatientOldArchive patient;
   private DataListener dataListener;
   private String dateOfBirth = "";
   private String firstName = "";
@@ -144,7 +144,7 @@ public class PatientAddFragment extends Fragment {
           && !TextUtils.isEmpty(dateOfBirth)
           && !TextUtils.isEmpty(medicareNo)) {
         patient =
-            new Patient(
+            new PatientOldArchive(
                 dateOfBirth,
                 firstName,
                 middleName,

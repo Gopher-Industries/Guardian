@@ -2,11 +2,11 @@ package deakin.gopher.guardian.util
 
 import deakin.gopher.guardian.model.GP
 import deakin.gopher.guardian.model.NextOfKin
-import deakin.gopher.guardian.model.Patient
+import deakin.gopher.guardian.model.PatientOldArchive
 
 interface DataListener {
     fun onDataFilled(
-        patient: Patient?,
+        patient: PatientOldArchive?,
         nextOfKin1: NextOfKin?,
         nextOfKin2: NextOfKin?,
         gp1: GP?,

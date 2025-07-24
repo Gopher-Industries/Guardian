@@ -2,11 +2,12 @@ package deakin.gopher.guardian.services
 
 import android.app.Activity
 import android.content.Intent
-import deakin.gopher.guardian.model.login.RoleName
+import deakin.gopher.guardian.model.login.Role
 import deakin.gopher.guardian.view.general.Homepage4admin
 import deakin.gopher.guardian.view.general.Homepage4caretaker
 import deakin.gopher.guardian.view.general.Homepage4nurse
 import deakin.gopher.guardian.view.general.LoginActivity
+import deakin.gopher.guardian.view.general.PatientListActivity
 import deakin.gopher.guardian.view.general.PinCodeActivity
 import deakin.gopher.guardian.view.general.RegisterActivity
 import deakin.gopher.guardian.view.general.Setting
@@ -14,9 +15,9 @@ import deakin.gopher.guardian.view.general.TaskAddActivity
 import deakin.gopher.guardian.view.general.TasksListActivity
 
 class NavigationService(val activity: Activity) {
-    fun toHomeScreenForRole(roleName: RoleName) {
-        when (roleName) {
-            RoleName.Caretaker -> {
+    fun toHomeScreenForRole(role: Role) {
+        when (role) {
+            Role.Caretaker -> {
                 activity.startActivity(
                     Intent(
                         activity.applicationContext,
@@ -25,7 +26,7 @@ class NavigationService(val activity: Activity) {
                 )
             }
 
-            RoleName.Nurse -> {
+            Role.Nurse -> {
                 activity.startActivity(
                     Intent(
                         activity.applicationContext,
@@ -34,7 +35,7 @@ class NavigationService(val activity: Activity) {
                 )
             }
 
-            RoleName.Admin -> {
+            Role.Admin -> {
                 activity.startActivity(
                     Intent(
                         activity.applicationContext,
@@ -72,6 +73,15 @@ class NavigationService(val activity: Activity) {
         )
     }
 
+    fun onLaunchPatientList() {
+        activity.startActivity(
+            Intent(
+                activity.applicationContext,
+                PatientListActivity::class.java,
+            ),
+        )
+    }
+
     fun onLaunchTasks() {
         activity.startActivity(
             Intent(
@@ -99,9 +109,9 @@ class NavigationService(val activity: Activity) {
         )
     }
 
-    fun toPinCodeActivity(roleName: RoleName) {
+    fun toPinCodeActivity(role: Role) {
         val intent = Intent(activity.applicationContext, PinCodeActivity::class.java)
-        intent.putExtra("role", roleName)
+        intent.putExtra("role", role)
         activity.startActivity(intent)
     }
 }

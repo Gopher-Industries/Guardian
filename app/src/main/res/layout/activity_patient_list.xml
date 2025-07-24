@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
@@ -8,126 +7,64 @@
     android:layout_height="match_parent"
     tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/patient_list_backgroud"
-        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:background="@color/deep_blue"
         app:layout_constraintEnd_toEndOf="parent"
+        app:navigationIcon="@drawable/ic_arrow_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context="deakin.gopher.guardian.view.general.PatientListActivity">
+        app:menu="@menu/menu_patient_list"
+        app:title="@string/my_patients"
+        app:titleCentered="true"
+        app:titleTextColor="@android:color/white" />
 
-        <ImageView
-            android:id="@+id/patient_list_menu_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="51dp"
-            android:layout_marginTop="65dp"
-            android:contentDescription="TODO"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/menu_button" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewPatients"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingVertical="@dimen/activity_horizontal_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:itemCount="4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:listitem="@layout/item_patient" />
 
+    <TextView
+        android:id="@+id/tvEmptyMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/empty_patient_list"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <ImageView
-            android:id="@+id/patient_list_head_image"
-            android:layout_width="54dp"
-            android:layout_height="51dp"
-            android:layout_marginStart="94dp"
-            android:layout_marginTop="56dp"
-            android:contentDescription="TODO"
-            app:layout_constraintStart_toEndOf="@+id/patient_list_company_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/profile_icon_small" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
 
-        <ImageView
-            android:id="@+id/patient_list_company_icon"
-            android:layout_width="67dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="172dp"
-            android:layout_marginTop="44dp"
-            android:contentDescription="TODO"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/gopher_logo" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/content_description_corner_blue_flower_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/shapes" />
 
-        <TextView
-            android:id="@+id/patient_list_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="132dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="@string/patient_list"
-            android:textColor="@android:color/white"
-            android:textSize="25sp"
-            android:translationZ="2dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_list_company_icon" />
-
-
-        <Button
-            android:id="@+id/button_view_archived"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:backgroundTint="#842B2B"
-            android:text="Archive"
-            android:textColor="#FFFFFF"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-
-        <SearchView
-            android:id="@+id/patient_list_searchView"
-            android:layout_width="375dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/white_rectangle_patient_list"
-            android:iconifiedByDefault="false"
-            android:queryHint="Search patients or others"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_list_title" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/patient_list_recycleView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/patient_list_searchView"
-            app:layout_constraintBottom_toTopOf="@+id/imageView62" />
-
-
-        <ImageView
-            android:id="@+id/imageView61"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="188dp"
-            android:contentDescription="TODO"
-            app:layout_constraintBottom_toTopOf="@+id/imageView62"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/three_point" />
-
-        <ImageView
-            android:id="@+id/imageView62"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="180dp"
-            android:layout_marginBottom="16dp"
-            android:contentDescription="TODO"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/add_new_96" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <include
-        android:id="@id/nav_view"
-        layout="@layout/navigation_view" />
-</androidx.drawerlayout.widget.DrawerLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
