@@ -1,4 +1,4 @@
-package com.example.guardionmonitor
+package deakin.gopher.guardian
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

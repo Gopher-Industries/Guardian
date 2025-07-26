@@ -1,4 +1,4 @@
-package com.example.guardionmonitor
+package deakin.gopher.guardian
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,28 +9,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
-// Theme
-import com.example.guardionmonitor.ui.theme.GuardionMonitorTheme
+import deakin.gopher.guardian.view.theme.GuardianTheme
 
-// Screens
-import com.example.guardionmonitor.WelcomeScreen
-import com.example.guardionmonitor.RoleSelectionScreen
-import com.example.guardionmonitor.DoctorLoginPage
-import com.example.guardionmonitor.DoctorHomeScreen
-import com.example.guardionmonitor.PatientReportScreen
-import com.example.guardionmonitor.MedicalSummaryScreen
-import com.example.guardionmonitor.AssignNurseScreen
-import com.example.guardionmonitor.ActivityLogScreen
-import com.example.guardionmonitor.AppointmentScreen
-import com.example.guardionmonitor.PrescriptionScreen
-import com.example.guardionmonitor.BillingScreen
-import com.example.guardionmonitor.SignOutScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            GuardionMonitorTheme {
+            GuardianTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
                     val navController = rememberNavController()
                     NavHost(navController = navController, startDestination = "welcome") {
