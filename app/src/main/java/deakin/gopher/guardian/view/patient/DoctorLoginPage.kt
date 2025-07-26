@@ -1,26 +1,53 @@
+@file:Suppress("ktlint")
+
 package deakin.gopher.guardian
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.Icon
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.IconButton
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.material3.Text
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material3.Checkbox
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
 @Composable
 fun DoctorLoginPage(navController: NavHostController) {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var rememberMe by remember { mutableStateOf(false) }
-    var loginError by remember { mutableStateOf(false) }
+//    var username by remember { mutableStateOf("") }
+//    var password by remember { mutableStateOf("") }
+//    var rememberMe by remember { mutableStateOf(false) }
+//    var loginError by remember { mutableStateOf(false) }
 
     val validUsername = "doctor"
     val validPassword = "1234"
@@ -65,19 +92,27 @@ fun DoctorLoginPage(navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
-            label = { Text("Username") },
-            modifier = Modifier.fillMaxWidth(0.8f),
-            singleLine = true
-        )
+        val username = null
+//        OutlinedTextField(
+//            value = username,
+//            onValueChange = {
+//                val it = null
+//                username = it
+//            },
+//            label = { Text("Username") },
+//            modifier = Modifier.fillMaxWidth(0.8f),
+//            singleLine = true
+//        )
 
         Spacer(modifier = Modifier.height(10.dp))
 
+        var password = null
         OutlinedTextField(
             value = password,
-            onValueChange = { password = it },
+            onValueChange = {
+                val it = null
+                password = it
+            },
             label = { Text("Password") },
             modifier = Modifier.fillMaxWidth(0.8f),
             singleLine = true
@@ -89,6 +124,7 @@ fun DoctorLoginPage(navController: NavHostController) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth(0.8f)
         ) {
+            var rememberMe = false
             Checkbox(
                 checked = rememberMe,
                 onCheckedChange = { rememberMe = it }
@@ -98,6 +134,7 @@ fun DoctorLoginPage(navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(10.dp))
 
+        var loginError = false
         if (loginError) {
             Text(
                 text = "Invalid username or password",
@@ -133,4 +170,8 @@ fun DoctorLoginPage(navController: NavHostController) {
             color = Color(0xFF1976D2)
         )
     }
+}
+
+fun OutlinedTextField(value: Nothing?, onValueChange: () -> Unit, label: @Composable () -> Unit, modifier: Modifier, singleLine: Boolean) {
+
 }

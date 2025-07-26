@@ -8,10 +8,7 @@ import androidx.compose.material3.Surface
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import deakin.gopher.guardian.ActivityLogScreen
-
 import deakin.gopher.guardian.view.theme.GuardianTheme
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +18,6 @@ class MainActivity : ComponentActivity() {
                 Surface(color = MaterialTheme.colorScheme.background) {
                     val navController = rememberNavController()
                     NavHost(navController = navController, startDestination = "welcome") {
-
                         // 1. Welcome
                         composable("welcome") {
                             WelcomeScreen(navController)

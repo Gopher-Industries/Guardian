@@ -3,12 +3,25 @@ package deakin.gopher.guardian
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,27 +33,33 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
 @Composable
-fun MedicalSummaryScreen(navController: NavHostController, patientName: String) {
+fun MedicalSummaryScreen(
+    navController: NavHostController,
+    patientName: String,
+) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(Color.White),
     ) {
         // Header with image and patient name
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color(0xFF4BA4E0))
-                .padding(vertical = 24.dp),
-            contentAlignment = Alignment.Center
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .background(Color(0xFF4BA4E0))
+                    .padding(vertical = 24.dp),
+            contentAlignment = Alignment.Center,
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Image(
                     painter = painterResource(id = R.drawable.icon_william),
                     contentDescription = "$patientName photo",
-                    modifier = Modifier
-                        .size(90.dp)
-                        .background(Color.White, CircleShape)
+                    modifier =
+                        Modifier
+                            .size(90.dp)
+                            .background(Color.White, CircleShape),
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(patientName, fontWeight = FontWeight.Bold, color = Color.White)
@@ -51,10 +70,11 @@ fun MedicalSummaryScreen(navController: NavHostController, patientName: String) 
 
         // Medical Summary box
         Column(
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .background(Color(0xFFE3F2FD), shape = MaterialTheme.shapes.medium)
-                .padding(16.dp)
+            modifier =
+                Modifier
+                    .padding(horizontal = 16.dp)
+                    .background(Color(0xFFE3F2FD), shape = MaterialTheme.shapes.medium)
+                    .padding(16.dp),
         ) {
             Text("MEDICAL SUMMARY", fontWeight = FontWeight.Bold, fontSize = 16.sp)
             Spacer(modifier = Modifier.height(8.dp))
@@ -72,7 +92,7 @@ fun MedicalSummaryScreen(navController: NavHostController, patientName: String) 
             Icon(
                 imageVector = Icons.Default.ArrowForward,
                 contentDescription = "Calendar",
-                modifier = Modifier.size(20.dp)
+                modifier = Modifier.size(20.dp),
             )
             Spacer(modifier = Modifier.width(8.dp))
             Column {
@@ -85,10 +105,11 @@ fun MedicalSummaryScreen(navController: NavHostController, patientName: String) 
 
         // Notes
         Column(
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .background(Color(0xFFE3F2FD), shape = MaterialTheme.shapes.medium)
-                .padding(16.dp)
+            modifier =
+                Modifier
+                    .padding(horizontal = 16.dp)
+                    .background(Color(0xFFE3F2FD), shape = MaterialTheme.shapes.medium)
+                    .padding(16.dp),
         ) {
             Text("NOTES:", fontWeight = FontWeight.SemiBold)
             Spacer(modifier = Modifier.height(8.dp))
@@ -101,14 +122,15 @@ fun MedicalSummaryScreen(navController: NavHostController, patientName: String) 
 
         // Assign Nurse + Activity Log Buttons
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Button(
                 onClick = { navController.navigate("assign_nurse") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 Text("Assign Nurse")
             }
@@ -117,7 +139,7 @@ fun MedicalSummaryScreen(navController: NavHostController, patientName: String) 
 
             Button(
                 onClick = { navController.navigate("activity_log") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 Text("View Activity Log")
             }
@@ -127,17 +149,19 @@ fun MedicalSummaryScreen(navController: NavHostController, patientName: String) 
 
         // Back button
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.End
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+            horizontalArrangement = Arrangement.End,
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
                 contentDescription = "Back",
-                modifier = Modifier
-                    .size(28.dp)
-                    .clickable { navController.navigate("patient_report") }
+                modifier =
+                    Modifier
+                        .size(28.dp)
+                        .clickable { navController.navigate("patient_report") },
             )
         }
     }
