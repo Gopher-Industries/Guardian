@@ -57,9 +57,9 @@ class MainActivity : ComponentActivity() {
                         }
 
                         // 8. Activity log
-                        composable("activity_log") {
-                            ActivityLogScreen(navController)
-                        }
+//                        composable("activity_log") {
+//                            ActivityLogScreen(navController)
+//                        }
 
                         // 9. Appointment
                         composable("appointment") {
