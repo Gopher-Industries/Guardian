@@ -8,6 +8,7 @@ import androidx.compose.material3.Surface
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import deakin.gopher.guardian.ActivityLogScreen
 
 import deakin.gopher.guardian.view.theme.GuardianTheme
 
@@ -57,9 +58,9 @@ class MainActivity : ComponentActivity() {
                         }
 
                         // 8. Activity log
-//                        composable("activity_log") {
-//                            ActivityLogScreen(navController)
-//                        }
+                        composable("activity_log") {
+                            ActivityLogScreen(navController)
+                        }
 
                         // 9. Appointment
                         composable("appointment") {
