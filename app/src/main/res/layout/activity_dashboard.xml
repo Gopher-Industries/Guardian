@@ -49,7 +49,15 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
+    <Spinner
+        android:id="@+id/sortSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp" />
+
+
     <!-- Button to Navigate to Tasks List -->
+
     <Button
         android:id="@+id/buttonViewTasks"
         android:text="View All Tasks"

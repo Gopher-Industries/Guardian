@@ -21,6 +21,7 @@ import deakin.gopher.guardian.services.api.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import deakin.gopher.guardian.utils.SecurityUtils
 
 class RegisterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +64,9 @@ class RegisterActivity : BaseActivity() {
             progressBar.visibility = View.VISIBLE
 
             val emailAddress = EmailAddress(emailInput)
-            val password = Password(passwordInput)
+            val hashedPassword = SecurityUtils.hashPassword(passwordInput)
+            val password = Password(hashedPassword)
+
             val role = findViewById<MaterialButton>(roleInput).text.toString().lowercase()
 
             val request =

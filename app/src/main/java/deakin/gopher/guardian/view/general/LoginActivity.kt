@@ -37,6 +37,8 @@ import deakin.gopher.guardian.view.show
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import deakin.gopher.guardian.utils.SecurityUtils
+
 
 class LoginActivity : BaseActivity() {
     private var userRole: RoleName = RoleName.Caretaker
@@ -77,6 +79,7 @@ class LoginActivity : BaseActivity() {
             progressBar.show()
             val emailInput = mEmail.text.toString().trim { it <= ' ' }
             val passwordInput = mPassword.text.toString().trim { it <= ' ' }
+            val hashedPasswordInput = SecurityUtils.hashPassword(passwordInput)
 
             val loginValidationError = validateInputs(emailInput)
 
@@ -90,7 +93,8 @@ class LoginActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
-            val call = ApiClient.apiService.login(emailInput, passwordInput)
+            val call = ApiClient.apiService.login(emailInput, hashedPasswordInput)
+
 
             call.enqueue(
                 object : Callback<AuthResponse> {
@@ -104,7 +108,8 @@ class LoginActivity : BaseActivity() {
                             val user = response.body()!!.user
                             val token = response.body()!!.token
                             SessionManager.createLoginSession(user, token)
-                            NavigationService(this@LoginActivity).toPinCodeActivity(userRole)
+                            NavigationService(this@LoginActivity).toHomeScreenForRole(userRole)
+
                         } else {
                             // Handle error
                             val errorResponse =

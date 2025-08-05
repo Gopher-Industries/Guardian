@@ -7,11 +7,11 @@ import deakin.gopher.guardian.view.general.Homepage4admin
 import deakin.gopher.guardian.view.general.Homepage4caretaker
 import deakin.gopher.guardian.view.general.Homepage4nurse
 import deakin.gopher.guardian.view.general.LoginActivity
-import deakin.gopher.guardian.view.general.PinCodeActivity
 import deakin.gopher.guardian.view.general.RegisterActivity
 import deakin.gopher.guardian.view.general.Setting
 import deakin.gopher.guardian.view.general.TaskAddActivity
 import deakin.gopher.guardian.view.general.TasksListActivity
+import deakin.gopher.guardian.view.general.DashboardActivity
 
 class NavigationService(val activity: Activity) {
     fun toHomeScreenForRole(roleName: RoleName) {
@@ -100,7 +100,8 @@ class NavigationService(val activity: Activity) {
     }
 
     fun toPinCodeActivity(roleName: RoleName) {
-        val intent = Intent(activity.applicationContext, PinCodeActivity::class.java)
+        val intent = Intent(activity.applicationContext, DashboardActivity::class.java)
+
         intent.putExtra("role", roleName)
         activity.startActivity(intent)
     }
