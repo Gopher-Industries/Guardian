@@ -97,286 +97,288 @@
             android:padding="8dp" />
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/contentScrollView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/exerciseRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fillViewport="true"
+        android:layout_marginTop="12dp"
+        android:clipToPadding="false"
+        android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@+id/tabCardView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp">
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="12dp">-->
 
-            <GridLayout
-                android:id="@+id/exerciseGrid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:columnCount="2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+<!--            <GridLayout-->
+<!--                android:id="@+id/exerciseGrid"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="12dp"-->
+<!--                android:columnCount="2"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/flexibilityCard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="2dp">
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/flexibilityCard"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_columnWeight="1"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    app:cardBackgroundColor="#FFFFFF"-->
+<!--                    app:cardCornerRadius="10dp"-->
+<!--                    app:cardElevation="2dp">-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        android:padding="12dp">-->
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            app:cardBackgroundColor="#E6E6FA"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="0dp">
+<!--                        <androidx.cardview.widget.CardView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="120dp"-->
+<!--                            app:cardBackgroundColor="#E6E6FA"-->
+<!--                            app:cardCornerRadius="5dp"-->
+<!--                            app:cardElevation="0dp">-->
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:gravity="center"-->
+<!--                                android:orientation="vertical">-->
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="8dp"
-                                    android:text="@string/flexibility_exercise1"
-                                    android:textColor="#000000"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold" />
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginBottom="8dp"-->
+<!--                                    android:text="@string/flexibility_exercise1"-->
+<!--                                    android:textColor="#000000"-->
+<!--                                    android:textSize="16sp"-->
+<!--                                    android:textStyle="bold" />-->
 
-                                <ImageView
-                                    android:id="@+id/stretching"
-                                    android:layout_width="38dp"
-                                    android:layout_height="32dp"
-                                    android:layout_marginTop="4dp"
-                                    android:contentDescription="@string/flexibility_exercise1"
-                                    android:src="@drawable/stretching" />
+<!--                                <ImageView-->
+<!--                                    android:id="@+id/stretching"-->
+<!--                                    android:layout_width="38dp"-->
+<!--                                    android:layout_height="32dp"-->
+<!--                                    android:layout_marginTop="4dp"-->
+<!--                                    android:contentDescription="@string/flexibility_exercise1"-->
+<!--                                    android:src="@drawable/stretching" />-->
 
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+<!--                            </LinearLayout>-->
+<!--                        </androidx.cardview.widget.CardView>-->
+<!--                    </LinearLayout>-->
+<!--                </androidx.cardview.widget.CardView>-->
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/strengthCard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="2dp">
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/strengthCard"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_columnWeight="1"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    app:cardBackgroundColor="#FFFFFF"-->
+<!--                    app:cardCornerRadius="10dp"-->
+<!--                    app:cardElevation="2dp">-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        android:padding="12dp">-->
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            app:cardBackgroundColor="#FFFCF5E0"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="0dp">
+<!--                        <androidx.cardview.widget.CardView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="120dp"-->
+<!--                            app:cardBackgroundColor="#FFFCF5E0"-->
+<!--                            app:cardCornerRadius="5dp"-->
+<!--                            app:cardElevation="0dp">-->
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:gravity="center"-->
+<!--                                android:orientation="vertical">-->
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="8dp"
-                                    android:text="@string/strength_exercise1"
-                                    android:textColor="#000000"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold" />
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginBottom="8dp"-->
+<!--                                    android:text="@string/strength_exercise1"-->
+<!--                                    android:textColor="#000000"-->
+<!--                                    android:textSize="16sp"-->
+<!--                                    android:textStyle="bold" />-->
 
-                                <ImageView
-                                    android:id="@+id/walking"
-                                    android:layout_width="38dp"
-                                    android:layout_height="32dp"
-                                    android:layout_marginTop="8dp"
-                                    android:contentDescription="@string/strength_exercise1"
-                                    android:src="@drawable/walking2" />
+<!--                                <ImageView-->
+<!--                                    android:id="@+id/walking"-->
+<!--                                    android:layout_width="38dp"-->
+<!--                                    android:layout_height="32dp"-->
+<!--                                    android:layout_marginTop="8dp"-->
+<!--                                    android:contentDescription="@string/strength_exercise1"-->
+<!--                                    android:src="@drawable/walking2" />-->
 
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+<!--                            </LinearLayout>-->
+<!--                        </androidx.cardview.widget.CardView>-->
+<!--                    </LinearLayout>-->
+<!--                </androidx.cardview.widget.CardView>-->
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/breathingCard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="2dp">
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/breathingCard"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_columnWeight="1"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    app:cardBackgroundColor="#FFFFFF"-->
+<!--                    app:cardCornerRadius="10dp"-->
+<!--                    app:cardElevation="2dp">-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        android:padding="12dp">-->
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            app:cardBackgroundColor="#FFE8F8E8"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="0dp">
+<!--                        <androidx.cardview.widget.CardView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="120dp"-->
+<!--                            app:cardBackgroundColor="#FFE8F8E8"-->
+<!--                            app:cardCornerRadius="5dp"-->
+<!--                            app:cardElevation="0dp">-->
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:gravity="center"-->
+<!--                                android:orientation="vertical">-->
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="8dp"
-                                    android:text="@string/breathing_exercise1"
-                                    android:textColor="#000000"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold" />
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginBottom="8dp"-->
+<!--                                    android:text="@string/breathing_exercise1"-->
+<!--                                    android:textColor="#000000"-->
+<!--                                    android:textSize="16sp"-->
+<!--                                    android:textStyle="bold" />-->
 
-                                <ImageView
-                                    android:id="@+id/breathing"
-                                    android:layout_width="38dp"
-                                    android:layout_height="32dp"
-                                    android:layout_marginTop="4dp"
-                                    android:contentDescription="@string/breathing_exercise1"
-                                    android:src="@drawable/breathing" />
+<!--                                <ImageView-->
+<!--                                    android:id="@+id/breathing"-->
+<!--                                    android:layout_width="38dp"-->
+<!--                                    android:layout_height="32dp"-->
+<!--                                    android:layout_marginTop="4dp"-->
+<!--                                    android:contentDescription="@string/breathing_exercise1"-->
+<!--                                    android:src="@drawable/breathing" />-->
 
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+<!--                            </LinearLayout>-->
+<!--                        </androidx.cardview.widget.CardView>-->
+<!--                    </LinearLayout>-->
+<!--                </androidx.cardview.widget.CardView>-->
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/balanceCard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="2dp">
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/balanceCard"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_columnWeight="1"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    app:cardBackgroundColor="#FFFFFF"-->
+<!--                    app:cardCornerRadius="10dp"-->
+<!--                    app:cardElevation="2dp">-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        android:padding="12dp">-->
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            app:cardBackgroundColor="#FFF0F8FF"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="0dp">
+<!--                        <androidx.cardview.widget.CardView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="120dp"-->
+<!--                            app:cardBackgroundColor="#FFF0F8FF"-->
+<!--                            app:cardCornerRadius="5dp"-->
+<!--                            app:cardElevation="0dp">-->
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:gravity="center"-->
+<!--                                android:orientation="vertical">-->
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="8dp"
-                                    android:text="@string/balance_exercise1"
-                                    android:textColor="#000000"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold" />
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginBottom="8dp"-->
+<!--                                    android:text="@string/balance_exercise1"-->
+<!--                                    android:textColor="#000000"-->
+<!--                                    android:textSize="16sp"-->
+<!--                                    android:textStyle="bold" />-->
 
-                                <ImageView
-                                    android:id="@+id/balance"
-                                    android:layout_width="38dp"
-                                    android:layout_height="32dp"
-                                    android:layout_marginTop="4dp"
-                                    android:contentDescription="@string/balance_exercise1"
-                                    android:src="@drawable/balance" />
+<!--                                <ImageView-->
+<!--                                    android:id="@+id/balance"-->
+<!--                                    android:layout_width="38dp"-->
+<!--                                    android:layout_height="32dp"-->
+<!--                                    android:layout_marginTop="4dp"-->
+<!--                                    android:contentDescription="@string/balance_exercise1"-->
+<!--                                    android:src="@drawable/balance" />-->
 
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+<!--                            </LinearLayout>-->
+<!--                        </androidx.cardview.widget.CardView>-->
+<!--                    </LinearLayout>-->
+<!--                </androidx.cardview.widget.CardView>-->
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardioCard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="2dp">
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:id="@+id/cardioCard"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_columnWeight="1"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    app:cardBackgroundColor="#FFFFFF"-->
+<!--                    app:cardCornerRadius="10dp"-->
+<!--                    app:cardElevation="2dp">-->
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="vertical"-->
+<!--                        android:padding="12dp">-->
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="120dp"
-                            app:cardBackgroundColor="#FFFFE8E8"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="0dp">
+<!--                        <androidx.cardview.widget.CardView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="120dp"-->
+<!--                            app:cardBackgroundColor="#FFFFE8E8"-->
+<!--                            app:cardCornerRadius="5dp"-->
+<!--                            app:cardElevation="0dp">-->
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:gravity="center"-->
+<!--                                android:orientation="vertical">-->
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="8dp"
-                                    android:text="@string/cardio_exercise1"
-                                    android:textColor="#000000"
-                                    android:textSize="16sp"
-                                    android:textStyle="bold" />
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_marginBottom="8dp"-->
+<!--                                    android:text="@string/cardio_exercise1"-->
+<!--                                    android:textColor="#000000"-->
+<!--                                    android:textSize="16sp"-->
+<!--                                    android:textStyle="bold" />-->
 
-                                <ImageView
-                                    android:id="@+id/cardioIcon"
-                                    android:layout_width="38dp"
-                                    android:layout_height="32dp"
-                                    android:layout_marginTop="8dp"
-                                    android:contentDescription="@string/cardio_exercise1"
-                                    android:src="@drawable/walking2" />
+<!--                                <ImageView-->
+<!--                                    android:id="@+id/cardioIcon"-->
+<!--                                    android:layout_width="38dp"-->
+<!--                                    android:layout_height="32dp"-->
+<!--                                    android:layout_marginTop="8dp"-->
+<!--                                    android:contentDescription="@string/cardio_exercise1"-->
+<!--                                    android:src="@drawable/walking2" />-->
 
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-            </GridLayout>
+<!--                            </LinearLayout>-->
+<!--                        </androidx.cardview.widget.CardView>-->
+<!--                    </LinearLayout>-->
+<!--                </androidx.cardview.widget.CardView>-->
+<!--            </GridLayout>-->
 
             <Button
                 android:id="@+id/backButton"
@@ -394,5 +396,3 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
