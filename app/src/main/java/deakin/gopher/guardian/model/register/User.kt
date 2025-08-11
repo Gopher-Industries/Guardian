@@ -1,5 +1,6 @@
 package deakin.gopher.guardian.model.register
 
+import android.provider.ContactsContract.CommonDataKinds.Organization
 import com.google.gson.annotations.SerializedName
 import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.login.Role
@@ -11,6 +12,7 @@ data class User(
     @SerializedName("fullname") val name: String,
     @SerializedName("role") val roleName: String,
     @SerializedName("photoUrl") val photoUrl: String,
+    @SerializedName("organization") val organization: String? = null,
 ) : Serializable {
     val role: Role
         get() {

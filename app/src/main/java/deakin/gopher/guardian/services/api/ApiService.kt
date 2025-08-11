@@ -9,7 +9,9 @@ import deakin.gopher.guardian.model.register.AuthResponse
 import deakin.gopher.guardian.model.register.RegisterRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.http.DELETE
 import retrofit2.Call
+import retrofit2.http.Path
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -83,4 +85,10 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("patientId") patientId: String,
     ): Response<List<PatientActivity>>
+
+    @DELETE("patients/{id}")
+    suspend fun deletePatient(
+        @Header("Authorization") token: String,
+        @Path("id") patientId: String
+    ): Response<BaseModel>
 }

@@ -11,50 +11,50 @@ import deakin.gopher.guardian.databinding.FragmentPatientAssignedNursesBinding
 import deakin.gopher.guardian.model.register.User
 
 class PatientAssignedNursesFragment : Fragment() {
+
     private lateinit var binding: FragmentPatientAssignedNursesBinding
-    private val nurseListAdapter =
-        NurseListAdapter(
-            emptyList(),
-            onNurseClick = { nurse ->
-            },
-        )
+
+    // Backing field for the nurses list
+    private var assignedNurses: List<User> = emptyList()
+
+    private val nurseListAdapter = NurseListAdapter(emptyList()) { nurse ->
+        // Handle nurse click if needed
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        // Inflate the layout for this fragment
-        binding = FragmentPatientAssignedNursesBinding.inflate(layoutInflater)
+        binding = FragmentPatientAssignedNursesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?,
-    ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerViewNurses.layoutManager = LinearLayoutManager(this.context)
+        binding.recyclerViewNurses.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewNurses.adapter = nurseListAdapter
 
-        val assignedNurses = arguments?.getSerializable("nurses") as List<User>
+        // If assignedNurses was set before view creation, show them
+        updateNurseList(assignedNurses)
+    }
 
-        if (assignedNurses.isNotEmpty()) {
-            nurseListAdapter.updateData(assignedNurses)
+    // Public method to update nurses list dynamically
+    fun setAssignedNurses(nurses: List<User>) {
+        assignedNurses = nurses
+        if (isAdded) {
+            updateNurseList(nurses)
+        }
+    }
+
+    private fun updateNurseList(nurses: List<User>) {
+        if (nurses.isNotEmpty()) {
+            nurseListAdapter.updateData(nurses)
             binding.tvEmptyMessage.visibility = View.GONE
         } else {
             binding.tvEmptyMessage.visibility = View.VISIBLE
         }
     }
-
-    companion object {
-        fun newInstance(nurses: List<User>): PatientAssignedNursesFragment {
-            val fragment = PatientAssignedNursesFragment()
-            val args = Bundle()
-            args.putSerializable("nurses", ArrayList(nurses))
-            fragment.arguments = args
-            return fragment
-        }
-    }
 }
+

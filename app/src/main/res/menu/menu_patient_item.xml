@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/assign_nurse"
-        android:icon="@drawable/ic_assignment_indicator"
-        android:clickable="true"
-        android:focusable="true"
-        android:title="@string/assign_nurse"
-        app:showAsAction="ifRoom"/>
-
+        android:title="Assign Nurse" />
+    <item
+        android:id="@+id/action_delete"
+        android:title="Delete" />
 </menu>
