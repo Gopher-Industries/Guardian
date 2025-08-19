@@ -29,7 +29,7 @@ function insertSyntheticDataToSheet(data) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
   // Optional: Clear sheet before inserting new data
-  sheet.clear();
+  //sheet.clear();
 
   const headers = [
     "patientId", "age", "gender",
@@ -37,10 +37,12 @@ function insertSyntheticDataToSheet(data) {
     "nursingNote",
     "medications",
     "heartRate", "spo2", "temperature", "bloodPressure",
-    "stepsTaken", "calorieIntake", "sleepHours", "waterIntakeMl", "mealsSkipped", "exerciseMinutes",
+    "stepsTaken", "calorieIntake", "sleepHours", "waterIntakeMl", "mealsSkipped", "exerciseMinutes","bathroomVisits",
     "behaviourTags",
     "emotionTags",
-    "clinicalSummary"
+    "clinicalSummary",
+    "entitiesExtracted"
+
   ];
 
   sheet.appendRow(headers);
@@ -76,9 +78,11 @@ function insertSyntheticDataToSheet(data) {
       adls.waterIntakeMl,
       adls.mealsSkipped,
       adls.exerciseMinutes,
+      adls.bathroomVisits,
       behaviourTags,
       emotionTags,
-      record.clinicalSummary
+      record.clinicalSummary,
+      record.entitiesExtracted,
     ];
 
     sheet.appendRow(row);
