@@ -1,7 +1,6 @@
 package deakin.gopher.guardian.model.login
 
 data class Password(val password: String) {
-
     fun isValid(): Boolean {
         val minLength = 8
         val maxLength = 16
