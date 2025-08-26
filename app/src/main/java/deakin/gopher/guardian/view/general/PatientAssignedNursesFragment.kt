@@ -11,15 +11,15 @@ import deakin.gopher.guardian.databinding.FragmentPatientAssignedNursesBinding
 import deakin.gopher.guardian.model.register.User
 
 class PatientAssignedNursesFragment : Fragment() {
-
     private lateinit var binding: FragmentPatientAssignedNursesBinding
 
     // Backing field for the nurses list
     private var assignedNurses: List<User> = emptyList()
 
-    private val nurseListAdapter = NurseListAdapter(emptyList()) { nurse ->
-        // Handle nurse click if needed
-    }
+    private val nurseListAdapter =
+        NurseListAdapter(emptyList()) { nurse ->
+            // Handle nurse click if needed
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +30,10 @@ class PatientAssignedNursesFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.recyclerViewNurses.layoutManager = LinearLayoutManager(requireContext())
@@ -57,4 +60,3 @@ class PatientAssignedNursesFragment : Fragment() {
         }
     }
 }
-

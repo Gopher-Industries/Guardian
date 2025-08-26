@@ -1,6 +1,5 @@
 package deakin.gopher.guardian.model.register
 
-import android.provider.ContactsContract.CommonDataKinds.Organization
 import com.google.gson.annotations.SerializedName
 import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.login.Role

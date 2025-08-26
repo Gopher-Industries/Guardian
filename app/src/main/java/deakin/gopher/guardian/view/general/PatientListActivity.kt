@@ -38,10 +38,9 @@ class PatientListActivity : BaseActivity() {
 //            intent.putExtra("patientId", patient.id)
 //            startActivity(intent)
             },
-
             onDeleteClick = { patient ->
                 confirmDeletePatient(patient)
-            }
+            },
         )
 
     private fun confirmDeletePatient(patient: Patient) {
@@ -52,15 +51,16 @@ class PatientListActivity : BaseActivity() {
     private fun deletePatient(patient: Patient) {
         val token = "Bearer ${SessionManager.getToken()}"
         CoroutineScope(Dispatchers.IO).launch {
-            val response = try {
-                ApiClient.apiService.deletePatient(token, patient.id)
-            } catch (e: Exception) {
-                null
-            }
+            val response =
+                try {
+                    ApiClient.apiService.deletePatient(token, patient.id)
+                } catch (e: Exception) {
+                    null
+                }
             withContext(Dispatchers.Main) {
                 if (response?.isSuccessful == true) {
                     showMessage("Patient deleted")
-                    fetchPatients()  // Refresh the patient list
+                    fetchPatients() // Refresh the patient list
                 } else {
                     showMessage("Failed to delete patient")
                 }
@@ -131,7 +131,7 @@ class PatientListActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if ( currentUser.organization != null) {
+        if (currentUser.organization != null) {
             return false
         }
         menuInflater.inflate(R.menu.menu_patient_list, menu)
@@ -150,5 +150,3 @@ class PatientListActivity : BaseActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
-
-
