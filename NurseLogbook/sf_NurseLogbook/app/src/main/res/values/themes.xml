@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.NurseLogbook" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/brand_teal</item>
+        <item name="colorSecondary">@color/brand_teal</item>
+
+        <!-- Make system bars match the header -->
+        <item name="android:statusBarColor">@color/brand_teal</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/bg_page</item>
+    </style>
+</resources>
+
