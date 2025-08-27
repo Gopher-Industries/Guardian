@@ -381,6 +381,33 @@
     <string name="daily">Daily</string>
 
 
+    <!-- Exercise Portal-->
+
+    <string name="step_1">Step 1</string>
+    <string name="step_2">Step 2</string>
+    <string name="step_3">Step 3</string>
+    <string name="step_4">Step 4</string>
+    <string name="flexibility_instructions">
+    1. Sit or stand tall with shoulders relaxed.\n
+    2. Slowly tilt your head toward your right shoulder (don’t lift your shoulder).\n
+    3. Hold for 20–30 seconds, feeling a stretch along the opposite side of your neck.\n
+    4. Switch sides. Repeat 2–3 times per side.
+    </string>
+    <string name="strength_instructions">
+    1. Stand in front of a sturdy chair with your feet shoulder-width apart.\n
+    2. Slowly bend your knees and lower your hips toward the chair.\n
+    3. Lightly touch the chair with your hips (don’t sit fully).\n
+    4. Push through your heels to return to standing.
+    </string>
+    <string name="balance_instructions">
+    1. Stand with your feet hip-width apart, arms relaxed at your sides.\n
+    2. Slowly lift your right foot off the ground, keeping your balance on your left foot.\n
+    3. Hold this position for 20–30 seconds.\n
+    4. Switch legs and repeat 2–3 times per side.\n
+    5. For added challenge, close your eyes or extend your arms forward.
+    </string>
+
+
     <string-array name="hospital_list_array">
         <item>Royal Melbourne Hospital</item>
         <item>Austin Hospital</item>
