@@ -11,6 +11,7 @@ data class User(
     @SerializedName("fullname") val name: String,
     @SerializedName("role") val roleName: String,
     @SerializedName("photoUrl") val photoUrl: String,
+    @SerializedName("organization") val organization: String? = null,
 ) : Serializable {
     val role: Role
         get() {

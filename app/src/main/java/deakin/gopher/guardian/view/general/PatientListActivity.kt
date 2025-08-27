@@ -12,6 +12,7 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.adapter.PatientListAdapter
 import deakin.gopher.guardian.databinding.ActivityPatientListBinding
 import deakin.gopher.guardian.model.ApiErrorResponse
+import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.login.Role
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.api.ApiClient
@@ -37,7 +38,35 @@ class PatientListActivity : BaseActivity() {
 //            intent.putExtra("patientId", patient.id)
 //            startActivity(intent)
             },
+            onDeleteClick = { patient ->
+                confirmDeletePatient(patient)
+            },
         )
+
+    private fun confirmDeletePatient(patient: Patient) {
+        // Optional: show a confirmation dialog before deleting
+        deletePatient(patient)
+    }
+
+    private fun deletePatient(patient: Patient) {
+        val token = "Bearer ${SessionManager.getToken()}"
+        CoroutineScope(Dispatchers.IO).launch {
+            val response =
+                try {
+                    ApiClient.apiService.deletePatient(token, patient.id)
+                } catch (e: Exception) {
+                    null
+                }
+            withContext(Dispatchers.Main) {
+                if (response?.isSuccessful == true) {
+                    showMessage("Patient deleted")
+                    fetchPatients() // Refresh the patient list
+                } else {
+                    showMessage("Failed to delete patient")
+                }
+            }
+        }
+    }
 
     private val currentUser = SessionManager.getCurrentUser()
 
@@ -102,7 +131,7 @@ class PatientListActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (currentUser.role == Role.Nurse) {
+        if (currentUser.organization != null) {
             return false
         }
         menuInflater.inflate(R.menu.menu_patient_list, menu)
