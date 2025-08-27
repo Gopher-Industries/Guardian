@@ -1,0 +1,4404 @@
+[
+  {
+    "patientId": "P0001",
+    "age": 80,
+    "gender": "Male",
+    "observationStart": "2025-07-10T03:20:44.984045",
+    "observationEnd": "2025-07-11T02:20:44.984045",
+    "nursingNote": "Noted increased agitation during evening rounds. Redirected with calming techniques.",
+    "medications": [
+      {
+        "name": "Atorvastatin",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-31T11:35:50.493660",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 94,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 91,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.5,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 102,
+        "diastolic": 60,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 1267,
+      "calorieIntake": 1647,
+      "sleepHours": 5.2,
+      "waterIntakeMl": 1732,
+      "mealsSkipped": 0,
+      "exerciseMinutes": 35
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [
+        "anxious",
+        "calm"
+      ],
+      "confidenceScores": {
+        "sad": 0.79,
+        "calm": 0.9
+      }
+    },
+    "clinicalSummary": "Patient status: Noted increased agitation during evening rounds. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "headache",
+        "fatigue"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "CT scan"
+      ],
+      "medications": [
+        "Metformin",
+        "Atorvastatin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 67,
+      "avgSpo2": 95,
+      "avgSleepHours": 7.9,
+      "avgCalorieIntake": 1844,
+      "avgScreenTimeMinutes": 73,
+      "avgBathroomVisits": 2,
+      "usualDietCompliance": 0.81
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0002",
+    "age": 71,
+    "gender": "Female",
+    "observationStart": "2025-07-27T12:01:14.980099",
+    "observationEnd": "2025-07-27T20:01:14.980099",
+    "nursingNote": "Noted increased agitation during evening rounds. Redirected with calming techniques.",
+    "medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "25mg",
+        "scheduledTime": "2025-08-07T13:58:53.167052",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Paracetamol",
+        "dose": "75mg",
+        "scheduledTime": "2025-08-03T06:30:33.996568",
+        "complianceStatus": "Delayed"
+      },
+      {
+        "name": "Metformin",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-30T12:37:47.306298",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 74,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 94,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.5,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 114,
+        "diastolic": 87,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 1327,
+      "calorieIntake": 1978,
+      "sleepHours": 5.4,
+      "waterIntakeMl": 1801,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 10
+    },
+    "behaviourTags": [
+      "agitated"
+    ],
+    "emotionAnalysis": {
+      "tags": [],
+      "confidenceScores": {
+        "frustrated": 0.8,
+        "happy": 0.59
+      }
+    },
+    "clinicalSummary": "Patient status: Noted increased agitation during evening rounds. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "nausea",
+        "headache"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "CT scan"
+      ],
+      "medications": [
+        "Lisinopril",
+        "Atorvastatin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 75,
+      "avgSpo2": 99,
+      "avgSleepHours": 7.1,
+      "avgCalorieIntake": 1832,
+      "avgScreenTimeMinutes": 167,
+      "avgBathroomVisits": 2,
+      "usualDietCompliance": 0.77
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0003",
+    "age": 61,
+    "gender": "Female",
+    "observationStart": "2025-07-21T10:10:36.234823",
+    "observationEnd": "2025-07-21T20:10:36.234823",
+    "nursingNote": "Patient refused morning medication citing dizziness. Vitals within normal limits.",
+    "medications": [
+      {
+        "name": "Metformin",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-29T01:15:14.127316",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 89,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 92,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.7,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 115,
+        "diastolic": 83,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 5098,
+      "calorieIntake": 2303,
+      "sleepHours": 5.3,
+      "waterIntakeMl": 1697,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 57
+    },
+    "behaviourTags": [
+      "withdrawn",
+      "nonCompliant"
+    ],
+    "emotionAnalysis": {
+      "tags": [],
+      "confidenceScores": {
+        "sad": 0.55,
+        "calm": 0.52
+      }
+    },
+    "clinicalSummary": "Patient status: Patient refused morning medication citing dizziness. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "headache",
+        "fatigue"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "x-ray"
+      ],
+      "medications": [
+        "Lisinopril",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 66,
+      "avgSpo2": 97,
+      "avgSleepHours": 6.8,
+      "avgCalorieIntake": 1979,
+      "avgScreenTimeMinutes": 127,
+      "avgBathroomVisits": 4,
+      "usualDietCompliance": 0.99
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0004",
+    "age": 87,
+    "gender": "Male",
+    "observationStart": "2025-07-29T19:08:31.706305",
+    "observationEnd": "2025-07-30T08:08:31.706305",
+    "nursingNote": "Slept well through the night. Mood appeared improved from previous day.",
+    "medications": [
+      {
+        "name": "Metformin",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-12T17:39:20.340890",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Atorvastatin",
+        "dose": "100mg",
+        "scheduledTime": "2025-07-09T11:40:28.966271",
+        "complianceStatus": "Delayed"
+      },
+      {
+        "name": "Metformin",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-24T14:52:08.007515",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 100,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 94,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.1,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 132,
+        "diastolic": 79,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 2129,
+      "calorieIntake": 1513,
+      "sleepHours": 5.9,
+      "waterIntakeMl": 830,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 49
+    },
+    "behaviourTags": [
+      "refusedActivity",
+      "agitated"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "calm"
+      ],
+      "confidenceScores": {
+        "happy": 0.96,
+        "anxious": 0.94
+      }
+    },
+    "clinicalSummary": "Patient status: Slept well through the night. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "headache"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Atorvastatin",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 66,
+      "avgSpo2": 94,
+      "avgSleepHours": 7.5,
+      "avgCalorieIntake": 1570,
+      "avgScreenTimeMinutes": 157,
+      "avgBathroomVisits": 6,
+      "usualDietCompliance": 0.93
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0005",
+    "age": 64,
+    "gender": "Female",
+    "observationStart": "2025-08-06T19:04:08.884765",
+    "observationEnd": "2025-08-07T11:04:08.884765",
+    "nursingNote": "Patient refused morning medication citing dizziness. Vitals within normal limits.",
+    "medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "50mg",
+        "scheduledTime": "2025-08-06T06:09:20.880840",
+        "complianceStatus": "Delayed"
+      },
+      {
+        "name": "Atorvastatin",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-21T08:36:45.148576",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 83,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 97,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.2,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 128,
+        "diastolic": 63,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 2530,
+      "calorieIntake": 1660,
+      "sleepHours": 4.3,
+      "waterIntakeMl": 543,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 35
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [
+        "sad",
+        "happy"
+      ],
+      "confidenceScores": {
+        "happy": 0.61,
+        "anxious": 0.95
+      }
+    },
+    "clinicalSummary": "Patient status: Patient refused morning medication citing dizziness. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "headache"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "x-ray"
+      ],
+      "medications": [
+        "Metformin",
+        "Lisinopril"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 72,
+      "avgSpo2": 95,
+      "avgSleepHours": 7.1,
+      "avgCalorieIntake": 2084,
+      "avgScreenTimeMinutes": 133,
+      "avgBathroomVisits": 5,
+      "usualDietCompliance": 0.77
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0006",
+    "age": 75,
+    "gender": "Female",
+    "observationStart": "2025-07-15T02:25:59.605037",
+    "observationEnd": "2025-07-15T14:25:59.605037",
+    "nursingNote": "Noted increased agitation during evening rounds. Redirected with calming techniques.",
+    "medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-22T02:18:52.897891",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Paracetamol",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-11T04:58:45.158240",
+        "complianceStatus": "Delayed"
+      },
+      {
+        "name": "Metformin",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-16T20:22:14.324564",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 94,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 97,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.4,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 111,
+        "diastolic": 68,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 4289,
+      "calorieIntake": 1711,
+      "sleepHours": 8.4,
+      "waterIntakeMl": 654,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 51
+    },
+    "behaviourTags": [
+      "refusedActivity",
+      "withdrawn"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "anxious",
+        "happy"
+      ],
+      "confidenceScores": {
+        "happy": 0.58,
+        "sad": 0.74
+      }
+    },
+    "clinicalSummary": "Patient status: Noted increased agitation during evening rounds. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "nausea",
+        "fatigue"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Atorvastatin",
+        "Lisinopril"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 65,
+      "avgSpo2": 97,
+      "avgSleepHours": 6.5,
+      "avgCalorieIntake": 1965,
+      "avgScreenTimeMinutes": 96,
+      "avgBathroomVisits": 5,
+      "usualDietCompliance": 0.91
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0007",
+    "age": 83,
+    "gender": "Female",
+    "observationStart": "2025-07-14T00:47:30.478195",
+    "observationEnd": "2025-07-15T00:47:30.478195",
+    "nursingNote": "Patient refused morning medication citing dizziness. Vitals within normal limits.",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-31T19:52:49.759600",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 63,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 99,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.2,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 133,
+        "diastolic": 65,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 965,
+      "calorieIntake": 2240,
+      "sleepHours": 4.4,
+      "waterIntakeMl": 880,
+      "mealsSkipped": 0,
+      "exerciseMinutes": 38
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [
+        "sad",
+        "calm"
+      ],
+      "confidenceScores": {
+        "happy": 0.79,
+        "sad": 0.52
+      }
+    },
+    "clinicalSummary": "Patient status: Patient refused morning medication citing dizziness. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "headache",
+        "nausea"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "MRI"
+      ],
+      "medications": [
+        "Metformin",
+        "Paracetamol"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 75,
+      "avgSpo2": 99,
+      "avgSleepHours": 6.6,
+      "avgCalorieIntake": 1771,
+      "avgScreenTimeMinutes": 110,
+      "avgBathroomVisits": 3,
+      "usualDietCompliance": 0.9
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0008",
+    "age": 69,
+    "gender": "Female",
+    "observationStart": "2025-07-18T20:59:08.399875",
+    "observationEnd": "2025-07-19T06:59:08.399875",
+    "nursingNote": "Patient refused morning medication citing dizziness. Vitals within normal limits.",
+    "medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-11T14:05:08.896239",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 92,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 94,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.3,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 122,
+        "diastolic": 88,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 1063,
+      "calorieIntake": 1700,
+      "sleepHours": 5.8,
+      "waterIntakeMl": 823,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 53
+    },
+    "behaviourTags": [
+      "agitated",
+      "withdrawn"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "anxious",
+        "happy"
+      ],
+      "confidenceScores": {
+        "anxious": 0.97,
+        "frustrated": 0.55
+      }
+    },
+    "clinicalSummary": "Patient status: Patient refused morning medication citing dizziness. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "nausea",
+        "fatigue"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Paracetamol",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 73,
+      "avgSpo2": 95,
+      "avgSleepHours": 6.5,
+      "avgCalorieIntake": 2119,
+      "avgScreenTimeMinutes": 86,
+      "avgBathroomVisits": 4,
+      "usualDietCompliance": 0.76
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0009",
+    "age": 80,
+    "gender": "Female",
+    "observationStart": "2025-07-24T13:13:57.385775",
+    "observationEnd": "2025-07-25T11:13:57.385775",
+    "nursingNote": "Noted increased agitation during evening rounds. Redirected with calming techniques.",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dose": "100mg",
+        "scheduledTime": "2025-08-03T06:28:07.354854",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 60,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 95,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.9,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 140,
+        "diastolic": 68,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 1823,
+      "calorieIntake": 2104,
+      "sleepHours": 6.8,
+      "waterIntakeMl": 1375,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 0
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [],
+      "confidenceScores": {
+        "sad": 0.92,
+        "happy": 0.79
+      }
+    },
+    "clinicalSummary": "Patient status: Noted increased agitation during evening rounds. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "nausea",
+        "fatigue"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "x-ray"
+      ],
+      "medications": [
+        "Paracetamol",
+        "Atorvastatin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 70,
+      "avgSpo2": 94,
+      "avgSleepHours": 7.8,
+      "avgCalorieIntake": 1715,
+      "avgScreenTimeMinutes": 147,
+      "avgBathroomVisits": 3,
+      "usualDietCompliance": 0.9
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0010",
+    "age": 71,
+    "gender": "Female",
+    "observationStart": "2025-08-07T14:30:02.669907",
+    "observationEnd": "2025-08-08T05:30:02.669907",
+    "nursingNote": "Blood pressure slightly elevated. Advised rest and rechecked after 30 minutes.",
+    "medications": [
+      {
+        "name": "Atorvastatin",
+        "dose": "50mg",
+        "scheduledTime": "2025-08-04T19:57:27.909726",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 71,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 95,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.0,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 126,
+        "diastolic": 85,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 5987,
+      "calorieIntake": 1708,
+      "sleepHours": 5.3,
+      "waterIntakeMl": 2112,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 6
+    },
+    "behaviourTags": [
+      "refusedActivity"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "sad"
+      ],
+      "confidenceScores": {
+        "sad": 0.67,
+        "calm": 0.91
+      }
+    },
+    "clinicalSummary": "Patient status: Blood pressure slightly elevated. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "nausea",
+        "headache"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Atorvastatin",
+        "Lisinopril"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 70,
+      "avgSpo2": 96,
+      "avgSleepHours": 7.7,
+      "avgCalorieIntake": 1785,
+      "avgScreenTimeMinutes": 104,
+      "avgBathroomVisits": 6,
+      "usualDietCompliance": 0.82
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0011",
+    "age": 86,
+    "gender": "Female",
+    "observationStart": "2025-08-06T13:35:19.774987",
+    "observationEnd": "2025-08-07T02:35:19.774987",
+    "nursingNote": "Experienced difficulty sleeping. Requested warm drink and reassurance.",
+    "medications": [
+      {
+        "name": "Atorvastatin",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-10T12:52:59.762812",
+        "complianceStatus": "Delayed"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-31T05:53:25.904489",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 87,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 99,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.5,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 107,
+        "diastolic": 72,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 7868,
+      "calorieIntake": 2380,
+      "sleepHours": 5.0,
+      "waterIntakeMl": 590,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 27
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [
+        "anxious",
+        "sad"
+      ],
+      "confidenceScores": {
+        "frustrated": 0.53,
+        "calm": 0.83
+      }
+    },
+    "clinicalSummary": "Patient status: Experienced difficulty sleeping. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "fatigue"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "MRI"
+      ],
+      "medications": [
+        "Paracetamol",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 69,
+      "avgSpo2": 98,
+      "avgSleepHours": 6.6,
+      "avgCalorieIntake": 1918,
+      "avgScreenTimeMinutes": 101,
+      "avgBathroomVisits": 5,
+      "usualDietCompliance": 0.91
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0012",
+    "age": 77,
+    "gender": "Male",
+    "observationStart": "2025-07-15T03:27:46.628342",
+    "observationEnd": "2025-07-17T03:27:46.628342",
+    "nursingNote": "Blood pressure slightly elevated. Advised rest and rechecked after 30 minutes.",
+    "medications": [
+      {
+        "name": "Atorvastatin",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-21T13:42:43.944741",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Metformin",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-15T16:40:10.626540",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 98,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 100,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.8,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 128,
+        "diastolic": 74,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 6034,
+      "calorieIntake": 1637,
+      "sleepHours": 6.6,
+      "waterIntakeMl": 2125,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 10
+    },
+    "behaviourTags": [
+      "refusedActivity",
+      "nonCompliant"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "anxious",
+        "frustrated"
+      ],
+      "confidenceScores": {
+        "happy": 0.84,
+        "sad": 0.61
+      }
+    },
+    "clinicalSummary": "Patient status: Blood pressure slightly elevated. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "nausea",
+        "headache"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Paracetamol",
+        "Lisinopril"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 72,
+      "avgSpo2": 98,
+      "avgSleepHours": 7.7,
+      "avgCalorieIntake": 1574,
+      "avgScreenTimeMinutes": 118,
+      "avgBathroomVisits": 5,
+      "usualDietCompliance": 0.97
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0013",
+    "age": 78,
+    "gender": "Male",
+    "observationStart": "2025-07-30T22:32:49.720334",
+    "observationEnd": "2025-08-01T04:32:49.720334",
+    "nursingNote": "Experienced difficulty sleeping. Requested warm drink and reassurance.",
+    "medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-13T19:35:22.033845",
+        "complianceStatus": "Delayed"
+      },
+      {
+        "name": "Paracetamol",
+        "dose": "25mg",
+        "scheduledTime": "2025-08-01T17:48:02.801715",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 71,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 98,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.2,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 135,
+        "diastolic": 67,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 7449,
+      "calorieIntake": 1448,
+      "sleepHours": 6.3,
+      "waterIntakeMl": 2141,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 42
+    },
+    "behaviourTags": [
+      "agitated",
+      "nonCompliant"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "anxious",
+        "calm"
+      ],
+      "confidenceScores": {
+        "anxious": 0.95,
+        "calm": 0.87
+      }
+    },
+    "clinicalSummary": "Patient status: Experienced difficulty sleeping. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "fatigue",
+        "nausea"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "MRI"
+      ],
+      "medications": [
+        "Atorvastatin",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 69,
+      "avgSpo2": 98,
+      "avgSleepHours": 7.0,
+      "avgCalorieIntake": 1744,
+      "avgScreenTimeMinutes": 95,
+      "avgBathroomVisits": 5,
+      "usualDietCompliance": 0.72
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0014",
+    "age": 69,
+    "gender": "Male",
+    "observationStart": "2025-07-17T12:58:22.664957",
+    "observationEnd": "2025-07-18T14:58:22.664957",
+    "nursingNote": "Slept well through the night. Mood appeared improved from previous day.",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-13T21:56:10.172978",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Atorvastatin",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-11T07:34:58.288462",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Metformin",
+        "dose": "100mg",
+        "scheduledTime": "2025-07-21T20:41:43.922213",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 86,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 96,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.3,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 137,
+        "diastolic": 90,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 6197,
+      "calorieIntake": 1240,
+      "sleepHours": 8.3,
+      "waterIntakeMl": 2067,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 24
+    },
+    "behaviourTags": [
+      "refusedActivity"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "frustrated"
+      ],
+      "confidenceScores": {
+        "calm": 0.77,
+        "anxious": 0.87
+      }
+    },
+    "clinicalSummary": "Patient status: Slept well through the night. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "nausea",
+        "fatigue"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "x-ray"
+      ],
+      "medications": [
+        "Metformin",
+        "Atorvastatin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 72,
+      "avgSpo2": 94,
+      "avgSleepHours": 6.8,
+      "avgCalorieIntake": 2184,
+      "avgScreenTimeMinutes": 146,
+      "avgBathroomVisits": 5,
+      "usualDietCompliance": 0.92
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0015",
+    "age": 86,
+    "gender": "Female",
+    "observationStart": "2025-08-05T23:24:28.988216",
+    "observationEnd": "2025-08-07T20:24:28.988216",
+    "nursingNote": "Patient refused morning medication citing dizziness. Vitals within normal limits.",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dose": "100mg",
+        "scheduledTime": "2025-07-27T03:30:03.181877",
+        "complianceStatus": "Delayed"
+      },
+      {
+        "name": "Paracetamol",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-28T16:07:04.195094",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-10T21:32:34.877461",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 80,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 93,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.1,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 121,
+        "diastolic": 84,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 7706,
+      "calorieIntake": 1976,
+      "sleepHours": 5.4,
+      "waterIntakeMl": 2448,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 16
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [
+        "happy"
+      ],
+      "confidenceScores": {
+        "anxious": 1.0,
+        "happy": 0.67
+      }
+    },
+    "clinicalSummary": "Patient status: Patient refused morning medication citing dizziness. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "headache",
+        "dizziness"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Paracetamol",
+        "Lisinopril"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 68,
+      "avgSpo2": 94,
+      "avgSleepHours": 7.2,
+      "avgCalorieIntake": 1744,
+      "avgScreenTimeMinutes": 76,
+      "avgBathroomVisits": 5,
+      "usualDietCompliance": 0.9
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0016",
+    "age": 78,
+    "gender": "Male",
+    "observationStart": "2025-07-23T08:09:45.192547",
+    "observationEnd": "2025-07-24T06:09:45.192547",
+    "nursingNote": "Patient refused morning medication citing dizziness. Vitals within normal limits.",
+    "medications": [
+      {
+        "name": "Atorvastatin",
+        "dose": "25mg",
+        "scheduledTime": "2025-08-01T17:20:53.676457",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Metformin",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-26T17:59:27.934160",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 96,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 100,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.3,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 124,
+        "diastolic": 72,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 6357,
+      "calorieIntake": 1606,
+      "sleepHours": 4.4,
+      "waterIntakeMl": 1914,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 15
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [
+        "frustrated",
+        "happy"
+      ],
+      "confidenceScores": {
+        "anxious": 0.67,
+        "happy": 0.71
+      }
+    },
+    "clinicalSummary": "Patient status: Patient refused morning medication citing dizziness. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "headache"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "MRI"
+      ],
+      "medications": [
+        "Paracetamol",
+        "Atorvastatin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 72,
+      "avgSpo2": 94,
+      "avgSleepHours": 6.9,
+      "avgCalorieIntake": 1870,
+      "avgScreenTimeMinutes": 141,
+      "avgBathroomVisits": 5,
+      "usualDietCompliance": 0.91
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0017",
+    "age": 73,
+    "gender": "Male",
+    "observationStart": "2025-07-31T09:40:14.535524",
+    "observationEnd": "2025-08-02T08:40:14.535524",
+    "nursingNote": "Vitals remained stable. Patient ambulated with assistance and tolerated a full meal.",
+    "medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "100mg",
+        "scheduledTime": "2025-07-22T10:57:06.193396",
+        "complianceStatus": "Delayed"
+      },
+      {
+        "name": "Metformin",
+        "dose": "75mg",
+        "scheduledTime": "2025-08-03T22:34:17.618305",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 77,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 97,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.6,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 129,
+        "diastolic": 78,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 5499,
+      "calorieIntake": 1976,
+      "sleepHours": 5.7,
+      "waterIntakeMl": 1512,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 11
+    },
+    "behaviourTags": [
+      "nonCompliant"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "frustrated"
+      ],
+      "confidenceScores": {
+        "frustrated": 0.94,
+        "anxious": 0.85
+      }
+    },
+    "clinicalSummary": "Patient status: Vitals remained stable. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "fatigue"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Atorvastatin",
+        "Paracetamol"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 68,
+      "avgSpo2": 99,
+      "avgSleepHours": 6.8,
+      "avgCalorieIntake": 2068,
+      "avgScreenTimeMinutes": 157,
+      "avgBathroomVisits": 3,
+      "usualDietCompliance": 0.91
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0018",
+    "age": 80,
+    "gender": "Female",
+    "observationStart": "2025-07-22T20:01:25.540095",
+    "observationEnd": "2025-07-23T03:01:25.540095",
+    "nursingNote": "Patient was withdrawn and reluctant to participate in group activities.",
+    "medications": [
+      {
+        "name": "Metformin",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-21T12:30:24.833108",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 79,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 100,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.5,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 130,
+        "diastolic": 77,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 4849,
+      "calorieIntake": 1904,
+      "sleepHours": 6.1,
+      "waterIntakeMl": 2027,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 21
+    },
+    "behaviourTags": [
+      "withdrawn"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "frustrated"
+      ],
+      "confidenceScores": {
+        "frustrated": 0.56,
+        "sad": 0.6
+      }
+    },
+    "clinicalSummary": "Patient status: Patient was withdrawn and reluctant to participate in group activities. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "headache",
+        "dizziness"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "x-ray"
+      ],
+      "medications": [
+        "Atorvastatin",
+        "Paracetamol"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 72,
+      "avgSpo2": 96,
+      "avgSleepHours": 7.4,
+      "avgCalorieIntake": 2037,
+      "avgScreenTimeMinutes": 136,
+      "avgBathroomVisits": 4,
+      "usualDietCompliance": 0.99
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0019",
+    "age": 86,
+    "gender": "Male",
+    "observationStart": "2025-07-18T06:38:07.940386",
+    "observationEnd": "2025-07-19T11:38:07.940386",
+    "nursingNote": "Slept well through the night. Mood appeared improved from previous day.",
+    "medications": [
+      {
+        "name": "Metformin",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-30T15:06:41.022574",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 77,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 90,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.4,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 135,
+        "diastolic": 69,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 6213,
+      "calorieIntake": 1458,
+      "sleepHours": 7.2,
+      "waterIntakeMl": 2041,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 6
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [
+        "frustrated",
+        "calm"
+      ],
+      "confidenceScores": {
+        "calm": 0.67,
+        "anxious": 0.98
+      }
+    },
+    "clinicalSummary": "Patient status: Slept well through the night. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "nausea"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Paracetamol",
+        "Atorvastatin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 72,
+      "avgSpo2": 94,
+      "avgSleepHours": 7.2,
+      "avgCalorieIntake": 1554,
+      "avgScreenTimeMinutes": 79,
+      "avgBathroomVisits": 3,
+      "usualDietCompliance": 0.94
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0020",
+    "age": 90,
+    "gender": "Female",
+    "observationStart": "2025-07-11T22:40:06.022211",
+    "observationEnd": "2025-07-12T19:40:06.022211",
+    "nursingNote": "Observed to skip lunch and reported feeling fatigued. Encouraged hydration.",
+    "medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "50mg",
+        "scheduledTime": "2025-08-01T15:50:14.762556",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 88,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 97,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.7,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 137,
+        "diastolic": 73,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 3001,
+      "calorieIntake": 2364,
+      "sleepHours": 7.1,
+      "waterIntakeMl": 1748,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 6
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [
+        "sad",
+        "frustrated"
+      ],
+      "confidenceScores": {
+        "happy": 0.62,
+        "sad": 0.78
+      }
+    },
+    "clinicalSummary": "Patient status: Observed to skip lunch and reported feeling fatigued. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "nausea",
+        "headache"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "CT scan"
+      ],
+      "medications": [
+        "Lisinopril",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 74,
+      "avgSpo2": 97,
+      "avgSleepHours": 6.6,
+      "avgCalorieIntake": 1737,
+      "avgScreenTimeMinutes": 96,
+      "avgBathroomVisits": 4,
+      "usualDietCompliance": 0.91
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0021",
+    "age": 74,
+    "gender": "Male",
+    "observationStart": "2025-07-30T00:15:18.820507",
+    "observationEnd": "2025-07-30T22:15:18.820507",
+    "nursingNote": "Observed to skip lunch and reported feeling fatigued. Encouraged hydration.",
+    "medications": [
+      {
+        "name": "Atorvastatin",
+        "dose": "100mg",
+        "scheduledTime": "2025-07-12T19:58:37.283669",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Atorvastatin",
+        "dose": "75mg",
+        "scheduledTime": "2025-08-03T04:30:45.073509",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Paracetamol",
+        "dose": "50mg",
+        "scheduledTime": "2025-08-02T04:01:50.351374",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 96,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 94,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.1,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 129,
+        "diastolic": 82,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 2991,
+      "calorieIntake": 2024,
+      "sleepHours": 8.7,
+      "waterIntakeMl": 1524,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 31
+    },
+    "behaviourTags": [
+      "refusedActivity"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "happy",
+        "calm"
+      ],
+      "confidenceScores": {
+        "frustrated": 0.51,
+        "anxious": 0.61
+      }
+    },
+    "clinicalSummary": "Patient status: Observed to skip lunch and reported feeling fatigued. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "headache",
+        "dizziness"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "MRI"
+      ],
+      "medications": [
+        "Paracetamol",
+        "Lisinopril"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 72,
+      "avgSpo2": 98,
+      "avgSleepHours": 7.3,
+      "avgCalorieIntake": 1784,
+      "avgScreenTimeMinutes": 83,
+      "avgBathroomVisits": 6,
+      "usualDietCompliance": 0.83
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0022",
+    "age": 86,
+    "gender": "Female",
+    "observationStart": "2025-08-07T11:03:28.279609",
+    "observationEnd": "2025-08-08T23:03:28.279609",
+    "nursingNote": "Experienced difficulty sleeping. Requested warm drink and reassurance.",
+    "medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-19T00:30:00.107174",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Atorvastatin",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-21T17:43:21.180469",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 78,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 100,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.4,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 135,
+        "diastolic": 61,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 4225,
+      "calorieIntake": 1380,
+      "sleepHours": 5.6,
+      "waterIntakeMl": 1162,
+      "mealsSkipped": 0,
+      "exerciseMinutes": 49
+    },
+    "behaviourTags": [
+      "refusedActivity"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "anxious",
+        "calm"
+      ],
+      "confidenceScores": {
+        "calm": 0.59,
+        "happy": 0.68
+      }
+    },
+    "clinicalSummary": "Patient status: Experienced difficulty sleeping. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "fatigue",
+        "dizziness"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "CT scan"
+      ],
+      "medications": [
+        "Paracetamol",
+        "Lisinopril"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 69,
+      "avgSpo2": 98,
+      "avgSleepHours": 6.3,
+      "avgCalorieIntake": 1794,
+      "avgScreenTimeMinutes": 116,
+      "avgBathroomVisits": 5,
+      "usualDietCompliance": 0.74
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0023",
+    "age": 80,
+    "gender": "Male",
+    "observationStart": "2025-07-30T16:22:54.190440",
+    "observationEnd": "2025-07-31T17:22:54.190440",
+    "nursingNote": "Complained of joint pain after physiotherapy session. Administered prescribed analgesics.",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dose": "100mg",
+        "scheduledTime": "2025-07-12T04:26:55.357510",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-28T19:41:20.621121",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-24T15:43:33.370858",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 86,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 97,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.5,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 115,
+        "diastolic": 74,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 5015,
+      "calorieIntake": 1496,
+      "sleepHours": 5.9,
+      "waterIntakeMl": 2387,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 32
+    },
+    "behaviourTags": [
+      "nonCompliant",
+      "refusedActivity"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "calm"
+      ],
+      "confidenceScores": {
+        "frustrated": 0.91,
+        "anxious": 0.64
+      }
+    },
+    "clinicalSummary": "Patient status: Complained of joint pain after physiotherapy session. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "fatigue"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "CT scan"
+      ],
+      "medications": [
+        "Atorvastatin",
+        "Lisinopril"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 73,
+      "avgSpo2": 97,
+      "avgSleepHours": 6.7,
+      "avgCalorieIntake": 2065,
+      "avgScreenTimeMinutes": 157,
+      "avgBathroomVisits": 6,
+      "usualDietCompliance": 0.81
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0024",
+    "age": 89,
+    "gender": "Female",
+    "observationStart": "2025-08-04T11:27:04.670767",
+    "observationEnd": "2025-08-05T08:27:04.670767",
+    "nursingNote": "Patient refused morning medication citing dizziness. Vitals within normal limits.",
+    "medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "50mg",
+        "scheduledTime": "2025-08-04T01:40:02.741591",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Paracetamol",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-31T17:31:32.860693",
+        "complianceStatus": "Delayed"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "100mg",
+        "scheduledTime": "2025-08-08T00:59:46.200868",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 69,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 97,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.4,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 108,
+        "diastolic": 76,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 5334,
+      "calorieIntake": 1879,
+      "sleepHours": 8.3,
+      "waterIntakeMl": 2290,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 6
+    },
+    "behaviourTags": [
+      "withdrawn",
+      "refusedActivity"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "sad",
+        "calm"
+      ],
+      "confidenceScores": {
+        "sad": 0.73,
+        "happy": 0.98
+      }
+    },
+    "clinicalSummary": "Patient status: Patient refused morning medication citing dizziness. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "fatigue"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "CT scan"
+      ],
+      "medications": [
+        "Paracetamol",
+        "Atorvastatin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 75,
+      "avgSpo2": 98,
+      "avgSleepHours": 6.8,
+      "avgCalorieIntake": 1824,
+      "avgScreenTimeMinutes": 140,
+      "avgBathroomVisits": 5,
+      "usualDietCompliance": 0.96
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0025",
+    "age": 61,
+    "gender": "Male",
+    "observationStart": "2025-07-16T10:22:21.577985",
+    "observationEnd": "2025-07-17T10:22:21.577985",
+    "nursingNote": "Patient reported mild nausea in the morning. Appetite was slightly reduced.",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dose": "100mg",
+        "scheduledTime": "2025-08-07T17:44:28.499428",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 66,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 97,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.4,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 119,
+        "diastolic": 88,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 737,
+      "calorieIntake": 1294,
+      "sleepHours": 5.6,
+      "waterIntakeMl": 614,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 22
+    },
+    "behaviourTags": [
+      "withdrawn"
+    ],
+    "emotionAnalysis": {
+      "tags": [],
+      "confidenceScores": {
+        "sad": 0.78,
+        "calm": 0.9
+      }
+    },
+    "clinicalSummary": "Patient status: Patient reported mild nausea in the morning. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "nausea",
+        "headache"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Lisinopril",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 75,
+      "avgSpo2": 95,
+      "avgSleepHours": 7.0,
+      "avgCalorieIntake": 2097,
+      "avgScreenTimeMinutes": 78,
+      "avgBathroomVisits": 3,
+      "usualDietCompliance": 0.84
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0026",
+    "age": 68,
+    "gender": "Female",
+    "observationStart": "2025-07-17T01:10:23.935455",
+    "observationEnd": "2025-07-17T07:10:23.935455",
+    "nursingNote": "Patient refused morning medication citing dizziness. Vitals within normal limits.",
+    "medications": [
+      {
+        "name": "Metformin",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-11T14:31:07.153447",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Metformin",
+        "dose": "100mg",
+        "scheduledTime": "2025-07-30T02:21:49.732216",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 79,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 93,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.5,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 130,
+        "diastolic": 63,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 2443,
+      "calorieIntake": 1981,
+      "sleepHours": 6.9,
+      "waterIntakeMl": 1677,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 44
+    },
+    "behaviourTags": [
+      "refusedActivity"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "calm",
+        "frustrated"
+      ],
+      "confidenceScores": {
+        "happy": 0.96,
+        "anxious": 0.87
+      }
+    },
+    "clinicalSummary": "Patient status: Patient refused morning medication citing dizziness. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "headache"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "MRI"
+      ],
+      "medications": [
+        "Atorvastatin",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 68,
+      "avgSpo2": 98,
+      "avgSleepHours": 6.5,
+      "avgCalorieIntake": 2175,
+      "avgScreenTimeMinutes": 147,
+      "avgBathroomVisits": 3,
+      "usualDietCompliance": 0.89
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0027",
+    "age": 88,
+    "gender": "Male",
+    "observationStart": "2025-07-18T15:46:11.143152",
+    "observationEnd": "2025-07-20T01:46:11.143152",
+    "nursingNote": "Vitals remained stable. Patient ambulated with assistance and tolerated a full meal.",
+    "medications": [
+      {
+        "name": "Metformin",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-12T02:14:02.817888",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 80,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 96,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.4,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 108,
+        "diastolic": 85,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 4918,
+      "calorieIntake": 1949,
+      "sleepHours": 6.7,
+      "waterIntakeMl": 2370,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 53
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [
+        "calm"
+      ],
+      "confidenceScores": {
+        "frustrated": 0.9,
+        "anxious": 0.73
+      }
+    },
+    "clinicalSummary": "Patient status: Vitals remained stable. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "headache",
+        "fatigue"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "x-ray"
+      ],
+      "medications": [
+        "Lisinopril",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 70,
+      "avgSpo2": 94,
+      "avgSleepHours": 7.6,
+      "avgCalorieIntake": 1514,
+      "avgScreenTimeMinutes": 93,
+      "avgBathroomVisits": 6,
+      "usualDietCompliance": 0.74
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0028",
+    "age": 71,
+    "gender": "Female",
+    "observationStart": "2025-07-26T22:13:16.865544",
+    "observationEnd": "2025-07-28T20:13:16.865544",
+    "nursingNote": "Experienced difficulty sleeping. Requested warm drink and reassurance.",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-23T12:48:05.149797",
+        "complianceStatus": "Delayed"
+      },
+      {
+        "name": "Metformin",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-28T19:38:52.078611",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 89,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 94,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.6,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 107,
+        "diastolic": 64,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 871,
+      "calorieIntake": 1276,
+      "sleepHours": 5.5,
+      "waterIntakeMl": 1508,
+      "mealsSkipped": 0,
+      "exerciseMinutes": 6
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [
+        "sad",
+        "calm"
+      ],
+      "confidenceScores": {
+        "calm": 0.84,
+        "frustrated": 0.87
+      }
+    },
+    "clinicalSummary": "Patient status: Experienced difficulty sleeping. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "fatigue",
+        "dizziness"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "x-ray"
+      ],
+      "medications": [
+        "Lisinopril",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 66,
+      "avgSpo2": 97,
+      "avgSleepHours": 7.2,
+      "avgCalorieIntake": 1786,
+      "avgScreenTimeMinutes": 64,
+      "avgBathroomVisits": 4,
+      "usualDietCompliance": 0.77
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0029",
+    "age": 74,
+    "gender": "Male",
+    "observationStart": "2025-08-04T01:15:44.009073",
+    "observationEnd": "2025-08-04T13:15:44.009073",
+    "nursingNote": "Blood pressure slightly elevated. Advised rest and rechecked after 30 minutes.",
+    "medications": [
+      {
+        "name": "Metformin",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-11T04:56:02.939152",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Atorvastatin",
+        "dose": "25mg",
+        "scheduledTime": "2025-08-06T20:37:33.071215",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Paracetamol",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-28T15:21:55.087113",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 61,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 90,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.0,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 115,
+        "diastolic": 64,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 6946,
+      "calorieIntake": 2356,
+      "sleepHours": 5.0,
+      "waterIntakeMl": 2199,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 13
+    },
+    "behaviourTags": [
+      "nonCompliant",
+      "refusedActivity"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "sad"
+      ],
+      "confidenceScores": {
+        "anxious": 0.64,
+        "happy": 0.99
+      }
+    },
+    "clinicalSummary": "Patient status: Blood pressure slightly elevated. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "nausea",
+        "dizziness"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "MRI"
+      ],
+      "medications": [
+        "Atorvastatin",
+        "Paracetamol"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 75,
+      "avgSpo2": 94,
+      "avgSleepHours": 6.3,
+      "avgCalorieIntake": 1866,
+      "avgScreenTimeMinutes": 161,
+      "avgBathroomVisits": 3,
+      "usualDietCompliance": 0.88
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0030",
+    "age": 60,
+    "gender": "Male",
+    "observationStart": "2025-07-17T08:24:09.689647",
+    "observationEnd": "2025-07-17T22:24:09.689647",
+    "nursingNote": "Patient refused morning medication citing dizziness. Vitals within normal limits.",
+    "medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-31T18:13:01.500967",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-24T18:52:09.894206",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "50mg",
+        "scheduledTime": "2025-08-06T18:02:14.454666",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 93,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 94,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.1,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 101,
+        "diastolic": 61,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 4423,
+      "calorieIntake": 2022,
+      "sleepHours": 6.1,
+      "waterIntakeMl": 721,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 45
+    },
+    "behaviourTags": [
+      "refusedActivity"
+    ],
+    "emotionAnalysis": {
+      "tags": [],
+      "confidenceScores": {
+        "frustrated": 0.53,
+        "sad": 0.64
+      }
+    },
+    "clinicalSummary": "Patient status: Patient refused morning medication citing dizziness. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "nausea"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "MRI"
+      ],
+      "medications": [
+        "Lisinopril",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 74,
+      "avgSpo2": 97,
+      "avgSleepHours": 6.2,
+      "avgCalorieIntake": 1617,
+      "avgScreenTimeMinutes": 169,
+      "avgBathroomVisits": 6,
+      "usualDietCompliance": 0.92
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0031",
+    "age": 66,
+    "gender": "Female",
+    "observationStart": "2025-07-22T22:27:27.450293",
+    "observationEnd": "2025-07-23T18:27:27.450293",
+    "nursingNote": "Blood pressure slightly elevated. Advised rest and rechecked after 30 minutes.",
+    "medications": [
+      {
+        "name": "Metformin",
+        "dose": "100mg",
+        "scheduledTime": "2025-07-21T08:25:25.745712",
+        "complianceStatus": "Delayed"
+      },
+      {
+        "name": "Paracetamol",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-22T04:36:29.412351",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 76,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 95,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.4,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 130,
+        "diastolic": 62,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 1247,
+      "calorieIntake": 1374,
+      "sleepHours": 4.5,
+      "waterIntakeMl": 697,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 47
+    },
+    "behaviourTags": [
+      "nonCompliant"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "happy",
+        "frustrated"
+      ],
+      "confidenceScores": {
+        "happy": 0.68,
+        "calm": 0.83
+      }
+    },
+    "clinicalSummary": "Patient status: Blood pressure slightly elevated. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "fatigue",
+        "dizziness"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Metformin",
+        "Lisinopril"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 69,
+      "avgSpo2": 96,
+      "avgSleepHours": 6.2,
+      "avgCalorieIntake": 2019,
+      "avgScreenTimeMinutes": 87,
+      "avgBathroomVisits": 3,
+      "usualDietCompliance": 0.9
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0032",
+    "age": 67,
+    "gender": "Male",
+    "observationStart": "2025-07-19T21:25:12.581173",
+    "observationEnd": "2025-07-21T14:25:12.581173",
+    "nursingNote": "Noted increased agitation during evening rounds. Redirected with calming techniques.",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-26T14:41:24.319387",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Paracetamol",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-10T06:11:03.753475",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 79,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 95,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.9,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 111,
+        "diastolic": 87,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 1673,
+      "calorieIntake": 2359,
+      "sleepHours": 7.3,
+      "waterIntakeMl": 642,
+      "mealsSkipped": 0,
+      "exerciseMinutes": 47
+    },
+    "behaviourTags": [
+      "refusedActivity",
+      "withdrawn"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "anxious",
+        "sad"
+      ],
+      "confidenceScores": {
+        "calm": 0.73,
+        "anxious": 0.58
+      }
+    },
+    "clinicalSummary": "Patient status: Noted increased agitation during evening rounds. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "fatigue"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "MRI"
+      ],
+      "medications": [
+        "Paracetamol",
+        "Lisinopril"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 67,
+      "avgSpo2": 95,
+      "avgSleepHours": 7.5,
+      "avgCalorieIntake": 1550,
+      "avgScreenTimeMinutes": 146,
+      "avgBathroomVisits": 2,
+      "usualDietCompliance": 0.78
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0033",
+    "age": 81,
+    "gender": "Female",
+    "observationStart": "2025-07-23T23:00:52.247286",
+    "observationEnd": "2025-07-25T09:00:52.247286",
+    "nursingNote": "Noted increased agitation during evening rounds. Redirected with calming techniques.",
+    "medications": [
+      {
+        "name": "Metformin",
+        "dose": "50mg",
+        "scheduledTime": "2025-08-01T00:53:49.736605",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Metformin",
+        "dose": "100mg",
+        "scheduledTime": "2025-07-12T17:10:43.397766",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 97,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 97,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.3,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 119,
+        "diastolic": 61,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 2306,
+      "calorieIntake": 2009,
+      "sleepHours": 8.9,
+      "waterIntakeMl": 612,
+      "mealsSkipped": 0,
+      "exerciseMinutes": 13
+    },
+    "behaviourTags": [
+      "nonCompliant"
+    ],
+    "emotionAnalysis": {
+      "tags": [],
+      "confidenceScores": {
+        "frustrated": 0.66,
+        "anxious": 0.5
+      }
+    },
+    "clinicalSummary": "Patient status: Noted increased agitation during evening rounds. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "fatigue",
+        "headache"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "x-ray"
+      ],
+      "medications": [
+        "Lisinopril",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 68,
+      "avgSpo2": 98,
+      "avgSleepHours": 7.1,
+      "avgCalorieIntake": 2184,
+      "avgScreenTimeMinutes": 163,
+      "avgBathroomVisits": 4,
+      "usualDietCompliance": 0.72
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0034",
+    "age": 87,
+    "gender": "Male",
+    "observationStart": "2025-07-22T11:24:58.299817",
+    "observationEnd": "2025-07-23T22:24:58.299817",
+    "nursingNote": "Slept well through the night. Mood appeared improved from previous day.",
+    "medications": [
+      {
+        "name": "Metformin",
+        "dose": "100mg",
+        "scheduledTime": "2025-07-26T14:11:09.081119",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 100,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 96,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.7,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 125,
+        "diastolic": 60,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 3160,
+      "calorieIntake": 1551,
+      "sleepHours": 8.0,
+      "waterIntakeMl": 1765,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 53
+    },
+    "behaviourTags": [
+      "agitated",
+      "refusedActivity"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "happy"
+      ],
+      "confidenceScores": {
+        "sad": 0.79,
+        "calm": 0.76
+      }
+    },
+    "clinicalSummary": "Patient status: Slept well through the night. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "fatigue",
+        "nausea"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "MRI"
+      ],
+      "medications": [
+        "Atorvastatin",
+        "Lisinopril"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 67,
+      "avgSpo2": 94,
+      "avgSleepHours": 7.0,
+      "avgCalorieIntake": 1616,
+      "avgScreenTimeMinutes": 127,
+      "avgBathroomVisits": 6,
+      "usualDietCompliance": 0.76
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0035",
+    "age": 84,
+    "gender": "Female",
+    "observationStart": "2025-07-19T22:07:47.621307",
+    "observationEnd": "2025-07-21T21:07:47.621307",
+    "nursingNote": "Patient refused morning medication citing dizziness. Vitals within normal limits.",
+    "medications": [
+      {
+        "name": "Atorvastatin",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-13T18:46:40.522081",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 71,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 99,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.4,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 104,
+        "diastolic": 65,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 6831,
+      "calorieIntake": 2486,
+      "sleepHours": 6.5,
+      "waterIntakeMl": 2045,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 48
+    },
+    "behaviourTags": [
+      "withdrawn",
+      "agitated"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "anxious",
+        "frustrated"
+      ],
+      "confidenceScores": {
+        "frustrated": 0.72,
+        "sad": 0.73
+      }
+    },
+    "clinicalSummary": "Patient status: Patient refused morning medication citing dizziness. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "nausea"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Metformin",
+        "Lisinopril"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 66,
+      "avgSpo2": 96,
+      "avgSleepHours": 6.9,
+      "avgCalorieIntake": 1538,
+      "avgScreenTimeMinutes": 67,
+      "avgBathroomVisits": 4,
+      "usualDietCompliance": 0.95
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0036",
+    "age": 62,
+    "gender": "Male",
+    "observationStart": "2025-07-27T20:08:38.851107",
+    "observationEnd": "2025-07-29T10:08:38.851107",
+    "nursingNote": "Slept well through the night. Mood appeared improved from previous day.",
+    "medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-22T21:08:46.868204",
+        "complianceStatus": "Delayed"
+      },
+      {
+        "name": "Atorvastatin",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-27T12:56:32.230255",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 69,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 90,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.1,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 121,
+        "diastolic": 82,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 1190,
+      "calorieIntake": 2233,
+      "sleepHours": 7.2,
+      "waterIntakeMl": 580,
+      "mealsSkipped": 0,
+      "exerciseMinutes": 45
+    },
+    "behaviourTags": [
+      "withdrawn"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "anxious",
+        "sad"
+      ],
+      "confidenceScores": {
+        "frustrated": 0.96,
+        "anxious": 0.69
+      }
+    },
+    "clinicalSummary": "Patient status: Slept well through the night. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "fatigue"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Metformin",
+        "Paracetamol"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 70,
+      "avgSpo2": 94,
+      "avgSleepHours": 7.1,
+      "avgCalorieIntake": 1895,
+      "avgScreenTimeMinutes": 96,
+      "avgBathroomVisits": 4,
+      "usualDietCompliance": 0.92
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0037",
+    "age": 81,
+    "gender": "Male",
+    "observationStart": "2025-07-19T09:21:31.505878",
+    "observationEnd": "2025-07-21T04:21:31.505878",
+    "nursingNote": "Patient refused morning medication citing dizziness. Vitals within normal limits.",
+    "medications": [
+      {
+        "name": "Atorvastatin",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-18T16:42:17.772155",
+        "complianceStatus": "Delayed"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-27T05:46:03.971799",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Metformin",
+        "dose": "100mg",
+        "scheduledTime": "2025-07-28T16:39:11.647072",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 68,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 100,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.8,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 133,
+        "diastolic": 62,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 5792,
+      "calorieIntake": 2067,
+      "sleepHours": 6.5,
+      "waterIntakeMl": 537,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 19
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [],
+      "confidenceScores": {
+        "frustrated": 0.6,
+        "calm": 1.0
+      }
+    },
+    "clinicalSummary": "Patient status: Patient refused morning medication citing dizziness. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "nausea",
+        "headache"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "MRI"
+      ],
+      "medications": [
+        "Paracetamol",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 73,
+      "avgSpo2": 99,
+      "avgSleepHours": 7.8,
+      "avgCalorieIntake": 1538,
+      "avgScreenTimeMinutes": 144,
+      "avgBathroomVisits": 4,
+      "usualDietCompliance": 0.96
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0038",
+    "age": 79,
+    "gender": "Male",
+    "observationStart": "2025-07-27T07:21:19.883723",
+    "observationEnd": "2025-07-27T22:21:19.883723",
+    "nursingNote": "Complained of joint pain after physiotherapy session. Administered prescribed analgesics.",
+    "medications": [
+      {
+        "name": "Atorvastatin",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-31T00:35:23.438785",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 86,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 95,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.7,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 115,
+        "diastolic": 74,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 5501,
+      "calorieIntake": 1783,
+      "sleepHours": 7.8,
+      "waterIntakeMl": 2105,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 14
+    },
+    "behaviourTags": [
+      "nonCompliant",
+      "withdrawn"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "sad"
+      ],
+      "confidenceScores": {
+        "frustrated": 0.73,
+        "calm": 0.64
+      }
+    },
+    "clinicalSummary": "Patient status: Complained of joint pain after physiotherapy session. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "fatigue",
+        "dizziness"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "CT scan"
+      ],
+      "medications": [
+        "Atorvastatin",
+        "Paracetamol"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 74,
+      "avgSpo2": 95,
+      "avgSleepHours": 7.7,
+      "avgCalorieIntake": 1553,
+      "avgScreenTimeMinutes": 142,
+      "avgBathroomVisits": 5,
+      "usualDietCompliance": 0.96
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0039",
+    "age": 77,
+    "gender": "Male",
+    "observationStart": "2025-07-30T17:32:48.441193",
+    "observationEnd": "2025-08-01T08:32:48.441193",
+    "nursingNote": "Vitals remained stable. Patient ambulated with assistance and tolerated a full meal.",
+    "medications": [
+      {
+        "name": "Metformin",
+        "dose": "25mg",
+        "scheduledTime": "2025-08-01T06:46:55.932624",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 88,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 98,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.4,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 127,
+        "diastolic": 62,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 7958,
+      "calorieIntake": 1654,
+      "sleepHours": 8.1,
+      "waterIntakeMl": 2311,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 59
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [
+        "happy"
+      ],
+      "confidenceScores": {
+        "calm": 0.62,
+        "frustrated": 1.0
+      }
+    },
+    "clinicalSummary": "Patient status: Vitals remained stable. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "headache"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Metformin",
+        "Paracetamol"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 75,
+      "avgSpo2": 96,
+      "avgSleepHours": 7.6,
+      "avgCalorieIntake": 1640,
+      "avgScreenTimeMinutes": 64,
+      "avgBathroomVisits": 4,
+      "usualDietCompliance": 0.98
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0040",
+    "age": 75,
+    "gender": "Male",
+    "observationStart": "2025-08-01T03:42:13.381684",
+    "observationEnd": "2025-08-02T15:42:13.381684",
+    "nursingNote": "Patient was withdrawn and reluctant to participate in group activities.",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-09T23:01:15.178228",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Atorvastatin",
+        "dose": "100mg",
+        "scheduledTime": "2025-07-12T17:23:33.450504",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 75,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 94,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.3,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 115,
+        "diastolic": 73,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 5734,
+      "calorieIntake": 2475,
+      "sleepHours": 6.3,
+      "waterIntakeMl": 727,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 38
+    },
+    "behaviourTags": [
+      "refusedActivity",
+      "agitated"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "anxious",
+        "sad"
+      ],
+      "confidenceScores": {
+        "sad": 0.71,
+        "frustrated": 0.81
+      }
+    },
+    "clinicalSummary": "Patient status: Patient was withdrawn and reluctant to participate in group activities. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "nausea",
+        "dizziness"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "CT scan"
+      ],
+      "medications": [
+        "Atorvastatin",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 75,
+      "avgSpo2": 94,
+      "avgSleepHours": 7.0,
+      "avgCalorieIntake": 1869,
+      "avgScreenTimeMinutes": 68,
+      "avgBathroomVisits": 6,
+      "usualDietCompliance": 0.86
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0041",
+    "age": 85,
+    "gender": "Male",
+    "observationStart": "2025-07-21T02:27:53.183395",
+    "observationEnd": "2025-07-22T14:27:53.183395",
+    "nursingNote": "Patient was withdrawn and reluctant to participate in group activities.",
+    "medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-16T23:57:58.585300",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 82,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 91,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.9,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 140,
+        "diastolic": 63,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 6820,
+      "calorieIntake": 2391,
+      "sleepHours": 7.7,
+      "waterIntakeMl": 1180,
+      "mealsSkipped": 0,
+      "exerciseMinutes": 2
+    },
+    "behaviourTags": [
+      "agitated"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "sad",
+        "calm"
+      ],
+      "confidenceScores": {
+        "calm": 0.91,
+        "sad": 0.53
+      }
+    },
+    "clinicalSummary": "Patient status: Patient was withdrawn and reluctant to participate in group activities. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "fatigue",
+        "headache"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "MRI"
+      ],
+      "medications": [
+        "Atorvastatin",
+        "Paracetamol"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 68,
+      "avgSpo2": 94,
+      "avgSleepHours": 6.6,
+      "avgCalorieIntake": 1817,
+      "avgScreenTimeMinutes": 125,
+      "avgBathroomVisits": 5,
+      "usualDietCompliance": 1.0
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0042",
+    "age": 77,
+    "gender": "Female",
+    "observationStart": "2025-07-16T23:43:26.388039",
+    "observationEnd": "2025-07-18T22:43:26.388039",
+    "nursingNote": "Noted increased agitation during evening rounds. Redirected with calming techniques.",
+    "medications": [
+      {
+        "name": "Metformin",
+        "dose": "75mg",
+        "scheduledTime": "2025-08-04T06:04:40.179618",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 81,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 94,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.3,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 123,
+        "diastolic": 73,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 7786,
+      "calorieIntake": 2019,
+      "sleepHours": 7.7,
+      "waterIntakeMl": 2332,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 21
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [
+        "calm"
+      ],
+      "confidenceScores": {
+        "frustrated": 0.9,
+        "anxious": 0.86
+      }
+    },
+    "clinicalSummary": "Patient status: Noted increased agitation during evening rounds. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "headache",
+        "nausea"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "x-ray"
+      ],
+      "medications": [
+        "Metformin",
+        "Atorvastatin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 66,
+      "avgSpo2": 94,
+      "avgSleepHours": 6.7,
+      "avgCalorieIntake": 1802,
+      "avgScreenTimeMinutes": 99,
+      "avgBathroomVisits": 5,
+      "usualDietCompliance": 0.88
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0043",
+    "age": 73,
+    "gender": "Male",
+    "observationStart": "2025-07-30T01:58:07.492157",
+    "observationEnd": "2025-07-31T05:58:07.492157",
+    "nursingNote": "Noted increased agitation during evening rounds. Redirected with calming techniques.",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-27T20:01:52.150535",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Metformin",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-11T15:22:03.808329",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 85,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 95,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.3,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 110,
+        "diastolic": 90,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 755,
+      "calorieIntake": 1492,
+      "sleepHours": 8.2,
+      "waterIntakeMl": 1888,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 2
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [],
+      "confidenceScores": {
+        "sad": 0.68,
+        "frustrated": 0.97
+      }
+    },
+    "clinicalSummary": "Patient status: Noted increased agitation during evening rounds. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "headache",
+        "dizziness"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "x-ray"
+      ],
+      "medications": [
+        "Lisinopril",
+        "Atorvastatin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 70,
+      "avgSpo2": 97,
+      "avgSleepHours": 7.5,
+      "avgCalorieIntake": 2087,
+      "avgScreenTimeMinutes": 77,
+      "avgBathroomVisits": 6,
+      "usualDietCompliance": 0.81
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0044",
+    "age": 70,
+    "gender": "Female",
+    "observationStart": "2025-07-16T21:03:30.513543",
+    "observationEnd": "2025-07-17T10:03:30.513543",
+    "nursingNote": "Patient reported mild nausea in the morning. Appetite was slightly reduced.",
+    "medications": [
+      {
+        "name": "Atorvastatin",
+        "dose": "100mg",
+        "scheduledTime": "2025-07-24T22:06:52.859482",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 67,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 94,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 37.9,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 128,
+        "diastolic": 66,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 5512,
+      "calorieIntake": 1784,
+      "sleepHours": 7.5,
+      "waterIntakeMl": 1505,
+      "mealsSkipped": 0,
+      "exerciseMinutes": 7
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [],
+      "confidenceScores": {
+        "calm": 0.95,
+        "sad": 0.72
+      }
+    },
+    "clinicalSummary": "Patient status: Patient reported mild nausea in the morning. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "headache",
+        "dizziness"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "MRI"
+      ],
+      "medications": [
+        "Metformin",
+        "Lisinopril"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 66,
+      "avgSpo2": 98,
+      "avgSleepHours": 7.1,
+      "avgCalorieIntake": 1807,
+      "avgScreenTimeMinutes": 168,
+      "avgBathroomVisits": 3,
+      "usualDietCompliance": 0.91
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0045",
+    "age": 89,
+    "gender": "Male",
+    "observationStart": "2025-08-02T04:47:58.135685",
+    "observationEnd": "2025-08-03T18:47:58.135685",
+    "nursingNote": "Slept well through the night. Mood appeared improved from previous day.",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dose": "50mg",
+        "scheduledTime": "2025-08-02T03:37:31.334767",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 91,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 90,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.9,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 136,
+        "diastolic": 71,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 4328,
+      "calorieIntake": 2329,
+      "sleepHours": 4.6,
+      "waterIntakeMl": 2310,
+      "mealsSkipped": 0,
+      "exerciseMinutes": 4
+    },
+    "behaviourTags": [
+      "withdrawn"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "calm",
+        "anxious"
+      ],
+      "confidenceScores": {
+        "calm": 0.56,
+        "happy": 0.66
+      }
+    },
+    "clinicalSummary": "Patient status: Slept well through the night. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "headache",
+        "nausea"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "CT scan"
+      ],
+      "medications": [
+        "Metformin",
+        "Paracetamol"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 73,
+      "avgSpo2": 99,
+      "avgSleepHours": 7.2,
+      "avgCalorieIntake": 1632,
+      "avgScreenTimeMinutes": 115,
+      "avgBathroomVisits": 6,
+      "usualDietCompliance": 0.97
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0046",
+    "age": 61,
+    "gender": "Male",
+    "observationStart": "2025-07-24T22:22:17.837339",
+    "observationEnd": "2025-07-25T23:22:17.837339",
+    "nursingNote": "Noted increased agitation during evening rounds. Redirected with calming techniques.",
+    "medications": [
+      {
+        "name": "Atorvastatin",
+        "dose": "75mg",
+        "scheduledTime": "2025-08-06T10:20:57.581376",
+        "complianceStatus": "Taken"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 82,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 98,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 38.2,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 105,
+        "diastolic": 68,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 2108,
+      "calorieIntake": 2500,
+      "sleepHours": 8.8,
+      "waterIntakeMl": 1062,
+      "mealsSkipped": 0,
+      "exerciseMinutes": 40
+    },
+    "behaviourTags": [
+      "refusedActivity"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "sad",
+        "anxious"
+      ],
+      "confidenceScores": {
+        "sad": 0.92,
+        "frustrated": 0.78
+      }
+    },
+    "clinicalSummary": "Patient status: Noted increased agitation during evening rounds. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "headache",
+        "fatigue"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Metformin",
+        "Lisinopril"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 68,
+      "avgSpo2": 98,
+      "avgSleepHours": 6.8,
+      "avgCalorieIntake": 2154,
+      "avgScreenTimeMinutes": 63,
+      "avgBathroomVisits": 5,
+      "usualDietCompliance": 0.97
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0047",
+    "age": 77,
+    "gender": "Female",
+    "observationStart": "2025-07-28T15:30:40.802718",
+    "observationEnd": "2025-07-29T16:30:40.802718",
+    "nursingNote": "Noted increased agitation during evening rounds. Redirected with calming techniques.",
+    "medications": [
+      {
+        "name": "Atorvastatin",
+        "dose": "100mg",
+        "scheduledTime": "2025-07-18T07:29:25.703603",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Paracetamol",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-22T13:51:14.564656",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 89,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 93,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.9,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 109,
+        "diastolic": 70,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 7557,
+      "calorieIntake": 1853,
+      "sleepHours": 7.7,
+      "waterIntakeMl": 2262,
+      "mealsSkipped": 1,
+      "exerciseMinutes": 25
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [
+        "anxious"
+      ],
+      "confidenceScores": {
+        "anxious": 0.66,
+        "happy": 0.73
+      }
+    },
+    "clinicalSummary": "Patient status: Noted increased agitation during evening rounds. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "dizziness",
+        "nausea"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "x-ray"
+      ],
+      "medications": [
+        "Atorvastatin",
+        "Paracetamol"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 65,
+      "avgSpo2": 96,
+      "avgSleepHours": 7.9,
+      "avgCalorieIntake": 2130,
+      "avgScreenTimeMinutes": 113,
+      "avgBathroomVisits": 3,
+      "usualDietCompliance": 0.99
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0048",
+    "age": 88,
+    "gender": "Male",
+    "observationStart": "2025-08-02T19:02:31.686857",
+    "observationEnd": "2025-08-04T13:02:31.686857",
+    "nursingNote": "Patient reported mild nausea in the morning. Appetite was slightly reduced.",
+    "medications": [
+      {
+        "name": "Metformin",
+        "dose": "50mg",
+        "scheduledTime": "2025-08-01T06:47:07.713252",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "100mg",
+        "scheduledTime": "2025-08-04T18:16:21.228950",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Paracetamol",
+        "dose": "25mg",
+        "scheduledTime": "2025-08-06T17:54:20.537049",
+        "complianceStatus": "Delayed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 89,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 93,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.5,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 122,
+        "diastolic": 61,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 914,
+      "calorieIntake": 1776,
+      "sleepHours": 6.5,
+      "waterIntakeMl": 2307,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 43
+    },
+    "behaviourTags": [
+      "agitated"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "happy",
+        "anxious"
+      ],
+      "confidenceScores": {
+        "calm": 0.94,
+        "sad": 0.86
+      }
+    },
+    "clinicalSummary": "Patient status: Patient reported mild nausea in the morning. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "fatigue",
+        "nausea"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "blood test"
+      ],
+      "medications": [
+        "Lisinopril",
+        "Paracetamol"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 74,
+      "avgSpo2": 98,
+      "avgSleepHours": 6.4,
+      "avgCalorieIntake": 2066,
+      "avgScreenTimeMinutes": 96,
+      "avgBathroomVisits": 2,
+      "usualDietCompliance": 0.82
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0049",
+    "age": 74,
+    "gender": "Female",
+    "observationStart": "2025-08-03T03:33:44.045083",
+    "observationEnd": "2025-08-05T00:33:44.045083",
+    "nursingNote": "Vitals remained stable. Patient ambulated with assistance and tolerated a full meal.",
+    "medications": [
+      {
+        "name": "Paracetamol",
+        "dose": "50mg",
+        "scheduledTime": "2025-08-07T15:23:51.766500",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Metformin",
+        "dose": "75mg",
+        "scheduledTime": "2025-07-26T02:58:37.233756",
+        "complianceStatus": "Missed"
+      },
+      {
+        "name": "Atorvastatin",
+        "dose": "50mg",
+        "scheduledTime": "2025-07-27T11:06:41.078377",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 92,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 90,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.1,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 108,
+        "diastolic": 82,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 3228,
+      "calorieIntake": 2170,
+      "sleepHours": 6.6,
+      "waterIntakeMl": 805,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 57
+    },
+    "behaviourTags": [
+      "nonCompliant",
+      "withdrawn"
+    ],
+    "emotionAnalysis": {
+      "tags": [
+        "frustrated",
+        "sad"
+      ],
+      "confidenceScores": {
+        "calm": 0.8,
+        "frustrated": 0.75
+      }
+    },
+    "clinicalSummary": "Patient status: Vitals remained stable. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "fatigue",
+        "dizziness"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "MRI"
+      ],
+      "medications": [
+        "Lisinopril",
+        "Paracetamol"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 70,
+      "avgSpo2": 96,
+      "avgSleepHours": 7.3,
+      "avgCalorieIntake": 1926,
+      "avgScreenTimeMinutes": 134,
+      "avgBathroomVisits": 4,
+      "usualDietCompliance": 0.94
+    },
+    "alerts": []
+  },
+  {
+    "patientId": "P0050",
+    "age": 83,
+    "gender": "Male",
+    "observationStart": "2025-07-27T07:06:46.833542",
+    "observationEnd": "2025-07-28T05:06:46.833542",
+    "nursingNote": "Observed to skip lunch and reported feeling fatigued. Encouraged hydration.",
+    "medications": [
+      {
+        "name": "Atorvastatin",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-26T21:28:29.443107",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Lisinopril",
+        "dose": "50mg",
+        "scheduledTime": "2025-08-03T00:56:03.175608",
+        "complianceStatus": "Taken"
+      },
+      {
+        "name": "Paracetamol",
+        "dose": "25mg",
+        "scheduledTime": "2025-07-15T02:42:10.086736",
+        "complianceStatus": "Missed"
+      }
+    ],
+    "vitals": {
+      "heartRate": {
+        "value": 80,
+        "unit": "bpm"
+      },
+      "spo2": {
+        "value": 96,
+        "unit": "%"
+      },
+      "temperature": {
+        "value": 36.4,
+        "unit": "C"
+      },
+      "bloodPressure": {
+        "systolic": 113,
+        "diastolic": 73,
+        "unit": "mmHg"
+      }
+    },
+    "adls": {
+      "stepsTaken": 4610,
+      "calorieIntake": 2452,
+      "sleepHours": 8.6,
+      "waterIntakeMl": 2287,
+      "mealsSkipped": 2,
+      "exerciseMinutes": 46
+    },
+    "behaviourTags": [],
+    "emotionAnalysis": {
+      "tags": [
+        "sad",
+        "anxious"
+      ],
+      "confidenceScores": {
+        "anxious": 1.0,
+        "frustrated": 0.74
+      }
+    },
+    "clinicalSummary": "Patient status: Observed to skip lunch and reported feeling fatigued. Continue monitoring.",
+    "entitiesExtracted": {
+      "symptoms": [
+        "fatigue",
+        "nausea"
+      ],
+      "vitals": [
+        "heart rate",
+        "temperature"
+      ],
+      "procedures": [
+        "x-ray"
+      ],
+      "medications": [
+        "Lisinopril",
+        "Metformin"
+      ]
+    },
+    "baselineStats": {
+      "avgHeartRate": 70,
+      "avgSpo2": 98,
+      "avgSleepHours": 6.7,
+      "avgCalorieIntake": 2197,
+      "avgScreenTimeMinutes": 142,
+      "avgBathroomVisits": 4,
+      "usualDietCompliance": 0.88
+    },
+    "alerts": []
+  }
+]

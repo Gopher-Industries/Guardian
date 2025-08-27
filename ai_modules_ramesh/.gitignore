@@ -1,0 +1,21 @@
+# OS
+.DS_Store
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Data - don't commit sensitive/raw files
+data/raw/
+*.csv
+*.jsonl
+*.xlsx
+
+# Models
+*.pkl
+*.pt
+*.bin
+*.h5

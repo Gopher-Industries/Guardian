@@ -337,6 +337,8 @@
     <string name="search">Search</string>
     <string name="update">Update</string>
     <string name="enter_an_email_adress">Enter an email adress</string>
+    <string name="add_patient">Add Patient</string>
+    <string name="no_activities_found">No Activities Found</string>
 
     <string name="caretaker_role_name">Caretaker</string>
     <string name="company_admin_role_name">Admin</string>
