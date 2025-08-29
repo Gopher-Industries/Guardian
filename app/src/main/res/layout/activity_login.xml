@@ -154,6 +154,15 @@
                 android:textColor="@color/white"
                 app:cornerRadius="24dp" />
 
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/loginFacebookBtn"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="Continue with Facebook" />
+
             <TextView
                 android:id="@+id/forgotPassword"
                 android:layout_width="wrap_content"
