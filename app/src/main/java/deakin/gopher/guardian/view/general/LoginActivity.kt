@@ -73,25 +73,36 @@ class LoginActivity : BaseActivity() {
         callbackManager = CallbackManager.Factory.create()
         fbLoginButton = findViewById(R.id.loginFacebookBtn)
         fbLoginButton.setPermissions("email", "public_profile")
-        fbLoginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-            override fun onSuccess(result: LoginResult) {
-                val credential = FacebookAuthProvider.getCredential(result.accessToken.token)
-                FirebaseAuth.getInstance().signInWithCredential(credential)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            NavigationService(this@LoginActivity).toHomeScreenForRole(Role.Caretaker)
-                        } else {
-                            showMessage(getString(R.string.toast_login_error, task.exception?.message))
-                        }
+        fbLoginButton.registerCallback(
+    callbackManager,
+    object : FacebookCallback<LoginResult> {
+        override fun onSuccess(result: LoginResult) {
+            val credential = FacebookAuthProvider.getCredential(result.accessToken.token)
+            FirebaseAuth.getInstance().signInWithCredential(credential)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        NavigationService(this@LoginActivity).toHomeScreenForRole(Role.Caretaker)
+                    } else {
+                        showMessage(
+                            getString(
+                                R.string.toast_login_error,
+                                task.exception?.message,
+                            ),
+                        )
                     }
-            }
-            override fun onCancel() {
-                showMessage("Facebook login cancelled")
-            }
-            override fun onError(error: FacebookException) {
-                showMessage("Facebook login error: ${error.message}")
-            }
-        })
+                }
+        }
+
+        override fun onCancel() {
+            showMessage("Facebook login cancelled")
+        }
+
+        override fun onError(error: FacebookException) {
+            showMessage("Facebook login error: ${error.message}")
+        }
+    },
+)
+
 
         // --- Google setup (as you had) ---
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
