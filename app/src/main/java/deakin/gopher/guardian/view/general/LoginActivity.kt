@@ -10,6 +10,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.FacebookSdk
+import com.facebook.login.LoginResult
+import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -17,18 +23,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-
-// Facebook
-import com.facebook.FacebookSdk
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginResult
-import com.facebook.login.widget.LoginButton
-import com.google.firebase.auth.FacebookAuthProvider
-
 import com.google.gson.Gson
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.ApiErrorResponse
@@ -75,32 +72,38 @@ class LoginActivity : BaseActivity() {
         callbackManager = CallbackManager.Factory.create()
         fbLoginButton = findViewById(R.id.loginFacebookBtn)
         fbLoginButton.setPermissions("email", "public_profile")
-        fbLoginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-            override fun onSuccess(result: LoginResult) {
-                val credential = FacebookAuthProvider.getCredential(result.accessToken.token)
-                FirebaseAuth.getInstance().signInWithCredential(credential)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            NavigationService(this@LoginActivity).toHomeScreenForRole(Role.Caretaker)
-                        } else {
-                            showMessage(getString(R.string.toast_login_error, task.exception?.message))
+        fbLoginButton.registerCallback(
+            callbackManager,
+            object : FacebookCallback<LoginResult> {
+                override fun onSuccess(result: LoginResult) {
+                    val credential = FacebookAuthProvider.getCredential(result.accessToken.token)
+                    FirebaseAuth.getInstance().signInWithCredential(credential)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                NavigationService(this@LoginActivity).toHomeScreenForRole(Role.Caretaker)
+                            } else {
+                                showMessage(getString(R.string.toast_login_error, task.exception?.message))
+                            }
                         }
-                    }
-            }
-            override fun onCancel() {
-                showMessage("Facebook login cancelled")
-            }
-            override fun onError(error: FacebookException) {
-                showMessage("Facebook login error: ${error.message}")
-            }
-        })
+                }
+
+                override fun onCancel() {
+                    showMessage("Facebook login cancelled")
+                }
+
+                override fun onError(error: FacebookException) {
+                    showMessage("Facebook login error: ${error.message}")
+                }
+            },
+        )
 
         // --- Google setup (as you had) ---
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            // If Firebase Google sign-in ever fails with null idToken, add:
-            // .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
+        val gso =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                // If Firebase Google sign-in ever fails with null idToken, add:
+                // .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
         gsoClient = GoogleSignIn.getClient(this, gso)
 
         loginButton.setOnClickListener {
@@ -120,30 +123,37 @@ class LoginActivity : BaseActivity() {
             }
 
             val call = ApiClient.apiService.login(emailInput, passwordInput)
-            call.enqueue(object : Callback<AuthResponse> {
-                override fun onResponse(
-                    call: Call<AuthResponse>,
-                    response: Response<AuthResponse>,
-                ) {
-                    progressBar.hide()
-                    if (response.isSuccessful && response.body() != null) {
-                        val user = response.body()!!.user
-                        val token = response.body()!!.token
-                        SessionManager.createLoginSession(user, token)
-                        NavigationService(this@LoginActivity).toPinCodeActivity(user.role)
-                    } else {
-                        val errorResponse = Gson().fromJson(
-                            response.errorBody()?.string(),
-                            ApiErrorResponse::class.java,
-                        )
-                        showMessage(errorResponse.apiError ?: response.message())
+            call.enqueue(
+                object : Callback<AuthResponse> {
+                    override fun onResponse(
+                        call: Call<AuthResponse>,
+                        response: Response<AuthResponse>,
+                    ) {
+                        progressBar.hide()
+                        if (response.isSuccessful && response.body() != null) {
+                            val user = response.body()!!.user
+                            val token = response.body()!!.token
+                            SessionManager.createLoginSession(user, token)
+                            NavigationService(this@LoginActivity).toPinCodeActivity(user.role)
+                        } else {
+                            val errorResponse =
+                                Gson().fromJson(
+                                    response.errorBody()?.string(),
+                                    ApiErrorResponse::class.java,
+                                )
+                            showMessage(errorResponse.apiError ?: response.message())
+                        }
                     }
-                }
-                override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-                    progressBar.hide()
-                    showMessage(getString(R.string.toast_login_error, t.message))
-                }
-            })
+
+                    override fun onFailure(
+                        call: Call<AuthResponse>,
+                        t: Throwable,
+                    ) {
+                        progressBar.hide()
+                        showMessage(getString(R.string.toast_login_error, t.message))
+                    }
+                },
+            )
         }
 
         mCreateBtn.setOnClickListener {
@@ -181,29 +191,43 @@ class LoginActivity : BaseActivity() {
 
     private fun sendResetPasswordEmail(userEmail: String) {
         val call = ApiClient.apiService.requestPasswordReset(userEmail)
-        call.enqueue(object : Callback<BaseModel> {
-            override fun onResponse(call: Call<BaseModel>, response: Response<BaseModel>) {
-                if (response.isSuccessful && response.body() != null) {
-                    showMessage(
-                        response.body()!!.apiMessage
-                            ?: getString(R.string.toast_reset_link_sent_to_your_email),
-                    )
-                } else {
-                    val errorResponse = Gson().fromJson(
-                        response.errorBody()?.string(),
-                        ApiErrorResponse::class.java,
-                    )
-                    showMessage(errorResponse.apiError ?: response.message())
+        call.enqueue(
+            object : Callback<BaseModel> {
+                override fun onResponse(
+                    call: Call<BaseModel>,
+                    response: Response<BaseModel>,
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        showMessage(
+                            response.body()!!.apiMessage
+                                ?: getString(R.string.toast_reset_link_sent_to_your_email),
+                        )
+                    } else {
+                        val errorResponse =
+                            Gson().fromJson(
+                                response.errorBody()?.string(),
+                                ApiErrorResponse::class.java,
+                            )
+                        showMessage(errorResponse.apiError ?: response.message())
+                    }
                 }
-            }
-            override fun onFailure(call: Call<BaseModel>, t: Throwable) {
-                showMessage("Error sending password reset link: ${t.message}")
-            }
-        })
+
+                override fun onFailure(
+                    call: Call<BaseModel>,
+                    t: Throwable,
+                ) {
+                    showMessage("Error sending password reset link: ${t.message}")
+                }
+            },
+        )
     }
 
     @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?,
+    ) {
         super.onActivityResult(requestCode, resultCode, data)
 
         // Facebook first
@@ -243,5 +267,3 @@ class LoginActivity : BaseActivity() {
         private const val RC_GOOGLE_SIGN_IN = 1000
     }
 }
-
-
