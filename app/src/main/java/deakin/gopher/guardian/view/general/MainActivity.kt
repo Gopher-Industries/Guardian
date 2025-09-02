@@ -41,6 +41,9 @@ class MainActivity : BaseActivity() {
                 Role.Admin -> {
                     startActivity(Intent(this@MainActivity, Homepage4admin::class.java))
                 }
+                Role.Doctor -> {
+                    startActivity(Intent(this@MainActivity, Homepage4admin::class.java))
+                }
                 Role.Caretaker -> {
                     startActivity(Intent(this@MainActivity, Homepage4caretaker::class.java))
                 }

@@ -6,7 +6,8 @@ data class Password(val password: String) {
             return false // Password is empty, not valid
         }
 
-        val minLength = 12
+        val minLength = 8
+        val maxLength = 16
         val hasUppercase = password.any { it.isUpperCase() }
         val hasLowercase = password.any { it.isLowerCase() }
         val hasDigit = password.any { it.isDigit() }
@@ -14,7 +15,7 @@ data class Password(val password: String) {
         val allowedSpecialChars = setOf('!', '@', '#', '$', '%', '^', '&', '*')
         val hasSpecialChar = password.any { it in allowedSpecialChars }
 
-        return password.length >= minLength &&
+        return password.length in minLength..maxLength &&
             hasUppercase &&
             hasLowercase &&
             hasDigit &&

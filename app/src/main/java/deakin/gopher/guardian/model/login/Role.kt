@@ -16,16 +16,23 @@ sealed class Role(val name: String) : Serializable {
         private fun readResolve(): Any = Nurse
     }
 
+    data object Doctor : Role(R.string.doctor_role_name.toString().lowercase()) {
+        private fun readResolve(): Any = Doctor
+    }
+
     companion object {
         private const val CARETAKER_ROLE = "caretaker"
         private const val ADMIN_ROLE = "admin"
         private const val NURSE_ROLE = "nurse"
+        private const val DOCTOR_ROLE = "doctor"
+
 
         fun create(name: String): Role {
             return when (name.lowercase()) {
                 CARETAKER_ROLE.lowercase() -> Caretaker
                 ADMIN_ROLE.lowercase() -> Admin
                 NURSE_ROLE.lowercase() -> Nurse
+                DOCTOR_ROLE.lowercase() -> Doctor
                 else -> throw IllegalArgumentException("Unknown role: $name")
             }
         }

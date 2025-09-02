@@ -43,6 +43,15 @@ class NavigationService(val activity: Activity) {
                     ),
                 )
             }
+
+            Role.Doctor -> {
+                activity.startActivity(
+                    Intent(
+                        activity.applicationContext,
+                        Homepage4admin::class.java,
+                    ),
+                )
+            }
         }
     }
 

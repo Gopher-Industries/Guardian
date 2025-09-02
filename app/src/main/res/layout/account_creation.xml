@@ -192,6 +192,13 @@
                     android:layout_height="wrap_content"
                     android:text="@string/nurse_role_name" />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_doctor"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/doctor_role_name" />
+
             </com.google.android.material.button.MaterialButtonToggleGroup>
 
 

@@ -337,6 +337,7 @@
     <string name="caretaker_role_name">Caretaker</string>
     <string name="company_admin_role_name">Admin</string>
     <string name="nurse_role_name">Nurse</string>
+    <string name="doctor_role_name">Doctor</string>
     <string name="login_role_selection_prompt">Login as:</string>
     <string name="register_role_selection_prompt">Register as:</string>
     <string name="password_hint">Enter password</string>
@@ -354,7 +355,7 @@
     <string name="validation_empty_email">Email is Required.</string>
     <string name="validation_invalid_email_address">Invalid Email Address</string>
     <string name="validation_empty_password">Password is Required.</string>
-    <string name="validation_password_weak">Please use a stronger password</string>
+    <string name="validation_password_weak">Password must be 8-16 characters long, include uppercase, lowercase, number, and special character.</string>
     <string name="text_reset_password">Reset Password</string>
     <string name="text_enter_your_email_to_received_reset_link">Enter Your Email To Received Reset Link.</string>
     <string name="tasks_label">Tasks</string>
