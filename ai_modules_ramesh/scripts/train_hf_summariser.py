@@ -1,123 +1,157 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""
-Train a Hugging Face seq2seq summariser with ROUGE evaluation.
-
-Works with transformers 4.55.x.
-- Uses Seq2SeqTrainingArguments (so predict_with_generate works)
-- Uses tokenizer(..., text_target=...) to avoid deprecation warning
-- Lets you pass dataset files/columns via CLI args to match your data
-"""
-
 import argparse
 import os
-from typing import Dict, Any
-
+import inspect
 import numpy as np
 
-from datasets import load_dataset, load_from_disk
+from datasets import load_dataset
 from transformers import (
     AutoTokenizer,
     AutoModelForSeq2SeqLM,
     DataCollatorForSeq2Seq,
-    Seq2SeqTrainer,
     Seq2SeqTrainingArguments,
+    Seq2SeqTrainer,
+    set_seed,
 )
 import evaluate
 
 
 def parse_args():
-    p = argparse.ArgumentParser()
-    # Model & output
-    p.add_argument("--model_name", type=str, default="facebook/bart-base",
-                   help="Seq2Seq model checkpoint (e.g., facebook/bart-base, google/pegasus-xsum, t5-small)")
-    p.add_argument("--output_dir", type=str, default="./models/hf_summariser",
-                   help="Where to save checkpoints")
-    # Data inputs (choose either CSV/JSON files or a load_from_disk dir)
-    p.add_argument("--train_file", type=str, default="", help="Path to train file (csv or json/jsonl)")
-    p.add_argument("--valid_file", type=str, default="", help="Path to validation file (csv or json/jsonl)")
-    p.add_argument("--dataset_format", type=str, default="csv", choices=["csv", "json"],
-                   help="Format of input files if using train_file/valid_file")
-    p.add_argument("--load_from_disk_dir", type=str, default="",
-                   help="If set, will load a datasets.DatasetDict from this directory instead of files")
-    # Column names
-    p.add_argument("--text_column", type=str, default="text",
-                   help="Source text column name")
-    p.add_argument("--summary_column", type=str, default="summary",
-                   help="Target summary column name")
-    # Tokenisation lengths
-    p.add_argument("--max_source_length", type=int, default=512)
-    p.add_argument("--max_target_length", type=int, default=128)
-    # Training hparams
-    p.add_argument("--train_batch_size", type=int, default=8)
-    p.add_argument("--eval_batch_size", type=int, default=8)
-    p.add_argument("--num_epochs", type=float, default=3)
-    p.add_argument("--logging_steps", type=int, default=50)
-    p.add_argument("--save_strategy", type=str, default="epoch", choices=["no", "steps", "epoch"])
-    p.add_argument("--eval_strategy", type=str, default="epoch", choices=["no", "steps", "epoch"])
-    p.add_argument("--eval_steps", type=int, default=None,
-                   help="Only used if eval_strategy=steps")
-    p.add_argument("--generation_max_length", type=int, default=128)
-    p.add_argument("--generation_num_beams", type=int, default=4)
-    p.add_argument("--seed", type=int, default=42)
-    return p.parse_args()
+    ap = argparse.ArgumentParser(description="Train a HF summariser (Seq2Seq)")
+
+    # Model & IO
+    ap.add_argument("--model_name", default="google/mt5-small", type=str)
+    ap.add_argument("--output_dir", default="models/hf_summariser/model-best", type=str)
+    ap.add_argument("--train_file", required=True, type=str)
+    ap.add_argument("--valid_file", required=True, type=str)
+    ap.add_argument("--dataset_format", choices=["json", "csv"], default="json")
+
+    # Columns
+    ap.add_argument("--text_column", default="input_text", type=str)
+    ap.add_argument("--summary_column", default="target_text", type=str)
+
+    # Lengths
+    ap.add_argument("--max_source_length", type=int, default=256)
+    ap.add_argument("--max_target_length", type=int, default=64)
+
+    # Training
+    ap.add_argument("--train_batch_size", type=int, default=8)
+    ap.add_argument("--eval_batch_size", type=int, default=8)
+    ap.add_argument("--num_epochs", type=int, default=2)
+    ap.add_argument("--learning_rate", type=float, default=5e-5)
+    ap.add_argument("--weight_decay", type=float, default=0.0)
+    ap.add_argument("--warmup_ratio", type=float, default=0.0)
+    ap.add_argument("--logging_steps", type=int, default=50)
+
+    # Strategies (may not exist in older transformers)
+    ap.add_argument("--save_strategy", choices=["no", "steps", "epoch"], default="steps")
+    ap.add_argument("--eval_strategy", choices=["no", "steps", "epoch"], default="steps")
+    ap.add_argument("--eval_steps", type=int, default=100)
+    ap.add_argument("--save_total_limit", type=int, default=2)
+
+    # Generation
+    ap.add_argument("--generation_max_length", type=int, default=64)
+    ap.add_argument("--generation_num_beams", type=int, default=4)
+
+    # Misc
+    ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument("--fp16", action="store_true")
+    ap.add_argument("--bf16", action="store_true")
+
+    return ap.parse_args()
 
 
-def load_data(args):
+def build_training_args(args):
     """
-    Returns a datasets.DatasetDict with 'train' and 'validation' splits.
+    Build Seq2SeqTrainingArguments but only pass kwargs supported by the local transformers version.
     """
-    if args.load_from_disk_dir:
-        ds = load_from_disk(args.load_from_disk_dir)
-        # Expect 'train' and 'validation' present
-        if "validation" not in ds and "val" in ds:
-            ds = ds.rename_columns({"val": "validation"})
-        return ds
+    # Desired kwargs
+    wanted = dict(
+        output_dir=args.output_dir,
+        per_device_train_batch_size=args.train_batch_size,
+        per_device_eval_batch_size=args.eval_batch_size,
+        gradient_accumulation_steps=1,
+        learning_rate=args.learning_rate,
+        weight_decay=args.weight_decay,
+        warmup_ratio=args.warmup_ratio,
+        num_train_epochs=args.num_epochs,
+        logging_steps=args.logging_steps,
+        predict_with_generate=True,
+        generation_max_length=args.generation_max_length,
+        generation_num_beams=args.generation_num_beams,
+        load_best_model_at_end=True,
+        metric_for_best_model="rougeLsum",
+        greater_is_better=True,
+        fp16=args.fp16,
+        bf16=args.bf16,
+        report_to="none",
+        save_total_limit=args.save_total_limit,
+        # These may not exist on older versions:
+        evaluation_strategy=args.eval_strategy,
+        save_strategy=args.save_strategy,
+        eval_steps=args.eval_steps if args.eval_strategy == "steps" else None,
+        save_steps=args.eval_steps if args.save_strategy == "steps" else None,
+    )
 
-    if not args.train_file or not args.valid_file:
-        raise ValueError("Provide --train_file and --valid_file, or use --load_from_disk_dir")
+    # Keep only kwargs that exist in local signature
+    sig = inspect.signature(Seq2SeqTrainingArguments.__init__)
+    allowed = set(sig.parameters.keys())
+    filtered = {k: v for k, v in wanted.items() if (k in allowed and v is not None)}
 
-    if args.dataset_format == "csv":
-        ds = load_dataset("csv", data_files={"train": args.train_file, "validation": args.valid_file})
+    try:
+        return Seq2SeqTrainingArguments(**filtered)
+    except TypeError:
+        # As a fallback, drop strategy keys entirely (older HF)
+        for k in ("evaluation_strategy", "save_strategy", "eval_steps", "save_steps"):
+            filtered.pop(k, None)
+        return Seq2SeqTrainingArguments(**filtered)
+
+
+def main():
+    args = parse_args()
+    set_seed(args.seed)
+    os.makedirs(args.output_dir, exist_ok=True)
+
+    # Load data
+    data_files = {"train": args.train_file, "validation": args.valid_file}
+    if args.dataset_format == "json":
+        ds = load_dataset("json", data_files=data_files)
     else:
-        # json / jsonl
-        ds = load_dataset("json", data_files={"train": args.train_file, "validation": args.valid_file})
-    return ds
+        ds = load_dataset("csv", data_files=data_files)
 
+    # Tokenizer & model
+    tokenizer = AutoTokenizer.from_pretrained(args.model_name, use_fast=True)
+    # Use safetensors to avoid torch.load(.bin) restriction (CVE-2025-32434)
+    # Use dtype="auto" if supported, else fallback to torch_dtype="auto"
+    model_kwargs = dict(use_safetensors=True, low_cpu_mem_usage=True)
+    try:
+        model = AutoModelForSeq2SeqLM.from_pretrained(args.model_name, dtype="auto", **model_kwargs)
+    except TypeError:
+        model = AutoModelForSeq2SeqLM.from_pretrained(args.model_name, torch_dtype="auto", **model_kwargs)
 
-def build_preprocess(tokenizer, args):
     text_col = args.text_column
-    summ_col = args.summary_column
+    sum_col = args.summary_column
 
-    def preprocess(batch: Dict[str, Any]):
-        # Inputs
-        model_inputs = tokenizer(
-            batch[text_col],
-            max_length=args.max_source_length,
-            truncation=True,
-        )
-        # Targets (no as_target_tokenizer; use text_target to avoid deprecation)
-        with_target = tokenizer(
-            batch[summ_col],
-            max_length=args.max_target_length,
-            truncation=True,
-            text_target=True,
-        )
-        model_inputs["labels"] = with_target["input_ids"]
+    def preprocess(batch):
+        inputs = batch[text_col]
+        targets = batch[sum_col]
+        model_inputs = tokenizer(inputs, max_length=args.max_source_length, truncation=True)
+        # label tokenization (compatible with both old/new APIs)
+        labels = tokenizer(text_target=targets, max_length=args.max_target_length, truncation=True)
+        model_inputs["labels"] = labels["input_ids"]
         return model_inputs
 
-    return preprocess
+    tokenized_train = ds["train"].map(preprocess, batched=True, remove_columns=ds["train"].column_names)
+    tokenized_eval = ds["validation"].map(preprocess, batched=True, remove_columns=ds["validation"].column_names)
 
+    data_collator = DataCollatorForSeq2Seq(tokenizer=tokenizer, model=model)
 
-def build_metrics(tokenizer):
-    rouge = evaluate.load("rouge")  # requires `pip install rouge_score`
+    # Metrics
+    rouge = evaluate.load("rouge")
 
     def postprocess_text(preds, labels):
-        # Decode IDs to strings; replace -100 with pad_token_id for labels before decoding
-        preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
-        labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
-        # Strip
         preds = [p.strip() for p in preds]
         labels = [l.strip() for l in labels]
         return preds, labels
@@ -126,79 +160,46 @@ def build_metrics(tokenizer):
         preds, labels = eval_pred
         if isinstance(preds, tuple):
             preds = preds[0]
-        # Replace -100 in the labels as we can't decode them
+        decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
         labels = np.where(labels != -100, labels, tokenizer.pad_token_id)
+        decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
+        decoded_preds, decoded_labels = postprocess_text(decoded_preds, decoded_labels)
+        result = rouge.compute(predictions=decoded_preds, references=decoded_labels, use_stemmer=True)
+        return {
+            "rouge1": result["rouge1"],
+            "rouge2": result.get("rouge2", 0.0),
+            "rougeL": result["rougeL"],
+            "rougeLsum": result["rougeLsum"],
+        }
 
-        decoded_preds, decoded_labels = postprocess_text(preds, labels)
-        result = rouge.compute(
-            predictions=decoded_preds,
-            references=decoded_labels,
-            use_stemmer=True,
-        )
-        # Convert to percentages
-        result = {k: round(v * 100, 4) for k, v in result.items()}
-        return result
-
-    return compute_metrics
-
-
-def main():
-    args = parse_args()
-
-    tokenizer = AutoTokenizer.from_pretrained(args.model_name, use_fast=True)
-    model = AutoModelForSeq2SeqLM.from_pretrained(args.model_name)
-
-    ds = load_data(args)
-    preprocess = build_preprocess(tokenizer, args)
-
-    # Map/tokenise
-    cols = [args.text_column, args.summary_column]
-    tokenised = ds.map(preprocess, batched=True, remove_columns=[c for c in ds["train"].column_names if c in cols])
-
-    # Data collator for seq2seq
-    data_collator = DataCollatorForSeq2Seq(tokenizer=tokenizer, model=model)
-
-    # Metrics
-    compute_metrics = build_metrics(tokenizer)
-
-    # Training args — note: your env exposes `eval_strategy` (not evaluation_strategy)
-    targs = Seq2SeqTrainingArguments(
-        output_dir=args.output_dir,
-        per_device_train_batch_size=args.train_batch_size,
-        per_device_eval_batch_size=args.eval_batch_size,
-        num_train_epochs=args.num_epochs,
-        logging_steps=args.logging_steps,
-        save_strategy=args.save_strategy,
-        eval_strategy=args.eval_strategy,
-        eval_steps=args.eval_steps,
-        predict_with_generate=True,
-        generation_max_length=args.generation_max_length,
-        generation_num_beams=args.generation_num_beams,
-        load_best_model_at_end=True,
-        metric_for_best_model="rougeLsum",
-        greater_is_better=True,
-        seed=args.seed,
-        report_to=None,   # set to ["tensorboard"] if you want TB logs
-    )
+    training_args = build_training_args(args)
 
     trainer = Seq2SeqTrainer(
         model=model,
-        args=targs,
-        train_dataset=tokenised["train"],
-        eval_dataset=tokenised["validation"],
-        data_collator=data_collator,
+        args=training_args,
+        train_dataset=tokenized_train,
+        eval_dataset=tokenized_eval,
         tokenizer=tokenizer,
+        data_collator=data_collator,
         compute_metrics=compute_metrics,
     )
 
+    # Train
     trainer.train()
-    metrics = trainer.evaluate()
-    print("Eval metrics:", metrics)
 
-    # Save final artefacts
+    # Try evaluation at end (covers older HF where in-flight eval wasn't configured)
+    try:
+        metrics = trainer.evaluate()
+        print("Final eval metrics:", metrics)
+    except Exception as e:
+        print("Eval skipped at end due to:", repr(e))
+
+    # Save best/final
     trainer.save_model(args.output_dir)
     tokenizer.save_pretrained(args.output_dir)
+    print("✅ Training complete. Model saved to:", args.output_dir)
 
 
 if __name__ == "__main__":
+    os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
     main()
