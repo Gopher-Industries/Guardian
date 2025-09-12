@@ -11,7 +11,7 @@ function App() {
   const handleLogin = (e) => {
     e.preventDefault();
     // Simulate backend login credentials (admin only)
-    if (email === 'dominicdiona@gmail.com' && password === 'admin123') {
+    if (email === 'admin@gmail.com' && password === 'admin@123') {
       setStep('otp'); // Go to 2FA step
     } else {
       alert('Invalid credentials. Please contact backend for admin login.');
