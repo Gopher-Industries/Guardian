@@ -710,6 +710,7 @@
     <string name="patient_photo">Patient photo</string>
     <string name="more_options">More Options</string>
     <string name="add_activity">Add Activity</string>
+    <string name="logbook"><![CDATA[<string name=\"logbook\">Logbook</string>\n]]></string>
 
 
     <string-array name="dropdown_items">
