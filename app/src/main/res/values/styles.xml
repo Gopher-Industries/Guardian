@@ -1,6 +1,14 @@
 <resources>
 
-    <style name="Widget.Theme.TeamGuardians.ButtonBar.Fullscreen" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Legacy Theme (for older activities) -->
+    <style name="Theme.TeamGuardians.DayNight" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/deep_blue</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Button bar -->
+    <style name="Widget.Theme.TeamGuardians.ButtonBar.Fullscreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:background">@color/black_overlay</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
         <item name="windowNoTitle">true</item>
@@ -9,11 +17,13 @@
         <item name="textAppearanceButton">@color/white</item>
     </style>
 
+    <!-- Fonts -->
     <style name="poppinsfontstyle" parent="@android:style/TextAppearance.Small">
         <item name="android:fontFamily">@font/poppins</item>
     </style>
 
-    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+    <!-- Calendar View -->
+    <style name="CalenderViewCustom" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorAccent">@color/light_blue_A200</item>
         <item name="colorPrimary">@color/white</item>
     </style>
@@ -31,43 +41,18 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/deep_blue</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
+    <!-- Tabs -->
     <style name="TabLayoutTheme" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">16sp</item>
         <item name="textAllCaps">false</item>
         <item name="android:textStyle">bold</item>
-
     </style>
 
     <style name="TabLayoutSelectedTheme" parent="TextAppearance.Design.Tab">
         <item name="android:textColor">@color/TG_blue</item>
     </style>
 
-
-    <style name="Theme.TeamGuardians.DayNight" parent="Theme.MaterialComponents.DayNight">
-
-    </style>
-    //dark mode
-
-    <style name="Widget.Theme.TeamGuardians.ButtonBar.Fullscreen1" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:background">@color/dark_primary_color</item>
-        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="textAppearanceButton">@color/white</item>
-    </style>
-
-    <style name="poppinsfontstyle1" parent="@android:style/TextAppearance.Small">
-        <item name="android:fontFamily">@font/poppins</item>
-    </style>
-
+    <!-- Menu text -->
     <style name="menu_text_style" parent="@android:style/TextAppearance.DeviceDefault.Widget.ActionBar.Menu">
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
@@ -75,6 +60,7 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <!-- Autofill -->
     <style name="CustomAutofillTextAppearance">
         <item name="android:textSize">14sp</item>
     </style>
