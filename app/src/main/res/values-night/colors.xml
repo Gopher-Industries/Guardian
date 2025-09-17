@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Backgrounds -->
+    <color name="white">#121212</color> <!-- "white" → dark bg -->
+    <color name="off_white">#1E1E1E</color> <!-- card/surface bg -->
+    <color name="_bg__new_homepage___ek2_color">#121212</color>
+    <color name="gray">#2A2A2A</color>
+    <color name="alert_gray">#2C2C2C</color>
+
+    <!-- Text -->
+    <color name="black">#FFFFFF</color> <!-- replace black text with white -->
+    <color name="default_text">#CCCCCC</color>
+    <color name="text_heading_color">#FFFFFF</color>
+    <color name="text_input_color">#EEEEEE</color>
+    <color name="colorPrimaryText">#FFFFFF</color>
+
+    <!-- Theme colors (used by themes-night.xml) -->
+    <color name="primary_dark">#2F83AA</color>                <!-- ✅ new -->
+    <color name="primary_variant_dark">#54C5F4</color>        <!-- ✅ new -->
+    <color name="on_primary_dark">#000000</color>             <!-- ✅ new -->
+
+    <color name="secondary_dark">#3B9CD7</color>              <!-- ✅ new -->
+    <color name="secondary_variant_dark">#0B98C5</color>      <!-- ✅ new -->
+    <color name="on_secondary_dark">#000000</color>           <!-- ✅ new -->
+
+    <color name="background_dark">#121212</color>             <!-- ✅ new -->
+    <color name="on_background_dark">#FFFFFF</color>          <!-- ✅ new -->
+
+    <color name="surface_dark">#1E1E1E</color>                <!-- ✅ new -->
+    <color name="on_surface_dark">#FFFFFF</color>             <!-- ✅ new -->
+    <color name="on_surface_variant_dark">#BBBBBB</color>     <!-- ✅ new -->
+
+    <!-- Keep your existing dark palette -->
+    <color name="colorPrimary">@color/dark_primary_color</color>
+    <color name="colorPrimaryDark">@color/dark_primary_variant_color</color>
+    <color name="colorAccent">@color/teal_200</color>
+    <color name="colorWhite">#FFFFFF</color>
+
+    <color name="dark_primary_color">#2F83AA</color>
+    <color name="dark_primary_variant_color">#54C5F4</color>
+    <color name="dark_text_color">#FFFFFF</color>
+    <color name="dark_secondary_color">#2C2C2C</color>
+    <color name="dark_secondary_variant_color">#121212</color>
+
+    <!-- Material roles -->
+    <color name="primary">@color/dark_primary_color</color>
+    <color name="primary_variant">@color/dark_primary_variant_color</color>
+    <color name="on_primary">#000000</color>
+
+    <color name="secondary">@color/TG_blue</color>
+    <color name="secondary_variant">@color/TG_blue_2</color>
+    <color name="on_secondary">#000000</color>
+
+    <color name="background">#121212</color>
+    <color name="on_background">#FFFFFF</color>
+
+    <color name="surface">#1E1E1E</color>
+    <color name="on_surface">#FFFFFF</color>
+    <color name="on_surface_variant">#BBBBBB</color>
+</resources>

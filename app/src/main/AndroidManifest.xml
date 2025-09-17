@@ -6,23 +6,15 @@
         android:name="android.hardware.camera"
         android:required="false" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- For reading images -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-
-    <!-- For reading videos -->
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.CAMERA" />
-
-
-    <!-- For reading audio -->
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
-
-    <!-- Add WRITE permissions only if necessary -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
-    <!-- Add the permission here -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+    <!-- Application -->
     <application
         android:name=".GuardianApplication"
         android:allowBackup="false"
@@ -32,11 +24,12 @@
         android:label="Guardians"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/Theme.GopherGuardian"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:label"
         tools:targetApi="31"
         tools:ignore="ExtraText">
+
         <activity
             android:name=".WelcomeActivity"
             android:exported="false" />
@@ -45,15 +38,16 @@
             android:exported="false" />
         <activity
             android:name=".Training2"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".Training"
             android:exported="false" />
+
         <activity
             android:name=".view.patient.patientdata.heartrate.HeartRateActivity"
             android:exported="false"
-            android:label="@string/title_activity_heart_rate"
-            android:theme="@style/Theme.TeamGuardians" />
+            android:label="@string/title_activity_heart_rate" />
+
         <activity
             android:name=".view.general.Setting"
             android:exported="false" />
@@ -162,16 +156,18 @@
             android:exported="false" />
         <activity
             android:name=".view.general.AddNewPatientActivity"
-            android:exported="false" /> <!-- Kussay: may we need to change the start up page into login page -->
+            android:exported="false" />
+
+        <!-- Main entry point -->
         <activity
             android:name=".view.general.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- These are here only for UI testing -->
+        </activity>
+
         <activity
             android:name=".view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity"
             android:exported="false" />
@@ -186,18 +182,14 @@
             android:exported="false" />
 
         <activity android:name=".ModulesActivity" />
-
-
         <activity android:name=".Module1CoursesActivity" />
         <activity android:name=".HomecareInductionActivity" />
         <activity android:name=".InfectionControlActivity" />
         <activity android:name=".SupportingMealtimesActivity" />
 
-
         <activity android:name=".Module2CoursesActivity" />
         <activity android:name=".MedicationTechniqueActivity" />
         <activity android:name=".MedicationSafetyActivity" />
-
 
         <activity android:name=".Module3CoursesActivity" />
         <activity android:name=".InspiringLeadershipEIActivity" />
@@ -212,7 +204,6 @@
             android:exported="false"
             android:label="Patient Exercise Modules" />
 
-
         <service
             android:name=".model.FirebaseMessagingService"
             android:exported="false">
@@ -226,6 +217,6 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".view.general.DashboardActivity"/>
-    </application>
 
+    </application>
 </manifest>
