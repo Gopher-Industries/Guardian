@@ -194,6 +194,8 @@
         <activity android:name=".view.FallDetection.FallDetectionActivity" />
         <activity android:name=".view.FallDetection.FallAlertActivity" />
         <activity android:name="deakin.gopher.guardian.view.caretaker.notifications.confirmincident.CallAmbulanceActivity" />
+        <activity android:name=".view.general.DashboardActivity"/>
+        <activity android:name=".view.general.DoctorPortalActivity" />
 
 
         <service

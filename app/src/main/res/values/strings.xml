@@ -42,6 +42,7 @@
     <string name="welcome_caretaker">Welcome, Caretaker</string>
     <string name="welcome_admin">Welcome, Administrator</string>
     <string name="welcome_nurse">Welcome, Nurse</string>
+    <string name="doctor_role_name">Doctor</string>
 
 
     <!-- Below are all strings previously hardcoded added here using the quick function -->

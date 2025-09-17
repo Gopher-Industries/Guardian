@@ -38,6 +38,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import deakin.gopher.guardian.utils.SecurityUtils
+import android.util.Log
+
 
 
 class LoginActivity : BaseActivity() {
@@ -65,6 +67,7 @@ class LoginActivity : BaseActivity() {
                     R.id.admin_radioButton -> RoleName.Admin
                     R.id.caretaker_radioButton -> RoleName.Caretaker
                     R.id.nurse_radioButton -> RoleName.Nurse
+                    R.id.doctor_radioButton -> RoleName.Doctor
                     else -> RoleName.Caretaker
                 }
         }
@@ -80,6 +83,8 @@ class LoginActivity : BaseActivity() {
             val emailInput = mEmail.text.toString().trim { it <= ' ' }
             val passwordInput = mPassword.text.toString().trim { it <= ' ' }
             val hashedPasswordInput = SecurityUtils.hashPassword(passwordInput)
+            Log.d("HashedPassword", "Hashed value: $hashedPasswordInput")
+
 
             val loginValidationError = validateInputs(emailInput)
 

@@ -122,7 +122,18 @@
                         android:fontFamily="@font/poppins_bold"
                         android:minHeight="48dp"
                         android:text="@string/nurse_role_name" />
+
+                    <RadioButton
+                        android:id="@+id/doctor_radioButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:minHeight="48dp"
+                        android:text="Doctor" />
+
                 </RadioGroup>
+
+
 
             </LinearLayout>
 

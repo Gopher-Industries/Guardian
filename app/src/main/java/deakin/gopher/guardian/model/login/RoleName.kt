@@ -15,4 +15,13 @@ sealed class RoleName(val name: String) : Serializable {
     data object Nurse : RoleName(R.string.nurse_role_name.toString()) {
         private fun readResolve(): Any = Nurse
     }
+
+    data object Doctor : RoleName(R.string.doctor_role_name.toString()) {
+        private fun readResolve(): Any = Doctor
+    }
+
+
+
+
+
 }

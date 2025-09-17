@@ -12,6 +12,8 @@ import deakin.gopher.guardian.view.general.Setting
 import deakin.gopher.guardian.view.general.TaskAddActivity
 import deakin.gopher.guardian.view.general.TasksListActivity
 import deakin.gopher.guardian.view.general.DashboardActivity
+import deakin.gopher.guardian.view.general.DoctorPortalActivity
+
 
 class NavigationService(val activity: Activity) {
     fun toHomeScreenForRole(roleName: RoleName) {
@@ -33,6 +35,16 @@ class NavigationService(val activity: Activity) {
                     ),
                 )
             }
+            RoleName.Doctor -> {
+                activity.startActivity(
+                    Intent(
+                        activity.applicationContext,
+                        DoctorPortalActivity::class.java,
+                    ),
+                )
+            }
+
+
 
             RoleName.Admin -> {
                 activity.startActivity(
