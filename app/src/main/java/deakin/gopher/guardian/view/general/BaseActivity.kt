@@ -2,16 +2,15 @@ package deakin.gopher.guardian.view.general
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import android.os.Bundle
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.model.login.SessionManager.isLoggedIn
 import deakin.gopher.guardian.model.login.SessionManager.logoutUser
 import deakin.gopher.guardian.model.login.SessionManager.updateLastActiveTime
 
 abstract class BaseActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         // 🔑 Apply night mode before super.onCreate() + setContentView()
         val sharedPreferences: SharedPreferences = getSharedPreferences("settings", MODE_PRIVATE)

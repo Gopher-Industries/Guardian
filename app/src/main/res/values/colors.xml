@@ -78,5 +78,24 @@
     <color name="surface">#FFFFFF</color>
     <color name="on_surface">#212121</color>
     <color name="on_surface_variant">#666666</color>
+              <!-- ✅ new -->
+
+    <color name="secondary_dark">#3B9CD7</color>              <!-- ✅ new -->
+    <color name="secondary_variant_dark">#0B98C5</color>      <!-- ✅ new -->
+    <color name="on_secondary_dark">#000000</color>           <!-- ✅ new -->
+
+    <color name="background_dark">#121212</color>             <!-- ✅ new -->
+    <color name="on_background_dark">#FFFFFF</color>          <!-- ✅ new -->
+
+    <color name="surface_dark">#1E1E1E</color>                <!-- ✅ new -->
+    <color name="on_surface_dark">#FFFFFF</color>             <!-- ✅ new -->
+    <color name="on_surface_variant_dark">#BBBBBB</color>     <!-- ✅ new -->
+
+    <color name="primary_dark">#2F83AA</color>
+    <color name="on_primary_dark">#000000</color>
+    <color name="primary_variant_dark">#54C5F4</color>
+
+
+
 
 </resources>
