@@ -1,92 +1,52 @@
-import React, { useState } from 'react';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./Login";
+import Dashboard from "./Dashboard";
+import Patients from "./Patients";
+import Staff from "./Staff";
+import Assignments from "./Assignments";
+import ProtectedRoute from "./ProtectedRoute";
 
-function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [otp, setOtp] = useState('');
-  const [step, setStep] = useState('login'); // login → otp → dashboard
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Simulate backend login credentials (admin only)
-    if (email === 'dominicdiona@gmail.com' && password === 'admin123') {
-      setStep('otp'); // Go to 2FA step
-    } else {
-      alert('Invalid credentials. Please contact backend for admin login.');
-    }
-  };
-
-
-  const handleOTPVerify = (e) => {
-    e.preventDefault();
-    // Simulated OTP check (normally generated backend)
-    if (otp === '123456') {
-      setIsAuthenticated(true);
-    } else {
-      alert('Invalid OTP');
-    }
-  };
-
-  if (isAuthenticated) {
-    return (
-      <div className="login-container">
-        <img
-          src="/logo_guardian.png"
-          alt="Guardian Logo"
-          style={{ width: '100px', marginBottom: '20px' }}
-        />
-        <h2>Admin Dashboard</h2>
-        <p>Welcome, {email}</p>
-        {/* Add admin dashboard components here */}
-      </div>
-    );
-  }
-
+const App = () => {
   return (
-    <div className="login-container">
-      <img
-        src="/logo_guardian.png"
-        alt="Guardian Logo"
-        style={{ width: '100px', marginBottom: '20px' }}
-      />
-      <h2>Guardian Admin Login</h2>
-
-      {step === 'login' && (
-        <form onSubmit={handleLogin} className="login-form">
-          <input
-            type="email"
-            placeholder="Admin Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit">Login</button>
-        </form>
-      )}
-
-      {step === 'otp' && (
-        <form onSubmit={handleOTPVerify} className="login-form">
-          <input
-            type="text"
-            placeholder="Enter 2FA OTP"
-            value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-            required
-          />
-          <button type="submit">Verify OTP</button>
-        </form>
-      )}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/patients"
+          element={
+            <ProtectedRoute>
+              <Patients />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/staff"
+          element={
+            <ProtectedRoute>
+              <Staff />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/assignments"
+          element={
+            <ProtectedRoute>
+              <Assignments />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
