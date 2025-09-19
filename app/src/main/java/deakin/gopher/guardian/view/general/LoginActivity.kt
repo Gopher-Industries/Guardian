@@ -3,6 +3,7 @@ package deakin.gopher.guardian.view.general
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -10,7 +11,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import android.util.Log
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -56,10 +56,11 @@ class LoginActivity : BaseActivity() {
         setContentView(R.layout.activity_login)
 
         try {
-            val info = packageManager.getPackageInfo(
-                packageName,
-                android.content.pm.PackageManager.GET_SIGNING_CERTIFICATES
-            )
+            val info =
+                packageManager.getPackageInfo(
+                    packageName,
+                    android.content.pm.PackageManager.GET_SIGNING_CERTIFICATES,
+                )
             for (signature in info.signingInfo.apkContentsSigners) {
                 val md = java.security.MessageDigest.getInstance("SHA")
                 md.update(signature.toByteArray())
@@ -69,7 +70,6 @@ class LoginActivity : BaseActivity() {
         } catch (e: Exception) {
             Log.e("FB_KEY_HASH", "Error generating key hash", e)
         }
-
 
         // --- Initialize Facebook SDK ---
         FacebookSdk.setApplicationId(getString(R.string.facebook_app_id))
@@ -105,12 +105,13 @@ class LoginActivity : BaseActivity() {
                                 AlertDialog.Builder(this@LoginActivity)
                                     .setTitle("Continue as")
                                     .setItems(arrayOf("Admin", "Nurse", "Caretaker")) { _, which ->
-                                        val role = when (which) {
-                                            0 -> Role.Admin
-                                            1 -> Role.Nurse
-                                            2 -> Role.Caretaker
-                                            else -> Role.Caretaker
-                                        }
+                                        val role =
+                                            when (which) {
+                                                0 -> Role.Admin
+                                                1 -> Role.Nurse
+                                                2 -> Role.Caretaker
+                                                else -> Role.Caretaker
+                                            }
                                         // Pass selected role to your navigation or backend
                                         NavigationService(this@LoginActivity).toHomeScreenForRole(role)
                                     }
@@ -121,7 +122,6 @@ class LoginActivity : BaseActivity() {
                             }
                         }
                 }
-
 
                 override fun onCancel() {
                     showMessage("Facebook login cancelled")
