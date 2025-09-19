@@ -10,6 +10,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import android.util.Log
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -54,6 +55,22 @@ class LoginActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        try {
+            val info = packageManager.getPackageInfo(
+                packageName,
+                android.content.pm.PackageManager.GET_SIGNING_CERTIFICATES
+            )
+            for (signature in info.signingInfo.apkContentsSigners) {
+                val md = java.security.MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                val keyHash = android.util.Base64.encodeToString(md.digest(), android.util.Base64.DEFAULT)
+                Log.d("FB_KEY_HASH", "KeyHash: $keyHash")
+            }
+        } catch (e: Exception) {
+            Log.e("FB_KEY_HASH", "Error generating key hash", e)
+        }
+
+
         // --- Initialize Facebook SDK ---
         FacebookSdk.setApplicationId(getString(R.string.facebook_app_id))
         FacebookSdk.setClientToken(getString(R.string.facebook_client_token))
@@ -71,21 +88,40 @@ class LoginActivity : BaseActivity() {
         // --- Facebook setup ---
         callbackManager = CallbackManager.Factory.create()
         fbLoginButton = findViewById(R.id.loginFacebookBtn)
-        fbLoginButton.setPermissions("email", "public_profile")
+        fbLoginButton.setPermissions("public_profile", "email")
         fbLoginButton.registerCallback(
             callbackManager,
             object : FacebookCallback<LoginResult> {
                 override fun onSuccess(result: LoginResult) {
-                    val credential = FacebookAuthProvider.getCredential(result.accessToken.token)
+                    Log.d("FB_LOGIN", "Facebook login success, token: ${result.accessToken.token}")
+                    Toast.makeText(this@LoginActivity, "Facebook Login Success!", Toast.LENGTH_SHORT).show()
+
+                    val fbToken = result.accessToken.token
+                    val credential = FacebookAuthProvider.getCredential(fbToken)
+
                     FirebaseAuth.getInstance().signInWithCredential(credential)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                NavigationService(this@LoginActivity).toHomeScreenForRole(Role.Caretaker)
+                                AlertDialog.Builder(this@LoginActivity)
+                                    .setTitle("Continue as")
+                                    .setItems(arrayOf("Admin", "Nurse", "Caretaker")) { _, which ->
+                                        val role = when (which) {
+                                            0 -> Role.Admin
+                                            1 -> Role.Nurse
+                                            2 -> Role.Caretaker
+                                            else -> Role.Caretaker
+                                        }
+                                        // Pass selected role to your navigation or backend
+                                        NavigationService(this@LoginActivity).toHomeScreenForRole(role)
+                                    }
+                                    .setCancelable(false)
+                                    .show()
                             } else {
                                 showMessage(getString(R.string.toast_login_error, task.exception?.message))
                             }
                         }
                 }
+
 
                 override fun onCancel() {
                     showMessage("Facebook login cancelled")

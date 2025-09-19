@@ -5,9 +5,9 @@
 
     <string name="web_client_id">274677794777-fu1sosmmrqm4bgvmkf76gdc3v430d03v.apps.googleusercontent.com</string>
 
-    <string name="facebook_app_id">626640083403955</string>
-    <string name="fb_login_protocol_scheme">fb626640083403955</string>
-    <string name="facebook_client_token">YOUR_CLIENT_TOKEN_HERE</string>
+    <string name="facebook_app_id">769250915495699</string>
+    <string name="fb_login_protocol_scheme">fb769250915495699</string>
+    <string name="facebook_client_token">a1ad3d3a28c60443562f9e9037951d96</string>
 
     <string name="ek_img_content">ExportKit Image</string>
     <string name="welcome__marilyn___string">Welcome, Marilyn !</string>
