@@ -4,27 +4,20 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import deakin.gopher.guardian.databinding.ActivityAssignDoctorBinding
-import deakin.gopher.guardian.model.ApiErrorResponse
 import deakin.gopher.guardian.model.Doctor
-//import deakin.gopher.guardian.model.requests.AssignDoctorRequest
 import deakin.gopher.guardian.model.login.SessionManager
-import deakin.gopher.guardian.services.api.ApiClient
-import deakin.gopher.guardian.view.hide
 import deakin.gopher.guardian.view.show
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.google.gson.Gson
 
 class AssignDoctorActivity : BaseActivity() {
-
     private lateinit var binding: ActivityAssignDoctorBinding
+
 //    private lateinit var adapter: DoctorListAdapter
     private var allDoctors: List<Doctor> = emptyList()
     private var searchJob: Job? = null
@@ -61,25 +54,43 @@ class AssignDoctorActivity : BaseActivity() {
 //        binding.recyclerViewDoctors.adapter = adapter
 
         // Search (debounced)
-        binding.etSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun afterTextChanged(s: Editable?) {}
+        binding.etSearch.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {}
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // local filter; if you prefer server-side search, call fetchDoctors(query)
-                filterLocal(s?.toString().orEmpty())
-            }
-        })
+                override fun afterTextChanged(s: Editable?) {}
+
+                override fun onTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {
+                    // local filter; if you prefer server-side search, call fetchDoctors(query)
+                    filterLocal(s?.toString().orEmpty())
+                }
+            },
+        )
 
 //        fetchDoctors()
     }
 
     private fun filterLocal(query: String) {
         val q = query.trim().lowercase()
-        val filtered = if (q.isEmpty()) allDoctors else allDoctors.filter {
-            it.fullname.lowercase().contains(q) ||
-                    (it.specialty?.lowercase()?.contains(q) == true)
-        }
+        val filtered =
+            if (q.isEmpty()) {
+                allDoctors
+            } else {
+                allDoctors.filter {
+                    it.fullname.lowercase().contains(q) ||
+                        (it.specialty?.lowercase()?.contains(q) == true)
+                }
+            }
 //        adapter.updateData(filtered)
         binding.tvEmptyMessage.text = if (filtered.isEmpty()) "No matching doctors" else ""
         binding.tvEmptyMessage.visibility = if (filtered.isEmpty()) android.view.View.VISIBLE else android.view.View.GONE
@@ -117,15 +128,16 @@ class AssignDoctorActivity : BaseActivity() {
         val token = "Bearer ${SessionManager.getToken()}"
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.Main) { binding.progressBar.show() }
-            val res = try {
+            val res =
+                try {
 //                ApiClient.apiService.assignDoctor(
 //                    token = token,
 //                    patientId = patientId,
 //                    body = AssignDoctorRequest(doctorId = doctor.id)
 //                )
-            } catch (e: Exception) {
-                null
-            }
+                } catch (e: Exception) {
+                    null
+                }
 //            withContext(Dispatchers.Main) {
 //                binding.progressBar.hide()
 //                if (res?.isSuccessful == true) {
@@ -136,7 +148,7 @@ class AssignDoctorActivity : BaseActivity() {
 //                    val parsed = try { Gson().fromJson(error, ApiErrorResponse::class.java) } catch (_: Exception) { null }
 //                    Toast.makeText(this@AssignDoctorActivity, parsed?.apiError ?: "Failed to assign doctor", Toast.LENGTH_SHORT).show()
 //                }
-            }
         }
     }
-//}
+}
+// }

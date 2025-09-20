@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -65,8 +64,7 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     boolean isNight = sp.getBoolean(KEY_NIGHT, false);
 
     AppCompatDelegate.setDefaultNightMode(
-            isNight ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
-    );
+        isNight ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
   }
 
   @Override
@@ -75,7 +73,6 @@ public class Setting extends BaseActivity implements View.OnClickListener {
       showFeedbackDialog();
     }
   }
-
 
   private void handleNotificationSwitch(final boolean isChecked) {
     if (isChecked) {

@@ -13,9 +13,8 @@ import deakin.gopher.guardian.model.Doctor
 
 class DoctorListAdapter(
     private var doctors: List<Doctor>,
-    private val onSelect: (Doctor) -> Unit
+    private val onSelect: (Doctor) -> Unit,
 ) : RecyclerView.Adapter<DoctorListAdapter.DoctorVH>() {
-
     inner class DoctorVH(view: View) : RecyclerView.ViewHolder(view) {
         val photo: ImageView = view.findViewById(R.id.ivPhoto)
         val name: TextView = view.findViewById(R.id.tvName)
@@ -23,12 +22,18 @@ class DoctorListAdapter(
         val btnAssign: Button = view.findViewById(R.id.btnAssign)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DoctorVH {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): DoctorVH {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_doctor, parent, false)
         return DoctorVH(view)
     }
 
-    override fun onBindViewHolder(holder: DoctorVH, position: Int) {
+    override fun onBindViewHolder(
+        holder: DoctorVH,
+        position: Int,
+    ) {
         val d = doctors[position]
         holder.name.text = d.fullname
         holder.specialty.text = d.specialty?.let { "Specialty: $it" } ?: "Specialty: —"
