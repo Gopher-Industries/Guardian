@@ -19,7 +19,7 @@
         android:layout_width="0dp"
         android:layout_height="220dp"
         android:layout_marginTop="-40dp"
-        app:cardBackgroundColor="@color/TG_blue"
+        app:cardBackgroundColor="?attr/colorPrimary"
         app:cardCornerRadius="40dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
