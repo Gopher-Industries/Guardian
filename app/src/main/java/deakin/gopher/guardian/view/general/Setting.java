@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -29,6 +30,8 @@ public class Setting extends BaseActivity implements View.OnClickListener {
   Switch notificationSwitch;
   Switch themeSwitch;
   ImageView settingsMenuButton;
+  private static final String PREFS = "app_prefs";
+  private static final String KEY_NIGHT = "night_mode";
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
@@ -36,7 +39,6 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     setContentView(R.layout.activity_setting);
     String userType = getIntent().getStringExtra("userType");
 
-    settingsThemeButton = findViewById(R.id.settings_theme_button);
     settingsNotificationButton = findViewById(R.id.settings_notification_button);
     settingsAppUpdateButton = findViewById(R.id.settings_app_update_button);
     settingsFeedbackButton = findViewById(R.id.settings_feedback_button);
@@ -53,15 +55,18 @@ public class Setting extends BaseActivity implements View.OnClickListener {
           drawerLayout.openDrawer(GravityCompat.START);
         });
 
-    final ConstraintLayout settingsThemeButton = findViewById(R.id.settings_theme_button);
-
     notificationSwitch = findViewById(R.id.notification_switch);
     notificationSwitch.setOnCheckedChangeListener(
         (buttonView, isChecked) -> handleNotificationSwitch(isChecked));
 
-    themeSwitch = findViewById(R.id.theme_switch);
-    themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> handleThemeSwitch(isChecked));
     configureNavigationDrawer(userType);
+
+    SharedPreferences sp = getSharedPreferences(PREFS, MODE_PRIVATE);
+    boolean isNight = sp.getBoolean(KEY_NIGHT, false);
+
+    AppCompatDelegate.setDefaultNightMode(
+            isNight ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
+    );
   }
 
   @Override
@@ -71,11 +76,6 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     }
   }
 
-  private void initializeSwitchStates() {
-    final SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
-    boolean isNightMode = sharedPreferences.getBoolean("night_mode", false);
-    themeSwitch.setChecked(isNightMode);
-  }
 
   private void handleNotificationSwitch(final boolean isChecked) {
     if (isChecked) {
@@ -116,17 +116,6 @@ public class Setting extends BaseActivity implements View.OnClickListener {
           drawerLayout.closeDrawer(GravityCompat.START);
           return true;
         });
-  }
-
-  private void handleThemeSwitch(final boolean isChecked) {
-    final SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
-    if (isChecked) {
-      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-      sharedPreferences.edit().putBoolean("night_mode", true).apply();
-    } else {
-      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-      sharedPreferences.edit().putBoolean("night_mode", false).apply();
-    }
   }
 
   private void showNotification() {
@@ -172,6 +161,5 @@ public class Setting extends BaseActivity implements View.OnClickListener {
   @Override
   protected void onResume() {
     super.onResume();
-    initializeSwitchStates();
   }
 }
