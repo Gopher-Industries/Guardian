@@ -15,6 +15,7 @@ data class Patient(
     @SerializedName("dateOfBirth") val dateOfBirth: String,
     @SerializedName("age") val _age: Int,
     @SerializedName("gender") val gender: String,
+    @SerializedName("isDeleted") val isDeleted: Boolean,
     @SerializedName("healthConditions") val healthConditions: List<String>,
     @SerializedName("caretaker") val caretaker: User,
     @SerializedName("assignedNurses") val assignedNurses: List<User>,

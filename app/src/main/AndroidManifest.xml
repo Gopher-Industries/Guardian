@@ -2,25 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
+    <!-- Features -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- For reading images -->
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-
-    <!-- For reading videos -->
-    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.CAMERA" />
-
-
-    <!-- For reading audio -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
-
-    <!-- Add WRITE permissions only if necessary -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
-    <!-- Add the permission here -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
@@ -35,197 +27,96 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:label"
-        tools:targetApi="31"
-        tools:ignore="ExtraText">
-        <activity
-            android:name=".WelcomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TrainingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Training2"
-            android:exported="false"></activity>
-        <activity
-            android:name=".Training"
-            android:exported="false" />
-        <activity
-            android:name=".view.patient.patientdata.heartrate.HeartRateActivity"
+        tools:targetApi="31">
+
+        <!-- FileProvider for Camera/Gallery -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:label="@string/title_activity_heart_rate"
-            android:theme="@style/Theme.TeamGuardians" />
-        <activity
-            android:name=".view.general.Setting"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.PatientProfileAddActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.Homepage4admin"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.Homepage4caretaker"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.Homepage4nurse"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.TaskDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.TaskAddActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.UploadPhoto"
-            android:exported="false" />
-        <activity
-            android:name=".view.caretaker.notifications.falsealarm.FalseAlertConfirmedActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.caretaker.notifications.confirmincident.ConfirmIncidentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.caretaker.CaretakerDashboardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.caretaker.CaretakerProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.caretaker.EditCaretakerProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.patient.patientdata.healthdata.HealthDataActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.patient.associateradar.ActivitySuggestionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.PatientProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.ArchivedPatientListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.patient.viewactivitydata.WeeklyActivityProfilingActivity"
-            android:exported="false">
+            android:grantUriPermissions="true">
             <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".view.patient.associateradar.ActivityProfilingActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".view.patient.careplan.CarePlanSummaryActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".view.patient.careplan.CarePlanActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.patient.dailyreport.DailyReportSummaryActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".view.patient.dailyreport.DailyReportActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".view.general.PatientListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.PatientDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.AddPatientLogActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.LoginActivity"
-            android:exported="false" />
-        <activity android:name=".view.general.PinCodeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.AddNewPatientActivity"
-            android:exported="false" /> <!-- Kussay: may we need to change the start up page into login page -->
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- Launcher Activity -->
         <activity
             android:name=".view.general.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- These are here only for UI testing -->
-        <activity
-            android:name=".view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.DrawerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.patient.PatientDashboardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.general.TasksListActivity"
-            android:exported="false" />
+        </activity>
 
-        <activity android:name=".ModulesActivity" />
+        <!-- Other activities -->
+        <activity android:name=".WelcomeActivity" android:exported="false" />
+        <activity android:name=".TrainingActivity" android:exported="false" />
+        <activity android:name=".Training2" android:exported="false" />
+        <activity android:name=".Training" android:exported="false" />
+        <activity android:name=".view.patient.patientdata.heartrate.HeartRateActivity" android:exported="false" />
+        <activity android:name=".view.general.Setting" android:exported="false" />
+        <activity android:name=".view.general.PatientProfileAddActivity" android:exported="false" />
+        <activity android:name=".view.general.Homepage4admin" android:exported="false" />
+        <activity android:name=".view.general.Homepage4caretaker" android:exported="false" />
+        <activity android:name=".view.general.Homepage4nurse" android:exported="false" />
+        <activity android:name=".view.general.TaskDetailActivity" android:exported="false" />
+        <activity android:name=".view.general.TaskAddActivity" android:exported="false" />
+        <activity android:name=".view.general.UploadPhoto" android:exported="false" />
+        <activity android:name=".view.caretaker.notifications.falsealarm.FalseAlertConfirmedActivity" android:exported="false" />
+        <activity android:name=".view.caretaker.notifications.confirmincident.ConfirmIncidentActivity" android:exported="false" />
+        <activity android:name=".view.caretaker.CaretakerDashboardActivity" android:exported="false" />
+        <activity android:name=".view.caretaker.CaretakerProfileActivity" android:exported="false" />
+        <activity android:name=".view.caretaker.EditCaretakerProfileActivity" android:exported="false" />
+        <activity android:name=".view.patient.patientdata.healthdata.HealthDataActivity" android:exported="false" />
+        <activity android:name=".view.patient.associateradar.ActivitySuggestionActivity" android:exported="false" />
+        <activity android:name=".view.general.PatientProfileActivity" android:exported="false" />
+        <activity android:name=".view.general.ArchivedPatientListActivity" android:exported="false" />
+        <activity android:name=".view.patient.viewactivitydata.WeeklyActivityProfilingActivity" android:exported="false" />
+        <activity android:name=".view.patient.associateradar.ActivityProfilingActivity" android:exported="false" />
+        <activity android:name=".view.patient.careplan.CarePlanSummaryActivity" android:exported="false" />
+        <activity android:name=".view.patient.careplan.CarePlanActivity" android:exported="false" />
+        <activity android:name=".view.patient.dailyreport.DailyReportSummaryActivity" android:exported="false" />
+        <activity android:name=".view.patient.dailyreport.DailyReportActivity" android:exported="false" />
+        <activity android:name=".view.general.PatientListActivity" android:exported="false" />
+        <activity android:name=".view.general.PatientDetailsActivity" android:exported="false" />
+        <activity android:name=".view.general.AddPatientLogActivity" android:exported="false" />
+        <activity android:name=".view.general.RegisterActivity" android:exported="false" />
+        <activity android:name=".view.general.LoginActivity" android:exported="false" />
+        <activity android:name=".view.general.PinCodeActivity" android:exported="false" />
+        <activity android:name=".view.general.AddNewPatientActivity" android:exported="false" />
+        <activity android:name=".ModulesActivity" android:exported="false" />
+        <activity android:name=".Module1CoursesActivity" android:exported="false" />
+        <activity android:name=".Module2CoursesActivity" android:exported="false" />
+        <activity android:name=".Module3CoursesActivity" android:exported="false" />
+        <activity android:name=".HomecareInductionActivity" android:exported="false" />
+        <activity android:name=".InfectionControlActivity" android:exported="false" />
+        <activity android:name=".SupportingMealtimesActivity" android:exported="false" />
+        <activity android:name=".MedicationTechniqueActivity" android:exported="false" />
+        <activity android:name=".MedicationSafetyActivity" android:exported="false" />
+        <activity android:name=".InspiringLeadershipEIActivity" android:exported="false" />
+        <activity android:name=".EmotionalIntelligenceCommunicationActivity" android:exported="false" />
+        <activity android:name="deakin.gopher.guardian.view.general.NurseRosterActivity" android:exported="false" />
+        <activity android:name=".view.falldetection.FallDetectionActivity" android:exported="false" />
+        <activity android:name=".view.falldetection.FallAlertActivity" android:exported="false" />
+        <activity android:name="deakin.gopher.guardian.view.caretaker.notifications.confirmincident.CallAmbulanceActivity" android:exported="false" />
+        <activity android:name=".PatientExerciseModules" android:exported="false" />
+        <activity android:name=".view.general.DashboardActivity" android:exported="false" />
+        <activity android:name=".view.general.AssignNurseActivity" />
+        <activity android:name=".view.general.EditPatientActivity" />
 
 
-        <activity android:name=".Module1CoursesActivity" />
-        <activity android:name=".HomecareInductionActivity" />
-        <activity android:name=".InfectionControlActivity" />
-        <activity android:name=".SupportingMealtimesActivity" />
-
-
-        <activity android:name=".Module2CoursesActivity" />
-        <activity android:name=".MedicationTechniqueActivity" />
-        <activity android:name=".MedicationSafetyActivity" />
-
-
-        <activity android:name=".Module3CoursesActivity" />
-        <activity android:name=".InspiringLeadershipEIActivity" />
-        <activity android:name=".EmotionalIntelligenceCommunicationActivity" />
-        <activity android:name="deakin.gopher.guardian.view.general.NurseRosterActivity" />
-        <activity android:name=".view.falldetection.FallDetectionActivity" />
-        <activity android:name=".view.falldetection.FallAlertActivity" />
-        <activity android:name="deakin.gopher.guardian.view.caretaker.notifications.confirmincident.CallAmbulanceActivity" />
-
-        <activity
-            android:name=".PatientExerciseModules"
-            android:exported="false"
-            android:label="Patient Exercise Modules" />
-
-
-        <service
-            android:name=".model.FirebaseMessagingService"
-            android:exported="false">
+        <!-- Firebase Service -->
+        <service android:name=".model.FirebaseMessagingService" android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+        <!-- Fonts -->
+        <meta-data android:name="preloaded_fonts" android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".view.general.DashboardActivity"/>
     </application>
 
 </manifest>

@@ -1,3 +1,6 @@
+@file:Suppress("ktlint")
+
+
 package deakin.gopher.guardian.view.patient.patientdata.heartrate.ui.screens
 
 import android.widget.Toast

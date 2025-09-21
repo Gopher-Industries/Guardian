@@ -50,12 +50,12 @@ class MainActivity : ComponentActivity() {
 
                         // 7. Assign nurse
                         composable("assign_nurse") {
-                            AssignNurseScreen(navController)
+                            assignNurseScreen(navController)
                         }
 
                         // 8. Activity log
                         composable("activity_log") {
-                            ActivityLogScreen(navController)
+                            activityLogScreen(navController)
                         }
 
                         // 9. Appointment
