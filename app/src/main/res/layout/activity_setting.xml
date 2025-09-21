@@ -12,6 +12,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:cardBackgroundColor="?attr/colorPrimary"
         tools:context="deakin.gopher.guardian.view.general.Setting">
 
         <androidx.cardview.widget.CardView
@@ -19,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="220dp"
             android:layout_marginTop="-40dp"
-            app:cardBackgroundColor="@color/TG_blue"
+            app:cardBackgroundColor="?attr/colorPrimary"
             app:cardCornerRadius="40dp"
             app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +29,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:cardBackgroundColor="?attr/colorPrimary">
 
                 <ImageView
                     android:id="@+id/settings_menu_button"
@@ -48,7 +50,7 @@
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/poppins_bold"
                     android:text="@string/settings"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -70,47 +72,6 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/settings_theme_button"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/settings_button_background"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_header_card_view">
-
-
-            <TextView
-                android:id="@+id/theme_button_title"
-                android:layout_width="wrap_content"
-                android:layout_height="20sp"
-                android:layout_marginStart="25dp"
-                android:fontFamily="@font/poppins"
-                android:text="@string/night_mode"
-                android:textColor="#FFFFFF"
-                android:textFontWeight="400"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.533" />
-
-            <Switch
-                android:id="@+id/theme_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/settings_notification_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -120,7 +81,7 @@
             android:background="@drawable/settings_button_background"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/settings_theme_button">
+            app:layout_constraintTop_toBottomOf="@+id/settings_header_card_view">
 
             <TextView
                 android:id="@+id/notification_button_title"
@@ -129,7 +90,7 @@
                 android:layout_marginStart="25dp"
                 android:fontFamily="@font/poppins"
                 android:text="@string/notifications"
-                android:textColor="#FFFFFF"
+                android:textColor="?android:textColorPrimary"
                 android:textFontWeight="400"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -169,7 +130,7 @@
                 android:layout_marginStart="25dp"
                 android:fontFamily="@font/poppins"
                 android:text="@string/app_update"
-                android:textColor="#FFFFFF"
+                android:textColor="?android:textColorPrimary"
                 android:textFontWeight="400"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -207,7 +168,7 @@
                 android:layout_marginStart="25dp"
                 android:fontFamily="@font/poppins"
                 android:text="@string/feedback"
-                android:textColor="#FFFFFF"
+                android:textColor="?android:textColorPrimary"
                 android:textFontWeight="400"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"

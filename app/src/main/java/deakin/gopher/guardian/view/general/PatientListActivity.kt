@@ -38,6 +38,11 @@ class PatientListActivity : BaseActivity() {
 //            intent.putExtra("patientId", patient.id)
 //            startActivity(intent)
             },
+            onAssignDoctorClick = { patient ->
+                val intent = Intent(this, AssignDoctorActivity::class.java)
+                intent.putExtra("patientId", patient.id)
+                startActivity(intent)
+            },
             onDeleteClick = { patient ->
                 confirmDeletePatient(patient)
             },

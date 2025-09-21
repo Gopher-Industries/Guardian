@@ -4,6 +4,9 @@
         android:id="@+id/assign_nurse"
         android:title="Assign Nurse" />
     <item
+        android:id="@+id/assign_doctor"
+        android:title="Assign Doctor" />
+    <item
         android:id="@+id/action_delete"
         android:title="Delete" />
 </menu>
