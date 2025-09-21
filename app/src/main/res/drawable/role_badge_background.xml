@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Background color using your TG_blue theme -->
+    <solid android:color="@color/TG_blue" />
+
+    <!-- Rounded corners for badge appearance -->
+    <corners android:radius="12dp" />
+
+    <!-- Optional: Add border stroke -->
+    <stroke
+        android:width="1dp"
+        android:color="@color/TG_blue_2" />
+
+    <!-- Optional: Add gradient effect -->
+    <!--
+    <gradient
+        android:startColor="@color/badge_start_color"
+        android:endColor="@color/badge_end_color"
+        android:angle="45" />
+    -->
+
+</shape>

@@ -56,4 +56,35 @@
     <color name="breathing_bg">#FFE8F8E8</color>    <!-- Light mint green -->
     <color name="balance_bg">#FFF0F8FF</color>      <!-- Very light blue -->
     <color name="cardio_bg">#FFFFE8E8</color>       <!-- Light pink -->
+
+    <!-- Calendar Dark Theme -->
+    <color name="background_dark">#0F0F0F</color>
+    <color name="card_background">#1E1E1E</color>
+    <color name="card_background_light">#2A2A2A</color>
+    <color name="dialog_background">#1E1E1E</color>
+    <color name="badge_background">#0D47A1</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B0B0B0</color>
+    <color name="divider_color">#333333</color>
+
+    <!-- Status Colors -->
+    <color name="success_color">#4CAF50</color>
+    <color name="warning_color">#FF9800</color>
+    <color name="error_color">#F44336</color>
+
+    <!-- Priority Colors -->
+    <color name="priority_high">#F44336</color>
+    <color name="priority_medium">#FF9800</color>
+    <color name="priority_low">#4CAF50</color>
+
+
+    <!-- Role Badge Colors - Add these to your existing colors.xml -->
+    <color name="nurse_role_color">#4CAF50</color>          <!-- Green for nurses -->
+    <color name="admin_role_color">#FF9800</color>          <!-- Orange for admin -->
+    <color name="doctor_role_color">#2196F3</color>         <!-- Blue for doctors -->
+    <color name="default_role_color">#9E9E9E</color>        <!-- Gray for default -->
+
+
 </resources>
