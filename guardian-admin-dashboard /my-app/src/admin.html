@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Assignment System</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Fixed Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <div class="logo-text">
+                    <h1>HealthCare</h1>
+                    <p>Assignment System</p>  
+                </div>
+            </div>
+        </header>
+
+        <!-- Fixed Sidebar -->
+        <nav class="sidebar">
+            <ul class="nav-menu">
+                <li><a href="#dashboard" class="nav-link active" data-page="dashboard"> Dashboard</a></li>
+                <li><a href="#patients" class="nav-link" data-page="patients"> Patients</a></li>
+                <li><a href="#staff" class="nav-link" data-page="staff"> Staff</a></li>
+                <li><a href="#assignments" class="nav-link" data-page="assignments"> Assignments</a></li>
+            </ul>
+        </nav>
+
+        <!-- Scrollable Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page active">
+                <div class="page-header">
+                    <h2>Dashboard</h2>
+                    <p>Patient-Staff Assignment Overview</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-content">
+                            <div class="stat-info">
+                                <p class="stat-label">Total Patients</p>
+                                <p class="stat-value" id="total-patients">0</p>
+                            </div>
+                            <div class="stat-icon">👥</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-content">
+                            <div class="stat-info">
+                                <p class="stat-label">Active Staff</p>
+                                <p class="stat-value" id="active-staff">0</p>
+                            </div>
+                            <div class="stat-icon"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-content">
+                            <div class="stat-info">
+                                <p class="stat-label">Active Assignments</p>
+                                <p class="stat-value" id="active-assignments">0</p>
+                            </div>
+                            <div class="stat-icon">📋</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-content">
+                            <div class="stat-info">
+                                <p class="stat-label">Unassigned Patients</p>
+                                <p class="stat-value" id="unassigned-patients">0</p>
+                            </div>
+                            <div class="stat-icon"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="assignment-panel">
+                    <div class="panel-header">
+                        <h3>Quick Assignment</h3>
+                        <button class="btn btn-primary" onclick="openAssignmentModal()">+ New Assignment</button>
+                    </div>
+                    <div class="assignment-grid">
+                        <div class="assignment-column">
+                            <h4>Unassigned Patients</h4>
+                            <div id="unassigned-list" class="patient-list"></div>
+                        </div>
+                        <div class="assignment-column">
+                            <h4>Available Staff</h4>
+                            <div id="available-staff-list" class="staff-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Patients Page -->
+            <div id="patients" class="page">
+                <div class="page-header">
+                    <h2>Patients</h2>
+                    <p>Manage patient information and assignments</p>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>All Patients</h3>
+                        <div class="table-actions">
+                            <input type="text" id="patient-search" placeholder="Search patients..." class="search-input">
+                            <button class="btn btn-primary" onclick="openPatientModal()">+ Add Patient</button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>Age</th>
+                                    <th>Condition</th>
+                                    <th>Department</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="patients-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Staff Page -->
+            <div id="staff" class="page">
+                <div class="page-header">
+                    <h2>Staff</h2>
+                    <p>Manage healthcare staff and their assignments</p>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>All Staff Members</h3>
+                        <div class="table-actions">
+                            <input type="text" id="staff-search" placeholder="Search staff..." class="search-input">
+                            <button class="btn btn-primary" onclick="openStaffModal()">+ Add Staff Member</button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Staff Member</th>
+                                    <th>Role</th>
+                                    <th>Department</th>
+                                    <th>Max Patients</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="staff-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assignments Page -->
+            <div id="assignments" class="page">
+                <div class="page-header">
+                    <h2>Assignments</h2>
+                    <p>Manage patient-staff assignments</p>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>All Assignments</h3>
+                        <div class="table-actions">
+                            <input type="text" id="assignment-search" placeholder="Search assignments..." class="search-input">
+                            <button class="btn btn-primary" onclick="openAssignmentModal()">+ New Assignment</button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>Condition</th>
+                                    <th>Assigned To</th>
+                                    <th>Department</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="assignments-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+            <!-- Patients Page -->
+            <div id="patients" class="page">
+                <div class="page-header">
+                    <h2>Patients</h2>
+                    <p>Manage patient information and assignments</p>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>All Patients</h3>
+                        <div class="table-actions">
+                            <input type="text" id="patient-search" placeholder="Search patients..." class="search-input">
+                            <button class="btn btn-primary" onclick="openPatientModal()">+ Add Patient</button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>Age</th>
+                                    <th>Condition</th>
+                                    <th>Department</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="patients-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Staff Page -->
+            <div id="staff" class="page">
+                <div class="page-header">
+                    <h2>Staff</h2>
+                    <p>Manage healthcare staff and their assignments</p>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>All Staff Members</h3>
+                        <div class="table-actions">
+                            <input type="text" id="staff-search" placeholder="Search staff..." class="search-input">
+                            <button class="btn btn-primary" onclick="openStaffModal()">+ Add Staff Member</button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Staff Member</th>
+                                    <th>Role</th>
+                                    <th>Department</th>
+                                    <th>Max Patients</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="staff-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Assignments Page -->
+            <div id="assignments" class="page">
+                <div class="page-header">
+                    <h2>Assignments</h2>
+                    <p>Manage patient-staff assignments</p>
+                </div>
+
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>All Assignments</h3>
+                        <div class="table-actions">
+                            <input type="text" id="assignment-search" placeholder="Search assignments..." class="search-input">
+                            <button class="btn btn-primary" onclick="openAssignmentModal()">+ New Assignment</button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>Condition</th>
+                                    <th>Assigned To</th>
+                                    <th>Department</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="assignments-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Patient Modal -->
+    <div id="patient-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="patient-modal-title">Add New Patient</h3>
+                <span class="close" onclick="closeModal('patient-modal')">&times;</span>
+            </div>
+            <form id="patient-form">
+                <div class="form-group">
+                    <label for="patient-name">Patient Name</label>
+                    <input type="text" id="patient-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="patient-age">Age</label>
+                    <input type="number" id="patient-age" name="age" min="1" max="120" required>
+                </div>
+                <div class="form-group">
+                    <label for="patient-condition">Medical Condition</label>
+                    <input type="text" id="patient-condition" name="condition" required>
+                </div>
+                <div class="form-group">
+                    <label for="patient-department">Department</label>
+                    <select id="patient-department" name="department" required>
+                        <option value="">Select department</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Surgery">Surgery</option>
+                        <option value="ICU">ICU</option>
+                        <option value="Emergency">Emergency</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                        <option value="General">General</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="patient-priority">Priority</label>
+                    <select id="patient-priority" name="priority" required>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                        <option value="urgent">Urgent</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="patient-notes">Notes (Optional)</label>
+                    <textarea id="patient-notes" name="notes" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save Patient</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('patient-modal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Staff Modal -->
+    <div id="staff-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="staff-modal-title">Add New Staff Member</h3>
+                <span class="close" onclick="closeModal('staff-modal')">&times;</span>
+            </div>
+            <form id="staff-form">
+                <div class="form-group">
+                    <label for="staff-name">Staff Name</label>
+                    <input type="text" id="staff-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="staff-role">Role</label>
+                    <select id="staff-role" name="role" required>
+                        <option value="nurse">Nurse</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="caretaker">Caretaker</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="staff-department">Department</label>
+                    <select id="staff-department" name="department" required>
+                        <option value="">Select department</option>
+                        <option value="Cardiology">Cardiology</option>
+                        <option value="Surgery">Surgery</option>
+                        <option value="ICU">ICU</option>
+                        <option value="Emergency">Emergency</option>
+                        <option value="Orthopedics">Orthopedics</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                        <option value="General">General</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="staff-max-patients">Maximum Patients</label>
+                    <input type="number" id="staff-max-patients" name="maxPatients" min="1" max="20" value="5" required>
+                </div>
+                <div class="form-group">
+                    <label for="staff-status">Status</label>
+                    <select id="staff-status" name="status" required>
+                        <option value="available">Available</option>
+                        <option value="busy">Busy</option>
+                        <option value="unavailable">Unavailable</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save Staff Member</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('staff-modal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Assignment Modal -->
+    <div id="assignment-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="assignment-modal-title">Create New Assignment</h3>
+                <span class="close" onclick="closeModal('assignment-modal')">&times;</span>
+            </div>
+            <form id="assignment-form">
+                <div class="form-group">
+                    <label for="assignment-patient">Select Patient</label>
+                    <select id="assignment-patient" name="patientId" required>
+                        <option value="">Choose a patient...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assignment-staff">Assign to Staff</label>
+                    <select id="assignment-staff" name="staffId" required>
+                        <option value="">Choose staff member...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assignment-notes">Notes (Optional)</label>
+                    <textarea id="assignment-notes" name="notes" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Create Assignment</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('assignment-modal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
