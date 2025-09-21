@@ -30,3 +30,11 @@ data class AuthResponse(
     @SerializedName("user") val user: User,
     @SerializedName("token") val token: String,
 ) : BaseModel()
+
+data class NotificationItem(
+    val userId: String,
+    val title: String,
+    val message: String,
+    val isRead: Boolean,
+    val createdAt: String,
+)

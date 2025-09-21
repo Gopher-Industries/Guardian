@@ -14,9 +14,10 @@ import deakin.gopher.guardian.model.Patient
 
 class PatientListAdapter(
     private var patients: List<Patient>,
-    private val onPatientClick: ((Patient) -> Unit)? = null,
-    private val onAssignNurseClick: ((Patient) -> Unit)? = null,
-    private val onDeleteClick: ((Patient) -> Unit)? = null,
+    private val onPatientClick: (Patient) -> Unit,
+    private val onAssignNurseClick: (Patient) -> Unit,
+    private val onEditClick: (Patient) -> Unit,
+    private val onDeleteClick: (Patient) -> Unit,
 ) : RecyclerView.Adapter<PatientListAdapter.PatientViewHolder>() {
     inner class PatientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameText: TextView = itemView.findViewById(R.id.tvName)
@@ -68,11 +69,15 @@ class PatientListAdapter(
             popupMenu.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.assign_nurse -> {
-                        onAssignNurseClick?.invoke(patient)
+                        onAssignNurseClick(patient)
                         true
                     }
-                    R.id.action_delete -> { // Handle delete click
-                        onDeleteClick?.invoke(patient)
+                    R.id.action_edit -> {
+                        onEditClick(patient) // NEW
+                        true
+                    }
+                    R.id.action_delete -> {
+                        onDeleteClick(patient)
                         true
                     }
                     else -> false

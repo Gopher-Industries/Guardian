@@ -34,7 +34,7 @@ import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AssignNurseScreen(navController: NavController) {
+fun assignNurseScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(

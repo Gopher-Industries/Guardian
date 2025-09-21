@@ -2,5 +2,4 @@
 # This configuration is used by ktlint when spotless invokes it
 
 [*.{kt,kts}]
-ktlint_function_naming_ignore_when_annotated_with=Composable, Test
-ktlint_disabled_rules=no-wildcard-imports
+

@@ -87,7 +87,7 @@ class LoginActivity : BaseActivity() {
                             val user = response.body()!!.user
                             val token = response.body()!!.token
                             SessionManager.createLoginSession(user, token)
-                            NavigationService(this@LoginActivity).toPinCodeActivity(user.role)
+                            NavigationService(this@LoginActivity).toHomeScreenForRole(user.role)
                         } else {
                             // Handle error
                             val errorResponse =

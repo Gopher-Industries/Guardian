@@ -34,9 +34,15 @@ class PatientListActivity : BaseActivity() {
                 startActivity(intent)
             },
             onAssignNurseClick = { patient ->
-//            val intent = Intent(this, AssignNurseActivity::class.java)
-//            intent.putExtra("patientId", patient.id)
-//            startActivity(intent)
+                val intent = Intent(this, AssignNurseActivity::class.java)
+                intent.putExtra("patientId", patient.id)
+                intent.putExtra("patientName", patient.fullname)
+                startActivity(intent)
+            },
+            onEditClick = { patient ->
+                val intent = Intent(this, EditPatientActivity::class.java)
+                intent.putExtra("patient", patient)
+                startActivity(intent)
             },
             onDeleteClick = { patient ->
                 confirmDeletePatient(patient)
@@ -44,8 +50,37 @@ class PatientListActivity : BaseActivity() {
         )
 
     private fun confirmDeletePatient(patient: Patient) {
-        // Optional: show a confirmation dialog before deleting
-        deletePatient(patient)
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setTitle("Delete Patient")
+        builder.setMessage("Are you sure you want to delete?")
+
+        builder.setPositiveButton("Delete") { dialog, _ ->
+            deletePatient(patient)
+            dialog.dismiss()
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_add_patient -> {
+                val intent = Intent(this, AddNewPatientActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.assign_nurse -> {
+                val intent = Intent(this, AssignNurseActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun deletePatient(patient: Patient) {
@@ -60,7 +95,7 @@ class PatientListActivity : BaseActivity() {
             withContext(Dispatchers.Main) {
                 if (response?.isSuccessful == true) {
                     showMessage("Patient deleted")
-                    fetchPatients() // Refresh the patient list
+                    fetchPatients()
                 } else {
                     showMessage("Failed to delete patient")
                 }
@@ -101,24 +136,25 @@ class PatientListActivity : BaseActivity() {
                     binding.progressBar.show()
                 }
             }
+
             val response = ApiClient.apiService.getAssignedPatients(token)
+
             withContext(Dispatchers.Main) {
-                withContext(Dispatchers.Main) {
-                    binding.progressBar.hide()
-                }
+                binding.progressBar.hide()
+
                 if (response.isSuccessful) {
-                    if (!response.body().isNullOrEmpty()) {
-                        patientListAdapter.updateData(response.body()!!)
-                        withContext(Dispatchers.Main) {
-                            binding.tvEmptyMessage.visibility = View.GONE
+                    val patients =
+                        response.body()?.filter { patient ->
+                            patient.isDeleted != true
                         }
+
+                    if (!patients.isNullOrEmpty()) {
+                        patientListAdapter.updateData(patients)
+                        binding.tvEmptyMessage.visibility = View.GONE
                     } else {
-                        withContext(Dispatchers.Main) {
-                            binding.tvEmptyMessage.visibility = View.VISIBLE
-                        }
+                        binding.tvEmptyMessage.visibility = View.VISIBLE
                     }
                 } else {
-                    // Handle error
                     val errorResponse =
                         Gson().fromJson(
                             response.errorBody()?.string(),
@@ -131,19 +167,8 @@ class PatientListActivity : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (currentUser.organization != null) {
-            return false
-        }
-        menuInflater.inflate(R.menu.menu_patient_list, menu)
+        menuInflater.inflate(R.menu.menu_add_patient, menu)
         return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_add_patient) {
-            startActivity(Intent(this, AddNewPatientActivity::class.java))
-            return true
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun showMessage(message: String) {

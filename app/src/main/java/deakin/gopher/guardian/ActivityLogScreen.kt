@@ -34,7 +34,7 @@ import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ActivityLogScreen(navController: NavController) {
+fun activityLogScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(

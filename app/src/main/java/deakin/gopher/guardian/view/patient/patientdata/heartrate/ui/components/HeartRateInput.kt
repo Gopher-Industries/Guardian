@@ -1,3 +1,6 @@
+@file:Suppress("ktlint")
+
+
 package deakin.gopher.guardian.view.patient.patientdata.heartrate.ui.components
 
 import androidx.compose.foundation.layout.Arrangement

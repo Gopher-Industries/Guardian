@@ -53,18 +53,6 @@ class PatientDetailsActivity : BaseActivity() {
             }
         }"
 
-        if (patient.healthConditions.isNotEmpty()) {
-            val formattedConditions =
-                patient.healthConditions.joinToString(", ") { condition ->
-                    condition.split(" ").joinToString(" ") { word ->
-                        word.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
-                    }
-                }
-            binding.tvHealthConditions.text = "Health Conditions: $formattedConditions"
-        } else {
-            binding.tvHealthConditions.text = "Health Conditions: No conditions listed"
-        }
-
         Glide.with(this)
             .load(patient.photoUrl)
             .placeholder(R.drawable.profile)

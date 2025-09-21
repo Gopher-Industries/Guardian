@@ -6,7 +6,10 @@ import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.PatientActivity
 import deakin.gopher.guardian.model.register.AuthResponse
+import deakin.gopher.guardian.model.register.NotificationItem
 import deakin.gopher.guardian.model.register.RegisterRequest
+import deakin.gopher.guardian.model.user.NursesResponse
+import deakin.gopher.guardian.view.general.UpdatePatientRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -19,6 +22,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -91,4 +95,35 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") patientId: String,
     ): Response<BaseModel>
+
+    @GET("/api/v1/nurse/all")
+    suspend fun getAllNurses(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 100,
+    ): Response<NursesResponse>
+
+    @POST("patients/assign-nurse")
+    suspend fun assignNurse(
+        @Header("Authorization") token: String,
+        @Body body: Map<String, String>,
+    ): Response<Void>
+
+    @PUT("/api/v1/patients/{patientId}")
+    suspend fun updatePatient(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+        @Body request: UpdatePatientRequest,
+    ): Response<Patient>
+
+    @POST("notifications")
+    suspend fun createNotification(
+        @Header("Authorization") token: String,
+        @Body body: Map<String, String>,
+    ): Response<BaseModel>
+
+    @GET("notifications")
+    suspend fun getMyNotifications(
+        @Header("Authorization") token: String,
+    ): Response<List<NotificationItem>>
 }
