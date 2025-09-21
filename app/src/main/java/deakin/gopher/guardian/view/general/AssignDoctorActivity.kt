@@ -3,28 +3,19 @@ package deakin.gopher.guardian.view.general
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import deakin.gopher.guardian.adapter.DoctorListAdapter
 import deakin.gopher.guardian.databinding.ActivityAssignDoctorBinding
 import deakin.gopher.guardian.model.Doctor
-import deakin.gopher.guardian.model.login.SessionManager
-import deakin.gopher.guardian.view.show
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class AssignDoctorActivity : BaseActivity() {
     private lateinit var binding: ActivityAssignDoctorBinding
+    private val patientId: String by lazy { intent.getStringExtra("patientId") ?: "" }
 
-//    private lateinit var adapter: DoctorListAdapter
+    private lateinit var adapter: DoctorListAdapter
     private var allDoctors: List<Doctor> = emptyList()
-    private var searchJob: Job? = null
-    private val patientId: String by lazy {
-        // Expecting "patientId" putExtra from PatientListActivity
-        intent.getStringExtra("patientId") ?: ""
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,19 +32,24 @@ class AssignDoctorActivity : BaseActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
-        supportActionBar?.title = "Assign Doctor"
+        supportActionBar?.title = "Assign / Request Doctor"
 
-//        adapter = DoctorListAdapter(
-//            doctors = emptyList(),
-//            onSelect = { doctor ->
-//                assignDoctor(doctor)
-//            }
-//        )
+        adapter =
+            DoctorListAdapter(
+                doctors = emptyList(),
+                onAssign = { d -> assignDoctorLocal(d) },
+                onRequest = { d -> sendDoctorRequestLocal(d) },
+                onUnassign = { d -> unassignDoctorLocal(d) },
+                onCancelRequest = { d -> cancelDoctorRequestLocal(d) },
+            )
 
         binding.recyclerViewDoctors.layoutManager = LinearLayoutManager(this)
-//        binding.recyclerViewDoctors.adapter = adapter
+        binding.recyclerViewDoctors.adapter = adapter
 
-        // Search (debounced)
+        loadDummyDoctors()
+
+        refreshAdapterState()
+
         binding.etSearch.addTextChangedListener(
             object : TextWatcher {
                 override fun beforeTextChanged(
@@ -71,13 +67,26 @@ class AssignDoctorActivity : BaseActivity() {
                     before: Int,
                     count: Int,
                 ) {
-                    // local filter; if you prefer server-side search, call fetchDoctors(query)
                     filterLocal(s?.toString().orEmpty())
                 }
             },
         )
+    }
 
-//        fetchDoctors()
+    private fun prefs() = getSharedPreferences("assignments", MODE_PRIVATE)
+
+    private fun getAssignedDoctorId(): String? = prefs().getString("doctor_for_$patientId", null)
+
+    private fun isRequestAlreadySent(doctorId: String): Boolean = prefs().contains("request_${doctorId}_$patientId")
+
+    private fun refreshAdapterState() {
+        val assignedId = getAssignedDoctorId()
+        val requestedIds =
+            allDoctors
+                .map { it.id }
+                .filter { isRequestAlreadySent(it) }
+                .toSet()
+        adapter.updateState(assignedDoctorId = assignedId, requestedDoctorIds = requestedIds)
     }
 
     private fun filterLocal(query: String) {
@@ -91,10 +100,86 @@ class AssignDoctorActivity : BaseActivity() {
                         (it.specialty?.lowercase()?.contains(q) == true)
                 }
             }
-//        adapter.updateData(filtered)
+
+        adapter.updateData(filtered)
         binding.tvEmptyMessage.text = if (filtered.isEmpty()) "No matching doctors" else ""
-        binding.tvEmptyMessage.visibility = if (filtered.isEmpty()) android.view.View.VISIBLE else android.view.View.GONE
+        binding.tvEmptyMessage.visibility = if (filtered.isEmpty()) View.VISIBLE else View.GONE
+
+        refreshAdapterState()
     }
+
+    private fun loadDummyDoctors() {
+        allDoctors =
+            listOf(
+                Doctor("d1", "Dr. Priya Sharma", "Cardiology"),
+                Doctor("d2", "Dr. Karan Malhotra", "Orthopedics"),
+                Doctor("d3", "Dr. Aditi Rao", "Pediatrics"),
+                Doctor("d4", "Dr. Vikram Singh", "Neurology"),
+                Doctor("d5", "Dr. Meera Iyer", "Dermatology"),
+            )
+        adapter.updateData(allDoctors)
+        binding.tvEmptyMessage.visibility = View.GONE
+    }
+
+    private fun assignDoctorLocal(doctor: Doctor) {
+        val currentAssigned = getAssignedDoctorId()
+        if (currentAssigned != null) {
+            val name = allDoctors.firstOrNull { it.id == currentAssigned }?.fullname ?: "another doctor"
+            Toast.makeText(this, "Already assigned to $name", Toast.LENGTH_SHORT).show()
+            return
+        }
+        prefs().edit()
+            .putString("doctor_for_$patientId", doctor.id)
+            .apply()
+        Toast.makeText(this, "Assigned ${doctor.fullname}", Toast.LENGTH_SHORT).show()
+
+        finish()
+    }
+
+    private fun sendDoctorRequestLocal(doctor: Doctor) {
+        val currentAssigned = getAssignedDoctorId()
+        if (currentAssigned != null) {
+            val name = allDoctors.firstOrNull { it.id == currentAssigned }?.fullname ?: "the assigned doctor"
+            Toast.makeText(this, "Patient already assigned to $name", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (isRequestAlreadySent(doctor.id)) {
+            Toast.makeText(this, "Request already sent to ${doctor.fullname}", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val key = "request_${doctor.id}_$patientId"
+        val payload =
+            """{"patientId":"$patientId","doctorId":"${doctor.id}","at":${System.currentTimeMillis()}}"""
+        prefs().edit().putString(key, payload).apply()
+
+        Toast.makeText(this, "Request sent to ${doctor.fullname}", Toast.LENGTH_SHORT).show()
+        finish()
+    }
+
+    private fun unassignDoctorLocal(doctor: Doctor) {
+        val key = "doctor_for_$patientId"
+        if (prefs().getString(key, null) == null) {
+            Toast.makeText(this, "No doctor assigned", Toast.LENGTH_SHORT).show()
+            return
+        }
+        prefs().edit().remove(key).apply()
+        Toast.makeText(this, "Unassigned ${doctor.fullname}", Toast.LENGTH_SHORT).show()
+        refreshAdapterState() // stay and reflect new state
+    }
+
+    private fun cancelDoctorRequestLocal(doctor: Doctor) {
+        val key = "request_${doctor.id}_$patientId"
+        if (!prefs().contains(key)) {
+            Toast.makeText(this, "No request to cancel", Toast.LENGTH_SHORT).show()
+            return
+        }
+        prefs().edit().remove(key).apply()
+        Toast.makeText(this, "Cancelled request to ${doctor.fullname}", Toast.LENGTH_SHORT).show()
+        refreshAdapterState() // stay and reflect new state
+    }
+}
 
 //    private fun fetchDoctors() {
 //        val token = "Bearer ${SessionManager.getToken()}"
@@ -124,20 +209,20 @@ class AssignDoctorActivity : BaseActivity() {
 //        }
 //    }
 
-    private fun assignDoctor(doctor: Doctor) {
-        val token = "Bearer ${SessionManager.getToken()}"
-        CoroutineScope(Dispatchers.IO).launch {
-            withContext(Dispatchers.Main) { binding.progressBar.show() }
-            val res =
-                try {
+//    private fun assignDoctor(doctor: Doctor) {
+//        val token = "Bearer ${SessionManager.getToken()}"
+//        CoroutineScope(Dispatchers.IO).launch {
+//            withContext(Dispatchers.Main) { binding.progressBar.show() }
+//            val res =
+//                try {
 //                ApiClient.apiService.assignDoctor(
 //                    token = token,
 //                    patientId = patientId,
 //                    body = AssignDoctorRequest(doctorId = doctor.id)
 //                )
-                } catch (e: Exception) {
-                    null
-                }
+//                } catch (e: Exception) {
+//                    null
+//                }
 //            withContext(Dispatchers.Main) {
 //                binding.progressBar.hide()
 //                if (res?.isSuccessful == true) {
@@ -148,7 +233,7 @@ class AssignDoctorActivity : BaseActivity() {
 //                    val parsed = try { Gson().fromJson(error, ApiErrorResponse::class.java) } catch (_: Exception) { null }
 //                    Toast.makeText(this@AssignDoctorActivity, parsed?.apiError ?: "Failed to assign doctor", Toast.LENGTH_SHORT).show()
 //                }
-        }
-    }
-}
+//        }
+//    }
+// }
 // }
