@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Dark Mode for Legacy Theme -->
+    <style name="Theme.TeamGuardians.DayNight" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/dark_primary_color</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Button bar Dark -->
+    <style name="Widget.Theme.TeamGuardians.ButtonBar.Fullscreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@color/dark_primary_color</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="textAppearanceButton">@color/white</item>
+    </style>
+
+</resources>

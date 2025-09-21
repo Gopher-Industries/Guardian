@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base palette -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -19,9 +20,9 @@
     <color name="black_overlay">#66000000</color>
     <color name="teal_600">#049594</color>
     <color name="bordercolor">#000000</color>
-    <color name="red">#fc0303</color>
-    <color name="orange">#fc8803</color>
-    <color name="green">#24fc03</color>
+    <color name="red">#FC0303</color>
+    <color name="orange">#FC8803</color>
+    <color name="green">#24FC03</color>
     <color name="_bg__new_homepage___ek2_color">#FFFFFF</color>
     <color name="ellipse_9_color">#C4C4C4</color>
     <color name="gray">#F3F3F3</color>
@@ -31,19 +32,23 @@
     <color name="text_input_color">#666262</color>
     <color name="box_border">#E0DDDD</color>
 
+    <!-- Theme colors -->
     <color name="colorPrimary">@color/light_blue_600</color>
-    <color name="colorPrimaryDark">@color/design_default_color_primary_dark</color>
+    <color name="colorPrimaryDark">@color/light_blue_900</color>
     <color name="colorAccent">@color/light_blue_A200</color>
     <color name="colorPrimaryText">#212121</color>
-    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhite">@color/white</color>
     <color name="colorGreen">#32CD32</color>
     <color name="colorRed">#FF0000</color>
 
+    <!-- Gradients -->
     <color name="homepageButtonsEnd">#FF2F83AA</color>
     <color name="homepageButtonsStart">#FF54C5F4</color>
 
+    <!-- Extra grays -->
     <color name="gray2">#D3D3D3</color>
 
+    <!-- Dark theme placeholders (used in night override) -->
     <color name="dark_primary_color">#FF2F83AA</color>
     <color name="dark_primary_variant_color">#FF54C5F4</color>
     <color name="dark_text_color">#FFFFFF</color>
@@ -51,9 +56,46 @@
     <color name="dark_secondary_variant_color">#000000</color>
     <color name="loading_page_icon_bg_color">#FDFCFC</color>
 
-    <color name="flexibility_bg">#E6E6FA</color>  <!-- Very light lavender -->
-    <color name="strength_bg">#FFFCF5E0</color>     <!-- Light yellow -->
-    <color name="breathing_bg">#FFE8F8E8</color>    <!-- Light mint green -->
-    <color name="balance_bg">#FFF0F8FF</color>      <!-- Very light blue -->
-    <color name="cardio_bg">#FFFFE8E8</color>       <!-- Light pink -->
+    <!-- Category backgrounds -->
+    <color name="flexibility_bg">#E6E6FA</color>
+    <color name="strength_bg">#FFFCF5E0</color>
+    <color name="breathing_bg">#FFE8F8E8</color>
+    <color name="balance_bg">#FFF0F8FF</color>
+    <color name="cardio_bg">#FFFFE8E8</color>
+
+    <!-- Material baseline color roles (Light theme) -->
+    <color name="primary">@color/light_blue_600</color>
+    <color name="primary_variant">@color/light_blue_900</color>
+    <color name="on_primary">#FFFFFF</color>
+
+    <color name="secondary">@color/TG_blue</color>
+    <color name="secondary_variant">@color/TG_blue_2</color>
+    <color name="on_secondary">#FFFFFF</color>
+
+    <color name="background">#FFFFFF</color>
+    <color name="on_background">#212121</color>
+
+    <color name="surface">#FFFFFF</color>
+    <color name="on_surface">#212121</color>
+    <color name="on_surface_variant">#666666</color>
+              <!-- ✅ new -->
+
+    <color name="secondary_dark">#3B9CD7</color>              <!-- ✅ new -->
+    <color name="secondary_variant_dark">#0B98C5</color>      <!-- ✅ new -->
+    <color name="on_secondary_dark">#000000</color>           <!-- ✅ new -->
+
+    <color name="background_dark">#121212</color>             <!-- ✅ new -->
+    <color name="on_background_dark">#FFFFFF</color>          <!-- ✅ new -->
+
+    <color name="surface_dark">#1E1E1E</color>                <!-- ✅ new -->
+    <color name="on_surface_dark">#FFFFFF</color>             <!-- ✅ new -->
+    <color name="on_surface_variant_dark">#BBBBBB</color>     <!-- ✅ new -->
+
+    <color name="primary_dark">#2F83AA</color>
+    <color name="on_primary_dark">#000000</color>
+    <color name="primary_variant_dark">#54C5F4</color>
+
+
+
+
 </resources>
