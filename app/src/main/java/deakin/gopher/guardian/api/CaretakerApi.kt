@@ -1,5 +1,6 @@
-package deakin.gopher.guardian.network
+@file:Suppress("ktlint:standard:no-wildcard-imports")
 
+package deakin.gopher.guardian.network
 
 import deakin.gopher.guardian.model.login.Role.Caretaker
 import retrofit2.Response
@@ -9,11 +10,11 @@ interface CaretakerApi {
     @GET("caretaker/profile")
     suspend fun getProfile(
         @Query("caretakerId") caretakerId: String? = null,
-        @Query("email") email: String? = null
+        @Query("email") email: String? = null,
     ): Response<Caretaker>
 
     @PUT("caretaker/profile")
     suspend fun updateProfile(
-        @Body caretaker: deakin.gopher.guardian.model.Caretaker
+        @Body caretaker: deakin.gopher.guardian.model.Caretaker,
     ): Response<Caretaker>
 }

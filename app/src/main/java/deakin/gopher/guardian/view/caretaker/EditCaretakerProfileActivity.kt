@@ -1,22 +1,22 @@
-//package deakin.gopher.guardian.view.caretaker
+// package deakin.gopher.guardian.view.caretaker
 //
-//import android.content.Intent
-//import android.os.Bundle
-//import android.widget.ImageView
-//import android.widget.Toast
-//import androidx.appcompat.app.AppCompatActivity
-//import com.google.android.material.button.MaterialButton
-//import com.google.android.material.textfield.TextInputEditText
-//import deakin.gopher.guardian.R
-//import deakin.gopher.guardian.model.Caretaker
-//import deakin.gopher.guardian.model.login.SessionManager
-//import deakin.gopher.guardian.services.api.ApiClient
-//import kotlinx.coroutines.CoroutineScope
-//import kotlinx.coroutines.Dispatchers
-//import kotlinx.coroutines.launch
-//import retrofit2.Response
+// import android.content.Intent
+// import android.os.Bundle
+// import android.widget.ImageView
+// import android.widget.Toast
+// import androidx.appcompat.app.AppCompatActivity
+// import com.google.android.material.button.MaterialButton
+// import com.google.android.material.textfield.TextInputEditText
+// import deakin.gopher.guardian.R
+// import deakin.gopher.guardian.model.Caretaker
+// import deakin.gopher.guardian.model.login.SessionManager
+// import deakin.gopher.guardian.services.api.ApiClient
+// import kotlinx.coroutines.CoroutineScope
+// import kotlinx.coroutines.Dispatchers
+// import kotlinx.coroutines.launch
+// import retrofit2.Response
 //
-//class EditCaretakerProfileActivity : AppCompatActivity() {
+// class EditCaretakerProfileActivity : AppCompatActivity() {
 //
 //    private lateinit var txtName: TextInputEditText
 //    private lateinit var txtEmergencyContact: TextInputEditText
@@ -119,7 +119,7 @@
 //            }
 //        }
 //    }
-//}
+// }
 
 package deakin.gopher.guardian.view.caretaker
 
@@ -139,7 +139,6 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class EditCaretakerProfileActivity : AppCompatActivity() {
-
     private lateinit var txtName: TextInputEditText
     private lateinit var txtAddress: TextInputEditText
     private lateinit var txtDoB: TextInputEditText
@@ -214,23 +213,25 @@ class EditCaretakerProfileActivity : AppCompatActivity() {
     }
 
     private fun updateCaretakerProfile(caretaker: Caretaker) {
-        val token = try {
-            "Bearer ${SessionManager.getToken()}"
-        } catch (e: Exception) {
-            Toast.makeText(this, "Token not found. Please login again.", Toast.LENGTH_LONG).show()
-            return
-        }
+        val token =
+            try {
+                "Bearer ${SessionManager.getToken()}"
+            } catch (e: Exception) {
+                Toast.makeText(this, "Token not found. Please login again.", Toast.LENGTH_LONG).show()
+                return
+            }
 
-        val requestBody = mapOf(
-            "caretakerId" to (caretaker.id ?: ""),
-            "fullname" to (caretaker.fullName ?: ""),
-            "address" to (caretaker.address ?: ""),
-            "dob" to (caretaker.dob ?: ""),
-            "phone" to (caretaker.phone ?: ""),
-            "ward" to (caretaker.ward ?: ""),
-            "medicareNumber" to (caretaker.medicareNumber ?: ""),
-            "email" to (caretaker.email ?: "")
-        )
+        val requestBody =
+            mapOf(
+                "caretakerId" to (caretaker.id ?: ""),
+                "fullname" to (caretaker.fullName ?: ""),
+                "address" to (caretaker.address ?: ""),
+                "dob" to (caretaker.dob ?: ""),
+                "phone" to (caretaker.phone ?: ""),
+                "ward" to (caretaker.ward ?: ""),
+                "medicareNumber" to (caretaker.medicareNumber ?: ""),
+                "email" to (caretaker.email ?: ""),
+            )
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -250,7 +251,7 @@ class EditCaretakerProfileActivity : AppCompatActivity() {
                         Toast.makeText(
                             this@EditCaretakerProfileActivity,
                             "Update failed: ${response.code()}",
-                            Toast.LENGTH_LONG
+                            Toast.LENGTH_LONG,
                         ).show()
                     }
                 }
@@ -259,11 +260,10 @@ class EditCaretakerProfileActivity : AppCompatActivity() {
                     Toast.makeText(
                         this@EditCaretakerProfileActivity,
                         "Error: ${e.message}",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_LONG,
                     ).show()
                 }
             }
         }
     }
 }
-

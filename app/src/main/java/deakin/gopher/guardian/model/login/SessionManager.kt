@@ -1,13 +1,13 @@
-//package deakin.gopher.guardian.model.login
+// package deakin.gopher.guardian.model.login
 //
-//import android.content.Context
-//import android.content.SharedPreferences
-//import android.security.keystore.UserNotAuthenticatedException
-//import com.google.gson.Gson
-//import deakin.gopher.guardian.model.register.User
-//import java.lang.reflect.Type
+// import android.content.Context
+// import android.content.SharedPreferences
+// import android.security.keystore.UserNotAuthenticatedException
+// import com.google.gson.Gson
+// import deakin.gopher.guardian.model.register.User
+// import java.lang.reflect.Type
 //
-//object SessionManager {
+// object SessionManager {
 //    private const val PREF_NAME = "LoginPref"
 //    private const val IS_LOGIN = "IsLoggedIn"
 //    private const val KEY_CURRENT_USER: String = "KEY_CURRENT_USER"
@@ -97,7 +97,7 @@
 //    private fun deleteObject(key: String) {
 //        editor.remove(key).apply()
 //    }
-//}
+// }
 package deakin.gopher.guardian.model.login
 
 import android.content.Context

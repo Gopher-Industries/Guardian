@@ -1,24 +1,24 @@
-//package deakin.gopher.guardian.view.prescription
+// package deakin.gopher.guardian.view.prescription
 //
-//import android.app.Activity
-//import android.content.Intent
-//import android.os.Bundle
-//import android.util.Log
-//import android.widget.Button
-//import android.widget.EditText
-//import android.widget.Toast
-//import androidx.appcompat.app.AppCompatActivity
-//import deakin.gopher.guardian.R
-//import deakin.gopher.guardian.model.Prescription
-//import deakin.gopher.guardian.model.PrescriptionItem
-//import deakin.gopher.guardian.model.login.SessionManager
-//import deakin.gopher.guardian.services.api.ApiClient
-//import deakin.gopher.guardian.services.api.ApiService
-//import retrofit2.Call
-//import retrofit2.Callback
-//import retrofit2.Response
+// import android.app.Activity
+// import android.content.Intent
+// import android.os.Bundle
+// import android.util.Log
+// import android.widget.Button
+// import android.widget.EditText
+// import android.widget.Toast
+// import androidx.appcompat.app.AppCompatActivity
+// import deakin.gopher.guardian.R
+// import deakin.gopher.guardian.model.Prescription
+// import deakin.gopher.guardian.model.PrescriptionItem
+// import deakin.gopher.guardian.model.login.SessionManager
+// import deakin.gopher.guardian.services.api.ApiClient
+// import deakin.gopher.guardian.services.api.ApiService
+// import retrofit2.Call
+// import retrofit2.Callback
+// import retrofit2.Response
 //
-//class IssuePrescriptionActivity : AppCompatActivity() {
+// class IssuePrescriptionActivity : AppCompatActivity() {
 //
 //    private lateinit var etMedicine: EditText
 //    private lateinit var etDoses: EditText
@@ -112,7 +112,7 @@
 //                }
 //            })
 //    }
-//}
+// }
 
 package deakin.gopher.guardian.view.prescription
 
@@ -132,7 +132,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class IssuePrescriptionActivity : AppCompatActivity() {
-
     private lateinit var etMedicine: EditText
     private lateinit var etDoses: EditText
     private lateinit var etDays: EditText
@@ -169,53 +168,63 @@ class IssuePrescriptionActivity : AppCompatActivity() {
             return
         }
 
-        val prescriptionItem = PrescriptionItem(
-            name = medicine,
-            dose = doses,
-            frequency = "Once daily",
-            durationDays = duration
-        )
+        val prescriptionItem =
+            PrescriptionItem(
+                name = medicine,
+                dose = doses,
+                frequency = "Once daily",
+                durationDays = duration,
+            )
 
-        val prescription = Prescription(
-            patientId = patientId,
-            items = listOf(prescriptionItem),
-            notes = ""
-        )
+        val prescription =
+            Prescription(
+                patientId = patientId,
+                items = listOf(prescriptionItem),
+                notes = "",
+            )
 
-        val token = try {
-            SessionManager.getToken()
-        } catch (e: Exception) {
-            Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show()
-            return
-        }
+        val token =
+            try {
+                SessionManager.getToken()
+            } catch (e: Exception) {
+                Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show()
+                return
+            }
 
         apiService.createPrescription("Bearer $token", prescription)
-            .enqueue(object : Callback<Prescription> {
-                override fun onResponse(call: Call<Prescription>, response: Response<Prescription>) {
-                    if (response.isSuccessful) {
+            .enqueue(
+                object : Callback<Prescription> {
+                    override fun onResponse(
+                        call: Call<Prescription>,
+                        response: Response<Prescription>,
+                    ) {
+                        if (response.isSuccessful) {
+                            Toast.makeText(
+                                this@IssuePrescriptionActivity,
+                                "Prescription issued successfully!",
+                                Toast.LENGTH_SHORT,
+                            ).show()
+                            finish() // Return to PrescriptionActivity, which will refresh automatically
+                        } else {
+                            Toast.makeText(
+                                this@IssuePrescriptionActivity,
+                                "Failed to issue prescription: ${response.code()}",
+                                Toast.LENGTH_LONG,
+                            ).show()
+                        }
+                    }
+
+                    override fun onFailure(
+                        call: Call<Prescription>,
+                        t: Throwable,
+                    ) {
                         Toast.makeText(
                             this@IssuePrescriptionActivity,
-                            "Prescription issued successfully!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        finish() // Return to PrescriptionActivity, which will refresh automatically
-                    } else {
-                        Toast.makeText(
-                            this@IssuePrescriptionActivity,
-                            "Failed to issue prescription: ${response.code()}",
-                            Toast.LENGTH_LONG
+                            "Error: ${t.localizedMessage}",
+                            Toast.LENGTH_LONG,
                         ).show()
                     }
-                }
-
-                override fun onFailure(call: Call<Prescription>, t: Throwable) {
-                    Toast.makeText(
-                        this@IssuePrescriptionActivity,
-                        "Error: ${t.localizedMessage}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-            })
+                },
+            )
     }
 }
-

@@ -1,24 +1,24 @@
-//package deakin.gopher.guardian.view.prescription
+// package deakin.gopher.guardian.view.prescription
 //
-//import android.content.Intent
-//import android.os.Bundle
-//import android.view.View
-//import android.widget.TextView
-//import androidx.appcompat.app.AppCompatActivity
-//import androidx.recyclerview.widget.LinearLayoutManager
-//import androidx.recyclerview.widget.RecyclerView
-//import com.google.android.material.floatingactionbutton.FloatingActionButton
-//import deakin.gopher.guardian.R
-//import deakin.gopher.guardian.model.Prescription
-//import deakin.gopher.guardian.model.login.SessionManager
-//import deakin.gopher.guardian.services.api.ApiClient
-//import deakin.gopher.guardian.services.api.ApiService
-//import deakin.gopher.guardian.view.general.PrescriptionAdapter
-//import retrofit2.Call
-//import retrofit2.Callback
-//import retrofit2.Response
+// import android.content.Intent
+// import android.os.Bundle
+// import android.view.View
+// import android.widget.TextView
+// import androidx.appcompat.app.AppCompatActivity
+// import androidx.recyclerview.widget.LinearLayoutManager
+// import androidx.recyclerview.widget.RecyclerView
+// import com.google.android.material.floatingactionbutton.FloatingActionButton
+// import deakin.gopher.guardian.R
+// import deakin.gopher.guardian.model.Prescription
+// import deakin.gopher.guardian.model.login.SessionManager
+// import deakin.gopher.guardian.services.api.ApiClient
+// import deakin.gopher.guardian.services.api.ApiService
+// import deakin.gopher.guardian.view.general.PrescriptionAdapter
+// import retrofit2.Call
+// import retrofit2.Callback
+// import retrofit2.Response
 //
-//class PrescriptionActivity : AppCompatActivity() {
+// class PrescriptionActivity : AppCompatActivity() {
 //
 //    private lateinit var fabAddPrescription: FloatingActionButton
 //    private lateinit var recyclerView: RecyclerView
@@ -102,7 +102,7 @@
 //            fetchPrescriptions()
 //        }
 //    }
-//}
+// }
 
 package deakin.gopher.guardian.view.prescription
 
@@ -127,7 +127,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class PrescriptionActivity : AppCompatActivity() {
-
     private lateinit var fabAddPrescription: FloatingActionButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var tvEmptyMessage: TextView
@@ -167,33 +166,38 @@ class PrescriptionActivity : AppCompatActivity() {
 
     private fun fetchPrescriptions() {
         apiService.getPrescriptionsForPatient(bearerToken, patientId)
-            .enqueue(object : Callback<PrescriptionResponse> { // ✅ Change callback type
-                override fun onResponse(
-                    call: Call<PrescriptionResponse>,
-                    response: Response<PrescriptionResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        val prescriptions = response.body()?.prescriptions ?: emptyList() // ✅ extract list
+            .enqueue(
+                object : Callback<PrescriptionResponse> { // ✅ Change callback type
+                    override fun onResponse(
+                        call: Call<PrescriptionResponse>,
+                        response: Response<PrescriptionResponse>,
+                    ) {
+                        if (response.isSuccessful) {
+                            val prescriptions = response.body()?.prescriptions ?: emptyList() // ✅ extract list
 
-                        Log.d("PrescriptionActivity", "Fetched ${prescriptions.size} prescriptions")
-                        prescriptionList.clear()
-                        prescriptionList.addAll(prescriptions)
-                        updateUI()
-                    } else {
-                        Log.e("PrescriptionActivity", "Failed: ${response.code()}")
-                        tvEmptyMessage.text = "Error loading prescriptions"
+                            Log.d("PrescriptionActivity", "Fetched ${prescriptions.size} prescriptions")
+                            prescriptionList.clear()
+                            prescriptionList.addAll(prescriptions)
+                            updateUI()
+                        } else {
+                            Log.e("PrescriptionActivity", "Failed: ${response.code()}")
+                            tvEmptyMessage.text = "Error loading prescriptions"
+                            tvEmptyMessage.visibility = View.VISIBLE
+                            recyclerView.visibility = View.GONE
+                        }
+                    }
+
+                    override fun onFailure(
+                        p0: Call<PrescriptionResponse>,
+                        t: Throwable,
+                    ) {
+                        Log.e("PrescriptionActivity", "Fetch error: ${t.localizedMessage}")
+                        tvEmptyMessage.text = "Failed to connect to server"
                         tvEmptyMessage.visibility = View.VISIBLE
                         recyclerView.visibility = View.GONE
                     }
-                }
-
-                override fun onFailure(p0: Call<PrescriptionResponse>, t: Throwable) {
-                    Log.e("PrescriptionActivity", "Fetch error: ${t.localizedMessage}")
-                    tvEmptyMessage.text = "Failed to connect to server"
-                    tvEmptyMessage.visibility = View.VISIBLE
-                    recyclerView.visibility = View.GONE
-                }
-            })
+                },
+            )
     }
 
     private fun updateUI() {
@@ -207,4 +211,3 @@ class PrescriptionActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
     }
 }
-

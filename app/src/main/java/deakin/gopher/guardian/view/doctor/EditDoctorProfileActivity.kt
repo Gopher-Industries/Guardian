@@ -10,7 +10,6 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Doctor
 
 class EditDoctorProfileActivity : AppCompatActivity() {
-
     private lateinit var txtName: TextInputEditText
     private lateinit var txtSpecialization: TextInputEditText
     private lateinit var txtPhone: TextInputEditText

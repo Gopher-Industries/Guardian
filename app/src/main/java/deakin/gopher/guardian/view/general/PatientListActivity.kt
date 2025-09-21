@@ -7,11 +7,9 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.adapter.PatientListAdapter
 import deakin.gopher.guardian.databinding.ActivityPatientListBinding
-import deakin.gopher.guardian.model.ApiErrorResponse
 import deakin.gopher.guardian.model.login.Role
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.api.ApiClient
@@ -93,7 +91,6 @@ class PatientListActivity : BaseActivity() {
             }
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (currentUser.role == Role.Nurse) {

@@ -8,9 +8,9 @@ import androidx.annotation.OptIn
 import androidx.media3.common.util.UnstableApi
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.services.EmailPasswordAuthService
+import deakin.gopher.guardian.view.doctor.DoctorProfileActivity
 import deakin.gopher.guardian.view.falldetection.FallDetectionActivity
 import deakin.gopher.guardian.view.prescription.PrescriptionActivity
-import deakin.gopher.guardian.view.doctor.DoctorProfileActivity
 
 class Homepage4doctor : BaseActivity() {
     private lateinit var patientListButton: Button

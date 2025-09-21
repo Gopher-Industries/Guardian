@@ -6,12 +6,12 @@ data class PrescriptionItem(
     val name: String,
     val dose: String,
     val frequency: String,
-    val durationDays: Int
+    val durationDays: Int,
 ) : Serializable
 
 data class Prescription(
     val id: String? = null,
     val patientId: String,
     val items: List<PrescriptionItem>,
-    val notes: String
+    val notes: String,
 ) : Serializable

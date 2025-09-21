@@ -1,3 +1,5 @@
+@file:Suppress("ktlint:standard:no-wildcard-imports")
+
 package deakin.gopher.guardian.services.api
 
 import deakin.gopher.guardian.model.AddPatientActivityResponse
@@ -10,7 +12,6 @@ import deakin.gopher.guardian.model.Prescription
 import deakin.gopher.guardian.model.PrescriptionResponse
 import deakin.gopher.guardian.model.register.AuthResponse
 import deakin.gopher.guardian.model.register.RegisterRequest
-
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -73,7 +74,7 @@ interface ApiService {
     @GET("caretaker/profile")
     suspend fun getCaretakerProfile(
         @Header("Authorization") token: String,
-        @Query("caretakerId") caretakerId: String
+        @Query("caretakerId") caretakerId: String,
 //        @Header("Content-Type") contentType: String = "application/json",
 //        caretakerId: String
     ): Response<Caretaker>
@@ -81,10 +82,8 @@ interface ApiService {
     @PUT("caretaker/profile")
     suspend fun updateCaretakerProfile(
         @Header("Authorization") token: String,
-        @Body body: Map<String, String> // ✅ FIXED
+        @Body body: Map<String, String>,
     ): Response<Void>
-
-
 
     @Multipart
     @POST("patients/add")
@@ -118,60 +117,53 @@ interface ApiService {
         @Path("id") patientId: String,
     ): Response<BaseModel>
 
-
-
     @POST("patients/assign-nurse")
     suspend fun assignNurse(
         @Header("Authorization") token: String,
-        @Body body: Map<String, String>
+        @Body body: Map<String, String>,
     ): Response<Void>
 
     @GET("patients/{patientId}/prescriptions")
     fun getPrescriptionsForPatient(
         @Header("Authorization") token: String,
-        @Path("patientId") patientId: String
+        @Path("patientId") patientId: String,
     ): Call<PrescriptionResponse>
 
-        @POST("prescriptions")
-        fun createPrescription(
-            @Header("Authorization") token: String,
-            @Body prescription: Prescription
-        ): Call<Prescription>
+    @POST("prescriptions")
+    fun createPrescription(
+        @Header("Authorization") token: String,
+        @Body prescription: Prescription,
+    ): Call<Prescription>
 
-        // Get all prescriptions for a patient
-        @GET("patients/{patientId}/prescriptions")
-        fun getPrescriptionsForPatient(
-            @Header("Authorization") token: String,
-            @Path("patientId") patientId: String,
-            @Query("status") status: String? = null,
-            @Query("page") page: Int? = 1,
-            @Query("limit") limit: Int? = 10
-        ): Call<PrescriptionResponse>
+    // Get all prescriptions for a patient
+    @GET("patients/{patientId}/prescriptions")
+    fun getPrescriptionsForPatient(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+        @Query("status") status: String? = null,
+        @Query("page") page: Int? = 1,
+        @Query("limit") limit: Int? = 10,
+    ): Call<PrescriptionResponse>
 
-        // Get a prescription by ID
-        @GET("prescriptions/{id}")
-        fun getPrescriptionById(
-            @Header("Authorization") token: String,
-            @Path("id") prescriptionId: String
-        ): Call<Prescription>
+    // Get a prescription by ID
+    @GET("prescriptions/{id}")
+    fun getPrescriptionById(
+        @Header("Authorization") token: String,
+        @Path("id") prescriptionId: String,
+    ): Call<Prescription>
 
-        // Update a prescription by ID
-        @PATCH("prescriptions/{id}")
-        fun updatePrescription(
-            @Header("Authorization") token: String,
-            @Path("id") prescriptionId: String,
-            @Body updatedFields: Map<String, Any>
-        ): Call<Prescription>
+    // Update a prescription by ID
+    @PATCH("prescriptions/{id}")
+    fun updatePrescription(
+        @Header("Authorization") token: String,
+        @Path("id") prescriptionId: String,
+        @Body updatedFields: Map<String, Any>,
+    ): Call<Prescription>
 
-        // Discontinue a prescription
-        @POST("prescriptions/{id}/discontinue")
-        fun discontinuePrescription(
-            @Header("Authorization") token: String,
-            @Path("id") prescriptionId: String
-        ): Call<Void>
-    }
-
-
-
-
-
+    // Discontinue a prescription
+    @POST("prescriptions/{id}/discontinue")
+    fun discontinuePrescription(
+        @Header("Authorization") token: String,
+        @Path("id") prescriptionId: String,
+    ): Call<Void>
+}

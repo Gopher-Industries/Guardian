@@ -1,24 +1,24 @@
 //
 //
-//package deakin.gopher.guardian.view.caretaker
+// package deakin.gopher.guardian.view.caretaker
 //
-//import android.os.Bundle
-//import android.util.Log
-//import android.view.View
-//import android.widget.TextView
-//import android.widget.Toast
-//import androidx.appcompat.app.AppCompatActivity
-//import androidx.lifecycle.lifecycleScope
-//import com.google.android.material.button.MaterialButton
-//import com.google.android.material.textfield.TextInputEditText
-//import deakin.gopher.guardian.R
-//import deakin.gopher.guardian.model.Caretaker
-//import deakin.gopher.guardian.model.login.SessionManager
-//import deakin.gopher.guardian.services.api.ApiClient
-//import kotlinx.coroutines.launch
-//import retrofit2.HttpException
+// import android.os.Bundle
+// import android.util.Log
+// import android.view.View
+// import android.widget.TextView
+// import android.widget.Toast
+// import androidx.appcompat.app.AppCompatActivity
+// import androidx.lifecycle.lifecycleScope
+// import com.google.android.material.button.MaterialButton
+// import com.google.android.material.textfield.TextInputEditText
+// import deakin.gopher.guardian.R
+// import deakin.gopher.guardian.model.Caretaker
+// import deakin.gopher.guardian.model.login.SessionManager
+// import deakin.gopher.guardian.services.api.ApiClient
+// import kotlinx.coroutines.launch
+// import retrofit2.HttpException
 //
-//class CaretakerProfileActivity : AppCompatActivity() {
+// class CaretakerProfileActivity : AppCompatActivity() {
 //
 //    private lateinit var txtName: TextInputEditText
 //    private lateinit var txtAddress: TextInputEditText
@@ -67,13 +67,13 @@
 //            Log.d("SessionData", "Token: $token")
 //
 //            // Optional: display session data as fallback
-////            txtName.setText(user.name ?: "")
-////            txtAddress.setText(user.address ?: "")
-////            txtDoB.setText(user.dob ?: "")
-////            txtPhone.setText(user.phone ?: "")
-////            txtUnderCare.setText(user.ward ?: "")
-////            txtMedicareNumber.setText(user.medicareNumber ?: "")
-////            txtEmergencyContact.setText(user.EmergencyContact ?: "")
+// //            txtName.setText(user.name ?: "")
+// //            txtAddress.setText(user.address ?: "")
+// //            txtDoB.setText(user.dob ?: "")
+// //            txtPhone.setText(user.phone ?: "")
+// //            txtUnderCare.setText(user.ward ?: "")
+// //            txtMedicareNumber.setText(user.medicareNumber ?: "")
+// //            txtEmergencyContact.setText(user.EmergencyContact ?: "")
 //
 //        } catch (e: Exception) {
 //            Log.e("SessionData", "Failed to get session data: ${e.message}")
@@ -155,13 +155,12 @@
 //        txtMedicareNumber.isEnabled = false
 //        txtEmergencyContact.isEnabled = false
 //    }
-//}
+// }
 
 package deakin.gopher.guardian.view.caretaker
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -179,7 +178,6 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
 class CaretakerProfileActivity : AppCompatActivity() {
-
     private lateinit var txtName: TextInputEditText
     private lateinit var txtAddress: TextInputEditText
     private lateinit var txtDoB: TextInputEditText
@@ -239,28 +237,31 @@ class CaretakerProfileActivity : AppCompatActivity() {
     private fun fetchCaretakerProfile() {
         txtLoading.visibility = View.VISIBLE
 
-        val token = try {
-            "Bearer ${SessionManager.getToken()}"
-        } catch (e: Exception) {
-            Toast.makeText(this, "User not logged in", Toast.LENGTH_LONG).show()
-            return
-        }
+        val token =
+            try {
+                "Bearer ${SessionManager.getToken()}"
+            } catch (e: Exception) {
+                Toast.makeText(this, "User not logged in", Toast.LENGTH_LONG).show()
+                return
+            }
 
-        val currentUser = try {
-            SessionManager.getCurrentUser()
-        } catch (e: Exception) {
-            Toast.makeText(this, "User not found", Toast.LENGTH_LONG).show()
-            return
-        }
+        val currentUser =
+            try {
+                SessionManager.getCurrentUser()
+            } catch (e: Exception) {
+                Toast.makeText(this, "User not found", Toast.LENGTH_LONG).show()
+                return
+            }
 
         val caretakerId = currentUser.id ?: ""
 
         lifecycleScope.launch {
             try {
-                val response = ApiClient.apiService.getCaretakerProfile(
-                    token = token,
-                    caretakerId = caretakerId
-                )
+                val response =
+                    ApiClient.apiService.getCaretakerProfile(
+                        token = token,
+                        caretakerId = caretakerId,
+                    )
 
                 txtLoading.visibility = View.GONE
 
@@ -272,23 +273,22 @@ class CaretakerProfileActivity : AppCompatActivity() {
                     Toast.makeText(
                         this@CaretakerProfileActivity,
                         "Failed to fetch profile: ${response.code()}",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_LONG,
                     ).show()
                 }
-
             } catch (e: HttpException) {
                 txtLoading.visibility = View.GONE
                 Toast.makeText(
                     this@CaretakerProfileActivity,
                     "HTTP error: ${e.message()}",
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_LONG,
                 ).show()
             } catch (e: Exception) {
                 txtLoading.visibility = View.GONE
                 Toast.makeText(
                     this@CaretakerProfileActivity,
                     "Error: ${e.message}",
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_LONG,
                 ).show()
             }
         }

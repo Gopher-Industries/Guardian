@@ -16,7 +16,7 @@ import deakin.gopher.guardian.view.general.TaskAddActivity
 import deakin.gopher.guardian.view.general.TasksListActivity
 import kotlin.jvm.java
 
-//class NavigationService(val activity: Activity) {
+// class NavigationService(val activity: Activity) {
 //    fun toHomeScreenForRole(role: Role) {
 //        when (role) {
 //            Role.Caretaker -> {
@@ -124,7 +124,7 @@ import kotlin.jvm.java
 //        intent.putExtra("role", role)
 //        activity.startActivity(intent)
 //    }
-//}
+// }
 
 class NavigationService(val activity: Activity) {
     fun toHomeScreenForRole(role: Role) {
@@ -170,4 +170,3 @@ class NavigationService(val activity: Activity) {
         activity.startActivity(intent)
     }
 }
-

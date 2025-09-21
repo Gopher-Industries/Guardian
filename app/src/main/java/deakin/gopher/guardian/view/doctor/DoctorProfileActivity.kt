@@ -1,26 +1,26 @@
-//package deakin.gopher.guardian.view.doctor
+// package deakin.gopher.guardian.view.doctor
 //
-//import android.content.Intent
-//import android.os.Bundle
-//import android.util.Log
-//import android.view.View
-//import android.widget.ImageView
-//import android.widget.TextView
-//import android.widget.Toast
-//import androidx.activity.result.contract.ActivityResultContracts
-//import androidx.appcompat.app.AppCompatActivity
-//import androidx.lifecycle.lifecycleScope
-//import com.google.android.material.button.MaterialButton
-//import com.google.android.material.textfield.TextInputEditText
-//import deakin.gopher.guardian.R
-//import deakin.gopher.guardian.model.Doctor
-//import deakin.gopher.guardian.model.login.SessionManager
-//import deakin.gopher.guardian.services.api.ApiClient
-//import kotlinx.coroutines.launch
-//import retrofit2.HttpException
-//import kotlin.jvm.java
+// import android.content.Intent
+// import android.os.Bundle
+// import android.util.Log
+// import android.view.View
+// import android.widget.ImageView
+// import android.widget.TextView
+// import android.widget.Toast
+// import androidx.activity.result.contract.ActivityResultContracts
+// import androidx.appcompat.app.AppCompatActivity
+// import androidx.lifecycle.lifecycleScope
+// import com.google.android.material.button.MaterialButton
+// import com.google.android.material.textfield.TextInputEditText
+// import deakin.gopher.guardian.R
+// import deakin.gopher.guardian.model.Doctor
+// import deakin.gopher.guardian.model.login.SessionManager
+// import deakin.gopher.guardian.services.api.ApiClient
+// import kotlinx.coroutines.launch
+// import retrofit2.HttpException
+// import kotlin.jvm.java
 //
-//class DoctorProfileActivity : AppCompatActivity() {
+// class DoctorProfileActivity : AppCompatActivity() {
 //
 //    // UI components
 //    private lateinit var txtName: TextInputEditText
@@ -155,7 +155,7 @@
 //        txtAssignedPatients.isEnabled = false
 //        txtHospital.isEnabled = false
 //    }
-//}
+// }
 
 package deakin.gopher.guardian.view.doctor
 
@@ -163,7 +163,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
@@ -172,7 +171,6 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Doctor
 
 class DoctorProfileActivity : AppCompatActivity() {
-
     private lateinit var txtName: TextInputEditText
     private lateinit var txtSpecialization: TextInputEditText
     private lateinit var txtPhone: TextInputEditText
@@ -207,15 +205,15 @@ class DoctorProfileActivity : AppCompatActivity() {
         txtHospital = findViewById(R.id.txtHospital)
         editButton = findViewById(R.id.editButton)
 
-
         // Create a dummy doctor object (static)
-        doctor = Doctor(
-            fullName = "Dr. John Doe",
-            specialization = "Cardiology",
-            phone = "123-456-7890",
-            email = "john.doe@example.com",
-            hospital = "City Hospital"
-        )
+        doctor =
+            Doctor(
+                fullName = "Dr. John Doe",
+                specialization = "Cardiology",
+                phone = "123-456-7890",
+                email = "john.doe@example.com",
+                hospital = "City Hospital",
+            )
 
         // Bind profile
         bindProfile(doctor)
@@ -251,4 +249,3 @@ class DoctorProfileActivity : AppCompatActivity() {
         txtHospital.isEnabled = false
     }
 }
-

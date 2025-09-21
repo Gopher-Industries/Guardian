@@ -1,9 +1,9 @@
-//package deakin.gopher.guardian.model.login
+// package deakin.gopher.guardian.model.login
 //
-//import deakin.gopher.guardian.R
-//import java.io.Serializable
+// import deakin.gopher.guardian.R
+// import java.io.Serializable
 //
-//sealed class Role(val name: String) : Serializable {
+// sealed class Role(val name: String) : Serializable {
 //    data object Caretaker : Role(R.string.caretaker_role_name.toString().lowercase()) {
 //        private fun readResolve(): Any = Caretaker
 //    }
@@ -36,14 +36,13 @@
 //            }
 //        }
 //    }
-//}
+// }
 
 package deakin.gopher.guardian.model.login
 
 import java.io.Serializable
 
 sealed class Role(val name: String) : Serializable {
-
     data object Caretaker : Role("caretaker") {
         private fun readResolve(): Any = Caretaker
     }

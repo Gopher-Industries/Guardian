@@ -1,16 +1,16 @@
-//package deakin.gopher.guardian
+// package deakin.gopher.guardian
 //
-//import android.os.Bundle
-//import androidx.activity.ComponentActivity
-//import androidx.activity.compose.setContent
-//import androidx.compose.material3.MaterialTheme
-//import androidx.compose.material3.Surface
-//import androidx.navigation.compose.NavHost
-//import androidx.navigation.compose.composable
-//import androidx.navigation.compose.rememberNavController
-//import deakin.gopher.guardian.view.theme.GuardianTheme
+// import android.os.Bundle
+// import androidx.activity.ComponentActivity
+// import androidx.activity.compose.setContent
+// import androidx.compose.material3.MaterialTheme
+// import androidx.compose.material3.Surface
+// import androidx.navigation.compose.NavHost
+// import androidx.navigation.compose.composable
+// import androidx.navigation.compose.rememberNavController
+// import deakin.gopher.guardian.view.theme.GuardianTheme
 //
-//class MainActivity : ComponentActivity() {
+// class MainActivity : ComponentActivity() {
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
 //        setContent {
@@ -38,7 +38,7 @@
 //            }
 //        }
 //    }
-//}
+// }
 
 package deakin.gopher.guardian
 
@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
                     // Navigation Graph
                     NavHost(
                         navController = navController,
-                        startDestination = "welcome"
+                        startDestination = "welcome",
                     ) {
                         composable("welcome") {
                             WelcomeScreen(navController)

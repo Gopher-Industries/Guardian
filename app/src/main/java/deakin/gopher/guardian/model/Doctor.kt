@@ -9,5 +9,5 @@ data class Doctor(
     var phone: String? = null,
     var email: String? = null,
     var hospital: String? = null,
-    var assignedPatients: List<String>? = null
+    var assignedPatients: List<String>? = null,
 ) : Serializable

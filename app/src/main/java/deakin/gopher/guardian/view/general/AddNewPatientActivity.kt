@@ -24,10 +24,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.util.Calendar
 import java.util.Locale
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-
 
 class AddNewPatientActivity : BaseActivity() {
     private lateinit var binding: ActivityAddNewPatientBinding

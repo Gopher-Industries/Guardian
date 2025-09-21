@@ -1,16 +1,16 @@
-//package deakin.gopher.guardian.view.general
+// package deakin.gopher.guardian.view.general
 //
-//import android.content.Intent
-//import android.os.Bundle
-//import android.util.Log
-//import android.widget.Button
-//import com.google.android.gms.tasks.Task
-//import com.google.firebase.messaging.FirebaseMessaging
-//import deakin.gopher.guardian.R
-//import deakin.gopher.guardian.model.login.Role
-//import deakin.gopher.guardian.model.login.SessionManager
+// import android.content.Intent
+// import android.os.Bundle
+// import android.util.Log
+// import android.widget.Button
+// import com.google.android.gms.tasks.Task
+// import com.google.firebase.messaging.FirebaseMessaging
+// import deakin.gopher.guardian.R
+// import deakin.gopher.guardian.model.login.Role
+// import deakin.gopher.guardian.model.login.SessionManager
 //
-//class MainActivity : BaseActivity() {
+// class MainActivity : BaseActivity() {
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main)
@@ -53,7 +53,7 @@
 //            }
 //        }
 //    }
-//}
+// }
 
 package deakin.gopher.guardian.view.general
 
