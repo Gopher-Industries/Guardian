@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Empty message shown when no prescriptions exist -->
+    <TextView
+        android:id="@+id/tvEmptyMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No prescriptions yet"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/darker_gray"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Prescription list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewPrescriptions"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="16dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnPrescription"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnPrescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Add Prescription"
+        app:srcCompat="@drawable/ic_baseline_add_24"
+        app:backgroundTint="@android:color/holo_blue_dark"
+        app:tint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="24dp"
+        android:clickable="true"
+        android:focusable="true" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

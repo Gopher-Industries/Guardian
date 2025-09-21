@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="deakin.gopher.guardian.view.general.Homepage4caretaker"
+    tools:context="deakin.gopher.guardian.view.general.Homepage4doctor"
     android:background="@color/off_white">
 
     <!-- ================= Header Card ================= -->
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="@string/welcome_caretaker"
+                android:text="@string/welcome_doctor"
                 android:textColor="@color/off_white"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -102,33 +102,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/medicalDiaganosticsHeaderCardView" />
 
-    <!-- ================= Row 2 ================= -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/taskListButton"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="156dp"
-        android:elevation="20dp"
-        android:fontFamily="@font/poppins_bold"
-        android:gravity="center"
-        android:paddingTop="25dp"
-        android:paddingBottom="16dp"
-        android:text="@string/task_list"
-        android:textColor="@color/off_white"
-        android:textSize="11sp"
-        app:backgroundTint="@color/deep_blue"
-        app:cornerRadius="16dp"
-        app:icon="@drawable/patient_list_icon"
-        app:iconGravity="top"
-        app:iconSize="42dp"
-        app:iconTint="@color/off_white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/medicalDiaganosticsHeaderCardView" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/caretaker_profile"
+        android:id="@+id/doctor_profile"
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="120dp"
         android:layout_height="120dp"
@@ -151,86 +126,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/medicalDiaganosticsHeaderCardView" />
 
-    <!-- ================= Row 3 ================= -->
+    <!-- ================= Prescription Button ================= -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/trainingButton"
+        android:id="@+id/signOutButton"
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="292dp"
-        android:elevation="20dp"
-        android:fontFamily="@font/poppins_bold"
-        android:gravity="center"
-        android:paddingTop="20dp"
-        android:paddingBottom="16dp"
-        android:text="@string/training"
-        android:textColor="@color/white"
-        android:textSize="11sp"
-        app:backgroundTint="@color/deep_blue"
-        app:cornerRadius="16dp"
-        app:icon="@drawable/training"
-        app:iconGravity="top"
-        app:iconPadding="10dp"
-        app:iconSize="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/medicalDiaganosticsHeaderCardView" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/monitorButton"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="204dp"
-        android:layout_marginTop="292dp"
-        android:elevation="20dp"
-        android:fontFamily="@font/poppins_bold"
-        android:gravity="center"
-        android:paddingTop="10dp"
-        android:paddingBottom="15dp"
-        android:text="@string/monitoring"
-        android:textColor="@color/white"
-        android:textSize="11sp"
-        app:backgroundTint="@color/deep_blue"
-        app:cornerRadius="16dp"
-        app:icon="@drawable/baseline_camera_indoor_24"
-        app:iconGravity="top"
-        app:iconSize="60dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/medicalDiaganosticsHeaderCardView" />
-
-    <!-- ================= Row 4 ================= -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/exerciseportal"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="428dp"
-        android:elevation="20dp"
-        android:fontFamily="@font/poppins_bold"
-        android:gravity="center"
-        android:paddingTop="20dp"
-        android:paddingBottom="16dp"
-        android:text="@string/exercise_portal"
-        android:textColor="@color/white"
-        android:textSize="9sp"
-        app:backgroundTint="@color/deep_blue"
-        app:cornerRadius="16dp"
-        app:icon="@drawable/dumbbell"
-        app:iconGravity="top"
-        app:iconPadding="10dp"
-        app:iconSize="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/medicalDiaganosticsHeaderCardView" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/sighOutButton"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="204dp"
-        android:layout_marginTop="428dp"
+        android:layout_marginStart="196dp"
+        android:layout_marginTop="284dp"
         android:elevation="20dp"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center"
@@ -248,14 +151,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/medicalDiaganosticsHeaderCardView" />
 
-    <!-- ================= Prescription Button ================= -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/prescriptionButton"
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="564dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="156dp"
         android:elevation="20dp"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center"

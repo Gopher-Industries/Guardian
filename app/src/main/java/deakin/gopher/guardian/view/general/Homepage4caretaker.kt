@@ -11,7 +11,9 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.TrainingActivity
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.view.caretaker.CaretakerProfileActivity
-import deakin.gopher.guardian.view.falldetection.FallDetectionActivity
+import deakin.gopher.guardian.view.falldetection.FallDetectionActivity // <-- Added import for Prescription
+import deakin.gopher.guardian.view.prescription.PrescriptionActivity
+import kotlin.jvm.java
 
 class Homepage4caretaker : BaseActivity() {
     private lateinit var patientListButton: Button
@@ -22,11 +24,14 @@ class Homepage4caretaker : BaseActivity() {
     private lateinit var trainingButton: Button
     private lateinit var monitorButton: Button
     private lateinit var exercisePortalButton: Button
+    private lateinit var prescriptionButton: Button // <-- Added prescription button
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage4caretaker)
+
+        // Existing button initializations
         patientListButton = findViewById(R.id.patientListButton)
         settingsButton = findViewById(R.id.settingsButton3)
         signOutButton = findViewById(R.id.sighOutButton)
@@ -35,6 +40,7 @@ class Homepage4caretaker : BaseActivity() {
         trainingButton = findViewById(R.id.trainingButton)
         monitorButton = findViewById(R.id.monitorButton)
         exercisePortalButton = findViewById(R.id.exerciseportal)
+        prescriptionButton = findViewById(R.id.prescriptionButton) // <-- Initialize prescription button
 
         // patient list button
         patientListButton.setOnClickListener {
@@ -65,12 +71,14 @@ class Homepage4caretaker : BaseActivity() {
             finish()
         }
 
+        // profile button
         profileButton.setOnClickListener {
             val medicalDiagnosticsActivityIntent =
                 Intent(this@Homepage4caretaker, CaretakerProfileActivity::class.java)
             startActivity(medicalDiagnosticsActivityIntent)
         }
 
+        // monitor button
         monitorButton.setOnClickListener {
             startFallDetectionActivity()
         }
@@ -82,11 +90,18 @@ class Homepage4caretaker : BaseActivity() {
             )
         }
 
-        //  exercise portal button
+        // exercise portal button
         exercisePortalButton.setOnClickListener {
             startActivity(
                 Intent(this@Homepage4caretaker, PatientExerciseModules::class.java),
             )
+        }
+
+        // prescription button
+        prescriptionButton.setOnClickListener {
+            val prescriptionIntent =
+                Intent(this@Homepage4caretaker, PrescriptionActivity::class.java)
+            startActivity(prescriptionIntent)
         }
     }
 

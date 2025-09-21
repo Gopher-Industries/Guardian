@@ -54,8 +54,10 @@
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="0.0">
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -191,6 +193,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/nurse_role_name" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_doctor"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/doctor_role_name" />
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
 

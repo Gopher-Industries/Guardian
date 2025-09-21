@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="nameTextView" type="id" />
+    <item name="phoneTextView" type="id" />
+    <item name="tvPatientDetails" type="id" />
+
+    <item name="tvPatientName" type="id" />
+    <item name="tvDetails" type="id" />
+</resources>

@@ -40,6 +40,7 @@
     <string name="others">Others</string>
     <string name="verified">Verified</string>
     <string name="welcome_caretaker">Welcome, Caretaker</string>
+    <string name="welcome_doctor">Welcome, Doctor</string>
     <string name="welcome_admin">Welcome, Administrator</string>
     <string name="welcome_nurse">Welcome, Nurse</string>
 
@@ -337,6 +338,7 @@
     <string name="caretaker_role_name">Caretaker</string>
     <string name="company_admin_role_name">Admin</string>
     <string name="nurse_role_name">Nurse</string>
+    <string name="doctor_role_name">Doctor</string>
     <string name="login_role_selection_prompt">Login as:</string>
     <string name="register_role_selection_prompt">Register as:</string>
     <string name="password_hint">Enter password</string>
@@ -377,6 +379,10 @@
     <string name="blood_pressure_tip">Blood Pressure Tip</string>
     <string name="current">Current</string>
     <string name="daily">Daily</string>
+
+    <string name="edit_caretaker_profile">Edit Caretaker Profile</string>
+
+
 
 
     <string-array name="hospital_list_array">
@@ -708,6 +714,7 @@
     <string name="patient_photo">Patient photo</string>
     <string name="more_options">More Options</string>
     <string name="add_activity">Add Activity</string>
+    <string name="edit_profile" />
 
 
     <string-array name="dropdown_items">

@@ -65,6 +65,9 @@
             android:name=".view.general.Homepage4nurse"
             android:exported="false" />
         <activity
+            android:name=".view.general.Homepage4doctor"
+            android:exported="false" />
+        <activity
             android:name=".view.general.TaskDetailActivity"
             android:exported="false" />
         <activity
@@ -85,6 +88,11 @@
         <activity
             android:name=".view.caretaker.CaretakerProfileActivity"
             android:exported="false" />
+        <activity android:name=".view.prescription.PrescriptionActivity"
+            android:exported="false" />
+        <activity android:name=".view.prescription.IssuePrescriptionActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".view.caretaker.EditCaretakerProfileActivity"
             android:exported="false" />

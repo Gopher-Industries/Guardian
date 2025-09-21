@@ -24,6 +24,10 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.util.Calendar
 import java.util.Locale
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 
 class AddNewPatientActivity : BaseActivity() {
     private lateinit var binding: ActivityAddNewPatientBinding
@@ -104,6 +108,7 @@ class AddNewPatientActivity : BaseActivity() {
             }
             val response =
                 ApiClient.apiService.addPatient(token, namePart, dobPart, genderPart, photoPart)
+
             withContext(Dispatchers.Main) {
                 withContext(Dispatchers.Main) {
                     binding.progressBar.hide()

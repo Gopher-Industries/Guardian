@@ -1,0 +1,21 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- Paper outline -->
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M36,4H12c-2.2,0 -4,1.8 -4,4v32c0,2.2 1.8,4 4,4h24c2.2,0 4,-1.8 4,-4V8c0,-2.2 -1.8,-4 -4,-4zM36,40H12V8h24v32z"/>
+
+    <!-- Cross symbol -->
+    <path
+        android:fillColor="#F44336"
+        android:pathData="M24,14h4v4h-4v4h-4v-4h-4v-4h4v-4h4v4z"/>
+
+    <!-- Letter P inside the paper -->
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M28,28h-4v8h4c3,0 3,-4 0,-4 2.5,0 2.5,-4 0,-4z"/>
+</vector>

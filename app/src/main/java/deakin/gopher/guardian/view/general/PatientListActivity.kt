@@ -72,34 +72,28 @@ class PatientListActivity : BaseActivity() {
                     binding.progressBar.show()
                 }
             }
-            val response = ApiClient.apiService.getAssignedPatients(token)
-            withContext(Dispatchers.Main) {
+
+            try {
+                val response = ApiClient.apiService.getAssignedPatients(token)
+
                 withContext(Dispatchers.Main) {
                     binding.progressBar.hide()
-                }
-                if (response.isSuccessful) {
-                    if (!response.body().isNullOrEmpty()) {
+                    if (response.isSuccessful && !response.body().isNullOrEmpty()) {
                         patientListAdapter.updateData(response.body()!!)
-                        withContext(Dispatchers.Main) {
-                            binding.tvEmptyMessage.visibility = View.GONE
-                        }
+                        binding.tvEmptyMessage.visibility = View.GONE
                     } else {
-                        withContext(Dispatchers.Main) {
-                            binding.tvEmptyMessage.visibility = View.VISIBLE
-                        }
+                        binding.tvEmptyMessage.visibility = View.VISIBLE
+                        showMessage("Failed to fetch patients: ${response.code()} - ${response.message()}")
                     }
-                } else {
-                    // Handle error
-                    val errorResponse =
-                        Gson().fromJson(
-                            response.errorBody()?.string(),
-                            ApiErrorResponse::class.java,
-                        )
-                    showMessage(errorResponse.apiError ?: response.message())
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    showMessage("Error: ${e.message}")
                 }
             }
         }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (currentUser.role == Role.Nurse) {
