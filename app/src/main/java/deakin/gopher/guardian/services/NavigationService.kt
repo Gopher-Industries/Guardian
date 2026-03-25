@@ -16,40 +16,21 @@ import deakin.gopher.guardian.view.general.TasksListActivity
 
 class NavigationService(val activity: Activity) {
     fun toHomeScreenForRole(role: Role) {
-        when (role) {
-            Role.Caretaker -> {
-                activity.startActivity(
-                    Intent(
-                        activity.applicationContext,
-                        Homepage4caretaker::class.java,
-                    ),
-                )
-            }
-
-            Role.Nurse -> {
-                activity.startActivity(
-                    Intent(
-                        activity.applicationContext,
-                        Homepage4nurse::class.java,
-                    ),
-                )
-            }
-
-            Role.Admin -> {
-                activity.startActivity(
-                    Intent(
-                        activity.applicationContext,
-                        Homepage4admin::class.java,
-                    ),
-                )
-            }
+        val intent = when (role) {
+            Role.Caretaker -> Intent(activity, Homepage4caretaker::class.java)
+            Role.Nurse -> Intent(activity, Homepage4nurse::class.java)
+            Role.Admin -> Intent(activity, Homepage4admin::class.java)
         }
+        // Clear back stack so user cannot go back to Login/PIN screens
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        activity.startActivity(intent)
+        activity.finish()
     }
 
     fun toRegistration() {
         activity.startActivity(
             Intent(
-                activity.applicationContext,
+                activity,
                 RegisterActivity::class.java,
             ),
         )
@@ -58,25 +39,23 @@ class NavigationService(val activity: Activity) {
     fun onSettings() {
         activity.startActivity(
             Intent(
-                activity.applicationContext,
+                activity,
                 Setting::class.java,
             ),
         )
     }
 
     fun onSignOut() {
-        activity.startActivity(
-            Intent(
-                activity.applicationContext,
-                LoginActivity::class.java,
-            ),
-        )
+        val intent = Intent(activity, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        activity.startActivity(intent)
+        activity.finish()
     }
 
     fun onLaunchPatientList() {
         activity.startActivity(
             Intent(
-                activity.applicationContext,
+                activity,
                 PatientListActivity::class.java,
             ),
         )
@@ -85,7 +64,7 @@ class NavigationService(val activity: Activity) {
     fun onLaunchTasks() {
         activity.startActivity(
             Intent(
-                activity.applicationContext,
+                activity,
                 TasksListActivity::class.java,
             ),
         )
@@ -94,24 +73,26 @@ class NavigationService(val activity: Activity) {
     fun onLaunchTaskCreator() {
         activity.startActivity(
             Intent(
-                activity.applicationContext,
+                activity,
                 TaskAddActivity::class.java,
             ),
         )
     }
 
     fun toLogin() {
-        activity.startActivity(
-            Intent(
-                activity.applicationContext,
-                LoginActivity::class.java,
-            ),
-        )
+        val intent = Intent(activity, LoginActivity::class.java)
+        // If coming from Registration, we want to clear the Registration screen from stack
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        activity.startActivity(intent)
+        activity.finish()
     }
 
     fun toPinCodeActivity(role: Role) {
-        val intent = Intent(activity.applicationContext, PinCodeActivity::class.java)
+        val intent = Intent(activity, PinCodeActivity::class.java)
         intent.putExtra("role", role)
         activity.startActivity(intent)
+        // We keep LoginActivity in the stack in case user wants to go back from PIN screen?
+        // Actually, usually you'd want to finish() it too if PIN is mandatory.
+        // If we want the back button on PIN screen to go back to Login, we don't finish() here.
     }
 }
