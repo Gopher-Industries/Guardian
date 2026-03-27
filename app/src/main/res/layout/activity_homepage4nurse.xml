@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="deakin.gopher.guardian.view.general.Homepage4nurse">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="deakin.gopher.guardian.view.general.Homepage4nurse">
 
+    <!-- Settings button -->
     <Button
         android:id="@+id/settingsButton_nurse"
         android:layout_width="120dp"
@@ -41,6 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
+    <!-- Patients button -->
     <Button
         android:id="@+id/patientsButton_nurse"
         android:layout_width="120dp"
@@ -77,41 +79,85 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
+    <!-- =====================  SECOND ROW ===================== -->
+
+    <!-- Sign Out button directly under My Patients -->
     <Button
         android:id="@+id/sighOutButton_nurse"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="240dp"
         android:background="@drawable/homepage_button_background"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
-
-    <TextView
-        android:id="@+id/sighOutTxt_nurse"
-        android:layout_width="82dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="320dp"
-        android:elevation="4dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/sign_out"
-        android:textColor="@color/white"
-        android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+        app:layout_constraintTop_toBottomOf="@+id/patientsTxt_nurse"
+        app:layout_constraintStart_toStartOf="@+id/patientsButton_nurse"
+        app:layout_constraintEnd_toEndOf="@+id/patientsButton_nurse"
+        android:layout_marginTop="24dp" />
 
     <View
         android:id="@+id/sighOutIcon_nurse"
         android:layout_width="53dp"
         android:layout_height="43dp"
-        android:layout_marginStart="188dp"
-        android:layout_marginTop="268dp"
         android:background="@drawable/menu_signout"
         android:elevation="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+        app:layout_constraintTop_toTopOf="@+id/sighOutButton_nurse"
+        app:layout_constraintBottom_toBottomOf="@+id/sighOutButton_nurse"
+        app:layout_constraintStart_toStartOf="@+id/sighOutButton_nurse"
+        app:layout_constraintEnd_toEndOf="@+id/sighOutButton_nurse" />
 
+    <TextView
+        android:id="@+id/sighOutTxt_nurse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/sign_out"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sighOutButton_nurse"
+        app:layout_constraintStart_toStartOf="@+id/sighOutButton_nurse"
+        app:layout_constraintEnd_toEndOf="@+id/sighOutButton_nurse"
+        android:layout_marginBottom="12dp" />
+
+    <!-- LOGBOOK button directly under Settings -->
+    <Button
+        android:id="@+id/logbookButton_nurse"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/homepage_button_background"
+        app:layout_constraintTop_toBottomOf="@+id/settingsTxt_nurse"
+        app:layout_constraintStart_toStartOf="@+id/settingsButton_nurse"
+        app:layout_constraintEnd_toEndOf="@+id/settingsButton_nurse"
+        android:layout_marginTop="24dp" />
+
+    <!-- LOGBOOK icon -->
+    <View
+        android:id="@+id/logbookIcon_nurse"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/ic_assignment_indicator"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="@+id/logbookButton_nurse"
+        app:layout_constraintBottom_toBottomOf="@+id/logbookButton_nurse"
+        app:layout_constraintStart_toStartOf="@+id/logbookButton_nurse"
+        app:layout_constraintEnd_toEndOf="@+id/logbookButton_nurse" />
+
+    <!-- LOGBOOK text inside the button -->
+    <TextView
+        android:id="@+id/logbookTxt_nurse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Log Book"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/logbookButton_nurse"
+        app:layout_constraintStart_toStartOf="@+id/logbookButton_nurse"
+        app:layout_constraintEnd_toEndOf="@+id/logbookButton_nurse"
+        android:layout_marginBottom="12dp" />
+
+    <!-- ===================================================================== -->
+
+    <!-- Header card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/medicalDiaganosticsHeaderCardView"
         android:layout_width="0dp"
