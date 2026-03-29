@@ -1,92 +1,47 @@
-import React, { useState } from 'react';
-import './App.css';
+import { Navigate, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import OtpPage from "./pages/OtpPage";
+import DashboardHome from "./pages/DashboardHome";
+import AdminLayout from "./layout/AdminLayout";
+import { getAuthToken } from "./utils/storage";
+import StaffManagementPage from "./pages/StaffManagementPage";
+import OrgAssignmentPage from "./pages/OrgAssignmentPage";
+import PatientsPage from "./pages/PatientsPage";
+import NurseRosterPage from "./pages/NurseRosterPage";
+import ReportsPage from "./pages/ReportsPage";
+import SettingsPage from "./pages/SettingsPage";
+import "./App.css";
 
-function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [otp, setOtp] = useState('');
-  const [step, setStep] = useState('login'); // login → otp → dashboard
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Simulate backend login credentials (admin only)
-    if (email === 'dominicdiona@gmail.com' && password === 'admin123') {
-      setStep('otp'); // Go to 2FA step
-    } else {
-      alert('Invalid credentials. Please contact backend for admin login.');
-    }
-  };
-
-
-  const handleOTPVerify = (e) => {
-    e.preventDefault();
-    // Simulated OTP check (normally generated backend)
-    if (otp === '123456') {
-      setIsAuthenticated(true);
-    } else {
-      alert('Invalid OTP');
-    }
-  };
-
-  if (isAuthenticated) {
-    return (
-      <div className="login-container">
-        <img
-          src="/logo_guardian.png"
-          alt="Guardian Logo"
-          style={{ width: '100px', marginBottom: '20px' }}
-        />
-        <h2>Admin Dashboard</h2>
-        <p>Welcome, {email}</p>
-        {/* Add admin dashboard components here */}
-      </div>
-    );
-  }
-
-  return (
-    <div className="login-container">
-      <img
-        src="/logo_guardian.png"
-        alt="Guardian Logo"
-        style={{ width: '100px', marginBottom: '20px' }}
-      />
-      <h2>Guardian Admin Login</h2>
-
-      {step === 'login' && (
-        <form onSubmit={handleLogin} className="login-form">
-          <input
-            type="email"
-            placeholder="Admin Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit">Login</button>
-        </form>
-      )}
-
-      {step === 'otp' && (
-        <form onSubmit={handleOTPVerify} className="login-form">
-          <input
-            type="text"
-            placeholder="Enter 2FA OTP"
-            value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-            required
-          />
-          <button type="submit">Verify OTP</button>
-        </form>
-      )}
-    </div>
-  );
+function ProtectedRoute({ children }) {
+  const token = getAuthToken();
+  return token ? children : <Navigate to="/login" replace />;
 }
 
-export default App;
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/otp" element={<OtpPage />} />
+
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <AdminLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<DashboardHome />} />
+        <Route path="staff-management" element={<StaffManagementPage />} />
+        <Route path="org-assignment" element={<OrgAssignmentPage />} />
+        <Route path="patients" element={<PatientsPage />} />
+        <Route path="nurse-roster" element={<NurseRosterPage />} />
+        <Route path="reports" element={<ReportsPage />} />
+        <Route path="settings" element={<SettingsPage />} />
+      </Route>
+
+      <Route path="*" element={<Navigate to="/login" replace />} />
+    </Routes>
+  );
+}
