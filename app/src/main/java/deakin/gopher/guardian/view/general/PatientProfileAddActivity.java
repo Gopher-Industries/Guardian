@@ -18,6 +18,7 @@ import deakin.gopher.guardian.model.GP;
 import deakin.gopher.guardian.model.MedicalDiagnostic;
 import deakin.gopher.guardian.model.NextOfKin;
 import deakin.gopher.guardian.model.PatientOldArchive;
+import deakin.gopher.guardian.services.EmailPasswordAuthService;
 import deakin.gopher.guardian.util.DataListener;
 
 public class PatientProfileAddActivity extends BaseActivity implements DataListener {
@@ -47,6 +48,22 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
     customHeader.setHeaderTopImage(R.drawable.add_image_button);
 
     navigationView.setItemIconTintList(null);
+    navigationView.setNavigationItemSelectedListener(
+        item -> {
+          final int itemId = item.getItemId();
+          if (itemId == R.id.nav_home) {
+            startActivity(new Intent(PatientProfileAddActivity.this, Homepage4admin.class));
+            finish();
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+          } else if (itemId == R.id.nav_signout) {
+            showSignOutConfirmationDialog();
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+          }
+          drawerLayout.closeDrawer(GravityCompat.START);
+          return false;
+        });
 
     if (null != customHeader) {
       customHeader.menuButton.setOnClickListener(
@@ -250,5 +267,19 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
                             + e.getMessage(),
                         Toast.LENGTH_SHORT)
                     .show());
+  }
+
+  private void showSignOutConfirmationDialog() {
+    final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle(R.string.sign_out);
+    builder.setMessage(R.string.sign_out_confirmation_message);
+    builder.setPositiveButton(
+        R.string.sign_out,
+        (dialog, which) -> {
+          EmailPasswordAuthService.signOut(this);
+          finish();
+        });
+    builder.setNegativeButton(R.string.stay_in, null);
+    builder.show();
   }
 }

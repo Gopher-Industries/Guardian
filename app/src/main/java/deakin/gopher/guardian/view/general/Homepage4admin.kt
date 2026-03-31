@@ -1,6 +1,7 @@
 package deakin.gopher.guardian.view.general
 
 import android.content.Intent
+import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
 import android.widget.Button
 import deakin.gopher.guardian.R
@@ -56,8 +57,15 @@ class Homepage4admin : BaseActivity() {
 
         // sign out button
         signOutButton.setOnClickListener {
-            EmailPasswordAuthService.signOut(this)
-            finish()
+            AlertDialog.Builder(this)
+                .setTitle(R.string.sign_out)
+                .setMessage(R.string.sign_out_confirmation_message)
+                .setPositiveButton(R.string.sign_out) { _, _ ->
+                    EmailPasswordAuthService.signOut(this)
+                    finish()
+                }
+                .setNegativeButton(R.string.stay_in, null)
+                .show()
         }
 
         // nurse roster button
@@ -66,5 +74,17 @@ class Homepage4admin : BaseActivity() {
                 Intent(this@Homepage4admin, NurseRosterActivity::class.java)
             startActivity(nurseRosterActivityIntent)
         }
+    }
+
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+            .setTitle(R.string.sign_out)
+            .setMessage(R.string.sign_out_confirmation_message)
+            .setPositiveButton(R.string.sign_out) { _, _ ->
+                EmailPasswordAuthService.signOut(this)
+                finish()
+            }
+            .setNegativeButton(R.string.stay_in, null)
+            .show()
     }
 }
