@@ -1,6 +1,5 @@
 package deakin.gopher.guardian.view.general
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,7 +8,6 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -124,26 +122,8 @@ class LoginActivity : BaseActivity() {
             startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN)
         }
 
-        forgotTextLink.setOnClickListener { v: View ->
-            val resetMail = EditText(v.context)
-            val passwordResetDialog = AlertDialog.Builder(v.context)
-
-            with(passwordResetDialog) {
-                setTitle(getString(R.string.text_reset_password))
-                setMessage(getString(R.string.text_enter_your_email_to_received_reset_link))
-                setView(resetMail)
-            }
-
-            passwordResetDialog.setPositiveButton(
-                getString(R.string.yes),
-            ) { _: DialogInterface?, _: Int ->
-                val mail = resetMail.text.toString()
-                sendResetPasswordEmail(mail)
-            }
-            passwordResetDialog.setNegativeButton(
-                getString(R.string.no),
-            ) { _: DialogInterface?, _: Int -> }
-            passwordResetDialog.create().show()
+        forgotTextLink.setOnClickListener {
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
     }
 
@@ -184,35 +164,6 @@ class LoginActivity : BaseActivity() {
         }
 
         return null
-    }
-
-    private fun sendResetPasswordEmail(userEmail: String) {
-        val call = ApiClient.apiService.requestPasswordReset(userEmail)
-        call.enqueue(
-            object : Callback<BaseModel> {
-                override fun onResponse(
-                    call: Call<BaseModel>,
-                    response: Response<BaseModel>,
-                ) {
-                    if (response.isSuccessful && response.body() != null) {
-                        showMessage(
-                            response.body()!!.apiMessage
-                                ?: getString(R.string.toast_reset_link_sent_to_your_email),
-                        )
-                    } else {
-                        val errorResponse = parseError(response)
-                        showMessage(errorResponse ?: response.message())
-                    }
-                }
-
-                override fun onFailure(
-                    call: Call<BaseModel>,
-                    t: Throwable,
-                ) {
-                    showMessage("Error sending password reset link: ${t.message}")
-                }
-            },
-        )
     }
 
     @Deprecated("Deprecated in Java")
