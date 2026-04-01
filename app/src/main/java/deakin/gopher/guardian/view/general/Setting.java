@@ -34,7 +34,6 @@ public class Setting extends BaseActivity implements View.OnClickListener {
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_setting);
-    String userType = getIntent().getStringExtra("userType");
 
     settingsThemeButton = findViewById(R.id.settings_theme_button);
     settingsNotificationButton = findViewById(R.id.settings_notification_button);
@@ -53,6 +52,9 @@ public class Setting extends BaseActivity implements View.OnClickListener {
           drawerLayout.openDrawer(GravityCompat.START);
         });
 
+    DrawerNavigationHelper.bindStandardDrawer(
+        this, drawerLayout, navigationView, settingsMenuButton);
+
     final ConstraintLayout settingsThemeButton = findViewById(R.id.settings_theme_button);
 
     notificationSwitch = findViewById(R.id.notification_switch);
@@ -61,7 +63,6 @@ public class Setting extends BaseActivity implements View.OnClickListener {
 
     themeSwitch = findViewById(R.id.theme_switch);
     themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> handleThemeSwitch(isChecked));
-    configureNavigationDrawer(userType);
   }
 
   @Override
@@ -84,38 +85,6 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     } else {
       showToast("Notifications turned off");
     }
-  }
-
-  private void configureNavigationDrawer(String userType) {
-    NavigationView navigationView = findViewById(R.id.nav_view);
-    Menu menu = navigationView.getMenu();
-    menu.clear();
-
-    navigationView.inflateMenu(R.menu.nav_menu);
-    navigationView.setNavigationItemSelectedListener(
-        menuItem -> {
-          Intent intent = null;
-          switch (menuItem.getItemId()) {
-            case R.id.nav_home:
-              intent =
-                  new Intent(
-                      Setting.this,
-                      userType.equals("admin") ? Homepage4admin.class : Homepage4caretaker.class);
-              break;
-            case R.id.nav_signout:
-              FirebaseAuth.getInstance().signOut();
-              startActivity(new Intent(Setting.this, LoginActivity.class));
-              finish();
-          }
-
-          if (intent != null) {
-            startActivity(intent);
-          }
-
-          DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-          drawerLayout.closeDrawer(GravityCompat.START);
-          return true;
-        });
   }
 
   private void handleThemeSwitch(final boolean isChecked) {

@@ -95,6 +95,11 @@ public class PatientProfileActivity extends BaseActivity {
           });
     }
 
+    if (customHeader != null && drawerLayout != null) {
+      DrawerNavigationHelper.bindStandardDrawer(
+          this, drawerLayout, navigationView, customHeader.menuButton);
+    }
+
     new TabLayoutMediator(
             tabLayout,
             viewPager2,

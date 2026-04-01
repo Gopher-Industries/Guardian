@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper;
 
 public class CarePlanSummaryActivity extends AppCompatActivity {
   Button prevButton;
@@ -34,5 +35,8 @@ public class CarePlanSummaryActivity extends AppCompatActivity {
         v -> {
           drawerLayout.openDrawer(GravityCompat.START);
         });
+
+    DrawerNavigationHelper.bindStandardDrawer(
+        this, drawerLayout, navigationView, carePlanSummaryMenuButton);
   }
 }
