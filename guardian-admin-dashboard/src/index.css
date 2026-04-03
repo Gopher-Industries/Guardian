@@ -422,6 +422,40 @@ a {
   box-shadow: 0 0 0 4px rgba(79, 160, 200, 0.14);
 }
 
+.table-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 0;
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.9rem;
+}
+
+.table-loader-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: rgba(79, 160, 200, 0.9);
+  border-radius: 50%;
+  animation: table-spin 0.7s linear infinite;
+}
+
+@keyframes table-spin {
+  to { transform: rotate(360deg); }
+}
+
+.field-input--error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12) !important;
+}
+
+.field-error {
+  font-size: 0.8rem;
+  color: #ef4444;
+  margin-top: -4px;
+}
+
 .auth-card-helper {
   display: flex;
   justify-content: space-between;

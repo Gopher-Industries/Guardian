@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const MotionSpan = motion.span;
 const MotionUl = motion.ul;
 
-export default function Dropdown({ label, name, value, onChange, options = [], placeholder }) {
+export default function Dropdown({ label, name, value, onChange, options = [], placeholder, error, disabled }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -30,8 +30,9 @@ export default function Dropdown({ label, name, value, onChange, options = [], p
       <div className="dropdown-wrapper" ref={ref}>
         <button
           type="button"
-          className={`field-input dropdown-trigger${!value ? ' placeholder-shown' : ''}`}
-          onClick={() => setOpen((prev) => !prev)}
+          className={`field-input dropdown-trigger${!value ? ' placeholder-shown' : ''}${error ? ' field-input--error' : ''}`}
+          onClick={() => !disabled && setOpen((prev) => !prev)}
+          disabled={disabled}
         >
           <span>{selected ? selected.label : placeholder}</span>
           <MotionSpan
@@ -65,6 +66,7 @@ export default function Dropdown({ label, name, value, onChange, options = [], p
           )}
         </AnimatePresence>
       </div>
+      {error && <span className="field-error">{error}</span>}
     </div>
   );
 }

@@ -49,3 +49,10 @@ export const STORAGE_KEYS = {
   pendingToken: "guardian_admin_pending_token",
   pendingUser: "guardian_admin_pending_user",
 };
+
+export const ROLE_OPTIONS = [
+  { value: 'doctor', label: 'Doctor' },
+  { value: 'nurse', label: 'Nurse' },
+  { value: 'caretaker', label: 'Caretaker' },
+  { value: 'admin', label: 'Admin' },
+];
