@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
@@ -25,48 +24,24 @@ import kotlinx.coroutines.withContext
 
 class PatientListActivity : BaseActivity() {
     private lateinit var binding: ActivityPatientListBinding
-    private val patientListAdapter =
-        PatientListAdapter(
-            emptyList(),
-            onPatientClick = { patient ->
-                val intent = Intent(this, PatientDetailsActivity::class.java)
-                intent.putExtra("patient", patient)
-                startActivity(intent)
-            },
-            onAssignNurseClick = { patient ->
-//            val intent = Intent(this, AssignNurseActivity::class.java)
-//            intent.putExtra("patientId", patient.id)
-//            startActivity(intent)
-            },
-            onDeleteClick = { patient ->
-                confirmDeletePatient(patient)
-            },
-        )
 
-    private fun confirmDeletePatient(patient: Patient) {
-        // Optional: show a confirmation dialog before deleting
-        deletePatient(patient)
-    }
-
-    private fun deletePatient(patient: Patient) {
-        val token = "Bearer ${SessionManager.getToken()}"
-        CoroutineScope(Dispatchers.IO).launch {
-            val response =
-                try {
-                    ApiClient.apiService.deletePatient(token, patient.id)
-                } catch (e: Exception) {
-                    null
-                }
-            withContext(Dispatchers.Main) {
-                if (response?.isSuccessful == true) {
-                    showMessage("Patient deleted")
-                    fetchPatients() // Refresh the patient list
-                } else {
-                    showMessage("Failed to delete patient")
-                }
-            }
-        }
-    }
+    private val patientListAdapter = PatientListAdapter(
+        emptyList(),
+        onPatientClick = { patient ->
+            val intent = Intent(this, PatientDetailsActivity::class.java)
+            intent.putExtra("patient", patient)
+            startActivity(intent)
+        },
+        onAssignNurseClick = { patient ->
+            val intent = Intent(this, AssignNurseActivity::class.java)
+            intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_ID, patient.id)
+            intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_NAME, patient.fullname)
+            startActivity(intent)
+        },
+        onDeleteClick = { patient ->
+            confirmDeletePatient(patient)
+        },
+    )
 
     private val currentUser = SessionManager.getCurrentUser()
 
@@ -93,38 +68,75 @@ class PatientListActivity : BaseActivity() {
         fetchPatients()
     }
 
+    private fun confirmDeletePatient(patient: Patient) {
+        deletePatient(patient)
+    }
+
+    private fun deletePatient(patient: Patient) {
+        val token = "Bearer ${SessionManager.getToken()}"
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = try {
+                ApiClient.apiService.deletePatient(token, patient.id)
+            } catch (e: Exception) {
+                null
+            }
+
+            withContext(Dispatchers.Main) {
+                if (response?.isSuccessful == true) {
+                    showMessage("Patient deleted")
+                    fetchPatients()
+                } else {
+                    showMessage("Failed to delete patient")
+                }
+            }
+        }
+    }
+
     private fun fetchPatients() {
         val token = "Bearer ${SessionManager.getToken()}"
+
         CoroutineScope(Dispatchers.IO).launch {
             if (patientListAdapter.itemCount <= 0) {
                 withContext(Dispatchers.Main) {
                     binding.progressBar.show()
                 }
             }
-            val response = ApiClient.apiService.getAssignedPatients(token)
+
+            val response = try {
+                ApiClient.apiService.getAssignedPatients(token)
+            } catch (e: Exception) {
+                null
+            }
+
             withContext(Dispatchers.Main) {
-                withContext(Dispatchers.Main) {
-                    binding.progressBar.hide()
-                }
-                if (response.isSuccessful) {
-                    if (!response.body().isNullOrEmpty()) {
-                        patientListAdapter.updateData(response.body()!!)
-                        withContext(Dispatchers.Main) {
-                            binding.tvEmptyMessage.visibility = View.GONE
-                        }
+                binding.progressBar.hide()
+
+                if (response?.isSuccessful == true) {
+                    val patients = response.body().orEmpty()
+                    if (patients.isNotEmpty()) {
+                        patientListAdapter.updateData(patients)
+                        binding.tvEmptyMessage.visibility = android.view.View.GONE
                     } else {
-                        withContext(Dispatchers.Main) {
-                            binding.tvEmptyMessage.visibility = View.VISIBLE
-                        }
+                        binding.tvEmptyMessage.visibility = android.view.View.VISIBLE
                     }
                 } else {
-                    // Handle error
-                    val errorResponse =
-                        Gson().fromJson(
-                            response.errorBody()?.string(),
-                            ApiErrorResponse::class.java,
-                        )
-                    showMessage(errorResponse.apiError ?: response.message())
+                    val rawErrorBody = try {
+                        response?.errorBody()?.string()
+                    } catch (e: Exception) {
+                        null
+                    }
+
+                    val errorResponse = try {
+                        Gson().fromJson(rawErrorBody, ApiErrorResponse::class.java)
+                    } catch (e: Exception) {
+                        null
+                    }
+
+                    val errorMessage = errorResponse?.apiError?.takeIf { it.isNotBlank() }
+                        ?: rawErrorBody?.takeIf { it.isNotBlank() } ?: response?.message()
+                            ?.takeIf { it.isNotBlank() } ?: "Failed to load patients"
+
+                    showMessage(errorMessage)
                 }
             }
         }

@@ -73,6 +73,9 @@
             android:name=".view.general.TaskDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".view.general.AssignNurseActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.general.TaskAddActivity"
             android:exported="false" />
         <activity
