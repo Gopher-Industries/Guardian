@@ -679,8 +679,8 @@
     <string name="patient_manual_navigate">How to Navigate through the Exercise plans</string>
     <string name="patient_manual_progress">How to Track Progress</string>
     <string name="benefits_of_exercising">Benefits of Exercising</string>
-    <string name="benefits_greeting">There are several benefits why exercising is important for you and here is why</string>
-    <string name="benefits_list">Bone Health\nEnergy Increase\nAllows Flexibility\nWeight Loss\nBoosts Immunity\nPrevent falls\nImproved mood\nCognitive Function\nRelieves Osteoarthritis Pain\nBetter Cardiovascular Health\nImproved Sleep</string>
+    <string name="benefits_greeting">Exercising provides several important benefits to our health. Here’s why it matters:</string>
+    <string name="benefits_list">The benefits of exercising include - \n\nImproved Bone Health\nEnergy Increase\nAllows Flexibility\nWeight Loss\nBoosts Immunity\nPrevent falls\nImproved mood\nCognitive Function\nRelieves Osteoarthritis Pain\nBetter Cardiovascular Health\nImproved Sleep</string>
     <string name="navigation_guide">Exercise Plan Navigation Guide</string>
     <string name="navigate_instructions">1. At the Exercise Plan portal, select what kind of exercise you want.\n2. Follow the plan.\n3. You can exit anytime.</string>
     <string name="how_to_track_progress">How to Track Progress</string>

@@ -178,9 +178,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
+                android:enabled="false"
                 android:hint="@string/photo"
-                android:inputType="text"
-                android:enabled="false"/>
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
