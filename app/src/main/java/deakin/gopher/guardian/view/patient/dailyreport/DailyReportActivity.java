@@ -56,14 +56,16 @@ public class DailyReportActivity extends AppCompatActivity {
     navigationView.setItemIconTintList(null);
 
     final NavigationService navigationService = new NavigationService(this);
-    final boolean canAddTasks = SessionManager.INSTANCE.getCurrentUser().getRole() instanceof Role.Caretaker;
+    final boolean canAddTasks =
+        SessionManager.INSTANCE.getCurrentUser().getRole() instanceof Role.Caretaker;
     navigationView.getMenu().findItem(R.id.add_task).setVisible(canAddTasks);
 
     navigationView.setNavigationItemSelectedListener(
         menuItem -> {
           final int id = menuItem.getItemId();
           if (R.id.nav_home == id) {
-            navigationService.toHomeScreenForRole(SessionManager.INSTANCE.getCurrentUser().getRole());
+            navigationService.toHomeScreenForRole(
+                SessionManager.INSTANCE.getCurrentUser().getRole());
           } else if (R.id.add_task == id && canAddTasks) {
             navigationService.onLaunchTaskCreator();
           } else if (R.id.nav_signout == id) {
