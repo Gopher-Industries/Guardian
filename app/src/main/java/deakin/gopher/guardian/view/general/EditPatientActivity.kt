@@ -21,6 +21,7 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.databinding.ActivityEditPatientBinding
 import deakin.gopher.guardian.model.ApiErrorResponse
 import deakin.gopher.guardian.model.Patient
+import deakin.gopher.guardian.model.UpdatePatientRequest
 import deakin.gopher.guardian.model.login.Role
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.api.ApiClient
@@ -96,7 +97,7 @@ class EditPatientActivity : BaseActivity() {
 
         binding.btnSelectFromGallery.setOnClickListener { openGallery() }
         binding.btnTakePhoto.setOnClickListener { checkCameraPermissionAndOpen() }
-//        binding.btnSave.setOnClickListener { updatePatientInfo() }
+        binding.btnSave.setOnClickListener { updatePatientInfo() }
     }
 
     private fun setupGenderSpinner() {
@@ -164,8 +165,7 @@ class EditPatientActivity : BaseActivity() {
 
     private fun checkCameraPermissionAndOpen() {
         if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.CAMERA
+                this, Manifest.permission.CAMERA
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             openCamera()
@@ -201,71 +201,93 @@ class EditPatientActivity : BaseActivity() {
         cameraLauncher.launch(null)
     }
 
-//    private fun updatePatientInfo() {
-//        if (!validateInputs()) return
-//
-//        val fullname = binding.txtName.text.toString().trim()
-//        val dob = binding.txtDob.text.toString().trim()
-//        val gender = binding.genderSpinner.selectedItem?.toString()?.lowercase() ?: ""
-//
-//        val namePart = fullname.toRequestBody("text/plain".toMediaTypeOrNull())
-//        val dobPart = dob.toRequestBody("text/plain".toMediaTypeOrNull())
-//        val genderPart = gender.toRequestBody("text/plain".toMediaTypeOrNull())
-//
-//        val photoPart: MultipartBody.Part? = when {
-//            selectedPhotoUri != null -> prepareFilePart("photo", selectedPhotoUri!!, this)
-//            capturedPhotoBitmap != null -> prepareBitmapPart("photo", capturedPhotoBitmap!!)
-//            else -> null
-//        }
-//
-//        val token = "Bearer ${SessionManager.getToken()}"
-//
-//        CoroutineScope(Dispatchers.IO).launch {
-//            withContext(Dispatchers.Main) {
-//                binding.progressBar.show()
-//                binding.btnSave.hide()
-//            }
-//
-//            val response = try {
-//                ApiClient.apiService.updatePatient(
-//                    token = token,
-//                    patientId = patient.id,
-//                    name = namePart,
-//                    dob = dobPart,
-//                    gender = genderPart,
-//                    photo = photoPart,
-//                )
-//            } catch (e: Exception) {
-//                null
-//            }
-//
-//            withContext(Dispatchers.Main) {
-//                binding.progressBar.hide()
-//                binding.btnSave.show()
-//
-//                if (response?.isSuccessful == true) {
-//                    showMessage(response.body()?.apiMessage ?: "Patient updated successfully")
-//                    finish()
-//                } else {
-//                    val errorBody = try {
-//                        response?.errorBody()?.string()
-//                    } catch (e: Exception) {
-//                        null
-//                    }
-//
-//                    val errorResponse = try {
-//                        Gson().fromJson(errorBody, ApiErrorResponse::class.java)
-//                    } catch (e: Exception) {
-//                        null
-//                    }
-//
-//                    showMessage(errorResponse?.apiError?.takeIf { it.isNotBlank() }
-//                        ?: response?.message()?.takeIf { it.isNotBlank() }
-//                        ?: "Failed to update patient")
-//                }
-//            }
-//        }
-//    }
+    private fun updatePatientInfo() {
+        if (!validateInputs()) return
+
+        val fullName = binding.txtName.text.toString().trim().replace("\\s+".toRegex(), " ")
+        val dob = binding.txtDob.text.toString().trim()
+        val gender = binding.genderSpinner.selectedItem?.toString()?.trim()?.lowercase() ?: ""
+
+        if (!hasChanges(fullName, dob, gender)) {
+            showMessage("No changes to update")
+            return
+        }
+
+        val token = "Bearer ${SessionManager.getToken()}"
+
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.Main) {
+                binding.progressBar.show()
+                binding.btnSave.visibility = android.view.View.GONE
+            }
+
+            val response = try {
+                val photoPart = when {
+                    selectedPhotoUri != null -> prepareFilePart(
+                        "photo", selectedPhotoUri!!, this@EditPatientActivity
+                    )
+
+                    capturedPhotoBitmap != null -> prepareBitmapPart("photo", capturedPhotoBitmap!!)
+                    else -> null
+                }
+
+                if (photoPart != null) {
+                    val fullNamePart = fullName.toRequestBody("text/plain".toMediaTypeOrNull())
+                    val dobPart = dob.toRequestBody("text/plain".toMediaTypeOrNull())
+                    val genderPart = gender.toRequestBody("text/plain".toMediaTypeOrNull())
+
+                    ApiClient.apiService.updatePatientWithPhoto(
+                        token = token,
+                        patientId = patient.id,
+                        fullName = fullNamePart,
+                        dateOfBirth = dobPart,
+                        gender = genderPart,
+                        photo = photoPart,
+                    )
+                } else {
+                    ApiClient.apiService.updatePatient(
+                        token = token,
+                        patientId = patient.id,
+                        request = UpdatePatientRequest(
+                            fullName = fullName,
+                            dateOfBirth = dob,
+                            gender = gender,
+                        ),
+                    )
+                }
+            } catch (e: Exception) {
+                null
+            }
+
+            withContext(Dispatchers.Main) {
+                binding.progressBar.hide()
+                binding.btnSave.visibility = android.view.View.VISIBLE
+
+                if (response?.isSuccessful == true) {
+                    showMessage(response.body()?.apiMessage ?: "Patient updated successfully")
+                    finish()
+                } else {
+                    val rawErrorBody = try {
+                        response?.errorBody()?.string()
+                    } catch (e: Exception) {
+                        null
+                    }
+
+                    val errorResponse = try {
+                        Gson().fromJson(rawErrorBody, ApiErrorResponse::class.java)
+                    } catch (e: Exception) {
+                        null
+                    }
+
+                    val errorMessage = errorResponse?.apiError?.takeIf { it.isNotBlank() }
+                        ?: rawErrorBody?.takeIf { it.isNotBlank() } ?: response?.message()
+                            ?.takeIf { it.isNotBlank() } ?: "Failed to update patient"
+
+                    showMessage(errorMessage)
+                }
+            }
+        }
+    }
 
     private fun validateInputs(): Boolean {
         clearErrors()
@@ -377,4 +399,17 @@ class EditPatientActivity : BaseActivity() {
     private fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
+    private fun hasChanges(
+        fullName: String,
+        dob: String,
+        gender: String,
+    ): Boolean {
+        val currentName = patient.fullname.trim().replace("\\s+".toRegex(), " ")
+        val currentDob = patient.dateOfBirth.substringBefore("T")
+        val currentGender = patient.gender.trim().lowercase()
+
+        return fullName != currentName || dob != currentDob || gender != currentGender || selectedPhotoUri != null || capturedPhotoBitmap != null
+    }
+
 }

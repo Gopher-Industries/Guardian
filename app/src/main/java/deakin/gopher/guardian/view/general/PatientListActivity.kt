@@ -33,15 +33,27 @@ class PatientListActivity : BaseActivity() {
             startActivity(intent)
         },
         onAssignNurseClick = { patient ->
-            val intent = Intent(this, AssignNurseActivity::class.java)
-            intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_ID, patient.id)
-            intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_NAME, patient.fullname)
-            startActivity(intent)
+            if (currentUser.role == Role.Nurse) {
+                Toast.makeText(
+                    this, "Only caretaker can assign nurse to the patient", Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                val intent = Intent(this, AssignNurseActivity::class.java)
+                intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_ID, patient.id)
+                intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_NAME, patient.fullname)
+                startActivity(intent)
+            }
         },
         onEditClick = { patient ->
-            val intent = Intent(this, EditPatientActivity::class.java)
-            intent.putExtra(EditPatientActivity.EXTRA_PATIENT, patient)
-            startActivity(intent)
+            if (currentUser.role == Role.Nurse) {
+                Toast.makeText(
+                    this, "Only caretaker can edit patient info", Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                val intent = Intent(this, EditPatientActivity::class.java)
+                intent.putExtra(EditPatientActivity.EXTRA_PATIENT, patient)
+                startActivity(intent)
+            }
         },
         onDeleteClick = { patient ->
             confirmDeletePatient(patient)

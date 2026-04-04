@@ -11,14 +11,16 @@ import deakin.gopher.guardian.databinding.ActivityAssignNurseBinding
 import deakin.gopher.guardian.model.ApiErrorResponse
 import deakin.gopher.guardian.model.login.Role
 import deakin.gopher.guardian.model.login.SessionManager
+import deakin.gopher.guardian.model.AssignNurseRequest
 import deakin.gopher.guardian.model.register.User
 import deakin.gopher.guardian.services.api.ApiClient
-//import deakin.gopher.guardian.services.api.AssignNurseRequest
 import deakin.gopher.guardian.view.hide
 import deakin.gopher.guardian.view.show
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import deakin.gopher.guardian.model.register.NurseListItem
+import deakin.gopher.guardian.model.register.NurseListResponse
 import kotlinx.coroutines.withContext
 
 class AssignNurseActivity : BaseActivity() {
@@ -52,7 +54,7 @@ class AssignNurseActivity : BaseActivity() {
         setupToolbar()
         setupRecyclerView()
         setupUi()
-//        fetchNurses()
+        fetchNurses()
     }
 
     private fun setupToolbar() {
@@ -76,110 +78,124 @@ class AssignNurseActivity : BaseActivity() {
 
     private fun setupRecyclerView() {
         nurseListAdapter = NurseListAdapter(emptyList()) { nurse ->
-//                showAssignConfirmation(nurse)
+            showAssignConfirmation(nurse)
         }
 
         binding.recyclerViewNurses.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewNurses.adapter = nurseListAdapter
     }
 
-//    private fun fetchNurses() {
-//        val token = "Bearer ${SessionManager.getToken()}"
-//
-//        CoroutineScope(Dispatchers.IO).launch {
-//            withContext(Dispatchers.Main) {
-//                binding.progressBar.show()
-//            }
-//
-//            val response =
-//                try {
-////                    ApiClient.apiService.getAllNurses(token)
-//                } catch (e: Exception) {
-//                    null
-//                }
-//
-//            withContext(Dispatchers.Main) {
-//                binding.progressBar.hide()
-//
-//                if (response?.isSuccessful == true) {
-//                    val nurses = response.body().orEmpty()
-//
-//                    if (nurses.isNotEmpty()) {
-//                        nurseListAdapter.updateData(nurses)
-//                        binding.tvEmptyMessage.visibility = android.view.View.GONE
-//                    } else {
-//                        binding.tvEmptyMessage.visibility = android.view.View.VISIBLE
-//                    }
-//                } else {
-//                    val errorResponse =
-//                        try {
-//                            Gson().fromJson(
-//                                response?.errorBody()?.string(),
-//                                ApiErrorResponse::class.java,
-//                            )
-//                        } catch (e: Exception) {
-//                            null
-//                        }
-//
-//                    showMessage(errorResponse?.apiError ?: "Failed to load nurses")
-//                }
-//            }
-//        }
-//    }
+    private fun fetchNurses() {
+        val token = "Bearer ${SessionManager.getToken()}"
 
-//    private fun showAssignConfirmation(nurse: User) {
-//        AlertDialog.Builder(this)
-//            .setTitle("Assign Nurse")
-//            .setMessage("Assign ${nurse.name} to ${patientName.ifBlank { "this patient" }}?")
-//            .setPositiveButton("Assign") { _, _ ->
-//                assignNurseToPatient(nurse)
-//            }
-//            .setNegativeButton("Cancel", null)
-//            .show()
-//    }
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.Main) {
+                binding.progressBar.show()
+            }
 
-//    private fun assignNurseToPatient(nurse: User) {
-//        val token = "Bearer ${SessionManager.getToken()}"
-//
-//        CoroutineScope(Dispatchers.IO).launch {
-//            withContext(Dispatchers.Main) {
-//                binding.progressBar.show()
-//            }
-//
-//            val response =
-//                try {
-//                    ApiClient.apiService.assignNurseToPatient(
-//                        token = token,
-//                        patientId = patientId,
-//                        request = AssignNurseRequest(nurse.id),
-//                    )
-//                } catch (e: Exception) {
-//                    null
-//                }
-//
-//            withContext(Dispatchers.Main) {
-//                binding.progressBar.hide()
-//
-//                if (response?.isSuccessful == true) {
-//                    showMessage("Nurse assigned successfully")
-//                    setResult(RESULT_OK)
-//                    finish()
-//                } else {
-//                    val errorResponse =
-//                        try {
-//                            Gson().fromJson(
-//                                response?.errorBody()?.string(),
-//                                ApiErrorResponse::class.java,
-//                            )
-//                        } catch (e: Exception) {
-//                            null
-//                        }
-//
-//                    showMessage(errorResponse?.apiError ?: "Failed to assign nurse")
-//                }
-//            }
-//        }
-//    }
+            val response = try {
+                ApiClient.apiService.getAllNurses(
+                    token = token,
+                    page = 1,
+                    limit = 50,
+                )
+            } catch (e: Exception) {
+                null
+            }
+
+            withContext(Dispatchers.Main) {
+                binding.progressBar.hide()
+
+                if (response?.isSuccessful == true) {
+                    val nurses = response.body()?.nurses.orEmpty().map { it.toUser() }
+                        .filter { it.role == Role.Nurse }
+
+                    if (nurses.isNotEmpty()) {
+                        nurseListAdapter.updateData(nurses)
+                        binding.tvEmptyMessage.visibility = android.view.View.GONE
+                    } else {
+                        binding.tvEmptyMessage.visibility = android.view.View.VISIBLE
+                    }
+                } else {
+                    val rawErrorBody = try {
+                        response?.errorBody()?.string()
+                    } catch (e: Exception) {
+                        null
+                    }
+
+                    val errorResponse = try {
+                        Gson().fromJson(rawErrorBody, ApiErrorResponse::class.java)
+                    } catch (e: Exception) {
+                        null
+                    }
+
+                    val errorMessage = errorResponse?.apiError?.takeIf { it.isNotBlank() }
+                        ?: rawErrorBody?.takeIf { it.isNotBlank() } ?: response?.message()
+                            ?.takeIf { it.isNotBlank() } ?: "Failed to load nurses"
+
+                    showMessage(errorMessage)
+                }
+            }
+        }
+    }
+
+    private fun showAssignConfirmation(nurse: User) {
+        AlertDialog.Builder(this).setTitle("Assign Nurse")
+            .setMessage("Assign ${nurse.name} to ${patientName.ifBlank { "this patient" }}?")
+            .setPositiveButton("Assign") { _, _ ->
+                assignNurseToPatient(nurse)
+            }.setNegativeButton("Cancel", null).show()
+    }
+
+    private fun assignNurseToPatient(nurse: User) {
+        val token = "Bearer ${SessionManager.getToken()}"
+
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.Main) {
+                binding.progressBar.show()
+            }
+
+            val response = try {
+                ApiClient.apiService.assignNurseToPatient(
+                    token = token,
+                    request = AssignNurseRequest(
+                        nurseId = nurse.id,
+                        patientId = patientId,
+                    ),
+                )
+            } catch (e: Exception) {
+                null
+            }
+
+            withContext(Dispatchers.Main) {
+                binding.progressBar.hide()
+
+                if (response?.isSuccessful == true) {
+                    showMessage("Nurse assigned successfully")
+                    setResult(RESULT_OK)
+                    finish()
+                } else {
+                    val rawErrorBody = try {
+                        response?.errorBody()?.string()
+                    } catch (e: Exception) {
+                        null
+                    }
+
+                    val errorResponse = try {
+                        Gson().fromJson(rawErrorBody, ApiErrorResponse::class.java)
+                    } catch (e: Exception) {
+                        null
+                    }
+
+                    val errorMessage = errorResponse?.apiError?.takeIf { it.isNotBlank() }
+                        ?: rawErrorBody?.takeIf { it.isNotBlank() } ?: response?.message()
+                            ?.takeIf { it.isNotBlank() } ?: "Failed to assign nurse"
+
+                    showMessage(errorMessage)
+                }
+            }
+        }
+    }
 
     private fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
