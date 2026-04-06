@@ -53,6 +53,4 @@ export const STORAGE_KEYS = {
 export const ROLE_OPTIONS = [
   { value: 'doctor', label: 'Doctor' },
   { value: 'nurse', label: 'Nurse' },
-  { value: 'caretaker', label: 'Caretaker' },
-  { value: 'admin', label: 'Admin' },
 ];
