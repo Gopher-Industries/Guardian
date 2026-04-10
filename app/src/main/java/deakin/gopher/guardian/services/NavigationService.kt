@@ -5,6 +5,7 @@ import android.content.Intent
 import deakin.gopher.guardian.model.login.Role
 import deakin.gopher.guardian.view.general.Homepage4admin
 import deakin.gopher.guardian.view.general.Homepage4caretaker
+import deakin.gopher.guardian.view.general.Homepage4doctor
 import deakin.gopher.guardian.view.general.Homepage4nurse
 import deakin.gopher.guardian.view.general.LoginActivity
 import deakin.gopher.guardian.view.general.PatientListActivity

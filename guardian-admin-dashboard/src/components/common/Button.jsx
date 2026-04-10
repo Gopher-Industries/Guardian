@@ -6,6 +6,7 @@ export default function Button({
   onClick,
   disabled = false,
   fullWidth = false,
+  style,
 }) {
   return (
     <motion.button
@@ -13,6 +14,7 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       className={`ui-button ${fullWidth ? "full-width" : ""}`}
+      style={{ display: "inline-flex", alignItems: "center", gap: "8px", ...style }}
       whileHover={{ y: -1, scale: 1.01 }}
       whileTap={{ scale: 0.99 }}
     >
