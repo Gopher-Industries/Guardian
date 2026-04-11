@@ -6,12 +6,13 @@ export default function InputField({
   name,
   placeholder,
   autoComplete,
+  error,
 }) {
   return (
     <label className="field">
       <span className="field-label">{label}</span>
       <input
-        className="field-input"
+        className={`field-input${error ? ' field-input--error' : ''}`}
         type={type}
         name={name}
         value={value}
@@ -19,6 +20,7 @@ export default function InputField({
         placeholder={placeholder}
         autoComplete={autoComplete}
       />
+      {error && <span className="field-error">{error}</span>}
     </label>
   );
 }
