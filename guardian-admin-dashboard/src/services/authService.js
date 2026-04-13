@@ -29,22 +29,15 @@
 // }
 
 // Mock login and otp fallback
+import api from "./api";
 
 export async function loginAdmin({ email, password }) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({
-        user: {
-          id: "demo-admin-id",
-          fullname: "Alice Smith",
-          email,
-          role: "admin",
-          twoFactorRequired: true,
-        },
-        token: "demo-admin-token",
-      });
-    }, 700);
+  const response = await api.post("/auth/login", {
+    email,
+    password,
   });
+  console.log("LOGIN RESPONSE:", response.data); 
+  return response.data;
 }
 
 export async function sendPin(email) {
