@@ -4,7 +4,7 @@ import { getAuthToken } from "../utils/storage";
 const api = axios.create({
   baseURL:
     import.meta.env.VITE_API_BASE_URL ||
-    "https://guardian-backend-ashen.vercel.app/",
+    "https://guardian-backend-git-fix-cors-patelrudra2306-5873s-projects.vercel.app",
   headers: {
     "Content-Type": "application/json",
   },
@@ -12,6 +12,7 @@ const api = axios.create({
 
 api.interceptors.request.use((config) => {
   const token = getAuthToken();
+  console.log('token:', getAuthToken());
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
