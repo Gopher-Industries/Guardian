@@ -1,0 +1,237 @@
+Emotion Classifier Observation Notes
+
+Baseline Performance
+
+The original notebook version achieved:
+
+- Test Loss: 1.0922
+- Test Accuracy: 0.5913
+
+The improved notebook version achieved:
+
+- Test Loss: 1.0326
+- Test Accuracy: 0.6262
+
+Overall improvement:
+
+- Loss reduced by 0.0596
+- Accuracy increased by 0.0349 or about 3.49 percentage points
+
+Observation 1: Random Rotation
+
+Initial Setting
+
+- RandomRotation(10)
+
+What Random Rotation Means
+
+RandomRotation is a data augmentation technique. During training, it randomly rotates input images by a certain number of degrees. This helps the model generalize better because it sees slightly different versions of the same image.
+
+Why It Was Changed
+
+The rotation range was reduced from 10 degrees to 5 degrees.
+
+The reason for this change was that facial expression images are sensitive to distortion. If the face is rotated too much, the expression can become less natural and harder for the model to learn from. A smaller rotation still gives some variation, but keeps the faces closer to realistic positions.
+
+Effect On Performance
+
+Reducing the rotation made the training data less distorted, which likely helped the model learn facial features more clearly and improved fitting on the dataset.
+
+Observation 2: Dropout
+
+Initial Setting
+
+- Dropout(0.5)
+
+What Dropout Means
+
+Dropout is a regularization technique used during training. It randomly turns off a fraction of neurons in a layer so the model does not rely too heavily on specific activations. This is useful for reducing overfitting.
+
+Why It Was Changed
+
+The dropout was first reduced from 0.5 to 0.3.
+
+The reason for this was that 0.5 dropout was quite strong for this CNN and may have been preventing the model from learning enough useful patterns from the data. This is called underfitting.
+
+Effect On Performance
+
+Lowering dropout allowed the model to keep more information during training, which improved its ability to learn facial-expression features.
+
+Final Refinement
+
+Dropout was later tuned further to 0.2 in the current notebook version.
+
+This gave the model even more capacity to fit the training data while still keeping some regularization, and this was part of the final version that reached 0.6262 test accuracy.
+
+Observation 3: Learning Rate Scheduler
+
+Initial Setting
+
+- No learning rate scheduler
+
+What a Learning Rate Scheduler Means
+
+A learning rate scheduler changes the optimizer's learning rate during training. The learning rate controls how large each update step is when the model adjusts its weights.
+
+Why It Was Changed
+
+A ReduceLROnPlateau scheduler was added.
+
+This scheduler lowers the learning rate when validation loss stops improving. The reason for adding it was that a fixed learning rate can become too aggressive later in training and stop the model from settling into a better solution.
+
+Effect On Performance
+
+The scheduler helped training become smoother and more controlled once improvement slowed down, which likely contributed to the better validation and test performance.
+
+Observation 4: Gradient Clipping
+
+Initial Setting
+
+- No gradient clipping
+
+What Gradient Clipping Means
+
+Gradient clipping limits how large the gradients can become during backpropagation. Gradients control how much the weights change at each update.
+
+Why It Was Changed
+
+Gradient clipping with clip_grad_norm_ was added.
+
+The reason for this was to prevent unstable updates, especially when gradients become too large. Large updates can make training noisy or cause the optimizer to miss better solutions.
+
+Effect On Performance
+
+This made training more stable and likely helped the optimizer learn more consistently across epochs.
+
+Observation 5: Number of Epochs
+
+Initial Setting
+
+- 15 epochs
+
+What Epochs Mean
+
+An epoch is one full pass through the training dataset. More epochs allow the model to learn for longer.
+
+Why It Was Changed
+
+The training schedule was increased from 15 epochs to 25 epochs in the first improved version.
+
+The reason for this was that the model still appeared to be learning after 15 epochs, so stopping too early could leave performance on the table.
+
+Effect On Performance
+
+The longer schedule gave the model more time to improve. In your improved run, the best validation result appeared after the original 15-epoch range, which shows that extending training helped.
+
+Final Refinement
+
+In the current notebook, training is set to 20 epochs with early stopping.
+
+This keeps the benefit of longer training while avoiding unnecessary epochs if validation performance stops improving.
+
+Observation 6: Validation Tracking
+
+Initial Setting
+
+- Only training loss and training accuracy were printed during training
+
+What Validation Tracking Means
+
+Validation tracking measures performance on unseen data during training. It helps show whether the model is truly generalizing, not just memorizing the training set.
+
+Why It Was Changed
+
+Validation loss and validation accuracy were added to the training loop.
+
+The reason for this was that training accuracy alone is not enough to judge model quality. A model can improve on training data while not improving on unseen data.
+
+Effect On Performance
+
+This made it possible to identify the best-performing epoch based on validation results, which directly improved model selection.
+
+Observation 7: Checkpoint Saving
+
+Initial Setting
+
+- The model was saved every epoch
+- In practice, this meant the final saved model was simply the last epoch
+
+What Checkpointing Means
+
+Checkpointing means saving the model weights during training so they can be loaded later.
+
+Why It Was Changed
+
+Checkpoint saving was changed so that the notebook saves the model only when validation loss improves.
+
+The reason for this was that the last epoch is not always the best epoch. Sometimes validation performance peaks earlier and then starts to degrade.
+
+Effect On Performance
+
+This ensured that the final evaluated model was the best version seen during training instead of just the final one. That likely played a major role in the improvement from 0.5913 to 0.6262.
+
+Observation 8: Early Stopping
+
+Initial Setting
+
+- No early stopping
+
+What Early Stopping Means
+
+Early stopping ends training when validation performance has stopped improving for a set number of epochs.
+
+Why It Was Changed
+
+Early stopping was added in the later version of the notebook.
+
+The reason for this was to avoid wasting time on extra epochs once the model had already peaked, and to reduce the chance of overtraining.
+
+Effect On Performance
+
+This made the training process more efficient and kept the longer training schedule under control.
+
+Observation 9: Evaluation Fix
+
+Initial Setting
+
+- The original testing cell relied on variables that were not clearly initialized inside that cell
+
+Why It Was Changed
+
+The evaluation flow was cleaned up so the final test result uses the saved best model and the shared evaluate() function.
+
+Effect On Performance
+
+This did not directly improve the model itself, but it made the final test measurement more reliable and reproducible.
+
+Observation 10: Local Path Cleanup
+
+Initial Setting
+
+- The original notebook used Kaggle and Colab setup code
+
+Why It Was Changed
+
+The notebook was switched to local paths:
+
+- train_dir = "/Users/tech_nauch/Gopher/archive/train"
+- test_dir = "/Users/tech_nauch/Gopher/archive/test"
+- save_path = "/Users/tech_nauch/Gopher/archive/best_emotion_model.pth"
+
+Effect On Performance
+
+This did not directly change accuracy, but it made the notebook easier to run consistently in your own environment.
+
+Final Summary
+
+The accuracy improvement did not come from one single change. It came from a combination of:
+
+- slightly weaker augmentation
+- lower dropout
+- longer training
+- validation monitoring
+- better checkpoint selection
+- learning-rate scheduling
+- gradient clipping
+
+Together, these changes helped the CNN train more stably, fit the data better, and select the best-performing checkpoint instead of simply using the final epoch.
