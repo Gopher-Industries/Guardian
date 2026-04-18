@@ -1,0 +1,32 @@
+PROJECT GUARDIAN MONITOR — EXAMPLE DASHBOARD CARDS
+====================================================================
+
+┌──────────────────────────────────────────────────────────────────┐
+│  Patient 10023771     │  Note: SYN_0390     │  🟢 Low Alert         │
+├──────────────────────────────────────────────────────────────────┤
+│  Note:    Observed to be relaxed with no acute behavioral concern.   │
+│  Tags:    calm                                                       │
+│  Vitals:  Low        risk  │  Text concern: 0.14                 │
+├──────────────────────────────────────────────────────────────────┤
+│  Low Alert — calm; vitals stable.                                 │
+└──────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────┐
+│  Patient 10023771     │  Note: SYN_0402     │  🟡 Medium Alert      │
+├──────────────────────────────────────────────────────────────────┤
+│  Note:    Patient complains of pain and remains uneasy.              │
+│  Tags:    pain_concern                                               │
+│  Vitals:  Low        risk  │  Text concern: 0.42                 │
+├──────────────────────────────────────────────────────────────────┤
+│  Medium Alert — note: pain concern.                               │
+└──────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────┐
+│  Patient 10014729     │  Note: SYN_0063     │  🔴 High Alert        │
+├──────────────────────────────────────────────────────────────────┤
+│  Note:    Receiving increased oxygen support (FiO2 about 40%). Looks │
+│  Tags:    anxious, respiratory_distress_concern                      │
+│  Vitals:  Low        risk  │  Text concern: 0.89                 │
+├──────────────────────────────────────────────────────────────────┤
+│  High Alert — note: anxious, respiratory distress concern.        │
+└──────────────────────────────────────────────────────────────────┘

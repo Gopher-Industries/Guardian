@@ -1,0 +1,38 @@
+======================================================================
+PROJECT GUARDIAN MONITOR — EVALUATION REPORT
+Generated: 2026-04-17 07:30:39
+======================================================================
+
+Test set size: 112 samples
+
+TEXT MODEL — Per-tag F1 (test set)
+--------------------------------------------------
+Tag                                     F1       P       R  Support
+--------------------------------------------------
+calm                                 0.914   0.842   1.000       16
+anxious                              0.935   0.878   1.000       36
+confused                             0.957   1.000   0.917       12
+agitated                             1.000   1.000   1.000       26
+pain_concern                         0.985   0.985   0.985       65
+respiratory_distress_concern         0.960   0.923   1.000       24
+improvement_stable                   1.000   1.000   1.000       24
+--------------------------------------------------
+Macro F1                             0.964
+
+FINAL ALERT DISTRIBUTION (test set)
+------------------------------
+  Low     : true=17  pred=27
+  Medium  : true=47  pred=27
+  High    : true=48  pred=58
+
+ALERT-LEVEL F1 (per level, test set)
+----------------------------------------
+  Low     : F1=0.773  P=0.630  R=1.000
+  Medium  : F1=0.703  P=0.963  R=0.553
+  High    : F1=0.887  P=0.810  R=0.979
+
+VITALS RISK DISTRIBUTION (test set)
+------------------------------
+  vitals=Low     true_alert=High: 48
+  vitals=Low     true_alert=Low: 17
+  vitals=Low     true_alert=Medium: 47
