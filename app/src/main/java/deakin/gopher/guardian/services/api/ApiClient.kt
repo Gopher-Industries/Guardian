@@ -7,18 +7,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 //    private const val BASE_URL = "http://10.0.2.2:3000/api/v1/"
+
     private const val BASE_URL = "https://guardian-backend-ashen.vercel.app/api/v1/"
+
+//  private const val BASE_URL = "https://guardian-backend-git-fix-cors-patelrudra2306-5873s-projects.vercel.app/api/v1/"
 
     private val client = OkHttpClient()
     private val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     private val clientBuilder = client.newBuilder().addInterceptor(interceptor)
 
     val retrofit: Retrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(clientBuilder.build())
-            .build()
+        Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
+            .client(clientBuilder.build()).build()
     }
 }
 

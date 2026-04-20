@@ -18,7 +18,9 @@
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
 
     <!-- Add WRITE permissions only if necessary -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
     <!-- Add the permission here -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -34,9 +36,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
+        tools:ignore="ExtraText"
         tools:replace="android:allowBackup,android:label"
-        tools:targetApi="31"
-        tools:ignore="ExtraText">
+        tools:targetApi="31">
         <activity
             android:name=".WelcomeActivity"
             android:exported="false" />
@@ -76,6 +78,9 @@
             android:name=".view.general.TaskDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".view.general.AssignNurseActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.general.TaskAddActivity"
             android:exported="false" />
         <activity
@@ -93,6 +98,7 @@
         <activity
             android:name=".view.caretaker.CaretakerProfileActivity"
             android:exported="false" />
+        <activity android:name=".view.general.EditPatientActivity" />
         <activity
             android:name=".view.caretaker.EditCaretakerProfileActivity"
             android:exported="false" />
@@ -161,7 +167,8 @@
         <activity
             android:name=".view.general.LoginActivity"
             android:exported="false" />
-        <activity android:name=".view.general.PinCodeActivity"
+        <activity
+            android:name=".view.general.PinCodeActivity"
             android:exported="false" />
         <activity
             android:name=".view.general.AddNewPatientActivity"
@@ -228,7 +235,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".view.general.DashboardActivity"/>
+        <activity android:name=".view.general.DashboardActivity" />
     </application>
 
 </manifest>

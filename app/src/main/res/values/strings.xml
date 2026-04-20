@@ -41,7 +41,7 @@
     <string name="verified">Verified</string>
     <string name="welcome_caretaker">Welcome, Caretaker</string>
     <string name="welcome_admin">Welcome, Administrator</string>
-    <string name="welcome_nurse">Welcome, Nurse</string>
+    <string name="welcome_nurse">Welcome, </string>
 
 
     <!-- Below are all strings previously hardcoded added here using the quick function -->
@@ -705,7 +705,7 @@
     <string name="todo">To Do</string>
     <string name="mark_as_complete">Mark as Complete</string>
     <string name="empty_patient_list">You have not added any Patients yet.\nTap + to add.</string>
-    <string name="empty_assigned_nurses_list">You have not assigned any Nurses to this Patient yet.\nTap + to add.</string>
+    <string name="empty_assigned_nurses_list">You have not assigned any Nurses to this Patient yet.\</string>
     <string name="empty_patient_activity">No activity has been recorded for this Patient yet.</string>
     <string name="patient_photo">Patient photo</string>
     <string name="more_options">More Options</string>

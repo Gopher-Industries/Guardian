@@ -6,18 +6,49 @@ import deakin.gopher.guardian.model.login.Role
 import java.io.Serializable
 
 data class User(
-    @SerializedName("id") val id: String,
-    @SerializedName("email") val email: String,
-    @SerializedName("fullname") val name: String,
-    @SerializedName("role") val roleName: String,
-    @SerializedName("photoUrl") val photoUrl: String,
+    @SerializedName(value = "id", alternate = ["_id"]) val id: String = "",
+
+    @SerializedName(value = "fullname", alternate = ["fullName"]) val name: String = "",
+
+    @SerializedName("email") val email: String = "",
+
+    @SerializedName("role") val roleName: String? = null,
+
+    @SerializedName("photoUrl") val photoUrl: String? = null,
+
     @SerializedName("organization") val organization: String? = null,
 ) : Serializable {
     val role: Role
-        get() {
-            return Role.create(roleName)
-        }
+        get() = Role.create(roleName ?: "")
 }
+
+data class NurseListResponse(
+    @SerializedName("nurses") val nurses: List<NurseListItem>,
+)
+
+data class NurseListItem(
+    @SerializedName("_id") val id: String,
+    @SerializedName("fullname") val fullName: String?,
+    @SerializedName("email") val email: String?,
+    @SerializedName("photoUrl") val photoUrl: String? = null,
+    @SerializedName("role") val role: NurseRole?,
+) {
+    fun toUser(): User {
+        return User(
+            id = id,
+            email = email.orEmpty(),
+            name = fullName.orEmpty(),
+            roleName = role?.name.orEmpty(),
+            photoUrl = photoUrl.orEmpty(),
+            organization = null,
+        )
+    }
+}
+
+data class NurseRole(
+    @SerializedName("_id") val id: String,
+    @SerializedName("name") val name: String,
+)
 
 data class RegisterRequest(
     @SerializedName("email") val email: String,
