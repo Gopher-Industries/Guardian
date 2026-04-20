@@ -1,0 +1,8 @@
+<resources>
+    <!-- Adjust if you want it a bit lighter/darker -->
+    <color name="brand_teal">#17B6C2</color>
+    <color name="bg_page">#F7F9FC</color>
+    <color name="ink_900">#0B1220</color>
+    <color name="ink_600">#5B667A</color>
+</resources>
+
