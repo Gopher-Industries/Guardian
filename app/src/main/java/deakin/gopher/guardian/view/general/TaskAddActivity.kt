@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -18,8 +18,6 @@ class TaskAddActivity : AppCompatActivity() {
     private lateinit var taskDescriptionEditText: EditText
     private lateinit var patientIdEditText: EditText
     private lateinit var taskSubDescEditText: EditText
-    private lateinit var assignedNurseEditText: EditText
-    private lateinit var priorityRadioGroup: RadioGroup
     private var taskPriority: Priority = Priority.MEDIUM
     private var task: Task? = null
 
@@ -31,16 +29,12 @@ class TaskAddActivity : AppCompatActivity() {
         taskSubDescEditText = findViewById(R.id.tasksubDescEditText)
         patientIdEditText = findViewById(R.id.taskPatientIdEditText)
 
-        priorityRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            taskPriority =
-                when (checkedId) {
-                    else -> Priority.MEDIUM
-                }
-        }
-
         val submitButton: Button = findViewById(R.id.newTaskSubmitButton)
         submitButton.setOnClickListener {
-            showSaveDialog()
+            // ADDED: Validate input before save
+            if (validateInputs()) {
+                showSaveDialog()
+            }
         }
 
         val customHeader: CustomHeader = findViewById(R.id.taskCustomHeader)
@@ -56,15 +50,39 @@ class TaskAddActivity : AppCompatActivity() {
         }
     }
 
+    // ADDED: Basic validation to improve task creation flow
+    private fun validateInputs(): Boolean {
+        val patientId = patientIdEditText.text.toString().trim()
+        val taskDescription = taskDescriptionEditText.text.toString().trim()
+
+        if (patientId.isEmpty()) {
+            patientIdEditText.error = "Patient ID is required"
+            patientIdEditText.requestFocus()
+            return false
+        }
+
+        if (taskDescription.isEmpty()) {
+            taskDescriptionEditText.error = "Task description is required"
+            taskDescriptionEditText.requestFocus()
+            return false
+        }
+
+        return true
+    }
+
     private fun showSaveDialog() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(getString(R.string.saving_changes))
+        // ADDED: Clearer confirmation message
+        builder.setMessage("Do you want to save this task?")
         builder.setPositiveButton(getString(R.string.yes)) { _, _ -> saveInFirebase() }
         builder.setNegativeButton(getString(R.string.no), null)
         val dialog = builder.create()
         dialog.setOnShowListener {
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(R.color.colorGreen))
-            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(R.color.colorRed))
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                .setTextColor(resources.getColor(R.color.colorGreen))
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+                .setTextColor(resources.getColor(R.color.colorRed))
         }
         dialog.show()
     }
@@ -76,12 +94,22 @@ class TaskAddActivity : AppCompatActivity() {
         val patientId = patientIdEditText.text.toString().trim()
         val taskDescription = taskDescriptionEditText.text.toString().trim()
         val taskSubDesc = taskSubDescEditText.text.toString().trim()
-        val assignedNurse = assignedNurseEditText.text.toString().trim()
+
+        // ADDED: No nurse input exists in current UI, so default value is used
+        val assignedNurse = "Not Assigned"
+
+        // IMPROVED: Merge sub description with main description when provided
+        val finalDescription =
+            if (taskSubDesc.isNotEmpty()) {
+                "$taskDescription - $taskSubDesc"
+            } else {
+                taskDescription
+            }
 
         val newTask =
             Task(
                 taskId = "",
-                description = taskDescription,
+                description = finalDescription,
                 assignedNurse = assignedNurse,
                 priority = taskPriority,
                 patientId = patientId,
@@ -90,18 +118,30 @@ class TaskAddActivity : AppCompatActivity() {
         val taskId = caretakerTaskRef.push().key ?: ""
         newTask.taskId = taskId
 
+        // ADDED: Prevent repeated taps during save
+        val submitButton: Button = findViewById(R.id.newTaskSubmitButton)
+        submitButton.isEnabled = false
+
         caretakerTaskRef.child(taskId).setValue(newTask).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 updatePatientTasks(taskId)
-                finish()
+
+                // IMPROVED: Also save to nurse tasks and show feedback
+                val nurseTaskRef = databaseRef.child("nurse_tasks")
+                nurseTaskRef.child(taskId).setValue(newTask).addOnCompleteListener { nurseTask ->
+                    if (nurseTask.isSuccessful) {
+                        Toast.makeText(this, "Task saved successfully", Toast.LENGTH_SHORT).show()
+                        finish()
+                    } else {
+                        Toast.makeText(this, "Task saved partially", Toast.LENGTH_SHORT).show()
+                        submitButton.isEnabled = true
+                    }
+                }
             } else {
-                // Handle the error
+                Toast.makeText(this, "Failed to save task", Toast.LENGTH_SHORT).show()
+                submitButton.isEnabled = true
             }
         }
-
-        // Save under nurse tasks as well
-        val nurseTaskRef = databaseRef.child("nurse_tasks")
-        nurseTaskRef.child(taskId).setValue(newTask)
     }
 
     private fun updatePatientTasks(taskId: String) {

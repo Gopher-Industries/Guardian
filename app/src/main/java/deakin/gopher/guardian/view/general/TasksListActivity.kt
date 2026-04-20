@@ -3,10 +3,12 @@ package deakin.gopher.guardian.view.general
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.GravityCompat
@@ -31,39 +33,51 @@ class TasksListActivity : AppCompatActivity() {
     private var overviewCardview: CardView? = null
     private lateinit var plusButton: ImageButton
 
+    // ADDED: Keep a reference to the Firebase listener to avoid duplicate listeners
+    private var taskValueEventListener: ValueEventListener? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tasks_list)
+
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         val taskListMenuBtn: ImageView = findViewById(R.id.task_list_manu_button)
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
 
         plusButton = findViewById(R.id.imageView62)
         navigationView.setItemIconTintList(null)
+
+        // FIXED: Navigation item listener moved outside menu button click
+        // This prevents the listener from being attached again every time the menu button is pressed
+        navigationView.setNavigationItemSelectedListener { menuItem: MenuItem ->
+            val id = menuItem.itemId
+            when (id) {
+                R.id.nav_home ->
+                    startActivity(
+                        Intent(this@TasksListActivity, Homepage4caretaker::class.java),
+                    )
+
+//                R.id.nav_settings -> startActivity(
+//                    Intent(this@TasksListActivity, Setting::class.java)
+//                )
+
+                R.id.add_task ->
+                    startActivity(
+                        Intent(this@TasksListActivity, TaskAddActivity::class.java),
+                    )
+
+                R.id.nav_signout -> {
+                    FirebaseAuth.getInstance().signOut()
+                    startActivity(Intent(this@TasksListActivity, LoginActivity::class.java))
+                    finish()
+                }
+            }
+            true
+        }
+
+        // SIMPLIFIED: Menu button only opens the drawer
         taskListMenuBtn.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
-            navigationView.setNavigationItemSelectedListener { menuItem: MenuItem ->
-                val id = menuItem.itemId
-                when (id) {
-                    R.id.nav_home ->
-                        startActivity(
-                            Intent(this@TasksListActivity, Homepage4caretaker::class.java),
-                        )
-//                    R.id.nav_settings -> startActivity(
-//                        Intent(this@TasksListActivity, Setting::class.java)
-//                    )
-                    R.id.add_task ->
-                        startActivity(
-                            Intent(this@TasksListActivity, TaskAddActivity::class.java),
-                        )
-                    R.id.nav_signout -> {
-                        FirebaseAuth.getInstance().signOut()
-                        startActivity(Intent(this@TasksListActivity, LoginActivity::class.java))
-                        finish()
-                    }
-                }
-                true
-            }
         }
 
         plusButton.setOnClickListener {
@@ -74,6 +88,7 @@ class TasksListActivity : AppCompatActivity() {
         overviewCardview = findViewById(R.id.task_list_task_overview)
         val taskSearchView: SearchView = findViewById(R.id.task_list_searchView)
         val addTaskButton: Button = findViewById(R.id.add_task_button)
+
         addTaskButton.setOnClickListener {
             NavigationService(this).onLaunchTaskCreator()
         }
@@ -108,6 +123,8 @@ class TasksListActivity : AppCompatActivity() {
                                 .endAt(s + "\uf8ff")
                                 .limitToFirst(10)
                         }
+
+                    // REFRESH: Reload Firebase data when search text changes
                     fetchDataFromFirebase()
                     return true
                 }
@@ -116,23 +133,52 @@ class TasksListActivity : AppCompatActivity() {
     }
 
     private fun fetchDataFromFirebase() {
-        query?.addValueEventListener(
+        // ADDED: Remove previous listener before attaching a new one
+        // This avoids duplicate callbacks when search text changes
+        taskValueEventListener?.let { listener ->
+            query?.removeEventListener(listener)
+        }
+
+        taskValueEventListener =
             object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val taskList = mutableListOf<Task>()
+
                     for (taskSnapshot in dataSnapshot.children) {
                         val task = taskSnapshot.getValue(Task::class.java)
                         if (task != null) {
                             taskList.add(task)
                         }
                     }
+
                     taskListAdapter?.updateTaskList(taskList)
+
+                    // ADDED: Basic empty-state handling using existing CardView
+                    if (taskList.isEmpty()) {
+                        overviewCardview?.visibility = View.GONE
+                    } else {
+                        overviewCardview?.visibility = View.VISIBLE
+                    }
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
-                    // Handle possible errors.
+                    // ADDED: Show simple error feedback to improve user experience
+                    Toast.makeText(
+                        this@TasksListActivity,
+                        "Failed to load tasks: ${databaseError.message}",
+                        Toast.LENGTH_SHORT,
+                    ).show()
                 }
-            },
-        )
+            }
+
+        query?.addValueEventListener(taskValueEventListener!!)
+    }
+
+    // ADDED: Remove listener when activity is destroyed to improve stability
+    override fun onDestroy() {
+        super.onDestroy()
+        taskValueEventListener?.let { listener ->
+            query?.removeEventListener(listener)
+        }
     }
 }

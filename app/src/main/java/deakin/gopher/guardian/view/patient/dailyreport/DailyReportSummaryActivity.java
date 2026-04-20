@@ -18,56 +18,74 @@ import java.util.Locale;
 
 public class DailyReportSummaryActivity extends AppCompatActivity {
 
-  private final StringBuilder statuses = new StringBuilder();
-  private long dateMs;
+    private final StringBuilder statuses = new StringBuilder();
+    private long dateMs;
 
-  ImageView dailyReportSummaryMenuButton;
+    ImageView dailyReportSummaryMenuButton;
 
-  @Override
-  protected void onCreate(final Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_daily_report_summary);
+    TextView currentStatusSummary;
+    TextView progressNotesSummary;
+    CalendarView patientReportSummaryCalendarView;
 
-    final NavigationView navigationView = findViewById(R.id.nav_view);
-    dailyReportSummaryMenuButton = findViewById(R.id.menuButton101);
-    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-    navigationView.setItemIconTintList(null);
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_daily_report_summary);
 
-    dailyReportSummaryMenuButton.setOnClickListener(
-        v -> {
-          drawerLayout.openDrawer(GravityCompat.START);
-        });
+        final NavigationView navigationView = findViewById(R.id.nav_view);
+        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        dailyReportSummaryMenuButton = findViewById(R.id.menuButton101);
 
-    final TextView currentStatusSummary = findViewById(R.id.currentStatusSummary);
-    final TextView progressNotesSummary = findViewById(R.id.progressNotesSummary);
-    final CalendarView patientReportSummaryCalendarView =
-        findViewById(R.id.patientReportSummaryCalendarView);
+        currentStatusSummary = findViewById(R.id.currentStatusSummary);
+        progressNotesSummary = findViewById(R.id.progressNotesSummary);
+        patientReportSummaryCalendarView = findViewById(R.id.patientReportSummaryCalendarView);
 
-    final Intent intent = getIntent();
-    final String date = intent.getStringExtra(Util.DAILY_REPORT_DATE);
-    final String notes = intent.getStringExtra(Util.DAILY_REPORT_STATUS_NOTES);
-    final String[] statusList = intent.getStringArrayExtra(Util.DAILY_REPORT_STATUS_LIST);
-    if (null != statusList && 0 != statusList.length) {
-      for (int i = 0; i < statusList.length - 1; i++) {
-        statuses.append(statusList[i]).append("\n");
-      }
-      statuses.append(statusList[statusList.length - 1]);
+        // ADDED: Keep original navigation icon colours
+        navigationView.setItemIconTintList(null);
+
+        // Open drawer when menu button is clicked
+        dailyReportSummaryMenuButton.setOnClickListener(
+                v -> drawerLayout.openDrawer(GravityCompat.START));
+
+        final Intent intent = getIntent();
+        final String date = intent.getStringExtra(Util.DAILY_REPORT_DATE);
+        final String notes = intent.getStringExtra(Util.DAILY_REPORT_STATUS_NOTES);
+        final String[] statusList = intent.getStringArrayExtra(Util.DAILY_REPORT_STATUS_LIST);
+
+        // ADDED: Format selected status values for summary display
+        if (statusList != null && statusList.length > 0) {
+            for (int i = 0; i < statusList.length - 1; i++) {
+                statuses.append(statusList[i]).append("\n");
+            }
+            statuses.append(statusList[statusList.length - 1]);
+        } else {
+            // ADDED: Fallback text when no statuses are passed
+            statuses.append("No status selected");
+        }
+
+        // IMPROVED: Safely parse date before updating CalendarView
+        if (date != null && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            final SimpleDateFormat formatter =
+                    new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+            try {
+                final Date parsedDate = formatter.parse(date);
+                if (parsedDate != null) {
+                    dateMs = parsedDate.getTime();
+                    patientReportSummaryCalendarView.setDate(dateMs);
+                }
+            } catch (final ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // ADDED: Fallback text for missing notes
+        if (notes != null && !notes.isEmpty()) {
+            progressNotesSummary.setText(notes);
+        } else {
+            progressNotesSummary.setText("No progress notes available");
+        }
+
+        currentStatusSummary.setText(statuses.toString());
     }
-
-    if (android.os.Build.VERSION_CODES.N <= android.os.Build.VERSION.SDK_INT) {
-      final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-
-      try {
-        final Date d;
-        d = formatter.parse(date);
-        dateMs = d.getTime();
-      } catch (final ParseException e) {
-        e.printStackTrace();
-      }
-    }
-
-    progressNotesSummary.setText(notes);
-    currentStatusSummary.setText(statuses);
-    patientReportSummaryCalendarView.setDate(dateMs);
-  }
 }
