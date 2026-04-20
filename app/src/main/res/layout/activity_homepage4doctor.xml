@@ -1,29 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
 
-    <TextView
-        android:id="@+id/welcomeDoctorText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome Doctor"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <!-- HEADER -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/headerCard"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="-30dp"
+        app:cardCornerRadius="30dp"
+        app:cardBackgroundColor="#156A80"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!-- SAFE HEART ICON -->
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/heart"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome Doctor"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- DOCTORS LIST -->
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#156A80"
+        android:text="Doctors List"
+        android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/headerCard"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- ASSIGN PATIENT -->
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="204dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#156A80"
+        android:text="Assign Patient"
+        android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/headerCard"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- MY PATIENTS -->
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="160dp"
+        android:backgroundTint="#156A80"
+        android:text="My Patients"
+        android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/headerCard"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- HEALTH RECORDS -->
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="204dp"
+        android:layout_marginTop="160dp"
+        android:backgroundTint="#156A80"
+        android:text="Health Records"
+        android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/headerCard"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- PROFILE -->
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="300dp"
+        android:backgroundTint="#156A80"
+        android:text="Profile"
+        android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/headerCard"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- LOGOUT -->
     <Button
         android:id="@+id/signOutButton_doctor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Sign Out"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcomeDoctorText" />
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="204dp"
+        android:layout_marginTop="300dp"
+        android:backgroundTint="#156A80"
+        android:text="Log Out"
+        android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/headerCard"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

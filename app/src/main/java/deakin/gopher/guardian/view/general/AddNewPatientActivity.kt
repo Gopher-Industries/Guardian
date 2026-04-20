@@ -8,8 +8,11 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -46,30 +49,38 @@ class AddNewPatientActivity : BaseActivity() {
         private const val CAMERA_PERMISSION_CODE = 1001
     }
 
-    // Launcher for picking image from gallery
     private val galleryLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             if (uri != null) {
                 selectedPhotoUri = uri
                 capturedPhotoBitmap = null
-                val localBinding = binding
-                when (localBinding) {
-                    is ActivityAddNewPatientBinding -> localBinding.imgPreview.setImageURI(uri)
-                    is ActivityAddNewPatientNurseBinding -> localBinding.imgPreview.setImageURI(uri)
+
+                when (val localBinding = binding) {
+                    is ActivityAddNewPatientBinding -> {
+                        localBinding.imgPreview.setImageURI(uri)
+                        localBinding.checkNoPhoto.isChecked = false
+                    }
+                    is ActivityAddNewPatientNurseBinding -> {
+                        localBinding.imgPreview.setImageURI(uri)
+                    }
                 }
             }
         }
 
-    // Launcher for taking photo with camera (returns Bitmap)
     private val cameraLauncher =
         registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap: Bitmap? ->
             if (bitmap != null) {
                 capturedPhotoBitmap = bitmap
                 selectedPhotoUri = null
-                val localBinding = binding
-                when (localBinding) {
-                    is ActivityAddNewPatientBinding -> localBinding.imgPreview.setImageBitmap(bitmap)
-                    is ActivityAddNewPatientNurseBinding -> localBinding.imgPreview.setImageBitmap(bitmap)
+
+                when (val localBinding = binding) {
+                    is ActivityAddNewPatientBinding -> {
+                        localBinding.imgPreview.setImageBitmap(bitmap)
+                        localBinding.checkNoPhoto.isChecked = false
+                    }
+                    is ActivityAddNewPatientNurseBinding -> {
+                        localBinding.imgPreview.setImageBitmap(bitmap)
+                    }
                 }
             }
         }
@@ -89,8 +100,7 @@ class AddNewPatientActivity : BaseActivity() {
             setContentView(caretakerBinding.root)
         }
 
-        val localBinding = binding
-        when (localBinding) {
+        when (val localBinding = binding) {
             is ActivityAddNewPatientBinding -> {
                 setSupportActionBar(localBinding.toolbar)
                 localBinding.toolbar.setNavigationOnClickListener {
@@ -108,24 +118,66 @@ class AddNewPatientActivity : BaseActivity() {
         }
     }
 
-    // Common UI setup for both bindings
     private fun setupUI(localBinding: ViewBinding) {
         when (localBinding) {
             is ActivityAddNewPatientBinding -> {
                 setupGenderSpinner(localBinding.genderSpinner)
                 setupDOBPicker(localBinding.txtDob)
+                setupNameValidation(localBinding.txtName)
+                setupNoPhotoCheckbox(
+                    localBinding.checkNoPhoto,
+                    localBinding.btnSelectFromGallery,
+                    localBinding.btnTakePhoto,
+                    localBinding.imgPreview
+                )
                 localBinding.btnSelectFromGallery.setOnClickListener { openGallery() }
                 localBinding.btnTakePhoto.setOnClickListener { checkCameraPermissionAndOpen() }
                 localBinding.btnSave.setOnClickListener { savePatientInfo() }
             }
+
             is ActivityAddNewPatientNurseBinding -> {
                 setupGenderSpinner(localBinding.genderSpinner)
                 setupDOBPicker(localBinding.txtDob)
+                setupNameValidation(localBinding.txtName)
                 localBinding.btnSelectFromGallery.setOnClickListener { openGallery() }
                 localBinding.btnTakePhoto.setOnClickListener { checkCameraPermissionAndOpen() }
                 localBinding.btnSave.setOnClickListener { savePatientInfo() }
             }
         }
+    }
+
+    private fun setupNoPhotoCheckbox(
+        checkBox: CheckBox,
+        galleryButton: View,
+        cameraButton: View,
+        imageView: ImageView,
+    ) {
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            galleryButton.isEnabled = !isChecked
+            cameraButton.isEnabled = !isChecked
+
+            galleryButton.alpha = if (isChecked) 0.5f else 1f
+            cameraButton.alpha = if (isChecked) 0.5f else 1f
+
+            if (isChecked) {
+                selectedPhotoUri = null
+                capturedPhotoBitmap = null
+                imageView.setImageResource(R.drawable.profile)
+            }
+        }
+    }
+
+    private fun setupNameValidation(txtName: android.widget.EditText) {
+        txtName.filters = arrayOf(
+            InputFilter { source, _, _, _, _, _ ->
+                if (source.any { it.isDigit() }) {
+                    showMessage("Name should not contain numbers")
+                    ""
+                } else {
+                    null
+                }
+            },
+        )
     }
 
     private fun setupGenderSpinner(genderSpinner: android.widget.Spinner) {
@@ -156,13 +208,23 @@ class AddNewPatientActivity : BaseActivity() {
                                 selectedDay,
                             )
                         txtDob.setText(formattedDate)
+
+                        val age = calculateAge(selectedYear, selectedMonth, selectedDay)
+
+                        when (val localBinding = binding) {
+                            is ActivityAddNewPatientBinding -> {
+                                localBinding.txtAge.setText(age.toString())
+                            }
+                            is ActivityAddNewPatientNurseBinding -> {
+                                localBinding.txtAge.setText(age.toString())
+                            }
+                        }
                     },
                     year,
                     month,
                     day,
                 )
 
-            // Force spinner mode (for API 21+)
             try {
                 val datePickerField = datePickerDialog.datePicker.javaClass.getDeclaredField("mDelegate")
                 datePickerField.isAccessible = true
@@ -171,7 +233,7 @@ class AddNewPatientActivity : BaseActivity() {
                 val spinnerDelegateClass = Class.forName("android.widget.DatePickerSpinnerDelegate")
 
                 if (delegate.javaClass != spinnerDelegateClass) {
-                    datePickerField.set(datePickerDialog.datePicker, null) // Clear the current delegate
+                    datePickerField.set(datePickerDialog.datePicker, null)
 
                     val constructor =
                         datePickerDialog.datePicker.javaClass.getDeclaredConstructor(
@@ -191,11 +253,10 @@ class AddNewPatientActivity : BaseActivity() {
                         )
                     datePickerField.set(datePickerDialog.datePicker, spinnerDelegate)
 
-                    // Re-initialize the date picker with current date
                     datePickerDialog.datePicker.updateDate(year, month, day)
                 }
             } catch (e: Exception) {
-                e.printStackTrace() // Fallback gracefully if reflection fails
+                e.printStackTrace()
             }
 
             datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
@@ -203,7 +264,6 @@ class AddNewPatientActivity : BaseActivity() {
         }
     }
 
-    // Permission check before opening camera
     private fun checkCameraPermissionAndOpen() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             == PackageManager.PERMISSION_GRANTED
@@ -225,7 +285,7 @@ class AddNewPatientActivity : BaseActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == CAMERA_PERMISSION_CODE) {
-            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openCamera()
             } else {
                 showMessage("Camera permission is required to take photos")
@@ -272,9 +332,25 @@ class AddNewPatientActivity : BaseActivity() {
         val genderPart = gender.toRequestBody("text/plain".toMediaTypeOrNull())
 
         val photoPart: MultipartBody.Part? =
-            when {
-                selectedPhotoUri != null -> prepareFilePart("photo", selectedPhotoUri!!, this)
-                capturedPhotoBitmap != null -> prepareBitmapPart("photo", capturedPhotoBitmap!!)
+            when (localBinding) {
+                is ActivityAddNewPatientBinding -> {
+                    if (localBinding.checkNoPhoto.isChecked) {
+                        null
+                    } else {
+                        when {
+                            selectedPhotoUri != null -> prepareFilePart("photo", selectedPhotoUri!!, this)
+                            capturedPhotoBitmap != null -> prepareBitmapPart("photo", capturedPhotoBitmap!!)
+                            else -> null
+                        }
+                    }
+                }
+                is ActivityAddNewPatientNurseBinding -> {
+                    when {
+                        selectedPhotoUri != null -> prepareFilePart("photo", selectedPhotoUri!!, this)
+                        capturedPhotoBitmap != null -> prepareBitmapPart("photo", capturedPhotoBitmap!!)
+                        else -> null
+                    }
+                }
                 else -> null
             }
 
@@ -331,33 +407,52 @@ class AddNewPatientActivity : BaseActivity() {
         val localBinding = binding
         return when (localBinding) {
             is ActivityAddNewPatientBinding -> {
-                if (localBinding.txtName.text.toString().trim().isEmpty()) {
-                    showMessage(getString(R.string.validation_empty_name))
+                val name = localBinding.txtName.text.toString().trim()
+
+                if (name.isEmpty()) {
+                    showMessage("Please enter full name")
+                    false
+                } else if (name.any { it.isDigit() }) {
+                    showMessage("Name should not contain numbers")
                     false
                 } else if (localBinding.txtDob.text.toString().trim().isEmpty()) {
-                    showMessage(getString(R.string.validation_empty_dob))
+                    showMessage("Please select date of birth")
                     false
                 } else if (localBinding.genderSpinner.selectedItemPosition == 0) {
-                    showMessage(getString(R.string.validation_empty_gender))
+                    showMessage("Please select gender")
+                    false
+                } else if (
+                    !localBinding.checkNoPhoto.isChecked &&
+                    selectedPhotoUri == null &&
+                    capturedPhotoBitmap == null
+                ) {
+                    showMessage("Please upload photo or tick 'No photo available'")
                     false
                 } else {
                     true
                 }
             }
+
             is ActivityAddNewPatientNurseBinding -> {
-                if (localBinding.txtName.text.toString().trim().isEmpty()) {
-                    showMessage(getString(R.string.validation_empty_name))
+                val name = localBinding.txtName.text.toString().trim()
+
+                if (name.isEmpty()) {
+                    showMessage("Please enter full name")
+                    false
+                } else if (name.any { it.isDigit() }) {
+                    showMessage("Name should not contain numbers")
                     false
                 } else if (localBinding.txtDob.text.toString().trim().isEmpty()) {
-                    showMessage(getString(R.string.validation_empty_dob))
+                    showMessage("Please select date of birth")
                     false
                 } else if (localBinding.genderSpinner.selectedItemPosition == 0) {
-                    showMessage(getString(R.string.validation_empty_gender))
+                    showMessage("Please select gender")
                     false
                 } else {
                     true
                 }
             }
+
             else -> false
         }
     }
@@ -374,12 +469,13 @@ class AddNewPatientActivity : BaseActivity() {
         val today = Calendar.getInstance()
         val birthDate = Calendar.getInstance()
         birthDate.set(year, month, day)
+
         var age = today.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR)
 
-        // If birthday hasn't happened yet this year, subtract one
         if (today.get(Calendar.DAY_OF_YEAR) < birthDate.get(Calendar.DAY_OF_YEAR)) {
             age--
         }
+
         return age
     }
 
