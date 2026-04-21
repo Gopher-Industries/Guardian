@@ -1,6 +1,5 @@
 package deakin.gopher.guardian.view.general
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,7 +8,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.core.widget.addTextChangedListener
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -17,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.gson.Gson
@@ -44,6 +44,8 @@ class LoginActivity : BaseActivity() {
         setContentView(R.layout.activity_login)
         val mEmail: EditText = findViewById(R.id.Email)
         val mPassword: EditText = findViewById(R.id.password)
+        val emailLayout: TextInputLayout = findViewById(R.id.emailTextInputLayout)
+        val passwordLayout: TextInputLayout = findViewById(R.id.passwordTextInputLayout)
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
         val loginButton: Button = findViewById(R.id.loginBtn)
         val loginGoogleButton: SignInButton = findViewById(R.id.loginGoogleBtn)
@@ -56,22 +58,29 @@ class LoginActivity : BaseActivity() {
                 .build()
         gsoClient = GoogleSignIn.getClient(this, gso)
 
+        mEmail.addTextChangedListener { emailLayout.error = null }
+        mPassword.addTextChangedListener { passwordLayout.error = null }
+
         loginButton.setOnClickListener {
-            progressBar.show()
             val emailInput = mEmail.text.toString().trim { it <= ' ' }
             val passwordInput = mPassword.text.toString().trim { it <= ' ' }
 
-            val loginValidationError = validateInputs(emailInput)
+            val loginValidationError = validateInputs(emailInput, passwordInput)
 
             if (loginValidationError != null) {
-                progressBar.hide()
-                Toast.makeText(
-                    applicationContext,
-                    loginValidationError.messageResoureId,
-                    Toast.LENGTH_LONG,
-                ).show()
+                when (loginValidationError) {
+                    LoginValidationError.EmptyEmail, LoginValidationError.InvalidEmail -> {
+                        emailLayout.error = getString(loginValidationError.messageResoureId)
+                    }
+                    LoginValidationError.EmptyPassword -> {
+                        passwordLayout.error = getString(loginValidationError.messageResoureId)
+                    }
+                    else -> showMessage(getString(loginValidationError.messageResoureId))
+                }
                 return@setOnClickListener
             }
+
+            setLoading(true, loginButton, progressBar)
 
             val call = ApiClient.apiService.login(emailInput, passwordInput)
 
@@ -81,21 +90,15 @@ class LoginActivity : BaseActivity() {
                         call: Call<AuthResponse>,
                         response: Response<AuthResponse>,
                     ) {
-                        progressBar.hide()
+                        setLoading(false, loginButton, progressBar)
                         if (response.isSuccessful && response.body() != null) {
-                            // Handle successful login
                             val user = response.body()!!.user
                             val token = response.body()!!.token
                             SessionManager.createLoginSession(user, token)
                             NavigationService(this@LoginActivity).toPinCodeActivity(user.role)
                         } else {
-                            // Handle error
-                            val errorResponse =
-                                Gson().fromJson(
-                                    response.errorBody()?.string(),
-                                    ApiErrorResponse::class.java,
-                                )
-                            showMessage(errorResponse.apiError ?: response.message())
+                            val errorResponse = parseError(response)
+                            showMessage(errorResponse ?: response.message())
                         }
                     }
 
@@ -103,9 +106,8 @@ class LoginActivity : BaseActivity() {
                         call: Call<AuthResponse>,
                         t: Throwable,
                     ) {
-                        // Handle failure
-                        progressBar.hide()
-                        showMessage(getString(R.string.toast_login_error, t.message))
+                        setLoading(false, loginButton, progressBar)
+                        showMessage(getString(R.string.toast_login_error, t.localizedMessage))
                     }
                 },
             )
@@ -120,30 +122,34 @@ class LoginActivity : BaseActivity() {
             startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN)
         }
 
-        forgotTextLink.setOnClickListener { v: View ->
-            val resetMail = EditText(v.context)
-            val passwordResetDialog = AlertDialog.Builder(v.context)
-
-            with(passwordResetDialog) {
-                setTitle(getString(R.string.text_reset_password))
-                setMessage(getString(R.string.text_enter_your_email_to_received_reset_link))
-                setView(resetMail)
-            }
-
-            passwordResetDialog.setPositiveButton(
-                getString(R.string.yes),
-            ) { _: DialogInterface?, _: Int ->
-                val mail = resetMail.text.toString()
-                sendResetPasswordEmail(mail)
-            }
-            passwordResetDialog.setNegativeButton(
-                getString(R.string.no),
-            ) { _: DialogInterface?, _: Int -> }
-            passwordResetDialog.create().show()
+        forgotTextLink.setOnClickListener {
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
     }
 
-    private fun validateInputs(rawEmail: String?): LoginValidationError? {
+    private fun setLoading(isLoading: Boolean, button: Button, progressBar: ProgressBar) {
+        if (isLoading) {
+            button.isEnabled = false
+            progressBar.show()
+        } else {
+            button.isEnabled = true
+            progressBar.hide()
+        }
+    }
+
+    private fun parseError(response: Response<*>): String? {
+        return try {
+            val errorResponse = Gson().fromJson(
+                response.errorBody()?.string(),
+                ApiErrorResponse::class.java,
+            )
+            errorResponse.apiError
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private fun validateInputs(rawEmail: String?, rawPassword: String?): LoginValidationError? {
         if (rawEmail.isNullOrEmpty()) {
             return LoginValidationError.EmptyEmail
         }
@@ -153,41 +159,11 @@ class LoginActivity : BaseActivity() {
             return LoginValidationError.InvalidEmail
         }
 
+        if (rawPassword.isNullOrEmpty()) {
+            return LoginValidationError.EmptyPassword
+        }
+
         return null
-    }
-
-    private fun sendResetPasswordEmail(userEmail: String) {
-        val call = ApiClient.apiService.requestPasswordReset(userEmail)
-        call.enqueue(
-            object : Callback<BaseModel> {
-                override fun onResponse(
-                    call: Call<BaseModel>,
-                    response: Response<BaseModel>,
-                ) {
-                    if (response.isSuccessful && response.body() != null) {
-                        showMessage(
-                            response.body()!!.apiMessage
-                                ?: getString(R.string.toast_reset_link_sent_to_your_email),
-                        )
-                    } else {
-                        // Handle error
-                        val errorResponse =
-                            Gson().fromJson(
-                                response.errorBody()?.string(),
-                                ApiErrorResponse::class.java,
-                            )
-                        showMessage(errorResponse.apiError ?: response.message())
-                    }
-                }
-
-                override fun onFailure(
-                    call: Call<BaseModel>,
-                    t: Throwable,
-                ) {
-                    showMessage("Error sending password reset link: ${t.message}")
-                }
-            },
-        )
     }
 
     @Deprecated("Deprecated in Java")
