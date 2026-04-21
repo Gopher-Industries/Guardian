@@ -1,0 +1,11 @@
+patient_id,timestamp,source,emotion,confidence,notes,model,privacy_tag
+P001,2000-01-01 09:00:00+00:00,face,neutral,0.91,,v1,normal
+P001,2000-01-01 09:05:00+00:00,voice,stressed,0.77,,v1,normal
+P001,2000-01-01 09:10:00+00:00,face,happy,0.85,,v1,normal
+P001,2000-01-01 09:15:00+00:00,voice,tired,0.66,,v1,normal
+P001,2000-01-01 09:20:00+00:00,face,angry,0.72,,v1,normal
+P002,2000-01-01 09:25:00+00:00,voice,neutral,0.88,,v1,normal
+P002,2000-01-01 09:30:00+00:00,face,surprise,0.79,,v1,normal
+P002,2000-01-01 09:35:00+00:00,voice,sad,0.81,,v1,normal
+P002,2000-01-01 09:40:00+00:00,face,happy,0.92,,v1,normal
+P002,2000-01-01 09:45:00+00:00,voice,stressed,0.84,,v1,normal
