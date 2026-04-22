@@ -10,14 +10,21 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper;
 
 public class ActivityProfilingActivity extends AppCompatActivity {
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_profiling);
+    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+    final NavigationView navigationView = findViewById(R.id.nav_view);
+    final ImageView menuButton = findViewById(R.id.imageView8);
     final LinearLayout activityProfilingLayout = findViewById(R.id.activityProfilingLayout);
+    DrawerNavigationHelper.bindStandardDrawer(this, drawerLayout, navigationView, menuButton);
 
     final int choicesNum = getResources().getStringArray(R.array.ActivityStatusText).length;
 

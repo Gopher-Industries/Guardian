@@ -360,6 +360,8 @@
     <string name="text_reset_password">Reset Password</string>
     <string name="text_enter_your_email_to_received_reset_link">Enter Your Email To Received Reset Link.</string>
     <string name="tasks_label">Tasks</string>
+    <string name="checklist_progress">Checklist %1$d / %2$d</string>
+    <string name="add_an_item">Add an item</string>
     <string name="validation_error_passwords_do_not_match">Passwords do not match</string>
     <string name="validation_empty_confirmed_password">Password confirmation must not be empty</string>
     <string name="validation_empty_name">Name must not be empty</string>
@@ -693,7 +695,7 @@
     <string name="strength_exercise1">Strength Exercise</string>
     <string name="strength_exercise2">1. Chair Squats: Sit and stand without using hands (10–15 reps).\n2. Wall Push-Ups: Push against a wall for upper body strength (10–15 reps).\n3. Bicep Curls: Use light weights or water bottles (10–15 reps per arm).\n4. Leg Raises: Extend one leg while seated, then lower (10–15 reps per leg).\n5. Toe Stands: Rise onto toes and lower to strengthen calves (10–15 reps).\n6. Seated Rows: Use resistance bands to pull back while seated, strengthening the back and shoulders (10–15 reps).\n7. Lateral Arm Raises: Lift light weights to shoulder height, working on the arms and shoulders (10–15 reps).\n8. Heel Slides: While seated, slide your heel back and forth on the floor to improve knee flexibility and strength (10–15 reps).\n9. Step-Ups: Step up and down on a stable platform to build leg strength and balance (10 reps per leg).</string>
     <string name="flexibility_exercise1">Flexibility Exercise</string>
-    <string name="flexibility_exercise2">1. Neck Stretch: Tilt head to the side, hold 10–15 sec per side, repeat 2–3 times.\n2. Shoulder Rolls: Roll shoulders forward and backward 10 times each.\n3. Chest Stretch: Pull hands behind back, hold for 15–30 sec, repeat 2 times.\n4. Spinal Twist: Twist torso, hold 10 sec per side, repeat 2–3 times.\n5. Hamstring Stretch: Lean forward on extended leg, hold 15 sec per leg, repeat 2–3 times.\n6. Ankle Circles: Rotate ankle 10 times clockwise, 10 times counterclockwise per foot.\n7. Hip Flexor Stretch: Step back, press hips forward, hold 15–20 sec per side, repeat 2 times.\n8. Calf Stretch: Step back, press heel down, hold 15–20 sec per side, repeat 2–3 times.</string>
+    <string name="flexibility_exercise2">1. Neck Stretch: Tilt head to the side, hold 10–15 sec per side, repeat 2–3 times.\n2. Shoulder Rolls: Roll shoulders forward and backward 10 times each.\n3. Chest Stretch: Pull hands behind back, hold for 15–30 sec, repeat 2 times.\n4. Spinal Twist: Twist torso, hold 10 sec per side, repeat 2–3 times.\n5. Hamstring Stretch: Lean forward on extended leg, hold 15 sec per leg, repeat 2–3 times.\n6. Ankle Circles: Rotate ankle 10 times clockwise, 10 times counterclockwise per foot.\n7. Hip Flexor Stretch: Step back, press hips forward, hold 15–20 sec per side, repeat 2 times.\n8. Calf Stretch: Step back, press heel down, hold 15–20 sec per side, repeat 2–3 times.\n9. Quad Stretch: Stand on one leg, pull other foot towards glutes, hold 15–20 sec, repeat 2 times.</string>
     <string name="cardio_exercise1">Cardio Exercise</string>
     <string name="cardio_exercise2">1. Gentle Walking: Walk at a steady pace indoors or outdoors (15–20 mins).\n2. Seated Marching: Lift knees alternately while seated (10–15 mins).\n3. Step Touch: Step side-to-side while lightly swinging arms (10–15 mins).\n4. Arm Swings: Swing arms while stepping in place for light cardio (10–15 mins).\n5. Heel Digs: Tap your heels forward alternately while seated or standing (10–15 mins).\n6. Low-Impact Dancing: Move gently to favorite music (10–15 mins).\n7. Seated Jumping Jacks: Extend arms and legs alternately while seated (10–15 reps).</string>
     <string name="breathing_exercise1">Breathing Exercise</string>
@@ -723,4 +725,3 @@
         <item quantity="other">%d seconds</item>
     </plurals>
 </resources>
-

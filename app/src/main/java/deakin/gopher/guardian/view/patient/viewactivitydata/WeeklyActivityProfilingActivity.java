@@ -10,7 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper;
 import deakin.gopher.guardian.view.patient.associateradar.ActivitySuggestionActivity;
 
 public class WeeklyActivityProfilingActivity extends AppCompatActivity {
@@ -19,8 +22,12 @@ public class WeeklyActivityProfilingActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_weekly_profiling);
 
+    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+    final NavigationView navigationView = findViewById(R.id.nav_view);
+    final ImageView menuButton = findViewById(R.id.imageView8);
     final LinearLayout weeklyActivityProfilingLayout =
         findViewById(R.id.weeklyActivityProfilingLayout);
+    DrawerNavigationHelper.bindStandardDrawer(this, drawerLayout, navigationView, menuButton);
 
     final int choicesNum = getResources().getStringArray(R.array.WeeklyActivitySummaryText).length;
 

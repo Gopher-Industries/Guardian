@@ -3,64 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="8dp">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="375dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        app:cardCornerRadius="30dp"
+    <ImageView
+        android:id="@+id/task_completed_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:contentDescription="Toggle Task Completion"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/red_circle" />
 
-        <Button
-            android:id="@+id/task_description_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:alpha="0"
-            android:backgroundTint="@color/_bg__new_homepage___ek2_color"
-            android:text="" />
+    <TextView
+        android:id="@+id/task_description_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/poppins"
+        android:text="Task Description"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/task_detail_arrow"
+        app:layout_constraintStart_toEndOf="@+id/task_completed_icon"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="15dp">
+    <ImageView
+        android:id="@+id/task_detail_arrow"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:contentDescription="View Details"
+        android:alpha="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/right_vector" />
 
-            <ImageView
-                android:id="@+id/task_completed_icon"
-                android:layout_width="35dp"
-                android:layout_height="33dp"
-                android:contentDescription="TODO"
-                tools:srcCompat="@drawable/orange_circle" />
-
-            <TextView
-                android:id="@+id/task_description_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="9dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/patients_overview"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
-
-            <ImageView
-                android:layout_width="26dp"
-                android:layout_height="31dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:contentDescription="TODO"
-                android:scaleType="fitEnd"
-                app:srcCompat="@drawable/right_vector" />
-            <!--                tools:layout_editor_absoluteX="337dp"-->
-            <!--                tools:layout_editor_absoluteY="234dp" />-->
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
+    <Button
+        android:id="@+id/task_description_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/task_completed_icon"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,8 +2,6 @@ package deakin.gopher.guardian.view.general
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,22 +23,26 @@ import kotlinx.coroutines.withContext
 
 class PatientListActivity : BaseActivity() {
     private lateinit var binding: ActivityPatientListBinding
+    private val currentUser = SessionManager.getCurrentUser()
+    private val canAddPatients = currentUser.role == Role.Admin
+    private val canDeletePatients = currentUser.role == Role.Admin
     private val patientListAdapter =
         PatientListAdapter(
             emptyList(),
+            showDeleteAction = canDeletePatients,
             onPatientClick = { patient ->
                 val intent = Intent(this, PatientDetailsActivity::class.java)
                 intent.putExtra("patient", patient)
                 startActivity(intent)
             },
-            onAssignNurseClick = { patient ->
-//            val intent = Intent(this, AssignNurseActivity::class.java)
-//            intent.putExtra("patientId", patient.id)
-//            startActivity(intent)
-            },
-            onDeleteClick = { patient ->
-                confirmDeletePatient(patient)
-            },
+            onDeleteClick =
+                if (canDeletePatients) {
+                    { patient ->
+                        confirmDeletePatient(patient)
+                    }
+                } else {
+                    null
+                },
         )
 
     private fun confirmDeletePatient(patient: Patient) {
@@ -68,8 +70,6 @@ class PatientListActivity : BaseActivity() {
         }
     }
 
-    private val currentUser = SessionManager.getCurrentUser()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPatientListBinding.inflate(layoutInflater)
@@ -78,6 +78,15 @@ class PatientListActivity : BaseActivity() {
         setSupportActionBar(binding.toolbar)
         binding.toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+        binding.toolbar.menu.findItem(R.id.action_add_patient).isVisible = canAddPatients
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            if (item.itemId == R.id.action_add_patient && canAddPatients) {
+                startActivity(Intent(this, AddNewPatientActivity::class.java))
+                true
+            } else {
+                false
+            }
         }
 
         if (currentUser.role == Role.Nurse) {
@@ -128,22 +137,6 @@ class PatientListActivity : BaseActivity() {
                 }
             }
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (currentUser.organization != null) {
-            return false
-        }
-        menuInflater.inflate(R.menu.menu_patient_list, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_add_patient) {
-            startActivity(Intent(this, AddNewPatientActivity::class.java))
-            return true
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun showMessage(message: String) {
