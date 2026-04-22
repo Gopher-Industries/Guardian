@@ -95,41 +95,68 @@ class PatientListActivity : BaseActivity() {
 
     private fun fetchPatients() {
         val token = "Bearer ${SessionManager.getToken()}"
+
         CoroutineScope(Dispatchers.IO).launch {
-            if (patientListAdapter.itemCount <= 0) {
-                withContext(Dispatchers.Main) {
+            withContext(Dispatchers.Main) {
+                if (patientListAdapter.itemCount <= 0) {
                     binding.progressBar.show()
                 }
+                binding.tvEmptyMessage.visibility = View.GONE
+                binding.recyclerViewPatients.visibility = View.VISIBLE
             }
-            val response = ApiClient.apiService.getAssignedPatients(token)
-            withContext(Dispatchers.Main) {
+
+            try {
+                val response = ApiClient.apiService.getAssignedPatients(token)
+
                 withContext(Dispatchers.Main) {
                     binding.progressBar.hide()
-                }
-                if (response.isSuccessful) {
-                    if (!response.body().isNullOrEmpty()) {
-                        patientListAdapter.updateData(response.body()!!)
-                        withContext(Dispatchers.Main) {
+
+                    if (response.isSuccessful) {
+                        val patients = response.body()
+
+                        if (!patients.isNullOrEmpty()) {
+                            patientListAdapter.updateData(patients)
+                            binding.recyclerViewPatients.visibility = View.VISIBLE
                             binding.tvEmptyMessage.visibility = View.GONE
+                        } else {
+                            patientListAdapter.updateData(emptyList())
+                            binding.recyclerViewPatients.visibility = View.GONE
+                            binding.tvEmptyMessage.visibility = View.VISIBLE
+                            binding.tvEmptyMessage.text = "No patients found"
                         }
                     } else {
-                        withContext(Dispatchers.Main) {
-                            binding.tvEmptyMessage.visibility = View.VISIBLE
-                        }
+                        patientListAdapter.updateData(emptyList())
+                        binding.recyclerViewPatients.visibility = View.GONE
+                        binding.tvEmptyMessage.visibility = View.VISIBLE
+                        binding.tvEmptyMessage.text = "Unable to load patients"
+
+                        val errorBody = response.errorBody()?.string()
+                        val errorResponse =
+                            if (!errorBody.isNullOrBlank()) {
+                                try {
+                                    Gson().fromJson(errorBody, ApiErrorResponse::class.java)
+                                } catch (e: Exception) {
+                                    null
+                                }
+                            } else {
+                                null
+                            }
+
+                        showMessage(errorResponse?.apiError ?: response.message())
                     }
-                } else {
-                    // Handle error
-                    val errorResponse =
-                        Gson().fromJson(
-                            response.errorBody()?.string(),
-                            ApiErrorResponse::class.java,
-                        )
-                    showMessage(errorResponse.apiError ?: response.message())
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    binding.progressBar.hide()
+                    patientListAdapter.updateData(emptyList())
+                    binding.recyclerViewPatients.visibility = View.GONE
+                    binding.tvEmptyMessage.visibility = View.VISIBLE
+                    binding.tvEmptyMessage.text = "Network error occurred"
+                    showMessage("Network error occurred")
                 }
             }
         }
     }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (currentUser.organization != null) {
             return false
