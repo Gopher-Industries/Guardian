@@ -36,7 +36,8 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:label"
         tools:targetApi="31"
-        tools:ignore="ExtraText">
+        tools:ignore="ExtraText"
+        android:networkSecurityConfig="@xml/network_security_config">
         <activity
             android:name=".WelcomeActivity"
             android:exported="false" />
@@ -188,6 +189,7 @@
             android:name=".view.general.TasksListActivity"
             android:exported="false" />
 
+
         <activity android:name=".ModulesActivity" />
 
 
@@ -209,6 +211,21 @@
         <activity android:name=".view.falldetection.FallDetectionActivity" />
         <activity android:name=".view.falldetection.FallAlertActivity" />
         <activity android:name="deakin.gopher.guardian.view.caretaker.notifications.confirmincident.CallAmbulanceActivity" />
+
+        <activity
+            android:name=".view.calendar.GuardianCalendarActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.calendar.AddTaskCalendarActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.logbook.PatientLogbookActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".PatientExerciseModules"

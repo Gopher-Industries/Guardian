@@ -7,23 +7,25 @@ import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.PatientActivity
 import deakin.gopher.guardian.model.register.AuthResponse
 import deakin.gopher.guardian.model.register.RegisterRequest
+import deakin.gopher.guardian.model.calendar.CreateTaskRequest
+import deakin.gopher.guardian.model.calendar.TaskApiResponse
+import deakin.gopher.guardian.model.calendar.TaskListApiResponse
+import deakin.gopher.guardian.model.calendar.TaskResponse
+
+import deakin.gopher.guardian.model.calendar.UpdateTaskRequest
+import deakin.gopher.guardian.model.calendar.UpdateTaskStatusRequest
+import deakin.gopher.guardian.model.logbook.CreateLogRequest
+import deakin.gopher.guardian.model.logbook.CreateLogResponse
+import deakin.gopher.guardian.model.logbook.DeleteLogResponse
+import deakin.gopher.guardian.model.logbook.LogListResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
+    // Your existing endpoints...
     @POST("auth/register")
     fun register(
         @Body request: RegisterRequest,
@@ -91,4 +93,62 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") patientId: String,
     ): Response<BaseModel>
+
+    @POST("caretaker/tasks")
+    suspend fun createTask(
+        @Header("Authorization") token: String,
+        @Body request: CreateTaskRequest
+    ): Response<TaskApiResponse>
+
+    @GET("caretaker/tasks")
+    suspend fun getTasks(
+        @Header("Authorization") token: String,
+        @Query("caretakerId") caretakerId: String,
+        @Query("filter") filter: String? = null,
+        @Query("status") status: String? = null,
+        @Query("dueDate") dueDate: String? = null,
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 10,
+        @Query("sort") sort: String? = null
+    ): Response<TaskListApiResponse>
+
+    @PUT("caretaker/tasks/{taskId}")
+    suspend fun updateTask(
+        @Header("Authorization") token: String,
+        @Path("taskId") taskId: String,
+        @Body request: UpdateTaskRequest
+    ): Response<TaskApiResponse>
+
+    @PATCH("caretaker/tasks/{taskId}/status")
+    suspend fun updateTaskStatus(
+        @Header("Authorization") token: String,
+        @Path("taskId") taskId: String,
+        @Body request: UpdateTaskStatusRequest
+    ): Response<TaskApiResponse>
+    @DELETE("caretaker/tasks/{taskId}")
+    suspend fun deleteTask(
+        @Header("Authorization") token: String,
+        @Path("taskId") taskId: String
+    ): Response<BaseModel>
+
+    @POST("patient-logs")
+    suspend fun createPatientLog(
+        @Header("Authorization") token: String,
+        @Body request: CreateLogRequest
+    ): Response<CreateLogResponse>
+
+    @GET("patient-logs")
+    suspend fun getPatientLogs(
+        @Header("Authorization") token: String,
+        @Query("patient") patientId: String? = null,
+        @Query("page") page: Int? = null,
+        @Query("limit") limit: Int? = null
+    ): Response<LogListResponse>
+
+    @DELETE("patient-logs/{logId}")
+    suspend fun deletePatientLog(
+        @Header("Authorization") token: String,
+        @Path("logId") logId: String
+    ): Response<DeleteLogResponse>
+
 }

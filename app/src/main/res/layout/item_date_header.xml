@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="16dp"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Fri, 18 Jul"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary" />
+
+    <!-- Task Count Badge -->
+    <TextView
+        android:id="@+id/day_count_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:textSize="12sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/count_badge_background"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        android:visibility="gone" />
+
+</LinearLayout>

@@ -3,6 +3,7 @@ package deakin.gopher.guardian.services
 import android.app.Activity
 import android.content.Intent
 import deakin.gopher.guardian.model.login.Role
+import deakin.gopher.guardian.view.logbook.PatientLogbookActivity
 import deakin.gopher.guardian.view.general.Homepage4admin
 import deakin.gopher.guardian.view.general.Homepage4caretaker
 import deakin.gopher.guardian.view.general.Homepage4doctor
@@ -122,6 +123,17 @@ class NavigationService(val activity: Activity) {
     fun toPinCodeActivity(role: Role) {
         val intent = Intent(activity.applicationContext, PinCodeActivity::class.java)
         intent.putExtra("role", role)
+        activity.startActivity(intent)
+    }
+
+    fun toLogbook(patientId: String? = null) {
+        val intent = Intent(
+            activity.applicationContext,
+            PatientLogbookActivity::class.java
+        )
+        patientId?.let {
+            intent.putExtra("PATIENT_ID", it)
+        }
         activity.startActivity(intent)
     }
 }

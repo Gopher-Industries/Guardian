@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header with title and delete button -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/log_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/delete_button"
+                android:text="Log Entry Title"
+                android:textColor="@color/text_heading_color"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:maxLines="2"
+                tools:text="Patient Care Log Entry" />
+
+            <ImageButton
+                android:id="@+id/delete_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Delete log entry"
+                android:src="@android:drawable/ic_menu_delete"
+                app:tint="@color/red" />
+
+        </RelativeLayout>
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/log_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Log entry description"
+            android:textColor="@color/text_input_color"
+            android:textSize="14sp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            tools:text="This is a sample log entry description that shows what the log entry contains." />
+
+        <!-- Footer with creator info and date -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Role badge -->
+            <TextView
+                android:id="@+id/role_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/role_badge_background"
+                android:text="NURSE"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                tools:text="DOCTOR" />
+
+            <!-- Created by text -->
+            <TextView
+                android:id="@+id/created_by_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:text="Created by John Doe"
+                android:textColor="@color/default_text"
+                android:textSize="12sp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="Created by Dr. Jane Smith" />
+
+        </LinearLayout>
+
+        <!-- Creation date -->
+        <TextView
+            android:id="@+id/created_at_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Mar 15, 2024 at 2:30 PM"
+            android:textColor="@color/default_text"
+            android:textSize="11sp"
+            android:gravity="end"
+            tools:text="Mar 15, 2024 at 2:30 PM" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

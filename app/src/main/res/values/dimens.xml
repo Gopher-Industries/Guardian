@@ -5,8 +5,39 @@
     <dimen name="activity_quarter_margin">4dp</dimen>
 
 
-    <dimen name="text_size_title">20sp</dimen>
+
     <dimen name="text_size_description">16sp</dimen>
     <dimen name="text_size_caption">14sp</dimen>
+
+
+    <!-- Spacing -->
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_extra_large">32dp</dimen>
+
+    <!-- Text Sizes -->
     <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_medium">14sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_extra_large">18sp</dimen>
+    <dimen name="text_size_title">20sp</dimen>
+
+    <!-- Calendar Specific -->
+    <dimen name="week_day_size">48dp</dimen>
+    <dimen name="time_slot_width">60dp</dimen>
+    <dimen name="calendar_grid_height">300dp</dimen>
+    <dimen name="task_card_corner_radius">12dp</dimen>
+    <dimen name="priority_indicator_width">4dp</dimen>
+    <dimen name="badge_corner_radius">12dp</dimen>
+
+    <!-- Button Sizes -->
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="icon_button_size">40dp</dimen>
+    <dimen name="small_icon_button_size">32dp</dimen>
+
+    <!-- Card Elevations -->
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="dialog_elevation">8dp</dimen>
 </resources>

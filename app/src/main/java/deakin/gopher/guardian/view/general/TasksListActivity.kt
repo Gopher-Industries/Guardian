@@ -24,6 +24,7 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.adapter.TaskListAdapter
 import deakin.gopher.guardian.model.Task
 import deakin.gopher.guardian.services.NavigationService
+import deakin.gopher.guardian.view.calendar.GuardianCalendarActivity
 
 class TasksListActivity : AppCompatActivity() {
     private var taskListAdapter: TaskListAdapter? = null
@@ -54,7 +55,7 @@ class TasksListActivity : AppCompatActivity() {
 //                    )
                     R.id.add_task ->
                         startActivity(
-                            Intent(this@TasksListActivity, TaskAddActivity::class.java),
+                            Intent(this@TasksListActivity, GuardianCalendarActivity::class.java),
                         )
                     R.id.nav_signout -> {
                         FirebaseAuth.getInstance().signOut()
