@@ -60,18 +60,17 @@ export default function NotificationPanel({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="notification-drawer-overlay" onClick={onClose}>
-      <div className="notification-drawer" onClick={(e) => e.stopPropagation()}>
-        <div className="notification-drawer-header">
-          <h2>Notifications</h2>
-          <div className="notification-drawer-header-actions">
-            <button className="icon-button" onClick={onClose} aria-label="Close panel">
-              <X size={18} />
-            </button>
-          </div>
+    <>
+      <div className="notification-dropdown-overlay" onClick={onClose} />
+      <div className="notification-dropdown" onClick={(e) => e.stopPropagation()}>
+        <div className="notification-dropdown-header">
+          <h3>Notifications</h3>
+          <button className="icon-button" style={{ width: '32px', height: '32px' }} onClick={onClose} aria-label="Close menu">
+            <X size={16} />
+          </button>
         </div>
 
-        <div className="notification-drawer-content">
+        <div className="notification-dropdown-content">
           {isLoading ? (
             <div className="notification-empty">
               <Loader text="Loading notifications..." />
@@ -98,7 +97,7 @@ export default function NotificationPanel({ isOpen, onClose }) {
                   className={`notification-item ${!isRead ? "unread" : ""}`}
                 >
                   <div className="notification-item-header">
-                    <h3 className="notification-item-title">{notif.title}</h3>
+                    <h4 className="notification-item-title">{notif.title}</h4>
                     <span className="notification-item-date">
                       {new Date(notif.createdAt || notif.date).toLocaleDateString()}
                     </span>
@@ -131,6 +130,6 @@ export default function NotificationPanel({ isOpen, onClose }) {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 }

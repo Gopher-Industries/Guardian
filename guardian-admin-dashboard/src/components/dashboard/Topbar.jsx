@@ -11,8 +11,7 @@ export default function Topbar() {
   };
 
   return (
-    <>
-      <header className="topbar">
+    <header className="topbar">
       <div className="topbar-left">
         <div>
           <p className="topbar-eyebrow">Administrator Workspace</p>
@@ -26,14 +25,21 @@ export default function Topbar() {
           <input type="text" placeholder="Search records..." />
         </div>
 
-        <button 
-          className="icon-button" 
-          type="button" 
-          aria-label="Notifications"
-          onClick={() => setIsNotificationsOpen(true)}
-        >
-          <Bell size={18} />
-        </button>
+        <div className="notification-wrapper" style={{ position: "relative" }}>
+          <button 
+            className="icon-button" 
+            type="button" 
+            aria-label="Notifications"
+            onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
+          >
+            <Bell size={18} />
+          </button>
+          
+          <NotificationPanel 
+            isOpen={isNotificationsOpen} 
+            onClose={() => setIsNotificationsOpen(false)} 
+          />
+        </div>
 
         <div className="topbar-profile">
           <UserCircle2 size={20} />
@@ -44,10 +50,5 @@ export default function Topbar() {
         </div>
       </div>
     </header>
-      <NotificationPanel 
-        isOpen={isNotificationsOpen} 
-        onClose={() => setIsNotificationsOpen(false)} 
-      />
-    </>
   );
 }
