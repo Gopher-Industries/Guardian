@@ -1,14 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Bell, Search, UserCircle2 } from "lucide-react";
 import { getAdminUser } from "../../utils/storage";
 import NotificationPanel from "./NotificationPanel";
+import { getNotifications } from "../../services/notificationService";
 
 export default function Topbar() {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  
   const admin = getAdminUser() || {
     fullname: "Guardian Admin",
     role: "admin",
   };
+
+  const fetchNotifications = useCallback(async () => {
+    try {
+      const data = await getNotifications();
+      setNotifications(Array.isArray(data) ? data : data?.notifications || []);
+    } catch (err) {
+      console.error("Failed to fetch notifications for badge", err);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchNotifications();
+    // Optional: Set up interval for polling if needed
+    // const interval = setInterval(fetchNotifications, 60000);
+    // return () => clearInterval(interval);
+  }, [fetchNotifications]);
+
+  const unreadCount = notifications.filter(n => !(n.isRead || n.read)).length;
 
   return (
     <header className="topbar">
@@ -33,11 +54,19 @@ export default function Topbar() {
             onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
           >
             <Bell size={18} />
+            {unreadCount > 0 && (
+              <span className="notification-badge">
+                {unreadCount > 9 ? '9+' : unreadCount}
+              </span>
+            )}
           </button>
           
           <NotificationPanel 
             isOpen={isNotificationsOpen} 
             onClose={() => setIsNotificationsOpen(false)} 
+            notifications={notifications}
+            setNotifications={setNotifications}
+            refreshNotifications={fetchNotifications}
           />
         </div>
 
@@ -51,4 +80,4 @@ export default function Topbar() {
       </div>
     </header>
   );
-}
+}

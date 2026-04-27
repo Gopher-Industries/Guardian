@@ -18,30 +18,21 @@ import {
 } from "../../services/notificationService";
 import Loader from "../common/Loader";
 
-export default function NotificationPanel({ isOpen, onClose }) {
-  const [notifications, setNotifications] = useState([]);
+export default function NotificationPanel({ 
+  isOpen, 
+  onClose, 
+  notifications, 
+  setNotifications,
+  refreshNotifications 
+}) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchNotifications = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const data = await getNotifications();
-      setNotifications(Array.isArray(data) ? data : data?.notifications || []);
-    } catch (err) {
-      setError("Failed to load notifications.");
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
   useEffect(() => {
     if (isOpen) {
-      fetchNotifications();
+      refreshNotifications();
     }
-  }, [isOpen, fetchNotifications]);
+  }, [isOpen, refreshNotifications]);
 
   const handleMarkAsRead = async (id) => {
     try {
