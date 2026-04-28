@@ -8,16 +8,14 @@ import {
   CheckCircle2, 
   XCircle, 
   Bell,
-  Clock 
+  Clock,
+  ExternalLink
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  getNotifications,
   markNotificationAsRead,
-  deleteNotification,
 } from "../../services/notificationService";
 import Loader from "../common/Loader";
-import ConfirmationModal from "../common/ConfirmationModal";
 
 export default function NotificationPanel({ 
   isOpen, 
@@ -25,15 +23,22 @@ export default function NotificationPanel({
   notifications, 
   setNotifications,
   refreshNotifications,
-  onDeleteRequest
+  onDeleteRequest,
+  onViewAll
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [selectedNotification, setSelectedNotification] = useState(null);
 
   useEffect(() => {
-    if (isOpen) {
-      refreshNotifications();
-    }
+    const load = async () => {
+      if (isOpen) {
+        setIsLoading(true);
+        await refreshNotifications();
+        setIsLoading(false);
+      }
+    };
+    load();
   }, [isOpen, refreshNotifications]);
 
   const handleMarkAsRead = async (id) => {
@@ -46,6 +51,13 @@ export default function NotificationPanel({
       );
     } catch (err) {
       console.error("Failed to mark as read", err);
+    }
+  };
+
+  const handleViewDetails = (notif) => {
+    setSelectedNotification(notif);
+    if (!(notif.isRead || notif.read)) {
+      handleMarkAsRead(notif.id);
     }
   };
 
@@ -110,7 +122,7 @@ export default function NotificationPanel({
             <div className="notification-empty">
               <AlertTriangle size={32} style={{ opacity: 0.3, marginBottom: '12px' }} />
               <p className="form-error">{error}</p>
-              <button className="ui-button secondary" onClick={fetchNotifications} style={{ marginTop: '12px' }}>
+              <button className="ui-button secondary" onClick={refreshNotifications} style={{ marginTop: '12px' }}>
                 Retry
               </button>
             </div>
@@ -131,7 +143,9 @@ export default function NotificationPanel({
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    className={`notification-item ${!isRead ? "unread" : ""} type-${notif.type || 'info'}`}
+                    className={`notification-item ${!isRead ? "unread" : ""} type-${notif.type || 'info'} compact`}
+                    onClick={() => handleViewDetails(notif)}
+                    style={{ cursor: 'pointer' }}
                   >
                     <div className="notification-item-header">
                       <div className="notification-item-title-wrap">
@@ -143,16 +157,18 @@ export default function NotificationPanel({
                         {formatTime(notif.createdAt || notif.date)}
                       </div>
                     </div>
-                    <p className="notification-item-message">{notif.message}</p>
+                    <p className="notification-item-message truncate">
+                      {notif.message}
+                    </p>
                     
-                    <div className="notification-item-actions">
+                    <div className="notification-item-actions" onClick={(e) => e.stopPropagation()}>
                       {!isRead && (
                         <button
                           className="notification-action-btn read-btn"
                           onClick={() => handleMarkAsRead(notif.id)}
                         >
                           <Check size={12} style={{ marginRight: '3px' }} />
-                          Mark as read
+                          Mark
                         </button>
                       )}
                       <button
@@ -169,7 +185,72 @@ export default function NotificationPanel({
             </AnimatePresence>
           )}
         </div>
+
+        {notifications.length > 0 && (
+          <div className="notification-dropdown-footer">
+            <button className="view-all-btn" onClick={onViewAll}>
+              View all notifications
+              <ExternalLink size={14} style={{ marginLeft: '8px' }} />
+            </button>
+          </div>
+        )}
       </motion.div>
+
+      {/* Detail Modal */}
+      <AnimatePresence>
+        {selectedNotification && (
+          <div className="modal-overlay" style={{ zIndex: 2500 }} onClick={() => setSelectedNotification(null)}>
+            <motion.div 
+              className={`modal-content notification-detail-modal type-${selectedNotification.type || 'info'}`}
+              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            >
+              <div className="modal-header">
+                <div className="modal-title-wrap">
+                  {getIcon(selectedNotification.type)}
+                  <h2>Notification Details</h2>
+                </div>
+                <button className="icon-button" onClick={() => setSelectedNotification(null)}>
+                  <X size={18} />
+                </button>
+              </div>
+
+              <div className="modal-body">
+                <div className="detail-meta">
+                  <span className="detail-type-badge">{selectedNotification.type || 'info'}</span>
+                  <span className="detail-date">
+                    {new Date(selectedNotification.createdAt || selectedNotification.date).toLocaleString()}
+                  </span>
+                </div>
+                <h3 className="detail-title">{selectedNotification.title}</h3>
+                <div className="detail-message">
+                  {selectedNotification.message}
+                </div>
+              </div>
+
+              <div className="modal-footer">
+                <button 
+                  className="ui-button secondary" 
+                  onClick={() => setSelectedNotification(null)}
+                >
+                  Close
+                </button>
+                <button 
+                  className="ui-button danger-btn"
+                  onClick={() => {
+                    onDeleteRequest(selectedNotification.id);
+                    setSelectedNotification(null);
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

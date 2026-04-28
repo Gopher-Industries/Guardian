@@ -1,16 +1,16 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, AlertCircle } from "lucide-react";
 
-export default function ConfirmationModal({ 
-  isOpen, 
-  onClose, 
-  onConfirm, 
-  title = "Are you sure?", 
-  message, 
+export default function ConfirmationModal({
+  isOpen,
+  onClose,
+  onConfirm,
+  title = "Are you sure?",
+  message,
   children,
   confirmText = "Confirm",
   cancelText = "Cancel",
-  type = "danger", // 'danger', 'primary', 'warning', 'success'
+  type = "danger",
   isLoading = false,
   icon: CustomIcon,
   maxWidth = "440px"
@@ -25,8 +25,8 @@ export default function ConfirmationModal({
   return (
     <AnimatePresence>
       <div className="modal-overlay" onClick={isLoading ? null : onClose}>
-        <motion.div 
-          className={`modal-content modal-${type}`} 
+        <motion.div
+          className={`modal-content modal-${type}`}
           style={{ maxWidth }}
           onClick={(e) => e.stopPropagation()}
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -52,16 +52,16 @@ export default function ConfirmationModal({
           </div>
 
           <div className="modal-footer">
-            <button 
-              type="button" 
-              className="ui-button secondary" 
+            <button
+              type="button"
+              className="ui-button secondary"
               onClick={onClose}
               disabled={isLoading}
             >
               {cancelText}
             </button>
-            <button 
-              type="button" 
+            <button
+              type="button"
               className={`ui-button ${type === 'danger' ? 'danger-btn' : ''}`}
               onClick={onConfirm}
               disabled={isLoading}

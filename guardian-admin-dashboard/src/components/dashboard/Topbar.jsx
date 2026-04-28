@@ -2,53 +2,26 @@ import { useState, useEffect, useCallback } from "react";
 import { Bell, Search, UserCircle2 } from "lucide-react";
 import { getAdminUser } from "../../utils/storage";
 import NotificationPanel from "./NotificationPanel";
-import ConfirmationModal from "../common/ConfirmationModal";
 import { 
   getNotifications, 
   deleteNotification 
 } from "../../services/notificationService";
 
-export default function Topbar() {
+export default function Topbar({ 
+  notifications, 
+  onRefreshNotifications, 
+  onDeleteRequest, 
+  onOpenDrawer,
+  setNotifications
+}) {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
-  const [notifications, setNotifications] = useState([]);
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  const [selectedId, setSelectedId] = useState(null);
   
   const admin = getAdminUser() || {
     fullname: "Guardian Admin",
     role: "admin",
   };
 
-  const fetchNotifications = useCallback(async () => {
-    try {
-      const data = await getNotifications();
-      setNotifications(Array.isArray(data) ? data : data?.notifications || []);
-    } catch (err) {
-      console.error("Failed to fetch notifications for badge", err);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchNotifications();
-  }, [fetchNotifications]);
-
   const unreadCount = notifications.filter(n => !(n.isRead || n.read)).length;
-
-  const handleDeleteRequest = (id) => {
-    setSelectedId(id);
-    setIsConfirmOpen(true);
-  };
-
-  const handleConfirmDelete = async () => {
-    if (!selectedId) return;
-    try {
-      await deleteNotification(selectedId);
-      setNotifications(prev => prev.filter(n => n.id !== selectedId));
-      setSelectedId(null);
-    } catch (err) {
-      console.error("Failed to delete notification", err);
-    }
-  };
 
   return (
     <header className="topbar">
@@ -85,8 +58,12 @@ export default function Topbar() {
             onClose={() => setIsNotificationsOpen(false)} 
             notifications={notifications}
             setNotifications={setNotifications}
-            refreshNotifications={fetchNotifications}
-            onDeleteRequest={handleDeleteRequest}
+            refreshNotifications={onRefreshNotifications}
+            onDeleteRequest={onDeleteRequest}
+            onViewAll={() => {
+              setIsNotificationsOpen(false);
+              onOpenDrawer();
+            }}
           />
         </div>
 
@@ -98,15 +75,6 @@ export default function Topbar() {
           </div>
         </div>
       </div>
-
-      <ConfirmationModal
-        isOpen={isConfirmOpen}
-        onClose={() => setIsConfirmOpen(false)}
-        onConfirm={handleConfirmDelete}
-        title="Delete Notification"
-        message="Are you sure you want to remove this alert? This action cannot be reversed."
-        confirmText="Delete Alert"
-      />
     </header>
   );
 }
