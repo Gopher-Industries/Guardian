@@ -73,19 +73,20 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailTextInputLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center_horizontal"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/Email"
-                    android:layout_width="300dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="12dp"
-                    android:autofillHints=""
+                    android:autofillHints="emailAddress"
                     android:ems="10"
                     android:focusable="auto"
                     android:hint="@string/email"
@@ -95,19 +96,20 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordTextInputLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                app:errorEnabled="true"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                    android:autofillHints=""
+                    android:autofillHints="password"
                     android:ems="10"
                     android:focusable="auto"
                     android:hint="@string/password"
