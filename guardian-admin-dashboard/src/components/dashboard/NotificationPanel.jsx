@@ -24,11 +24,11 @@ export default function NotificationPanel({
   setNotifications,
   refreshNotifications,
   onDeleteRequest,
+  onViewNotification,
   onViewAll
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [selectedNotification, setSelectedNotification] = useState(null);
 
   useEffect(() => {
     const load = async () => {
@@ -55,7 +55,7 @@ export default function NotificationPanel({
   };
 
   const handleViewDetails = (notif) => {
-    setSelectedNotification(notif);
+    onViewNotification(notif);
     if (!(notif.isRead || notif.read)) {
       handleMarkAsRead(notif.id);
     }
@@ -196,61 +196,6 @@ export default function NotificationPanel({
         )}
       </motion.div>
 
-      {/* Detail Modal */}
-      <AnimatePresence>
-        {selectedNotification && (
-          <div className="modal-overlay" style={{ zIndex: 2500 }} onClick={() => setSelectedNotification(null)}>
-            <motion.div 
-              className={`modal-content notification-detail-modal type-${selectedNotification.type || 'info'}`}
-              onClick={(e) => e.stopPropagation()}
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            >
-              <div className="modal-header">
-                <div className="modal-title-wrap">
-                  {getIcon(selectedNotification.type)}
-                  <h2>Notification Details</h2>
-                </div>
-                <button className="icon-button" onClick={() => setSelectedNotification(null)}>
-                  <X size={18} />
-                </button>
-              </div>
-
-              <div className="modal-body">
-                <div className="detail-meta">
-                  <span className="detail-type-badge">{selectedNotification.type || 'info'}</span>
-                  <span className="detail-date">
-                    {new Date(selectedNotification.createdAt || selectedNotification.date).toLocaleString()}
-                  </span>
-                </div>
-                <h3 className="detail-title">{selectedNotification.title}</h3>
-                <div className="detail-message">
-                  {selectedNotification.message}
-                </div>
-              </div>
-
-              <div className="modal-footer">
-                <button 
-                  className="ui-button secondary" 
-                  onClick={() => setSelectedNotification(null)}
-                >
-                  Close
-                </button>
-                <button 
-                  className="ui-button danger-btn"
-                  onClick={() => {
-                    onDeleteRequest(selectedNotification.id);
-                    setSelectedNotification(null);
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </>
   );
 }

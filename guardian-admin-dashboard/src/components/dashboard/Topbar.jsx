@@ -12,7 +12,8 @@ export default function Topbar({
   onRefreshNotifications, 
   onDeleteRequest, 
   onOpenDrawer,
-  setNotifications
+  setNotifications,
+  onViewNotification
 }) {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   
@@ -60,6 +61,7 @@ export default function Topbar({
             setNotifications={setNotifications}
             refreshNotifications={onRefreshNotifications}
             onDeleteRequest={onDeleteRequest}
+            onViewNotification={onViewNotification}
             onViewAll={() => {
               setIsNotificationsOpen(false);
               onOpenDrawer();

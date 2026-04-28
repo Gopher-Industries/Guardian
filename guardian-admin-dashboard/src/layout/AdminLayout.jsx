@@ -4,6 +4,8 @@ import Sidebar from "../components/dashboard/Sidebar";
 import Topbar from "../components/dashboard/Topbar";
 import ConfirmationModal from "../components/common/ConfirmationModal";
 import NotificationDrawer from "../components/dashboard/NotificationDrawer";
+import Modal from "../components/common/Modal";
+import { Trash2, Clock } from "lucide-react";
 import { 
   getNotifications, 
   deleteNotification 
@@ -17,6 +19,14 @@ export default function AdminLayout() {
   // Notifications State
   const [notifications, setNotifications] = useState([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [detailModal, setDetailModal] = useState({
+    isOpen: false,
+    notification: null,
+    title: "Notification Detail",
+    description: "",
+    confirmText: "Delete Notification",
+    cancelText: "Close"
+  });
 
   // Global Confirmation Modal State
   const [confirmModal, setConfirmModal] = useState({
@@ -89,6 +99,21 @@ export default function AdminLayout() {
     });
   };
 
+  const handleViewNotification = (notif, options = {}) => {
+    setDetailModal({
+      isOpen: true,
+      notification: notif,
+      title: options.title || "Notification Detail",
+      description: options.description || "",
+      confirmText: options.confirmText || "Delete Notification",
+      cancelText: options.cancelText || "Close"
+    });
+  };
+
+  const closeDetailModal = () => {
+    setDetailModal(prev => ({ ...prev, isOpen: false }));
+  };
+
   return (
     <div className="admin-shell">
       <Sidebar
@@ -121,9 +146,16 @@ export default function AdminLayout() {
           onRefreshNotifications={fetchNotifications}
           onDeleteRequest={handleDeleteRequest}
           onOpenDrawer={() => setIsDrawerOpen(true)}
+          onViewNotification={handleViewNotification}
         />
         <main className="admin-content">
-          <Outlet context={{ showConfirm, hideConfirm, notifications, fetchNotifications }} />
+          <Outlet context={{ 
+            showConfirm, 
+            hideConfirm, 
+            notifications, 
+            fetchNotifications,
+            onViewNotification: handleViewNotification 
+          }} />
         </main>
       </div>
 
@@ -133,7 +165,60 @@ export default function AdminLayout() {
         notifications={notifications}
         setNotifications={setNotifications}
         onDeleteRequest={handleDeleteRequest}
+        onViewNotification={handleViewNotification}
       />
+
+      <Modal
+        isOpen={detailModal.isOpen}
+        onClose={closeDetailModal}
+        title={detailModal.title}
+        type={detailModal.notification?.type || 'info'}
+        footer={
+          <>
+            <button className="ui-button secondary" onClick={closeDetailModal}>
+              {detailModal.cancelText}
+            </button>
+            <button 
+              className="ui-button danger-btn"
+              onClick={() => {
+                handleDeleteRequest(detailModal.notification.id);
+                closeDetailModal();
+              }}
+              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+              <Trash2 size={16} />
+              {detailModal.confirmText}
+            </button>
+          </>
+        }
+      >
+        {detailModal.notification && (
+          <>
+            <div className="detail-meta" style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span className={`type-tag color-${detailModal.notification.type || 'info'}`}>
+                {detailModal.notification.type || 'information'}
+              </span>
+              <div className="notification-item-date" style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                <Clock size={14} />
+                {new Date(detailModal.notification.createdAt || detailModal.notification.date).toLocaleString([], {
+                  dateStyle: 'medium',
+                  timeStyle: 'short'
+                })}
+              </div>
+            </div>
+
+            {detailModal.description && (
+              <p className="modal-subtitle" style={{ color: 'var(--text-muted)', marginBottom: '16px', fontSize: '0.95rem', lineHeight: '1.5' }}>
+                {detailModal.description}
+              </p>
+            )}
+
+            <div className="detail-message">
+              {detailModal.notification.message}
+            </div>
+          </>
+        )}
+      </Modal>
 
       <ConfirmationModal
         isOpen={confirmModal.isOpen}
@@ -149,4 +234,4 @@ export default function AdminLayout() {
       />
     </div>
   );
-}
+}

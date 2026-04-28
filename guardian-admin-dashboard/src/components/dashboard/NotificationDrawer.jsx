@@ -19,7 +19,8 @@ export default function NotificationDrawer({
   notifications, 
   setNotifications,
   onDeleteRequest,
-  getIcon // We can pass this or redefine
+  onViewNotification,
+  getIcon
 }) {
   const [filter, setFilter] = useState("all"); // all, unread
   const [search, setSearch] = useState("");
@@ -129,6 +130,8 @@ export default function NotificationDrawer({
                     <div 
                       key={notif.id} 
                       className={`drawer-item ${!isRead ? 'unread' : ''} type-${notif.type || 'info'}`}
+                      onClick={() => onViewNotification(notif)}
+                      style={{ cursor: 'pointer' }}
                     >
                       <div className="drawer-item-header">
                         <h3 className="drawer-item-title">{notif.title}</h3>

@@ -1758,6 +1758,11 @@ a {
   border-radius: 12px;
 }
 
+.type-tag.color-success { color: var(--success); background: rgba(23, 166, 115, 0.1); }
+.type-tag.color-warning { color: var(--warning); background: rgba(232, 163, 23, 0.1); }
+.type-tag.color-error { color: var(--danger); background: rgba(228, 98, 111, 0.1); }
+.type-tag.color-info { color: var(--primary); background: rgba(79, 160, 200, 0.1); }
+
 .drawer-item-actions {
   display: flex;
   gap: 10px;
