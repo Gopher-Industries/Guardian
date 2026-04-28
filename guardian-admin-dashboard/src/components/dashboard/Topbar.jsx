@@ -2,11 +2,17 @@ import { useState, useEffect, useCallback } from "react";
 import { Bell, Search, UserCircle2 } from "lucide-react";
 import { getAdminUser } from "../../utils/storage";
 import NotificationPanel from "./NotificationPanel";
-import { getNotifications } from "../../services/notificationService";
+import ConfirmationModal from "../common/ConfirmationModal";
+import { 
+  getNotifications, 
+  deleteNotification 
+} from "../../services/notificationService";
 
 export default function Topbar() {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
   
   const admin = getAdminUser() || {
     fullname: "Guardian Admin",
@@ -24,12 +30,25 @@ export default function Topbar() {
 
   useEffect(() => {
     fetchNotifications();
-    // Optional: Set up interval for polling if needed
-    // const interval = setInterval(fetchNotifications, 60000);
-    // return () => clearInterval(interval);
   }, [fetchNotifications]);
 
   const unreadCount = notifications.filter(n => !(n.isRead || n.read)).length;
+
+  const handleDeleteRequest = (id) => {
+    setSelectedId(id);
+    setIsConfirmOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!selectedId) return;
+    try {
+      await deleteNotification(selectedId);
+      setNotifications(prev => prev.filter(n => n.id !== selectedId));
+      setSelectedId(null);
+    } catch (err) {
+      console.error("Failed to delete notification", err);
+    }
+  };
 
   return (
     <header className="topbar">
@@ -67,6 +86,7 @@ export default function Topbar() {
             notifications={notifications}
             setNotifications={setNotifications}
             refreshNotifications={fetchNotifications}
+            onDeleteRequest={handleDeleteRequest}
           />
         </div>
 
@@ -78,6 +98,16 @@ export default function Topbar() {
           </div>
         </div>
       </div>
+
+      <ConfirmationModal
+        isOpen={isConfirmOpen}
+        onClose={() => setIsConfirmOpen(false)}
+        onConfirm={handleConfirmDelete}
+        title="Delete Notification"
+        message="Are you sure you want to remove this alert? This action cannot be reversed."
+        confirmText="Delete Alert"
+      />
     </header>
   );
-}
+}
+

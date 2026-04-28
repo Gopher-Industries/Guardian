@@ -17,13 +17,15 @@ import {
   deleteNotification,
 } from "../../services/notificationService";
 import Loader from "../common/Loader";
+import ConfirmationModal from "../common/ConfirmationModal";
 
 export default function NotificationPanel({ 
   isOpen, 
   onClose, 
   notifications, 
   setNotifications,
-  refreshNotifications 
+  refreshNotifications,
+  onDeleteRequest
 }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -44,17 +46,6 @@ export default function NotificationPanel({
       );
     } catch (err) {
       console.error("Failed to mark as read", err);
-    }
-  };
-
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this notification?")) return;
-    
-    try {
-      await deleteNotification(id);
-      setNotifications((prev) => prev.filter((notif) => notif.id !== id));
-    } catch (err) {
-      console.error("Failed to delete notification", err);
     }
   };
 
@@ -166,7 +157,8 @@ export default function NotificationPanel({
                       )}
                       <button
                         className="notification-action-btn delete-btn"
-                        onClick={() => handleDelete(notif.id)}
+                        onClick={() => onDeleteRequest(notif.id)}
+                        title="Delete notification"
                       >
                         <Trash2 size={12} />
                       </button>
@@ -181,4 +173,3 @@ export default function NotificationPanel({
     </>
   );
 }
-
