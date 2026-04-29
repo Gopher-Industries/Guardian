@@ -14,7 +14,7 @@ export const getPatientOverview = async (patientId, orgId) => {
 
 export async function getPatients({ page = 1, limit = 10 } = {}) {
   const params = { page, limit };
-  const response = await api.get('/api/v1/admin/patients', { params });
+  const response = await api.get('/admin/patients', { params });
 
   console.log('GET patients response:', response.data);
 
@@ -22,7 +22,7 @@ export async function getPatients({ page = 1, limit = 10 } = {}) {
 }
 
 export async function createPatient(patientData) {
-  const response = await api.post('/api/v1/admin/patients', patientData);
+  const response = await api.post('/admin/patients', patientData);
 
   console.log('POST create patient response:', response.data);
 
@@ -30,7 +30,7 @@ export async function createPatient(patientData) {
 }
 
 export async function deactivatePatient(id) {
-  const response = await api.delete(`/api/v1/admin/patients/${id}`);
+  const response = await api.delete(`/admin/patients/${id}`);
 
   console.log('DELETE patient response:', response.data);
 

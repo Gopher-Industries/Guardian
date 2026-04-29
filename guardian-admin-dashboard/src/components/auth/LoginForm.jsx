@@ -50,11 +50,16 @@ export default function LoginForm() {
         navigate("/dashboard");
       }
     } catch (err) {
-      setError(
-        err?.response?.data?.message ||
-          err?.message ||
-          "Login failed. Please check your credentials and try again."
-      );
+      const status = err?.response?.status;
+      const backendMessage = err?.response?.data?.message;
+
+      if (backendMessage) {
+        setError(backendMessage);
+      } else if (status === 400 || status === 401) {
+        setError("Incorrect email or password. Please try again.");
+      } else {
+        setError("Login failed. Please try again later.");
+      }
     } finally {
       setSubmitting(false);
     }
