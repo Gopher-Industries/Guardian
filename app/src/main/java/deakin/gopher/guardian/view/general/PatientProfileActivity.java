@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.adapter.PatientProfileAdapter;
+import deakin.gopher.guardian.services.EmailPasswordAuthService;
 
 public class PatientProfileActivity extends BaseActivity {
 
@@ -79,15 +80,9 @@ public class PatientProfileActivity extends BaseActivity {
                     final int id = menuItem.getItemId();
                     if (R.id.nav_home == id) {
                       startActivity(new Intent(PatientProfileActivity.this, Homepage4admin.class));
-
-                    } /*else if (R.id.nav_admin == id) {
-                          startActivity(new Intent(PatientProfileActivity.this, Homepage4admin.class));
-                      } else if (R.id.nav_settings == id) {
-                          startActivity(new Intent(PatientProfileActivity.this, Setting.class));
-                      }*/ else if (R.id.nav_signout == id) {
-                      mAuth.getInstance().signOut();
-                      startActivity(new Intent(PatientProfileActivity.this, LoginActivity.class));
                       finish();
+                    } else if (R.id.nav_signout == id) {
+                      showSignOutConfirmationDialog();
                     }
                     return true;
                   });
@@ -172,5 +167,19 @@ public class PatientProfileActivity extends BaseActivity {
                 Toast.makeText(
                         PatientProfileActivity.this, "Failed to delete patient", Toast.LENGTH_SHORT)
                     .show());
+  }
+
+  private void showSignOutConfirmationDialog() {
+    new androidx.appcompat.app.AlertDialog.Builder(this)
+        .setTitle(R.string.sign_out)
+        .setMessage(R.string.sign_out_confirmation_message)
+        .setPositiveButton(
+            R.string.sign_out,
+            (dialog, which) -> {
+              EmailPasswordAuthService.signOut(this);
+              finish();
+            })
+        .setNegativeButton(R.string.stay_in, null)
+        .show();
   }
 }
