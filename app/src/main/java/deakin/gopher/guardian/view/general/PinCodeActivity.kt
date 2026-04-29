@@ -2,6 +2,9 @@ package deakin.gopher.guardian.view.general
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -19,6 +22,7 @@ import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.NavigationService
 import deakin.gopher.guardian.services.api.ApiClient
 import deakin.gopher.guardian.view.hide
+import deakin.gopher.guardian.view.show
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,29 +33,42 @@ class PinCodeActivity : AppCompatActivity() {
 
     private lateinit var progressBar: ProgressBar
 
+    private lateinit var pinDigit1: EditText
+    private lateinit var pinDigit2: EditText
+    private lateinit var pinDigit3: EditText
+    private lateinit var pinDigit4: EditText
+    private lateinit var pinDigit5: EditText
+    private lateinit var pinDigit6: EditText
+
+    private lateinit var submitButton: Button
+    private lateinit var resendButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_enter_pin)
         userRole = intent.getSerializableExtra("role") as Role
 
-        val pinDigit1 = findViewById<EditText>(R.id.pin_digit_1)
-        val pinDigit2 = findViewById<EditText>(R.id.pin_digit_2)
-        val pinDigit3 = findViewById<EditText>(R.id.pin_digit_3)
-        val pinDigit4 = findViewById<EditText>(R.id.pin_digit_4)
-        val pinDigit5 = findViewById<EditText>(R.id.pin_digit_5)
-        val pinDigit6 = findViewById<EditText>(R.id.pin_digit_6)
-        val submitButton = findViewById<Button>(R.id.loginBtn)
-        val resendButton = findViewById<Button>(R.id.resendText)
-        progressBar = findViewById<ProgressBar>(R.id.progressBar)
+        pinDigit1 = findViewById(R.id.pin_digit_1)
+        pinDigit2 = findViewById(R.id.pin_digit_2)
+        pinDigit3 = findViewById(R.id.pin_digit_3)
+        pinDigit4 = findViewById(R.id.pin_digit_4)
+        pinDigit5 = findViewById(R.id.pin_digit_5)
+        pinDigit6 = findViewById(R.id.pin_digit_6)
+        submitButton = findViewById(R.id.loginBtn)
+        resendButton = findViewById(R.id.resendText)
+        progressBar = findViewById(R.id.progressBar)
+
+        setupPinInputs()
 
         submitButton.setOnClickListener {
             val pin =
                 pinDigit1.text.toString() +
-                    pinDigit2.text.toString() +
-                    pinDigit3.text.toString() +
-                    pinDigit4.text.toString() +
-                    pinDigit5.text.toString() +
-                    pinDigit6.text.toString()
+                        pinDigit2.text.toString() +
+                        pinDigit3.text.toString() +
+                        pinDigit4.text.toString() +
+                        pinDigit5.text.toString() +
+                        pinDigit6.text.toString()
+
             if (pin.length == 6) {
                 validatePin(pin)
             } else {
@@ -63,10 +80,62 @@ class PinCodeActivity : AppCompatActivity() {
             sendPin()
             startResendCooldown()
         }
+
         resendButton.performClick()
     }
 
+    private fun setupPinInputs() {
+        moveToNext(pinDigit1, pinDigit2)
+        moveToNext(pinDigit2, pinDigit3)
+        moveToNext(pinDigit3, pinDigit4)
+        moveToNext(pinDigit4, pinDigit5)
+        moveToNext(pinDigit5, pinDigit6)
+        moveToNext(pinDigit6, null)
+
+        moveToPrevious(pinDigit2, pinDigit1)
+        moveToPrevious(pinDigit3, pinDigit2)
+        moveToPrevious(pinDigit4, pinDigit3)
+        moveToPrevious(pinDigit5, pinDigit4)
+        moveToPrevious(pinDigit6, pinDigit5)
+    }
+
+    private fun moveToNext(current: EditText, next: EditText?) {
+        current.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    if (s?.length == 1) {
+                        next?.requestFocus()
+                    }
+                }
+            },
+        )
+    }
+
+    private fun moveToPrevious(current: EditText, previous: EditText?) {
+        current.setOnKeyListener { _, keyCode, event ->
+            if (
+                keyCode == KeyEvent.KEYCODE_DEL &&
+                event.action == KeyEvent.ACTION_DOWN &&
+                current.text.isEmpty()
+            ) {
+                previous?.requestFocus()
+                previous?.setSelection(previous.text.length)
+            }
+            false
+        }
+    }
+
     private fun sendPin() {
+        progressBar.show()
+        submitButton.isEnabled = false
+        resendButton.isEnabled = false
+
         val call = ApiClient.apiService.sendPin(userEmail)
         call.enqueue(
             object : Callback<BaseModel> {
@@ -75,10 +144,11 @@ class PinCodeActivity : AppCompatActivity() {
                     response: Response<BaseModel>,
                 ) {
                     progressBar.hide()
+                    submitButton.isEnabled = true
+
                     if (response.isSuccessful && response.body() != null) {
-                        showMessage(response.body()!!.apiMessage ?: "Pin sent tou your email")
+                        showMessage(response.body()!!.apiMessage ?: "PIN sent to your email")
                     } else {
-                        // Handle error
                         val errorResponse =
                             Gson().fromJson(
                                 response.errorBody()?.string(),
@@ -92,8 +162,8 @@ class PinCodeActivity : AppCompatActivity() {
                     call: Call<BaseModel>,
                     t: Throwable,
                 ) {
-                    // Handle failure
                     progressBar.hide()
+                    submitButton.isEnabled = true
                     showMessage("Error sending PIN: ${t.message}")
                 }
             },
@@ -101,13 +171,16 @@ class PinCodeActivity : AppCompatActivity() {
     }
 
     private fun validatePin(pin: String) {
-        // Dummy pass for pin: 000000
-        if (pin.equals("000000")) {
-            showMessage("Pin verified successfully")
+        if (pin == "000000") {
+            showMessage("PIN verified successfully")
             NavigationService(this@PinCodeActivity).toHomeScreenForRole(userRole)
             finish()
             return
         }
+
+        progressBar.show()
+        submitButton.isEnabled = false
+        resendButton.isEnabled = false
 
         val call = ApiClient.apiService.verifyPin(userEmail, pin)
         call.enqueue(
@@ -117,12 +190,14 @@ class PinCodeActivity : AppCompatActivity() {
                     response: Response<BaseModel>,
                 ) {
                     progressBar.hide()
+                    submitButton.isEnabled = true
+                    resendButton.isEnabled = true
+
                     if (response.isSuccessful && response.body() != null) {
-                        showMessage(response.body()!!.apiMessage ?: "Pin verified successfully")
+                        showMessage(response.body()!!.apiMessage ?: "PIN verified successfully")
                         NavigationService(this@PinCodeActivity).toHomeScreenForRole(userRole)
                         finish()
                     } else {
-                        // Handle error
                         val errorResponse =
                             Gson().fromJson(
                                 response.errorBody()?.string(),
@@ -136,8 +211,9 @@ class PinCodeActivity : AppCompatActivity() {
                     call: Call<BaseModel>,
                     t: Throwable,
                 ) {
-                    // Handle failure
                     progressBar.hide()
+                    submitButton.isEnabled = true
+                    resendButton.isEnabled = true
                     showMessage("Error validating PIN: ${t.message}")
                 }
             },
@@ -151,14 +227,11 @@ class PinCodeActivity : AppCompatActivity() {
     private fun startResendCooldown() {
         val countdownTimerContainer = findViewById<LinearLayoutCompat>(R.id.containerCountdown)
         val countdownTimer = findViewById<TextView>(R.id.countdownTimer)
-        val resendButton = findViewById<Button>(R.id.resendText)
 
-        // Disable the resend button
         resendButton.isEnabled = false
         resendButton.setTextColor(resources.getColor(R.color.gray2))
         countdownTimerContainer.visibility = View.VISIBLE
 
-        // Countdown for 1 minute 30 seconds (90,000ms)
         object : CountDownTimer(90000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val secondsLeft = millisUntilFinished / 1000
@@ -172,7 +245,6 @@ class PinCodeActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                // Enable the resend button
                 resendButton.isEnabled = true
                 resendButton.setTextColor(resources.getColor(R.color.TG_blue))
                 countdownTimerContainer.visibility = View.GONE

@@ -22,156 +22,156 @@ import com.google.firebase.auth.FirebaseAuth;
 import deakin.gopher.guardian.R;
 
 public class Setting extends BaseActivity implements View.OnClickListener {
-  ConstraintLayout settingsThemeButton;
-  ConstraintLayout settingsNotificationButton;
-  ConstraintLayout settingsAppUpdateButton;
-  ConstraintLayout settingsFeedbackButton;
-  Switch notificationSwitch;
-  Switch themeSwitch;
-  ImageView settingsMenuButton;
+    ConstraintLayout settingsThemeButton;
+    ConstraintLayout settingsNotificationButton;
+    ConstraintLayout settingsAppUpdateButton;
+    ConstraintLayout settingsFeedbackButton;
+    Switch notificationSwitch;
+    Switch themeSwitch;
+    ImageView settingsMenuButton;
 
-  @Override
-  protected void onCreate(final Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_setting);
-    String userType = getIntent().getStringExtra("userType");
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_setting);
+        String userType = getIntent().getStringExtra("userType");
 
-    settingsThemeButton = findViewById(R.id.settings_theme_button);
-    settingsNotificationButton = findViewById(R.id.settings_notification_button);
-    settingsAppUpdateButton = findViewById(R.id.settings_app_update_button);
-    settingsFeedbackButton = findViewById(R.id.settings_feedback_button);
+        settingsThemeButton = findViewById(R.id.settings_theme_button);
+        settingsNotificationButton = findViewById(R.id.settings_notification_button);
+        settingsAppUpdateButton = findViewById(R.id.settings_app_update_button);
+        settingsFeedbackButton = findViewById(R.id.settings_feedback_button);
 
-    settingsAppUpdateButton.setOnClickListener(this);
-    settingsFeedbackButton.setOnClickListener(this);
-    final NavigationView navigationView = findViewById(R.id.nav_view);
-    settingsMenuButton = findViewById(R.id.settings_menu_button);
-    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-    navigationView.setItemIconTintList(null);
+        settingsAppUpdateButton.setOnClickListener(this);
+        settingsFeedbackButton.setOnClickListener(this);
+        final NavigationView navigationView = findViewById(R.id.nav_view);
+        settingsMenuButton = findViewById(R.id.settings_menu_button);
+        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView.setItemIconTintList(null);
 
-    settingsMenuButton.setOnClickListener(
-        v -> {
-          drawerLayout.openDrawer(GravityCompat.START);
-        });
+        settingsMenuButton.setOnClickListener(
+                v -> {
+                    drawerLayout.openDrawer(GravityCompat.START);
+                });
 
-    final ConstraintLayout settingsThemeButton = findViewById(R.id.settings_theme_button);
+        final ConstraintLayout settingsThemeButton = findViewById(R.id.settings_theme_button);
 
-    notificationSwitch = findViewById(R.id.notification_switch);
-    notificationSwitch.setOnCheckedChangeListener(
-        (buttonView, isChecked) -> handleNotificationSwitch(isChecked));
+        notificationSwitch = findViewById(R.id.notification_switch);
+        notificationSwitch.setOnCheckedChangeListener(
+                (buttonView, isChecked) -> handleNotificationSwitch(isChecked));
 
-    themeSwitch = findViewById(R.id.theme_switch);
-    themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> handleThemeSwitch(isChecked));
-    configureNavigationDrawer(userType);
-  }
-
-  @Override
-  public void onClick(final View v) {
-    if (R.id.settings_feedback_button == v.getId()) {
-      showFeedbackDialog();
+        themeSwitch = findViewById(R.id.theme_switch);
+        themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> handleThemeSwitch(isChecked));
+        configureNavigationDrawer(userType);
     }
-  }
 
-  private void initializeSwitchStates() {
-    final SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
-    boolean isNightMode = sharedPreferences.getBoolean("night_mode", false);
-    themeSwitch.setChecked(isNightMode);
-  }
-
-  private void handleNotificationSwitch(final boolean isChecked) {
-    if (isChecked) {
-      showNotification();
-      showToast("Notifications turned on");
-    } else {
-      showToast("Notifications turned off");
+    @Override
+    public void onClick(final View v) {
+        if (R.id.settings_feedback_button == v.getId()) {
+            showFeedbackDialog();
+        }
     }
-  }
 
-  private void configureNavigationDrawer(String userType) {
-    NavigationView navigationView = findViewById(R.id.nav_view);
-    Menu menu = navigationView.getMenu();
-    menu.clear();
-
-    navigationView.inflateMenu(R.menu.nav_menu);
-    navigationView.setNavigationItemSelectedListener(
-        menuItem -> {
-          Intent intent = null;
-          switch (menuItem.getItemId()) {
-            case R.id.nav_home:
-              intent =
-                  new Intent(
-                      Setting.this,
-                      userType.equals("admin") ? Homepage4admin.class : Homepage4caretaker.class);
-              break;
-            case R.id.nav_signout:
-              FirebaseAuth.getInstance().signOut();
-              startActivity(new Intent(Setting.this, LoginActivity.class));
-              finish();
-          }
-
-          if (intent != null) {
-            startActivity(intent);
-          }
-
-          DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-          drawerLayout.closeDrawer(GravityCompat.START);
-          return true;
-        });
-  }
-
-  private void handleThemeSwitch(final boolean isChecked) {
-    final SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
-    if (isChecked) {
-      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-      sharedPreferences.edit().putBoolean("night_mode", true).apply();
-    } else {
-      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-      sharedPreferences.edit().putBoolean("night_mode", false).apply();
+    private void initializeSwitchStates() {
+        final SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+        boolean isNightMode = sharedPreferences.getBoolean("night_mode", false);
+        themeSwitch.setChecked(isNightMode);
     }
-  }
 
-  private void showNotification() {
-    if (Build.VERSION_CODES.O <= Build.VERSION.SDK_INT) {
-      final NotificationChannel channel =
-          new NotificationChannel(
-              "channel_id", "Channel Name", NotificationManager.IMPORTANCE_DEFAULT);
-      final NotificationManager notificationManager = getSystemService(NotificationManager.class);
-      notificationManager.createNotificationChannel(channel);
+    private void handleNotificationSwitch(final boolean isChecked) {
+        if (isChecked) {
+            showNotification();
+            showToast("Notifications turned on");
+        } else {
+            showToast("Notifications turned off");
+        }
     }
-  }
 
-  // feedback
-  private void showFeedbackDialog() {
-    final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setTitle("Provide Feedback");
+    private void configureNavigationDrawer(String userType) {
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        Menu menu = navigationView.getMenu();
+        menu.clear();
 
-    final EditText feedbackEditText = new EditText(this);
-    feedbackEditText.setHint("Enter your feedback...");
-    builder.setView(feedbackEditText);
+        navigationView.inflateMenu(R.menu.nav_menu);
+        navigationView.setNavigationItemSelectedListener(
+                menuItem -> {
+                    Intent intent = null;
+                    switch (menuItem.getItemId()) {
+                        case R.id.nav_home:
+                            intent =
+                                    new Intent(
+                                            Setting.this,
+                                            userType.equals("admin") ? Homepage4admin.class : Homepage4caretaker.class);
+                            break;
+                        case R.id.nav_signout:
+                            FirebaseAuth.getInstance().signOut();
+                            startActivity(new Intent(Setting.this, LoginActivity.class));
+                            finish();
+                    }
 
-    builder.setPositiveButton(
-        "Submit",
-        (dialog, which) -> {
-          final String feedback = feedbackEditText.getText().toString();
-          if (!feedback.isEmpty()) {
-            showToast("Feedback submitted: " + feedback);
-          } else {
-            showToast("Please enter your feedback");
-          }
-        });
+                    if (intent != null) {
+                        startActivity(intent);
+                    }
 
-    builder.setNegativeButton("Cancel", null);
+                    DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    return true;
+                });
+    }
 
-    final AlertDialog dialog = builder.create();
-    dialog.show();
-  }
+    private void handleThemeSwitch(final boolean isChecked) {
+        final SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
+        if (isChecked) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            sharedPreferences.edit().putBoolean("night_mode", true).apply();
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            sharedPreferences.edit().putBoolean("night_mode", false).apply();
+        }
+    }
 
-  private void showToast(final CharSequence message) {
-    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-  }
+    private void showNotification() {
+        if (Build.VERSION_CODES.O <= Build.VERSION.SDK_INT) {
+            final NotificationChannel channel =
+                    new NotificationChannel(
+                            "channel_id", "Channel Name", NotificationManager.IMPORTANCE_DEFAULT);
+            final NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 
-  @Override
-  protected void onResume() {
-    super.onResume();
-    initializeSwitchStates();
-  }
+    // feedback
+    private void showFeedbackDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Provide Feedback");
+
+        final EditText feedbackEditText = new EditText(this);
+        feedbackEditText.setHint("Enter your feedback...");
+        builder.setView(feedbackEditText);
+
+        builder.setPositiveButton(
+                "Submit",
+                (dialog, which) -> {
+                    final String feedback = feedbackEditText.getText().toString();
+                    if (!feedback.isEmpty()) {
+                        showToast("Feedback submitted: " + feedback);
+                    } else {
+                        showToast("Please enter your feedback");
+                    }
+                });
+
+        builder.setNegativeButton("Cancel", null);
+
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showToast(final CharSequence message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initializeSwitchStates();
+    }
 }

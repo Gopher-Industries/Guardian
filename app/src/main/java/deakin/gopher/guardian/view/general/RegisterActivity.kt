@@ -1,6 +1,7 @@
 package deakin.gopher.guardian.view.general
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -9,7 +10,9 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.gson.Gson
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.model.ApiErrorResponse
 import deakin.gopher.guardian.model.RegistrationStatusMessage
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.Password
@@ -23,9 +26,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RegisterActivity : BaseActivity() {
+
+    companion object {
+        private const val TAG = "RegisterActivity"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.account_creation)
+
         val mFullName: EditText = findViewById(R.id.Fullname)
         val mEmail: EditText = findViewById(R.id.Email)
         val mPassword: EditText = findViewById(R.id.password)
@@ -36,10 +45,10 @@ class RegisterActivity : BaseActivity() {
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
 
         mRegisterBtn.setOnClickListener {
-            val emailInput = mEmail.text.toString().trim { it <= ' ' }
-            val passwordInput = mPassword.text.toString().trim { it <= ' ' }
-            val passwordConfirmInput = passwordConfirmation.text.toString().trim { it <= ' ' }
-            val nameInput = mFullName.text.toString().trim { it <= ' ' }
+            val emailInput = mEmail.text.toString().trim()
+            val passwordInput = mPassword.text.toString().trim()
+            val passwordConfirmInput = passwordConfirmation.text.toString().trim()
+            val nameInput = mFullName.text.toString().trim()
             val roleInput = roleButton.checkedButtonId
 
             val registrationError =
@@ -61,6 +70,8 @@ class RegisterActivity : BaseActivity() {
             }
 
             progressBar.visibility = View.VISIBLE
+            mRegisterBtn.isEnabled = false
+            backToLoginButton.isEnabled = false
 
             val emailAddress = EmailAddress(emailInput)
             val password = Password(passwordInput)
@@ -83,17 +94,54 @@ class RegisterActivity : BaseActivity() {
                         response: Response<AuthResponse>,
                     ) {
                         progressBar.isVisible = false
+                        mRegisterBtn.isEnabled = true
+                        backToLoginButton.isEnabled = true
+
                         if (response.isSuccessful) {
-                            // Handle successful registration
                             showMessage(RegistrationStatusMessage.Success.toString())
                             NavigationService(this@RegisterActivity).toLogin()
                         } else {
-                            // Handle error
-                            showMessage(
-                                RegistrationStatusMessage.Failure.toString() + " : ${
-                                    response.errorBody()
-                                }",
-                            )
+                            val rawError = response.errorBody()?.string().orEmpty()
+                            Log.d(TAG, "Raw register error: $rawError")
+
+                            val parsedApiError =
+                                try {
+                                    Gson().fromJson(rawError, ApiErrorResponse::class.java)?.apiError
+                                } catch (e: Exception) {
+                                    null
+                                }
+
+                            val finalErrorText =
+                                when {
+                                    !parsedApiError.isNullOrBlank() -> parsedApiError
+                                    rawError.isNotBlank() -> rawError
+                                    else -> response.message()
+                                }
+
+                            val normalizedError = finalErrorText.lowercase()
+
+                            val isDuplicateEmail =
+                                normalizedError.contains("already exists") ||
+                                        normalizedError.contains("user already exists") ||
+                                        normalizedError.contains("email already exists") ||
+                                        normalizedError.contains("email already taken") ||
+                                        normalizedError.contains("email is already in use") ||
+                                        normalizedError.contains("email in use") ||
+                                        normalizedError.contains("duplicate") ||
+                                        normalizedError.contains("user exists") ||
+                                        normalizedError.contains("account exists") ||
+                                        normalizedError.contains("collision")
+
+                            if (isDuplicateEmail) {
+                                mEmail.error = "Email already taken"
+                                mEmail.requestFocus()
+                                showMessage("Email already taken")
+                            } else {
+                                showMessage(
+                                    if (finalErrorText.isNotBlank()) finalErrorText
+                                    else "Registration failed"
+                                )
+                            }
                         }
                     }
 
@@ -101,9 +149,11 @@ class RegisterActivity : BaseActivity() {
                         call: Call<AuthResponse>,
                         t: Throwable,
                     ) {
-                        // Handle failure
                         progressBar.isVisible = false
-                        showMessage(RegistrationStatusMessage.Failure.toString() + ": ${t.message}")
+                        mRegisterBtn.isEnabled = true
+                        backToLoginButton.isEnabled = true
+                        Log.e(TAG, "Register failure", t)
+                        showMessage("Registration failed: ${t.message}")
                     }
                 },
             )
