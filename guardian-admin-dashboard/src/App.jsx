@@ -11,6 +11,7 @@ import NurseRosterPage from "./pages/NurseRosterPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
 import "./App.css";
+import PatientOverviewPage from "./pages/PatientOverviewPage";
 
 function ProtectedRoute({ children }) {
   const token = getAuthToken();
@@ -36,9 +37,11 @@ export default function App() {
         <Route path="staff-management" element={<StaffManagementPage />} />
         <Route path="org-assignment" element={<OrgAssignmentPage />} />
         <Route path="patients" element={<PatientsPage />} />
+        <Route path="patients/:patientId/overview" element={<PatientOverviewPage />} />
         <Route path="nurse-roster" element={<NurseRosterPage />} />
         <Route path="reports" element={<ReportsPage />} />
         <Route path="settings" element={<SettingsPage />} />
+        
       </Route>
 
       <Route path="*" element={<Navigate to="/login" replace />} />
