@@ -38,47 +38,24 @@ class PatientDetailsActivity : BaseActivity() {
 
         if (currentUser.role == Role.Nurse) {
             binding.toolbar.setBackgroundColor(getColor(R.color.TG_blue))
-            binding.containerPatientInfo.setBackgroundColor(getColor(R.color.TG_blue))
+           // binding.containerPatientInfo.setBackgroundColor(getColor(R.color.TG_blue))
         }
 
-        val patient = intent.getSerializableExtra("patient") as Patient
-
-        // Set patient info views
-        binding.tvName.text = patient.fullname
-        binding.tvAge.text = "Age: ${patient.age}"
-        binding.tvDob.text = "Date of Birth: ${patient.dateOfBirth?.substringBefore("T")}"
-        binding.tvGender.text = "Gender: ${
-            patient.gender.replaceFirstChar {
-                if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-            }
-        }"
-
-        if (patient.healthConditions.isNotEmpty()) {
-            val formattedConditions =
-                patient.healthConditions.joinToString(", ") { condition ->
-                    condition.split(" ").joinToString(" ") { word ->
-                        word.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
-                    }
-                }
-            binding.tvHealthConditions.text = "Health Conditions: $formattedConditions"
-        } else {
-            binding.tvHealthConditions.text = "Health Conditions: No conditions listed"
+        val patient = intent.getSerializableExtra("patient") as? Patient
+        if (patient == null) {
+            showMessage("Patient details not available")
+            finish()
+            return
         }
 
-        Glide.with(this)
-            .load(patient.photoUrl)
-            .placeholder(R.drawable.profile)
-            .circleCrop()
-            .into(binding.imagePatient)
+        bindPatientDetails(patient)
 
-        // Load the assigned nurses fragment dynamically and pass the nurses
         val nursesFragment = PatientAssignedNursesFragment()
         nursesFragment.setAssignedNurses(patient.assignedNurses ?: emptyList())
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentAssignedNursesContainer, nursesFragment)
             .commit()
 
-        // Setup RecyclerView for activity logs
         activitiesAdapter = PatientActivityAdapter(emptyList())
         binding.recyclerViewActivities.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewActivities.adapter = activitiesAdapter
@@ -86,38 +63,99 @@ class PatientDetailsActivity : BaseActivity() {
         fetchPatientActivities(patient.id)
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun bindPatientDetails(patient: Patient) {
+        val formattedGender = patient.gender.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+        }
+
+        val dob = patient.dateOfBirth?.substringBefore("T") ?: "Not available"
+
+        val healthConditionsText =
+            if (!patient.healthConditions.isNullOrEmpty()) {
+                patient.healthConditions.joinToString(", ") { condition ->
+                    condition.split(" ").joinToString(" ") { word ->
+                        word.replaceFirstChar {
+                            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+                        }
+                    }
+                }
+            } else {
+                "No conditions listed"
+            }
+
+        binding.tvName.text = patient.fullname
+        binding.tvAge.text = "${patient.age} years"
+        binding.tvDob.text = "Date of Birth: $dob"
+        binding.tvGender.text = formattedGender
+        binding.tvHealthConditions.text = "Health Conditions: $healthConditionsText"
+
+        Glide.with(this)
+            .load(patient.photoUrl)
+            .placeholder(R.drawable.profile)
+            .error(R.drawable.profile)
+            .circleCrop()
+            .into(binding.imagePatient)
+    }
+
     private fun fetchPatientActivities(patientId: String) {
         val token = "Bearer ${SessionManager.getToken()}"
+
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.Main) {
                 binding.progressBar.visibility = View.VISIBLE
+                binding.tvEmptyMessage.visibility = View.GONE
+                binding.recyclerViewActivities.visibility = View.VISIBLE
             }
-            val response =
-                try {
-                    deakin.gopher.guardian.services.api.ApiClient.apiService.getPatientActivities(token, patientId)
-                } catch (e: Exception) {
-                    null
-                }
-            withContext(Dispatchers.Main) {
-                binding.progressBar.visibility = View.GONE
 
-                if (response?.isSuccessful == true) {
-                    val activities = response.body()
-                    if (!activities.isNullOrEmpty()) {
-                        activitiesAdapter.updateData(activities)
-                        binding.tvEmptyMessage.visibility = View.GONE
-                    } else {
-                        binding.tvEmptyMessage.visibility = View.VISIBLE
-                    }
-                } else {
-                    val errorBody = response?.errorBody()?.string()
-                    val errorResponse =
-                        try {
-                            Gson().fromJson(errorBody, ApiErrorResponse::class.java)
-                        } catch (ex: Exception) {
-                            null
+            try {
+                val response = deakin.gopher.guardian.services.api.ApiClient
+                    .apiService
+                    .getPatientActivities(token, patientId)
+
+                withContext(Dispatchers.Main) {
+                    binding.progressBar.visibility = View.GONE
+
+                    if (response.isSuccessful) {
+                        val activities = response.body()
+
+                        if (!activities.isNullOrEmpty()) {
+                            activitiesAdapter.updateData(activities)
+                            binding.recyclerViewActivities.visibility = View.VISIBLE
+                            binding.tvEmptyMessage.visibility = View.GONE
+                        } else {
+                            binding.recyclerViewActivities.visibility = View.GONE
+                            binding.tvEmptyMessage.visibility = View.VISIBLE
+                            binding.tvEmptyMessage.text = "No patient activities found"
                         }
-                    showMessage(errorResponse?.apiError ?: "Failed to load activities")
+                    } else {
+                        val errorBody = response.errorBody()?.string()
+
+                        val errorResponse: ApiErrorResponse? =
+                            if (!errorBody.isNullOrBlank()) {
+                                try {
+                                    Gson().fromJson(errorBody, ApiErrorResponse::class.java)
+                                } catch (e: Exception) {
+                                    null
+                                }
+                            } else {
+                                null
+                            }
+
+                        binding.recyclerViewActivities.visibility = View.GONE
+                        binding.tvEmptyMessage.visibility = View.VISIBLE
+                        binding.tvEmptyMessage.text = "Unable to load patient activities"
+
+                        showMessage(errorResponse?.apiError ?: "Failed to load activities")
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    binding.progressBar.visibility = View.GONE
+                    binding.recyclerViewActivities.visibility = View.GONE
+                    binding.tvEmptyMessage.visibility = View.VISIBLE
+                    binding.tvEmptyMessage.text = "Network error occurred"
+                    showMessage("Network error occurred")
                 }
             }
         }
