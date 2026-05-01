@@ -53,7 +53,7 @@ class PatientDetailsActivity : BaseActivity() {
             }
         }"
 
-        if (patient.healthConditions.isNotEmpty()) {
+        if (!patient.healthConditions.isNullOrEmpty()) {
             val formattedConditions =
                 patient.healthConditions.joinToString(", ") { condition ->
                     condition.split(" ").joinToString(" ") { word ->
