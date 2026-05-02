@@ -310,7 +310,7 @@ class AddNewPatientActivity : BaseActivity() {
 
                 if (response.isSuccessful) {
                     if (response.body()?.patient != null) {
-                        showMessage(response.message())
+                        showMessage("Patient added successfully")
                         onBackPressedDispatcher.onBackPressed()
                     } else {
                         showMessage(response.body()?.apiError ?: "Failed to add patient")
@@ -321,7 +321,12 @@ class AddNewPatientActivity : BaseActivity() {
                             response.errorBody()?.string(),
                             ApiErrorResponse::class.java,
                         )
-                    showMessage(errorResponse.apiError ?: response.message())
+                    showMessage(
+                        if (errorResponse.apiError.isNullOrBlank())
+                            "Something went wrong while adding the patient"
+                        else
+                            errorResponse.apiError
+                    )
                 }
             }
         }
