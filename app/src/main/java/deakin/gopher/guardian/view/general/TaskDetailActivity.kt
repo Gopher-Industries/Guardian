@@ -14,97 +14,147 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Task
 
 class TaskDetailActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_detail)
-        var taskDescriptionTextView: TextView = findViewById(R.id.task_detail_description_text_view)
-        var taskAssignedNurseTextView: TextView = findViewById(R.id.task_text_view_nurse_name)
-        var taskPriorityTextView: TextView = findViewById(R.id.task_text_view_priority)
-        var completeButton: Button = findViewById(R.id.task_button_mark_complete)
-        var backButton: Button = findViewById(R.id.task_detail_back_button)
-        var deleteButton: Button = findViewById(R.id.task_button_mark_delete)
-        var incompleteButton: Button = findViewById(R.id.task_button_mark_incomplete)
+
+        val taskDescriptionTextView: TextView = findViewById(R.id.task_detail_description_text_view)
+        val taskAssignedNurseTextView: TextView = findViewById(R.id.task_text_view_nurse_name)
+        val taskPriorityTextView: TextView = findViewById(R.id.task_text_view_priority)
+
+        val completeButton: Button = findViewById(R.id.task_button_mark_complete)
+        val incompleteButton: Button = findViewById(R.id.task_button_mark_incomplete)
+        val deleteButton: Button = findViewById(R.id.task_button_mark_delete)
+        val backButton: Button = findViewById(R.id.task_detail_back_button)
+
         val taskId = intent.getStringExtra("taskId")
-        if (taskId != null) {
-            val taskRef = FirebaseDatabase.getInstance().getReference("nurse-tasks").child(taskId)
-            taskRef.addListenerForSingleValueEvent(
-                object : ValueEventListener {
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            val task =
-                                dataSnapshot.getValue(
-                                    Task::class.java,
-                                )
-                            if (task != null) {
-                                var textdesc = getString(R.string.task_description_prefix) + " " + task.description
-                                var textnur = getString(R.string.assigned_nurse_prefix) + " " + task.assignedNurse
-                                var textprior = getString(R.string.priority_prefix) + " " + task.priority.toString()
 
-                                taskDescriptionTextView.setText(textdesc)
-                                taskAssignedNurseTextView.setText(textnur)
-                                taskPriorityTextView.setText(textprior)
+        // ADDED: Handle missing taskId (prevents crash / blank screen)
+        if (taskId == null) {
+            Toast.makeText(this, "Task not found", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
 
-                                if (task.completed) {
-                                    completeButton.visibility = View.GONE
-                                    incompleteButton.visibility = View.VISIBLE
-                                } else {
-                                    incompleteButton.visibility = View.GONE
-                                    completeButton.visibility = View.VISIBLE
-                                }
-                            }
-                        }
-                    }
+        val taskRef = FirebaseDatabase.getInstance().getReference("nurse-tasks").child(taskId)
 
-                    override fun onCancelled(databaseError: DatabaseError) {
+        // ADDED: Show loading state (basic UX improvement)
+        taskDescriptionTextView.text = "Loading..."
+        taskAssignedNurseTextView.text = ""
+        taskPriorityTextView.text = ""
+
+        taskRef.addListenerForSingleValueEvent(
+            object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    // ADDED: Handle empty snapshot (task deleted or missing)
+                    if (!dataSnapshot.exists()) {
                         Toast.makeText(
                             this@TaskDetailActivity,
-                            databaseError.toString(),
-                            Toast.LENGTH_SHORT,
+                            "Task not found",
+                            Toast.LENGTH_SHORT
                         ).show()
-                    }
-                },
-            )
-
-            fun markAsCompleted() {
-                val taskRef = FirebaseDatabase.getInstance().getReference("nurse-tasks").child(taskId)
-                taskRef.child("completed").setValue(true)
-                Toast.makeText(this@TaskDetailActivity, "Task marked as completed", Toast.LENGTH_SHORT).show()
-                completeButton.visibility = View.GONE
-                incompleteButton.visibility = View.VISIBLE
-            }
-
-            fun markAsIncomplete() {
-                val taskRef = FirebaseDatabase.getInstance().getReference("nurse-tasks").child(taskId)
-                taskRef.child("completed").setValue(false)
-                Toast.makeText(this@TaskDetailActivity, "Task marked as incomplete", Toast.LENGTH_SHORT).show()
-                incompleteButton.visibility = View.GONE
-                completeButton.visibility = View.VISIBLE
-            }
-
-            fun deleteTask() {
-                val taskRef =
-                    FirebaseDatabase.getInstance().getReference("nurse-tasks").child(taskId)
-                taskRef.removeValue()
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Task deleted", Toast.LENGTH_SHORT).show()
                         finish()
+                        return
                     }
-                    .addOnFailureListener {
-                        Toast.makeText(this, "Failed to delete task", Toast.LENGTH_SHORT).show()
+
+                    val task = dataSnapshot.getValue(Task::class.java)
+
+                    if (task != null) {
+
+                        val textdesc =
+                            getString(R.string.task_description_prefix) + " " + task.description
+                        val textnur =
+                            getString(R.string.assigned_nurse_prefix) + " " + task.assignedNurse
+                        val textprior =
+                            getString(R.string.priority_prefix) + " " + task.priority.toString()
+
+                        taskDescriptionTextView.text = textdesc
+                        taskAssignedNurseTextView.text = textnur
+                        taskPriorityTextView.text = textprior
+
+                        // IMPROVED: Clearer button state handling
+                        if (task.completed) {
+                            completeButton.visibility = View.GONE
+                            incompleteButton.visibility = View.VISIBLE
+                        } else {
+                            incompleteButton.visibility = View.GONE
+                            completeButton.visibility = View.VISIBLE
+                        }
                     }
-            }
-            completeButton.setOnClickListener {
-                markAsCompleted()
-            }
-            incompleteButton.setOnClickListener {
-                markAsIncomplete()
-            }
-            backButton.setOnClickListener {
-                finish()
-            }
-            deleteButton.setOnClickListener {
-                deleteTask()
-            }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // IMPROVED: Better error message
+                    Toast.makeText(
+                        this@TaskDetailActivity,
+                        "Failed to load task",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            },
+        )
+
+        // IMPROVED: Disable button during action to prevent multiple clicks
+        fun markAsCompleted() {
+            completeButton.isEnabled = false
+
+            taskRef.child("completed").setValue(true)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Task marked as completed", Toast.LENGTH_SHORT).show()
+                    completeButton.visibility = View.GONE
+                    incompleteButton.visibility = View.VISIBLE
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Failed to update task", Toast.LENGTH_SHORT).show()
+                    completeButton.isEnabled = true
+                }
+        }
+
+        fun markAsIncomplete() {
+            incompleteButton.isEnabled = false
+
+            taskRef.child("completed").setValue(false)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Task marked as incomplete", Toast.LENGTH_SHORT).show()
+                    incompleteButton.visibility = View.GONE
+                    completeButton.visibility = View.VISIBLE
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Failed to update task", Toast.LENGTH_SHORT).show()
+                    incompleteButton.isEnabled = true
+                }
+        }
+
+        fun deleteTask() {
+            deleteButton.isEnabled = false
+
+            taskRef.removeValue()
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Task deleted", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Failed to delete task", Toast.LENGTH_SHORT).show()
+                    deleteButton.isEnabled = true
+                }
+        }
+
+        completeButton.setOnClickListener {
+            markAsCompleted()
+        }
+
+        incompleteButton.setOnClickListener {
+            markAsIncomplete()
+        }
+
+        deleteButton.setOnClickListener {
+            deleteTask()
+        }
+
+        backButton.setOnClickListener {
+            finish()
         }
     }
 }
