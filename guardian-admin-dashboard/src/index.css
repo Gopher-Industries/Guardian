@@ -92,10 +92,21 @@ button:focus-visible {
   --radius-md: 18px;
 }
 
-.text-primary { color: var(--primary); }
-.text-success { color: var(--success); }
-.text-warning { color: var(--warning); }
-.text-danger { color: var(--danger); }
+.text-primary {
+  color: var(--primary);
+}
+
+.text-success {
+  color: var(--success);
+}
+
+.text-warning {
+  color: var(--warning);
+}
+
+.text-danger {
+  color: var(--danger);
+}
 
 * {
   box-sizing: border-box;
@@ -458,28 +469,24 @@ a {
   width: 160%;
   height: 120px;
   opacity: 0.18;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 8%,
-    rgba(20, 61, 116, 0.85) 10%,
-    rgba(20, 61, 116, 0.2) 12%,
-    rgba(20, 61, 116, 0.85) 14%,
-    transparent 18%,
-    transparent 100%
-  );
-  clip-path: polygon(
-    0 55%,
-    18% 55%,
-    24% 55%,
-    29% 35%,
-    34% 70%,
-    39% 48%,
-    52% 48%,
-    100% 48%,
-    100% 56%,
-    0 56%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      transparent 8%,
+      rgba(20, 61, 116, 0.85) 10%,
+      rgba(20, 61, 116, 0.2) 12%,
+      rgba(20, 61, 116, 0.85) 14%,
+      transparent 18%,
+      transparent 100%);
+  clip-path: polygon(0 55%,
+      18% 55%,
+      24% 55%,
+      29% 35%,
+      34% 70%,
+      39% 48%,
+      52% 48%,
+      100% 48%,
+      100% 56%,
+      0 56%);
   animation: pulseLineMove 7s linear infinite;
   pointer-events: none;
 }
@@ -488,6 +495,7 @@ a {
   0% {
     transform: translateX(-18%);
   }
+
   100% {
     transform: translateX(18%);
   }
@@ -774,7 +782,8 @@ a {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  position: relative; /* Required for absolute positioned badge */
+  position: relative;
+  /* Required for absolute positioned badge */
 }
 
 .topbar-profile {
@@ -938,7 +947,7 @@ a {
   color: var(--text-muted);
 }
 
-.activity-list li + li {
+.activity-list li+li {
   margin-top: 10px;
 }
 
@@ -1066,7 +1075,7 @@ a {
   backdrop-filter: blur(12px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: var(--radius-xl);
-  box-shadow: 
+  box-shadow:
     0 10px 25px -5px rgba(20, 61, 116, 0.1),
     0 8px 10px -6px rgba(20, 61, 116, 0.1),
     0 0 0 1px rgba(20, 61, 116, 0.05);
@@ -1139,9 +1148,17 @@ a {
   background: var(--primary);
 }
 
-.notification-item.type-success.unread::before { background: var(--success); }
-.notification-item.type-warning.unread::before { background: var(--warning); }
-.notification-item.type-error.unread::before { background: var(--danger); }
+.notification-item.type-success.unread::before {
+  background: var(--success);
+}
+
+.notification-item.type-warning.unread::before {
+  background: var(--warning);
+}
+
+.notification-item.type-error.unread::before {
+  background: var(--danger);
+}
 
 .notification-item-header {
   display: flex;
@@ -1233,8 +1250,13 @@ a {
 }
 
 @keyframes badgePop {
-  0% { transform: scale(0); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* Global Z-Index Hierarchy:
@@ -1249,7 +1271,6 @@ a {
   position: fixed;
   inset: 0;
   background: rgba(20, 61, 116, 0.4);
-  backdrop-filter: blur(8px);
   z-index: 3000;
   display: flex;
   align-items: center;
@@ -1455,9 +1476,17 @@ a {
   background: var(--primary);
 }
 
-.notification-item.type-success.unread::before { background: var(--success); }
-.notification-item.type-warning.unread::before { background: var(--warning); }
-.notification-item.type-error.unread::before { background: var(--danger); }
+.notification-item.type-success.unread::before {
+  background: var(--success);
+}
+
+.notification-item.type-warning.unread::before {
+  background: var(--warning);
+}
+
+.notification-item.type-error.unread::before {
+  background: var(--danger);
+}
 
 .notification-item-header {
   display: flex;
@@ -1491,7 +1520,8 @@ a {
   font-size: 0.82rem;
   color: var(--text-muted);
   line-height: 1.4;
-  padding-left: 24px; /* Align with icon */
+  padding-left: 24px;
+  /* Align with icon */
 }
 
 .notification-item.unread .notification-item-message {
@@ -1536,7 +1566,7 @@ a {
 }
 
 .notification-action-btn:hover {
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 /* Side Drawer (View All) */
@@ -1544,7 +1574,6 @@ a {
   position: fixed;
   inset: 0;
   background: rgba(20, 61, 116, 0.4);
-  backdrop-filter: blur(12px);
   z-index: 1000;
 }
 
@@ -1708,10 +1737,21 @@ a {
   background: var(--border);
 }
 
-.drawer-item.unread::before { background: var(--primary); }
-.drawer-item.type-success.unread::before { background: var(--success); }
-.drawer-item.type-warning.unread::before { background: var(--warning); }
-.drawer-item.type-error.unread::before { background: var(--danger); }
+.drawer-item.unread::before {
+  background: var(--primary);
+}
+
+.drawer-item.type-success.unread::before {
+  background: var(--success);
+}
+
+.drawer-item.type-warning.unread::before {
+  background: var(--warning);
+}
+
+.drawer-item.type-error.unread::before {
+  background: var(--danger);
+}
 
 .drawer-item-header {
   display: flex;
@@ -1758,10 +1798,25 @@ a {
   border-radius: 12px;
 }
 
-.type-tag.color-success { color: var(--success); background: rgba(23, 166, 115, 0.1); }
-.type-tag.color-warning { color: var(--warning); background: rgba(232, 163, 23, 0.1); }
-.type-tag.color-error { color: var(--danger); background: rgba(228, 98, 111, 0.1); }
-.type-tag.color-info { color: var(--primary); background: rgba(79, 160, 200, 0.1); }
+.type-tag.color-success {
+  color: var(--success);
+  background: rgba(23, 166, 115, 0.1);
+}
+
+.type-tag.color-warning {
+  color: var(--warning);
+  background: rgba(232, 163, 23, 0.1);
+}
+
+.type-tag.color-error {
+  color: var(--danger);
+  background: rgba(228, 98, 111, 0.1);
+}
+
+.type-tag.color-info {
+  color: var(--primary);
+  background: rgba(79, 160, 200, 0.1);
+}
 
 .drawer-item-actions {
   display: flex;
@@ -1832,7 +1887,7 @@ a {
   font-weight: 800;
   padding: 4px 10px;
   border-radius: 20px;
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .button-loader {
@@ -1846,7 +1901,9 @@ a {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .ui-button:disabled {
@@ -1854,6 +1911,3 @@ a {
   cursor: not-allowed;
   transform: none !important;
 }
-
-
-
