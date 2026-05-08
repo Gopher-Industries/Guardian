@@ -1,10 +1,13 @@
 package deakin.gopher.guardian
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -17,7 +20,11 @@ class MainActivity : ComponentActivity() {
             GuardianTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
                     val navController = rememberNavController()
-                    NavHost(navController = navController, startDestination = "welcome") {
+                    val startRoute =
+                        intent?.getStringExtra("startRoute")
+                            ?.takeIf { it.isNotBlank() }
+                            ?: "welcome"
+                    NavHost(navController = navController, startDestination = startRoute) {
                         // 1. Welcome
                         composable("welcome") {
                             WelcomeScreen(navController)
@@ -66,6 +73,48 @@ class MainActivity : ComponentActivity() {
                         // 10. Prescription
                         composable("prescription") {
                             PrescriptionScreen(navController)
+                        }
+
+                        composable(
+                            route = "patient_prescriptions/{patientId}/{patientName}",
+                            arguments =
+                                listOf(
+                                    navArgument("patientId") { type = NavType.StringType },
+                                    navArgument("patientName") { type = NavType.StringType },
+                                ),
+                        ) { backStackEntry ->
+                            val patientId =
+                                backStackEntry.arguments?.getString("patientId").orEmpty()
+                            val patientName =
+                                Uri.decode(
+                                    backStackEntry.arguments?.getString("patientName").orEmpty(),
+                                )
+                            PatientPrescriptionsScreen(
+                                navController = navController,
+                                patientId = patientId,
+                                patientName = patientName,
+                            )
+                        }
+
+                        composable(
+                            route = "prescription_detail/{prescriptionId}/{patientName}",
+                            arguments =
+                                listOf(
+                                    navArgument("prescriptionId") { type = NavType.StringType },
+                                    navArgument("patientName") { type = NavType.StringType },
+                                ),
+                        ) { backStackEntry ->
+                            val prescriptionId =
+                                backStackEntry.arguments?.getString("prescriptionId").orEmpty()
+                            val patientName =
+                                Uri.decode(
+                                    backStackEntry.arguments?.getString("patientName").orEmpty(),
+                                )
+                            PrescriptionDetailScreen(
+                                navController = navController,
+                                prescriptionId = prescriptionId,
+                                patientName = patientName,
+                            )
                         }
 
                         // 11. Billing
