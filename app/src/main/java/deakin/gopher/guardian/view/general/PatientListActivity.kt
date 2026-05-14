@@ -29,8 +29,8 @@ class PatientListActivity : BaseActivity() {
         PatientListAdapter(
             emptyList(),
             onPatientClick = { patient ->
-                val intent = Intent(this, PatientDetailsActivity::class.java)
-                intent.putExtra("patient", patient)
+                val intent = Intent(this, PatientOverviewActivity::class.java)
+                intent.putExtra(PatientOverviewActivity.EXTRA_PATIENT_ID, patient.id)
                 startActivity(intent)
             },
             onAssignNurseClick = { patient ->

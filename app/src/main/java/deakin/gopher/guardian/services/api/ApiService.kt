@@ -5,6 +5,7 @@ import deakin.gopher.guardian.model.AddPatientResponse
 import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.PatientActivity
+import deakin.gopher.guardian.model.PatientAdminOverviewResponse
 import deakin.gopher.guardian.model.register.AuthResponse
 import deakin.gopher.guardian.model.register.RegisterRequest
 import okhttp3.MultipartBody
@@ -58,6 +59,24 @@ interface ApiService {
     @GET("patients/assigned-patients")
     suspend fun getAssignedPatients(
         @Header("Authorization") token: String,
+    ): Response<List<Patient>>
+
+    @GET("patients/{patientId}")
+    suspend fun getPatientById(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+    ): Response<Patient>
+
+    @GET("admin/patient-overview/{patientId}")
+    suspend fun getPatientAdminOverview(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+    ): Response<PatientAdminOverviewResponse>
+
+    @GET("doctors/{doctorId}/patients")
+    suspend fun getDoctorPatients(
+        @Header("Authorization") token: String,
+        @Path("doctorId") doctorId: String,
     ): Response<List<Patient>>
 
     @Multipart
