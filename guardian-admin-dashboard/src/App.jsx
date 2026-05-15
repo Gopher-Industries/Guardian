@@ -37,7 +37,7 @@ export default function App() {
         <Route path="staff-management" element={<StaffManagementPage />} />
         <Route path="org-assignment" element={<OrgAssignmentPage />} />
         <Route path="patients" element={<PatientsPage />} />
-        <Route path="patients/:patientId/overview" element={<PatientOverviewPage />} />
+        <Route path="patient-overview" element={<PatientOverviewPage />} />
         <Route path="nurse-roster" element={<NurseRosterPage />} />
         <Route path="reports" element={<ReportsPage />} />
         <Route path="settings" element={<SettingsPage />} />
