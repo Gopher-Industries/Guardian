@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="deakin.gopher.guardian.view.general.Homepage4nurse">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="deakin.gopher.guardian.view.general.Homepage4nurse">
 
+    <!-- Settings Button -->
     <Button
         android:id="@+id/settingsButton_nurse"
         android:layout_width="120dp"
@@ -41,6 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
+    <!-- My Patients Button -->
     <Button
         android:id="@+id/patientsButton_nurse"
         android:layout_width="120dp"
@@ -77,6 +79,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
+    <!-- Sign Out Button -->
     <Button
         android:id="@+id/sighOutButton_nurse"
         android:layout_width="120dp"
@@ -112,6 +115,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
+    <!-- My Profile Button -->
+    <Button
+        android:id="@+id/profileButton_nurse"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="392dp"
+        android:background="@drawable/homepage_button_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <View
+        android:id="@+id/profileIcon_nurse"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="184dp"
+        android:layout_marginTop="420dp"
+        android:background="@drawable/avatar_icon"
+        android:elevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <TextView
+        android:id="@+id/profileTxt_nurse"
+        android:layout_width="88dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="472dp"
+        android:elevation="4dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="My Profile"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <!-- Header -->
     <androidx.cardview.widget.CardView
         android:id="@+id/medicalDiaganosticsHeaderCardView"
         android:layout_width="0dp"
@@ -147,10 +188,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="54dp"
-                android:contentDescription="TODO"
+                android:contentDescription="avatar"
                 app:layout_constraintBottom_toTopOf="@+id/medicalDiagnosticsTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/avatar_icon" />
