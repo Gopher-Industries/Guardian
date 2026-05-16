@@ -23,7 +23,7 @@ import java.util.Locale
 
 class PatientDetailsActivity : BaseActivity() {
     private lateinit var binding: ActivityPatientDetailsBinding
-    private val currentUser = SessionManager.getCurrentUser()
+    private lateinit var currentUser: deakin.gopher.guardian.model.register.User
     private lateinit var activitiesAdapter: PatientActivityAdapter
     private lateinit var currentPatient: Patient
     private val nursesFragment = PatientAssignedNursesFragment()
@@ -39,12 +39,27 @@ class PatientDetailsActivity : BaseActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
+        currentUser = try {
+            SessionManager.getCurrentUser()
+        } catch (exception: Exception) {
+            showMessage("Session expired. Please log in again.")
+            finish()
+            return
+        }
+
         if (currentUser.role == Role.Nurse) {
             binding.toolbar.setBackgroundColor(getColor(R.color.TG_blue))
             binding.containerPatientInfo.setBackgroundColor(getColor(R.color.TG_blue))
         }
 
-        currentPatient = intent.getSerializableExtra("patient") as Patient
+        val patient = intent.getSerializableExtra("patient") as? Patient
+        if (patient == null) {
+            showMessage("Patient details are unavailable.")
+            finish()
+            return
+        }
+
+        currentPatient = patient
         bindPatient(currentPatient)
 
         supportFragmentManager.beginTransaction()

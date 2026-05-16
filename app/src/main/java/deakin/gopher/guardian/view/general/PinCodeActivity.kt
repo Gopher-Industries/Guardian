@@ -25,14 +25,31 @@ import retrofit2.Response
 
 class PinCodeActivity : AppCompatActivity() {
     private lateinit var userRole: Role
-    private val userEmail = SessionManager.getCurrentUser().email
+    private lateinit var userEmail: String
 
     private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_enter_pin)
-        userRole = intent.getSerializableExtra("role") as Role
+
+        val currentUser = try {
+            SessionManager.getCurrentUser()
+        } catch (exception: Exception) {
+            showMessage("Session expired. Please log in again.")
+            finish()
+            return
+        }
+
+        val intentRole = intent.getSerializableExtra("role") as? Role
+        if (intentRole == null) {
+            showMessage("Unable to continue without a user role.")
+            finish()
+            return
+        }
+
+        userRole = intentRole
+        userEmail = currentUser.email
 
         val pinDigit1 = findViewById<EditText>(R.id.pin_digit_1)
         val pinDigit2 = findViewById<EditText>(R.id.pin_digit_2)
@@ -79,12 +96,7 @@ class PinCodeActivity : AppCompatActivity() {
                         showMessage(response.body()!!.apiMessage ?: "Pin sent tou your email")
                     } else {
                         // Handle error
-                        val errorResponse =
-                            Gson().fromJson(
-                                response.errorBody()?.string(),
-                                ApiErrorResponse::class.java,
-                            )
-                        showMessage(errorResponse.apiError ?: response.message())
+                        showMessage(readErrorMessage(response.errorBody()?.string()) ?: response.message())
                     }
                 }
 
@@ -123,12 +135,7 @@ class PinCodeActivity : AppCompatActivity() {
                         finish()
                     } else {
                         // Handle error
-                        val errorResponse =
-                            Gson().fromJson(
-                                response.errorBody()?.string(),
-                                ApiErrorResponse::class.java,
-                            )
-                        showMessage(errorResponse.apiError ?: response.message())
+                        showMessage(readErrorMessage(response.errorBody()?.string()) ?: response.message())
                     }
                 }
 
@@ -146,6 +153,18 @@ class PinCodeActivity : AppCompatActivity() {
 
     private fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun readErrorMessage(errorBody: String?): String? {
+        if (errorBody.isNullOrBlank()) {
+            return null
+        }
+
+        return try {
+            Gson().fromJson(errorBody, ApiErrorResponse::class.java)?.apiError
+        } catch (exception: Exception) {
+            null
+        }
     }
 
     private fun startResendCooldown() {

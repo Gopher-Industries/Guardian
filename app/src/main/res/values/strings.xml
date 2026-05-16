@@ -713,7 +713,6 @@
     <string name="more_options">More Options</string>
     <string name="add_activity">Add Activity</string>
     <string name="reassign_staff">Reassign Staff</string>
-    <string name="delete">Delete</string>
     <string name="current_caretaker">Current caretaker</string>
     <string name="current_nurse">Current nurse</string>
     <string name="current_doctor">Current doctor</string>
@@ -721,7 +720,6 @@
     <string name="available_nurse">Available nurse</string>
     <string name="available_doctor">Available doctor</string>
     <string name="save_changes">Save Changes</string>
-    <string name="cancel">Cancel</string>
     <string name="reassign_patient_title">Reassign Patient Staff</string>
     <string name="reassign_patient_message">Choose the staff members you want to assign to this patient.</string>
 

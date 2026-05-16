@@ -72,9 +72,9 @@ class PatientListAdapter(
             }
             val popupMenu = PopupMenu(holder.itemView.context, it)
             popupMenu.inflate(R.menu.menu_patient_item)
-            popupMenu.menu.findItem(R.id.assign_nurse).isVisible =
+            popupMenu.menu.findItem(R.id.assign_nurse)?.isVisible =
                 showReassignAction && onReassignClick != null
-            popupMenu.menu.findItem(R.id.action_delete).isVisible =
+            popupMenu.menu.findItem(R.id.action_delete)?.isVisible =
                 showDeleteAction && onDeleteClick != null
 
             popupMenu.setOnMenuItemClickListener { menuItem ->

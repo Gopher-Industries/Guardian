@@ -62,6 +62,15 @@ class LoginActivity : BaseActivity() {
             val passwordInput = mPassword.text.toString().trim { it <= ' ' }
 
             val loginValidationError = validateInputs(emailInput)
+            if (passwordInput.isBlank()) {
+                progressBar.hide()
+                Toast.makeText(
+                    applicationContext,
+                    getString(R.string.toast_login_error, "Password is required"),
+                    Toast.LENGTH_LONG,
+                ).show()
+                return@setOnClickListener
+            }
 
             if (loginValidationError != null) {
                 progressBar.hide()
@@ -84,18 +93,14 @@ class LoginActivity : BaseActivity() {
                         progressBar.hide()
                         if (response.isSuccessful && response.body() != null) {
                             // Handle successful login
-                            val user = response.body()!!.user
-                            val token = response.body()!!.token
+                            val body = response.body()!!
+                            val user = body.user
+                            val token = body.token
                             SessionManager.createLoginSession(user, token)
                             NavigationService(this@LoginActivity).toPinCodeActivity(user.role)
                         } else {
                             // Handle error
-                            val errorResponse =
-                                Gson().fromJson(
-                                    response.errorBody()?.string(),
-                                    ApiErrorResponse::class.java,
-                                )
-                            showMessage(errorResponse.apiError ?: response.message())
+                            showMessage(readErrorMessage(response.errorBody()?.string()) ?: response.message())
                         }
                     }
 
@@ -171,12 +176,7 @@ class LoginActivity : BaseActivity() {
                         )
                     } else {
                         // Handle error
-                        val errorResponse =
-                            Gson().fromJson(
-                                response.errorBody()?.string(),
-                                ApiErrorResponse::class.java,
-                            )
-                        showMessage(errorResponse.apiError ?: response.message())
+                        showMessage(readErrorMessage(response.errorBody()?.string()) ?: response.message())
                     }
                 }
 
@@ -223,6 +223,18 @@ class LoginActivity : BaseActivity() {
 
     private fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun readErrorMessage(errorBody: String?): String? {
+        if (errorBody.isNullOrBlank()) {
+            return null
+        }
+
+        return try {
+            Gson().fromJson(errorBody, ApiErrorResponse::class.java)?.apiError
+        } catch (exception: Exception) {
+            null
+        }
     }
 
     companion object {
