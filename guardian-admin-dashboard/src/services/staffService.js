@@ -12,16 +12,16 @@ export async function getStaff({
   if (orgId) params.orgId = orgId;
   if (role) params.role = role;
 
-  const response = await api.get('/api/v1/admin/staff', { params });
+  const response = await api.get('/admin/staff', { params });
   return response.data;
 }
 
 export async function createStaff(userId) {
-  const response = await api.post('/api/v1/admin/staff', { userId });
+  const response = await api.post('/admin/staff', { userId });
   return response.data;
 }
 
 export async function deactivateStaff(id) {
-  const response = await api.put(`/api/v1/admin/staff/${id}/deactivate`);
+  const response = await api.put(`/admin/staff/${id}/deactivate`);
   return response.data;
 }

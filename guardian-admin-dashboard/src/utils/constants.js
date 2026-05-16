@@ -11,9 +11,15 @@ export const ADMIN_NAV_ITEMS = [
     path: "/dashboard/org-assignment",
   },
   { id: "patients", label: "Patients", path: "/dashboard/patients" },
+  {
+  id: "patient-overview",
+  label: "Patient Overview",
+  path: "/dashboard/patient-overview",
+},
   { id: "nurse-roster", label: "Nurse Roster", path: "/dashboard/nurse-roster" },
   { id: "reports", label: "Reports", path: "/dashboard/reports" },
   { id: "settings", label: "Settings", path: "/dashboard/settings" },
+  
 ];
 export const DASHBOARD_STATS = [
   {

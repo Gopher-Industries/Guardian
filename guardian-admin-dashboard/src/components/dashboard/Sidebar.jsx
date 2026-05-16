@@ -62,7 +62,8 @@ const iconMap = {
   "staff-management": Users,
   "org-assignment": Building2,
   patients: ShieldPlus,
-  "doctor-assignments": Stethoscope,
+"doctor-assignments": Stethoscope,
+"patient-overview": ClipboardList,
   reports: Bell,
   settings: Settings,
   "nurse-roster": ClipboardList,
@@ -137,7 +138,10 @@ export default function Sidebar({
               <NavLink
                 key={item.id}
                 to={item.path}
-                end={item.path === "/dashboard"}
+                end={
+                      item.path === "/dashboard" ||
+                      item.path === "/dashboard/patients"
+                    }
                 className={({ isActive }) =>
                   `sidebar-link ${isActive ? "active" : ""} ${
                     collapsed && !isMobile ? "icon-only" : ""
