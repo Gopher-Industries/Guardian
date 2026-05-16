@@ -11,9 +11,15 @@ export const ADMIN_NAV_ITEMS = [
     path: "/dashboard/org-assignment",
   },
   { id: "patients", label: "Patients", path: "/dashboard/patients" },
+  {
+  id: "patient-overview",
+  label: "Patient Overview",
+  path: "/dashboard/patient-overview",
+},
   { id: "nurse-roster", label: "Nurse Roster", path: "/dashboard/nurse-roster" },
   { id: "reports", label: "Reports", path: "/dashboard/reports" },
   { id: "settings", label: "Settings", path: "/dashboard/settings" },
+  
 ];
 export const DASHBOARD_STATS = [
   {
@@ -49,3 +55,8 @@ export const STORAGE_KEYS = {
   pendingToken: "guardian_admin_pending_token",
   pendingUser: "guardian_admin_pending_user",
 };
+
+export const ROLE_OPTIONS = [
+  { value: 'doctor', label: 'Doctor' },
+  { value: 'nurse', label: 'Nurse' },
+];
