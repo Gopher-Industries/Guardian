@@ -25,16 +25,26 @@ class PatientListActivity : BaseActivity() {
     private lateinit var binding: ActivityPatientListBinding
     private val currentUser = SessionManager.getCurrentUser()
     private val canAddPatients = currentUser.role == Role.Admin
+    private val canReassignPatients = currentUser.role == Role.Admin
     private val canDeletePatients = currentUser.role == Role.Admin
     private val patientListAdapter =
         PatientListAdapter(
             emptyList(),
+            showReassignAction = canReassignPatients,
             showDeleteAction = canDeletePatients,
             onPatientClick = { patient ->
                 val intent = Intent(this, PatientDetailsActivity::class.java)
                 intent.putExtra("patient", patient)
                 startActivity(intent)
             },
+            onReassignClick =
+                if (canReassignPatients) {
+                    { patient ->
+                        openReassignmentDialog(patient)
+                    }
+                } else {
+                    null
+                },
             onDeleteClick =
                 if (canDeletePatients) {
                     { patient ->
@@ -44,6 +54,16 @@ class PatientListActivity : BaseActivity() {
                     null
                 },
         )
+
+    private fun openReassignmentDialog(patient: Patient) {
+        PatientReassignmentDialog(
+            activity = this,
+            patient = patient,
+            onReassigned = {
+                fetchPatients()
+            },
+        ).show()
+    }
 
     private fun confirmDeletePatient(patient: Patient) {
         // Optional: show a confirmation dialog before deleting
@@ -110,30 +130,48 @@ class PatientListActivity : BaseActivity() {
                     binding.progressBar.show()
                 }
             }
-            val response = ApiClient.apiService.getAssignedPatients(token)
-            withContext(Dispatchers.Main) {
-                withContext(Dispatchers.Main) {
-                    binding.progressBar.hide()
-                }
-                if (response.isSuccessful) {
-                    if (!response.body().isNullOrEmpty()) {
-                        patientListAdapter.updateData(response.body()!!)
-                        withContext(Dispatchers.Main) {
-                            binding.tvEmptyMessage.visibility = View.GONE
-                        }
-                    } else {
-                        withContext(Dispatchers.Main) {
-                            binding.tvEmptyMessage.visibility = View.VISIBLE
-                        }
+            val adminResponse =
+                if (canReassignPatients) {
+                    try {
+                        ApiClient.apiService.getAdminPatients(token)
+                    } catch (exception: Exception) {
+                        null
                     }
                 } else {
-                    // Handle error
+                    null
+                }
+            val assignedResponse =
+                if (adminResponse?.isSuccessful == true) {
+                    null
+                } else {
+                    try {
+                        ApiClient.apiService.getAssignedPatients(token)
+                    } catch (exception: Exception) {
+                        null
+                    }
+                }
+
+            withContext(Dispatchers.Main) {
+                binding.progressBar.hide()
+
+                val patients = adminResponse?.body()?.patients ?: assignedResponse?.body()
+
+                if (patients != null) {
+                    if (patients.isNotEmpty()) {
+                        patientListAdapter.updateData(patients)
+                        binding.tvEmptyMessage.visibility = View.GONE
+                    } else {
+                        patientListAdapter.updateData(emptyList())
+                        binding.tvEmptyMessage.visibility = View.VISIBLE
+                    }
+                } else {
                     val errorResponse =
                         Gson().fromJson(
-                            response.errorBody()?.string(),
+                            adminResponse?.errorBody()?.string()
+                                ?: assignedResponse?.errorBody()?.string(),
                             ApiErrorResponse::class.java,
                         )
-                    showMessage(errorResponse.apiError ?: response.message())
+                    showMessage(errorResponse?.apiError ?: "Failed to load patients")
                 }
             }
         }

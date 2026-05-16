@@ -2,9 +2,13 @@ package deakin.gopher.guardian.services.api
 
 import deakin.gopher.guardian.model.AddPatientActivityResponse
 import deakin.gopher.guardian.model.AddPatientResponse
+import deakin.gopher.guardian.model.AdminPatientListResponse
 import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.PatientActivity
+import deakin.gopher.guardian.model.PatientOverviewResponse
+import deakin.gopher.guardian.model.ReassignPatientRequest
+import deakin.gopher.guardian.model.StaffListResponse
 import deakin.gopher.guardian.model.register.AuthResponse
 import deakin.gopher.guardian.model.register.RegisterRequest
 import okhttp3.MultipartBody
@@ -21,6 +25,7 @@ import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.PUT
 import retrofit2.http.Query
 
 interface ApiService {
@@ -60,6 +65,13 @@ interface ApiService {
         @Header("Authorization") token: String,
     ): Response<List<Patient>>
 
+    @GET("admin/patients")
+    suspend fun getAdminPatients(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 100,
+    ): Response<AdminPatientListResponse>
+
     @Multipart
     @POST("patients/add")
     suspend fun addPatient(
@@ -85,6 +97,29 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("patientId") patientId: String,
     ): Response<List<PatientActivity>>
+
+    @GET("admin/patients/{id}/overview")
+    suspend fun getPatientOverview(
+        @Header("Authorization") token: String,
+        @Path("id") patientId: String,
+        @Query("orgId") organizationId: String? = null,
+    ): Response<PatientOverviewResponse>
+
+    @GET("admin/staff")
+    suspend fun getAdminStaff(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 100,
+        @Query("orgId") organizationId: String? = null,
+        @Query("role") role: String,
+    ): Response<StaffListResponse>
+
+    @PUT("admin/patients/{id}/reassign")
+    suspend fun reassignPatient(
+        @Header("Authorization") token: String,
+        @Path("id") patientId: String,
+        @Body request: ReassignPatientRequest,
+    ): Response<BaseModel>
 
     @DELETE("patients/{id}")
     suspend fun deletePatient(

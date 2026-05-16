@@ -14,6 +14,7 @@ import deakin.gopher.guardian.model.ApiErrorResponse
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.login.Role
 import deakin.gopher.guardian.model.login.SessionManager
+import deakin.gopher.guardian.services.api.ApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,6 +25,8 @@ class PatientDetailsActivity : BaseActivity() {
     private lateinit var binding: ActivityPatientDetailsBinding
     private val currentUser = SessionManager.getCurrentUser()
     private lateinit var activitiesAdapter: PatientActivityAdapter
+    private lateinit var currentPatient: Patient
+    private val nursesFragment = PatientAssignedNursesFragment()
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,19 +44,53 @@ class PatientDetailsActivity : BaseActivity() {
             binding.containerPatientInfo.setBackgroundColor(getColor(R.color.TG_blue))
         }
 
-        val patient = intent.getSerializableExtra("patient") as Patient
+        currentPatient = intent.getSerializableExtra("patient") as Patient
+        bindPatient(currentPatient)
 
-        // Set patient info views
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentAssignedNursesContainer, nursesFragment)
+            .commit()
+
+        binding.buttonReassignStaff.visibility =
+            if (currentUser.role == Role.Admin) View.VISIBLE else View.GONE
+        binding.buttonReassignStaff.setOnClickListener {
+            PatientReassignmentDialog(
+                activity = this,
+                patient = currentPatient,
+                onReassigned = {
+                    refreshPatientDetails()
+                },
+            ).show()
+        }
+
+        activitiesAdapter = PatientActivityAdapter(emptyList())
+        binding.recyclerViewActivities.layoutManager = LinearLayoutManager(this)
+        binding.recyclerViewActivities.adapter = activitiesAdapter
+
+        fetchPatientActivities(currentPatient.id)
+
+        if (currentUser.role == Role.Admin) {
+            refreshPatientDetails(showLoading = false)
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun bindPatient(patient: Patient) {
+        currentPatient = patient
+
         binding.tvName.text = patient.fullname
         binding.tvAge.text = "Age: ${patient.age}"
-        binding.tvDob.text = "Date of Birth: ${patient.dateOfBirth?.substringBefore("T")}"
+        binding.tvDob.text = "Date of Birth: ${patient.dateOfBirth?.substringBefore("T") ?: "-"}"
         binding.tvGender.text = "Gender: ${
             patient.gender.replaceFirstChar {
                 if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
             }
         }"
+        binding.tvCaretaker.text = "Caretaker: ${patient.caretaker?.name ?: "Not assigned"}"
+        binding.tvAssignedDoctor.text =
+            "Assigned Doctor: ${patient.assignedDoctor?.name ?: "Not assigned"}"
 
-        if (!patient.healthConditions.isNullOrEmpty()) {
+        if (patient.healthConditions.isNotEmpty()) {
             val formattedConditions =
                 patient.healthConditions.joinToString(", ") { condition ->
                     condition.split(" ").joinToString(" ") { word ->
@@ -71,19 +108,41 @@ class PatientDetailsActivity : BaseActivity() {
             .circleCrop()
             .into(binding.imagePatient)
 
-        // Load the assigned nurses fragment dynamically and pass the nurses
-        val nursesFragment = PatientAssignedNursesFragment()
-        nursesFragment.setAssignedNurses(patient.assignedNurses ?: emptyList())
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentAssignedNursesContainer, nursesFragment)
-            .commit()
+        nursesFragment.setAssignedNurses(patient.assignedNurses)
+    }
 
-        // Setup RecyclerView for activity logs
-        activitiesAdapter = PatientActivityAdapter(emptyList())
-        binding.recyclerViewActivities.layoutManager = LinearLayoutManager(this)
-        binding.recyclerViewActivities.adapter = activitiesAdapter
+    private fun refreshPatientDetails(showLoading: Boolean = true) {
+        val token = "Bearer ${SessionManager.getToken()}"
+        CoroutineScope(Dispatchers.IO).launch {
+            if (showLoading) {
+                withContext(Dispatchers.Main) {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+            }
 
-        fetchPatientActivities(patient.id)
+            val response =
+                try {
+                    ApiClient.apiService.getPatientOverview(
+                        token = token,
+                        patientId = currentPatient.id,
+                        organizationId = currentUser.organization,
+                    )
+                } catch (exception: Exception) {
+                    null
+                }
+
+            withContext(Dispatchers.Main) {
+                if (showLoading) {
+                    binding.progressBar.visibility = View.GONE
+                }
+
+                if (response?.isSuccessful == true) {
+                    response.body()?.patient?.let { updatedPatient ->
+                        bindPatient(updatedPatient)
+                    }
+                }
+            }
+        }
     }
 
     private fun fetchPatientActivities(patientId: String) {
@@ -94,7 +153,7 @@ class PatientDetailsActivity : BaseActivity() {
             }
             val response =
                 try {
-                    deakin.gopher.guardian.services.api.ApiClient.apiService.getPatientActivities(token, patientId)
+                    ApiClient.apiService.getPatientActivities(token, patientId)
                 } catch (e: Exception) {
                     null
                 }

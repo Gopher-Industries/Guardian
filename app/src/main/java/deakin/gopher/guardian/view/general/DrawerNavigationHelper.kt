@@ -20,9 +20,10 @@ object DrawerNavigationHelper {
         menuButton: View,
         vararg extraMenuButtons: View?,
     ) {
-        val openDrawerListener = View.OnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
+        val openDrawerListener =
+            View.OnClickListener {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
         menuButton.setOnClickListener(openDrawerListener)
         extraMenuButtons.forEach { button ->
             button?.setOnClickListener(openDrawerListener)

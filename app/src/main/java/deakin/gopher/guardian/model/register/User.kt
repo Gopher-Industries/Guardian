@@ -6,11 +6,11 @@ import deakin.gopher.guardian.model.login.Role
 import java.io.Serializable
 
 data class User(
-    @SerializedName("id") val id: String,
+    @SerializedName(value = "id", alternate = ["_id"]) val id: String,
     @SerializedName("email") val email: String,
     @SerializedName("fullname") val name: String,
     @SerializedName("role") val roleName: String,
-    @SerializedName("photoUrl") val photoUrl: String,
+    @SerializedName("photoUrl") val photoUrl: String? = null,
     @SerializedName("organization") val organization: String? = null,
 ) : Serializable {
     val role: Role

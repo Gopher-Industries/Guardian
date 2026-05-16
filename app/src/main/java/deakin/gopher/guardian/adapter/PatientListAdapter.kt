@@ -14,10 +14,10 @@ import deakin.gopher.guardian.model.Patient
 
 class PatientListAdapter(
     private var patients: List<Patient>,
-    private val showAssignNurseAction: Boolean = false,
+    private val showReassignAction: Boolean = false,
     private val showDeleteAction: Boolean = false,
     private val onPatientClick: ((Patient) -> Unit)? = null,
-    private val onAssignNurseClick: ((Patient) -> Unit)? = null,
+    private val onReassignClick: ((Patient) -> Unit)? = null,
     private val onDeleteClick: ((Patient) -> Unit)? = null,
 ) : RecyclerView.Adapter<PatientListAdapter.PatientViewHolder>() {
     inner class PatientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -63,7 +63,7 @@ class PatientListAdapter(
             onPatientClick?.invoke(patient)
         }
 
-        val hasManagementActions = showAssignNurseAction || showDeleteAction
+        val hasManagementActions = showReassignAction || showDeleteAction
         holder.moreIcon.visibility = if (hasManagementActions) View.VISIBLE else View.GONE
 
         holder.moreIcon.setOnClickListener {
@@ -73,14 +73,14 @@ class PatientListAdapter(
             val popupMenu = PopupMenu(holder.itemView.context, it)
             popupMenu.inflate(R.menu.menu_patient_item)
             popupMenu.menu.findItem(R.id.assign_nurse).isVisible =
-                showAssignNurseAction && onAssignNurseClick != null
+                showReassignAction && onReassignClick != null
             popupMenu.menu.findItem(R.id.action_delete).isVisible =
                 showDeleteAction && onDeleteClick != null
 
             popupMenu.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.assign_nurse -> {
-                        onAssignNurseClick?.invoke(patient)
+                        onReassignClick?.invoke(patient)
                         true
                     }
                     R.id.action_delete -> { // Handle delete click
