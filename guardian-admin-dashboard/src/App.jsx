@@ -8,6 +8,7 @@ import StaffManagementPage from "./pages/StaffManagementPage";
 import OrgAssignmentPage from "./pages/OrgAssignmentPage";
 import PatientsPage from "./pages/PatientsPage";
 import NurseRosterPage from "./pages/NurseRosterPage";
+import SupportTicketPage from "./pages/SupportTicketPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
 import "./App.css";
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="patients" element={<PatientsPage />} />
         <Route path="patients/:patientId/overview" element={<PatientOverviewPage />} />
         <Route path="nurse-roster" element={<NurseRosterPage />} />
+        <Route path="support-ticket" element={<SupportTicketPage />} />
         <Route path="reports" element={<ReportsPage />} />
         <Route path="settings" element={<SettingsPage />} />
         
