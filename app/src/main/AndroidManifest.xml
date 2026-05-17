@@ -196,6 +196,9 @@
             android:exported="false" />
 
         <activity android:name=".ModulesActivity" />
+        <activity
+            android:name=".view.general.AddEditPrescriptionActivity"
+            android:exported="false" />
 
 
         <activity android:name=".Module1CoursesActivity" />

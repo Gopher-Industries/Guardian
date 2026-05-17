@@ -70,3 +70,20 @@ data class UpdatePatientRequest(
     @SerializedName("dateOfBirth") val dateOfBirth: String,
     @SerializedName("gender") val gender: String,
 )
+
+data class PatientListResponse(
+    @SerializedName("page")
+    val page: Int = 1,
+
+    @SerializedName("limit")
+    val limit: Int = 50,
+
+    @SerializedName("total")
+    val total: Int = 0,
+
+    @SerializedName("totalPages")
+    val totalPages: Int = 1,
+
+    @SerializedName("patients")
+    val patients: List<Patient> = emptyList()
+)

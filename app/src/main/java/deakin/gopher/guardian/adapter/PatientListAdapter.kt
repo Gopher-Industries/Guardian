@@ -18,6 +18,7 @@ class PatientListAdapter(
     private val onAssignNurseClick: ((Patient) -> Unit)? = null,
     private val onEditClick: ((Patient) -> Unit)? = null,
     private val onDeleteClick: ((Patient) -> Unit)? = null,
+    private val showMoreMenu: Boolean = true
 ) : RecyclerView.Adapter<PatientListAdapter.PatientViewHolder>() {
     inner class PatientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameText: TextView = itemView.findViewById(R.id.tvName)
@@ -61,6 +62,8 @@ class PatientListAdapter(
         holder.card.setOnClickListener {
             onPatientClick?.invoke(patient)
         }
+
+        holder.moreIcon.visibility = if (showMoreMenu) View.VISIBLE else View.GONE
 
         holder.moreIcon.setOnClickListener {
             val popupMenu = PopupMenu(holder.itemView.context, it)

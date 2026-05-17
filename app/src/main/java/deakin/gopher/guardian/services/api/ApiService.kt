@@ -27,6 +27,11 @@ import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
+import deakin.gopher.guardian.model.CreatePrescriptionRequest
+import deakin.gopher.guardian.model.PrescriptionListResponse
+import deakin.gopher.guardian.model.UpdatePrescriptionRequest
+import retrofit2.http.PATCH
+import deakin.gopher.guardian.model.PatientListResponse
 
 interface ApiService {
     @POST("auth/register")
@@ -128,4 +133,33 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") patientId: String,
     ): Response<BaseModel>
+
+    @GET("patients/{patientId}/prescriptions")
+    suspend fun getPatientPrescriptions(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+        @Query("status") status: String? = null,
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 10
+    ): Response<PrescriptionListResponse>
+
+    @POST("prescriptions")
+    suspend fun createPrescription(
+        @Header("Authorization") token: String, @Body request: CreatePrescriptionRequest
+    ): Response<BaseModel>
+
+    @PATCH("prescriptions/{id}")
+    suspend fun updatePrescription(
+        @Header("Authorization") token: String,
+        @Path("id") prescriptionId: String,
+        @Body request: UpdatePrescriptionRequest
+    ): Response<BaseModel>
+
+    @GET("patients")
+    suspend fun getAllPatientsForDoctor(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 50
+    ): Response<PatientListResponse>
+
 }

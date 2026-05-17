@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Top Blue Header -->
         <View
             android:id="@+id/headerBackground"
             android:layout_width="0dp"
@@ -20,7 +19,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Toolbar -->
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="0dp"
@@ -34,7 +32,6 @@
             app:titleCentered="true"
             app:titleTextColor="@android:color/white" />
 
-        <!-- Patient Info Card -->
         <androidx.cardview.widget.CardView
             android:id="@+id/containerPatientInfo"
             android:layout_width="0dp"
@@ -61,11 +58,11 @@
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="24dp"
                     tools:text="Steve Rogers" />
 
                 <TextView
@@ -109,9 +106,9 @@
                     tools:text="Health Conditions: Diabetes, Arthritis" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.cardview.widget.CardView>
 
-        <!-- Patient Image -->
         <ImageView
             android:id="@+id/imagePatient"
             android:layout_width="100dp"
@@ -133,25 +130,100 @@
             android:paddingStart="16dp"
             android:paddingTop="12dp"
             android:paddingBottom="4dp"
-            android:text="Activities"
+            android:text="Assigned Nurses"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/containerPatientInfo" />
 
-        <!-- Fragment Container -->
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentAssignedNursesContainer"
-            android:name="deakin.gopher.guardian.view.general.PatientAssignedNursesFragment"
+        <TextView
+            android:id="@+id/tvAssignedNursesNames"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:text="No nurse assigned"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvAssignedNursesLabel" />
 
-        <!-- RecyclerView for Activities -->
+        <TextView
+            android:id="@+id/tvPrescriptionsLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="Prescriptions"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/btnAddPrescription"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvAssignedNursesNames" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddPrescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Add"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="@id/tvPrescriptionsLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvPrescriptionsLabel" />
+
+        <ProgressBar
+            android:id="@+id/progressBarPrescriptions"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPrescriptionsLabel" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPrescriptions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="ifContentScrolls"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPrescriptionsLabel" />
+
+        <TextView
+            android:id="@+id/tvEmptyPrescriptions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="No prescriptions found"
+            android:textColor="@color/gray"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPrescriptionsLabel" />
+
+        <TextView
+            android:id="@+id/tvActivitiesLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp"
+            android:text="Activities"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerViewPrescriptions" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewActivities"
             android:layout_width="0dp"
@@ -161,9 +233,8 @@
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragmentAssignedNursesContainer" />
+            app:layout_constraintTop_toBottomOf="@id/tvActivitiesLabel" />
 
-        <!-- Empty Message -->
         <TextView
             android:id="@+id/tvEmptyMessage"
             android:layout_width="0dp"
@@ -175,9 +246,8 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragmentAssignedNursesContainer" />
+            app:layout_constraintTop_toBottomOf="@id/tvActivitiesLabel" />
 
-        <!-- Progress Bar -->
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="48dp"
@@ -186,7 +256,8 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragmentAssignedNursesContainer" />
+            app:layout_constraintTop_toBottomOf="@id/tvActivitiesLabel" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.core.widget.NestedScrollView>
