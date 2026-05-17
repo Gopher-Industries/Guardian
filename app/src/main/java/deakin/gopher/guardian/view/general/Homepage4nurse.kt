@@ -21,9 +21,15 @@ class Homepage4nurse : AppCompatActivity() {
         val patientsButton: Button = findViewById(R.id.patientsButton_nurse)
         val settingsButton: Button = findViewById(R.id.settingsButton_nurse)
         val signOutButton: Button = findViewById(R.id.sighOutButton_nurse)
+        val logsButton: Button = findViewById(R.id.logsButton_nurse)
+
 
         patientsButton.setOnClickListener {
             NavigationService(this).onLaunchPatientList()
+        }
+
+        logsButton.setOnClickListener {
+            NavigationService(this).onPatientLogs()
         }
 
         // settings button

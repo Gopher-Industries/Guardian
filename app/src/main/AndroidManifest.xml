@@ -187,6 +187,7 @@
         <activity
             android:name=".view.general.TasksListActivity"
             android:exported="false" />
+        <activity android:name=".view.patient.PatientLogsActivity"/>
 
         <activity android:name=".ModulesActivity" />
 
