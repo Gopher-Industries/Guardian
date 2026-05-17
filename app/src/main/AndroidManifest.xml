@@ -73,6 +73,9 @@
             android:name=".view.general.Homepage4doctor"
             android:exported="false" />
         <activity
+            android:name="deakin.gopher.guardian.MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.general.TaskDetailActivity"
             android:exported="false" />
         <activity
