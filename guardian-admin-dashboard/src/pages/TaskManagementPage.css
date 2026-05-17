@@ -57,13 +57,13 @@
 }
 
 .task-secondary-btn {
-  background: #eef6fb;
+  background: var(--surface-accent-3);
   color: var(--primary-dark);
   border: 1px solid var(--border);
 }
 
 .task-secondary-btn:hover {
-  background: #e7f2f9;
+  background: var(--surface-accent-2);
 }
 
 .task-danger-btn {
@@ -76,13 +76,13 @@
 }
 
 .task-filter-btn {
-  background: white;
+  background: var(--surface);
   color: var(--primary-dark);
   border: 1px solid var(--border);
 }
 
 .task-filter-btn:hover {
-  background: #f8fbfd;
+  background: var(--surface-soft);
 }
 
 .task-summary-grid {
@@ -92,7 +92,7 @@
 }
 
 .task-summary-card {
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 18px;
@@ -143,7 +143,7 @@
   align-items: center;
   gap: 10px;
   min-width: 320px;
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 12px 14px;
@@ -159,7 +159,7 @@
 }
 
 .task-table-card {
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 24px;
   box-shadow: var(--shadow-sm);
@@ -194,14 +194,14 @@
 .task-table td {
   padding: 16px 12px;
   text-align: left;
-  border-top: 1px solid #edf3f7;
+  border-top: 1px solid var(--border);
   vertical-align: middle;
 }
 
 .task-table th {
   font-size: 0.9rem;
   color: var(--primary-dark);
-  background: #f9fcfe;
+  background: var(--surface-soft);
 }
 
 .task-table td {
@@ -315,7 +315,7 @@
   height: 32px;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: white;
+  background: var(--surface);
   color: var(--primary-dark);
   display: inline-flex;
   align-items: center;
@@ -326,7 +326,7 @@
 }
 
 .task-icon-btn:hover {
-  background: #f8fbfd;
+  background: var(--surface-soft);
 }
 
 .task-icon-btn.delete {
@@ -342,7 +342,7 @@
 .task-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(20, 61, 116, 0.22);
+  background: var(--backdrop-medium);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -352,10 +352,11 @@
 
 .task-modal {
   width: min(100%, 720px);
-  background: white;
+  background: var(--surface);
   border-radius: 24px;
   padding: 24px;
   box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
 }
 
 .task-modal h3 {
@@ -431,7 +432,7 @@
   outline: none;
   font: inherit;
   font-size: 0.98rem;
-  background: white;
+  background: var(--surface);
   width: 100%;
   color: var(--text);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
@@ -461,7 +462,7 @@
   left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: #6b7a90;
+  color: var(--text-muted);
   pointer-events: none;
   z-index: 1;
   width: 17px;
@@ -477,7 +478,7 @@
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-color: white;
+  background-color: var(--surface);
 }
 
 .task-select-shell select {
@@ -495,8 +496,8 @@
   top: 50%;
   width: 9px;
   height: 9px;
-  border-right: 2px solid #6b7a90;
-  border-bottom: 2px solid #6b7a90;
+  border-right: 2px solid var(--text-muted);
+  border-bottom: 2px solid var(--text-muted);
   transform: translateY(-65%) rotate(45deg);
   pointer-events: none;
 }
@@ -520,7 +521,7 @@
 
 .task-selection-card {
   border: 1px solid var(--border);
-  background: linear-gradient(135deg, #f8fbfd 0%, #eef7fb 100%);
+  background: linear-gradient(135deg, var(--surface-soft) 0%, var(--surface-soft-2) 100%);
   border-radius: 18px;
   padding: 18px;
 }
@@ -530,7 +531,7 @@
 }
 
 .task-selection-card.placeholder {
-  background: linear-gradient(135deg, #fbfdff 0%, #f3f8fc 100%);
+  background: linear-gradient(135deg, var(--surface-soft) 0%, var(--surface-soft-3) 100%);
 }
 
 .task-selection-head {
