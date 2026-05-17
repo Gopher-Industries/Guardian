@@ -199,11 +199,11 @@ function PatientsPage() {
     <div style={{ width: '100%' }}>
       <div
         style={{
-          background: '#ffffff',
-          border: '1px solid #d9e2ec',
+          background: 'var(--surface)',
+          border: '1px solid var(--border)',
           borderRadius: '24px',
           padding: '24px',
-          boxShadow: '0 4px 14px rgba(15, 23, 42, 0.04)',
+          boxShadow: 'var(--shadow-sm)',
         }}
       >
         <div
@@ -217,8 +217,8 @@ function PatientsPage() {
           }}
         >
           <div>
-            <h2 style={{ margin: 0, color: '#123b7a' }}>Patients</h2>
-            <p style={{ marginTop: '6px', color: '#5b6b7f' }}>
+            <h2 style={{ margin: 0, color: 'var(--primary-dark)' }}>Patients</h2>
+            <p style={{ marginTop: '6px', color: 'var(--text-muted)' }}>
               Manage patients under your organisation.
             </p>
           </div>
@@ -231,8 +231,9 @@ function PatientsPage() {
               padding: '10px 16px',
               fontWeight: 600,
               cursor: 'pointer',
-              background: '#4ea3d8',
+              background: 'linear-gradient(135deg, var(--primary), #3d92bf)',
               color: '#ffffff',
+              boxShadow: 'var(--shadow-sm)',
             }}
           >
             {showForm ? 'Close Form' : 'Add Patient'}
@@ -245,9 +246,10 @@ function PatientsPage() {
               marginBottom: '16px',
               padding: '12px 14px',
               borderRadius: '12px',
-              background: '#e8f8ee',
-              color: '#137333',
+              background: 'rgba(23, 166, 115, 0.12)',
+              color: 'var(--success)',
               fontWeight: 500,
+              border: '1px solid rgba(23, 166, 115, 0.18)',
             }}
           >
             {successMessage}
@@ -260,9 +262,9 @@ function PatientsPage() {
             style={{
               marginBottom: '24px',
               padding: '20px',
-              border: '1px solid #d9e2ec',
+              border: '1px solid var(--border)',
               borderRadius: '18px',
-              background: '#f8fbff',
+              background: 'var(--surface-soft)',
             }}
           >
             <div
@@ -273,7 +275,7 @@ function PatientsPage() {
               }}
             >
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: '#2c3e50' }}>
+                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
                   Full Name
                 </label>
                 <input
@@ -285,15 +287,17 @@ function PatientsPage() {
                   style={{
                     height: '44px',
                     padding: '0 14px',
-                    border: '1px solid #cfd8e3',
+                    border: '1px solid var(--border)',
                     borderRadius: '12px',
                     outline: 'none',
+                    background: 'var(--surface)',
+                    color: 'var(--text)',
                   }}
                 />
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: '#2c3e50' }}>
+                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
                   Gender
                 </label>
                 <select
@@ -303,10 +307,11 @@ function PatientsPage() {
                   style={{
                     height: '44px',
                     padding: '0 14px',
-                    border: '1px solid #cfd8e3',
+                    border: '1px solid var(--border)',
                     borderRadius: '12px',
                     outline: 'none',
-                    background: '#ffffff',
+                    background: 'var(--surface)',
+                    color: 'var(--text)',
                   }}
                 >
                   <option value="">Select gender</option>
@@ -317,7 +322,7 @@ function PatientsPage() {
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: '#2c3e50' }}>
+                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
                   Date of Birth
                 </label>
                 <input
@@ -328,15 +333,17 @@ function PatientsPage() {
                   style={{
                     height: '44px',
                     padding: '0 14px',
-                    border: '1px solid #cfd8e3',
+                    border: '1px solid var(--border)',
                     borderRadius: '12px',
                     outline: 'none',
+                    background: 'var(--surface)',
+                    color: 'var(--text)',
                   }}
                 />
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: '#2c3e50' }}>
+                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
                   Caretaker ID
                 </label>
                 <input
@@ -348,15 +355,17 @@ function PatientsPage() {
                   style={{
                     height: '44px',
                     padding: '0 14px',
-                    border: '1px solid #cfd8e3',
+                    border: '1px solid var(--border)',
                     borderRadius: '12px',
                     outline: 'none',
+                    background: 'var(--surface)',
+                    color: 'var(--text)',
                   }}
                 />
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: '#2c3e50' }}>
+                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
                   Nurse ID
                 </label>
                 <input
@@ -368,15 +377,17 @@ function PatientsPage() {
                   style={{
                     height: '44px',
                     padding: '0 14px',
-                    border: '1px solid #cfd8e3',
+                    border: '1px solid var(--border)',
                     borderRadius: '12px',
                     outline: 'none',
+                    background: 'var(--surface)',
+                    color: 'var(--text)',
                   }}
                 />
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: '#2c3e50' }}>
+                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
                   Doctor ID
                 </label>
                 <input
@@ -388,15 +399,17 @@ function PatientsPage() {
                   style={{
                     height: '44px',
                     padding: '0 14px',
-                    border: '1px solid #cfd8e3',
+                    border: '1px solid var(--border)',
                     borderRadius: '12px',
                     outline: 'none',
+                    background: 'var(--surface)',
+                    color: 'var(--text)',
                   }}
                 />
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: '#2c3e50' }}>
+                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
                   Image URL
                 </label>
                 <input
@@ -408,15 +421,17 @@ function PatientsPage() {
                   style={{
                     height: '44px',
                     padding: '0 14px',
-                    border: '1px solid #cfd8e3',
+                    border: '1px solid var(--border)',
                     borderRadius: '12px',
                     outline: 'none',
+                    background: 'var(--surface)',
+                    color: 'var(--text)',
                   }}
                 />
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: '#2c3e50' }}>
+                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
                   Date of Admitting
                 </label>
                 <input
@@ -427,9 +442,11 @@ function PatientsPage() {
                   style={{
                     height: '44px',
                     padding: '0 14px',
-                    border: '1px solid #cfd8e3',
+                    border: '1px solid var(--border)',
                     borderRadius: '12px',
                     outline: 'none',
+                    background: 'var(--surface)',
+                    color: 'var(--text)',
                   }}
                 />
               </div>
@@ -443,7 +460,7 @@ function PatientsPage() {
                 marginTop: '16px',
               }}
             >
-              <label style={{ fontWeight: 600, color: '#2c3e50' }}>
+              <label style={{ fontWeight: 600, color: 'var(--text)' }}>
                 Description
               </label>
               <textarea
@@ -454,11 +471,13 @@ function PatientsPage() {
                 rows={4}
                 style={{
                   padding: '12px 14px',
-                  border: '1px solid #cfd8e3',
+                  border: '1px solid var(--border)',
                   borderRadius: '12px',
                   outline: 'none',
                   resize: 'vertical',
                   fontFamily: 'inherit',
+                  background: 'var(--surface)',
+                  color: 'var(--text)',
                 }}
               />
             </div>
@@ -486,8 +505,8 @@ function PatientsPage() {
                   padding: '10px 16px',
                   fontWeight: 600,
                   cursor: 'pointer',
-                  background: '#e9f1f8',
-                  color: '#1b3a57',
+                  background: 'var(--surface-accent-3)',
+                  color: 'var(--primary-dark)',
                 }}
               >
                 Cancel
@@ -502,7 +521,7 @@ function PatientsPage() {
                   padding: '10px 16px',
                   fontWeight: 600,
                   cursor: submitting ? 'not-allowed' : 'pointer',
-                  background: '#4ea3d8',
+                  background: 'linear-gradient(135deg, var(--primary), #3d92bf)',
                   color: '#ffffff',
                   opacity: submitting ? 0.7 : 1,
                 }}
@@ -518,9 +537,10 @@ function PatientsPage() {
             style={{
               padding: '24px',
               textAlign: 'center',
-              color: '#5b6b7f',
-              border: '1px dashed #cfd8e3',
+              color: 'var(--text-muted)',
+              border: '1px dashed var(--border)',
               borderRadius: '16px',
+              background: 'var(--surface)',
             }}
           >
             Loading patients...
@@ -530,10 +550,10 @@ function PatientsPage() {
             style={{
               padding: '24px',
               textAlign: 'center',
-              color: '#b42318',
-              border: '1px dashed #f5c2c7',
+              color: 'var(--danger)',
+              border: '1px dashed rgba(228, 98, 111, 0.35)',
               borderRadius: '16px',
-              background: '#fdecec',
+              background: 'rgba(228, 98, 111, 0.08)',
             }}
           >
             {error}
@@ -543,9 +563,10 @@ function PatientsPage() {
             style={{
               padding: '24px',
               textAlign: 'center',
-              color: '#5b6b7f',
-              border: '1px dashed #cfd8e3',
+              color: 'var(--text-muted)',
+              border: '1px dashed var(--border)',
               borderRadius: '16px',
+              background: 'var(--surface)',
             }}
           >
             No patients found.
@@ -561,94 +582,30 @@ function PatientsPage() {
               >
                 <thead>
                   <tr>
-                    <th
-                      style={{
-                        textAlign: 'left',
-                        padding: '14px 12px',
-                        borderBottom: '1px solid #edf2f7',
-                        color: '#123b7a',
-                        fontSize: '14px',
-                      }}
-                    >
-                      Full Name
-                    </th>
-                    <th
-                      style={{
-                        textAlign: 'left',
-                        padding: '14px 12px',
-                        borderBottom: '1px solid #edf2f7',
-                        color: '#123b7a',
-                        fontSize: '14px',
-                      }}
-                    >
-                      Gender
-                    </th>
-                    <th
-                      style={{
-                        textAlign: 'left',
-                        padding: '14px 12px',
-                        borderBottom: '1px solid #edf2f7',
-                        color: '#123b7a',
-                        fontSize: '14px',
-                      }}
-                    >
-                      Date of Birth
-                    </th>
-                    <th
-                      style={{
-                        textAlign: 'left',
-                        padding: '14px 12px',
-                        borderBottom: '1px solid #edf2f7',
-                        color: '#123b7a',
-                        fontSize: '14px',
-                      }}
-                    >
-                      Age
-                    </th>
-                    <th
-                      style={{
-                        textAlign: 'left',
-                        padding: '14px 12px',
-                        borderBottom: '1px solid #edf2f7',
-                        color: '#123b7a',
-                        fontSize: '14px',
-                      }}
-                    >
-                      Caretaker
-                    </th>
-                    <th
-                      style={{
-                        textAlign: 'left',
-                        padding: '14px 12px',
-                        borderBottom: '1px solid #edf2f7',
-                        color: '#123b7a',
-                        fontSize: '14px',
-                      }}
-                    >
-                      Doctor
-                    </th>
-                    <th
-                      style={{
-                        textAlign: 'left',
-                        padding: '14px 12px',
-                        borderBottom: '1px solid #edf2f7',
-                        color: '#123b7a',
-                        fontSize: '14px',
-                      }}
-                    >
-                      Nurses
-                    </th>
-                    <th
-                      style={{
-                        textAlign: 'left',
-                        padding: '14px 12px',
-                        borderBottom: '1px solid #edf2f7',
-                        color: '#123b7a',
-                        fontSize: '14px',
-                      }}
-                    >
-                      Actions
-                    </th>
+                    {[
+                      'Full Name',
+                      'Gender',
+                      'Date of Birth',
+                      'Age',
+                      'Caretaker',
+                      'Doctor',
+                      'Nurses',
+                      'Actions',
+                    ].map((heading) => (
+                      <th
+                        key={heading}
+                        style={{
+                          textAlign: 'left',
+                          padding: '14px 12px',
+                          borderBottom: '1px solid var(--border)',
+                          color: 'var(--primary-dark)',
+                          fontSize: '14px',
+                          background: 'var(--surface-soft)',
+                        }}
+                      >
+                        {heading}
+                      </th>
+                    ))}
                   </tr>
                 </thead>
 
@@ -658,7 +615,8 @@ function PatientsPage() {
                       <td
                         style={{
                           padding: '14px 12px',
-                          borderBottom: '1px solid #edf2f7',
+                          borderBottom: '1px solid var(--border)',
+                          color: 'var(--text)',
                         }}
                       >
                         {patient.fullname || 'N/A'}
@@ -666,8 +624,9 @@ function PatientsPage() {
                       <td
                         style={{
                           padding: '14px 12px',
-                          borderBottom: '1px solid #edf2f7',
+                          borderBottom: '1px solid var(--border)',
                           textTransform: 'capitalize',
+                          color: 'var(--text)',
                         }}
                       >
                         {patient.gender || 'N/A'}
@@ -675,7 +634,8 @@ function PatientsPage() {
                       <td
                         style={{
                           padding: '14px 12px',
-                          borderBottom: '1px solid #edf2f7',
+                          borderBottom: '1px solid var(--border)',
+                          color: 'var(--text)',
                         }}
                       >
                         {formatDate(patient.dateOfBirth)}
@@ -683,7 +643,8 @@ function PatientsPage() {
                       <td
                         style={{
                           padding: '14px 12px',
-                          borderBottom: '1px solid #edf2f7',
+                          borderBottom: '1px solid var(--border)',
+                          color: 'var(--text)',
                         }}
                       >
                         {patient.age ?? 'N/A'}
@@ -691,7 +652,8 @@ function PatientsPage() {
                       <td
                         style={{
                           padding: '14px 12px',
-                          borderBottom: '1px solid #edf2f7',
+                          borderBottom: '1px solid var(--border)',
+                          color: 'var(--text)',
                         }}
                       >
                         {patient.caretaker?.fullname || 'N/A'}
@@ -699,7 +661,8 @@ function PatientsPage() {
                       <td
                         style={{
                           padding: '14px 12px',
-                          borderBottom: '1px solid #edf2f7',
+                          borderBottom: '1px solid var(--border)',
+                          color: 'var(--text)',
                         }}
                       >
                         {patient.assignedDoctor?.fullname || 'N/A'}
@@ -707,7 +670,8 @@ function PatientsPage() {
                       <td
                         style={{
                           padding: '14px 12px',
-                          borderBottom: '1px solid #edf2f7',
+                          borderBottom: '1px solid var(--border)',
+                          color: 'var(--text)',
                         }}
                       >
                         {patient.assignedNurses?.length
@@ -719,7 +683,7 @@ function PatientsPage() {
                       <td
                         style={{
                           padding: '14px 12px',
-                          borderBottom: '1px solid #edf2f7',
+                          borderBottom: '1px solid var(--border)',
                         }}
                       >
                         <button
@@ -734,8 +698,8 @@ function PatientsPage() {
                               deactivatingId === patient._id
                                 ? 'not-allowed'
                                 : 'pointer',
-                            background: '#ffe5e5',
-                            color: '#b42318',
+                            background: 'rgba(228, 98, 111, 0.12)',
+                            color: 'var(--danger)',
                             opacity: deactivatingId === patient._id ? 0.7 : 1,
                           }}
                         >
@@ -760,7 +724,7 @@ function PatientsPage() {
                 flexWrap: 'wrap',
               }}
             >
-              <div style={{ color: '#5b6b7f', fontSize: '14px' }}>
+              <div style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
                 Total Patients: {pagination.total || 0} | Page{' '}
                 {pagination.page || 1} of {pagination.pages || 1}
               </div>
@@ -775,8 +739,8 @@ function PatientsPage() {
                     padding: '10px 14px',
                     fontWeight: 600,
                     cursor: pagination.page <= 1 ? 'not-allowed' : 'pointer',
-                    background: '#e9f1f8',
-                    color: '#1b3a57',
+                    background: 'var(--surface-accent-3)',
+                    color: 'var(--primary-dark)',
                     opacity: pagination.page <= 1 ? 0.6 : 1,
                   }}
                 >
@@ -795,7 +759,7 @@ function PatientsPage() {
                       pagination.page >= pagination.pages
                         ? 'not-allowed'
                         : 'pointer',
-                    background: '#4ea3d8',
+                    background: 'linear-gradient(135deg, var(--primary), #3d92bf)',
                     color: '#ffffff',
                     opacity: pagination.page >= pagination.pages ? 0.6 : 1,
                   }}
