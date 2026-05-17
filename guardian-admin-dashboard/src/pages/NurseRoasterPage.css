@@ -57,7 +57,7 @@
 }
 
 .nurse-summary-card {
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 18px;
@@ -90,7 +90,7 @@
   align-items: center;
   gap: 10px;
   min-width: 340px;
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 12px 14px;
@@ -101,6 +101,7 @@
   outline: none;
   width: 100%;
   background: transparent;
+  color: var(--text);
   font: inherit;
 }
 
@@ -114,7 +115,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 10px 12px;
@@ -130,7 +131,7 @@
 }
 
 .nurse-roaster-card {
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 24px;
   box-shadow: var(--shadow-sm);
@@ -164,14 +165,14 @@
 .nurse-roaster-table td {
   padding: 16px 18px;
   text-align: left;
-  border-top: 1px solid #edf3f7;
+  border-top: 1px solid var(--border);
   vertical-align: middle;
 }
 
 .nurse-roaster-table th {
   font-size: 0.9rem;
   color: var(--primary-dark);
-  background: #f9fcfe;
+  background: var(--surface-soft);
   white-space: nowrap;
 }
 
@@ -190,7 +191,7 @@
   width: 40px;
   height: 40px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #dff1fb, #edf7fd);
+  background: linear-gradient(135deg, var(--surface-accent), var(--surface-accent-2));
   color: var(--primary-dark);
   font-weight: 800;
   display: flex;
@@ -260,7 +261,7 @@
   height: 34px;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: white;
+  background: var(--surface);
   color: var(--primary-dark);
   display: inline-flex;
   align-items: center;
@@ -270,7 +271,7 @@
 }
 
 .nurse-icon-btn:hover {
-  background: #f8fbfd;
+  background: var(--surface-soft);
 }
 
 .nurse-empty-state {
