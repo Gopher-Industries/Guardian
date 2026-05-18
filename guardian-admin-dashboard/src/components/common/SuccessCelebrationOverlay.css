@@ -1,0 +1,141 @@
+.celebration-overlay-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(19, 39, 68, 0.2);
+  backdrop-filter: blur(5px);
+  overflow: hidden;
+  animation: celebrationFadeIn 0.22s ease;
+}
+
+.celebration-card {
+  position: relative;
+  z-index: 2;
+  width: min(92%, 430px);
+  padding: 28px 24px 22px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbfe 100%);
+  border: 1px solid rgba(79, 160, 200, 0.18);
+  box-shadow: 0 24px 60px rgba(20, 61, 116, 0.18);
+  text-align: center;
+  animation: celebrationCardPop 0.28s ease;
+}
+
+.celebration-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(23, 166, 115, 0.12);
+  color: #158b61;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin-bottom: 14px;
+}
+
+.celebration-card h3 {
+  margin: 0 0 8px;
+  color: var(--primary-dark);
+  font-size: 1.45rem;
+}
+
+.celebration-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.celebration-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  transform-origin: left;
+  background: linear-gradient(90deg, #4fa0c8, #17a673);
+  animation: celebrationTimer 3.2s linear forwards;
+}
+
+.celebration-confetti-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -40px;
+  width: 10px;
+  height: 18px;
+  border-radius: 4px;
+  opacity: 0.95;
+  animation-name: confettiFall;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+.confetti-1 {
+  background: #4fa0c8;
+}
+
+.confetti-2 {
+  background: #17a673;
+}
+
+.confetti-3 {
+  background: #9fd2ea;
+}
+
+.confetti-4 {
+  background: #7dcfb6;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(115vh) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@keyframes celebrationFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes celebrationCardPop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes celebrationTimer {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
