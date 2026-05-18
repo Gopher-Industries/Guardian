@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="deakin.gopher.guardian.view.general.Homepage4nurse">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="deakin.gopher.guardian.view.general.Homepage4nurse">
+
+    <!-- SETTINGS BUTTON -->
 
     <Button
         android:id="@+id/settingsButton_nurse"
@@ -40,6 +42,8 @@
         android:textSize="13sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <!-- MY PATIENTS BUTTON -->
 
     <Button
         android:id="@+id/patientsButton_nurse"
@@ -77,11 +81,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
+    <!-- PATIENT ACTIVITIES BUTTON -->
+
+    <Button
+        android:id="@+id/patientActivitiesButton_nurse"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="240dp"
+        android:background="@drawable/homepage_button_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <TextView
+        android:id="@+id/patientActivitiesTxt_nurse"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="320dp"
+        android:elevation="4dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Activities"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/patientActivitiesButton_nurse"
+        app:layout_constraintStart_toStartOf="@+id/patientActivitiesButton_nurse"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <View
+        android:id="@+id/patientActivitiesIcon_nurse"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="268dp"
+        android:background="@drawable/ic_assignment_indicator"
+        android:elevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <!-- SIGN OUT BUTTON -->
+
     <Button
         android:id="@+id/sighOutButton_nurse"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="148dp"
+        android:layout_marginStart="224dp"
         android:layout_marginTop="240dp"
         android:background="@drawable/homepage_button_background"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +135,7 @@
         android:id="@+id/sighOutTxt_nurse"
         android:layout_width="82dp"
         android:layout_height="22dp"
-        android:layout_marginStart="172dp"
+        android:layout_marginStart="248dp"
         android:layout_marginTop="320dp"
         android:elevation="4dp"
         android:fontFamily="@font/poppins_bold"
@@ -105,12 +149,14 @@
         android:id="@+id/sighOutIcon_nurse"
         android:layout_width="53dp"
         android:layout_height="43dp"
-        android:layout_marginStart="188dp"
+        android:layout_marginStart="264dp"
         android:layout_marginTop="268dp"
         android:background="@drawable/menu_signout"
         android:elevation="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <!-- HEADER -->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/medicalDiaganosticsHeaderCardView"
@@ -147,15 +193,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="54dp"
-                android:contentDescription="TODO"
+                android:contentDescription="avatar"
                 app:layout_constraintBottom_toTopOf="@+id/medicalDiagnosticsTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/avatar_icon" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

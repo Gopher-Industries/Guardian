@@ -86,6 +86,12 @@ interface ApiService {
         @Query("patientId") patientId: String,
     ): Response<List<PatientActivity>>
 
+    @DELETE("patients/entryreport/{entryId}")
+    suspend fun deletePatientActivity(
+        @Header("Authorization") token: String,
+        @Path("entryId") entryId: String,
+    ): Response<BaseModel>
+
     @DELETE("patients/{id}")
     suspend fun deletePatient(
         @Header("Authorization") token: String,

@@ -53,5 +53,12 @@
             android:textSize="@dimen/text_size_caption"
             tools:text="Had oatmeal with banana and a cup of tea. Ate well." />
 
+        <Button
+            android:id="@+id/deleteActivityButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_half_margin"
+            android:text="Delete" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

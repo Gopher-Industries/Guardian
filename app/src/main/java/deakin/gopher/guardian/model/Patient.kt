@@ -50,10 +50,12 @@ data class AddPatientResponse(
 ) : BaseModel()
 
 data class PatientActivity(
+    @SerializedName("_id") val id: String,
     @SerializedName("activityType") val activityName: String,
     @SerializedName("activityTimestamp") val timestamp: String,
     @SerializedName("nurse") val loggedBy: String,
     @SerializedName("comment") val comment: String,
+
 )
 
 data class AddPatientActivityResponse(
