@@ -14,6 +14,7 @@ import SettingsPage from "./pages/SettingsPage";
 import DoctorAssignmentsPage from "./pages/DoctorAssignmentsPage";
 import "./App.css";
 import PatientOverviewPage from "./pages/PatientOverviewPage";
+import SupportTicketPage from "./pages/SupportTicketPage";
 
 function ProtectedRoute({ children }) {
   const token = getAuthToken();
