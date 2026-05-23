@@ -8,6 +8,7 @@ import {
   ClipboardList,
   Users,
   Building2,
+  ListTodo,
   X,
 } from "lucide-react";
 import Logo from "../common/Logo";
@@ -20,6 +21,7 @@ const iconMap = {
   "org-assignment": Building2,
   patients: ShieldPlus,
   "patient-overview": ClipboardList,
+  "task-management": ListTodo,
   reports: Bell,
   settings: Settings,
   "nurse-roster": ClipboardList

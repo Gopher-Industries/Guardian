@@ -1,7 +1,46 @@
+:root {
+  --page-bg: #f0f2f5;
+  --surface: #ffffff;
+  --surface-soft: #f8fbfd;
+  --surface-soft-2: #eef7fb;
+  --surface-soft-3: #fcfeff;
+  --surface-accent: #dff1fb;
+  --surface-accent-2: #edf7fd;
+  --surface-accent-3: #eef6fb;
+  --text: #1f2d3d;
+  --text-muted: #6b7280;
+  --border: #dbe7f0;
+  --primary: #4fa0c8;
+  --primary-dark: #143d74;
+  --toggle-track: #dbe8f2;
+  --shadow-sm: 0 10px 24px rgba(20, 61, 116, 0.08);
+  --shadow-lg: 0 22px 60px rgba(20, 61, 116, 0.18);
+}
+
+body.dark-theme {
+  --page-bg: #0f1722;
+  --surface: #182230;
+  --surface-soft: #1d2a39;
+  --surface-soft-2: #213040;
+  --surface-soft-3: #1b2735;
+  --surface-accent: #223449;
+  --surface-accent-2: #24384d;
+  --surface-accent-3: #203143;
+  --text: #edf4fb;
+  --text-muted: #a9bbcc;
+  --border: #2d3b4d;
+  --primary: #6cb8df;
+  --primary-dark: #d7ebfb;
+  --toggle-track: #314457;
+  --shadow-sm: 0 10px 24px rgba(0, 0, 0, 0.22);
+  --shadow-lg: 0 22px 60px rgba(0, 0, 0, 0.34);
+}
+
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: #f0f2f5;
+  background: var(--page-bg);
+  color: var(--text);
 }
 
 .login-container {
