@@ -172,3 +172,231 @@ body {
 .org-refresh-wrap {
   margin-top: 22px;
 }
+/* Doctor Assignments Page */
+
+.page-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 28px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #2d8fca;
+  text-transform: uppercase;
+}
+
+.page-header h1 {
+  margin: 0;
+  color: #07336f;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.page-subtitle,
+.card-muted {
+  color: #61708a;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.dashboard-card {
+  background: #ffffff;
+  border: 1px solid #d8e5f0;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 8px 20px rgba(15, 42, 70, 0.05);
+}
+
+.dashboard-card h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #07336f;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.full-width-card {
+  width: auto;
+}
+
+.assignment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.assignment-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  color: #07336f;
+  font-size: 14px;
+}
+
+.form-control {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d7e4ef;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  outline: none;
+  background: #ffffff;
+  color: #0b1f3a;
+}
+
+.form-control:focus {
+  border-color: #4aa3c7;
+  box-shadow: 0 0 0 3px rgba(74, 163, 199, 0.15);
+}
+
+.primary-button,
+.secondary-button,
+.danger-button {
+  border: none;
+  border-radius: 12px;
+  padding: 11px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.primary-button {
+  background: #07336f;
+  color: #ffffff;
+}
+
+.primary-button:hover {
+  background: #052858;
+}
+
+.secondary-button {
+  background: #eef6fb;
+  color: #07336f;
+}
+
+.secondary-button:hover {
+  background: #dceff8;
+}
+
+.danger-button {
+  background: #ffecec;
+  color: #c62828;
+}
+
+.danger-button:hover {
+  background: #ffdada;
+}
+
+.primary-button:disabled,
+.secondary-button:disabled,
+.danger-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.alert {
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.alert-error {
+  background: #ffecec;
+  color: #b3261e;
+  border: 1px solid #ffc9c9;
+}
+
+.alert-success {
+  background: #eaf8ef;
+  color: #1b7f3a;
+  border: 1px solid #bfe8cb;
+}
+
+.summary-box {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #f4f9fd;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #07336f;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.empty-state {
+  margin-top: 16px;
+  padding: 28px;
+  border: 1px dashed #cddcea;
+  border-radius: 14px;
+  color: #61708a;
+  text-align: center;
+  background: #f8fbfd;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 16px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+.admin-table th,
+.admin-table td {
+  text-align: left;
+  padding: 14px;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 14px;
+}
+
+.admin-table th {
+  color: #07336f;
+  background: #f7fbfe;
+  font-weight: 800;
+}
+
+.admin-table td {
+  color: #253858;
+}
+
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
