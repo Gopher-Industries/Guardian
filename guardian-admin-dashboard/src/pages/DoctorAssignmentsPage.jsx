@@ -5,6 +5,7 @@ import {
   getPatientsByDoctor,
   unassignDoctorFromPatient,
 } from "../services/doctorAssignmentService";
+import "./DoctorAssignmentsPage.css";
 
 export default function DoctorAssignmentsPage() {
   const [doctors, setDoctors] = useState([]);

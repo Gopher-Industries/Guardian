@@ -116,18 +116,18 @@
 import api from "./api";
 
 export async function getDoctors() {
-  const response = await api.get("/api/v1/doctors");
+  const response = await api.get("/doctors");
   return response.data;
 }
 
 export async function getPatientsByDoctor(doctorId) {
-  const response = await api.get(`/api/v1/doctors/${doctorId}/patients`);
+  const response = await api.get(`/doctors/${doctorId}/patients`);
   return response.data;
 }
 
 export async function assignDoctorToPatient(patientId, doctorId) {
   const response = await api.post(
-    `/api/v1/patients/${patientId}/assign-doctor`,
+    `/patients/${patientId}/assign-doctor`,
     { doctorId }
   );
   return response.data;
@@ -135,7 +135,7 @@ export async function assignDoctorToPatient(patientId, doctorId) {
 
 export async function unassignDoctorFromPatient(patientId) {
   const response = await api.post(
-    `/api/v1/patients/${patientId}/assign-doctor`,
+    `/patients/${patientId}/assign-doctor`,
     { doctorId: null }
   );
   return response.data;
