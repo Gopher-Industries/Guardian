@@ -13,58 +13,16 @@ import {
   Stethoscope,
 } from "lucide-react";
 import Logo from "../common/Logo";
+import { ADMIN_NAV_ITEMS } from "../../utils/constants";
 import { clearAuthStorage } from "../../utils/storage";
 
-const ADMIN_NAV_ITEMS = [
-  {
-    id: "dashboard",
-    label: "Dashboard",
-    path: "/dashboard",
-  },
-  {
-    id: "staff-management",
-    label: "Staff Management",
-    path: "/dashboard/staff-management",
-  },
-  {
-    id: "org-assignment",
-    label: "Organisation",
-    path: "/dashboard/org-assignment",
-  },
-  {
-    id: "patients",
-    label: "Patients",
-    path: "/dashboard/patients",
-  },
-  {
-    id: "doctor-assignments",
-    label: "Doctor Assignments",
-    path: "/dashboard/doctor-assignments",
-  },
-  {
-    id: "nurse-roster",
-    label: "Nurse Roster",
-    path: "/dashboard/nurse-roster",
-  },
-  {
-    id: "reports",
-    label: "Reports",
-    path: "/dashboard/reports",
-  },
-  {
-    id: "settings",
-    label: "Settings",
-    path: "/dashboard/settings",
-  },
-];
 
 const iconMap = {
   dashboard: LayoutDashboard,
   "staff-management": Users,
   "org-assignment": Building2,
   patients: ShieldPlus,
-"doctor-assignments": Stethoscope,
-"patient-overview": ClipboardList,
+ "doctor-assignments": Stethoscope,
   "patient-overview": ClipboardList,
   "task-management": ListTodo,
   reports: Bell,
