@@ -21,6 +21,11 @@ export const ADMIN_NAV_ITEMS = [
     label: "Task Management",
     path: "/dashboard/task-management",
   },
+  {
+  id: "doctor-assignments",
+  label: "Doctor Assignments",
+  path: "/dashboard/doctor-assignments",
+  },
   
   { id: "nurse-roster", label: "Nurse Roster", path: "/dashboard/nurse-roster" },
   { id: "support-ticket", label: "Support Ticket", path: "/dashboard/support-ticket" },
