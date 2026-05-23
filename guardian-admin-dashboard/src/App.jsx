@@ -8,13 +8,13 @@ import StaffManagementPage from "./pages/StaffManagementPage";
 import OrgAssignmentPage from "./pages/OrgAssignmentPage";
 import PatientsPage from "./pages/PatientsPage";
 import NurseRosterPage from "./pages/NurseRosterPage";
+import SupportTicketPage from "./pages/SupportTicketPage";
 import TaskManagementPage from "./pages/TaskManagementPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
 import DoctorAssignmentsPage from "./pages/DoctorAssignmentsPage";
 import "./App.css";
 import PatientOverviewPage from "./pages/PatientOverviewPage";
-import SupportTicketPage from "./pages/SupportTicketPage";
 
 function ProtectedRoute({ children }) {
   const token = getAuthToken();
@@ -40,6 +40,7 @@ export default function App() {
         <Route path="staff-management" element={<StaffManagementPage />} />
         <Route path="org-assignment" element={<OrgAssignmentPage />} />
         <Route path="patients" element={<PatientsPage />} />
+        <Route path="doctor-assignments" element={<DoctorAssignmentsPage />} />
         <Route path="patient-overview" element={<PatientOverviewPage />} />
         <Route path="nurse-roster" element={<NurseRosterPage />} />
         <Route path="support-ticket" element={<SupportTicketPage />} />
