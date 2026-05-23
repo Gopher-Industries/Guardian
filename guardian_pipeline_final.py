@@ -222,7 +222,7 @@ def load_notes(search_paths: list) -> pd.DataFrame:
     """
     for path in search_paths:
         if os.path.exists(path):
-            df = pd.read_csv(path)
+            df = pd.read_csv(path, encoding="utf-8")
             print(f"    Loaded notes  : {path}")
             break
     else:
@@ -1687,8 +1687,8 @@ if __name__ == "__main__":
     print_section("STEP 8 / 8  —  Saving Output Files")
 
     # Predictions CSVs
-    res_baseline.to_csv(OUT_PRED_BASELINE, index=False)
-    res_lsa.to_csv(OUT_PRED_LSA, index=False)
+    res_baseline.to_csv(OUT_PRED_BASELINE, index=False, encoding="utf-8")
+    res_lsa.to_csv(OUT_PRED_LSA, index=False, encoding="utf-8")
     print(f"    ✓ {OUT_PRED_BASELINE}")
     print(f"    ✓ {OUT_PRED_LSA}")
 
@@ -1696,13 +1696,13 @@ if __name__ == "__main__":
     report = build_evaluation_report(
         eval_baseline, eval_lsa, res_baseline, res_lsa, split_info
     )
-    with open(OUT_REPORT, "w") as f:
+    with open(OUT_REPORT, "w", encoding="utf-8") as f:
         f.write(report)
     print(f"    ✓ {OUT_REPORT}")
 
     # Dashboard cards
     cards = generate_dashboard_cards(res_baseline, n_per_level=2)
-    with open(OUT_CARDS, "w") as f:
+    with open(OUT_CARDS, "w", encoding="utf-8") as f:
         f.write(cards)
     print(f"    ✓ {OUT_CARDS}")
 
@@ -1715,7 +1715,7 @@ if __name__ == "__main__":
         borderline_count=bl_count,
         n_test=len(res_baseline),
     )
-    with open(OUT_SUMMARY, "w") as f:
+    with open(OUT_SUMMARY, "w", encoding="utf-8") as f:
         f.write(summary)
     print(f"    ✓ {OUT_SUMMARY}")
 
