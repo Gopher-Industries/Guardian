@@ -8,6 +8,8 @@ import StaffManagementPage from "./pages/StaffManagementPage";
 import OrgAssignmentPage from "./pages/OrgAssignmentPage";
 import PatientsPage from "./pages/PatientsPage";
 import NurseRosterPage from "./pages/NurseRosterPage";
+import SupportTicketPage from "./pages/SupportTicketPage";
+import TaskManagementPage from "./pages/TaskManagementPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
 import DoctorAssignmentsPage from "./pages/DoctorAssignmentsPage";
@@ -41,8 +43,10 @@ export default function App() {
         <Route path="doctor-assignments" element={<DoctorAssignmentsPage />} />
         <Route path="patient-overview" element={<PatientOverviewPage />} />
         <Route path="nurse-roster" element={<NurseRosterPage />} />
+        <Route path="support-ticket" element={<SupportTicketPage />} />
         <Route path="reports" element={<ReportsPage />} />
         <Route path="settings" element={<SettingsPage />} />
+        <Route path="task-management" element={<TaskManagementPage />} />
         
       </Route>
 

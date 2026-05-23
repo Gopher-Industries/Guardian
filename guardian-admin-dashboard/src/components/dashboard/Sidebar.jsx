@@ -8,6 +8,7 @@ import {
   ClipboardList,
   Users,
   Building2,
+  ListTodo,
   X,
   Stethoscope,
 } from "lucide-react";
@@ -64,6 +65,8 @@ const iconMap = {
   patients: ShieldPlus,
 "doctor-assignments": Stethoscope,
 "patient-overview": ClipboardList,
+  "patient-overview": ClipboardList,
+  "task-management": ListTodo,
   reports: Bell,
   settings: Settings,
   "nurse-roster": ClipboardList,

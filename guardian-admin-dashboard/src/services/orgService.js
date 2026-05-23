@@ -24,3 +24,17 @@ export async function getMyOrganizations() {
     ]
   };
 }
+
+import api from "./api";
+
+export async function getOrganizations() {
+  const response = await api.get('/orgs/mine');
+  console.log('GET my organizations response:', response.data);
+  return response.data;
+}
+
+export async function createOrganization(orgData) {
+  const response = await api.post('/orgs', orgData);
+  console.log('POST create organization response:', response.data);
+  return response.data;
+}
