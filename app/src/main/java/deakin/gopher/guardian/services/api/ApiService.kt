@@ -22,7 +22,7 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
-
+import okhttp3.ResponseBody
 interface ApiService {
     @POST("auth/register")
     fun register(
@@ -91,4 +91,29 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") patientId: String,
     ): Response<BaseModel>
+
+
+    @GET("patients/{patientId}/prescriptions")
+    suspend fun getPrescriptionsForPatient(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+    ): Response<ResponseBody>
+
+    @POST("prescriptions/{id}/discontinue")
+    suspend fun discontinuePrescription(
+        @Header("Authorization") token: String,
+        @Path("id") prescriptionId: String,
+    ): Response<ResponseBody>
+
+    @DELETE("prescriptions/{id}")
+    suspend fun deletePrescription(
+        @Header("Authorization") token: String,
+        @Path("id") prescriptionId: String,
+    ): Response<ResponseBody>
+
+    @GET("doctors/{doctorId}/patients")
+    suspend fun getPatientsForDoctor(
+        @Header("Authorization") token: String,
+        @Path("doctorId") doctorId: String,
+    ): Response<ResponseBody>
 }
