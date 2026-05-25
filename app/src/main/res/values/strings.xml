@@ -144,6 +144,8 @@
     <string name="working_at">Working at</string>
     <string name="st_vincent_s_public_hospital_melbourne">St. Vincent\'s Public Hospital Melbourne</string>
     <string name="sign_out">Sign Out</string>
+    <string name="sign_out_confirmation_message">Do you want to sign out?</string>
+    <string name="stay_in">Stay in</string>
     <string name="confirm_incident">Confirm Incident</string>
     <string name="confirm_false_alert">Confirm False Alert</string>
     <string name="alert">! Alert</string>
