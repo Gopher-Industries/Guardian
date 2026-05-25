@@ -1,9 +1,10 @@
 package deakin.gopher.guardian.view.general
 
 import android.content.Intent
-import androidx.appcompat.app.AlertDialog
 import android.os.Bundle
 import android.widget.Button
+import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.view.patient.dailyreport.DailyReportActivity
@@ -19,6 +20,7 @@ class Homepage4admin : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage4admin)
+
         newPatientButton = findViewById(R.id.newPaitentButton)
         dailyReportButton = findViewById(R.id.dailyReportButton4caretaker)
         patientListButton = findViewById(R.id.patientListButton)
@@ -26,20 +28,30 @@ class Homepage4admin : BaseActivity() {
         signOutButton = findViewById(R.id.sighOutButton)
         nurseRosterButton = findViewById(R.id.nurseRoseterButton)
 
-        // new Patient Button
+        onBackPressedDispatcher.addCallback(this) {
+            AlertDialog.Builder(this@Homepage4admin)
+                .setTitle(R.string.sign_out)
+                .setMessage(R.string.sign_out_confirmation_message)
+                .setPositiveButton(R.string.sign_out) { _, _ ->
+                    EmailPasswordAuthService.signOut(this@Homepage4admin)
+                    finish()
+                }
+                .setNegativeButton(R.string.stay_in, null)
+                .show()
+        }
+
         newPatientButton.setOnClickListener {
             val medicalDiagnosticsActivityIntent =
                 Intent(this@Homepage4admin, PatientProfileAddActivity::class.java)
             startActivity(medicalDiagnosticsActivityIntent)
         }
 
-        // daily report button
         dailyReportButton.setOnClickListener {
             val medicalDiagnosticsActivityIntent =
                 Intent(this@Homepage4admin, DailyReportActivity::class.java)
             startActivity(medicalDiagnosticsActivityIntent)
         }
-        // patient list button
+
         patientListButton.setOnClickListener {
             val medicalDiagnosticsActivityIntent =
                 Intent(this@Homepage4admin, PatientListActivity::class.java)
@@ -47,7 +59,6 @@ class Homepage4admin : BaseActivity() {
             startActivity(medicalDiagnosticsActivityIntent)
         }
 
-        // settings button
         settingsButton.setOnClickListener {
             val medicalDiagnosticsActivityIntent =
                 Intent(this@Homepage4admin, Setting::class.java)
@@ -55,7 +66,6 @@ class Homepage4admin : BaseActivity() {
             startActivity(medicalDiagnosticsActivityIntent)
         }
 
-        // sign out button
         signOutButton.setOnClickListener {
             AlertDialog.Builder(this)
                 .setTitle(R.string.sign_out)
@@ -68,23 +78,10 @@ class Homepage4admin : BaseActivity() {
                 .show()
         }
 
-        // nurse roster button
         nurseRosterButton.setOnClickListener {
             val nurseRosterActivityIntent =
                 Intent(this@Homepage4admin, NurseRosterActivity::class.java)
             startActivity(nurseRosterActivityIntent)
         }
-    }
-
-    override fun onBackPressed() {
-        AlertDialog.Builder(this)
-            .setTitle(R.string.sign_out)
-            .setMessage(R.string.sign_out_confirmation_message)
-            .setPositiveButton(R.string.sign_out) { _, _ ->
-                EmailPasswordAuthService.signOut(this)
-                finish()
-            }
-            .setNegativeButton(R.string.stay_in, null)
-            .show()
     }
 }

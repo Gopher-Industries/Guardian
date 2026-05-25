@@ -1,7 +1,7 @@
 package deakin.gopher.guardian.view.patient.careplan;
 
-import android.os.Bundle;
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -19,9 +19,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import deakin.gopher.guardian.R;
+import deakin.gopher.guardian.model.CarePlan;
 import deakin.gopher.guardian.services.EmailPasswordAuthService;
 import deakin.gopher.guardian.view.general.Homepage4admin;
-import deakin.gopher.guardian.model.CarePlan;
 import java.util.HashMap;
 
 public class CarePlanActivity extends AppCompatActivity {
