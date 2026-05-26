@@ -45,6 +45,11 @@ private fun calculateAge(
     }
 }
 
+data class AssignNurseRequest(
+    @SerializedName("nurseId") val nurseId: String,
+    @SerializedName("patientId") val patientId: String,
+)
+
 data class AddPatientResponse(
     @SerializedName("patient") val patient: Patient,
 ) : BaseModel()
@@ -59,3 +64,26 @@ data class PatientActivity(
 data class AddPatientActivityResponse(
     @SerializedName("activity") val activity: PatientActivity,
 ) : BaseModel()
+
+data class UpdatePatientRequest(
+    @SerializedName("fullName") val fullName: String,
+    @SerializedName("dateOfBirth") val dateOfBirth: String,
+    @SerializedName("gender") val gender: String,
+)
+
+data class PatientListResponse(
+    @SerializedName("page")
+    val page: Int = 1,
+
+    @SerializedName("limit")
+    val limit: Int = 50,
+
+    @SerializedName("total")
+    val total: Int = 0,
+
+    @SerializedName("totalPages")
+    val totalPages: Int = 1,
+
+    @SerializedName("patients")
+    val patients: List<Patient> = emptyList()
+)

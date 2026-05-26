@@ -34,6 +34,8 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
 import java.util.Calendar
+import androidx.core.widget.doAfterTextChanged
+import com.google.android.material.textfield.TextInputLayout
 import java.util.Locale
 
 class AddNewPatientActivity : BaseActivity() {
@@ -44,6 +46,8 @@ class AddNewPatientActivity : BaseActivity() {
 
     companion object {
         private const val CAMERA_PERMISSION_CODE = 1001
+        private const val MAX_ALLOWED_AGE = 120
+        private val NAME_REGEX = Regex("^[A-Za-z][A-Za-z .'-]{1,49}$")
     }
 
     // Launcher for picking image from gallery
@@ -69,7 +73,9 @@ class AddNewPatientActivity : BaseActivity() {
                 val localBinding = binding
                 when (localBinding) {
                     is ActivityAddNewPatientBinding -> localBinding.imgPreview.setImageBitmap(bitmap)
-                    is ActivityAddNewPatientNurseBinding -> localBinding.imgPreview.setImageBitmap(bitmap)
+                    is ActivityAddNewPatientNurseBinding -> localBinding.imgPreview.setImageBitmap(
+                        bitmap
+                    )
                 }
             }
         }
@@ -98,6 +104,7 @@ class AddNewPatientActivity : BaseActivity() {
                 }
                 setupUI(localBinding)
             }
+
             is ActivityAddNewPatientNurseBinding -> {
                 setSupportActionBar(localBinding.toolbar)
                 localBinding.toolbar.setNavigationOnClickListener {
@@ -114,13 +121,16 @@ class AddNewPatientActivity : BaseActivity() {
             is ActivityAddNewPatientBinding -> {
                 setupGenderSpinner(localBinding.genderSpinner)
                 setupDOBPicker(localBinding.txtDob)
+                setupValidationListeners(localBinding.txtName, localBinding.txtDob)
                 localBinding.btnSelectFromGallery.setOnClickListener { openGallery() }
                 localBinding.btnTakePhoto.setOnClickListener { checkCameraPermissionAndOpen() }
                 localBinding.btnSave.setOnClickListener { savePatientInfo() }
             }
+
             is ActivityAddNewPatientNurseBinding -> {
                 setupGenderSpinner(localBinding.genderSpinner)
                 setupDOBPicker(localBinding.txtDob)
+                setupValidationListeners(localBinding.txtName, localBinding.txtDob)
                 localBinding.btnSelectFromGallery.setOnClickListener { openGallery() }
                 localBinding.btnTakePhoto.setOnClickListener { checkCameraPermissionAndOpen() }
                 localBinding.btnSave.setOnClickListener { savePatientInfo() }
@@ -142,53 +152,53 @@ class AddNewPatientActivity : BaseActivity() {
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val datePickerDialog =
-                DatePickerDialog(
-                    this,
-                    Theme_Holo_Light_Dialog,
-                    { _, selectedYear, selectedMonth, selectedDay ->
-                        val formattedDate =
-                            String.format(
-                                Locale.getDefault(),
-                                "%04d-%02d-%02d",
-                                selectedYear,
-                                selectedMonth + 1,
-                                selectedDay,
-                            )
-                        txtDob.setText(formattedDate)
-                    },
-                    year,
-                    month,
-                    day,
-                )
+            val datePickerDialog = DatePickerDialog(
+                this,
+                Theme_Holo_Light_Dialog,
+                { _, selectedYear, selectedMonth, selectedDay ->
+                    val formattedDate = String.format(
+                        Locale.getDefault(),
+                        "%04d-%02d-%02d",
+                        selectedYear,
+                        selectedMonth + 1,
+                        selectedDay,
+                    )
+                    txtDob.setText(formattedDate)
+                    updateAgeField(selectedYear, selectedMonth, selectedDay)
+                },
+                year,
+                month,
+                day,
+            )
 
             // Force spinner mode (for API 21+)
             try {
-                val datePickerField = datePickerDialog.datePicker.javaClass.getDeclaredField("mDelegate")
+                val datePickerField =
+                    datePickerDialog.datePicker.javaClass.getDeclaredField("mDelegate")
                 datePickerField.isAccessible = true
                 val delegate = datePickerField.get(datePickerDialog.datePicker)
 
                 val spinnerDelegateClass = Class.forName("android.widget.DatePickerSpinnerDelegate")
 
                 if (delegate.javaClass != spinnerDelegateClass) {
-                    datePickerField.set(datePickerDialog.datePicker, null) // Clear the current delegate
+                    datePickerField.set(
+                        datePickerDialog.datePicker, null
+                    ) // Clear the current delegate
 
-                    val constructor =
-                        datePickerDialog.datePicker.javaClass.getDeclaredConstructor(
-                            Context::class.java,
-                            android.util.AttributeSet::class.java,
-                            Int::class.javaPrimitiveType,
-                            Int::class.javaPrimitiveType,
-                        )
+                    val constructor = datePickerDialog.datePicker.javaClass.getDeclaredConstructor(
+                        Context::class.java,
+                        android.util.AttributeSet::class.java,
+                        Int::class.javaPrimitiveType,
+                        Int::class.javaPrimitiveType,
+                    )
                     constructor.isAccessible = true
 
-                    val spinnerDelegate =
-                        constructor.newInstance(
-                            datePickerDialog.datePicker.context,
-                            null,
-                            android.R.attr.datePickerStyle,
-                            0,
-                        )
+                    val spinnerDelegate = constructor.newInstance(
+                        datePickerDialog.datePicker.context,
+                        null,
+                        android.R.attr.datePickerStyle,
+                        0,
+                    )
                     datePickerField.set(datePickerDialog.datePicker, spinnerDelegate)
 
                     // Re-initialize the date picker with current date
@@ -205,8 +215,10 @@ class AddNewPatientActivity : BaseActivity() {
 
     // Permission check before opening camera
     private fun checkCameraPermissionAndOpen() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-            == PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
             openCamera()
         } else {
@@ -246,37 +258,37 @@ class AddNewPatientActivity : BaseActivity() {
 
         val localBinding = binding
 
-        val fullname =
-            when (localBinding) {
-                is ActivityAddNewPatientBinding -> localBinding.txtName.text.toString().trim()
-                is ActivityAddNewPatientNurseBinding -> localBinding.txtName.text.toString().trim()
-                else -> ""
-            }
+        val fullname = when (localBinding) {
+            is ActivityAddNewPatientBinding -> localBinding.txtName.text.toString().trim()
+            is ActivityAddNewPatientNurseBinding -> localBinding.txtName.text.toString().trim()
+            else -> ""
+        }
 
-        val dob =
-            when (localBinding) {
-                is ActivityAddNewPatientBinding -> localBinding.txtDob.text.toString().trim()
-                is ActivityAddNewPatientNurseBinding -> localBinding.txtDob.text.toString().trim()
-                else -> ""
-            }
+        val dob = when (localBinding) {
+            is ActivityAddNewPatientBinding -> localBinding.txtDob.text.toString().trim()
+            is ActivityAddNewPatientNurseBinding -> localBinding.txtDob.text.toString().trim()
+            else -> ""
+        }
 
-        val gender =
-            when (localBinding) {
-                is ActivityAddNewPatientBinding -> localBinding.genderSpinner.selectedItem?.toString()?.lowercase() ?: ""
-                is ActivityAddNewPatientNurseBinding -> localBinding.genderSpinner.selectedItem?.toString()?.lowercase() ?: ""
-                else -> ""
-            }
+        val gender = when (localBinding) {
+            is ActivityAddNewPatientBinding -> localBinding.genderSpinner.selectedItem?.toString()
+                ?.lowercase() ?: ""
+
+            is ActivityAddNewPatientNurseBinding -> localBinding.genderSpinner.selectedItem?.toString()
+                ?.lowercase() ?: ""
+
+            else -> ""
+        }
 
         val namePart = fullname.toRequestBody("text/plain".toMediaTypeOrNull())
         val dobPart = dob.toRequestBody("text/plain".toMediaTypeOrNull())
         val genderPart = gender.toRequestBody("text/plain".toMediaTypeOrNull())
 
-        val photoPart: MultipartBody.Part? =
-            when {
-                selectedPhotoUri != null -> prepareFilePart("photo", selectedPhotoUri!!, this)
-                capturedPhotoBitmap != null -> prepareBitmapPart("photo", capturedPhotoBitmap!!)
-                else -> null
-            }
+        val photoPart: MultipartBody.Part? = when {
+            selectedPhotoUri != null -> prepareFilePart("photo", selectedPhotoUri!!, this)
+            capturedPhotoBitmap != null -> prepareBitmapPart("photo", capturedPhotoBitmap!!)
+            else -> null
+        }
 
         val token = "Bearer ${SessionManager.getToken()}"
 
@@ -287,6 +299,7 @@ class AddNewPatientActivity : BaseActivity() {
                         localBinding.progressBar.show()
                         localBinding.btnSave.visibility = View.GONE
                     }
+
                     is ActivityAddNewPatientNurseBinding -> {
                         localBinding.progressBar.show()
                         localBinding.btnSave.visibility = View.GONE
@@ -294,7 +307,8 @@ class AddNewPatientActivity : BaseActivity() {
                 }
             }
 
-            val response = ApiClient.apiService.addPatient(token, namePart, dobPart, genderPart, photoPart)
+            val response =
+                ApiClient.apiService.addPatient(token, namePart, dobPart, genderPart, photoPart)
 
             withContext(Dispatchers.Main) {
                 when (localBinding) {
@@ -302,6 +316,7 @@ class AddNewPatientActivity : BaseActivity() {
                         localBinding.progressBar.hide()
                         localBinding.btnSave.visibility = View.VISIBLE
                     }
+
                     is ActivityAddNewPatientNurseBinding -> {
                         localBinding.progressBar.hide()
                         localBinding.btnSave.visibility = View.VISIBLE
@@ -316,26 +331,55 @@ class AddNewPatientActivity : BaseActivity() {
                         showMessage(response.body()?.apiError ?: "Failed to add patient")
                     }
                 } else {
-                    val errorResponse =
-                        Gson().fromJson(
-                            response.errorBody()?.string(),
-                            ApiErrorResponse::class.java,
-                        )
-                    showMessage(errorResponse.apiError ?: response.message())
+                    val errorBody = response.errorBody()?.string()
+                    val errorResponse = try {
+                        Gson().fromJson(errorBody, ApiErrorResponse::class.java)
+                    } catch (e: Exception) {
+                        null
+                    }
+                    showMessage(errorResponse?.apiError ?: response.message())
                 }
             }
         }
     }
 
+    private fun setupValidationListeners(
+        nameEditText: android.widget.EditText,
+        dobEditText: android.widget.EditText,
+    ) {
+        nameEditText.doAfterTextChanged {
+            findViewById<TextInputLayout?>(R.id.nameInputLayout)?.error = null
+        }
+
+        dobEditText.doAfterTextChanged {
+            findViewById<TextInputLayout?>(R.id.dobInputLayout)?.error = null
+        }
+    }
+
     private fun validateInputs(): Boolean {
+        clearErrors()
+
         val localBinding = binding
         return when (localBinding) {
             is ActivityAddNewPatientBinding -> {
-                if (localBinding.txtName.text.toString().trim().isEmpty()) {
-                    showMessage(getString(R.string.validation_empty_name))
+                val name =
+                    localBinding.txtName.text.toString().trim().replace("\\s+".toRegex(), " ")
+                val dobText = localBinding.txtDob.text.toString().trim()
+
+                if (name.isEmpty()) {
+                    setNameError(getString(R.string.validation_empty_name))
                     false
-                } else if (localBinding.txtDob.text.toString().trim().isEmpty()) {
-                    showMessage(getString(R.string.validation_empty_dob))
+                } else if (name.length < 2) {
+                    setNameError("Name must be at least 2 characters")
+                    false
+                } else if (!NAME_REGEX.matches(name)) {
+                    setNameError("Name can contain only letters, spaces, apostrophes, dots or hyphens")
+                    false
+                } else if (dobText.isEmpty()) {
+                    setDobError(getString(R.string.validation_empty_dob))
+                    false
+                } else if (!isValidDob(dobText)) {
+                    setDobError("Please select a valid date of birth")
                     false
                 } else if (localBinding.genderSpinner.selectedItemPosition == 0) {
                     showMessage(getString(R.string.validation_empty_gender))
@@ -344,12 +388,26 @@ class AddNewPatientActivity : BaseActivity() {
                     true
                 }
             }
+
             is ActivityAddNewPatientNurseBinding -> {
-                if (localBinding.txtName.text.toString().trim().isEmpty()) {
-                    showMessage(getString(R.string.validation_empty_name))
+                val name =
+                    localBinding.txtName.text.toString().trim().replace("\\s+".toRegex(), " ")
+                val dobText = localBinding.txtDob.text.toString().trim()
+
+                if (name.isEmpty()) {
+                    setNameError(getString(R.string.validation_empty_name))
                     false
-                } else if (localBinding.txtDob.text.toString().trim().isEmpty()) {
-                    showMessage(getString(R.string.validation_empty_dob))
+                } else if (name.length < 2) {
+                    setNameError("Name must be at least 2 characters")
+                    false
+                } else if (!NAME_REGEX.matches(name)) {
+                    setNameError("Name can contain only letters, spaces, apostrophes, dots or hyphens")
+                    false
+                } else if (dobText.isEmpty()) {
+                    setDobError(getString(R.string.validation_empty_dob))
+                    false
+                } else if (!isValidDob(dobText)) {
+                    setDobError("Please select a valid date of birth")
                     false
                 } else if (localBinding.genderSpinner.selectedItemPosition == 0) {
                     showMessage(getString(R.string.validation_empty_gender))
@@ -358,7 +416,52 @@ class AddNewPatientActivity : BaseActivity() {
                     true
                 }
             }
+
             else -> false
+        }
+    }
+
+    private fun clearErrors() {
+        findViewById<TextInputLayout?>(R.id.nameInputLayout)?.error = null
+        findViewById<TextInputLayout?>(R.id.dobInputLayout)?.error = null
+    }
+
+    private fun setNameError(message: String) {
+        findViewById<TextInputLayout?>(R.id.nameInputLayout)?.error = message
+
+        when (val localBinding = binding) {
+            is ActivityAddNewPatientBinding -> localBinding.txtName.requestFocus()
+            is ActivityAddNewPatientNurseBinding -> localBinding.txtName.requestFocus()
+        }
+    }
+
+    private fun setDobError(message: String) {
+        findViewById<TextInputLayout?>(R.id.dobInputLayout)?.error = message
+
+        when (val localBinding = binding) {
+            is ActivityAddNewPatientBinding -> localBinding.txtDob.requestFocus()
+            is ActivityAddNewPatientNurseBinding -> localBinding.txtDob.requestFocus()
+        }
+    }
+
+    private fun isValidDob(dobText: String): Boolean {
+        val dobParts = dobText.split("-")
+        if (dobParts.size != 3) return false
+
+        val year = dobParts[0].toIntOrNull() ?: return false
+        val month = dobParts[1].toIntOrNull()?.minus(1) ?: return false
+        val day = dobParts[2].toIntOrNull() ?: return false
+
+        val age = calculateAge(year, month, day)
+        return age in 0..MAX_ALLOWED_AGE
+    }
+
+    private fun updateAgeField(year: Int, month: Int, day: Int) {
+        val age = calculateAge(year, month, day).coerceAtLeast(0)
+
+        when (val localBinding = binding) {
+            is ActivityAddNewPatientBinding -> localBinding.txtAge.setText(age.toString())
+            is ActivityAddNewPatientNurseBinding -> localBinding.txtAge.setText(age.toString())
         }
     }
 

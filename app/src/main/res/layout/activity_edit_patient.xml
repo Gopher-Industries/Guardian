@@ -6,22 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="deakin.gopher.guardian.view.general.AddNewPatientActivity">
+    tools:context="deakin.gopher.guardian.view.general.EditPatientActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/teal_700"
+        android:background="@color/deep_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:subtitle="Nurse"
-        app:subtitleCentered="true"
-        app:subtitleTextAppearance="@font/poppins_bold"
-        app:subtitleTextColor="@android:color/white"
-        app:title="@string/add_new_patient"
+        app:title="Edit Patient"
         app:titleCentered="true"
         app:titleTextColor="@android:color/white" />
 
@@ -104,7 +100,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:backgroundTint="@color/purple_700"
                 android:popupBackground="@color/white"
                 android:spinnerMode="dropdown" />
 
@@ -134,11 +129,9 @@
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:text="@string/select_from_gallery"
-                    android:textColor="@color/teal_600"
                     app:icon="@drawable/photo_select"
                     app:iconGravity="textStart"
-                    app:iconSize="30dp"
-                    app:iconTint="@color/teal_600" />
+                    app:iconSize="30dp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnTakePhoto"
@@ -148,11 +141,9 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:text="@string/take_photo"
-                    android:textColor="@color/teal_600"
                     app:icon="@drawable/baseline_add_a_photo_24"
                     app:iconGravity="textStart"
-                    app:iconSize="26dp"
-                    app:iconTint="@color/teal_600" />
+                    app:iconSize="26dp" />
             </LinearLayout>
 
             <ImageView
@@ -172,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:backgroundTint="@color/teal_600"
-                android:text="@string/add_patient"
+                android:text="Update Patient"
                 android:textColor="@android:color/white"
                 app:cornerRadius="8dp" />
 

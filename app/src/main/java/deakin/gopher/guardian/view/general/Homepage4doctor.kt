@@ -1,5 +1,6 @@
 package deakin.gopher.guardian.view.general
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,16 @@ class Homepage4doctor : AppCompatActivity() {
         signOutButton.setOnClickListener {
             EmailPasswordAuthService.signOut(this)
             finish()
+        }
+
+        val patientsListButton: Button = findViewById(R.id.patientListButton_doctor)
+
+        patientsListButton.setOnClickListener {
+            val intent = Intent(this, PatientListActivity::class.java)
+            intent.putExtra(
+                PatientListActivity.EXTRA_MODE, PatientListActivity.MODE_DOCTOR_PRESCRIPTION
+            )
+            startActivity(intent)
         }
     }
 }
