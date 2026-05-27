@@ -128,7 +128,7 @@ class AddNewPatientActivity : BaseActivity() {
                     localBinding.checkNoPhoto,
                     localBinding.btnSelectFromGallery,
                     localBinding.btnTakePhoto,
-                    localBinding.imgPreview
+                    localBinding.imgPreview,
                 )
                 localBinding.btnSelectFromGallery.setOnClickListener { openGallery() }
                 localBinding.btnTakePhoto.setOnClickListener { checkCameraPermissionAndOpen() }
@@ -168,16 +168,17 @@ class AddNewPatientActivity : BaseActivity() {
     }
 
     private fun setupNameValidation(txtName: android.widget.EditText) {
-        txtName.filters = arrayOf(
-            InputFilter { source, _, _, _, _, _ ->
-                if (source.any { it.isDigit() }) {
-                    showMessage("Name should not contain numbers")
-                    ""
-                } else {
-                    null
-                }
-            },
-        )
+        txtName.filters =
+            arrayOf(
+                InputFilter { source, _, _, _, _, _ ->
+                    if (source.any { it.isDigit() }) {
+                        showMessage("Name should not contain numbers")
+                        ""
+                    } else {
+                        null
+                    }
+                },
+            )
     }
 
     private fun setupGenderSpinner(genderSpinner: android.widget.Spinner) {
