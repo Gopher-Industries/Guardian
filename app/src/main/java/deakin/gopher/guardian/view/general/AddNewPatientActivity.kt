@@ -322,10 +322,11 @@ class AddNewPatientActivity : BaseActivity() {
                             ApiErrorResponse::class.java,
                         )
                     showMessage(
-                        if (errorResponse.apiError.isNullOrBlank())
+                        if (errorResponse.apiError.isNullOrBlank()) {
                             "Something went wrong while adding the patient"
-                        else
+                        } else {
                             errorResponse.apiError
+                        },
                     )
                 }
             }
