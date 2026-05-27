@@ -76,7 +76,7 @@ class PinCodeActivity : AppCompatActivity() {
                 ) {
                     progressBar.hide()
                     if (response.isSuccessful && response.body() != null) {
-                        showMessage(response.body()!!.apiMessage ?: "Pin sent tou your email")
+                        showMessage(response.body()!!.apiMessage ?: "Pin sent to your email")
                     } else {
                         // Handle error
                         val errorResponse =
