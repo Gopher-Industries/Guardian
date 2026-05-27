@@ -38,6 +38,15 @@
         tools:targetApi="31"
         tools:ignore="ExtraText">
         <activity
+            android:name=".view.general.SplashActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".WelcomeActivity"
             android:exported="false" />
         <activity
@@ -161,20 +170,17 @@
         <activity
             android:name=".view.general.LoginActivity"
             android:exported="false" />
+        <activity
+            android:name=".view.general.ForgotPasswordActivity"
+            android:exported="false" />
         <activity android:name=".view.general.PinCodeActivity"
             android:exported="false" />
         <activity
             android:name=".view.general.AddNewPatientActivity"
-            android:exported="false" /> <!-- Kussay: may we need to change the start up page into login page -->
+            android:exported="false" />
         <activity
             android:name=".view.general.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity> <!-- These are here only for UI testing -->
+            android:exported="false" />
         <activity
             android:name=".view.patient.patientdata.medicaldiagnostics.MedicalDiagnosticsActivity"
             android:exported="false" />
