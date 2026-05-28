@@ -15,9 +15,13 @@ import deakin.gopher.guardian.model.Patient
 class PatientListAdapter(
     private var patients: List<Patient>,
     private val showReassignAction: Boolean = false,
+    private val showAssignNurseAction: Boolean = true,
+    private val showEditAction: Boolean = true,
     private val showDeleteAction: Boolean = false,
     private val onPatientClick: ((Patient) -> Unit)? = null,
     private val onReassignClick: ((Patient) -> Unit)? = null,
+    private val onAssignNurseClick: ((Patient) -> Unit)? = null,
+    private val onEditClick: ((Patient) -> Unit)? = null,
     private val onDeleteClick: ((Patient) -> Unit)? = null,
 ) : RecyclerView.Adapter<PatientListAdapter.PatientViewHolder>() {
     inner class PatientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -44,18 +48,18 @@ class PatientListAdapter(
         position: Int,
     ) {
         val patient = patients[position]
+
         holder.nameText.text = patient.fullname
-        holder.ageText.text = "Age: ${patient.age}"
-        holder.genderText.text = "Gender: ${
+        holder.ageText.text = "${patient.age} years"
+        holder.genderText.text =
             patient.gender.replaceFirstChar {
                 if (it.isLowerCase()) it.titlecase() else it.toString()
             }
-        }"
 
-        // Load image using Glide
         Glide.with(holder.itemView.context)
             .load(patient.photoUrl)
             .placeholder(R.drawable.profile)
+            .error(R.drawable.profile)
             .circleCrop()
             .into(holder.image)
 
@@ -63,7 +67,12 @@ class PatientListAdapter(
             onPatientClick?.invoke(patient)
         }
 
-        val hasManagementActions = showReassignAction || showDeleteAction
+        val hasAssignAction =
+            (showReassignAction && onReassignClick != null) ||
+                (showAssignNurseAction && onAssignNurseClick != null)
+        val hasEditAction = showEditAction && onEditClick != null
+        val hasDeleteAction = showDeleteAction && onDeleteClick != null
+        val hasManagementActions = hasAssignAction || hasEditAction || hasDeleteAction
         holder.moreIcon.visibility = if (hasManagementActions) View.VISIBLE else View.GONE
 
         holder.moreIcon.setOnClickListener {
@@ -73,20 +82,31 @@ class PatientListAdapter(
             val popupMenu = PopupMenu(holder.itemView.context, it)
             popupMenu.inflate(R.menu.menu_patient_item)
             popupMenu.menu.findItem(R.id.assign_nurse)?.isVisible =
-                showReassignAction && onReassignClick != null
+                hasAssignAction
+            popupMenu.menu.findItem(R.id.action_edit_patient)?.isVisible =
+                hasEditAction
             popupMenu.menu.findItem(R.id.action_delete)?.isVisible =
-                showDeleteAction && onDeleteClick != null
+                hasDeleteAction
 
             popupMenu.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.assign_nurse -> {
-                        onReassignClick?.invoke(patient)
+                        if (onReassignClick != null) {
+                            onReassignClick.invoke(patient)
+                        } else {
+                            onAssignNurseClick?.invoke(patient)
+                        }
+                        true
+                    }
+                    R.id.action_edit_patient -> {
+                        onEditClick?.invoke(patient)
                         true
                     }
                     R.id.action_delete -> { // Handle delete click
                         onDeleteClick?.invoke(patient)
                         true
                     }
+
                     else -> false
                 }
             }

@@ -46,6 +46,11 @@ private fun calculateAge(
     }
 }
 
+data class AssignNurseRequest(
+    @SerializedName("nurseId") val nurseId: String,
+    @SerializedName("patientId") val patientId: String,
+)
+
 data class AddPatientResponse(
     @SerializedName("patient") val patient: Patient,
 ) : BaseModel()
@@ -97,4 +102,10 @@ data class ReassignPatientRequest(
     @SerializedName("caretakerId") val caretakerId: String,
     @SerializedName("nurseId") val nurseId: String,
     @SerializedName("doctorId") val doctorId: String,
+)
+
+data class UpdatePatientRequest(
+    @SerializedName("fullName") val fullName: String,
+    @SerializedName("dateOfBirth") val dateOfBirth: String,
+    @SerializedName("gender") val gender: String,
 )

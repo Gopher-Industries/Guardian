@@ -1,8 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { getAllPatients, getPatientOverview } from "../services/patientService";
 
-
-
 export default function PatientOverviewPage() {
   const [patients, setPatients] = useState([]);
   const [selectedPatientId, setSelectedPatientId] = useState("");
@@ -51,10 +49,10 @@ export default function PatientOverviewPage() {
       setLoadingOverview(true);
       setError("");
 
-      const selectedPatient = patients.find(p => p._id === patientId);
+      const selectedPatient = patients.find((p) => p._id === patientId);
       const orgId = selectedPatient?.organization;
       const data = await getPatientOverview(patientId, orgId);
-      
+
       setOverview(data);
     } catch (err) {
       console.error("Failed to load patient overview:", err);
@@ -102,7 +100,7 @@ export default function PatientOverviewPage() {
         {loadingPatients ? (
           <p style={styles.message}>Loading patients...</p>
         ) : error && !overview ? (
-          <p style={{ ...styles.message, color: "#c0392b" }}>{error}</p>
+          <p style={{ ...styles.message, color: "var(--danger)" }}>{error}</p>
         ) : !selectedPatientId ? (
           <div style={styles.listWrap}>
             {filteredPatients.length === 0 ? (
@@ -112,7 +110,6 @@ export default function PatientOverviewPage() {
                 <div key={item._id} style={styles.patientRow}>
                   <div>
                     <h3 style={styles.patientName}>{item.fullname}</h3>
-                    {/*<p style={styles.patientMeta}>ID: {item._id}</p>*/}
                     <p style={styles.patientMeta}>
                       Gender: {item.gender || "-"}
                     </p>
@@ -143,47 +140,54 @@ export default function PatientOverviewPage() {
               <h2 style={styles.sectionTitle}>
                 {patient.fullname || "Unknown Patient"}
               </h2>
-              <p>Gender: {patient.gender || "-"}</p>
-              <p>Date of Birth: {new Date(patient.dateOfBirth).toLocaleDateString() || "-"}</p>
-              <p>Organization: {patient.organization?.name || "Guardian Moniter"}</p>
+              <p style={styles.infoText}>Gender: {patient.gender || "-"}</p>
+              <p style={styles.infoText}>
+                Date of Birth:{" "}
+                {patient.dateOfBirth
+                  ? new Date(patient.dateOfBirth).toLocaleDateString()
+                  : "-"}
+              </p>
+              <p style={styles.infoText}>
+                Organization: {patient.organization?.name || "Guardian Monitor"}
+              </p>
 
               <h3 style={styles.subTitle}>Caretaker</h3>
-              <p>{patient.caretaker?.fullname || "-"}</p>
-              <p>{patient.caretaker?.email || "-"}</p>
+              <p style={styles.infoText}>{patient.caretaker?.fullname || "-"}</p>
+              <p style={styles.infoText}>{patient.caretaker?.email || "-"}</p>
 
               <h3 style={styles.subTitle}>Assigned Nurses</h3>
               {patient.assignedNurses?.length ? (
                 patient.assignedNurses.map((nurse) => (
                   <div key={nurse._id} style={{ marginBottom: "8px" }}>
-                    <p>{nurse.fullname}</p>
-                    <p>{nurse.email}</p>
+                    <p style={styles.infoText}>{nurse.fullname}</p>
+                    <p style={styles.infoText}>{nurse.email}</p>
                   </div>
                 ))
               ) : (
-                <p>No nurses assigned</p>
+                <p style={styles.infoText}>No nurses assigned</p>
               )}
 
               <h3 style={styles.subTitle}>Assigned Doctor</h3>
-              <p>{patient.assignedDoctor?.fullname || "-"}</p>
-              <p>{patient.assignedDoctor?.email || "-"}</p>
+              <p style={styles.infoText}>{patient.assignedDoctor?.fullname || "-"}</p>
+              <p style={styles.infoText}>{patient.assignedDoctor?.email || "-"}</p>
             </div>
 
             <div style={styles.statsRow}>
               <div style={styles.statCard}>
-                <h3>Records</h3>
-                <p>{records.length}</p>
+                <h3 style={styles.statTitle}>Records</h3>
+                <p style={styles.statValue}>{records.length}</p>
               </div>
               <div style={styles.statCard}>
-                <h3>Care Plans</h3>
-                <p>{carePlans.length}</p>
+                <h3 style={styles.statTitle}>Care Plans</h3>
+                <p style={styles.statValue}>{carePlans.length}</p>
               </div>
               <div style={styles.statCard}>
-                <h3>Tasks</h3>
-                <p>{tasks.length}</p>
+                <h3 style={styles.statTitle}>Tasks</h3>
+                <p style={styles.statValue}>{tasks.length}</p>
               </div>
               <div style={styles.statCard}>
-                <h3>Logs</h3>
-                <p>{logs.length}</p>
+                <h3 style={styles.statTitle}>Logs</h3>
+                <p style={styles.statValue}>{logs.length}</p>
               </div>
             </div>
 
@@ -201,14 +205,20 @@ export default function PatientOverviewPage() {
 function Section({ title, items }) {
   return (
     <div style={{ marginTop: "24px" }}>
-      <h2 style={{ color: "#1f4788" }}>{title}</h2>
+      <h2 style={{ color: "var(--primary-dark)" }}>{title}</h2>
       {!items?.length ? (
         <div style={styles.emptyBox}>No {title.toLowerCase()} available.</div>
       ) : (
         <div style={{ display: "grid", gap: "12px", marginTop: "12px" }}>
           {items.map((item, index) => (
             <div key={item?._id || index} style={styles.itemBox}>
-              <pre style={{ margin: 0, whiteSpace: "pre-wrap" }}>
+              <pre
+                style={{
+                  margin: 0,
+                  whiteSpace: "pre-wrap",
+                  color: "var(--text)",
+                }}
+              >
                 {JSON.stringify(item, null, 2)}
               </pre>
             </div>
@@ -224,13 +234,14 @@ const styles = {
     padding: "24px",
   },
   card: {
-    background: "#f9fbfd",
+    background: "var(--surface-soft)",
     borderRadius: "28px",
     padding: "28px",
-    border: "1px solid #d9e4ee",
+    border: "1px solid var(--border)",
+    boxShadow: "var(--shadow-sm)",
   },
   title: {
-    color: "#1f4788",
+    color: "var(--primary-dark)",
     fontSize: "2rem",
     fontWeight: 700,
     marginBottom: "24px",
@@ -248,16 +259,18 @@ const styles = {
     marginBottom: "10px",
     fontSize: "1.1rem",
     fontWeight: 600,
-    color: "#1f4788",
+    color: "var(--primary-dark)",
   },
   input: {
     width: "100%",
     maxWidth: "520px",
     padding: "16px 20px",
     borderRadius: "22px",
-    border: "1px solid #d9e4ee",
+    border: "1px solid var(--border)",
     fontSize: "1rem",
     outline: "none",
+    background: "var(--surface)",
+    color: "var(--text)",
   },
   listWrap: {
     display: "grid",
@@ -268,32 +281,34 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    background: "#ffffff",
+    background: "var(--surface)",
     borderRadius: "18px",
     padding: "18px",
-    border: "1px solid #d9e4ee",
+    border: "1px solid var(--border)",
+    gap: "16px",
   },
   patientName: {
     margin: "0 0 8px 0",
-    color: "#1f4788",
+    color: "var(--primary-dark)",
   },
   patientMeta: {
     margin: "4px 0",
-    color: "#5b6b84",
+    color: "var(--text-muted)",
   },
   button: {
-    background: "linear-gradient(90deg, #6fb2dc, #4f95c5)",
+    background: "linear-gradient(90deg, var(--primary), #4f95c5)",
     color: "#fff",
     border: "none",
     borderRadius: "16px",
     padding: "12px 18px",
     cursor: "pointer",
     fontWeight: 600,
+    boxShadow: "var(--shadow-sm)",
   },
   secondaryButton: {
-    background: "#ffffff",
-    color: "#1f4788",
-    border: "1px solid #d9e4ee",
+    background: "var(--surface)",
+    color: "var(--primary-dark)",
+    border: "1px solid var(--border)",
     borderRadius: "14px",
     padding: "10px 16px",
     cursor: "pointer",
@@ -302,20 +317,24 @@ const styles = {
     marginBottom: "14px",
   },
   overviewCard: {
-    background: "#fff",
+    background: "var(--surface)",
     borderRadius: "20px",
     padding: "20px",
     marginTop: "10px",
-    border: "1px solid #d9e4ee",
+    border: "1px solid var(--border)",
   },
   sectionTitle: {
-    color: "#1f4788",
+    color: "var(--primary-dark)",
     marginBottom: "12px",
   },
   subTitle: {
-    color: "#1f4788",
+    color: "var(--primary-dark)",
     marginTop: "16px",
     marginBottom: "8px",
+  },
+  infoText: {
+    color: "var(--text)",
+    margin: "6px 0",
   },
   statsRow: {
     display: "grid",
@@ -324,26 +343,37 @@ const styles = {
     marginTop: "20px",
   },
   statCard: {
-    background: "#fff",
+    background: "var(--surface)",
     borderRadius: "18px",
     padding: "18px",
     textAlign: "center",
-    border: "1px solid #d9e4ee",
+    border: "1px solid var(--border)",
+  },
+  statTitle: {
+    margin: "0 0 10px 0",
+    color: "var(--primary-dark)",
+  },
+  statValue: {
+    margin: 0,
+    color: "var(--text)",
+    fontSize: "1.45rem",
+    fontWeight: 700,
   },
   emptyBox: {
-    background: "#fff",
+    background: "var(--surface)",
     borderRadius: "14px",
     padding: "16px",
-    border: "1px solid #d9e4ee",
+    border: "1px solid var(--border)",
+    color: "var(--text-muted)",
   },
   itemBox: {
-    background: "#fff",
+    background: "var(--surface)",
     borderRadius: "14px",
     padding: "16px",
-    border: "1px solid #d9e4ee",
+    border: "1px solid var(--border)",
   },
   message: {
     marginTop: "18px",
-    color: "#2c3e50",
+    color: "var(--text)",
   },
 };

@@ -10,6 +10,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.widget.addTextChangedListener
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -17,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.gson.Gson
@@ -44,6 +46,8 @@ class LoginActivity : BaseActivity() {
         setContentView(R.layout.activity_login)
         val mEmail: EditText = findViewById(R.id.Email)
         val mPassword: EditText = findViewById(R.id.password)
+        val emailLayout: TextInputLayout = findViewById(R.id.emailTextInputLayout)
+        val passwordLayout: TextInputLayout = findViewById(R.id.passwordTextInputLayout)
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
         val loginButton: Button = findViewById(R.id.loginBtn)
         val loginGoogleButton: SignInButton = findViewById(R.id.loginGoogleBtn)
@@ -56,31 +60,29 @@ class LoginActivity : BaseActivity() {
                 .build()
         gsoClient = GoogleSignIn.getClient(this, gso)
 
+        mEmail.addTextChangedListener { emailLayout.error = null }
+        mPassword.addTextChangedListener { passwordLayout.error = null }
+
         loginButton.setOnClickListener {
-            progressBar.show()
             val emailInput = mEmail.text.toString().trim { it <= ' ' }
             val passwordInput = mPassword.text.toString().trim { it <= ' ' }
 
-            val loginValidationError = validateInputs(emailInput)
-            if (passwordInput.isBlank()) {
-                progressBar.hide()
-                Toast.makeText(
-                    applicationContext,
-                    getString(R.string.toast_login_error, "Password is required"),
-                    Toast.LENGTH_LONG,
-                ).show()
+            val loginValidationError = validateInputs(emailInput, passwordInput)
+
+            if (loginValidationError != null) {
+                when (loginValidationError) {
+                    LoginValidationError.EmptyEmail, LoginValidationError.InvalidEmail -> {
+                        emailLayout.error = getString(loginValidationError.messageResoureId)
+                    }
+                    LoginValidationError.EmptyPassword -> {
+                        passwordLayout.error = getString(loginValidationError.messageResoureId)
+                    }
+                    else -> showMessage(getString(loginValidationError.messageResoureId))
+                }
                 return@setOnClickListener
             }
 
-            if (loginValidationError != null) {
-                progressBar.hide()
-                Toast.makeText(
-                    applicationContext,
-                    loginValidationError.messageResoureId,
-                    Toast.LENGTH_LONG,
-                ).show()
-                return@setOnClickListener
-            }
+            setLoading(true, loginButton, progressBar)
 
             val call = ApiClient.apiService.login(emailInput, passwordInput)
 
@@ -90,17 +92,15 @@ class LoginActivity : BaseActivity() {
                         call: Call<AuthResponse>,
                         response: Response<AuthResponse>,
                     ) {
-                        progressBar.hide()
+                        setLoading(false, loginButton, progressBar)
                         if (response.isSuccessful && response.body() != null) {
-                            // Handle successful login
-                            val body = response.body()!!
-                            val user = body.user
-                            val token = body.token
+                            val user = response.body()!!.user
+                            val token = response.body()!!.token
                             SessionManager.createLoginSession(user, token)
                             NavigationService(this@LoginActivity).toPinCodeActivity(user.role)
                         } else {
-                            // Handle error
-                            showMessage(readErrorMessage(response.errorBody()?.string()) ?: response.message())
+                            val errorResponse = parseError(response)
+                            showMessage(errorResponse ?: response.message())
                         }
                     }
 
@@ -108,9 +108,8 @@ class LoginActivity : BaseActivity() {
                         call: Call<AuthResponse>,
                         t: Throwable,
                     ) {
-                        // Handle failure
-                        progressBar.hide()
-                        showMessage(getString(R.string.toast_login_error, t.message))
+                        setLoading(false, loginButton, progressBar)
+                        showMessage(getString(R.string.toast_login_error, t.localizedMessage))
                     }
                 },
             )
@@ -148,7 +147,37 @@ class LoginActivity : BaseActivity() {
         }
     }
 
-    private fun validateInputs(rawEmail: String?): LoginValidationError? {
+    private fun setLoading(
+        isLoading: Boolean,
+        button: Button,
+        progressBar: ProgressBar,
+    ) {
+        if (isLoading) {
+            button.isEnabled = false
+            progressBar.show()
+        } else {
+            button.isEnabled = true
+            progressBar.hide()
+        }
+    }
+
+    private fun parseError(response: Response<*>): String? {
+        return try {
+            val errorResponse =
+                Gson().fromJson(
+                    response.errorBody()?.string(),
+                    ApiErrorResponse::class.java,
+                )
+            errorResponse.apiError
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private fun validateInputs(
+        rawEmail: String?,
+        rawPassword: String?,
+    ): LoginValidationError? {
         if (rawEmail.isNullOrEmpty()) {
             return LoginValidationError.EmptyEmail
         }
@@ -156,6 +185,10 @@ class LoginActivity : BaseActivity() {
         val emailAddress = EmailAddress(rawEmail)
         if (emailAddress.isValid().not()) {
             return LoginValidationError.InvalidEmail
+        }
+
+        if (rawPassword.isNullOrEmpty()) {
+            return LoginValidationError.EmptyPassword
         }
 
         return null
@@ -175,8 +208,8 @@ class LoginActivity : BaseActivity() {
                                 ?: getString(R.string.toast_reset_link_sent_to_your_email),
                         )
                     } else {
-                        // Handle error
-                        showMessage(readErrorMessage(response.errorBody()?.string()) ?: response.message())
+                        val errorResponse = parseError(response)
+                        showMessage(errorResponse ?: response.message())
                     }
                 }
 
@@ -223,18 +256,6 @@ class LoginActivity : BaseActivity() {
 
     private fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun readErrorMessage(errorBody: String?): String? {
-        if (errorBody.isNullOrBlank()) {
-            return null
-        }
-
-        return try {
-            Gson().fromJson(errorBody, ApiErrorResponse::class.java)?.apiError
-        } catch (exception: Exception) {
-            null
-        }
     }
 
     companion object {

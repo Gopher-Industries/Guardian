@@ -4,12 +4,17 @@ import com.google.gson.JsonElement
 import deakin.gopher.guardian.model.AddPatientActivityResponse
 import deakin.gopher.guardian.model.AddPatientResponse
 import deakin.gopher.guardian.model.AdminPatientListResponse
+import deakin.gopher.guardian.model.AssignNurseRequest
 import deakin.gopher.guardian.model.BaseModel
+import deakin.gopher.guardian.model.CreatePatientLogRequest
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.PatientActivity
 import deakin.gopher.guardian.model.PatientOverviewResponse
+import deakin.gopher.guardian.model.PatientLog
 import deakin.gopher.guardian.model.ReassignPatientRequest
+import deakin.gopher.guardian.model.UpdatePatientRequest
 import deakin.gopher.guardian.model.register.AuthResponse
+import deakin.gopher.guardian.model.register.NurseListResponse
 import deakin.gopher.guardian.model.register.RegisterRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -23,9 +28,9 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
-import retrofit2.http.PUT
 import retrofit2.http.Query
 
 interface ApiService {
@@ -82,6 +87,38 @@ interface ApiService {
         @Part photo: MultipartBody.Part?,
     ): Response<AddPatientResponse>
 
+    @GET("nurse/all")
+    suspend fun getAllNurses(
+        @Header("Authorization") token: String,
+        @Query("q") query: String? = null,
+        @Query("page") page: Int = 1,
+        @Query("limit") limit: Int = 50,
+    ): Response<NurseListResponse>
+
+    @PUT("patients/{patientId}")
+    suspend fun updatePatient(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+        @Body request: UpdatePatientRequest,
+    ): Response<BaseModel>
+
+    @Multipart
+    @PUT("patients/{patientId}")
+    suspend fun updatePatientWithPhoto(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+        @Part("fullName") fullName: RequestBody,
+        @Part("dateOfBirth") dateOfBirth: RequestBody,
+        @Part("gender") gender: RequestBody,
+        @Part photo: MultipartBody.Part,
+    ): Response<BaseModel>
+
+    @POST("patients/assign-nurse")
+    suspend fun assignNurseToPatient(
+        @Header("Authorization") token: String,
+        @Body request: AssignNurseRequest,
+    ): Response<BaseModel>
+
     @FormUrlEncoded
     @POST("patients/entryreport")
     suspend fun logPatientActivity(
@@ -131,5 +168,24 @@ interface ApiService {
     suspend fun deletePatient(
         @Header("Authorization") token: String,
         @Path("id") patientId: String,
+    ): Response<BaseModel>
+
+    // For Patient Logs
+    @GET("patient-logs/{patientId}")
+    suspend fun getPatientLogs(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+    ): Response<List<PatientLog>>
+
+    @POST("patient-logs")
+    suspend fun createPatientLog(
+        @Header("Authorization") token: String,
+        @Body log: CreatePatientLogRequest,
+    ): Response<PatientLog>
+
+    @DELETE("patient-logs/{id}")
+    suspend fun deletePatientLog(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
     ): Response<BaseModel>
 }

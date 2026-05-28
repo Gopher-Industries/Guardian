@@ -39,13 +39,14 @@ class PatientDetailsActivity : BaseActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        currentUser = try {
-            SessionManager.getCurrentUser()
-        } catch (exception: Exception) {
-            showMessage("Session expired. Please log in again.")
-            finish()
-            return
-        }
+        currentUser =
+            try {
+                SessionManager.getCurrentUser()
+            } catch (exception: Exception) {
+                showMessage("Session expired. Please log in again.")
+                finish()
+                return
+            }
 
         if (currentUser.role == Role.Nurse) {
             binding.toolbar.setBackgroundColor(getColor(R.color.TG_blue))
@@ -93,33 +94,37 @@ class PatientDetailsActivity : BaseActivity() {
     private fun bindPatient(patient: Patient) {
         currentPatient = patient
 
-        binding.tvName.text = patient.fullname
-        binding.tvAge.text = "Age: ${patient.age}"
-        binding.tvDob.text = "Date of Birth: ${patient.dateOfBirth?.substringBefore("T") ?: "-"}"
-        binding.tvGender.text = "Gender: ${
+        val formattedGender =
             patient.gender.replaceFirstChar {
                 if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
             }
-        }"
+        val dob = patient.dateOfBirth?.substringBefore("T") ?: "Not available"
+        val healthConditionsText =
+            if (patient.healthConditions.isNotEmpty()) {
+                patient.healthConditions.joinToString(", ") { condition ->
+                    condition.split(" ").joinToString(" ") { word ->
+                        word.replaceFirstChar {
+                            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+                        }
+                    }
+                }
+            } else {
+                "No conditions listed"
+            }
+
+        binding.tvName.text = patient.fullname
+        binding.tvAge.text = "${patient.age} years"
+        binding.tvDob.text = "Date of Birth: $dob"
+        binding.tvGender.text = formattedGender
+        binding.tvHealthConditions.text = "Health Conditions: $healthConditionsText"
         binding.tvCaretaker.text = "Caretaker: ${patient.caretaker?.name ?: "Not assigned"}"
         binding.tvAssignedDoctor.text =
             "Assigned Doctor: ${patient.assignedDoctor?.name ?: "Not assigned"}"
 
-        if (patient.healthConditions.isNotEmpty()) {
-            val formattedConditions =
-                patient.healthConditions.joinToString(", ") { condition ->
-                    condition.split(" ").joinToString(" ") { word ->
-                        word.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
-                    }
-                }
-            binding.tvHealthConditions.text = "Health Conditions: $formattedConditions"
-        } else {
-            binding.tvHealthConditions.text = "Health Conditions: No conditions listed"
-        }
-
         Glide.with(this)
             .load(patient.photoUrl)
             .placeholder(R.drawable.profile)
+            .error(R.drawable.profile)
             .circleCrop()
             .into(binding.imagePatient)
 
@@ -162,38 +167,61 @@ class PatientDetailsActivity : BaseActivity() {
 
     private fun fetchPatientActivities(patientId: String) {
         val token = "Bearer ${SessionManager.getToken()}"
+
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.Main) {
                 binding.progressBar.visibility = View.VISIBLE
+                binding.tvEmptyMessage.visibility = View.GONE
+                binding.recyclerViewActivities.visibility = View.VISIBLE
             }
-            val response =
-                try {
-                    ApiClient.apiService.getPatientActivities(token, patientId)
-                } catch (e: Exception) {
-                    null
-                }
-            withContext(Dispatchers.Main) {
-                binding.progressBar.visibility = View.GONE
 
-                if (response?.isSuccessful == true) {
-                    val activities = response.body()
-                    if (!activities.isNullOrEmpty()) {
-                        activitiesAdapter.updateData(activities)
-                        binding.tvEmptyMessage.visibility = View.GONE
-                    } else {
-                        binding.tvEmptyMessage.visibility = View.VISIBLE
-                    }
-                } else {
-                    val errorBody = response?.errorBody()?.string()
-                    val errorResponse =
-                        try {
-                            Gson().fromJson(errorBody, ApiErrorResponse::class.java)
-                        } catch (ex: Exception) {
-                            null
+            try {
+                val response = ApiClient.apiService.getPatientActivities(token, patientId)
+
+                withContext(Dispatchers.Main) {
+                    binding.progressBar.visibility = View.GONE
+
+                    if (response.isSuccessful) {
+                        val activities = response.body()
+
+                        if (!activities.isNullOrEmpty()) {
+                            activitiesAdapter.updateData(activities)
+                            binding.recyclerViewActivities.visibility = View.VISIBLE
+                            binding.tvEmptyMessage.visibility = View.GONE
+                        } else {
+                            activitiesAdapter.updateData(emptyList())
+                            binding.recyclerViewActivities.visibility = View.GONE
+                            binding.tvEmptyMessage.visibility = View.VISIBLE
+                            binding.tvEmptyMessage.text = "No patient activities found"
                         }
-                    showMessage(errorResponse?.apiError ?: "Failed to load activities")
+                    } else {
+                        val errorResponse = readError(response.errorBody()?.string())
+                        binding.recyclerViewActivities.visibility = View.GONE
+                        binding.tvEmptyMessage.visibility = View.VISIBLE
+                        binding.tvEmptyMessage.text = "Unable to load patient activities"
+                        showMessage(errorResponse ?: "Failed to load activities")
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    binding.progressBar.visibility = View.GONE
+                    binding.recyclerViewActivities.visibility = View.GONE
+                    binding.tvEmptyMessage.visibility = View.VISIBLE
+                    binding.tvEmptyMessage.text = "Network error occurred"
+                    showMessage("Network error occurred")
                 }
             }
+        }
+    }
+
+    private fun readError(errorBody: String?): String? {
+        if (errorBody.isNullOrBlank()) {
+            return null
+        }
+        return try {
+            Gson().fromJson(errorBody, ApiErrorResponse::class.java)?.apiError
+        } catch (exception: Exception) {
+            null
         }
     }
 
