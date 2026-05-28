@@ -147,7 +147,11 @@ class LoginActivity : BaseActivity() {
         }
     }
 
-    private fun setLoading(isLoading: Boolean, button: Button, progressBar: ProgressBar) {
+    private fun setLoading(
+        isLoading: Boolean,
+        button: Button,
+        progressBar: ProgressBar,
+    ) {
         if (isLoading) {
             button.isEnabled = false
             progressBar.show()
@@ -159,17 +163,21 @@ class LoginActivity : BaseActivity() {
 
     private fun parseError(response: Response<*>): String? {
         return try {
-            val errorResponse = Gson().fromJson(
-                response.errorBody()?.string(),
-                ApiErrorResponse::class.java,
-            )
+            val errorResponse =
+                Gson().fromJson(
+                    response.errorBody()?.string(),
+                    ApiErrorResponse::class.java,
+                )
             errorResponse.apiError
         } catch (e: Exception) {
             null
         }
     }
 
-    private fun validateInputs(rawEmail: String?, rawPassword: String?): LoginValidationError? {
+    private fun validateInputs(
+        rawEmail: String?,
+        rawPassword: String?,
+    ): LoginValidationError? {
         if (rawEmail.isNullOrEmpty()) {
             return LoginValidationError.EmptyEmail
         }

@@ -7,13 +7,11 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.ApiErrorResponse
-import deakin.gopher.guardian.model.RegistrationStatusMessage
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.Password
 import deakin.gopher.guardian.model.register.AuthResponse
@@ -75,17 +73,20 @@ class RegisterActivity : BaseActivity() {
                     }
 
                     RegistrationError.EmptyEmail,
-                    RegistrationError.InvalidEmail -> {
+                    RegistrationError.InvalidEmail,
+                    -> {
                         emailLayout.error = getString(registrationError.messageResourceId)
                     }
 
                     RegistrationError.EmptyPassword,
-                    RegistrationError.PasswordTooShort -> {
+                    RegistrationError.PasswordTooShort,
+                    -> {
                         passwordLayout.error = getString(registrationError.messageResourceId)
                     }
 
                     RegistrationError.EmptyConfirmedPassword,
-                    RegistrationError.PasswordsFailConfirmation -> {
+                    RegistrationError.PasswordsFailConfirmation,
+                    -> {
                         confirmPasswordLayout.error =
                             getString(registrationError.messageResourceId)
                     }

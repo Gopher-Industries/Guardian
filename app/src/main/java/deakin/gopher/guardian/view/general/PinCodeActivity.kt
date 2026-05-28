@@ -42,15 +42,16 @@ class PinCodeActivity : AppCompatActivity() {
         setContentView(R.layout.login_enter_pin)
         userRole = intent.getSerializableExtra("role") as Role
 
-        pinDigits = listOf(
-            findViewById(R.id.pin_digit_1),
-            findViewById(R.id.pin_digit_2),
-            findViewById(R.id.pin_digit_3),
-            findViewById(R.id.pin_digit_4),
-            findViewById(R.id.pin_digit_5),
-            findViewById(R.id.pin_digit_6)
-        )
-        
+        pinDigits =
+            listOf(
+                findViewById(R.id.pin_digit_1),
+                findViewById(R.id.pin_digit_2),
+                findViewById(R.id.pin_digit_3),
+                findViewById(R.id.pin_digit_4),
+                findViewById(R.id.pin_digit_5),
+                findViewById(R.id.pin_digit_6),
+            )
+
         submitButton = findViewById(R.id.loginBtn)
         resendButton = findViewById(R.id.resendText)
         progressBar = findViewById(R.id.progressBar)
@@ -70,11 +71,11 @@ class PinCodeActivity : AppCompatActivity() {
             sendPin()
             startResendCooldown()
         }
-        
+
         // Initial PIN request
         sendPin()
         startResendCooldown()
-        
+
         // Focus first digit and show keyboard
         pinDigits[0].postDelayed({
             pinDigits[0].requestFocus()
@@ -84,18 +85,32 @@ class PinCodeActivity : AppCompatActivity() {
 
     private fun setupPinInputs() {
         for (i in pinDigits.indices) {
-            pinDigits[i].addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-                override fun afterTextChanged(s: Editable?) {
-                    if (s?.length == 1) {
-                        if (i < pinDigits.size - 1) {
-                            pinDigits[i + 1].requestFocus()
+            pinDigits[i].addTextChangedListener(
+                object : TextWatcher {
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) {}
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) {}
+
+                    override fun afterTextChanged(s: Editable?) {
+                        if (s?.length == 1) {
+                            if (i < pinDigits.size - 1) {
+                                pinDigits[i + 1].requestFocus()
+                            }
                         }
+                        updateSubmitButtonState()
                     }
-                    updateSubmitButtonState()
-                }
-            })
+                },
+            )
 
             pinDigits[i].setOnKeyListener { _, keyCode, event ->
                 if (keyCode == KeyEvent.KEYCODE_DEL && event.action == KeyEvent.ACTION_DOWN) {
@@ -133,7 +148,10 @@ class PinCodeActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<BaseModel>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<BaseModel>,
+                    t: Throwable,
+                ) {
                     setLoading(false)
                     showMessage(getString(R.string.error_sending_pin, t.localizedMessage))
                 }
@@ -162,7 +180,10 @@ class PinCodeActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<BaseModel>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<BaseModel>,
+                    t: Throwable,
+                ) {
                     setLoading(false)
                     showMessage(getString(R.string.error_validating_pin, t.localizedMessage))
                 }
@@ -199,10 +220,11 @@ class PinCodeActivity : AppCompatActivity() {
 
     private fun parseError(response: Response<*>): String? {
         return try {
-            val errorResponse = Gson().fromJson(
-                response.errorBody()?.string(),
-                ApiErrorResponse::class.java,
-            )
+            val errorResponse =
+                Gson().fromJson(
+                    response.errorBody()?.string(),
+                    ApiErrorResponse::class.java,
+                )
             errorResponse.apiError
         } catch (e: Exception) {
             null
@@ -224,11 +246,12 @@ class PinCodeActivity : AppCompatActivity() {
         object : CountDownTimer(90000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val secondsLeft = millisUntilFinished / 1000
-                val countdownText = resources.getQuantityString(
-                    R.plurals.resend_countdown_seconds,
-                    secondsLeft.toInt(),
-                    secondsLeft
-                )
+                val countdownText =
+                    resources.getQuantityString(
+                        R.plurals.resend_countdown_seconds,
+                        secondsLeft.toInt(),
+                        secondsLeft,
+                    )
                 countdownTimer.text = countdownText
             }
 

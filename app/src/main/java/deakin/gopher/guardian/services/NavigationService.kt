@@ -17,12 +17,13 @@ import deakin.gopher.guardian.view.general.TasksListActivity
 
 class NavigationService(val activity: Activity) {
     fun toHomeScreenForRole(role: Role) {
-        val intent = when (role) {
-            Role.Caretaker -> Intent(activity, Homepage4caretaker::class.java)
-            Role.Nurse -> Intent(activity, Homepage4nurse::class.java)
-            Role.Admin -> Intent(activity, Homepage4admin::class.java)
-            Role.Doctor -> Intent(activity, Homepage4doctor::class.java)
-        }
+        val intent =
+            when (role) {
+                Role.Caretaker -> Intent(activity, Homepage4caretaker::class.java)
+                Role.Nurse -> Intent(activity, Homepage4nurse::class.java)
+                Role.Admin -> Intent(activity, Homepage4admin::class.java)
+                Role.Doctor -> Intent(activity, Homepage4doctor::class.java)
+            }
         // Clear back stack so user cannot go back to Login/PIN screens
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         activity.startActivity(intent)
