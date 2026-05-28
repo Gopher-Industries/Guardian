@@ -6,11 +6,11 @@ data class PatientLog(
     val title: String,
     val description: String,
     val createdBy: CreatedBy,
-    val createdAt: String
+    val createdAt: String,
 )
 
 data class CreatedBy(
     val _id: String,
     val fullname: String,
-    val role: String
+    val role: String,
 )

@@ -79,8 +79,8 @@ class NavigationService(val activity: Activity) {
         activity.startActivity(
             Intent(
                 activity.applicationContext,
-                PatientLogsActivity::class.java
-            )
+                PatientLogsActivity::class.java,
+            ),
         )
     }
 

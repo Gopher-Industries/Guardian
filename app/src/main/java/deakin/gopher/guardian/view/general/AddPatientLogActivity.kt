@@ -63,26 +63,25 @@ class AddPatientLogActivity : BaseActivity() {
 // Live updating current date and time
         val handler = android.os.Handler(mainLooper)
 
-        val updateTimeRunnable = object : Runnable {
+        val updateTimeRunnable =
+            object : Runnable {
+                override fun run() {
+                    val currentCalendar = Calendar.getInstance()
 
-            override fun run() {
+                    val currentDate =
+                        SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                            .format(currentCalendar.time)
 
-                val currentCalendar = Calendar.getInstance()
+                    val currentTime =
+                        SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+                            .format(currentCalendar.time)
 
-                val currentDate =
-                    SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                        .format(currentCalendar.time)
+                    binding.txtDate.setText(currentDate)
+                    binding.txtTime.setText(currentTime)
 
-                val currentTime =
-                    SimpleDateFormat("HH:mm:ss", Locale.getDefault())
-                        .format(currentCalendar.time)
-
-                binding.txtDate.setText(currentDate)
-                binding.txtTime.setText(currentTime)
-
-                handler.postDelayed(this, 1000)
+                    handler.postDelayed(this, 1000)
+                }
             }
-        }
 
         handler.post(updateTimeRunnable)
 
@@ -94,7 +93,6 @@ class AddPatientLogActivity : BaseActivity() {
     }
 
     private fun savePatientActivity() {
-
         val title =
             if (binding.txtActivityType.text.toString().trim() == "Other") {
                 binding.txtOtherActivity.text.toString().trim()
@@ -116,49 +114,42 @@ class AddPatientLogActivity : BaseActivity() {
 
         val patientId = intent.getStringExtra("patientId").orEmpty()
 
-        val request = CreatePatientLogRequest(
-            patient = patientId,
-            title = title,
-            description = description
-        )
+        val request =
+            CreatePatientLogRequest(
+                patient = patientId,
+                title = title,
+                description = description,
+            )
 
         CoroutineScope(Dispatchers.IO).launch {
-
             withContext(Dispatchers.Main) {
                 binding.progressBar.show()
                 binding.btnSave.visibility = View.GONE
             }
 
             try {
-
-                val response = ApiClient.apiService.createPatientLog(
-                    "Bearer ${SessionManager.getToken()}",
-                    request
-                )
+                val response =
+                    ApiClient.apiService.createPatientLog(
+                        "Bearer ${SessionManager.getToken()}",
+                        request,
+                    )
 
                 withContext(Dispatchers.Main) {
-
                     binding.progressBar.hide()
                     binding.btnSave.visibility = View.VISIBLE
 
                     if (response.isSuccessful) {
-
                         showMessage("Log created successfully")
 
                         finish()
-
                     } else {
-
                         showMessage(
-                            response.errorBody()?.string() ?: "Failed to create log"
+                            response.errorBody()?.string() ?: "Failed to create log",
                         )
                     }
                 }
-
             } catch (e: Exception) {
-
                 withContext(Dispatchers.Main) {
-
                     binding.progressBar.hide()
                     binding.btnSave.visibility = View.VISIBLE
 

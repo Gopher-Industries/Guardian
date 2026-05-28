@@ -6,9 +6,9 @@ import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.CreatePatientLogRequest
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.PatientActivity
+import deakin.gopher.guardian.model.PatientLog
 import deakin.gopher.guardian.model.register.AuthResponse
 import deakin.gopher.guardian.model.register.RegisterRequest
-import deakin.gopher.guardian.model.PatientLog
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -94,7 +94,7 @@ interface ApiService {
         @Path("id") patientId: String,
     ): Response<BaseModel>
 
-    //For Patient Logs
+    // For Patient Logs
     @GET("patient-logs/{patientId}")
     suspend fun getPatientLogs(
         @Header("Authorization") token: String,
