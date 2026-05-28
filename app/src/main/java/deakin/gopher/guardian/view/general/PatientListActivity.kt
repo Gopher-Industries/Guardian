@@ -157,6 +157,7 @@ class PatientListActivity : BaseActivity() {
             }
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (currentUser.organization != null) {
             return false

@@ -38,7 +38,7 @@ class PatientDetailsActivity : BaseActivity() {
 
         if (currentUser.role == Role.Nurse) {
             binding.toolbar.setBackgroundColor(getColor(R.color.TG_blue))
-           // binding.containerPatientInfo.setBackgroundColor(getColor(R.color.TG_blue))
+            // binding.containerPatientInfo.setBackgroundColor(getColor(R.color.TG_blue))
         }
 
         val patient = intent.getSerializableExtra("patient") as? Patient
@@ -65,9 +65,10 @@ class PatientDetailsActivity : BaseActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun bindPatientDetails(patient: Patient) {
-        val formattedGender = patient.gender.replaceFirstChar {
-            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-        }
+        val formattedGender =
+            patient.gender.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+            }
 
         val dob = patient.dateOfBirth?.substringBefore("T") ?: "Not available"
 
@@ -109,9 +110,10 @@ class PatientDetailsActivity : BaseActivity() {
             }
 
             try {
-                val response = deakin.gopher.guardian.services.api.ApiClient
-                    .apiService
-                    .getPatientActivities(token, patientId)
+                val response =
+                    deakin.gopher.guardian.services.api.ApiClient
+                        .apiService
+                        .getPatientActivities(token, patientId)
 
                 withContext(Dispatchers.Main) {
                     binding.progressBar.visibility = View.GONE

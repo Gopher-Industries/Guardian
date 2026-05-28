@@ -18,7 +18,6 @@ class PatientListAdapter(
     private val onAssignNurseClick: ((Patient) -> Unit)? = null,
     private val onDeleteClick: ((Patient) -> Unit)? = null,
 ) : RecyclerView.Adapter<PatientListAdapter.PatientViewHolder>() {
-
     inner class PatientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameText: TextView = itemView.findViewById(R.id.tvName)
         val ageText: TextView = itemView.findViewById(R.id.tvAge)
@@ -32,8 +31,9 @@ class PatientListAdapter(
         parent: ViewGroup,
         viewType: Int,
     ): PatientViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_patient, parent, false)
+        val view =
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_patient, parent, false)
         return PatientViewHolder(view)
     }
 
@@ -45,9 +45,10 @@ class PatientListAdapter(
 
         holder.nameText.text = patient.fullname
         holder.ageText.text = "${patient.age} years"
-        holder.genderText.text = patient.gender.replaceFirstChar {
-            if (it.isLowerCase()) it.titlecase() else it.toString()
-        }
+        holder.genderText.text =
+            patient.gender.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase() else it.toString()
+            }
 
         Glide.with(holder.itemView.context)
             .load(patient.photoUrl)
