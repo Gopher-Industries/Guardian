@@ -54,11 +54,12 @@ class PatientDetailsActivity : BaseActivity() {
         }"
 
         if (!patient.healthConditions.isNullOrEmpty()) {
-            val formattedConditions = patient.healthConditions.joinToString(", ") { condition ->
-                condition.split(" ").joinToString(" ") { word ->
-                    word.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+            val formattedConditions =
+                patient.healthConditions.joinToString(", ") { condition ->
+                    condition.split(" ").joinToString(" ") { word ->
+                        word.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
+                    }
                 }
-            }
             binding.tvHealthConditions.text = "Health Conditions: $formattedConditions"
         } else {
             binding.tvHealthConditions.text = "Health Conditions: No conditions listed"
@@ -87,13 +88,15 @@ class PatientDetailsActivity : BaseActivity() {
             withContext(Dispatchers.Main) {
                 binding.progressBar.visibility = View.VISIBLE
             }
-            val response = try {
-                deakin.gopher.guardian.services.api.ApiClient.apiService.getPatientActivities(
-                    token, patientId
-                )
-            } catch (e: Exception) {
-                null
-            }
+            val response =
+                try {
+                    deakin.gopher.guardian.services.api.ApiClient.apiService.getPatientActivities(
+                        token,
+                        patientId,
+                    )
+                } catch (e: Exception) {
+                    null
+                }
             withContext(Dispatchers.Main) {
                 binding.progressBar.visibility = View.GONE
 
@@ -107,11 +110,12 @@ class PatientDetailsActivity : BaseActivity() {
                     }
                 } else {
                     val errorBody = response?.errorBody()?.string()
-                    val errorResponse = try {
-                        Gson().fromJson(errorBody, ApiErrorResponse::class.java)
-                    } catch (ex: Exception) {
-                        null
-                    }
+                    val errorResponse =
+                        try {
+                            Gson().fromJson(errorBody, ApiErrorResponse::class.java)
+                        } catch (ex: Exception) {
+                            null
+                        }
                     showMessage(errorResponse?.apiError ?: "Failed to load activities")
                 }
             }

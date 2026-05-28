@@ -7,15 +7,10 @@ import java.io.Serializable
 
 data class User(
     @SerializedName(value = "id", alternate = ["_id"]) val id: String = "",
-
     @SerializedName(value = "fullname", alternate = ["fullName"]) val name: String = "",
-
     @SerializedName("email") val email: String = "",
-
     @SerializedName("role") val roleName: String? = null,
-
     @SerializedName("photoUrl") val photoUrl: String? = null,
-
     @SerializedName("organization") val organization: String? = null,
 ) : Serializable {
     val role: Role

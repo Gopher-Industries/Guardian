@@ -1,16 +1,15 @@
 package deakin.gopher.guardian.services.api
 
-
 import deakin.gopher.guardian.model.AddPatientActivityResponse
 import deakin.gopher.guardian.model.AddPatientResponse
 import deakin.gopher.guardian.model.AssignNurseRequest
-import deakin.gopher.guardian.model.UpdatePatientRequest
 import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.PatientActivity
+import deakin.gopher.guardian.model.UpdatePatientRequest
 import deakin.gopher.guardian.model.register.AuthResponse
-import deakin.gopher.guardian.model.register.RegisterRequest
 import deakin.gopher.guardian.model.register.NurseListResponse
+import deakin.gopher.guardian.model.register.RegisterRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call

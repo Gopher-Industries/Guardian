@@ -25,40 +25,45 @@ import kotlinx.coroutines.withContext
 class PatientListActivity : BaseActivity() {
     private lateinit var binding: ActivityPatientListBinding
 
-    private val patientListAdapter = PatientListAdapter(
-        emptyList(),
-        onPatientClick = { patient ->
-            val intent = Intent(this, PatientDetailsActivity::class.java)
-            intent.putExtra("patient", patient)
-            startActivity(intent)
-        },
-        onAssignNurseClick = { patient ->
-            if (currentUser.role == Role.Nurse) {
-                Toast.makeText(
-                    this, "Only caretaker can assign nurse to the patient", Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                val intent = Intent(this, AssignNurseActivity::class.java)
-                intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_ID, patient.id)
-                intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_NAME, patient.fullname)
+    private val patientListAdapter =
+        PatientListAdapter(
+            emptyList(),
+            onPatientClick = { patient ->
+                val intent = Intent(this, PatientDetailsActivity::class.java)
+                intent.putExtra("patient", patient)
                 startActivity(intent)
-            }
-        },
-        onEditClick = { patient ->
-            if (currentUser.role == Role.Nurse) {
-                Toast.makeText(
-                    this, "Only caretaker can edit patient info", Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                val intent = Intent(this, EditPatientActivity::class.java)
-                intent.putExtra(EditPatientActivity.EXTRA_PATIENT, patient)
-                startActivity(intent)
-            }
-        },
-        onDeleteClick = { patient ->
-            confirmDeletePatient(patient)
-        },
-    )
+            },
+            onAssignNurseClick = { patient ->
+                if (currentUser.role == Role.Nurse) {
+                    Toast.makeText(
+                        this,
+                        "Only caretaker can assign nurse to the patient",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                } else {
+                    val intent = Intent(this, AssignNurseActivity::class.java)
+                    intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_ID, patient.id)
+                    intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_NAME, patient.fullname)
+                    startActivity(intent)
+                }
+            },
+            onEditClick = { patient ->
+                if (currentUser.role == Role.Nurse) {
+                    Toast.makeText(
+                        this,
+                        "Only caretaker can edit patient info",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                } else {
+                    val intent = Intent(this, EditPatientActivity::class.java)
+                    intent.putExtra(EditPatientActivity.EXTRA_PATIENT, patient)
+                    startActivity(intent)
+                }
+            },
+            onDeleteClick = { patient ->
+                confirmDeletePatient(patient)
+            },
+        )
 
     private val currentUser = SessionManager.getCurrentUser()
 
@@ -92,11 +97,12 @@ class PatientListActivity : BaseActivity() {
     private fun deletePatient(patient: Patient) {
         val token = "Bearer ${SessionManager.getToken()}"
         CoroutineScope(Dispatchers.IO).launch {
-            val response = try {
-                ApiClient.apiService.deletePatient(token, patient.id)
-            } catch (e: Exception) {
-                null
-            }
+            val response =
+                try {
+                    ApiClient.apiService.deletePatient(token, patient.id)
+                } catch (e: Exception) {
+                    null
+                }
 
             withContext(Dispatchers.Main) {
                 if (response?.isSuccessful == true) {
@@ -119,11 +125,12 @@ class PatientListActivity : BaseActivity() {
                 }
             }
 
-            val response = try {
-                ApiClient.apiService.getAssignedPatients(token)
-            } catch (e: Exception) {
-                null
-            }
+            val response =
+                try {
+                    ApiClient.apiService.getAssignedPatients(token)
+                } catch (e: Exception) {
+                    null
+                }
 
             withContext(Dispatchers.Main) {
                 binding.progressBar.hide()
@@ -137,20 +144,23 @@ class PatientListActivity : BaseActivity() {
                         binding.tvEmptyMessage.visibility = android.view.View.VISIBLE
                     }
                 } else {
-                    val rawErrorBody = try {
-                        response?.errorBody()?.string()
-                    } catch (e: Exception) {
-                        null
-                    }
+                    val rawErrorBody =
+                        try {
+                            response?.errorBody()?.string()
+                        } catch (e: Exception) {
+                            null
+                        }
 
-                    val errorResponse = try {
-                        Gson().fromJson(rawErrorBody, ApiErrorResponse::class.java)
-                    } catch (e: Exception) {
-                        null
-                    }
+                    val errorResponse =
+                        try {
+                            Gson().fromJson(rawErrorBody, ApiErrorResponse::class.java)
+                        } catch (e: Exception) {
+                            null
+                        }
 
-                    val errorMessage = errorResponse?.apiError?.takeIf { it.isNotBlank() }
-                        ?: rawErrorBody?.takeIf { it.isNotBlank() } ?: response?.message()
+                    val errorMessage =
+                        errorResponse?.apiError?.takeIf { it.isNotBlank() }
+                            ?: rawErrorBody?.takeIf { it.isNotBlank() } ?: response?.message()
                             ?.takeIf { it.isNotBlank() } ?: "Failed to load patients"
 
                     showMessage(errorMessage)

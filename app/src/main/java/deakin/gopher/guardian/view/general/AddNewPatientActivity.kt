@@ -14,7 +14,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.databinding.ActivityAddNewPatientBinding
@@ -34,8 +36,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
 import java.util.Calendar
-import androidx.core.widget.doAfterTextChanged
-import com.google.android.material.textfield.TextInputLayout
 import java.util.Locale
 
 class AddNewPatientActivity : BaseActivity() {
@@ -73,9 +73,10 @@ class AddNewPatientActivity : BaseActivity() {
                 val localBinding = binding
                 when (localBinding) {
                     is ActivityAddNewPatientBinding -> localBinding.imgPreview.setImageBitmap(bitmap)
-                    is ActivityAddNewPatientNurseBinding -> localBinding.imgPreview.setImageBitmap(
-                        bitmap
-                    )
+                    is ActivityAddNewPatientNurseBinding ->
+                        localBinding.imgPreview.setImageBitmap(
+                            bitmap,
+                        )
                 }
             }
         }
@@ -152,24 +153,26 @@ class AddNewPatientActivity : BaseActivity() {
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val datePickerDialog = DatePickerDialog(
-                this,
-                Theme_Holo_Light_Dialog,
-                { _, selectedYear, selectedMonth, selectedDay ->
-                    val formattedDate = String.format(
-                        Locale.getDefault(),
-                        "%04d-%02d-%02d",
-                        selectedYear,
-                        selectedMonth + 1,
-                        selectedDay,
-                    )
-                    txtDob.setText(formattedDate)
-                    updateAgeField(selectedYear, selectedMonth, selectedDay)
-                },
-                year,
-                month,
-                day,
-            )
+            val datePickerDialog =
+                DatePickerDialog(
+                    this,
+                    Theme_Holo_Light_Dialog,
+                    { _, selectedYear, selectedMonth, selectedDay ->
+                        val formattedDate =
+                            String.format(
+                                Locale.getDefault(),
+                                "%04d-%02d-%02d",
+                                selectedYear,
+                                selectedMonth + 1,
+                                selectedDay,
+                            )
+                        txtDob.setText(formattedDate)
+                        updateAgeField(selectedYear, selectedMonth, selectedDay)
+                    },
+                    year,
+                    month,
+                    day,
+                )
 
             // Force spinner mode (for API 21+)
             try {
@@ -182,23 +185,26 @@ class AddNewPatientActivity : BaseActivity() {
 
                 if (delegate.javaClass != spinnerDelegateClass) {
                     datePickerField.set(
-                        datePickerDialog.datePicker, null
+                        datePickerDialog.datePicker,
+                        null,
                     ) // Clear the current delegate
 
-                    val constructor = datePickerDialog.datePicker.javaClass.getDeclaredConstructor(
-                        Context::class.java,
-                        android.util.AttributeSet::class.java,
-                        Int::class.javaPrimitiveType,
-                        Int::class.javaPrimitiveType,
-                    )
+                    val constructor =
+                        datePickerDialog.datePicker.javaClass.getDeclaredConstructor(
+                            Context::class.java,
+                            android.util.AttributeSet::class.java,
+                            Int::class.javaPrimitiveType,
+                            Int::class.javaPrimitiveType,
+                        )
                     constructor.isAccessible = true
 
-                    val spinnerDelegate = constructor.newInstance(
-                        datePickerDialog.datePicker.context,
-                        null,
-                        android.R.attr.datePickerStyle,
-                        0,
-                    )
+                    val spinnerDelegate =
+                        constructor.newInstance(
+                            datePickerDialog.datePicker.context,
+                            null,
+                            android.R.attr.datePickerStyle,
+                            0,
+                        )
                     datePickerField.set(datePickerDialog.datePicker, spinnerDelegate)
 
                     // Re-initialize the date picker with current date
@@ -217,7 +223,7 @@ class AddNewPatientActivity : BaseActivity() {
     private fun checkCameraPermissionAndOpen() {
         if (ContextCompat.checkSelfPermission(
                 this,
-                Manifest.permission.CAMERA
+                Manifest.permission.CAMERA,
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             openCamera()
@@ -258,37 +264,43 @@ class AddNewPatientActivity : BaseActivity() {
 
         val localBinding = binding
 
-        val fullname = when (localBinding) {
-            is ActivityAddNewPatientBinding -> localBinding.txtName.text.toString().trim()
-            is ActivityAddNewPatientNurseBinding -> localBinding.txtName.text.toString().trim()
-            else -> ""
-        }
+        val fullname =
+            when (localBinding) {
+                is ActivityAddNewPatientBinding -> localBinding.txtName.text.toString().trim()
+                is ActivityAddNewPatientNurseBinding -> localBinding.txtName.text.toString().trim()
+                else -> ""
+            }
 
-        val dob = when (localBinding) {
-            is ActivityAddNewPatientBinding -> localBinding.txtDob.text.toString().trim()
-            is ActivityAddNewPatientNurseBinding -> localBinding.txtDob.text.toString().trim()
-            else -> ""
-        }
+        val dob =
+            when (localBinding) {
+                is ActivityAddNewPatientBinding -> localBinding.txtDob.text.toString().trim()
+                is ActivityAddNewPatientNurseBinding -> localBinding.txtDob.text.toString().trim()
+                else -> ""
+            }
 
-        val gender = when (localBinding) {
-            is ActivityAddNewPatientBinding -> localBinding.genderSpinner.selectedItem?.toString()
-                ?.lowercase() ?: ""
+        val gender =
+            when (localBinding) {
+                is ActivityAddNewPatientBinding ->
+                    localBinding.genderSpinner.selectedItem?.toString()
+                        ?.lowercase() ?: ""
 
-            is ActivityAddNewPatientNurseBinding -> localBinding.genderSpinner.selectedItem?.toString()
-                ?.lowercase() ?: ""
+                is ActivityAddNewPatientNurseBinding ->
+                    localBinding.genderSpinner.selectedItem?.toString()
+                        ?.lowercase() ?: ""
 
-            else -> ""
-        }
+                else -> ""
+            }
 
         val namePart = fullname.toRequestBody("text/plain".toMediaTypeOrNull())
         val dobPart = dob.toRequestBody("text/plain".toMediaTypeOrNull())
         val genderPart = gender.toRequestBody("text/plain".toMediaTypeOrNull())
 
-        val photoPart: MultipartBody.Part? = when {
-            selectedPhotoUri != null -> prepareFilePart("photo", selectedPhotoUri!!, this)
-            capturedPhotoBitmap != null -> prepareBitmapPart("photo", capturedPhotoBitmap!!)
-            else -> null
-        }
+        val photoPart: MultipartBody.Part? =
+            when {
+                selectedPhotoUri != null -> prepareFilePart("photo", selectedPhotoUri!!, this)
+                capturedPhotoBitmap != null -> prepareBitmapPart("photo", capturedPhotoBitmap!!)
+                else -> null
+            }
 
         val token = "Bearer ${SessionManager.getToken()}"
 
@@ -332,11 +344,12 @@ class AddNewPatientActivity : BaseActivity() {
                     }
                 } else {
                     val errorBody = response.errorBody()?.string()
-                    val errorResponse = try {
-                        Gson().fromJson(errorBody, ApiErrorResponse::class.java)
-                    } catch (e: Exception) {
-                        null
-                    }
+                    val errorResponse =
+                        try {
+                            Gson().fromJson(errorBody, ApiErrorResponse::class.java)
+                        } catch (e: Exception) {
+                            null
+                        }
                     showMessage(errorResponse?.apiError ?: response.message())
                 }
             }
@@ -456,7 +469,11 @@ class AddNewPatientActivity : BaseActivity() {
         return age in 0..MAX_ALLOWED_AGE
     }
 
-    private fun updateAgeField(year: Int, month: Int, day: Int) {
+    private fun updateAgeField(
+        year: Int,
+        month: Int,
+        day: Int,
+    ) {
         val age = calculateAge(year, month, day).coerceAtLeast(0)
 
         when (val localBinding = binding) {

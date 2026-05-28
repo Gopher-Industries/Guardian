@@ -15,7 +15,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import com.bumptech.glide.Glide
-import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.databinding.ActivityEditPatientBinding
@@ -133,24 +132,26 @@ class EditPatientActivity : BaseActivity() {
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-            val datePickerDialog = DatePickerDialog(
-                this,
-                Theme_Holo_Light_Dialog,
-                { _, selectedYear, selectedMonth, selectedDay ->
-                    val formattedDate = String.format(
-                        Locale.getDefault(),
-                        "%04d-%02d-%02d",
-                        selectedYear,
-                        selectedMonth + 1,
-                        selectedDay,
-                    )
-                    binding.txtDob.setText(formattedDate)
-                    updateAgeField(selectedYear, selectedMonth, selectedDay)
-                },
-                year,
-                month,
-                day,
-            )
+            val datePickerDialog =
+                DatePickerDialog(
+                    this,
+                    Theme_Holo_Light_Dialog,
+                    { _, selectedYear, selectedMonth, selectedDay ->
+                        val formattedDate =
+                            String.format(
+                                Locale.getDefault(),
+                                "%04d-%02d-%02d",
+                                selectedYear,
+                                selectedMonth + 1,
+                                selectedDay,
+                            )
+                        binding.txtDob.setText(formattedDate)
+                        updateAgeField(selectedYear, selectedMonth, selectedDay)
+                    },
+                    year,
+                    month,
+                    day,
+                )
 
             datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
             datePickerDialog.show()
@@ -226,48 +227,51 @@ class EditPatientActivity : BaseActivity() {
                 binding.btnSave.visibility = android.view.View.GONE
             }
 
-            val response = try {
-                val photoPart =
-                    when {
-                        selectedPhotoUri != null -> prepareFilePart(
-                            "photo",
-                            selectedPhotoUri!!,
-                            this@EditPatientActivity,
+            val response =
+                try {
+                    val photoPart =
+                        when {
+                            selectedPhotoUri != null ->
+                                prepareFilePart(
+                                    "photo",
+                                    selectedPhotoUri!!,
+                                    this@EditPatientActivity,
+                                )
+
+                            capturedPhotoBitmap != null ->
+                                prepareBitmapPart("photo", capturedPhotoBitmap!!)
+
+                            else -> null
+                        }
+
+                    if (photoPart != null) {
+                        val fullNamePart = fullName.toRequestBody("text/plain".toMediaTypeOrNull())
+                        val dobPart = dob.toRequestBody("text/plain".toMediaTypeOrNull())
+                        val genderPart = gender.toRequestBody("text/plain".toMediaTypeOrNull())
+
+                        ApiClient.apiService.updatePatientWithPhoto(
+                            token = token,
+                            patientId = patient.id,
+                            fullName = fullNamePart,
+                            dateOfBirth = dobPart,
+                            gender = genderPart,
+                            photo = photoPart,
                         )
-
-                        capturedPhotoBitmap != null ->
-                            prepareBitmapPart("photo", capturedPhotoBitmap!!)
-
-                        else -> null
+                    } else {
+                        ApiClient.apiService.updatePatient(
+                            token = token,
+                            patientId = patient.id,
+                            request =
+                                UpdatePatientRequest(
+                                    fullName = fullName,
+                                    dateOfBirth = dob,
+                                    gender = gender,
+                                ),
+                        )
                     }
-
-                if (photoPart != null) {
-                    val fullNamePart = fullName.toRequestBody("text/plain".toMediaTypeOrNull())
-                    val dobPart = dob.toRequestBody("text/plain".toMediaTypeOrNull())
-                    val genderPart = gender.toRequestBody("text/plain".toMediaTypeOrNull())
-
-                    ApiClient.apiService.updatePatientWithPhoto(
-                        token = token,
-                        patientId = patient.id,
-                        fullName = fullNamePart,
-                        dateOfBirth = dobPart,
-                        gender = genderPart,
-                        photo = photoPart,
-                    )
-                } else {
-                    ApiClient.apiService.updatePatient(
-                        token = token,
-                        patientId = patient.id,
-                        request = UpdatePatientRequest(
-                            fullName = fullName,
-                            dateOfBirth = dob,
-                            gender = gender,
-                        ),
-                    )
+                } catch (e: Exception) {
+                    null
                 }
-            } catch (e: Exception) {
-                null
-            }
 
             withContext(Dispatchers.Main) {
                 binding.progressBar.hide()
@@ -373,12 +377,20 @@ class EditPatientActivity : BaseActivity() {
         return age in 0..MAX_ALLOWED_AGE
     }
 
-    private fun updateAgeField(year: Int, month: Int, day: Int) {
+    private fun updateAgeField(
+        year: Int,
+        month: Int,
+        day: Int,
+    ) {
         val age = calculateAge(year, month, day).coerceAtLeast(0)
         binding.txtAge.setText(age.toString())
     }
 
-    private fun calculateAge(year: Int, month: Int, day: Int): Int {
+    private fun calculateAge(
+        year: Int,
+        month: Int,
+        day: Int,
+    ): Int {
         val today = Calendar.getInstance()
         val birthDate = Calendar.getInstance()
         birthDate.set(year, month, day)
