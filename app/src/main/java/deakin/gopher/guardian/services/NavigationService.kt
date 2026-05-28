@@ -14,6 +14,7 @@ import deakin.gopher.guardian.view.general.RegisterActivity
 import deakin.gopher.guardian.view.general.Setting
 import deakin.gopher.guardian.view.general.TaskAddActivity
 import deakin.gopher.guardian.view.general.TasksListActivity
+import deakin.gopher.guardian.view.patient.PatientLogsActivity
 
 class NavigationService(val activity: Activity) {
     fun toHomeScreenForRole(role: Role) {
@@ -44,6 +45,15 @@ class NavigationService(val activity: Activity) {
             Intent(
                 activity,
                 Setting::class.java,
+            ),
+        )
+    }
+
+    fun onPatientLogs() {
+        activity.startActivity(
+            Intent(
+                activity.applicationContext,
+                PatientLogsActivity::class.java,
             ),
         )
     }

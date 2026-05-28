@@ -77,11 +77,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
+    <!-- Logs Button Background -->
     <Button
         android:id="@+id/sighOutButton_nurse"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginStart="148dp"
+        android:layout_marginStart="224dp"
         android:layout_marginTop="240dp"
         android:background="@drawable/homepage_button_background"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,8 +92,8 @@
         android:id="@+id/sighOutTxt_nurse"
         android:layout_width="82dp"
         android:layout_height="22dp"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginStart="252dp"
+        android:layout_marginTop="324dp"
         android:elevation="4dp"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/sign_out"
@@ -105,11 +106,49 @@
         android:id="@+id/sighOutIcon_nurse"
         android:layout_width="53dp"
         android:layout_height="43dp"
-        android:layout_marginStart="188dp"
+        android:layout_marginStart="260dp"
         android:layout_marginTop="268dp"
         android:background="@drawable/menu_signout"
         android:elevation="4dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <Button
+        android:id="@+id/logsButton_nurse"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="240dp"
+        android:background="@drawable/homepage_button_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <!-- Logs Icon -->
+    <View
+        android:id="@+id/logsIcon_nurse"
+        android:layout_width="42dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="268dp"
+        android:background="@drawable/ic_patientlogs"
+        android:elevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <!-- Logs Text -->
+    <TextView
+        android:id="@+id/logsTxt_nurse"
+        android:layout_width="100dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="320dp"
+        android:elevation="4dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Patient Logs"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/logsButton_nurse"
+        app:layout_constraintStart_toStartOf="@+id/logsButton_nurse"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
     <androidx.cardview.widget.CardView
