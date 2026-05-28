@@ -70,6 +70,9 @@
             android:name=".view.general.Homepage4nurse"
             android:exported="false" />
         <activity
+            android:name=".view.general.Homepage4doctor"
+            android:exported="false" />
+        <activity
             android:name=".view.general.TaskDetailActivity"
             android:exported="false" />
         <activity
@@ -184,6 +187,7 @@
         <activity
             android:name=".view.general.TasksListActivity"
             android:exported="false" />
+        <activity android:name=".view.patient.PatientLogsActivity"/>
 
         <activity android:name=".ModulesActivity" />
 

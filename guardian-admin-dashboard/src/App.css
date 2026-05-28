@@ -1,7 +1,46 @@
+:root {
+  --page-bg: #f0f2f5;
+  --surface: #ffffff;
+  --surface-soft: #f8fbfd;
+  --surface-soft-2: #eef7fb;
+  --surface-soft-3: #fcfeff;
+  --surface-accent: #dff1fb;
+  --surface-accent-2: #edf7fd;
+  --surface-accent-3: #eef6fb;
+  --text: #1f2d3d;
+  --text-muted: #6b7280;
+  --border: #dbe7f0;
+  --primary: #4fa0c8;
+  --primary-dark: #143d74;
+  --toggle-track: #dbe8f2;
+  --shadow-sm: 0 10px 24px rgba(20, 61, 116, 0.08);
+  --shadow-lg: 0 22px 60px rgba(20, 61, 116, 0.18);
+}
+
+body.dark-theme {
+  --page-bg: #0f1722;
+  --surface: #182230;
+  --surface-soft: #1d2a39;
+  --surface-soft-2: #213040;
+  --surface-soft-3: #1b2735;
+  --surface-accent: #223449;
+  --surface-accent-2: #24384d;
+  --surface-accent-3: #203143;
+  --text: #edf4fb;
+  --text-muted: #a9bbcc;
+  --border: #2d3b4d;
+  --primary: #6cb8df;
+  --primary-dark: #d7ebfb;
+  --toggle-track: #314457;
+  --shadow-sm: 0 10px 24px rgba(0, 0, 0, 0.22);
+  --shadow-lg: 0 22px 60px rgba(0, 0, 0, 0.34);
+}
+
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: #f0f2f5;
+  background: var(--page-bg);
+  color: var(--text);
 }
 
 .login-container {
@@ -40,4 +79,96 @@ body {
 
 .login-form button:hover {
   background-color: #303f9f;
+}
+/* overview */
+.org-page-title {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.org-section-title {
+  margin: 0;
+}
+
+.org-error-title {
+  margin: 0 0 6px 0;
+}
+
+.org-muted-text {
+  margin: 0;
+  color: #6b7280;
+}
+
+.org-error-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.org-stat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.org-stat-label {
+  margin: 0 0 6px 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.org-stat-value {
+  margin: 0;
+}
+
+.org-stat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(63, 81, 181, 0.08);
+}
+
+.org-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.org-dropdown-wrap {
+  width: 260px;
+}
+
+.org-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.org-detail-label {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.org-detail-value {
+  font-weight: 500;
+}
+
+.org-break-word {
+  word-break: break-word;
+}
+
+.org-summary-list {
+  margin-top: 18px;
+}
+
+.org-refresh-wrap {
+  margin-top: 22px;
 }

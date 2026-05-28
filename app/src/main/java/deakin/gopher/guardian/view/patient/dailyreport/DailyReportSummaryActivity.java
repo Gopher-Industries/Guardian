@@ -11,7 +11,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
+import deakin.gopher.guardian.services.EmailPasswordAuthService;
 import deakin.gopher.guardian.util.Util;
+import deakin.gopher.guardian.view.general.Homepage4admin;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Locale;
@@ -40,30 +42,48 @@ public class DailyReportSummaryActivity extends AppCompatActivity {
         progressNotesSummary = findViewById(R.id.progressNotesSummary);
         patientReportSummaryCalendarView = findViewById(R.id.patientReportSummaryCalendarView);
 
-        // ADDED: Keep original navigation icon colours
         navigationView.setItemIconTintList(null);
 
-        // Open drawer when menu button is clicked
         dailyReportSummaryMenuButton.setOnClickListener(
                 v -> drawerLayout.openDrawer(GravityCompat.START));
+
+        navigationView.setNavigationItemSelectedListener(
+                item -> {
+                    int id = item.getItemId();
+                    if (id == R.id.nav_home) {
+                        startActivity(new Intent(DailyReportSummaryActivity.this, Homepage4admin.class));
+                        finish();
+                    } else if (id == R.id.nav_signout) {
+                        new androidx.appcompat.app.AlertDialog.Builder(this)
+                                .setTitle(R.string.sign_out)
+                                .setMessage(R.string.sign_out_confirmation_message)
+                                .setPositiveButton(
+                                        R.string.sign_out,
+                                        (dialog, which) -> {
+                                            EmailPasswordAuthService.signOut(this);
+                                            finish();
+                                        })
+                                .setNegativeButton(R.string.stay_in, null)
+                                .show();
+                    }
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    return true;
+                });
 
         final Intent intent = getIntent();
         final String date = intent.getStringExtra(Util.DAILY_REPORT_DATE);
         final String notes = intent.getStringExtra(Util.DAILY_REPORT_STATUS_NOTES);
         final String[] statusList = intent.getStringArrayExtra(Util.DAILY_REPORT_STATUS_LIST);
 
-        // ADDED: Format selected status values for summary display
         if (statusList != null && statusList.length > 0) {
             for (int i = 0; i < statusList.length - 1; i++) {
                 statuses.append(statusList[i]).append("\n");
             }
             statuses.append(statusList[statusList.length - 1]);
         } else {
-            // ADDED: Fallback text when no statuses are passed
             statuses.append("No status selected");
         }
 
-        // IMPROVED: Safely parse date before updating CalendarView
         if (date != null && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             final SimpleDateFormat formatter =
                     new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -79,7 +99,6 @@ public class DailyReportSummaryActivity extends AppCompatActivity {
             }
         }
 
-        // ADDED: Fallback text for missing notes
         if (notes != null && !notes.isEmpty()) {
             progressNotesSummary.setText(notes);
         } else {

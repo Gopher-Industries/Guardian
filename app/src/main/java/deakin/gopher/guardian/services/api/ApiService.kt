@@ -3,8 +3,10 @@ package deakin.gopher.guardian.services.api
 import deakin.gopher.guardian.model.AddPatientActivityResponse
 import deakin.gopher.guardian.model.AddPatientResponse
 import deakin.gopher.guardian.model.BaseModel
+import deakin.gopher.guardian.model.CreatePatientLogRequest
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.PatientActivity
+import deakin.gopher.guardian.model.PatientLog
 import deakin.gopher.guardian.model.register.AuthResponse
 import deakin.gopher.guardian.model.register.RegisterRequest
 import okhttp3.MultipartBody
@@ -90,5 +92,24 @@ interface ApiService {
     suspend fun deletePatient(
         @Header("Authorization") token: String,
         @Path("id") patientId: String,
+    ): Response<BaseModel>
+
+    // For Patient Logs
+    @GET("patient-logs/{patientId}")
+    suspend fun getPatientLogs(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+    ): Response<List<PatientLog>>
+
+    @POST("patient-logs")
+    suspend fun createPatientLog(
+        @Header("Authorization") token: String,
+        @Body log: CreatePatientLogRequest,
+    ): Response<PatientLog>
+
+    @DELETE("patient-logs/{id}")
+    suspend fun deletePatientLog(
+        @Header("Authorization") token: String,
+        @Path("id") id: String,
     ): Response<BaseModel>
 }

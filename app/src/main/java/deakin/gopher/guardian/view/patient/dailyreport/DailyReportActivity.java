@@ -12,7 +12,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
-
+import deakin.gopher.guardian.view.general.Homepage4admin;
+import deakin.gopher.guardian.view.general.Homepage4caretaker;
+import deakin.gopher.guardian.view.general.LoginActivity;
 
 public class DailyReportActivity extends AppCompatActivity {
 
@@ -57,18 +59,14 @@ public class DailyReportActivity extends AppCompatActivity {
 
         submitButton = findViewById(R.id.loginBtn);
 
-        // ADDED: Keep original menu icon colours
         navigationView.setItemIconTintList(null);
 
-        // Open drawer when menu button is clicked
         dailyReportMenuButton.setOnClickListener(
                 v -> drawerLayout.openDrawer(GravityCompat.START));
 
-        // Get patient data from intent
         String patientNameExtra = getIntent().getStringExtra("patientName");
         patientId = getIntent().getStringExtra("patientId");
 
-        // ADDED: Safe handling for null or empty patient name
         if (patientNameExtra != null && !patientNameExtra.isEmpty()) {
             patientName = patientNameExtra.split(" ")[0];
         } else {
@@ -77,14 +75,11 @@ public class DailyReportActivity extends AppCompatActivity {
 
         usernameTextView.setText(patientName);
 
-        // ADDED: Dummy frontend data for now
         reportedByTextView.setText("Nurse John");
         progressNotesEditText.setText("Patient is stable and doing well.");
 
-        // ADDED: Default selected alert
         highlightSelectedAlert(notApplicableTextView);
 
-        // ADDED: Alert selection handling
         urgentMedicalAttentionTextView.setOnClickListener(v -> {
             selectedAlert = "Urgent Medical Attention";
             highlightSelectedAlert(urgentMedicalAttentionTextView);
@@ -109,14 +104,12 @@ public class DailyReportActivity extends AppCompatActivity {
             showToast(selectedAlert);
         });
 
-        // ADDED: Basic validation before submission
         submitButton.setOnClickListener(v -> {
             String notes = progressNotesEditText.getText().toString().trim();
 
             if (notes.isEmpty()) {
                 Toast.makeText(this, "Please enter progress notes", Toast.LENGTH_SHORT).show();
             } else {
-                // IMPROVED: Show submitted values for demo feedback
                 Toast.makeText(
                         this,
                         "Daily Report Submitted\nAlert: " + selectedAlert,
@@ -125,46 +118,44 @@ public class DailyReportActivity extends AppCompatActivity {
             }
         });
 
-        // ADDED: Navigation handling using actual menu ids
-        navigationView.setNavigationItemSelectedListener(item -> {
-            int id = item.getItemId();
+        navigationView.setNavigationItemSelectedListener(
+                menuItem -> {
+                    Intent intent = null;
+                    final int itemId = menuItem.getItemId();
 
-            if (id == R.id.nav_home) {
-                Toast.makeText(this, "Going to Home", Toast.LENGTH_SHORT).show();
+                    if (itemId == R.id.nav_home) {
+                        final boolean isAdmin =
+                                deakin.gopher.guardian.model.login.SessionManager.INSTANCE
+                                                .getCurrentUser()
+                                                .getRole()
+                                        instanceof deakin.gopher.guardian.model.login.Role.Admin;
+                        intent =
+                                new Intent(
+                                        DailyReportActivity.this,
+                                        isAdmin ? Homepage4admin.class : Homepage4caretaker.class);
+                    } else if (itemId == R.id.nav_signout) {
+                        com.google.firebase.auth.FirebaseAuth.getInstance().signOut();
+                        intent = new Intent(DailyReportActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                        return true;
+                    }
 
-                // Uncomment when your Home activity is ready
-                // Intent intent = new Intent(DailyReportActivity.this, PatientHomeActivity.class);
-                // intent.putExtra("patientId", patientId);
-                // intent.putExtra("patientName", patientNameExtra);
-                // startActivity(intent);
+                    if (intent != null) {
+                        startActivity(intent);
+                    }
 
-            } else if (id == R.id.add_task) {
-                Toast.makeText(this, "Going to Add Task", Toast.LENGTH_SHORT).show();
-
-                // Uncomment when your Add Task activity is ready
-                // Intent intent = new Intent(DailyReportActivity.this, TaskAddActivity.class);
-                // intent.putExtra("patientId", patientId);
-                // intent.putExtra("patientName", patientNameExtra);
-                // startActivity(intent);
-
-            } else if (id == R.id.nav_signout) {
-                // ADDED: Placeholder sign out behaviour
-                Toast.makeText(this, "Signed Out", Toast.LENGTH_SHORT).show();
-
-                // Add real sign out logic here later
-            }
-
-            drawerLayout.closeDrawer(GravityCompat.START);
-            return true;
-        });
+                    if (drawerLayout != null) {
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                    }
+                    return true;
+                });
     }
 
-    // ADDED: Reusable toast method for cleaner code
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    // ADDED: Simple visual feedback for selected alert
     private void highlightSelectedAlert(TextView selectedTextView) {
         urgentMedicalAttentionTextView.setAlpha(0.6f);
         requiresHospitalisationTextView.setAlpha(0.6f);
