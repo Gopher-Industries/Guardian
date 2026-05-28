@@ -14,51 +14,51 @@ import deakin.gopher.guardian.services.EmailPasswordAuthService;
 import deakin.gopher.guardian.view.general.Homepage4admin;
 
 public class CarePlanSummaryActivity extends AppCompatActivity {
-    Button prevButton;
-    ImageView carePlanSummaryMenuButton;
+  Button prevButton;
+  ImageView carePlanSummaryMenuButton;
 
-    @SuppressLint("MissingInflatedId")
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_care_plan_summary);
+  @SuppressLint("MissingInflatedId")
+  @Override
+  protected void onCreate(final Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_care_plan_summary);
 
-        prevButton = findViewById(R.id.carePlanPrevButton);
+    prevButton = findViewById(R.id.carePlanPrevButton);
 
-        // IMPROVED: Go back to previous screen instead of creating a new CarePlanActivity
-        prevButton.setOnClickListener(view -> finish());
+    // IMPROVED: Go back to previous screen instead of creating a new CarePlanActivity
+    prevButton.setOnClickListener(view -> finish());
 
-        final NavigationView navigationView = findViewById(R.id.nav_view);
-        carePlanSummaryMenuButton = findViewById(R.id.menuButton);
-        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView.setItemIconTintList(null);
+    final NavigationView navigationView = findViewById(R.id.nav_view);
+    carePlanSummaryMenuButton = findViewById(R.id.menuButton);
+    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+    navigationView.setItemIconTintList(null);
 
-        carePlanSummaryMenuButton.setOnClickListener(
-                v -> {
-                    drawerLayout.openDrawer(GravityCompat.START);
-                });
+    carePlanSummaryMenuButton.setOnClickListener(
+        v -> {
+          drawerLayout.openDrawer(GravityCompat.START);
+        });
 
-        navigationView.setNavigationItemSelectedListener(
-                item -> {
-                    int id = item.getItemId();
-                    if (id == R.id.nav_home) {
-                        startActivity(new Intent(CarePlanSummaryActivity.this, Homepage4admin.class));
-                        finish();
-                    } else if (id == R.id.nav_signout) {
-                        new androidx.appcompat.app.AlertDialog.Builder(this)
-                                .setTitle(R.string.sign_out)
-                                .setMessage(R.string.sign_out_confirmation_message)
-                                .setPositiveButton(
-                                        R.string.sign_out,
-                                        (dialog, which) -> {
-                                            EmailPasswordAuthService.signOut(this);
-                                            finish();
-                                        })
-                                .setNegativeButton(R.string.stay_in, null)
-                                .show();
-                    }
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                    return true;
-                });
-    }
+    navigationView.setNavigationItemSelectedListener(
+        item -> {
+          int id = item.getItemId();
+          if (id == R.id.nav_home) {
+            startActivity(new Intent(CarePlanSummaryActivity.this, Homepage4admin.class));
+            finish();
+          } else if (id == R.id.nav_signout) {
+            new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle(R.string.sign_out)
+                .setMessage(R.string.sign_out_confirmation_message)
+                .setPositiveButton(
+                    R.string.sign_out,
+                    (dialog, which) -> {
+                      EmailPasswordAuthService.signOut(this);
+                      finish();
+                    })
+                .setNegativeButton(R.string.stay_in, null)
+                .show();
+          }
+          drawerLayout.closeDrawer(GravityCompat.START);
+          return true;
+        });
+  }
 }

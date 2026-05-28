@@ -14,7 +14,6 @@ import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Task
 
 class TaskDetailActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_detail)
@@ -47,13 +46,12 @@ class TaskDetailActivity : AppCompatActivity() {
         taskRef.addListenerForSingleValueEvent(
             object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-
                     // ADDED: Handle empty snapshot (task deleted or missing)
                     if (!dataSnapshot.exists()) {
                         Toast.makeText(
                             this@TaskDetailActivity,
                             "Task not found",
-                            Toast.LENGTH_SHORT
+                            Toast.LENGTH_SHORT,
                         ).show()
                         finish()
                         return
@@ -62,7 +60,6 @@ class TaskDetailActivity : AppCompatActivity() {
                     val task = dataSnapshot.getValue(Task::class.java)
 
                     if (task != null) {
-
                         val textdesc =
                             getString(R.string.task_description_prefix) + " " + task.description
                         val textnur =
@@ -90,7 +87,7 @@ class TaskDetailActivity : AppCompatActivity() {
                     Toast.makeText(
                         this@TaskDetailActivity,
                         "Failed to load task",
-                        Toast.LENGTH_SHORT
+                        Toast.LENGTH_SHORT,
                     ).show()
                 }
             },
