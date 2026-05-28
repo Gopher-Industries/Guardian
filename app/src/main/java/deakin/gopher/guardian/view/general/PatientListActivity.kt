@@ -119,51 +119,62 @@ class PatientListActivity : BaseActivity() {
         val token = "Bearer ${SessionManager.getToken()}"
 
         CoroutineScope(Dispatchers.IO).launch {
-            if (patientListAdapter.itemCount <= 0) {
-                withContext(Dispatchers.Main) {
+            withContext(Dispatchers.Main) {
+                if (patientListAdapter.itemCount <= 0) {
                     binding.progressBar.show()
                 }
+                binding.tvEmptyMessage.visibility = View.GONE
+                binding.recyclerViewPatients.visibility = View.VISIBLE
             }
 
-            val response =
-                try {
-                    ApiClient.apiService.getAssignedPatients(token)
-                } catch (e: Exception) {
-                    null
-                }
+            try {
+                val response = ApiClient.apiService.getAssignedPatients(token)
 
-            withContext(Dispatchers.Main) {
-                binding.progressBar.hide()
+                withContext(Dispatchers.Main) {
+                    binding.progressBar.hide()
 
-                if (response?.isSuccessful == true) {
-                    val patients = response.body().orEmpty()
-                    if (patients.isNotEmpty()) {
-                        patientListAdapter.updateData(patients)
-                        binding.tvEmptyMessage.visibility = android.view.View.GONE
+                    if (response.isSuccessful) {
+                        val patients = response.body()
+
+                        if (!patients.isNullOrEmpty()) {
+                            patientListAdapter.updateData(patients)
+                            binding.recyclerViewPatients.visibility = View.VISIBLE
+                            binding.tvEmptyMessage.visibility = View.GONE
+                        } else {
+                            patientListAdapter.updateData(emptyList())
+                            binding.recyclerViewPatients.visibility = View.GONE
+                            binding.tvEmptyMessage.visibility = View.VISIBLE
+                            binding.tvEmptyMessage.text = "No patients found"
+                        }
                     } else {
-                        binding.tvEmptyMessage.visibility = android.view.View.VISIBLE
+                        patientListAdapter.updateData(emptyList())
+                        binding.recyclerViewPatients.visibility = View.GONE
+                        binding.tvEmptyMessage.visibility = View.VISIBLE
+                        binding.tvEmptyMessage.text = "Unable to load patients"
+
+                        val errorBody = response.errorBody()?.string()
+                        val errorResponse =
+                            if (!errorBody.isNullOrBlank()) {
+                                try {
+                                    Gson().fromJson(errorBody, ApiErrorResponse::class.java)
+                                } catch (e: Exception) {
+                                    null
+                                }
+                            } else {
+                                null
+                            }
+
+                        showMessage(errorResponse?.apiError ?: response.message())
                     }
-                } else {
-                    val rawErrorBody =
-                        try {
-                            response?.errorBody()?.string()
-                        } catch (e: Exception) {
-                            null
-                        }
-
-                    val errorResponse =
-                        try {
-                            Gson().fromJson(rawErrorBody, ApiErrorResponse::class.java)
-                        } catch (e: Exception) {
-                            null
-                        }
-
-                    val errorMessage =
-                        errorResponse?.apiError?.takeIf { it.isNotBlank() }
-                            ?: rawErrorBody?.takeIf { it.isNotBlank() } ?: response?.message()
-                            ?.takeIf { it.isNotBlank() } ?: "Failed to load patients"
-
-                    showMessage(errorMessage)
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    binding.progressBar.hide()
+                    patientListAdapter.updateData(emptyList())
+                    binding.recyclerViewPatients.visibility = View.GONE
+                    binding.tvEmptyMessage.visibility = View.VISIBLE
+                    binding.tvEmptyMessage.text = "Network error occurred"
+                    showMessage("Network error occurred")
                 }
             }
         }

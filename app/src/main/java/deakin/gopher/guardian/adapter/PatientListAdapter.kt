@@ -43,18 +43,18 @@ class PatientListAdapter(
         position: Int,
     ) {
         val patient = patients[position]
+
         holder.nameText.text = patient.fullname
-        holder.ageText.text = "Age: ${patient.age}"
-        holder.genderText.text = "Gender: ${
+        holder.ageText.text = "${patient.age} years"
+        holder.genderText.text =
             patient.gender.replaceFirstChar {
                 if (it.isLowerCase()) it.titlecase() else it.toString()
             }
-        }"
 
-        // Load image using Glide
         Glide.with(holder.itemView.context)
             .load(patient.photoUrl)
             .placeholder(R.drawable.profile)
+            .error(R.drawable.profile)
             .circleCrop()
             .into(holder.image)
 
@@ -80,6 +80,7 @@ class PatientListAdapter(
                         onDeleteClick?.invoke(patient)
                         true
                     }
+
                     else -> false
                 }
             }

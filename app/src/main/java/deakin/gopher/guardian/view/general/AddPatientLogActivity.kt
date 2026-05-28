@@ -1,15 +1,11 @@
 package deakin.gopher.guardian.view.general
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import com.google.gson.Gson
-import deakin.gopher.guardian.R
 import deakin.gopher.guardian.databinding.ActivityAddPatientActivityBinding
-import deakin.gopher.guardian.model.ApiErrorResponse
+import deakin.gopher.guardian.model.CreatePatientLogRequest
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.api.ApiClient
 import deakin.gopher.guardian.view.hide
@@ -57,47 +53,37 @@ class AddPatientLogActivity : BaseActivity() {
         }
 
         // Set default date and time
-        val calendar = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        // Keep current date/time visible but prevent editing
+        binding.txtDate.isFocusable = false
+        binding.txtDate.isClickable = false
 
-        binding.txtDate.setText(dateFormat.format(calendar.time))
-        binding.txtTime.setText(timeFormat.format(calendar.time))
+        binding.txtTime.isFocusable = false
+        binding.txtTime.isClickable = false
 
-        // Date picker dialog
-        binding.txtDate.setOnClickListener {
-            val dpd =
-                DatePickerDialog(
-                    this,
-                    { _, year, month, dayOfMonth ->
-                        calendar.set(year, month, dayOfMonth)
-                        binding.txtDate.setText(dateFormat.format(calendar.time))
-                    },
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH),
-                )
-            dpd.datePicker.maxDate = System.currentTimeMillis()
-            dpd.show()
-        }
+// Live updating current date and time
+        val handler = android.os.Handler(mainLooper)
 
-        // Time picker dialog
-        binding.txtTime.setOnClickListener {
-            val tpd =
-                TimePickerDialog(this, { _, hour, minute ->
-                    calendar.set(Calendar.HOUR_OF_DAY, hour)
-                    calendar.set(Calendar.MINUTE, minute)
-                    binding.txtTime.setText(
-                        String.format(
-                            Locale.getDefault(),
-                            "%02d:%02d",
-                            hour,
-                            minute,
-                        ),
-                    )
-                }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true)
-            tpd.show()
-        }
+        val updateTimeRunnable =
+            object : Runnable {
+                override fun run() {
+                    val currentCalendar = Calendar.getInstance()
+
+                    val currentDate =
+                        SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                            .format(currentCalendar.time)
+
+                    val currentTime =
+                        SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+                            .format(currentCalendar.time)
+
+                    binding.txtDate.setText(currentDate)
+                    binding.txtTime.setText(currentTime)
+
+                    handler.postDelayed(this, 1000)
+                }
+            }
+
+        handler.post(updateTimeRunnable)
 
         binding.txtReporter.setText(SessionManager.getCurrentUser().name)
 
@@ -107,62 +93,67 @@ class AddPatientLogActivity : BaseActivity() {
     }
 
     private fun savePatientActivity() {
-        val activityType =
+        val title =
             if (binding.txtActivityType.text.toString().trim() == "Other") {
                 binding.txtOtherActivity.text.toString().trim()
             } else {
                 binding.txtActivityType.text.toString().trim()
             }
 
-        if (activityType.trim().isEmpty()) {
-            showMessage(getString(R.string.validation_empty_activity_type))
+        val description = binding.txtComment.text.toString().trim()
+
+        if (title.isEmpty()) {
+            showMessage("Please enter title")
             return
         }
 
-        val date = binding.txtDate.text.toString()
-        val time = binding.txtTime.text.toString()
-        // Build ISO timestamp
-        val isoTimestamp = "${date}T$time:00Z"
-
-        val comments = binding.txtComment.text.toString().trim()
+        if (description.isEmpty()) {
+            showMessage("Please enter description")
+            return
+        }
 
         val patientId = intent.getStringExtra("patientId").orEmpty()
-        val token = "Bearer ${SessionManager.getToken()}"
+
+        val request =
+            CreatePatientLogRequest(
+                patient = patientId,
+                title = title,
+                description = description,
+            )
+
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.Main) {
                 binding.progressBar.show()
                 binding.btnSave.visibility = View.GONE
             }
 
-            val response =
-                ApiClient.apiService.logPatientActivity(
-                    token,
-                    patientId,
-                    activityType,
-                    isoTimestamp,
-                    comments,
-                )
+            try {
+                val response =
+                    ApiClient.apiService.createPatientLog(
+                        "Bearer ${SessionManager.getToken()}",
+                        request,
+                    )
 
-            withContext(Dispatchers.Main) {
                 withContext(Dispatchers.Main) {
                     binding.progressBar.hide()
                     binding.btnSave.visibility = View.VISIBLE
-                }
-                if (response.isSuccessful) {
-                    if (response.body() != null) {
-                        showMessage(response.body()?.apiMessage ?: response.message())
-                        onBackPressedDispatcher.onBackPressed()
+
+                    if (response.isSuccessful) {
+                        showMessage("Log created successfully")
+
+                        finish()
                     } else {
-                        showMessage(response.body()?.apiError ?: "Failed to add patient activity")
-                    }
-                } else {
-                    // Handle error
-                    val errorResponse =
-                        Gson().fromJson(
-                            response.errorBody()?.string(),
-                            ApiErrorResponse::class.java,
+                        showMessage(
+                            response.errorBody()?.string() ?: "Failed to create log",
                         )
-                    showMessage(errorResponse.apiError ?: response.message())
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    binding.progressBar.hide()
+                    binding.btnSave.visibility = View.VISIBLE
+
+                    showMessage(e.message ?: "Unknown error")
                 }
             }
         }
