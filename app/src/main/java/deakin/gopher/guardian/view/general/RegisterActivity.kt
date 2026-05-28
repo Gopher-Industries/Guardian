@@ -29,6 +29,7 @@ class RegisterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.account_creation)
+
         val mFullName: EditText = findViewById(R.id.Fullname)
         val mEmail: EditText = findViewById(R.id.Email)
         val mPassword: EditText = findViewById(R.id.password)
@@ -36,7 +37,8 @@ class RegisterActivity : BaseActivity() {
         val nameLayout: TextInputLayout = findViewById(R.id.nameTextInputLayout)
         val emailLayout: TextInputLayout = findViewById(R.id.emailTextInputLayout)
         val passwordLayout: TextInputLayout = findViewById(R.id.passwordTextInputLayout)
-        val confirmPasswordLayout: TextInputLayout = findViewById(R.id.confirmPasswordTextInputLayout)
+        val confirmPasswordLayout: TextInputLayout =
+            findViewById(R.id.confirmPasswordTextInputLayout)
         val roleButton: MaterialButtonToggleGroup = findViewById(R.id.role_toggle_group)
         val backToLoginButton: Button = findViewById(R.id.backToLoginButton)
         val mRegisterBtn: Button = findViewById(R.id.registerBtn)
@@ -46,7 +48,7 @@ class RegisterActivity : BaseActivity() {
         mEmail.addTextChangedListener { emailLayout.error = null }
         mPassword.addTextChangedListener { passwordLayout.error = null }
         passwordConfirmation.addTextChangedListener { confirmPasswordLayout.error = null }
-        roleButton.addOnButtonCheckedListener { _, _, _ -> 
+        roleButton.addOnButtonCheckedListener { _, _, _ ->
             // Optional: clear role error if you add one to the layout
         }
 
@@ -68,22 +70,41 @@ class RegisterActivity : BaseActivity() {
 
             if (registrationError != null) {
                 when (registrationError) {
-                    RegistrationError.EmptyName -> nameLayout.error = getString(registrationError.messageResourceId)
-                    RegistrationError.EmptyEmail, RegistrationError.InvalidEmail -> emailLayout.error = getString(registrationError.messageResourceId)
-                    RegistrationError.EmptyPassword, RegistrationError.PasswordTooShort -> passwordLayout.error = getString(registrationError.messageResourceId)
-                    RegistrationError.EmptyConfirmedPassword, RegistrationError.PasswordsFailConfirmation -> confirmPasswordLayout.error = getString(registrationError.messageResourceId)
-                    RegistrationError.EmptyRole -> showMessage(getString(registrationError.messageResourceId))
+                    RegistrationError.EmptyName -> {
+                        nameLayout.error = getString(registrationError.messageResourceId)
+                    }
+
+                    RegistrationError.EmptyEmail,
+                    RegistrationError.InvalidEmail -> {
+                        emailLayout.error = getString(registrationError.messageResourceId)
+                    }
+
+                    RegistrationError.EmptyPassword,
+                    RegistrationError.PasswordTooShort -> {
+                        passwordLayout.error = getString(registrationError.messageResourceId)
+                    }
+
+                    RegistrationError.EmptyConfirmedPassword,
+                    RegistrationError.PasswordsFailConfirmation -> {
+                        confirmPasswordLayout.error =
+                            getString(registrationError.messageResourceId)
+                    }
+
+                    RegistrationError.EmptyRole -> {
+                        showMessage(getString(registrationError.messageResourceId))
+                    }
                 }
                 return@setOnClickListener
             }
 
             setLoading(true, mRegisterBtn, progressBar)
 
-            val role = when (roleId) {
-                R.id.button_caretaker -> "caretaker"
-                R.id.button_nurse -> "nurse"
-                else -> ""
-            }
+            val role =
+                when (roleId) {
+                    R.id.button_caretaker -> "caretaker"
+                    R.id.button_nurse -> "nurse"
+                    else -> ""
+                }
 
             val request =
                 RegisterRequest(
@@ -107,7 +128,10 @@ class RegisterActivity : BaseActivity() {
                             NavigationService(this@RegisterActivity).toLogin()
                         } else {
                             val errorMsg = parseError(response)
-                            showMessage(getString(R.string.registration_failure) + (if (errorMsg != null) ": $errorMsg" else ""))
+                            showMessage(
+                                getString(R.string.registration_failure) +
+                                    (if (errorMsg != null) ": $errorMsg" else ""),
+                            )
                         }
                     }
 
@@ -116,7 +140,10 @@ class RegisterActivity : BaseActivity() {
                         t: Throwable,
                     ) {
                         setLoading(false, mRegisterBtn, progressBar)
-                        showMessage(getString(R.string.registration_failure) + ": ${t.localizedMessage}")
+                        showMessage(
+                            getString(R.string.registration_failure) +
+                                ": ${t.localizedMessage}",
+                        )
                     }
                 },
             )
@@ -127,17 +154,22 @@ class RegisterActivity : BaseActivity() {
         }
     }
 
-    private fun setLoading(isLoading: Boolean, button: Button, progressBar: ProgressBar) {
+    private fun setLoading(
+        isLoading: Boolean,
+        button: Button,
+        progressBar: ProgressBar,
+    ) {
         button.isEnabled = !isLoading
         progressBar.isVisible = isLoading
     }
 
     private fun parseError(response: Response<*>): String? {
         return try {
-            val errorResponse = Gson().fromJson(
-                response.errorBody()?.string(),
-                ApiErrorResponse::class.java,
-            )
+            val errorResponse =
+                Gson().fromJson(
+                    response.errorBody()?.string(),
+                    ApiErrorResponse::class.java,
+                )
             errorResponse.apiError
         } catch (e: Exception) {
             null
