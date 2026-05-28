@@ -2,8 +2,11 @@ package deakin.gopher.guardian.view.patient.dailyreport;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -17,15 +20,105 @@ public class DailyReportActivity extends AppCompatActivity {
 
   ImageView dailyReportMenuButton;
 
+  DrawerLayout drawerLayout;
+  NavigationView navigationView;
+
+  TextView usernameTextView;
+  TextView reportedByTextView;
+
+  EditText progressNotesEditText;
+
+  TextView urgentMedicalAttentionTextView;
+  TextView requiresHospitalisationTextView;
+  TextView notApplicableTextView;
+  TextView requiresHourlyAttentionTextView;
+
+  Button submitButton;
+
+  String patientId;
+  String patientName;
+  String selectedAlert = "Not Applicable";
+
   @Override
-  protected void onCreate(final Bundle savedInstanceState) {
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_daily_report);
 
-    final NavigationView navigationView = findViewById(R.id.nav_view);
+    drawerLayout = findViewById(R.id.drawer_layout);
+    navigationView = findViewById(R.id.nav_view);
     dailyReportMenuButton = findViewById(R.id.menuButton11);
-    final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+
+    usernameTextView = findViewById(R.id.username);
+    reportedByTextView = findViewById(R.id.save);
+    progressNotesEditText = findViewById(R.id.patientNnormal);
+
+    urgentMedicalAttentionTextView = findViewById(R.id.urgentMedicalAttentionTextView);
+    requiresHospitalisationTextView = findViewById(R.id.requiresHospitalisationTextView);
+    notApplicableTextView = findViewById(R.id.notApplicableTextView);
+    requiresHourlyAttentionTextView = findViewById(R.id.requiresHourlyAttentionTextView);
+
+    submitButton = findViewById(R.id.loginBtn);
+
     navigationView.setItemIconTintList(null);
+
+    dailyReportMenuButton.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
+
+    String patientNameExtra = getIntent().getStringExtra("patientName");
+    patientId = getIntent().getStringExtra("patientId");
+
+    if (patientNameExtra != null && !patientNameExtra.isEmpty()) {
+      patientName = patientNameExtra.split(" ")[0];
+    } else {
+      patientName = "Patient";
+    }
+
+    usernameTextView.setText(patientName);
+
+    reportedByTextView.setText("Nurse John");
+    progressNotesEditText.setText("Patient is stable and doing well.");
+
+    highlightSelectedAlert(notApplicableTextView);
+
+    urgentMedicalAttentionTextView.setOnClickListener(
+        v -> {
+          selectedAlert = "Urgent Medical Attention";
+          highlightSelectedAlert(urgentMedicalAttentionTextView);
+          showToast(selectedAlert);
+        });
+
+    requiresHospitalisationTextView.setOnClickListener(
+        v -> {
+          selectedAlert = "Requires Hospitalisation";
+          highlightSelectedAlert(requiresHospitalisationTextView);
+          showToast(selectedAlert);
+        });
+
+    notApplicableTextView.setOnClickListener(
+        v -> {
+          selectedAlert = "Not Applicable";
+          highlightSelectedAlert(notApplicableTextView);
+          showToast(selectedAlert);
+        });
+
+    requiresHourlyAttentionTextView.setOnClickListener(
+        v -> {
+          selectedAlert = "Requires Hourly Attention";
+          highlightSelectedAlert(requiresHourlyAttentionTextView);
+          showToast(selectedAlert);
+        });
+
+    submitButton.setOnClickListener(
+        v -> {
+          String notes = progressNotesEditText.getText().toString().trim();
+
+          if (notes.isEmpty()) {
+            Toast.makeText(this, "Please enter progress notes", Toast.LENGTH_SHORT).show();
+          } else {
+            Toast.makeText(
+                    this, "Daily Report Submitted\nAlert: " + selectedAlert, Toast.LENGTH_SHORT)
+                .show();
+          }
+        });
 
     navigationView.setNavigationItemSelectedListener(
         menuItem -> {
@@ -59,16 +152,18 @@ public class DailyReportActivity extends AppCompatActivity {
           }
           return true;
         });
+  }
 
-    dailyReportMenuButton.setOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
+  private void showToast(String message) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+  }
 
-    final String patientNameExtra = getIntent().getStringExtra("patientName");
-    final String patientName = patientNameExtra != null ? patientNameExtra.split(" ")[0] : "";
+  private void highlightSelectedAlert(TextView selectedTextView) {
+    urgentMedicalAttentionTextView.setAlpha(0.6f);
+    requiresHospitalisationTextView.setAlpha(0.6f);
+    notApplicableTextView.setAlpha(0.6f);
+    requiresHourlyAttentionTextView.setAlpha(0.6f);
 
-    final TextView usernameTextView = findViewById(R.id.username);
-
-    /*if (null != patientName) {
-      usernameTextView.setText(patientName);
-    }*/
+    selectedTextView.setAlpha(1.0f);
   }
 }

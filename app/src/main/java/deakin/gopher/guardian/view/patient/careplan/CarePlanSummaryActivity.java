@@ -22,10 +22,11 @@ public class CarePlanSummaryActivity extends AppCompatActivity {
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_care_plan_summary);
+
     prevButton = findViewById(R.id.carePlanPrevButton);
 
-    prevButton.setOnClickListener(
-        view -> startActivity(new Intent(CarePlanSummaryActivity.this, CarePlanActivity.class)));
+    // IMPROVED: Go back to previous screen instead of creating a new CarePlanActivity
+    prevButton.setOnClickListener(view -> finish());
 
     final NavigationView navigationView = findViewById(R.id.nav_view);
     carePlanSummaryMenuButton = findViewById(R.id.menuButton);

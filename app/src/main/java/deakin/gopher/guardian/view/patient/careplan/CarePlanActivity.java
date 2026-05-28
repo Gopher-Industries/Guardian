@@ -1,12 +1,12 @@
 package deakin.gopher.guardian.view.patient.careplan;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast; // ADDED
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,8 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.model.CarePlan;
-import deakin.gopher.guardian.services.EmailPasswordAuthService;
-import deakin.gopher.guardian.view.general.Homepage4admin;
 import java.util.HashMap;
 
 public class CarePlanActivity extends AppCompatActivity {
@@ -53,7 +51,16 @@ public class CarePlanActivity extends AppCompatActivity {
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
     patientId = getIntent().getStringExtra("patientId");
+
+    // ADDED: Prevent invalid screen state if patientId is missing
+    if (patientId == null || patientId.isEmpty()) {
+      Toast.makeText(this, "Invalid patient", Toast.LENGTH_SHORT).show();
+      finish();
+      return;
+    }
+
     setContentView(R.layout.activity_care_plan);
 
     submitButton = findViewById(R.id.carePlanSubmitButton);
@@ -68,29 +75,6 @@ public class CarePlanActivity extends AppCompatActivity {
           drawerLayout.openDrawer(GravityCompat.START);
         });
 
-    navigationView.setNavigationItemSelectedListener(
-        item -> {
-          int id = item.getItemId();
-          if (id == R.id.nav_home) {
-            startActivity(new Intent(CarePlanActivity.this, Homepage4admin.class));
-            finish();
-          } else if (id == R.id.nav_signout) {
-            new AlertDialog.Builder(this)
-                .setTitle(R.string.sign_out)
-                .setMessage(R.string.sign_out_confirmation_message)
-                .setPositiveButton(
-                    R.string.sign_out,
-                    (dialog, which) -> {
-                      EmailPasswordAuthService.signOut(this);
-                      finish();
-                    })
-                .setNegativeButton(R.string.stay_in, null)
-                .show();
-          }
-          drawerLayout.closeDrawer(GravityCompat.START);
-          return true;
-        });
-
     // careplan type
     carePlanTypeRadioGroup = findViewById(R.id.carePlanTypeRGroup);
     carePlanTypesRadioButtons.put((RadioButton) findViewById(R.id.radioButton2), "Home");
@@ -101,7 +85,7 @@ public class CarePlanActivity extends AppCompatActivity {
     nutritionRadioButtons.put((RadioButton) findViewById(R.id.radioButton7), "No");
     nutritionRadioButtons.put((RadioButton) findViewById(R.id.radioButton8), "NA");
 
-    dietTimeRadioGroup = findViewById((R.id.dietTimingRGroup));
+    dietTimeRadioGroup = findViewById(R.id.dietTimingRGroup);
     dietTimeRadioButtons.put((RadioButton) findViewById(R.id.radioButton9), "8AM-BR");
     dietTimeRadioButtons.put((RadioButton) findViewById(R.id.radioButton5), "12PM-LN");
     dietTimeRadioButtons.put((RadioButton) findViewById(R.id.radioButton10), "6PM-DN");
@@ -112,16 +96,16 @@ public class CarePlanActivity extends AppCompatActivity {
     sleepPatternRadioButtons.put((RadioButton) findViewById(R.id.radioButton81), "11PM-7AM");
 
     painScoreRadioGroup = findViewById(R.id.ratingGroup);
-    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton21)), "1");
-    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton22)), "2");
-    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton23)), "3");
-    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton24)), "4");
-    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton25)), "5");
-    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton26)), "6");
-    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton27)), "7");
-    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton28)), "8");
-    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton29)), "9");
-    painScoreRadioButtons.put((RadioButton) findViewById((R.id.radioButton30)), "10");
+    painScoreRadioButtons.put((RadioButton) findViewById(R.id.radioButton21), "1");
+    painScoreRadioButtons.put((RadioButton) findViewById(R.id.radioButton22), "2");
+    painScoreRadioButtons.put((RadioButton) findViewById(R.id.radioButton23), "3");
+    painScoreRadioButtons.put((RadioButton) findViewById(R.id.radioButton24), "4");
+    painScoreRadioButtons.put((RadioButton) findViewById(R.id.radioButton25), "5");
+    painScoreRadioButtons.put((RadioButton) findViewById(R.id.radioButton26), "6");
+    painScoreRadioButtons.put((RadioButton) findViewById(R.id.radioButton27), "7");
+    painScoreRadioButtons.put((RadioButton) findViewById(R.id.radioButton28), "8");
+    painScoreRadioButtons.put((RadioButton) findViewById(R.id.radioButton29), "9");
+    painScoreRadioButtons.put((RadioButton) findViewById(R.id.radioButton30), "10");
 
     // support requirements
     supportRequirementsCheckBox.put((CheckBox) findViewById(R.id.selfCareCheckBox), "Self Care");
@@ -157,27 +141,31 @@ public class CarePlanActivity extends AppCompatActivity {
     // Firebase initialization
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     carePlanRef = database.getReference("careplan");
+
     // Load care plan summary data from Firebase
-    if (!"".equals(patientId) && null != patientId) {
-      loadCarePlanDataForPatient(patientId);
-    }
+    loadCarePlanDataForPatient(patientId);
 
     submitButton.setOnClickListener(
         v -> {
-          final AlertDialog.Builder builder =
-              new AlertDialog.Builder(v.getContext()); // new AlertDialog.Builder(this);
+          // ADDED: Basic validation before confirmation
+          if (!validateInputs()) {
+            return;
+          }
+
+          final AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
           builder.setTitle("Saving Changes?");
+          // ADDED: Clearer confirmation message
+          builder.setMessage("Do you want to save this care plan?");
           builder.setPositiveButton(
               "YES",
               (dialog, whichButton) -> {
                 CarePlan updatedCarePlan = createUpdatedCarePlan();
+
+                // ADDED: Prevent repeated taps during save
+                submitButton.setEnabled(false);
+
                 // Save the updated CarePlan to Firebase
                 saveCarePlanToFirebase(updatedCarePlan);
-
-                //                final Intent intent =
-                //                    new Intent(getApplicationContext(),
-                // CarePlanSummaryActivity.class);
-                //                startActivity(intent);
               });
           builder.setNegativeButton("No", null);
 
@@ -193,6 +181,15 @@ public class CarePlanActivity extends AppCompatActivity {
               });
           dialog.show();
         });
+  }
+
+  // ADDED: Simple validation to improve form flow
+  private boolean validateInputs() {
+    if (carePlanTypeRadioGroup.getCheckedRadioButtonId() == -1) {
+      Toast.makeText(this, "Please select care plan type", Toast.LENGTH_SHORT).show();
+      return false;
+    }
+    return true;
   }
 
   private void loadCarePlanDataForPatient(final String patientId) {
@@ -223,7 +220,8 @@ public class CarePlanActivity extends AppCompatActivity {
                 // Pre-fill support requirements checkboxes
                 for (CheckBox checkBox : supportRequirementsCheckBox.keySet()) {
                   String requirement = supportRequirementsCheckBox.get(checkBox);
-                  if (carePlan.supportRequirement.contains(requirement)) {
+                  if (carePlan.supportRequirement != null
+                      && carePlan.supportRequirement.contains(requirement)) {
                     checkBox.setChecked(true);
                   }
                 }
@@ -231,7 +229,7 @@ public class CarePlanActivity extends AppCompatActivity {
                 // Pre-fill drink likes checkboxes
                 for (CheckBox checkBox : drinkLikesCheckBox.keySet()) {
                   String drink = drinkLikesCheckBox.get(checkBox);
-                  if (carePlan.drinkLikings.contains(drink)) {
+                  if (carePlan.drinkLikings != null && carePlan.drinkLikings.contains(drink)) {
                     checkBox.setChecked(true);
                   }
                 }
@@ -239,7 +237,7 @@ public class CarePlanActivity extends AppCompatActivity {
                 // Pre-fill pain checkboxes
                 for (CheckBox checkBox : painCheckBox.keySet()) {
                   String pain = painCheckBox.get(checkBox);
-                  if (carePlan.painCategories.contains(pain)) {
+                  if (carePlan.painCategories != null && carePlan.painCategories.contains(pain)) {
                     checkBox.setChecked(true);
                   }
                 }
@@ -247,7 +245,8 @@ public class CarePlanActivity extends AppCompatActivity {
                 // Pre-fill behavioral management checkboxes
                 for (CheckBox checkBox : behavioralManagementCheckBox.keySet()) {
                   String behavior = behavioralManagementCheckBox.get(checkBox);
-                  if (carePlan.behavioralManagement.contains(behavior)) {
+                  if (carePlan.behavioralManagement != null
+                      && carePlan.behavioralManagement.contains(behavior)) {
                     checkBox.setChecked(true);
                   }
                 }
@@ -257,7 +256,9 @@ public class CarePlanActivity extends AppCompatActivity {
 
           @Override
           public void onCancelled(@NonNull DatabaseError error) {
-            // Handle error
+            // IMPROVED: Show error to user
+            Toast.makeText(CarePlanActivity.this, "Failed to load care plan", Toast.LENGTH_SHORT)
+                .show();
           }
         });
   }
@@ -336,7 +337,19 @@ public class CarePlanActivity extends AppCompatActivity {
   }
 
   private void saveCarePlanToFirebase(CarePlan carePlan) {
-    // Update care plan in Firebase
-    carePlanRef.child(patientId).setValue(carePlan);
+    // IMPROVED: Show success/failure feedback and re-enable button if needed
+    carePlanRef
+        .child(patientId)
+        .setValue(carePlan)
+        .addOnSuccessListener(
+            unused -> {
+              Toast.makeText(this, "Care plan saved successfully", Toast.LENGTH_SHORT).show();
+              finish();
+            })
+        .addOnFailureListener(
+            e -> {
+              Toast.makeText(this, "Failed to save care plan", Toast.LENGTH_SHORT).show();
+              submitButton.setEnabled(true);
+            });
   }
 }

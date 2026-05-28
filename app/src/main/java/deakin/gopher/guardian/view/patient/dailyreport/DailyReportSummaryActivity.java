@@ -25,20 +25,27 @@ public class DailyReportSummaryActivity extends AppCompatActivity {
 
   ImageView dailyReportSummaryMenuButton;
 
+  TextView currentStatusSummary;
+  TextView progressNotesSummary;
+  CalendarView patientReportSummaryCalendarView;
+
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_daily_report_summary);
 
     final NavigationView navigationView = findViewById(R.id.nav_view);
-    dailyReportSummaryMenuButton = findViewById(R.id.menuButton101);
     final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+    dailyReportSummaryMenuButton = findViewById(R.id.menuButton101);
+
+    currentStatusSummary = findViewById(R.id.currentStatusSummary);
+    progressNotesSummary = findViewById(R.id.progressNotesSummary);
+    patientReportSummaryCalendarView = findViewById(R.id.patientReportSummaryCalendarView);
+
     navigationView.setItemIconTintList(null);
 
     dailyReportSummaryMenuButton.setOnClickListener(
-        v -> {
-          drawerLayout.openDrawer(GravityCompat.START);
-        });
+        v -> drawerLayout.openDrawer(GravityCompat.START));
 
     navigationView.setNavigationItemSelectedListener(
         item -> {
@@ -63,36 +70,40 @@ public class DailyReportSummaryActivity extends AppCompatActivity {
           return true;
         });
 
-    final TextView currentStatusSummary = findViewById(R.id.currentStatusSummary);
-    final TextView progressNotesSummary = findViewById(R.id.progressNotesSummary);
-    final CalendarView patientReportSummaryCalendarView =
-        findViewById(R.id.patientReportSummaryCalendarView);
-
     final Intent intent = getIntent();
     final String date = intent.getStringExtra(Util.DAILY_REPORT_DATE);
     final String notes = intent.getStringExtra(Util.DAILY_REPORT_STATUS_NOTES);
     final String[] statusList = intent.getStringArrayExtra(Util.DAILY_REPORT_STATUS_LIST);
-    if (null != statusList && 0 != statusList.length) {
+
+    if (statusList != null && statusList.length > 0) {
       for (int i = 0; i < statusList.length - 1; i++) {
         statuses.append(statusList[i]).append("\n");
       }
       statuses.append(statusList[statusList.length - 1]);
+    } else {
+      statuses.append("No status selected");
     }
 
-    if (android.os.Build.VERSION_CODES.N <= android.os.Build.VERSION.SDK_INT) {
+    if (date != null && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
       final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
       try {
-        final Date d;
-        d = formatter.parse(date);
-        dateMs = d.getTime();
+        final Date parsedDate = formatter.parse(date);
+        if (parsedDate != null) {
+          dateMs = parsedDate.getTime();
+          patientReportSummaryCalendarView.setDate(dateMs);
+        }
       } catch (final ParseException e) {
         e.printStackTrace();
       }
     }
 
-    progressNotesSummary.setText(notes);
-    currentStatusSummary.setText(statuses);
-    patientReportSummaryCalendarView.setDate(dateMs);
+    if (notes != null && !notes.isEmpty()) {
+      progressNotesSummary.setText(notes);
+    } else {
+      progressNotesSummary.setText("No progress notes available");
+    }
+
+    currentStatusSummary.setText(statuses.toString());
   }
 }
