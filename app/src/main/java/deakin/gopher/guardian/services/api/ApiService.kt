@@ -9,8 +9,8 @@ import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.CreatePatientLogRequest
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.PatientActivity
-import deakin.gopher.guardian.model.PatientOverviewResponse
 import deakin.gopher.guardian.model.PatientLog
+import deakin.gopher.guardian.model.PatientOverviewResponse
 import deakin.gopher.guardian.model.ReassignPatientRequest
 import deakin.gopher.guardian.model.UpdatePatientRequest
 import deakin.gopher.guardian.model.register.AuthResponse

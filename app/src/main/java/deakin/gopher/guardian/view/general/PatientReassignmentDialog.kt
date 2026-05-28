@@ -76,12 +76,13 @@ class PatientReassignmentDialog(
     private fun loadStaffOptions() {
         setLoadingState(isLoading = true, loadingMessage = "Loading available staff...")
 
-        val token = try {
-            "Bearer ${SessionManager.getToken()}"
-        } catch (exception: Exception) {
-            showLoadError("Session expired. Please log in again.")
-            return
-        }
+        val token =
+            try {
+                "Bearer ${SessionManager.getToken()}"
+            } catch (exception: Exception) {
+                showLoadError("Session expired. Please log in again.")
+                return
+            }
 
         activity.lifecycleScope.launch {
             val result =
@@ -216,13 +217,14 @@ class PatientReassignmentDialog(
             return
         }
 
-        val token = try {
-            "Bearer ${SessionManager.getToken()}"
-        } catch (exception: Exception) {
-            binding.tvError.visibility = View.VISIBLE
-            binding.tvError.text = "Session expired. Please log in again."
-            return
-        }
+        val token =
+            try {
+                "Bearer ${SessionManager.getToken()}"
+            } catch (exception: Exception) {
+                binding.tvError.visibility = View.VISIBLE
+                binding.tvError.text = "Session expired. Please log in again."
+                return
+            }
 
         binding.tvError.visibility = View.GONE
         setLoadingState(isLoading = true, loadingMessage = "Saving reassignment...")
