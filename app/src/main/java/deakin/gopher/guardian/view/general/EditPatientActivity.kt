@@ -119,7 +119,10 @@ class EditPatientActivity : BaseActivity() {
             else -> binding.genderSpinner.setSelection(0)
         }
 
-        Glide.with(this).load(patient.photoUrl).placeholder(R.drawable.profile).circleCrop()
+        Glide.with(this)
+            .load(patient.photoUrl)
+            .placeholder(R.drawable.profile)
+            .circleCrop()
             .into(binding.imgPreview)
     }
 
@@ -164,8 +167,10 @@ class EditPatientActivity : BaseActivity() {
     }
 
     private fun checkCameraPermissionAndOpen() {
-        if (ContextCompat.checkSelfPermission(
-                this, Manifest.permission.CAMERA
+        if (
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA,
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             openCamera()
@@ -222,14 +227,19 @@ class EditPatientActivity : BaseActivity() {
             }
 
             val response = try {
-                val photoPart = when {
-                    selectedPhotoUri != null -> prepareFilePart(
-                        "photo", selectedPhotoUri!!, this@EditPatientActivity
-                    )
+                val photoPart =
+                    when {
+                        selectedPhotoUri != null -> prepareFilePart(
+                            "photo",
+                            selectedPhotoUri!!,
+                            this@EditPatientActivity,
+                        )
 
-                    capturedPhotoBitmap != null -> prepareBitmapPart("photo", capturedPhotoBitmap!!)
-                    else -> null
-                }
+                        capturedPhotoBitmap != null ->
+                            prepareBitmapPart("photo", capturedPhotoBitmap!!)
+
+                        else -> null
+                    }
 
                 if (photoPart != null) {
                     val fullNamePart = fullName.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -267,21 +277,25 @@ class EditPatientActivity : BaseActivity() {
                     showMessage(response.body()?.apiMessage ?: "Patient updated successfully")
                     finish()
                 } else {
-                    val rawErrorBody = try {
-                        response?.errorBody()?.string()
-                    } catch (e: Exception) {
-                        null
-                    }
+                    val rawErrorBody =
+                        try {
+                            response?.errorBody()?.string()
+                        } catch (e: Exception) {
+                            null
+                        }
 
-                    val errorResponse = try {
-                        Gson().fromJson(rawErrorBody, ApiErrorResponse::class.java)
-                    } catch (e: Exception) {
-                        null
-                    }
+                    val errorResponse =
+                        try {
+                            Gson().fromJson(rawErrorBody, ApiErrorResponse::class.java)
+                        } catch (e: Exception) {
+                            null
+                        }
 
-                    val errorMessage = errorResponse?.apiError?.takeIf { it.isNotBlank() }
-                        ?: rawErrorBody?.takeIf { it.isNotBlank() } ?: response?.message()
-                            ?.takeIf { it.isNotBlank() } ?: "Failed to update patient"
+                    val errorMessage =
+                        errorResponse?.apiError?.takeIf { it.isNotBlank() }
+                            ?: rawErrorBody?.takeIf { it.isNotBlank() }
+                            ?: response?.message()?.takeIf { it.isNotBlank() }
+                            ?: "Failed to update patient"
 
                     showMessage(errorMessage)
                 }
@@ -307,7 +321,9 @@ class EditPatientActivity : BaseActivity() {
             }
 
             !NAME_REGEX.matches(name) -> {
-                setNameError("Name can contain only letters, spaces, apostrophes, dots or hyphens")
+                setNameError(
+                    "Name can contain only letters, spaces, apostrophes, dots or hyphens",
+                )
                 false
             }
 
@@ -409,7 +425,12 @@ class EditPatientActivity : BaseActivity() {
         val currentDob = patient.dateOfBirth.substringBefore("T")
         val currentGender = patient.gender.trim().lowercase()
 
-        return fullName != currentName || dob != currentDob || gender != currentGender || selectedPhotoUri != null || capturedPhotoBitmap != null
+        return (
+            fullName != currentName ||
+                dob != currentDob ||
+                gender != currentGender ||
+                selectedPhotoUri != null ||
+                capturedPhotoBitmap != null
+        )
     }
-
 }
