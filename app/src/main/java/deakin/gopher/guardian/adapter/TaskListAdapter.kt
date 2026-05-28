@@ -47,19 +47,24 @@ class TaskListAdapter(private var tasks: MutableList<Task>) :
         init {
             viewTaskDetailsButton.setOnClickListener {
                 val context = itemView.context
-                val task = tasks[adapterPosition]
-                val intent = Intent(context, TaskDetailActivity::class.java)
-                intent.putExtra("taskId", task.taskId)
-                context.startActivity(intent)
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val task = tasks[position]
+                    val intent = Intent(context, TaskDetailActivity::class.java)
+                    intent.putExtra("taskId", task.taskId)
+                    context.startActivity(intent)
+                }
             }
         }
 
         fun bind(task: Task) {
             descriptionTextView.text = task.description
             if (task.completed) {
-                taskCompletedIcon.setImageResource(R.drawable.green_circle)
+                taskCompletedIcon.setImageResource(R.drawable.ic_checked_item)
+                descriptionTextView.setTextColor(itemView.context.getColor(R.color.default_text))
             } else {
-                taskCompletedIcon.setImageResource(R.drawable.red_circle)
+                taskCompletedIcon.setImageResource(R.drawable.ic_circle_outline)
+                descriptionTextView.setTextColor(itemView.context.getColor(R.color.black))
             }
         }
     }

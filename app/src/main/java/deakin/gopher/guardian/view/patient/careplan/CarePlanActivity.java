@@ -1,6 +1,5 @@
 package deakin.gopher.guardian.view.patient.careplan;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,8 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.model.CarePlan;
-import deakin.gopher.guardian.services.EmailPasswordAuthService;
-import deakin.gopher.guardian.view.general.Homepage4admin;
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper;
 import java.util.HashMap;
 
 public class CarePlanActivity extends AppCompatActivity {
@@ -68,28 +66,8 @@ public class CarePlanActivity extends AppCompatActivity {
           drawerLayout.openDrawer(GravityCompat.START);
         });
 
-    navigationView.setNavigationItemSelectedListener(
-        item -> {
-          int id = item.getItemId();
-          if (id == R.id.nav_home) {
-            startActivity(new Intent(CarePlanActivity.this, Homepage4admin.class));
-            finish();
-          } else if (id == R.id.nav_signout) {
-            new AlertDialog.Builder(this)
-                .setTitle(R.string.sign_out)
-                .setMessage(R.string.sign_out_confirmation_message)
-                .setPositiveButton(
-                    R.string.sign_out,
-                    (dialog, which) -> {
-                      EmailPasswordAuthService.signOut(this);
-                      finish();
-                    })
-                .setNegativeButton(R.string.stay_in, null)
-                .show();
-          }
-          drawerLayout.closeDrawer(GravityCompat.START);
-          return true;
-        });
+    DrawerNavigationHelper.bindStandardDrawer(
+        this, drawerLayout, navigationView, carePlanMenuButton);
 
     // careplan type
     carePlanTypeRadioGroup = findViewById(R.id.carePlanTypeRGroup);

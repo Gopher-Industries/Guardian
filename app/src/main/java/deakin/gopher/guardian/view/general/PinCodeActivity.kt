@@ -30,7 +30,7 @@ import retrofit2.Response
 
 class PinCodeActivity : AppCompatActivity() {
     private lateinit var userRole: Role
-    private val userEmail = SessionManager.getCurrentUser().email
+    private lateinit var userEmail: String
 
     private lateinit var progressBar: ProgressBar
     private lateinit var submitButton: Button
@@ -40,7 +40,24 @@ class PinCodeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_enter_pin)
-        userRole = intent.getSerializableExtra("role") as Role
+
+        val currentUser =
+            try {
+                SessionManager.getCurrentUser()
+            } catch (exception: Exception) {
+                showMessage("Session expired. Please log in again.")
+                finish()
+                return
+            }
+        val intentRole = intent.getSerializableExtra("role") as? Role
+        if (intentRole == null) {
+            showMessage("Unable to continue without a user role.")
+            finish()
+            return
+        }
+
+        userRole = intentRole
+        userEmail = currentUser.email
 
         pinDigits =
             listOf(
@@ -72,11 +89,9 @@ class PinCodeActivity : AppCompatActivity() {
             startResendCooldown()
         }
 
-        // Initial PIN request
         sendPin()
         startResendCooldown()
 
-        // Focus first digit and show keyboard
         pinDigits[0].postDelayed({
             pinDigits[0].requestFocus()
             showKeyboard(pinDigits[0])
@@ -102,10 +117,8 @@ class PinCodeActivity : AppCompatActivity() {
                     ) {}
 
                     override fun afterTextChanged(s: Editable?) {
-                        if (s?.length == 1) {
-                            if (i < pinDigits.size - 1) {
-                                pinDigits[i + 1].requestFocus()
-                            }
+                        if (s?.length == 1 && i < pinDigits.size - 1) {
+                            pinDigits[i + 1].requestFocus()
                         }
                         updateSubmitButtonState()
                     }
@@ -126,8 +139,7 @@ class PinCodeActivity : AppCompatActivity() {
     }
 
     private fun updateSubmitButtonState() {
-        val isComplete = pinDigits.all { it.text.length == 1 }
-        submitButton.isEnabled = isComplete
+        submitButton.isEnabled = pinDigits.all { it.text.length == 1 }
     }
 
     private fun sendPin() {
@@ -211,7 +223,7 @@ class PinCodeActivity : AppCompatActivity() {
     }
 
     private fun hideKeyboard() {
-        val view = this.currentFocus
+        val view = currentFocus
         if (view != null) {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)

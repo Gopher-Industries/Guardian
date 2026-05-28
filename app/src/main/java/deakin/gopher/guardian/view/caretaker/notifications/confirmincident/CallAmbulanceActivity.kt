@@ -12,9 +12,9 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import deakin.gopher.guardian.R
-import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.view.general.BaseActivity
-import deakin.gopher.guardian.view.general.Homepage4admin
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper
+import deakin.gopher.guardian.view.general.Homepage4caretaker
 
 class CallAmbulanceActivity : BaseActivity() {
     var hospitalSpinner: Spinner? = null
@@ -34,29 +34,7 @@ class CallAmbulanceActivity : BaseActivity() {
             button.setOnClickListener {
                 drawerLayout.openDrawer(GravityCompat.START)
             }
-        }
-
-        navigationView.setNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> {
-                    startActivity(Intent(this, Homepage4admin::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_signout -> {
-                    androidx.appcompat.app.AlertDialog.Builder(this)
-                        .setTitle(R.string.sign_out)
-                        .setMessage(R.string.sign_out_confirmation_message)
-                        .setPositiveButton(R.string.sign_out) { _, _ ->
-                            EmailPasswordAuthService.signOut(this)
-                            finish()
-                        }
-                        .setNegativeButton(R.string.stay_in, null)
-                        .show()
-                    true
-                }
-                else -> false
-            }
+            DrawerNavigationHelper.bindStandardDrawer(this, drawerLayout, navigationView, button)
         }
 
         hospitalSpinner = findViewById(R.id.hospitalSpinner)
@@ -93,7 +71,7 @@ class CallAmbulanceActivity : BaseActivity() {
 
     fun onConfirmIncidentCancelClick(view: View?) {
         val medicalDiagnosticsActivityIntent =
-            Intent(this@CallAmbulanceActivity, Homepage4admin::class.java)
+            Intent(this@CallAmbulanceActivity, Homepage4caretaker::class.java)
         startActivity(medicalDiagnosticsActivityIntent)
     }
 

@@ -108,7 +108,7 @@ class EditPatientActivity : BaseActivity() {
 
     private fun populatePatientData() {
         binding.txtName.setText(patient.fullname)
-        binding.txtDob.setText(patient.dateOfBirth.substringBefore("T"))
+        binding.txtDob.setText(patient.dateOfBirth?.substringBefore("T") ?: "")
         binding.txtAge.setText(patient.age.toString())
 
         when (patient.gender.lowercase()) {
@@ -434,7 +434,7 @@ class EditPatientActivity : BaseActivity() {
         gender: String,
     ): Boolean {
         val currentName = patient.fullname.trim().replace("\\s+".toRegex(), " ")
-        val currentDob = patient.dateOfBirth.substringBefore("T")
+        val currentDob = patient.dateOfBirth?.substringBefore("T") ?: ""
         val currentGender = patient.gender.trim().lowercase()
 
         return (

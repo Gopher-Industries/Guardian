@@ -10,7 +10,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import deakin.gopher.guardian.R;
@@ -19,7 +18,6 @@ import deakin.gopher.guardian.model.GP;
 import deakin.gopher.guardian.model.MedicalDiagnostic;
 import deakin.gopher.guardian.model.NextOfKin;
 import deakin.gopher.guardian.model.PatientOldArchive;
-import deakin.gopher.guardian.services.EmailPasswordAuthService;
 import deakin.gopher.guardian.util.DataListener;
 
 public class PatientProfileAddActivity extends BaseActivity implements DataListener {
@@ -49,22 +47,6 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
     customHeader.setHeaderTopImage(R.drawable.add_image_button);
 
     navigationView.setItemIconTintList(null);
-    navigationView.setNavigationItemSelectedListener(
-        item -> {
-          final int itemId = item.getItemId();
-          if (itemId == R.id.nav_home) {
-            startActivity(new Intent(PatientProfileAddActivity.this, Homepage4admin.class));
-            finish();
-            drawerLayout.closeDrawer(GravityCompat.START);
-            return true;
-          } else if (itemId == R.id.nav_signout) {
-            showSignOutConfirmationDialog();
-            drawerLayout.closeDrawer(GravityCompat.START);
-            return true;
-          }
-          drawerLayout.closeDrawer(GravityCompat.START);
-          return false;
-        });
 
     if (null != customHeader) {
       customHeader.menuButton.setOnClickListener(
@@ -75,27 +57,10 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
           });
     }
 
-    navigationView.setNavigationItemSelectedListener(
-        menuItem -> {
-          final int id = menuItem.getItemId();
-
-          if (id == R.id.nav_home) {
-            startActivity(new Intent(PatientProfileAddActivity.this, Homepage4admin.class));
-
-          } else if (id == R.id.nav_signout) {
-            FirebaseAuth.getInstance().signOut();
-            Intent loginIntent = new Intent(PatientProfileAddActivity.this, LoginActivity.class);
-            loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(loginIntent);
-            finish();
-          }
-
-          if (null != drawerLayout) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-          }
-
-          return true;
-        });
+    if (customHeader != null) {
+      DrawerNavigationHelper.bindStandardDrawer(
+          this, drawerLayout, navigationView, customHeader.menuButton);
+    }
 
     viewPager2.registerOnPageChangeCallback(
         new ViewPager2.OnPageChangeCallback() {
@@ -133,15 +98,19 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
     if (null != patient) {
       this.patient = patient;
     }
+
     if (null != nextOfKin1) {
       this.nextOfKin1 = nextOfKin1;
     }
+
     if (null != nextOfKin2) {
       this.nextOfKin2 = nextOfKin2;
     }
+
     if (null != gp1) {
       this.gp1 = gp1;
     }
+
     if (null != gp2) {
       this.gp2 = gp2;
     }
@@ -149,12 +118,15 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
 
   @Override
   public void onDataFinished(final Boolean isFinished) {
+    // insert a dialog here
+
     final AlertDialog.Builder builder = new AlertDialog.Builder(this);
     builder.setTitle("Saving Changes?");
     builder.setPositiveButton(
         "YES",
         (dialog, whichButton) -> {
           saveInFirebase();
+          // Toast.makeText(MainActivity.this, "Yaay", Toast.LENGTH_SHORT).show();
         });
     builder.setNegativeButton("No", null);
 
@@ -167,8 +139,11 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
           dialog
               .getButton(AlertDialog.BUTTON_NEGATIVE)
               .setTextColor(getResources().getColor(R.color.colorRed));
+          // dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.black));
         });
     dialog.show();
+    // insert
+
   }
 
   private void saveInFirebase() {
@@ -184,7 +159,6 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
     patient.setNokId2(nof2_id);
     patient.setGpId1(gp1_id);
     patient.setGpId2(gp2_id);
-
     nokRef
         .child(nof1_id)
         .setValue(nextOfKin1)
@@ -220,8 +194,8 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
                         "fail to upload first gp" + e.getMessage(),
                         Toast.LENGTH_SHORT)
                     .show());
-
     if (null != gp2) {
+
       gpRef
           .child(gp2_id)
           .setValue(gp2)
@@ -258,7 +232,6 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
                         "fail to upload patient" + e.getMessage(),
                         Toast.LENGTH_SHORT)
                     .show());
-
     PatientRelatedCreat(patient_id);
   }
 
@@ -278,23 +251,9 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
             e ->
                 Toast.makeText(
                         PatientProfileAddActivity.this,
-                        "Fail to create health detail of this patient! Please try again! Reason: "
+                        "Fail to create health detail of this patient!Please try it again!Reason:"
                             + e.getMessage(),
                         Toast.LENGTH_SHORT)
                     .show());
-  }
-
-  private void showSignOutConfirmationDialog() {
-    final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setTitle(R.string.sign_out);
-    builder.setMessage(R.string.sign_out_confirmation_message);
-    builder.setPositiveButton(
-        R.string.sign_out,
-        (dialog, which) -> {
-          EmailPasswordAuthService.signOut(this);
-          finish();
-        });
-    builder.setNegativeButton(R.string.stay_in, null);
-    builder.show();
   }
 }

@@ -2,11 +2,9 @@ package deakin.gopher.guardian.view.general;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,7 +17,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
-import deakin.gopher.guardian.services.EmailPasswordAuthService;
 
 public class Setting extends BaseActivity implements View.OnClickListener {
   ConstraintLayout settingsThemeButton;
@@ -34,7 +31,6 @@ public class Setting extends BaseActivity implements View.OnClickListener {
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_setting);
-    String userType = getIntent().getStringExtra("userType");
 
     settingsThemeButton = findViewById(R.id.settings_theme_button);
     settingsNotificationButton = findViewById(R.id.settings_notification_button);
@@ -53,6 +49,9 @@ public class Setting extends BaseActivity implements View.OnClickListener {
           drawerLayout.openDrawer(GravityCompat.START);
         });
 
+    DrawerNavigationHelper.bindStandardDrawer(
+        this, drawerLayout, navigationView, settingsMenuButton);
+
     final ConstraintLayout settingsThemeButton = findViewById(R.id.settings_theme_button);
 
     notificationSwitch = findViewById(R.id.notification_switch);
@@ -61,7 +60,6 @@ public class Setting extends BaseActivity implements View.OnClickListener {
 
     themeSwitch = findViewById(R.id.theme_switch);
     themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> handleThemeSwitch(isChecked));
-    configureNavigationDrawer(userType);
   }
 
   @Override
@@ -84,46 +82,6 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     } else {
       showToast("Notifications turned off");
     }
-  }
-
-  private void configureNavigationDrawer(String userType) {
-    NavigationView navigationView = findViewById(R.id.nav_view);
-    Menu menu = navigationView.getMenu();
-    menu.clear();
-
-    navigationView.inflateMenu(R.menu.nav_menu);
-    navigationView.setNavigationItemSelectedListener(
-        menuItem -> {
-          int id = menuItem.getItemId();
-          if (id == R.id.nav_home) {
-            Intent intent =
-                new Intent(
-                    Setting.this,
-                    userType.equals("admin") ? Homepage4admin.class : Homepage4caretaker.class);
-            startActivity(intent);
-            finish();
-          } else if (id == R.id.nav_signout) {
-            showSignOutConfirmationDialog();
-          }
-
-          DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-          drawerLayout.closeDrawer(GravityCompat.START);
-          return true;
-        });
-  }
-
-  private void showSignOutConfirmationDialog() {
-    new AlertDialog.Builder(this)
-        .setTitle(R.string.sign_out)
-        .setMessage(R.string.sign_out_confirmation_message)
-        .setPositiveButton(
-            R.string.sign_out,
-            (dialog, which) -> {
-              EmailPasswordAuthService.signOut(this);
-              finish();
-            })
-        .setNegativeButton(R.string.stay_in, null)
-        .show();
   }
 
   private void handleThemeSwitch(final boolean isChecked) {

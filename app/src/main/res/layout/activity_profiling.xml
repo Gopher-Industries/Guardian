@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#EDEDED"
-            android:orientation="vertical"
-            tools:context="deakin.gopher.guardian.view.patient.associateradar.ActivityProfilingActivity">
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#EDEDED"
+                android:orientation="vertical"
+                tools:context="deakin.gopher.guardian.view.patient.associateradar.ActivityProfilingActivity">
 
         <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -129,6 +135,11 @@
                 android:background="@drawable/rectangle_no_border"
                 android:orientation="vertical"></LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
 
-</ScrollView>
+    </ScrollView>
+
+    <include
+            android:id="@id/nav_view"
+            layout="@layout/navigation_view" />
+</androidx.drawerlayout.widget.DrawerLayout>

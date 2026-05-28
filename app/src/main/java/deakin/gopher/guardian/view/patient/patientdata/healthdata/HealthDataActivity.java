@@ -7,6 +7,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper;
 
 public class HealthDataActivity extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class HealthDataActivity extends AppCompatActivity {
 
     final NavigationView navigationView = findViewById(R.id.nav_view);
     healthDataMenuButton = findViewById(R.id.menuButton_a);
+    final ImageView secondaryMenuButton = findViewById(R.id.menuButton_b);
     final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
     navigationView.setItemIconTintList(null);
 
@@ -26,5 +28,8 @@ public class HealthDataActivity extends AppCompatActivity {
         v -> {
           drawerLayout.openDrawer(GravityCompat.START);
         });
+
+    DrawerNavigationHelper.bindStandardDrawer(
+        this, drawerLayout, navigationView, healthDataMenuButton, secondaryMenuButton);
   }
 }

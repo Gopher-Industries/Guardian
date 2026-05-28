@@ -10,9 +10,9 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import deakin.gopher.guardian.R
-import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.view.general.BaseActivity
-import deakin.gopher.guardian.view.general.Homepage4admin
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper
+import deakin.gopher.guardian.view.general.Homepage4caretaker
 
 class FalseAlertConfirmedActivity : BaseActivity() {
     var falseAlertMenuButton: ImageView? = null
@@ -30,31 +30,14 @@ class FalseAlertConfirmedActivity : BaseActivity() {
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         navigationView.itemIconTintList = null
 
-        falseAlertMenuButton?.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
+        falseAlertMenuButton?.setOnClickListener(
+            View.OnClickListener { v: View? ->
+                drawerLayout.openDrawer(GravityCompat.START)
+            },
+        )
 
-        navigationView.setNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> {
-                    startActivity(Intent(this, Homepage4admin::class.java))
-                    finish()
-                    true
-                }
-                R.id.nav_signout -> {
-                    androidx.appcompat.app.AlertDialog.Builder(this)
-                        .setTitle(R.string.sign_out)
-                        .setMessage(R.string.sign_out_confirmation_message)
-                        .setPositiveButton(R.string.sign_out) { _, _ ->
-                            EmailPasswordAuthService.signOut(this)
-                            finish()
-                        }
-                        .setNegativeButton(R.string.stay_in, null)
-                        .show()
-                    true
-                }
-                else -> false
-            }
+        falseAlertMenuButton?.let { menuButton ->
+            DrawerNavigationHelper.bindStandardDrawer(this, drawerLayout, navigationView, menuButton)
         }
     }
 
@@ -65,7 +48,7 @@ class FalseAlertConfirmedActivity : BaseActivity() {
         val okButtonFalseAlert = dialog.findViewById<Button>(R.id.okButtonFalseAlert)
         okButtonFalseAlert.setOnClickListener { v: View? ->
             val intent =
-                Intent(applicationContext, Homepage4admin::class.java)
+                Intent(applicationContext, Homepage4caretaker::class.java)
             startActivity(intent)
             finish()
         }

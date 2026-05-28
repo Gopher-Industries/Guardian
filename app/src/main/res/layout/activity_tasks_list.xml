@@ -5,175 +5,149 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="deakin.gopher.guardian.view.general.PatientProfileAddActivity">
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/patient_list_backgroud"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context=".view.general.TasksListActivity">
+        android:background="#FFFFFF">
 
-    <ImageView
+        <View
+            android:id="@+id/header_background"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@drawable/patient_list_backgroud"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
             android:id="@+id/task_list_manu_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="51dp"
-            android:layout_marginTop="65dp"
-            android:contentDescription="TODO"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:contentDescription="Menu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/menu_button" />
 
-
-    <ImageView
-            android:id="@+id/task_list_head_image"
-            android:layout_width="54dp"
-            android:layout_height="51dp"
-            android:layout_marginStart="94dp"
-            android:layout_marginTop="56dp"
-            android:contentDescription="TODO"
-            app:layout_constraintStart_toEndOf="@+id/task_list_company_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/profile_icon_small" />
-
-    <ImageView
+        <ImageView
             android:id="@+id/task_list_company_icon"
-            android:layout_width="67dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="172dp"
-            android:layout_marginTop="44dp"
-            android:contentDescription="TODO"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/gopher_logo" />
 
-    <TextView
-        android:id="@+id/task_list_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="@string/task_list"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="25sp"
-        android:translationZ="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_list_company_icon" />
-
-    <SearchView
-        android:id="@+id/task_list_searchView"
-        android:layout_width="375dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/white_rectangle_patient_list"
-        android:iconifiedByDefault="false"
-        android:queryHint="@string/search"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_list_title" />
-
-
-    <androidx.cardview.widget.CardView
-            android:id="@+id/task_list_task_overview"
-            android:layout_width="375dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            app:cardCornerRadius="30dp"
+        <TextView
+            android:id="@+id/task_list_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/task_list"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_list_searchView">
+            app:layout_constraintTop_toBottomOf="@+id/task_list_company_icon" />
 
-        <Button
-            android:id="@+id/add_task_button"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/task_list_task_overview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:alpha="0"
-            android:backgroundTint="@color/_bg__new_homepage___ek2_color"
-            android:text="" />
+            android:layout_height="0dp"
+            android:layout_marginTop="-20dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_background">
 
-        <LinearLayout
-                android:id="@+id/task_list_overview_layout"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="15dp">
+                android:padding="20dp">
 
-            <ImageView
-                    android:id="@+id/imageView55"
-                    android:layout_width="35dp"
-                    android:layout_height="33dp"
-                    android:contentDescription="TODO"
-                    app:srcCompat="@drawable/red_circle" />
+                <TextView
+                    android:id="@+id/task_progress_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Checklist 0 / 0"
+                    android:textColor="#333333"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="6dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/add_task"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                <SearchView
+                    android:id="@+id/task_list_searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edit_text_border"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="Search tasks..."
+                    app:layout_constraintTop_toBottomOf="@+id/task_progress_text" />
 
-            <ImageView
-                android:id="@+id/imageView64"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginLeft="190dp"
-                android:contentDescription="TODO"
-                app:srcCompat="@drawable/add_image_button"
-                tools:layout_editor_absoluteX="337dp"
-                tools:layout_editor_absoluteY="234dp" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/task_list_recycleView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/add_item_layout"
+                    app:layout_constraintTop_toBottomOf="@+id/task_list_searchView" />
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/add_item_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingVertical="12dp"
+                    app:layout_constraintBottom_toBottomOf="parent">
 
-    </androidx.cardview.widget.CardView>
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:srcCompat="@drawable/ic_circle_outline" />
 
-    <ScrollView
-            android:id="@+id/task_list_scrollView"
-            android:layout_width="409dp"
-            android:layout_height="338dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_list_task_overview">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="Add an item"
+                        android:textColor="#808080"
+                        android:textSize="16sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/task_list_recycleView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-    </ScrollView>
+                    <Button
+                        android:id="@+id/add_task_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0"
+                        android:background="?attr/selectableItemBackground" />
+                </LinearLayout>
 
-    <ImageView
-            android:id="@+id/imageView61"
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <ImageButton
+            android:id="@+id/imageView62"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginStart="188dp"
-            android:contentDescription="TODO"
-            app:layout_constraintBottom_toTopOf="@+id/imageView62"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/three_point" />
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Add Task"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/edit_button_plus" />
 
-    <ImageButton
-        android:id="@+id/imageView62"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="188dp"
-        android:layout_marginBottom="13dp"
-        android:contentDescription="TODO"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/edit_button_plus"
-        android:background="?attr/selectableItemBackgroundBorderless" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
     <include
         android:id="@id/nav_view"
         layout="@layout/navigation_view" />
+
 </androidx.drawerlayout.widget.DrawerLayout>

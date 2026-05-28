@@ -14,7 +14,12 @@ import deakin.gopher.guardian.model.Patient
 
 class PatientListAdapter(
     private var patients: List<Patient>,
+    private val showReassignAction: Boolean = false,
+    private val showAssignNurseAction: Boolean = true,
+    private val showEditAction: Boolean = true,
+    private val showDeleteAction: Boolean = false,
     private val onPatientClick: ((Patient) -> Unit)? = null,
+    private val onReassignClick: ((Patient) -> Unit)? = null,
     private val onAssignNurseClick: ((Patient) -> Unit)? = null,
     private val onEditClick: ((Patient) -> Unit)? = null,
     private val onDeleteClick: ((Patient) -> Unit)? = null,
@@ -62,14 +67,35 @@ class PatientListAdapter(
             onPatientClick?.invoke(patient)
         }
 
+        val hasAssignAction =
+            (showReassignAction && onReassignClick != null) ||
+                (showAssignNurseAction && onAssignNurseClick != null)
+        val hasEditAction = showEditAction && onEditClick != null
+        val hasDeleteAction = showDeleteAction && onDeleteClick != null
+        val hasManagementActions = hasAssignAction || hasEditAction || hasDeleteAction
+        holder.moreIcon.visibility = if (hasManagementActions) View.VISIBLE else View.GONE
+
         holder.moreIcon.setOnClickListener {
+            if (!hasManagementActions) {
+                return@setOnClickListener
+            }
             val popupMenu = PopupMenu(holder.itemView.context, it)
             popupMenu.inflate(R.menu.menu_patient_item)
+            popupMenu.menu.findItem(R.id.assign_nurse)?.isVisible =
+                hasAssignAction
+            popupMenu.menu.findItem(R.id.action_edit_patient)?.isVisible =
+                hasEditAction
+            popupMenu.menu.findItem(R.id.action_delete)?.isVisible =
+                hasDeleteAction
 
             popupMenu.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.assign_nurse -> {
-                        onAssignNurseClick?.invoke(patient)
+                        if (onReassignClick != null) {
+                            onReassignClick.invoke(patient)
+                        } else {
+                            onAssignNurseClick?.invoke(patient)
+                        }
                         true
                     }
                     R.id.action_edit_patient -> {
@@ -85,7 +111,9 @@ class PatientListAdapter(
                 }
             }
 
-            popupMenu.show()
+            if (popupMenu.menu.hasVisibleItems()) {
+                popupMenu.show()
+            }
         }
     }
 

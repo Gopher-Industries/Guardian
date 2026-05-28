@@ -14,6 +14,7 @@ import deakin.gopher.guardian.model.ApiErrorResponse
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.login.Role
 import deakin.gopher.guardian.model.login.SessionManager
+import deakin.gopher.guardian.services.api.ApiClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,8 +23,10 @@ import java.util.Locale
 
 class PatientDetailsActivity : BaseActivity() {
     private lateinit var binding: ActivityPatientDetailsBinding
-    private val currentUser = SessionManager.getCurrentUser()
+    private lateinit var currentUser: deakin.gopher.guardian.model.register.User
     private lateinit var activitiesAdapter: PatientActivityAdapter
+    private lateinit var currentPatient: Patient
+    private val nursesFragment = PatientAssignedNursesFragment()
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,52 +39,72 @@ class PatientDetailsActivity : BaseActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
+        currentUser =
+            try {
+                SessionManager.getCurrentUser()
+            } catch (exception: Exception) {
+                showMessage("Session expired. Please log in again.")
+                finish()
+                return
+            }
+
         if (currentUser.role == Role.Nurse) {
             binding.toolbar.setBackgroundColor(getColor(R.color.TG_blue))
-            // binding.containerPatientInfo.setBackgroundColor(getColor(R.color.TG_blue))
+            binding.containerPatientInfo.setBackgroundColor(getColor(R.color.TG_blue))
         }
 
         val patient = intent.getSerializableExtra("patient") as? Patient
         if (patient == null) {
-            showMessage("Patient details not available")
+            showMessage("Patient details are unavailable.")
             finish()
             return
         }
 
-        bindPatientDetails(patient)
+        currentPatient = patient
+        bindPatient(currentPatient)
 
-        val nursesFragment = PatientAssignedNursesFragment()
-        nursesFragment.setAssignedNurses(patient.assignedNurses ?: emptyList())
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentAssignedNursesContainer, nursesFragment)
             .commit()
+
+        binding.buttonReassignStaff.visibility =
+            if (currentUser.role == Role.Admin) View.VISIBLE else View.GONE
+        binding.buttonReassignStaff.setOnClickListener {
+            PatientReassignmentDialog(
+                activity = this,
+                patient = currentPatient,
+                onReassigned = {
+                    refreshPatientDetails()
+                },
+            ).show()
+        }
 
         activitiesAdapter = PatientActivityAdapter(emptyList())
         binding.recyclerViewActivities.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewActivities.adapter = activitiesAdapter
 
-        fetchPatientActivities(patient.id)
+        fetchPatientActivities(currentPatient.id)
+
+        if (currentUser.role == Role.Admin) {
+            refreshPatientDetails(showLoading = false)
+        }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun bindPatientDetails(patient: Patient) {
+    private fun bindPatient(patient: Patient) {
+        currentPatient = patient
+
         val formattedGender =
             patient.gender.replaceFirstChar {
                 if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
             }
-
         val dob = patient.dateOfBirth?.substringBefore("T") ?: "Not available"
-
         val healthConditionsText =
-            if (!patient.healthConditions.isNullOrEmpty()) {
+            if (patient.healthConditions.isNotEmpty()) {
                 patient.healthConditions.joinToString(", ") { condition ->
                     condition.split(" ").joinToString(" ") { word ->
                         word.replaceFirstChar {
-                            if (it.isLowerCase()) {
-                                it.titlecase(Locale.getDefault())
-                            } else {
-                                it.toString()
-                            }
+                            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
                         }
                     }
                 }
@@ -94,6 +117,9 @@ class PatientDetailsActivity : BaseActivity() {
         binding.tvDob.text = "Date of Birth: $dob"
         binding.tvGender.text = formattedGender
         binding.tvHealthConditions.text = "Health Conditions: $healthConditionsText"
+        binding.tvCaretaker.text = "Caretaker: ${patient.caretaker?.name ?: "Not assigned"}"
+        binding.tvAssignedDoctor.text =
+            "Assigned Doctor: ${patient.assignedDoctor?.name ?: "Not assigned"}"
 
         Glide.with(this)
             .load(patient.photoUrl)
@@ -101,6 +127,42 @@ class PatientDetailsActivity : BaseActivity() {
             .error(R.drawable.profile)
             .circleCrop()
             .into(binding.imagePatient)
+
+        nursesFragment.setAssignedNurses(patient.assignedNurses)
+    }
+
+    private fun refreshPatientDetails(showLoading: Boolean = true) {
+        val token = "Bearer ${SessionManager.getToken()}"
+        CoroutineScope(Dispatchers.IO).launch {
+            if (showLoading) {
+                withContext(Dispatchers.Main) {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+            }
+
+            val response =
+                try {
+                    ApiClient.apiService.getPatientOverview(
+                        token = token,
+                        patientId = currentPatient.id,
+                        organizationId = currentUser.organization,
+                    )
+                } catch (exception: Exception) {
+                    null
+                }
+
+            withContext(Dispatchers.Main) {
+                if (showLoading) {
+                    binding.progressBar.visibility = View.GONE
+                }
+
+                if (response?.isSuccessful == true) {
+                    response.body()?.patient?.let { updatedPatient ->
+                        bindPatient(updatedPatient)
+                    }
+                }
+            }
+        }
     }
 
     private fun fetchPatientActivities(patientId: String) {
@@ -114,10 +176,7 @@ class PatientDetailsActivity : BaseActivity() {
             }
 
             try {
-                val response =
-                    deakin.gopher.guardian.services.api.ApiClient
-                        .apiService
-                        .getPatientActivities(token, patientId)
+                val response = ApiClient.apiService.getPatientActivities(token, patientId)
 
                 withContext(Dispatchers.Main) {
                     binding.progressBar.visibility = View.GONE
@@ -130,29 +189,17 @@ class PatientDetailsActivity : BaseActivity() {
                             binding.recyclerViewActivities.visibility = View.VISIBLE
                             binding.tvEmptyMessage.visibility = View.GONE
                         } else {
+                            activitiesAdapter.updateData(emptyList())
                             binding.recyclerViewActivities.visibility = View.GONE
                             binding.tvEmptyMessage.visibility = View.VISIBLE
                             binding.tvEmptyMessage.text = "No patient activities found"
                         }
                     } else {
-                        val errorBody = response.errorBody()?.string()
-
-                        val errorResponse: ApiErrorResponse? =
-                            if (!errorBody.isNullOrBlank()) {
-                                try {
-                                    Gson().fromJson(errorBody, ApiErrorResponse::class.java)
-                                } catch (e: Exception) {
-                                    null
-                                }
-                            } else {
-                                null
-                            }
-
+                        val errorResponse = readError(response.errorBody()?.string())
                         binding.recyclerViewActivities.visibility = View.GONE
                         binding.tvEmptyMessage.visibility = View.VISIBLE
                         binding.tvEmptyMessage.text = "Unable to load patient activities"
-
-                        showMessage(errorResponse?.apiError ?: "Failed to load activities")
+                        showMessage(errorResponse ?: "Failed to load activities")
                     }
                 }
             } catch (e: Exception) {
@@ -164,6 +211,17 @@ class PatientDetailsActivity : BaseActivity() {
                     showMessage("Network error occurred")
                 }
             }
+        }
+    }
+
+    private fun readError(errorBody: String?): String? {
+        if (errorBody.isNullOrBlank()) {
+            return null
+        }
+        return try {
+            Gson().fromJson(errorBody, ApiErrorResponse::class.java)?.apiError
+        } catch (exception: Exception) {
+            null
         }
     }
 

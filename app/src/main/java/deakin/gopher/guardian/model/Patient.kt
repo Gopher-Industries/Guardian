@@ -11,13 +11,14 @@ import java.time.ZoneId
 data class Patient(
     @SerializedName("_id") val id: String,
     @SerializedName("fullname") val fullname: String,
-    @SerializedName("photoUrl") val photoUrl: String,
-    @SerializedName("dateOfBirth") val dateOfBirth: String,
+    @SerializedName("photoUrl") val photoUrl: String? = null,
+    @SerializedName("dateOfBirth") val dateOfBirth: String? = null,
     @SerializedName("age") val _age: Int,
     @SerializedName("gender") val gender: String,
-    @SerializedName("healthConditions") val healthConditions: List<String>,
-    @SerializedName("caretaker") val caretaker: User,
-    @SerializedName("assignedNurses") val assignedNurses: List<User>,
+    @SerializedName("healthConditions") val healthConditions: List<String> = emptyList(),
+    @SerializedName("caretaker") val caretaker: User? = null,
+    @SerializedName("assignedNurses") val assignedNurses: List<User> = emptyList(),
+    @SerializedName("assignedDoctor") val assignedDoctor: User? = null,
 ) : Serializable {
     val age: Int
         get() {
@@ -64,6 +65,44 @@ data class PatientActivity(
 data class AddPatientActivityResponse(
     @SerializedName("activity") val activity: PatientActivity,
 ) : BaseModel()
+
+data class AdminPatientListResponse(
+    @SerializedName("patients") val patients: List<Patient> = emptyList(),
+)
+
+data class PatientOverviewResponse(
+    @SerializedName("patient") val patient: Patient? = null,
+)
+
+data class StaffListResponse(
+    @SerializedName("staff") val staff: List<StaffMember> = emptyList(),
+)
+
+data class StaffMember(
+    @SerializedName(value = "_id", alternate = ["id"]) val id: String,
+    @SerializedName("fullname") val fullname: String,
+    @SerializedName("email") val email: String,
+    @SerializedName("photoUrl") val photoUrl: String? = null,
+    @SerializedName("role") val role: StaffRole? = null,
+) {
+    fun displayLabel(): String {
+        return if (email.isBlank()) {
+            fullname
+        } else {
+            "$fullname ($email)"
+        }
+    }
+}
+
+data class StaffRole(
+    @SerializedName("name") val name: String? = null,
+)
+
+data class ReassignPatientRequest(
+    @SerializedName("caretakerId") val caretakerId: String,
+    @SerializedName("nurseId") val nurseId: String,
+    @SerializedName("doctorId") val doctorId: String,
+)
 
 data class UpdatePatientRequest(
     @SerializedName("fullName") val fullName: String,

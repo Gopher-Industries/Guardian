@@ -2,8 +2,6 @@ package deakin.gopher.guardian.view.general
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,48 +23,63 @@ import kotlinx.coroutines.withContext
 
 class PatientListActivity : BaseActivity() {
     private lateinit var binding: ActivityPatientListBinding
+    private val currentUser = SessionManager.getCurrentUser()
+    private val canAddPatients = currentUser.role == Role.Admin
+    private val canReassignPatients = currentUser.role == Role.Admin
+    private val canAssignNurse = currentUser.role != Role.Nurse && !canReassignPatients
+    private val canEditPatients = currentUser.role != Role.Nurse
+    private val canDeletePatients = currentUser.role == Role.Admin
 
     private val patientListAdapter =
         PatientListAdapter(
             emptyList(),
+            showReassignAction = canReassignPatients,
+            showAssignNurseAction = canAssignNurse,
+            showEditAction = canEditPatients,
+            showDeleteAction = canDeletePatients,
             onPatientClick = { patient ->
                 val intent = Intent(this, PatientDetailsActivity::class.java)
                 intent.putExtra("patient", patient)
                 startActivity(intent)
             },
-            onAssignNurseClick = { patient ->
-                if (currentUser.role == Role.Nurse) {
-                    Toast.makeText(
-                        this,
-                        "Only caretaker can assign nurse to the patient",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+            onReassignClick =
+                if (canReassignPatients) {
+                    { patient ->
+                        openReassignmentDialog(patient)
+                    }
                 } else {
-                    val intent = Intent(this, AssignNurseActivity::class.java)
-                    intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_ID, patient.id)
-                    intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_NAME, patient.fullname)
-                    startActivity(intent)
-                }
-            },
-            onEditClick = { patient ->
-                if (currentUser.role == Role.Nurse) {
-                    Toast.makeText(
-                        this,
-                        "Only caretaker can edit patient info",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    null
+                },
+            onAssignNurseClick =
+                if (canAssignNurse) {
+                    { patient ->
+                        val intent = Intent(this, AssignNurseActivity::class.java)
+                        intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_ID, patient.id)
+                        intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_NAME, patient.fullname)
+                        startActivity(intent)
+                    }
                 } else {
-                    val intent = Intent(this, EditPatientActivity::class.java)
-                    intent.putExtra(EditPatientActivity.EXTRA_PATIENT, patient)
-                    startActivity(intent)
-                }
-            },
-            onDeleteClick = { patient ->
-                confirmDeletePatient(patient)
-            },
+                    null
+                },
+            onEditClick =
+                if (canEditPatients) {
+                    { patient ->
+                        val intent = Intent(this, EditPatientActivity::class.java)
+                        intent.putExtra(EditPatientActivity.EXTRA_PATIENT, patient)
+                        startActivity(intent)
+                    }
+                } else {
+                    null
+                },
+            onDeleteClick =
+                if (canDeletePatients) {
+                    { patient ->
+                        confirmDeletePatient(patient)
+                    }
+                } else {
+                    null
+                },
         )
-
-    private val currentUser = SessionManager.getCurrentUser()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +89,15 @@ class PatientListActivity : BaseActivity() {
         setSupportActionBar(binding.toolbar)
         binding.toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+        binding.toolbar.menu.findItem(R.id.action_add_patient).isVisible = canAddPatients
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            if (item.itemId == R.id.action_add_patient && canAddPatients) {
+                startActivity(Intent(this, AddNewPatientActivity::class.java))
+                true
+            } else {
+                false
+            }
         }
 
         if (currentUser.role == Role.Nurse) {
@@ -89,6 +111,16 @@ class PatientListActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         fetchPatients()
+    }
+
+    private fun openReassignmentDialog(patient: Patient) {
+        PatientReassignmentDialog(
+            activity = this,
+            patient = patient,
+            onReassigned = {
+                fetchPatients()
+            },
+        ).show()
     }
 
     private fun confirmDeletePatient(patient: Patient) {
@@ -128,73 +160,65 @@ class PatientListActivity : BaseActivity() {
                 binding.recyclerViewPatients.visibility = View.VISIBLE
             }
 
-            try {
-                val response = ApiClient.apiService.getAssignedPatients(token)
-
-                withContext(Dispatchers.Main) {
-                    binding.progressBar.hide()
-
-                    if (response.isSuccessful) {
-                        val patients = response.body()
-
-                        if (!patients.isNullOrEmpty()) {
-                            patientListAdapter.updateData(patients)
-                            binding.recyclerViewPatients.visibility = View.VISIBLE
-                            binding.tvEmptyMessage.visibility = View.GONE
-                        } else {
-                            patientListAdapter.updateData(emptyList())
-                            binding.recyclerViewPatients.visibility = View.GONE
-                            binding.tvEmptyMessage.visibility = View.VISIBLE
-                            binding.tvEmptyMessage.text = "No patients found"
-                        }
-                    } else {
-                        patientListAdapter.updateData(emptyList())
-                        binding.recyclerViewPatients.visibility = View.GONE
-                        binding.tvEmptyMessage.visibility = View.VISIBLE
-                        binding.tvEmptyMessage.text = "Unable to load patients"
-
-                        val errorBody = response.errorBody()?.string()
-                        val errorResponse =
-                            if (!errorBody.isNullOrBlank()) {
-                                try {
-                                    Gson().fromJson(errorBody, ApiErrorResponse::class.java)
-                                } catch (e: Exception) {
-                                    null
-                                }
-                            } else {
-                                null
-                            }
-
-                        showMessage(errorResponse?.apiError ?: response.message())
+            val adminResponse =
+                if (canReassignPatients) {
+                    try {
+                        ApiClient.apiService.getAdminPatients(token)
+                    } catch (exception: Exception) {
+                        null
+                    }
+                } else {
+                    null
+                }
+            val assignedResponse =
+                if (adminResponse?.isSuccessful == true) {
+                    null
+                } else {
+                    try {
+                        ApiClient.apiService.getAssignedPatients(token)
+                    } catch (exception: Exception) {
+                        null
                     }
                 }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    binding.progressBar.hide()
+
+            withContext(Dispatchers.Main) {
+                binding.progressBar.hide()
+
+                val patients = adminResponse?.body()?.patients ?: assignedResponse?.body()
+
+                if (!patients.isNullOrEmpty()) {
+                    patientListAdapter.updateData(patients)
+                    binding.recyclerViewPatients.visibility = View.VISIBLE
+                    binding.tvEmptyMessage.visibility = View.GONE
+                } else {
                     patientListAdapter.updateData(emptyList())
                     binding.recyclerViewPatients.visibility = View.GONE
                     binding.tvEmptyMessage.visibility = View.VISIBLE
-                    binding.tvEmptyMessage.text = "Network error occurred"
-                    showMessage("Network error occurred")
+                    binding.tvEmptyMessage.text =
+                        if (patients != null) "No patients found" else "Unable to load patients"
+
+                    if (patients == null) {
+                        val errorResponse =
+                            readError(
+                                adminResponse?.errorBody()?.string()
+                                    ?: assignedResponse?.errorBody()?.string(),
+                            )
+                        showMessage(errorResponse ?: "Failed to load patients")
+                    }
                 }
             }
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (currentUser.organization != null) {
-            return false
+    private fun readError(errorBody: String?): String? {
+        if (errorBody.isNullOrBlank()) {
+            return null
         }
-        menuInflater.inflate(R.menu.menu_patient_list, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_add_patient) {
-            startActivity(Intent(this, AddNewPatientActivity::class.java))
-            return true
+        return try {
+            Gson().fromJson(errorBody, ApiErrorResponse::class.java)?.apiError
+        } catch (exception: Exception) {
+            null
         }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun showMessage(message: String) {
