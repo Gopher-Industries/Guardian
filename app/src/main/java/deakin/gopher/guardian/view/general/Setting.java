@@ -18,8 +18,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 import deakin.gopher.guardian.R;
+import deakin.gopher.guardian.services.EmailPasswordAuthService;
 
 public class Setting extends BaseActivity implements View.OnClickListener {
   ConstraintLayout settingsThemeButton;
@@ -94,28 +94,36 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     navigationView.inflateMenu(R.menu.nav_menu);
     navigationView.setNavigationItemSelectedListener(
         menuItem -> {
-          Intent intent = null;
-          switch (menuItem.getItemId()) {
-            case R.id.nav_home:
-              intent =
-                  new Intent(
-                      Setting.this,
-                      userType.equals("admin") ? Homepage4admin.class : Homepage4caretaker.class);
-              break;
-            case R.id.nav_signout:
-              FirebaseAuth.getInstance().signOut();
-              startActivity(new Intent(Setting.this, LoginActivity.class));
-              finish();
-          }
-
-          if (intent != null) {
+          int id = menuItem.getItemId();
+          if (id == R.id.nav_home) {
+            Intent intent =
+                new Intent(
+                    Setting.this,
+                    userType.equals("admin") ? Homepage4admin.class : Homepage4caretaker.class);
             startActivity(intent);
+            finish();
+          } else if (id == R.id.nav_signout) {
+            showSignOutConfirmationDialog();
           }
 
           DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
           drawerLayout.closeDrawer(GravityCompat.START);
           return true;
         });
+  }
+
+  private void showSignOutConfirmationDialog() {
+    new AlertDialog.Builder(this)
+        .setTitle(R.string.sign_out)
+        .setMessage(R.string.sign_out_confirmation_message)
+        .setPositiveButton(
+            R.string.sign_out,
+            (dialog, which) -> {
+              EmailPasswordAuthService.signOut(this);
+              finish();
+            })
+        .setNegativeButton(R.string.stay_in, null)
+        .show();
   }
 
   private void handleThemeSwitch(final boolean isChecked) {

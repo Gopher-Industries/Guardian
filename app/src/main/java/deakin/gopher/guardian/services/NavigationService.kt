@@ -5,6 +5,7 @@ import android.content.Intent
 import deakin.gopher.guardian.model.login.Role
 import deakin.gopher.guardian.view.general.Homepage4admin
 import deakin.gopher.guardian.view.general.Homepage4caretaker
+import deakin.gopher.guardian.view.general.Homepage4doctor
 import deakin.gopher.guardian.view.general.Homepage4nurse
 import deakin.gopher.guardian.view.general.LoginActivity
 import deakin.gopher.guardian.view.general.PatientListActivity
@@ -40,6 +41,15 @@ class NavigationService(val activity: Activity) {
                     Intent(
                         activity.applicationContext,
                         Homepage4admin::class.java,
+                    ),
+                )
+            }
+
+            Role.Doctor -> {
+                activity.startActivity(
+                    Intent(
+                        activity.applicationContext,
+                        Homepage4doctor::class.java,
                     ),
                 )
             }

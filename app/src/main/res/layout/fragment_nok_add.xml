@@ -51,16 +51,16 @@
 
                             <Button
                                 android:id="@+id/step1"
-                                android:layout_width="26dp"
-                                android:layout_height="26dp"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
                                 android:layout_marginLeft="25sp"
                                 android:layout_marginTop="0sp"
-                                android:layout_marginRight="2sp"
+                                android:layout_marginRight="4sp"
                                 android:background="@drawable/roundshapebtn"
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
                                 android:text="@string/_1"
-                                android:textSize="10sp" />
+                                android:textSize="12sp" />
 
                             <View
                                 android:layout_width="20dp"
@@ -99,16 +99,16 @@
 
                             <Button
                                 android:id="@+id/step2"
-                                android:layout_width="26dp"
-                                android:layout_height="26dp"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
                                 android:layout_marginLeft="5sp"
                                 android:layout_marginTop="0sp"
-                                android:layout_marginRight="2sp"
+                                android:layout_marginRight="4sp"
                                 android:background="@drawable/roundshapeseletebtn"
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
                                 android:text="@string/_2"
-                                android:textSize="10sp" />
+                                android:textSize="12sp" />
 
                             <View
                                 android:layout_width="15dp"
@@ -148,16 +148,16 @@
 
                             <Button
                                 android:id="@+id/step3"
-                                android:layout_width="26dp"
-                                android:layout_height="26dp"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
                                 android:layout_marginLeft="5sp"
                                 android:layout_marginTop="0sp"
-                                android:layout_marginRight="2sp"
+                                android:layout_marginRight="4sp"
                                 android:background="@drawable/roundshapebtn"
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
                                 android:text="@string/_3"
-                                android:textSize="10sp" />
+                                android:textSize="12sp" />
 
                             <View
                                 android:layout_width="15dp"
@@ -197,16 +197,16 @@
 
                             <Button
                                 android:id="@+id/step4"
-                                android:layout_width="26dp"
-                                android:layout_height="26dp"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
                                 android:layout_marginLeft="5sp"
                                 android:layout_marginTop="0sp"
-                                android:layout_marginRight="2sp"
+                                android:layout_marginRight="4sp"
                                 android:background="@drawable/roundshapebtn"
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
                                 android:text="@string/_4"
-                                android:textSize="10sp" />
+                                android:textSize="12sp" />
 
                             <View
                                 android:layout_width="15dp"
@@ -246,16 +246,16 @@
 
                             <Button
                                 android:id="@+id/step5"
-                                android:layout_width="26dp"
-                                android:layout_height="26dp"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
                                 android:layout_marginLeft="5sp"
                                 android:layout_marginTop="0sp"
-                                android:layout_marginRight="2sp"
+                                android:layout_marginRight="4sp"
                                 android:background="@drawable/roundshapebtn"
                                 android:fontFamily="sans-serif-black"
                                 android:gravity="center"
                                 android:text="@string/_5"
-                                android:textSize="10sp" />
+                                android:textSize="12sp" />
 
 
                         </LinearLayout>
@@ -278,34 +278,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
-                <Button
-                    android:id="@+id/nok_add_polygon_left"
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:background="@drawable/polygon_2"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.87"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.27" />
-
-                <Button
-                    android:id="@+id/nok_add_polygon_right"
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:background="@drawable/polygon_1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.97"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.27" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

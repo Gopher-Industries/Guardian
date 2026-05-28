@@ -8,20 +8,26 @@ import {
   ClipboardList,
   Users,
   Building2,
+  ListTodo,
   X,
+  Stethoscope,
 } from "lucide-react";
 import Logo from "../common/Logo";
 import { ADMIN_NAV_ITEMS } from "../../utils/constants";
 import { clearAuthStorage } from "../../utils/storage";
+
 
 const iconMap = {
   dashboard: LayoutDashboard,
   "staff-management": Users,
   "org-assignment": Building2,
   patients: ShieldPlus,
+ "doctor-assignments": Stethoscope,
+  "patient-overview": ClipboardList,
+  "task-management": ListTodo,
   reports: Bell,
   settings: Settings,
-  "nurse-roster": ClipboardList
+  "nurse-roster": ClipboardList,
 };
 
 export default function Sidebar({
@@ -93,7 +99,10 @@ export default function Sidebar({
               <NavLink
                 key={item.id}
                 to={item.path}
-                end={item.path === "/dashboard"}
+                end={
+                      item.path === "/dashboard" ||
+                      item.path === "/dashboard/patients"
+                    }
                 className={({ isActive }) =>
                   `sidebar-link ${isActive ? "active" : ""} ${
                     collapsed && !isMobile ? "icon-only" : ""
