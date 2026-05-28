@@ -1,0 +1,96 @@
+Emotion Classifier Observation Notes
+
+Baseline Performance
+
+The first CNN attempts performed very poorly, with some early runs around single-digit accuracy. This showed that the original model and workflow were not learning the emotion classes properly.
+
+The improved notebook version achieved:
+- Best Validation Accuracy: 0.5139
+- Test Loss: 1.4427
+- Test Accuracy: 0.4583
+
+Overall improvement:
+- The work moved from an unreliable early CNN to a working voice emotion classifier.
+- The final accuracy is not perfect, but the audio loading, mel spectrogram creation, CNN training, validation tracking, checkpoint saving, and testing process now work correctly.
+
+Observation 1: Actor Folder Loading
+
+Initial issue:
+- The WAV files were first treated as if they were all in one folder.
+
+What changed:
+- The notebook was updated to search through all actor folders automatically.
+
+Why it mattered:
+- The RAVDESS dataset is split into Actor_01, Actor_02, and similar folders. This fix allowed the model to use the full dataset instead of missing most of the audio files.
+
+Observation 2: Fixed Audio Length
+
+Initial setting:
+- Duration: 3 seconds
+- Offset: 0 seconds
+
+What it means:
+- Each file is loaded from the start and forced into the same 3-second length. Longer files are cut down and shorter files are padded.
+
+Why it mattered:
+- CNNs need inputs with the same shape, so this made batching and training possible.
+
+Observation 3: Mel Spectrograms
+
+Main settings:
+- 128 mel bands
+- 1024 FFT size
+- 256 hop length
+- 50 Hz to 8000 Hz frequency range
+
+What it means:
+- A mel spectrogram turns audio into an image-like graph showing sound energy across time and frequency.
+
+Why it mattered:
+- A CNN can learn from these image-like patterns, including pitch, rhythm, tone, and energy changes in speech.
+
+Observation 4: Cached Features and Tensors
+
+Initial confusion:
+- It looked like the model was directly loading audio into tensors.
+
+What actually happens:
+- The audio is converted into a mel spectrogram first.
+- The mel feature is cached, normalised, and then converted into a PyTorch tensor.
+
+Why it mattered:
+- PyTorch trains on tensors, but the model is still learning from mel spectrogram features, not raw audio.
+
+Observation 5: Normalisation and Class Weights
+
+What changed:
+- Features were normalised using the training mean and standard deviation.
+- Class weights were added because the neutral class had fewer samples.
+
+Why it mattered:
+- Normalisation made training more stable, and class weights helped stop the model from ignoring smaller classes.
+
+Observation 6: CNN and Training Improvements
+
+What changed:
+- The CNN was rebuilt with stronger convolution blocks.
+- Dropout was added to reduce overfitting.
+- A learning-rate scheduler, gradient clipping, early stopping, and best-model checkpointing were added.
+
+Why it mattered:
+- The first CNN was too weak and unstable. These changes made training more controlled and saved the best validation model instead of simply using the final epoch.
+
+What We Fumbled With
+
+- The actor-folder dataset structure was misunderstood at first.
+- The first CNN was too weak and produced very poor accuracy.
+- The mel graph step became confusing because later versions cached spectrograms and loaded them as tensors.
+- Too many early versions made the project harder to follow.
+- The notebook had to be simplified into one clearer workflow.
+
+Final Summary
+
+The improvement came from combining correct folder loading, fixed-length audio, mel spectrogram features, caching, normalisation, class weights, a stronger CNN, dropout, learning-rate scheduling, gradient clipping, checkpointing, and early stopping.
+
+The final model is not perfect, but it is now a working and explainable voice emotion classification pipeline.

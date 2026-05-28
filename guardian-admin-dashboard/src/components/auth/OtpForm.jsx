@@ -53,6 +53,7 @@ export default function OtpForm() {
     } catch (err) {
       setError(
         err?.response?.data?.message ||
+          err?.message ||
           "OTP verification failed. Please try again."
       );
     } finally {
@@ -69,6 +70,7 @@ export default function OtpForm() {
     } catch (err) {
       setError(
         err?.response?.data?.message ||
+          err?.message ||
           "Could not resend OTP at the moment."
       );
     } finally {
@@ -112,7 +114,9 @@ export default function OtpForm() {
         ))}
       </div>
 
-      <p className="form-note">Testing mode is enabled. Use OTP: 123456</p>
+      <p className="form-note">
+        Current backend testing OTP is: <strong>123456</strong>
+      </p>
 
       {error ? <p className="form-error">{error}</p> : null}
 
