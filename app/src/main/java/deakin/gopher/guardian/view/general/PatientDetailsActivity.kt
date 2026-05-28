@@ -77,7 +77,11 @@ class PatientDetailsActivity : BaseActivity() {
                 patient.healthConditions.joinToString(", ") { condition ->
                     condition.split(" ").joinToString(" ") { word ->
                         word.replaceFirstChar {
-                            if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
+                            if (it.isLowerCase()) {
+                                it.titlecase(Locale.getDefault())
+                            } else {
+                                it.toString()
+                            }
                         }
                     }
                 }

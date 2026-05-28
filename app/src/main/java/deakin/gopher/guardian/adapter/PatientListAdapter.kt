@@ -16,6 +16,7 @@ class PatientListAdapter(
     private var patients: List<Patient>,
     private val onPatientClick: ((Patient) -> Unit)? = null,
     private val onAssignNurseClick: ((Patient) -> Unit)? = null,
+    private val onEditClick: ((Patient) -> Unit)? = null,
     private val onDeleteClick: ((Patient) -> Unit)? = null,
 ) : RecyclerView.Adapter<PatientListAdapter.PatientViewHolder>() {
     inner class PatientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -71,8 +72,11 @@ class PatientListAdapter(
                         onAssignNurseClick?.invoke(patient)
                         true
                     }
-
-                    R.id.action_delete -> {
+                    R.id.action_edit_patient -> {
+                        onEditClick?.invoke(patient)
+                        true
+                    }
+                    R.id.action_delete -> { // Handle delete click
                         onDeleteClick?.invoke(patient)
                         true
                     }

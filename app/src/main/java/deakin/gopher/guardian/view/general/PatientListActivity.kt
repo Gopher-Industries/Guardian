@@ -25,6 +25,7 @@ import kotlinx.coroutines.withContext
 
 class PatientListActivity : BaseActivity() {
     private lateinit var binding: ActivityPatientListBinding
+
     private val patientListAdapter =
         PatientListAdapter(
             emptyList(),
@@ -34,39 +35,36 @@ class PatientListActivity : BaseActivity() {
                 startActivity(intent)
             },
             onAssignNurseClick = { patient ->
-//            val intent = Intent(this, AssignNurseActivity::class.java)
-//            intent.putExtra("patientId", patient.id)
-//            startActivity(intent)
+                if (currentUser.role == Role.Nurse) {
+                    Toast.makeText(
+                        this,
+                        "Only caretaker can assign nurse to the patient",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                } else {
+                    val intent = Intent(this, AssignNurseActivity::class.java)
+                    intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_ID, patient.id)
+                    intent.putExtra(AssignNurseActivity.EXTRA_PATIENT_NAME, patient.fullname)
+                    startActivity(intent)
+                }
+            },
+            onEditClick = { patient ->
+                if (currentUser.role == Role.Nurse) {
+                    Toast.makeText(
+                        this,
+                        "Only caretaker can edit patient info",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                } else {
+                    val intent = Intent(this, EditPatientActivity::class.java)
+                    intent.putExtra(EditPatientActivity.EXTRA_PATIENT, patient)
+                    startActivity(intent)
+                }
             },
             onDeleteClick = { patient ->
                 confirmDeletePatient(patient)
             },
         )
-
-    private fun confirmDeletePatient(patient: Patient) {
-        // Optional: show a confirmation dialog before deleting
-        deletePatient(patient)
-    }
-
-    private fun deletePatient(patient: Patient) {
-        val token = "Bearer ${SessionManager.getToken()}"
-        CoroutineScope(Dispatchers.IO).launch {
-            val response =
-                try {
-                    ApiClient.apiService.deletePatient(token, patient.id)
-                } catch (e: Exception) {
-                    null
-                }
-            withContext(Dispatchers.Main) {
-                if (response?.isSuccessful == true) {
-                    showMessage("Patient deleted")
-                    fetchPatients() // Refresh the patient list
-                } else {
-                    showMessage("Failed to delete patient")
-                }
-            }
-        }
-    }
 
     private val currentUser = SessionManager.getCurrentUser()
 
@@ -91,6 +89,31 @@ class PatientListActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         fetchPatients()
+    }
+
+    private fun confirmDeletePatient(patient: Patient) {
+        deletePatient(patient)
+    }
+
+    private fun deletePatient(patient: Patient) {
+        val token = "Bearer ${SessionManager.getToken()}"
+        CoroutineScope(Dispatchers.IO).launch {
+            val response =
+                try {
+                    ApiClient.apiService.deletePatient(token, patient.id)
+                } catch (e: Exception) {
+                    null
+                }
+
+            withContext(Dispatchers.Main) {
+                if (response?.isSuccessful == true) {
+                    showMessage("Patient deleted")
+                    fetchPatients()
+                } else {
+                    showMessage("Failed to delete patient")
+                }
+            }
+        }
     }
 
     private fun fetchPatients() {
