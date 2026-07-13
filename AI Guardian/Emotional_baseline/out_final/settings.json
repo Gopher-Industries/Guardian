@@ -1,0 +1,23 @@
+{
+  "csv": "New AI spreadsheet - Sheet1.csv",
+  "text_col": "nursingNote",
+  "label_col": "state",
+  "group_col": null,
+  "test_size": 0.2,
+  "min_df": 2,
+  "n_splits": 5,
+  "with_lexicon": true,
+  "extra_label_words": "",
+  "stripped_tokens_effective": [
+    "comfort",
+    "comfortable",
+    "normal",
+    "normality",
+    "normally",
+    "sick",
+    "sickness",
+    "uncomfort",
+    "uncomfortable"
+  ],
+  "seed": 42
+}
