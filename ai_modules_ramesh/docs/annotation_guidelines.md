@@ -29,15 +29,15 @@ They will be used to train clinical NLP models for:
 
 ---
 
-## 3. Optional Relations
+## 3. Relations
 
 | Relation      | Head Entity  | Tail Entity |
 |---------------|--------------|-------------|
-| HAS_DOSAGE    | MEDICATION   | DOSAGE      |
-| HAS_ROUTE     | MEDICATION   | ROUTE       |
-| HAS_FREQUENCY | MEDICATION   | FREQUENCY   |
-| HAS_VALUE     | VITAL_TYPE   | VITAL_VALUE |
-| HAS_STATUS    | ADL_ACTIVITY | ADL_STATUS  |
+| **HAS_DOSAGE**    | MEDICATION   | DOSAGE      |
+| **HAS_ROUTE**     | MEDICATION   | ROUTE       |
+| **HAS_FREQUENCY** | MEDICATION   | FREQUENCY   |
+| **HAS_VALUE**     | VITAL_TYPE   | VITAL_VALUE |
+| **HAS_STATUS**    | ADL_ACTIVITY | ADL_STATUS  |
 
 ---
 
@@ -94,6 +94,6 @@ _Breakfast taken: porridge; Mobility: needs assistance._
 
 ---
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Author:** Ramesh Senarath  
-**Last Updated:** 08 Aug 2025
+**Last Updated:** 22 Aug 2025
