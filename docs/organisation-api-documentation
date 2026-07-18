@@ -1,9 +1,0 @@
-# API Documentation: Organisation API
-1. What It Does
-The Organisation API manages care facilities and medical institutions (such as Sunrise Care Facility and Deakin Health) within the Guardian platform. It acts as the bridge that allows the admin dashboard to read and write organizational records to the MongoDB database.
-
-It handles:
-
-* Data Retrieval: Fetching organizations linked to the authenticated administrator account so they can be viewed on the dashboard.
-
-* Data Entry: Creating and registering new organizations into the backend system.
