@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import StatCard from "../components/dashboard/StatCard";
 import { DASHBOARD_STATS } from "../utils/constants";
@@ -5,9 +6,21 @@ import { ArrowRight, Building2, Users, ShieldAlert, FileBarChart2 } from "lucide
 import { Link } from "react-router-dom";
 
 export default function DashboardHome() {
+  const dashboardPreferences = useMemo(() => {
+  const saved = localStorage.getItem("dashboardPreferences");
+
+  return saved
+    ? JSON.parse(saved)
+    : {
+        heroBanner: true,
+        statistics: true,
+        dashboardPanels: true,
+      };
+}, []);
   return (
     <div className="dashboard-home">
-      <motion.section
+      {dashboardPreferences.heroBanner && (
+       <motion.section
         className="hero-banner"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -44,13 +57,17 @@ export default function DashboardHome() {
           </div>
         </div>
       </motion.section>
+      )}
 
-      <section className="stats-grid">
-        {DASHBOARD_STATS.map((item) => (
-          <StatCard key={item.title} {...item} />
-        ))}
-      </section>
+      {dashboardPreferences.statistics && (
+  <section className="stats-grid">
+    {DASHBOARD_STATS.map((item) => (
+      <StatCard key={item.title} {...item} />
+    ))}
+  </section>
+)}
 
+      {dashboardPreferences.dashboardPanels && (
       <section className="dashboard-panels">
         <motion.article
           className="panel large"
@@ -98,6 +115,7 @@ export default function DashboardHome() {
           </div>
         </motion.article>
       </section>
+      )}
     </div>
   );
 }
