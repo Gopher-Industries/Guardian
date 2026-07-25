@@ -2,6 +2,8 @@
   padding: 40px;
   background: #f5f7fb;
   min-height: 100vh;
+  color: #374151;
+  transition: background 0.25s ease, color 0.25s ease;
 }
 
 .reports-header {
@@ -42,6 +44,7 @@
   cursor: pointer;
   font-size: 15px;
   font-weight: 600;
+  transition: 0.2s ease;
 }
 
 .primary-btn {
@@ -50,10 +53,23 @@
   border: none;
 }
 
+.primary-btn:hover {
+  background: #246fd0;
+}
+
 .secondary-btn {
   background: white;
+  color: #183b72;
   border: 1px solid #d1d5db;
 }
+
+.secondary-btn:hover {
+  background: #f3f4f6;
+}
+
+/* =========================
+   FILTERS
+========================= */
 
 .reports-filters {
   display: flex;
@@ -69,6 +85,12 @@
   border-radius: 10px;
   font-size: 15px;
   background: white;
+  color: #374151;
+  outline: none;
+}
+
+.filter-input:focus {
+  border-color: #2f80ed;
 }
 
 input.filter-input {
@@ -78,6 +100,10 @@ input.filter-input {
 select.filter-input {
   width: 140px;
 }
+
+/* =========================
+   SUMMARY CARDS
+========================= */
 
 .reports-summary {
   display: grid;
@@ -92,6 +118,7 @@ select.filter-input {
   padding: 24px;
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
   border: 1px solid #e5e7eb;
+  transition: background 0.25s ease, border 0.25s ease;
 }
 
 .summary-card h3 {
@@ -112,12 +139,18 @@ select.filter-input {
   font-size: 14px;
 }
 
+/* =========================
+   CHARTS
+========================= */
+
 .reports-chart {
   background: white;
   border-radius: 18px;
   padding: 24px;
+  margin-bottom: 32px;
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
   border: 1px solid #e5e7eb;
+  transition: background 0.25s ease, border 0.25s ease;
 }
 
 .reports-chart h2 {
@@ -129,7 +162,10 @@ select.filter-input {
   width: 100%;
   height: 320px;
 }
-/* Recent Reports Table */
+
+/* =========================
+   RECENT REPORTS TABLE
+========================= */
 
 .reports-table-section {
   background: white;
@@ -138,93 +174,8 @@ select.filter-input {
   padding: 24px;
   margin-bottom: 32px;
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  transition: background 0.25s ease, border 0.25s ease;
 }
-
-.table-header {
-  margin-bottom: 20px;
-}
-
-.table-header h2 {
-  margin: 0;
-  color: #183b72;
-  font-size: 24px;
-}
-
-.table-header p {
-  margin-top: 6px;
-  color: #6b7280;
-  font-size: 14px;
-}
-
-.reports-table-wrapper {
-  width: 100%;
-  overflow-x: auto;
-}
-
-.reports-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.reports-table th,
-.reports-table td {
-  padding: 14px 16px;
-  text-align: left;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.reports-table th {
-  color: #4b5563;
-  font-size: 13px;
-  font-weight: 700;
-  background: #f8fafc;
-}
-
-.reports-table td {
-  color: #374151;
-  font-size: 14px;
-}
-
-.status-badge {
-  display: inline-block;
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.status-badge.completed {
-  background: #dcfce7;
-  color: #166534;
-}
-
-.status-badge.pending {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.status-badge.review {
-  background: #dbeafe;
-  color: #1e40af;
-}
-
-.table-export-btn {
-  padding: 7px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  background: white;
-  color: #183b72;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.table-export-btn:hover {
-  background: #f3f4f6;
-}
-/* =========================
-   TABLE HEADER + SORT
-========================= */
 
 .table-header {
   display: flex;
@@ -275,6 +226,80 @@ select.filter-input {
   border-color: #2f80ed;
 }
 
+.reports-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.reports-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.reports-table th,
+.reports-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.reports-table th {
+  color: #4b5563;
+  font-size: 13px;
+  font-weight: 700;
+  background: #f8fafc;
+}
+
+.reports-table td {
+  color: #374151;
+  font-size: 14px;
+}
+
+/* =========================
+   STATUS BADGES
+========================= */
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.review {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+/* =========================
+   TABLE DOWNLOAD BUTTON
+========================= */
+
+.table-export-btn {
+  padding: 7px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+  color: #183b72;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.table-export-btn:hover {
+  background: #f3f4f6;
+}
 
 /* =========================
    PAGINATION
@@ -331,7 +356,6 @@ select.filter-input {
   cursor: not-allowed;
 }
 
-
 /* =========================
    RESPONSIVE TABLE CONTROLS
 ========================= */
@@ -355,6 +379,7 @@ select.filter-input {
     align-items: flex-start;
   }
 }
+
 /* =========================
    FULL RESPONSIVE LAYOUT
 ========================= */
@@ -471,4 +496,205 @@ select.filter-input {
     height: 280px;
     min-width: 0;
   }
+}
+
+/* =====================================================
+   DARK MODE
+   SettingsPage.jsx adds "dark-theme" to the body
+===================================================== */
+
+body.dark-theme .reports-page {
+  background: #111827;
+  color: #e5e7eb;
+}
+
+/* HEADER */
+
+body.dark-theme .reports-eyebrow {
+  color: #60a5fa;
+}
+
+body.dark-theme .reports-header h1 {
+  color: #f3f4f6;
+}
+
+body.dark-theme .reports-subtitle {
+  color: #9ca3af;
+}
+
+/* FILTERS */
+
+body.dark-theme .filter-input {
+  background: #1f2937;
+  color: #f3f4f6;
+  border-color: #374151;
+  color-scheme: dark;
+}
+
+body.dark-theme .filter-input:focus {
+  border-color: #60a5fa;
+}
+
+/* BUTTONS */
+
+body.dark-theme .secondary-btn {
+  background: #1f2937;
+  color: #f3f4f6;
+  border-color: #374151;
+}
+
+body.dark-theme .secondary-btn:hover {
+  background: #273449;
+}
+
+/* SUMMARY CARDS */
+
+body.dark-theme .summary-card {
+  background: #1f2937;
+  border-color: #374151;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-theme .summary-card h3 {
+  color: #d1d5db;
+}
+
+body.dark-theme .summary-card h2 {
+  color: #93c5fd;
+}
+
+body.dark-theme .summary-card p {
+  color: #9ca3af;
+}
+
+/* REPORT TABLE CARD */
+
+body.dark-theme .reports-table-section {
+  background: #1f2937;
+  border-color: #374151;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-theme .table-header h2 {
+  color: #f3f4f6;
+}
+
+body.dark-theme .table-header p {
+  color: #9ca3af;
+}
+
+body.dark-theme .table-sort label {
+  color: #d1d5db;
+}
+
+body.dark-theme .table-sort select {
+  background: #111827;
+  color: #f3f4f6;
+  border-color: #4b5563;
+}
+
+/* TABLE */
+
+body.dark-theme .reports-table th {
+  background: #111827;
+  color: #d1d5db;
+  border-bottom-color: #374151;
+}
+
+body.dark-theme .reports-table td {
+  color: #e5e7eb;
+  border-bottom-color: #374151;
+}
+
+body.dark-theme .reports-table th,
+body.dark-theme .reports-table td {
+  border-bottom-color: #374151;
+}
+
+/* DOWNLOAD BUTTON */
+
+body.dark-theme .table-export-btn {
+  background: #111827;
+  color: #93c5fd;
+  border-color: #4b5563;
+}
+
+body.dark-theme .table-export-btn:hover {
+  background: #273449;
+}
+
+/* PAGINATION */
+
+body.dark-theme .table-pagination {
+  border-top-color: #374151;
+}
+
+body.dark-theme .table-pagination > span {
+  color: #9ca3af;
+}
+
+body.dark-theme .pagination-buttons button {
+  background: #111827;
+  color: #d1d5db;
+  border-color: #4b5563;
+}
+
+body.dark-theme .pagination-buttons button:hover:not(:disabled) {
+  border-color: #60a5fa;
+  color: #60a5fa;
+}
+
+body.dark-theme .pagination-buttons .active-page {
+  background: #2f80ed;
+  border-color: #2f80ed;
+  color: white;
+}
+
+body.dark-theme .pagination-buttons button:disabled {
+  background: #1f2937;
+  color: #6b7280;
+  border-color: #374151;
+}
+
+/* CHART CARDS */
+
+body.dark-theme .reports-chart {
+  background: #1f2937;
+  border-color: #374151;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-theme .reports-chart h2 {
+  color: #f3f4f6;
+}
+
+/* RECHARTS AXIS TEXT */
+
+body.dark-theme .recharts-cartesian-axis-tick-value {
+  fill: #d1d5db;
+}
+
+/* RECHARTS AXIS LINES */
+
+body.dark-theme .recharts-cartesian-axis-line,
+body.dark-theme .recharts-cartesian-axis-tick-line {
+  stroke: #6b7280;
+}
+
+/* RECHARTS GRID */
+
+body.dark-theme .recharts-cartesian-grid line {
+  stroke: #374151;
+}
+
+/* RECHARTS TOOLTIP */
+
+body.dark-theme .recharts-default-tooltip {
+  background: #111827 !important;
+  border: 1px solid #4b5563 !important;
+  color: #f3f4f6 !important;
+}
+
+body.dark-theme .recharts-tooltip-label {
+  color: #f3f4f6 !important;
 }
