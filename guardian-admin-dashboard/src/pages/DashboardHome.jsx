@@ -17,16 +17,7 @@ export default function DashboardHome() {
       try {
         const token = localStorage.getItem("guardian_admin_token");
 
-        const response = api.get("admin/dashboard-summary"),
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            withCredentials: false,
-          }
-        );
+        const response = await api.get("admin/dashboard-summary");
         setSummary(response.data);
       } catch (err) {
         setError(
