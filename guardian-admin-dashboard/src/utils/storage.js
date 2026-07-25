@@ -5,7 +5,8 @@ export function setAuthToken(token) {
 }
 
 export function getAuthToken() {
-  return localStorage.getItem(STORAGE_KEYS.token);
+  const token = localStorage.getItem(STORAGE_KEYS.token);
+  return token;
 }
 
 export function removeAuthToken() {

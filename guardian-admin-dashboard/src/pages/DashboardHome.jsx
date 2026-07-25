@@ -1,10 +1,47 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import StatCard from "../components/dashboard/StatCard";
 import { DASHBOARD_STATS } from "../utils/constants";
 import { ArrowRight, Building2, Users, ShieldAlert, FileBarChart2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import api from "../services/api";
+import DashboardSummaryCards from "../components/dashboard/DashboardSummaryCards";
 
 export default function DashboardHome() {
+  const [summary, setSummary] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchSummary = async () => {
+      try {
+        const token = localStorage.getItem("guardian_admin_token");
+
+        const response = api.get("admin/dashboard-summary"),
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            withCredentials: false,
+          }
+        );
+        setSummary(response.data);
+      } catch (err) {
+        setError(
+          err?.response?.data?.message ||
+          err?.message ||
+          "Failed to load dashboard summary."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSummary();
+  }, []);
+
   return (
     <div className="dashboard-home">
       <motion.section
@@ -45,11 +82,17 @@ export default function DashboardHome() {
         </div>
       </motion.section>
 
-      <section className="stats-grid">
+      <DashboardSummaryCards
+        summary={summary}
+        loading={loading}
+        error={error}
+      />
+
+      {/* <section className="stats-grid">
         {DASHBOARD_STATS.map((item) => (
           <StatCard key={item.title} {...item} />
         ))}
-      </section>
+      </section> */}
 
       <section className="dashboard-panels">
         <motion.article
@@ -74,23 +117,19 @@ export default function DashboardHome() {
           transition={{ duration: 0.45, delay: 0.12 }}
         >
           <h3>Upcoming modules</h3>
-
           <div className="mini-module-list">
             <div className="mini-module-item">
               <ShieldAlert size={18} />
               <span>Alerts & Monitoring</span>
             </div>
-
             <div className="mini-module-item">
               <Users size={18} />
               <span>Staff Administration</span>
             </div>
-
             <div className="mini-module-item">
               <Building2 size={18} />
               <span>Organisation Workflows</span>
             </div>
-
             <div className="mini-module-item">
               <FileBarChart2 size={18} />
               <span>Reports & Analytics</span>
