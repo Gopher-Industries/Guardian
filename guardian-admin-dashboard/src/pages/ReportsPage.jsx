@@ -16,7 +16,6 @@ import {
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 
-// PATIENT ADMISSIONS TREND DATA
 const admissionsData = [
   { month: "Jan", admissions: 120 },
   { month: "Feb", admissions: 145 },
@@ -27,7 +26,6 @@ const admissionsData = [
   { month: "Jul", admissions: 248 },
 ];
 
-// TASK COMPLETION BY STAFF DATA
 const staffData = [
   { name: "Dr. Smith", completed: 42 },
   { name: "Nurse Lee", completed: 36 },
@@ -76,7 +74,6 @@ const reports = [
 ];
 
 export default function ReportsPage() {
-  // FILTER STATES
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const [appliedDepartment, setAppliedDepartment] = useState("all");
 
@@ -86,17 +83,14 @@ export default function ReportsPage() {
   const [selectedDate, setSelectedDate] = useState("");
   const [appliedDate, setAppliedDate] = useState("");
 
-  // SORT STATE
   const [sortOption, setSortOption] = useState("Newest");
 
-  // APPLY FILTERS
   const handleApplyFilters = () => {
     setAppliedDepartment(selectedDepartment);
     setAppliedRole(selectedRole);
     setAppliedDate(selectedDate);
   };
 
-  // FILTER REPORTS
   const filteredReports = reports.filter((report) => {
     const departmentMatches =
       appliedDepartment === "all" ||
@@ -111,7 +105,6 @@ export default function ReportsPage() {
     return departmentMatches && roleMatches && dateMatches;
   });
 
-  // SORT REPORTS
   const sortedReports = [...filteredReports].sort((a, b) => {
     if (sortOption === "Newest") {
       return new Date(b.filterDate) - new Date(a.filterDate);
@@ -132,7 +125,6 @@ export default function ReportsPage() {
     return 0;
   });
 
-  // STATUS COLOUR CLASS
   const getStatusClass = (status) => {
     if (status === "Completed") {
       return "completed";
@@ -145,7 +137,6 @@ export default function ReportsPage() {
     return "review";
   };
 
-  // EXPORT CSV
   const handleExportCSV = () => {
     const headers = [
       "Report ID",
@@ -178,8 +169,8 @@ export default function ReportsPage() {
     });
 
     const url = URL.createObjectURL(blob);
-
     const link = document.createElement("a");
+
     link.href = url;
     link.setAttribute("download", "guardian-reports.csv");
 
@@ -190,7 +181,6 @@ export default function ReportsPage() {
     URL.revokeObjectURL(url);
   };
 
-  // EXPORT ALL FILTERED REPORTS AS PDF
   const handleExportPDF = () => {
     const doc = new jsPDF();
 
@@ -202,7 +192,6 @@ export default function ReportsPage() {
 
     autoTable(doc, {
       startY: 35,
-
       head: [
         [
           "Report ID",
@@ -213,7 +202,6 @@ export default function ReportsPage() {
           "Status",
         ],
       ],
-
       body: sortedReports.map((report) => [
         report.id,
         report.name,
@@ -222,11 +210,9 @@ export default function ReportsPage() {
         report.date,
         report.status,
       ]),
-
       styles: {
         fontSize: 9,
       },
-
       headStyles: {
         fillColor: [47, 128, 237],
       },
@@ -235,7 +221,6 @@ export default function ReportsPage() {
     doc.save("guardian-reports.pdf");
   };
 
-  // DOWNLOAD ONE INDIVIDUAL REPORT
   const handleDownloadReport = (report) => {
     const doc = new jsPDF();
 
@@ -247,9 +232,7 @@ export default function ReportsPage() {
 
     autoTable(doc, {
       startY: 35,
-
       head: [["Field", "Details"]],
-
       body: [
         ["Report ID", report.id],
         ["Report Name", report.name],
@@ -258,11 +241,9 @@ export default function ReportsPage() {
         ["Date", report.date],
         ["Status", report.status],
       ],
-
       styles: {
         fontSize: 10,
       },
-
       headStyles: {
         fillColor: [47, 128, 237],
       },
@@ -273,13 +254,10 @@ export default function ReportsPage() {
 
   return (
     <div className="reports-page">
-      {/* HEADER */}
       <section className="reports-header">
         <div>
           <p className="reports-eyebrow">Analytics & Reporting</p>
-
           <h1>Reports</h1>
-
           <p className="reports-subtitle">
             View key performance insights, filter report data, and export
             results.
@@ -303,7 +281,6 @@ export default function ReportsPage() {
         </div>
       </section>
 
-      {/* FILTERS */}
       <section className="reports-filters">
         <input
           type="date"
@@ -345,7 +322,6 @@ export default function ReportsPage() {
         </button>
       </section>
 
-      {/* SUMMARY CARDS */}
       <section className="reports-summary">
         <div className="summary-card">
           <h3>Total Reports</h3>
@@ -372,12 +348,10 @@ export default function ReportsPage() {
         </div>
       </section>
 
-      {/* RECENT REPORTS TABLE */}
       <section className="reports-table-section">
         <div className="table-header">
           <div>
             <h2>Recent Reports</h2>
-
             <p>
               Latest generated reports and their current status.
             </p>
@@ -420,13 +394,9 @@ export default function ReportsPage() {
                 sortedReports.map((report) => (
                   <tr key={report.id}>
                     <td>{report.id}</td>
-
                     <td>{report.name}</td>
-
                     <td>{report.department}</td>
-
                     <td>{report.role}</td>
-
                     <td>{report.date}</td>
 
                     <td>
@@ -442,9 +412,7 @@ export default function ReportsPage() {
                     <td>
                       <button
                         className="table-export-btn"
-                        onClick={() =>
-                          handleDownloadReport(report)
-                        }
+                        onClick={() => handleDownloadReport(report)}
                       >
                         Download
                       </button>
@@ -462,7 +430,6 @@ export default function ReportsPage() {
           </table>
         </div>
 
-        {/* PAGINATION */}
         <div className="table-pagination">
           <span>
             Showing {sortedReports.length === 0 ? 0 : 1}–
@@ -471,15 +438,12 @@ export default function ReportsPage() {
 
           <div className="pagination-buttons">
             <button disabled>Previous</button>
-
             <button className="active-page">1</button>
-
             <button disabled>Next</button>
           </div>
         </div>
       </section>
 
-      {/* PATIENT ADMISSIONS TREND CHART */}
       <section className="reports-chart">
         <h2>Patient Admissions Trend</h2>
 
@@ -487,11 +451,8 @@ export default function ReportsPage() {
           <ResponsiveContainer width="100%" height={320}>
             <LineChart data={admissionsData}>
               <CartesianGrid strokeDasharray="3 3" />
-
               <XAxis dataKey="month" />
-
               <YAxis />
-
               <Tooltip />
 
               <Line
@@ -505,7 +466,6 @@ export default function ReportsPage() {
         </div>
       </section>
 
-      {/* TASK COMPLETION BY STAFF CHART */}
       <section className="reports-chart">
         <h2>Task Completion by Staff</h2>
 
@@ -531,7 +491,6 @@ export default function ReportsPage() {
               />
 
               <YAxis />
-
               <Tooltip />
 
               <Bar

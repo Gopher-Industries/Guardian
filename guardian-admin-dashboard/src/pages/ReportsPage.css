@@ -67,10 +67,6 @@
   background: #f3f4f6;
 }
 
-/* =========================
-   FILTERS
-========================= */
-
 .reports-filters {
   display: flex;
   gap: 12px;
@@ -100,10 +96,6 @@ input.filter-input {
 select.filter-input {
   width: 140px;
 }
-
-/* =========================
-   SUMMARY CARDS
-========================= */
 
 .reports-summary {
   display: grid;
@@ -139,10 +131,6 @@ select.filter-input {
   font-size: 14px;
 }
 
-/* =========================
-   CHARTS
-========================= */
-
 .reports-chart {
   background: white;
   border-radius: 18px;
@@ -162,10 +150,6 @@ select.filter-input {
   width: 100%;
   height: 320px;
 }
-
-/* =========================
-   RECENT REPORTS TABLE
-========================= */
 
 .reports-table-section {
   background: white;
@@ -255,10 +239,6 @@ select.filter-input {
   font-size: 14px;
 }
 
-/* =========================
-   STATUS BADGES
-========================= */
-
 .status-badge {
   display: inline-block;
   padding: 6px 10px;
@@ -282,10 +262,6 @@ select.filter-input {
   color: #1e40af;
 }
 
-/* =========================
-   TABLE DOWNLOAD BUTTON
-========================= */
-
 .table-export-btn {
   padding: 7px 12px;
   border: 1px solid #d1d5db;
@@ -300,10 +276,6 @@ select.filter-input {
 .table-export-btn:hover {
   background: #f3f4f6;
 }
-
-/* =========================
-   PAGINATION
-========================= */
 
 .table-pagination {
   display: flex;
@@ -356,10 +328,6 @@ select.filter-input {
   cursor: not-allowed;
 }
 
-/* =========================
-   RESPONSIVE TABLE CONTROLS
-========================= */
-
 @media (max-width: 768px) {
   .table-header {
     flex-direction: column;
@@ -379,10 +347,6 @@ select.filter-input {
     align-items: flex-start;
   }
 }
-
-/* =========================
-   FULL RESPONSIVE LAYOUT
-========================= */
 
 @media (max-width: 900px) {
   .reports-page {
@@ -498,17 +462,10 @@ select.filter-input {
   }
 }
 
-/* =====================================================
-   DARK MODE
-   SettingsPage.jsx adds "dark-theme" to the body
-===================================================== */
-
 body.dark-theme .reports-page {
   background: #111827;
   color: #e5e7eb;
 }
-
-/* HEADER */
 
 body.dark-theme .reports-eyebrow {
   color: #60a5fa;
@@ -522,8 +479,6 @@ body.dark-theme .reports-subtitle {
   color: #9ca3af;
 }
 
-/* FILTERS */
-
 body.dark-theme .filter-input {
   background: #1f2937;
   color: #f3f4f6;
@@ -535,8 +490,6 @@ body.dark-theme .filter-input:focus {
   border-color: #60a5fa;
 }
 
-/* BUTTONS */
-
 body.dark-theme .secondary-btn {
   background: #1f2937;
   color: #f3f4f6;
@@ -546,8 +499,6 @@ body.dark-theme .secondary-btn {
 body.dark-theme .secondary-btn:hover {
   background: #273449;
 }
-
-/* SUMMARY CARDS */
 
 body.dark-theme .summary-card {
   background: #1f2937;
@@ -566,8 +517,6 @@ body.dark-theme .summary-card h2 {
 body.dark-theme .summary-card p {
   color: #9ca3af;
 }
-
-/* REPORT TABLE CARD */
 
 body.dark-theme .reports-table-section {
   background: #1f2937;
@@ -593,8 +542,6 @@ body.dark-theme .table-sort select {
   border-color: #4b5563;
 }
 
-/* TABLE */
-
 body.dark-theme .reports-table th {
   background: #111827;
   color: #d1d5db;
@@ -611,8 +558,6 @@ body.dark-theme .reports-table td {
   border-bottom-color: #374151;
 }
 
-/* DOWNLOAD BUTTON */
-
 body.dark-theme .table-export-btn {
   background: #111827;
   color: #93c5fd;
@@ -622,8 +567,6 @@ body.dark-theme .table-export-btn {
 body.dark-theme .table-export-btn:hover {
   background: #273449;
 }
-
-/* PAGINATION */
 
 body.dark-theme .table-pagination {
   border-top-color: #374151;
@@ -656,8 +599,6 @@ body.dark-theme .pagination-buttons button:disabled {
   border-color: #374151;
 }
 
-/* CHART CARDS */
-
 body.dark-theme .reports-chart {
   background: #1f2937;
   border-color: #374151;
@@ -668,26 +609,18 @@ body.dark-theme .reports-chart h2 {
   color: #f3f4f6;
 }
 
-/* RECHARTS AXIS TEXT */
-
 body.dark-theme .recharts-cartesian-axis-tick-value {
   fill: #d1d5db;
 }
-
-/* RECHARTS AXIS LINES */
 
 body.dark-theme .recharts-cartesian-axis-line,
 body.dark-theme .recharts-cartesian-axis-tick-line {
   stroke: #6b7280;
 }
 
-/* RECHARTS GRID */
-
 body.dark-theme .recharts-cartesian-grid line {
   stroke: #374151;
 }
-
-/* RECHARTS TOOLTIP */
 
 body.dark-theme .recharts-default-tooltip {
   background: #111827 !important;
