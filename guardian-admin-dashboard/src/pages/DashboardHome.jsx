@@ -4,7 +4,7 @@ import StatCard from "../components/dashboard/StatCard";
 import { DASHBOARD_STATS } from "../utils/constants";
 import { ArrowRight, Building2, Users, ShieldAlert, FileBarChart2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 import DashboardSummaryCards from "../components/dashboard/DashboardSummaryCards";
 
 export default function DashboardHome() {
@@ -17,8 +17,7 @@ export default function DashboardHome() {
       try {
         const token = localStorage.getItem("guardian_admin_token");
 
-        const response = await axios.get(
-          "https://guardian-backend-git-fix-cors-patelrudra2306-5873s-projects.vercel.app/api/v1/admin/dashboard-summary",
+        const response = api.get("admin/dashboard-summary"),
           {
             headers: {
               Authorization: `Bearer ${token}`,
