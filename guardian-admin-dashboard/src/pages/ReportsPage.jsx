@@ -16,16 +16,18 @@ import {
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 
-const reportData = [
-  { month: "Jan", reports: 120 },
-  { month: "Feb", reports: 145 },
-  { month: "Mar", reports: 160 },
-  { month: "Apr", reports: 190 },
-  { month: "May", reports: 175 },
-  { month: "Jun", reports: 210 },
-  { month: "Jul", reports: 248 },
+// PATIENT ADMISSIONS TREND DATA
+const admissionsData = [
+  { month: "Jan", admissions: 120 },
+  { month: "Feb", admissions: 145 },
+  { month: "Mar", admissions: 160 },
+  { month: "Apr", admissions: 190 },
+  { month: "May", admissions: 175 },
+  { month: "Jun", admissions: 210 },
+  { month: "Jul", admissions: 248 },
 ];
 
+// TASK COMPLETION BY STAFF DATA
 const staffData = [
   { name: "Dr. Smith", completed: 42 },
   { name: "Nurse Lee", completed: 36 },
@@ -477,13 +479,13 @@ export default function ReportsPage() {
         </div>
       </section>
 
-      {/* MONTHLY REPORTS CHART */}
+      {/* PATIENT ADMISSIONS TREND CHART */}
       <section className="reports-chart">
-        <h2>Monthly Reports</h2>
+        <h2>Patient Admissions Trend</h2>
 
         <div className="chart-container">
           <ResponsiveContainer width="100%" height={320}>
-            <LineChart data={reportData}>
+            <LineChart data={admissionsData}>
               <CartesianGrid strokeDasharray="3 3" />
 
               <XAxis dataKey="month" />
@@ -494,7 +496,7 @@ export default function ReportsPage() {
 
               <Line
                 type="monotone"
-                dataKey="reports"
+                dataKey="admissions"
                 stroke="#2f80ed"
                 strokeWidth={3}
               />
@@ -503,7 +505,7 @@ export default function ReportsPage() {
         </div>
       </section>
 
-      {/* STAFF COMPLETION CHART */}
+      {/* TASK COMPLETION BY STAFF CHART */}
       <section className="reports-chart">
         <h2>Task Completion by Staff</h2>
 
