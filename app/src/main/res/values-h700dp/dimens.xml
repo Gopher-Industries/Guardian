@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!-- Login screen dimensions for taller phones -->
+
+    <dimen name="login_header_height">220dp</dimen>
+    <dimen name="login_welcome_spacing">16dp</dimen>
+
+    <dimen name="login_form_padding_top">24dp</dimen>
+    <dimen name="login_form_padding_bottom">24dp</dimen>
+    <dimen name="login_field_spacing">8dp</dimen>
+
+    <dimen name="login_button_width">200dp</dimen>
+    <dimen name="login_button_height">60dp</dimen>
+    <dimen name="login_button_spacing">12dp</dimen>
+    <dimen name="login_button_text_size">14sp</dimen>
+
+    <dimen name="login_forgot_margin_top">16dp</dimen>
+    <dimen name="login_forgot_margin_bottom">16dp</dimen>
+    <dimen name="login_forgot_text_size">14sp</dimen>
+
+</resources>
