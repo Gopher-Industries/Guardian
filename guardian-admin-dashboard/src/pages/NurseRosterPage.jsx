@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import {
   Search,
   Filter,
@@ -62,9 +63,14 @@ const mockNurses = [
 ];
 
 export default function NurseRoasterPage() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchParams] = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState(searchParams.get("q") || "");
   const [selectedShift, setSelectedShift] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
+
+  useEffect(() => {
+    setSearchTerm(searchParams.get("q") || "");
+  }, [searchParams]);
 
   const filteredNurses = useMemo(() => {
     return mockNurses.filter((nurse) => {

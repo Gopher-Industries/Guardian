@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { UserRoundPlus } from 'lucide-react';
 import DataTable from '../components/common/DataTable';
 import Modal from '../components/common/Modal';
@@ -35,6 +36,7 @@ function formatStaff(raw) {
 }
 
 export default function StaffManagementPage() {
+  const [searchParams] = useSearchParams();
   const [staff, setStaff] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -46,11 +48,28 @@ export default function StaffManagementPage() {
   const [orgLoading, setOrgLoading] = useState(true);
   const [orgFilter, setOrgFilter] = useState('');
   const [roleFilter, setRoleFilter] = useState('');
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(searchParams.get('q') || '');
+  const [debouncedSearch, setDebouncedSearch] = useState(searchParams.get('q') || '');
   const [confirmId, setConfirmId] = useState(null);
   const [successOpen, setSuccessOpen] = useState(false);
 
+  const latestRequestId = useRef(0);
+
+  useEffect(() => {
+    const q = searchParams.get('q') || '';
+    setSearch(q);
+    setPage(1);
+  }, [searchParams]);
+
+  useEffect(() => {
+    const handle = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 350);
+    return () => clearTimeout(handle);
+  }, [search]);
+
   const fetchStaff = useCallback(async () => {
+    const requestId = ++latestRequestId.current;
     setLoading(true);
     try {
       const data = await getStaff({
@@ -58,8 +77,14 @@ export default function StaffManagementPage() {
         limit: 10,
         role: roleFilter,
         orgId: orgFilter,
-        search,
+        search: debouncedSearch,
       });
+
+      // Ignore this response if a newer search/filter request has since been made -
+      // otherwise a slower, stale request can resolve last and overwrite the
+      // correctly filtered results with an older (or unfiltered) list.
+      if (requestId !== latestRequestId.current) return;
+
       const normalized = formatStaff(data.staff ?? []);
       const filtered = normalized.filter((s) =>
         ROLE_OPTIONS.some((r) => r.value === s.role.toLowerCase()),
@@ -69,9 +94,9 @@ export default function StaffManagementPage() {
     } catch (err) {
       console.error('Failed to load staff:', err);
     } finally {
-      setLoading(false);
+      if (requestId === latestRequestId.current) setLoading(false);
     }
-  }, [page, roleFilter, orgFilter, search]);
+  }, [page, roleFilter, orgFilter, debouncedSearch]);
 
   useEffect(() => {
     fetchStaff();
