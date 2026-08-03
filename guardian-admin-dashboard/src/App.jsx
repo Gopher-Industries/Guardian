@@ -3,7 +3,7 @@ import LoginPage from "./pages/LoginPage";
 import OtpPage from "./pages/OtpPage";
 import DashboardHome from "./pages/DashboardHome";
 import AdminLayout from "./layout/AdminLayout";
-import { getAuthToken } from "./utils/storage";
+import { getAuthToken, getAdminUser } from "./utils/storage";
 import StaffManagementPage from "./pages/StaffManagementPage";
 import OrgAssignmentPage from "./pages/OrgAssignmentPage";
 import PatientsPage from "./pages/PatientsPage";
@@ -13,15 +13,25 @@ import TaskManagementPage from "./pages/TaskManagementPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
 import DoctorAssignmentsPage from "./pages/DoctorAssignmentsPage";
-import "./App.css";
 import PatientOverviewPage from "./pages/PatientOverviewPage";
+import StatusPage from "./pages/StatusPage";
+import "./App.css";
 
-function ProtectedRoute({ children }) {
+function RequireAuth({ children }) {
   const token = getAuthToken();
-  return token ? children : <Navigate to="/login" replace />;
+  if (!token) return <Navigate to="/login" replace />;
+  return children;
+}
+
+function RequireRole({ allowed, children }) {
+  const role = getAdminUser()?.role;
+  if (!allowed.includes(role)) return <StatusPage type={403} />;
+  return children;
 }
 
 export default function App() {
+  const isAuthenticated = !!getAuthToken();
+
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
@@ -31,26 +41,98 @@ export default function App() {
       <Route
         path="/dashboard"
         element={
-          <ProtectedRoute>
+          <RequireAuth>
             <AdminLayout />
-          </ProtectedRoute>
+          </RequireAuth>
         }
       >
         <Route index element={<DashboardHome />} />
-        <Route path="staff-management" element={<StaffManagementPage />} />
-        <Route path="org-assignment" element={<OrgAssignmentPage />} />
-        <Route path="patients" element={<PatientsPage />} />
-        <Route path="doctor-assignments" element={<DoctorAssignmentsPage />} />
-        <Route path="patient-overview" element={<PatientOverviewPage />} />
-        <Route path="nurse-roster" element={<NurseRosterPage />} />
-        <Route path="support-ticket" element={<SupportTicketPage />} />
-        <Route path="reports" element={<ReportsPage />} />
+
+        <Route
+          path="staff-management"
+          element={
+            <RequireRole allowed={["admin"]}>
+              <StaffManagementPage />
+            </RequireRole>
+          }
+        />
+        <Route
+          path="org-assignment"
+          element={
+            <RequireRole allowed={["admin"]}>
+              <OrgAssignmentPage />
+            </RequireRole>
+          }
+        />
+        <Route
+          path="patients"
+          element={
+            <RequireRole allowed={["admin", "doctor", "nurse"]}>
+              <PatientsPage />
+            </RequireRole>
+          }
+        />
+        <Route
+          path="patient-overview"
+          element={
+            <RequireRole allowed={["admin", "doctor", "nurse"]}>
+              <PatientOverviewPage />
+            </RequireRole>
+          }
+        />
+        <Route
+          path="task-management"
+          element={
+            <RequireRole allowed={["admin", "doctor", "nurse"]}>
+              <TaskManagementPage />
+            </RequireRole>
+          }
+        />
+        <Route
+          path="nurse-roster"
+          element={
+            <RequireRole allowed={["admin", "doctor", "nurse"]}>
+              <NurseRosterPage />
+            </RequireRole>
+          }
+        />
+        <Route
+          path="support-ticket"
+          element={
+            <RequireRole allowed={["admin", "doctor", "nurse"]}>
+              <SupportTicketPage />
+            </RequireRole>
+          }
+        />
+        <Route
+          path="doctor-assignments"
+          element={
+            <RequireRole allowed={["admin", "doctor"]}>
+              <DoctorAssignmentsPage />
+            </RequireRole>
+          }
+        />
+        <Route
+          path="reports"
+          element={
+            <RequireRole allowed={["admin"]}>
+              <ReportsPage />
+            </RequireRole>
+          }
+        />
         <Route path="settings" element={<SettingsPage />} />
-        <Route path="task-management" element={<TaskManagementPage />} />
-        
+
+        {/* Catches unmatched paths WITHIN /dashboard, e.g. /dashboard/staffmanagement */}
+        <Route path="*" element={<StatusPage type={404} />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/login" replace />} />
+      {/* Catches everything outside /dashboard entirely, e.g. /staffmanagement */}
+      <Route
+        path="*"
+        element={
+          isAuthenticated ? <Navigate to="/dashboard" replace /> : <Navigate to="/login" replace />
+        }
+      />
     </Routes>
   );
 }

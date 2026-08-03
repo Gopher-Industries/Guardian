@@ -172,3 +172,18 @@ body {
 .org-refresh-wrap {
   margin-top: 22px;
 }
+
+.status-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px;
+  gap: 12px;
+}
+
+.status-page-icon {
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
