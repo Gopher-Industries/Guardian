@@ -9,12 +9,16 @@ export default function DashboardHome() {
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   useEffect(() => {
     const fetchSummary = async () => {
       try {
         const response = await api.get("admin/dashboard-summary");
+
         setSummary(response.data);
+        setLastUpdated(new Date());
+        setError("");
       } catch (err) {
         setError(
           err?.response?.data?.message ||
@@ -27,6 +31,12 @@ export default function DashboardHome() {
     };
 
     fetchSummary();
+
+    const interval = setInterval(() => {
+      fetchSummary();
+    }, 30000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -79,6 +89,16 @@ export default function DashboardHome() {
           </div>
         </div>
       </motion.section>
+
+      {lastUpdated && (
+        <div className="dashboard-metrics-header">
+          <span>Live system statistics</span>
+
+          <span className="dashboard-last-updated">
+            Updated: {lastUpdated.toLocaleTimeString()}
+          </span>
+        </div>
+      )}
 
       <DashboardSummaryCards
         summary={summary}
