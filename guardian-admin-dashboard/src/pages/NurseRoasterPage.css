@@ -40,7 +40,11 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, var(--primary), #3d92bf);
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    #3d92bf
+  );
   color: white;
   box-shadow: var(--shadow-sm);
   transition: 0.2s ease;
@@ -48,6 +52,12 @@
 
 .nurse-primary-btn:hover {
   transform: translateY(-1px);
+}
+
+.nurse-primary-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
 }
 
 .nurse-summary-grid {
@@ -191,7 +201,11 @@
   width: 40px;
   height: 40px;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--surface-accent), var(--surface-accent-2));
+  background: linear-gradient(
+    135deg,
+    var(--surface-accent),
+    var(--surface-accent-2)
+  );
   color: var(--primary-dark);
   font-weight: 800;
   display: flex;
@@ -280,6 +294,164 @@
   padding: 28px !important;
 }
 
+.nurse-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(11, 31, 55, 0.55);
+}
+
+.nurse-modal {
+  width: min(560px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: 0 24px 70px rgba(11, 31, 55, 0.25);
+}
+
+.nurse-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 24px 24px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.nurse-modal-header h2 {
+  margin: 0;
+  color: var(--primary-dark);
+  font-size: 1.45rem;
+}
+
+.nurse-modal-header p {
+  margin: 7px 0 0;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.nurse-modal-close {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--primary-dark);
+  cursor: pointer;
+}
+
+.nurse-modal-close:hover {
+  background: var(--surface-soft);
+}
+
+.nurse-modal-form {
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+}
+
+.nurse-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.nurse-form-field {
+  display: grid;
+  gap: 8px;
+}
+
+.nurse-form-field label {
+  color: var(--primary-dark);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.nurse-form-field input,
+.nurse-form-field select {
+  width: 100%;
+  min-height: 46px;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 11px 13px;
+  outline: none;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.nurse-form-field input:focus,
+.nurse-form-field select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 160, 200, 0.14);
+}
+
+.nurse-form-field select:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.nurse-selected-preview {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface-soft);
+}
+
+.nurse-selected-preview strong {
+  color: var(--primary-dark);
+}
+
+.nurse-selected-preview span {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.nurse-form-error {
+  margin: 0;
+  padding: 11px 13px;
+  border: 1px solid rgba(190, 45, 45, 0.25);
+  border-radius: 12px;
+  background: rgba(190, 45, 45, 0.08);
+  color: #a52f2f;
+  font-size: 0.9rem;
+}
+
+.nurse-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.nurse-secondary-btn {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 18px;
+  background: var(--surface);
+  color: var(--primary-dark);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.nurse-secondary-btn:hover {
+  background: var(--surface-soft);
+}
+
 @media (max-width: 1100px) {
   .nurse-summary-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -311,6 +483,23 @@
   }
 
   .nurse-primary-btn {
+    justify-content: center;
+  }
+
+  .nurse-modal-overlay {
+    padding: 14px;
+  }
+
+  .nurse-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nurse-modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .nurse-modal-actions button {
+    width: 100%;
     justify-content: center;
   }
 }
