@@ -18,6 +18,7 @@ export default function DataTable({
   perPage = 10,
   perPageOptions = [10, 20],
   loadingMessage,
+  noDataMessage = 'There are no records to display',
   ...rest
 }) {
   const progressComponent = loadingMessage ? (
@@ -161,6 +162,17 @@ export default function DataTable({
       data={data}
       progressPending={loading}
       progressComponent={progressComponent}
+      noDataComponent={
+        <div
+          style={{
+            padding: '24px',
+            color: 'var(--text-muted)',
+            textAlign: 'center',
+          }}
+        >
+          {noDataMessage}
+        </div>
+      }
       pagination
       paginationServer
       paginationTotalRows={totalRows}

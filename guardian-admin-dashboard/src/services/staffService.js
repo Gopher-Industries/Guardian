@@ -25,3 +25,13 @@ export async function deactivateStaff(id) {
   const response = await api.put(`/admin/staff/${id}/deactivate`);
   return response.data;
 }
+
+export async function getAllDoctors() {
+  const response = await api.get('/doctors');
+  return response.data;
+}
+
+export async function getAllNurses() {
+  const response = await api.get('/nurse/all');
+  return response.data;
+}
