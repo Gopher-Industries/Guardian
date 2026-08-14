@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import OtpPage from "./pages/OtpPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import DashboardHome from "./pages/DashboardHome";
 import AdminLayout from "./layout/AdminLayout";
 import { getAuthToken } from "./utils/storage";
@@ -26,7 +26,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/otp" element={<OtpPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
       <Route
         path="/dashboard"
@@ -47,7 +47,7 @@ export default function App() {
         <Route path="reports" element={<ReportsPage />} />
         <Route path="settings" element={<SettingsPage />} />
         <Route path="task-management" element={<TaskManagementPage />} />
-        
+
       </Route>
 
       <Route path="*" element={<Navigate to="/login" replace />} />
