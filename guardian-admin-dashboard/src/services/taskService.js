@@ -1,10 +1,23 @@
 import api from "./api";
 
-// TODO: integrate with proper backend GET API when endpoint is available
-// export async function getAdminTasks() {
-//   const response = await api.get("/admin/tasks");
-//   return response.data;
-// }
+export async function getTasks({
+  page = 1,
+  limit = 20,
+  status = "",
+  priority = "",
+  patientId = "",
+  assigneeId = ""
+} = {}) {
+  const params = { page, limit };
+
+  if (status) params.status = status;
+  if (priority) params.priority = priority;
+  if (patientId) params.patientId = patientId;
+  if (assigneeId) params.assigneeId = assigneeId;
+
+  const response = await api.get("/tasks", { params });
+  return response.data;
+}
 
 export async function createTask(taskData) {
   const response = await api.post("/admin/tasks", taskData);
