@@ -15,6 +15,8 @@ import {
 import Logo from "../common/Logo";
 import { ADMIN_NAV_ITEMS } from "../../utils/constants";
 import { clearAuthStorage } from "../../utils/storage";
+import { getAdminUser } from "../../utils/storage";
+
 
 
 const iconMap = {
@@ -38,6 +40,10 @@ export default function Sidebar({
   onCloseMobile,
 }) {
   const navigate = useNavigate();
+
+  const role = getAdminUser()?.role;
+const visibleItems = ADMIN_NAV_ITEMS.filter((item) => item.roles.includes(role));
+
 
   const handleLogout = () => {
     clearAuthStorage();
@@ -92,7 +98,7 @@ export default function Sidebar({
         </div>
 
         <nav className="sidebar-nav">
-          {ADMIN_NAV_ITEMS.map((item) => {
+          {visibleItems.map((item) => {
             const Icon = iconMap[item.id] || LayoutDashboard;
 
             return (
