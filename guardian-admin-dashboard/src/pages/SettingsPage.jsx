@@ -31,12 +31,43 @@ export default function SettingsPage() {
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [feedback, setFeedback] = useState("");
+  
+  const [dashboardPreferencesOpen, setDashboardPreferencesOpen] =
+  useState(false);
+
+const [dashboardPreferences, setDashboardPreferences] = useState(() => {
+  const savedPreferences = localStorage.getItem("dashboardPreferences");
+
+  return savedPreferences
+    ? JSON.parse(savedPreferences)
+    : {
+        heroBanner: true,
+        statistics: true,
+        dashboardPanels: true,
+      };
+});
 
   const toggleDarkMode = () => {
     const next = !darkMode;
     setDarkMode(next);
     document.body.classList.toggle("dark-theme", next);
   };
+
+  const toggleDashboardPreference = (preferenceName) => {
+  setDashboardPreferences((previousPreferences) => ({
+    ...previousPreferences,
+    [preferenceName]: !previousPreferences[preferenceName],
+  }));
+};
+
+const saveDashboardPreferences = () => {
+  localStorage.setItem(
+    "dashboardPreferences",
+    JSON.stringify(dashboardPreferences)
+  );
+
+  setDashboardPreferencesOpen(false);
+};
 
   const feedbackWordCount = useMemo(() => {
     return feedback.trim() ? feedback.trim().split(/\s+/).length : 0;
@@ -146,7 +177,11 @@ export default function SettingsPage() {
                 <ChevronRight size={16} />
               </button>
 
-              <button type="button" className="settings-action-tile">
+              <button
+                type="button"
+                className="settings-action-tile"
+                onClick={() => setDashboardPreferencesOpen(true)}
+                >
                 <div className="settings-action-left">
                   <MonitorCog size={17} />
                   <span>Dashboard Preferences</span>
@@ -208,7 +243,100 @@ export default function SettingsPage() {
         </div>
       </div>
 
-      {notificationsOpen && (
+      
+        {dashboardPreferencesOpen && (
+  <div className="settings-modal-backdrop">
+    <div className="settings-modal small-modal">
+      <div className="settings-modal-top">
+        <div>
+          <p className="settings-modal-eyebrow">Dashboard Preferences</p>
+          <h3>Customize Dashboard</h3>
+        </div>
+
+        <button
+          type="button"
+          className="settings-modal-close"
+          onClick={() => setDashboardPreferencesOpen(false)}
+          aria-label="Close dashboard preferences"
+        >
+          <X size={18} />
+        </button>
+      </div>
+
+      <div className="settings-stack">
+        <div className="settings-row">
+          <div className="settings-row-copy">
+            <strong>Welcome Banner</strong>
+            <p>Show the welcome message and quick navigation links.</p>
+          </div>
+
+          <button
+            type="button"
+            className={`mini-toggle ${
+              dashboardPreferences.heroBanner ? "active" : ""
+            }`}
+            onClick={() => toggleDashboardPreference("heroBanner")}
+          >
+            <span />
+          </button>
+        </div>
+
+        <div className="settings-row">
+          <div className="settings-row-copy">
+            <strong>Statistics Cards</strong>
+            <p>Show the summary statistics on the main dashboard.</p>
+          </div>
+
+          <button
+            type="button"
+            className={`mini-toggle ${
+              dashboardPreferences.statistics ? "active" : ""
+            }`}
+            onClick={() => toggleDashboardPreference("statistics")}
+          >
+            <span />
+          </button>
+        </div>
+
+        <div className="settings-row">
+          <div className="settings-row-copy">
+            <strong>Dashboard Panels</strong>
+            <p>Show progress information and upcoming modules.</p>
+          </div>
+
+          <button
+            type="button"
+            className={`mini-toggle ${
+              dashboardPreferences.dashboardPanels ? "active" : ""
+            }`}
+            onClick={() => toggleDashboardPreference("dashboardPanels")}
+          >
+            <span />
+          </button>
+        </div>
+      </div>
+
+      <div className="settings-modal-actions">
+        <button
+          type="button"
+          className="settings-secondary-btn"
+          onClick={() => setDashboardPreferencesOpen(false)}
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          className="settings-primary-btn"
+          onClick={saveDashboardPreferences}
+        >
+          Save Preferences
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+{notificationsOpen && (
         <div className="settings-modal-backdrop">
           <div className="settings-modal small-modal">
             <div className="settings-modal-top">
