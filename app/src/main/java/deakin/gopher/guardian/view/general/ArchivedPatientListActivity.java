@@ -40,8 +40,7 @@ public class ArchivedPatientListActivity extends BaseActivity {
     recyclerView = findViewById(R.id.archived_patient_recycler_view);
 
     final List<PatientOldArchive> archivedPatients = new ArrayList<>();
-    archivedPatients.add(new PatientOldArchive("1", "John", "Doe"));
-    archivedPatients.add(new PatientOldArchive("2", "Jane", "Doe"));
+
 
     DatabaseReference patientRef = FirebaseDatabase.getInstance().getReference().child("patients");
     Query archivedQuery = patientRef.orderByChild("is_Archived").equalTo(true);

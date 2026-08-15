@@ -32,6 +32,7 @@ import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
+import deakin.gopher.guardian.model.DoctorPatientsResponse
 
 interface ApiService {
     @POST("auth/register")
@@ -188,4 +189,17 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") id: String,
     ): Response<BaseModel>
+
+    @GET("doctors/{doctorId}/patients")
+    suspend fun getDoctorPatients(
+        @Header("Authorization") token: String,
+        @Path("doctorId") doctorId: String
+    ): Response<DoctorPatientsResponse>
+
+    @GET("patients/{patientId}/medications")
+    suspend fun getPatientMedications(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+    ): Response<List<deakin.gopher.guardian.model.Medication>>
+
 }

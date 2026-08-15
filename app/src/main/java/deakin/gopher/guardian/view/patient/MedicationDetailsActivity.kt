@@ -1,17 +1,26 @@
 package deakin.gopher.guardian.view.patient
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.adapter.MedicationAdapter
 import deakin.gopher.guardian.model.Medication
+import deakin.gopher.guardian.model.login.SessionManager
+import deakin.gopher.guardian.services.api.ApiClient
+import kotlinx.coroutines.launch
 
 class MedicationDetailsActivity : AppCompatActivity() {
     private lateinit var recyclerViewMorning: RecyclerView
     private lateinit var recyclerViewAfternoon: RecyclerView
     private lateinit var recyclerViewEvening: RecyclerView
+
+    private val adapterMorning = MedicationAdapter(emptyList())
+    private val adapterAfternoon = MedicationAdapter(emptyList())
+    private val adapterEvening = MedicationAdapter(emptyList())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,37 +29,39 @@ class MedicationDetailsActivity : AppCompatActivity() {
         recyclerViewAfternoon = findViewById(R.id.recyclerViewAfternoon)
         recyclerViewEvening = findViewById(R.id.recyclerViewEvening)
 
-        // Example data
-        val morningMedications =
-            listOf(
-                Medication("Azithromycin X 2"),
-                Medication("Levothyroxine X 1"),
-                Medication("Lisinopril X 2"),
-            )
+        setupRecyclerView(recyclerViewMorning, adapterMorning)
+        setupRecyclerView(recyclerViewAfternoon, adapterAfternoon)
+        setupRecyclerView(recyclerViewEvening, adapterEvening)
 
-        val afternoonMedications =
-            listOf(
-                Medication("Azithromycin X 2"),
-                Medication("Levothyroxine X 1"),
-                Medication("Lisinopril X 2"),
-            )
-
-        val eveningMedications =
-            listOf(
-                Medication("Azithromycin X 1"),
-                Medication("Levothyroxine X 1"),
-            )
-
-        setupRecyclerView(recyclerViewMorning, morningMedications)
-        setupRecyclerView(recyclerViewAfternoon, afternoonMedications)
-        setupRecyclerView(recyclerViewEvening, eveningMedications)
+        fetchMedications()
     }
 
     private fun setupRecyclerView(
         recyclerView: RecyclerView,
-        medications: List<Medication>,
+        adapter: MedicationAdapter,
     ) {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = MedicationAdapter(medications)
+        recyclerView.adapter = adapter
+    }
+
+    private fun fetchMedications() {
+        val patientId = intent.getStringExtra("patientId") ?: intent.getStringExtra("id") ?: ""
+        val token = "Bearer ${SessionManager.getToken()}"
+
+        lifecycleScope.launch {
+            try {
+                val response = ApiClient.apiService.getPatientMedications(token, patientId)
+                if (response.isSuccessful) {
+                    val medications = response.body().orEmpty()
+                    adapterMorning.updateData(medications)
+                    adapterAfternoon.updateData(emptyList())
+                    adapterEvening.updateData(emptyList())
+                } else {
+                    Toast.makeText(this@MedicationDetailsActivity, "Failed to load medications", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(this@MedicationDetailsActivity, "Network error loading medications", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
