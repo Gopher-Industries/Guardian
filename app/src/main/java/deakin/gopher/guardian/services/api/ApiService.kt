@@ -47,19 +47,6 @@ interface ApiService {
     ): Call<AuthResponse>
 
     @FormUrlEncoded
-    @POST("auth/send-pin")
-    fun sendPin(
-        @Field("email") email: String,
-    ): Call<BaseModel>
-
-    @FormUrlEncoded
-    @POST("auth/verify-pin")
-    fun verifyPin(
-        @Field("email") email: String,
-        @Field("otp") pin: String,
-    ): Call<BaseModel>
-
-    @FormUrlEncoded
     @POST("auth/reset-password-request")
     fun requestPasswordReset(
         @Field("email") email: String,
