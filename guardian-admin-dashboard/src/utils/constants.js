@@ -31,6 +31,12 @@ export const ADMIN_NAV_ITEMS = [
   path: "/dashboard/doctor-assignments",
   roles: ["admin", "doctor"]
   },
+  {
+  id: "pending-approvals",
+  label: "Pending Approvals",
+  path: "/dashboard/pending-approvals",
+  roles: ["admin"],
+},
   
   { id: "nurse-roster", label: "Nurse Roster", path: "/dashboard/nurse-roster",roles: ["admin", "doctor", "nurse","caretaker"] },
   { id: "support-ticket", label: "Support Ticket", path: "/dashboard/support-ticket", roles: ["admin", "doctor", "nurse","caretaker"] },
