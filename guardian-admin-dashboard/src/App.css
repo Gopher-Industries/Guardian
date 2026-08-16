@@ -187,3 +187,113 @@ body {
   color: var(--text-muted);
   margin-bottom: 8px;
 }
+
+/* --- Table & Empty State --- */
+.ui-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.ui-table th {
+  background: var(--surface-soft-2);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ui-table td {
+  padding: 16px 18px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.ui-table tbody tr:hover td {
+  background-color: var(--surface-soft);
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+  gap: 12px;
+}
+
+/* --- Badges & Form Fields --- */
+
+.ui-textarea {
+  box-sizing: border-box;
+  padding: 10px 14px;
+  background-color: var(--surface-soft);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+  outline: none;
+}
+
+.ui-textarea:focus {
+  border-color: var(--primary);
+}
+
+/* --- Buttons --- */
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ui-button.primary {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.ui-button.primary:hover {
+  filter: brightness(0.92);
+}
+
+.ui-button.secondary {
+  background-color: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.ui-button.secondary:hover {
+  background-color: var(--surface-soft);
+}
+
+.ui-button.danger-btn {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.ui-button.danger-btn:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.ui-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

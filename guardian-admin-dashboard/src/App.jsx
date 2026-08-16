@@ -15,6 +15,7 @@ import SettingsPage from "./pages/SettingsPage";
 import DoctorAssignmentsPage from "./pages/DoctorAssignmentsPage";
 import PatientOverviewPage from "./pages/PatientOverviewPage";
 import StatusPage from "./pages/StatusPage";
+import PendingApprovalsPage from "./pages/PendingApprovalsPage";
 import "./App.css";
 
 function RequireAuth({ children }) {
@@ -120,6 +121,14 @@ export default function App() {
             </RequireRole>
           }
         />
+        <Route
+          path="pending-approvals"
+          element={
+            <RequireRole allowed={["admin"]}>
+              <PendingApprovalsPage />
+            </RequireRole>
+          }
+        />
         <Route path="settings" element={<SettingsPage />} />
 
         {/* Catches unmatched paths WITHIN /dashboard, e.g. /dashboard/staffmanagement */}
@@ -130,7 +139,11 @@ export default function App() {
       <Route
         path="*"
         element={
-          isAuthenticated ? <Navigate to="/dashboard" replace /> : <Navigate to="/login" replace />
+          isAuthenticated ? (
+            <Navigate to="/dashboard" replace />
+          ) : (
+            <Navigate to="/login" replace />
+          )
         }
       />
     </Routes>
