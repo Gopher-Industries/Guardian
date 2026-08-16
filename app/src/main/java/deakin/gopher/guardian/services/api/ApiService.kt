@@ -7,6 +7,7 @@ import deakin.gopher.guardian.model.AdminPatientListResponse
 import deakin.gopher.guardian.model.AssignNurseRequest
 import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.CreatePatientLogRequest
+import deakin.gopher.guardian.model.DoctorPatientsResponse
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.PatientActivity
 import deakin.gopher.guardian.model.PatientLog
@@ -188,4 +189,16 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") id: String,
     ): Response<BaseModel>
+
+    @GET("doctors/{doctorId}/patients")
+    suspend fun getDoctorPatients(
+        @Header("Authorization") token: String,
+        @Path("doctorId") doctorId: String,
+    ): Response<DoctorPatientsResponse>
+
+    @GET("patients/{patientId}/medications")
+    suspend fun getPatientMedications(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+    ): Response<List<deakin.gopher.guardian.model.Medication>>
 }
