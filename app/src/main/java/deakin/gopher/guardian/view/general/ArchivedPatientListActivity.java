@@ -41,7 +41,6 @@ public class ArchivedPatientListActivity extends BaseActivity {
 
     final List<PatientOldArchive> archivedPatients = new ArrayList<>();
 
-
     DatabaseReference patientRef = FirebaseDatabase.getInstance().getReference().child("patients");
     Query archivedQuery = patientRef.orderByChild("is_Archived").equalTo(true);
     archivedQuery.addListenerForSingleValueEvent(

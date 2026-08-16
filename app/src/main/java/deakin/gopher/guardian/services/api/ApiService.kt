@@ -7,6 +7,7 @@ import deakin.gopher.guardian.model.AdminPatientListResponse
 import deakin.gopher.guardian.model.AssignNurseRequest
 import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.CreatePatientLogRequest
+import deakin.gopher.guardian.model.DoctorPatientsResponse
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.PatientActivity
 import deakin.gopher.guardian.model.PatientLog
@@ -32,7 +33,6 @@ import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
-import deakin.gopher.guardian.model.DoctorPatientsResponse
 
 interface ApiService {
     @POST("auth/register")
@@ -193,7 +193,7 @@ interface ApiService {
     @GET("doctors/{doctorId}/patients")
     suspend fun getDoctorPatients(
         @Header("Authorization") token: String,
-        @Path("doctorId") doctorId: String
+        @Path("doctorId") doctorId: String,
     ): Response<DoctorPatientsResponse>
 
     @GET("patients/{patientId}/medications")
@@ -201,5 +201,4 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("patientId") patientId: String,
     ): Response<List<deakin.gopher.guardian.model.Medication>>
-
 }

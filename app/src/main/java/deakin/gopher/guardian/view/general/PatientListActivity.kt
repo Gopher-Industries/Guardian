@@ -22,7 +22,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class PatientListActivity : BaseActivity() {
-
     private lateinit var binding: ActivityPatientListBinding
 
     private val currentUser by lazy {
@@ -41,7 +40,7 @@ class PatientListActivity : BaseActivity() {
     private val canEditPatients: Boolean
         get() =
             currentUser.role == Role.Admin ||
-                    currentUser.role == Role.Caretaker
+                currentUser.role == Role.Caretaker
 
     private val canDeletePatients: Boolean
         get() = currentUser.role == Role.Admin
@@ -49,39 +48,34 @@ class PatientListActivity : BaseActivity() {
     private val patientListAdapter by lazy {
         PatientListAdapter(
             emptyList(),
-
             showReassignAction = canReassignPatients,
             showAssignNurseAction = canAssignNurse,
             showEditAction = canEditPatients,
             showDeleteAction = canDeletePatients,
-
             onPatientClick = { patient ->
 
                 val intent =
                     Intent(
                         this,
-                        PatientDetailsActivity::class.java
+                        PatientDetailsActivity::class.java,
                     )
 
                 intent.putExtra(
                     "patient",
-                    patient
+                    patient,
                 )
 
                 startActivity(intent)
             },
-
             onReassignClick =
                 if (canReassignPatients) {
 
                     { patient ->
                         openReassignmentDialog(patient)
                     }
-
                 } else {
                     null
                 },
-
             onAssignNurseClick =
                 if (canAssignNurse) {
 
@@ -90,26 +84,24 @@ class PatientListActivity : BaseActivity() {
                         val intent =
                             Intent(
                                 this,
-                                AssignNurseActivity::class.java
+                                AssignNurseActivity::class.java,
                             )
 
                         intent.putExtra(
                             AssignNurseActivity.EXTRA_PATIENT_ID,
-                            patient.id
+                            patient.id,
                         )
 
                         intent.putExtra(
                             AssignNurseActivity.EXTRA_PATIENT_NAME,
-                            patient.fullname
+                            patient.fullname,
                         )
 
                         startActivity(intent)
                     }
-
                 } else {
                     null
                 },
-
             onEditClick =
                 if (canEditPatients) {
 
@@ -118,31 +110,28 @@ class PatientListActivity : BaseActivity() {
                         val intent =
                             Intent(
                                 this,
-                                EditPatientActivity::class.java
+                                EditPatientActivity::class.java,
                             )
 
                         intent.putExtra(
                             EditPatientActivity.EXTRA_PATIENT,
-                            patient
+                            patient,
                         )
 
                         startActivity(intent)
                     }
-
                 } else {
                     null
                 },
-
             onDeleteClick =
                 if (canDeletePatients) {
 
                     { patient ->
                         confirmDeletePatient(patient)
                     }
-
                 } else {
                     null
-                }
+                },
         )
     }
 
@@ -170,26 +159,22 @@ class PatientListActivity : BaseActivity() {
                 item.itemId == R.id.action_add_patient &&
                 canAddPatients
             ) {
-
                 startActivity(
                     Intent(
                         this,
-                        AddNewPatientActivity::class.java
-                    )
+                        AddNewPatientActivity::class.java,
+                    ),
                 )
 
                 true
-
             } else {
-
                 false
             }
         }
 
         if (currentUser.role == Role.Nurse) {
-
             binding.toolbar.setBackgroundColor(
-                getColor(R.color.TG_blue)
+                getColor(R.color.TG_blue),
             )
         }
 
@@ -207,14 +192,11 @@ class PatientListActivity : BaseActivity() {
     }
 
     private fun fetchPatients() {
-
         val token =
             "Bearer ${SessionManager.getToken()}"
 
         CoroutineScope(Dispatchers.IO).launch {
-
             withContext(Dispatchers.Main) {
-
                 if (patientListAdapter.itemCount == 0) {
                     binding.progressBar.show()
                 }
@@ -227,15 +209,14 @@ class PatientListActivity : BaseActivity() {
             }
 
             try {
-
                 when (currentUser.role) {
-
                     Role.Admin -> {
                         fetchAdminPatients(token)
                     }
 
                     Role.Caretaker,
-                    Role.Nurse -> {
+                    Role.Nurse,
+                    -> {
                         fetchAssignedPatients(token)
                     }
 
@@ -243,15 +224,12 @@ class PatientListActivity : BaseActivity() {
                         fetchDoctorPatients(token)
                     }
                 }
-
             } catch (exception: Exception) {
-
                 withContext(Dispatchers.Main) {
-
                     binding.progressBar.hide()
 
                     patientListAdapter.updateData(
-                        emptyList()
+                        emptyList(),
                     )
 
                     binding.recyclerViewPatients.visibility =
@@ -264,111 +242,86 @@ class PatientListActivity : BaseActivity() {
                         "Unable to load patients"
 
                     showMessage(
-                        "Network error: ${exception.message}"
+                        "Network error: ${exception.message}",
                     )
                 }
             }
         }
     }
 
-    private suspend fun fetchAdminPatients(
-        token: String
-    ) {
-
+    private suspend fun fetchAdminPatients(token: String) {
         val response =
             ApiClient.apiService
                 .getAdminPatients(token)
 
         withContext(Dispatchers.Main) {
-
             binding.progressBar.hide()
 
             if (response.isSuccessful) {
-
                 val patients =
                     response.body()?.patients
                         ?: emptyList()
 
                 showPatients(patients)
-
             } else {
-
                 showApiError(
-                    response.errorBody()?.string()
+                    response.errorBody()?.string(),
                 )
             }
         }
     }
 
-    private suspend fun fetchAssignedPatients(
-        token: String
-    ) {
-
+    private suspend fun fetchAssignedPatients(token: String) {
         val response =
             ApiClient.apiService
                 .getAssignedPatients(token)
 
         withContext(Dispatchers.Main) {
-
             binding.progressBar.hide()
 
             if (response.isSuccessful) {
-
                 val patients =
                     response.body()
                         ?: emptyList()
 
                 showPatients(patients)
-
             } else {
-
                 showApiError(
-                    response.errorBody()?.string()
+                    response.errorBody()?.string(),
                 )
             }
         }
     }
 
-    private suspend fun fetchDoctorPatients(
-        token: String
-    ) {
-
+    private suspend fun fetchDoctorPatients(token: String) {
         val doctorId = currentUser.id
 
         val response =
             ApiClient.apiService.getDoctorPatients(
                 token,
-                doctorId
+                doctorId,
             )
 
         withContext(Dispatchers.Main) {
-
             binding.progressBar.hide()
 
             if (response.isSuccessful) {
-
                 val patients =
                     response.body()?.patients ?: emptyList()
 
                 showPatients(patients)
-
             } else {
-
                 showApiError(
-                    response.errorBody()?.string()
+                    response.errorBody()?.string(),
                 )
             }
         }
     }
 
-    private fun showPatients(
-        patients: List<Patient>
-    ) {
-
+    private fun showPatients(patients: List<Patient>) {
         if (patients.isNotEmpty()) {
-
             patientListAdapter.updateData(
-                patients
+                patients,
             )
 
             binding.recyclerViewPatients.visibility =
@@ -376,11 +329,9 @@ class PatientListActivity : BaseActivity() {
 
             binding.tvEmptyMessage.visibility =
                 View.GONE
-
         } else {
-
             patientListAdapter.updateData(
-                emptyList()
+                emptyList(),
             )
 
             binding.recyclerViewPatients.visibility =
@@ -391,12 +342,12 @@ class PatientListActivity : BaseActivity() {
 
             binding.tvEmptyMessage.text =
                 when (currentUser.role) {
-
                     Role.Doctor ->
                         "No patients assigned to this doctor"
 
                     Role.Nurse,
-                    Role.Caretaker ->
+                    Role.Caretaker,
+                    ->
                         "No assigned patients found"
 
                     Role.Admin ->
@@ -405,12 +356,9 @@ class PatientListActivity : BaseActivity() {
         }
     }
 
-    private fun showApiError(
-        errorBody: String?
-    ) {
-
+    private fun showApiError(errorBody: String?) {
         patientListAdapter.updateData(
-            emptyList()
+            emptyList(),
         )
 
         binding.recyclerViewPatients.visibility =
@@ -426,106 +374,80 @@ class PatientListActivity : BaseActivity() {
             readError(errorBody)
 
         showMessage(
-            error ?: "Failed to load patients"
+            error ?: "Failed to load patients",
         )
     }
 
-    private fun openReassignmentDialog(
-        patient: Patient
-    ) {
-
+    private fun openReassignmentDialog(patient: Patient) {
         PatientReassignmentDialog(
             activity = this,
             patient = patient,
             onReassigned = {
                 fetchPatients()
-            }
+            },
         ).show()
     }
 
-    private fun confirmDeletePatient(
-        patient: Patient
-    ) {
-
+    private fun confirmDeletePatient(patient: Patient) {
         deletePatient(patient)
     }
 
-    private fun deletePatient(
-        patient: Patient
-    ) {
-
+    private fun deletePatient(patient: Patient) {
         val token =
             "Bearer ${SessionManager.getToken()}"
 
         CoroutineScope(Dispatchers.IO).launch {
-
             val response =
                 try {
-
                     ApiClient.apiService
                         .deletePatient(
                             token,
-                            patient.id
+                            patient.id,
                         )
-
                 } catch (exception: Exception) {
-
                     null
                 }
 
             withContext(Dispatchers.Main) {
-
                 if (
                     response?.isSuccessful == true
                 ) {
-
                     showMessage(
-                        "Patient deleted"
+                        "Patient deleted",
                     )
 
                     fetchPatients()
-
                 } else {
-
                     showMessage(
-                        "Failed to delete patient"
+                        "Failed to delete patient",
                     )
                 }
             }
         }
     }
 
-    private fun readError(
-        errorBody: String?
-    ): String? {
-
+    private fun readError(errorBody: String?): String? {
         if (errorBody.isNullOrBlank()) {
             return null
         }
 
         return try {
-
             Gson()
                 .fromJson(
                     errorBody,
-                    ApiErrorResponse::class.java
+                    ApiErrorResponse::class.java,
                 )
                 ?.apiError
-
         } catch (exception: Exception) {
-
             errorBody
         }
     }
 
-    private fun showMessage(
-        message: String
-    ) {
-
+    private fun showMessage(message: String) {
         Toast.makeText(
             this,
             message,
-            Toast.LENGTH_LONG
+            Toast.LENGTH_LONG,
         ).show()
     }
 }

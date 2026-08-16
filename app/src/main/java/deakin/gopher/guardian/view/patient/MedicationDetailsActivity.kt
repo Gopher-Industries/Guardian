@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.adapter.MedicationAdapter
-import deakin.gopher.guardian.model.Medication
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.api.ApiClient
 import kotlinx.coroutines.launch

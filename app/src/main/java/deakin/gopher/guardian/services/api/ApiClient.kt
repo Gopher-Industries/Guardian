@@ -15,10 +15,11 @@ object RetrofitClient {
 
 //  private const val BASE_URL = "https://guardian-backend-git-fix-cors-patelrudra2306-5873s-projects.vercel.app/api/v1/"
 
-    private val gson = GsonBuilder()
-        .registerTypeAdapter(User::class.java, UserDeserializer())
-        .setLenient()
-        .create()
+    private val gson =
+        GsonBuilder()
+            .registerTypeAdapter(User::class.java, UserDeserializer())
+            .setLenient()
+            .create()
 
     private val client = OkHttpClient()
     private val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)

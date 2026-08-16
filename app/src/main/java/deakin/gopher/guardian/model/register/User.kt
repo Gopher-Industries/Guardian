@@ -31,11 +31,12 @@ class UserDeserializer : com.google.gson.JsonDeserializer<User?> {
             val id = obj.get("id")?.asString ?: obj.get("_id")?.asString ?: ""
             val name = obj.get("fullname")?.asString ?: obj.get("fullName")?.asString ?: obj.get("name")?.asString ?: ""
             val email = obj.get("email")?.asString ?: ""
-            val roleName = if (obj.get("role")?.isJsonObject == true) {
-                obj.getAsJsonObject("role")?.get("name")?.asString
-            } else {
-                obj.get("role")?.asString
-            }
+            val roleName =
+                if (obj.get("role")?.isJsonObject == true) {
+                    obj.getAsJsonObject("role")?.get("name")?.asString
+                } else {
+                    obj.get("role")?.asString
+                }
             val photoUrl = obj.get("photoUrl")?.asString
             val organization = obj.get("organization")?.asString
             User(id = id, name = name, email = email, roleName = roleName, photoUrl = photoUrl, organization = organization)
