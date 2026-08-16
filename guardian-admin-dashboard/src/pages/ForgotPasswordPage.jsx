@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { ShieldCheck } from "lucide-react";
-import OtpForm from "../components/auth/OtpForm";
+import { KeyRound } from "lucide-react";
+import ForgotPasswordForm from "../components/auth/ForgotPasswordForm";
 import AnimatedHeading from "../components/common/AnimatedHeading";
 import Logo from "../components/common/Logo";
 
-export default function OtpPage() {
+export default function ForgotPasswordPage() {
   return (
     <section className="auth-page">
       <div className="auth-background">
@@ -23,26 +23,26 @@ export default function OtpPage() {
           <Logo size="large" />
 
           <AnimatedHeading
-            eyebrow="Second-step verification"
-            title="Confirm access to the admin workspace"
-            subtitle="Use the one-time password to securely continue into the Guardian administrative dashboard."
+            eyebrow="Account recovery"
+            title="Reset access to the admin workspace"
+            subtitle="Enter the email linked to your admin account to receive reset instructions."
           />
 
           <div className="hero-feature-list">
             <div className="hero-feature-card">
-              <ShieldCheck size={20} />
+              <KeyRound size={20} />
               <div>
-                <strong>Secure verification</strong>
+                <strong>Secure reset</strong>
                 <p>
-                  A second verification step helps protect access to
-                  administrative records and organisation-level controls.
+                  Reset links/codes expire after a short time to keep
+                  administrative access protected.
                 </p>
               </div>
             </div>
           </div>
         </motion.div>
 
-        <OtpForm />
+        <ForgotPasswordForm />
       </div>
     </section>
   );

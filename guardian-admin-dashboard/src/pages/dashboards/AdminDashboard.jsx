@@ -1,7 +1,5 @@
-import { useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import StatCard from "../../components/dashboard/StatCard";
-import { DASHBOARD_STATS } from "../../utils/constants";
 import {
   ArrowRight,
   Building2,
@@ -10,12 +8,20 @@ import {
   FileBarChart2,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { getAdminUser } from "../../utils/storage";
+import api from "../services/api";
+import DashboardSummaryCards from "../components/dashboard/DashboardSummaryCards";
+import StatCard from "../components/dashboard/StatCard";
+import { DASHBOARD_STATS } from "../utils/constants";
+import { getAdminUser } from "../utils/storage";
 
-export default function DashboardHome() {
+export default function AdminDashboard() {
+  const [summary, setSummary] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [lastUpdated, setLastUpdated] = useState(null);
+
   const dashboardPreferences = useMemo(() => {
     const saved = localStorage.getItem("dashboardPreferences");
-
     return saved
       ? JSON.parse(saved)
       : {
@@ -27,6 +33,33 @@ export default function DashboardHome() {
 
   const user = getAdminUser();
   const firstName = user?.fullname?.split(" ")[0] || "";
+
+  useEffect(() => {
+    const fetchSummary = async () => {
+      try {
+        const response = await api.get("admin/dashboard-summary");
+        setSummary(response.data);
+        setLastUpdated(new Date());
+        setError("");
+      } catch (err) {
+        setError(
+          err?.response?.data?.message ||
+            err?.message ||
+            "Failed to load dashboard summary."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSummary();
+
+    const interval = setInterval(() => {
+      fetchSummary();
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="dashboard-home">
@@ -40,13 +73,9 @@ export default function DashboardHome() {
           <div className="hero-banner-content">
             <div>
               <p className="section-eyebrow">Guardian Monitor Admin</p>
-
-              <h1>Welcome back, {firstName}</h1>
-
+              <h1>Welcome back{firstName ? `, ${firstName}` : ""}</h1>
               <p className="section-subtitle">
-                This shell layout is now ready for staff management,
-                organisation workflows, reporting, and future analytics
-                modules.
+                Monitor patients, staff, tasks, and system activity from one place.
               </p>
             </div>
 
@@ -56,12 +85,10 @@ export default function DashboardHome() {
                 className="hero-link-card"
               >
                 <Users size={18} />
-
                 <div>
                   <strong>Staff Management</strong>
-                  <span>Continue building admin-facing staff flows</span>
+                  <span>Manage staff members and administrative access</span>
                 </div>
-
                 <ArrowRight size={16} />
               </Link>
 
@@ -70,20 +97,31 @@ export default function DashboardHome() {
                 className="hero-link-card"
               >
                 <Building2 size={18} />
-
                 <div>
                   <strong>Organisation & Assignment</strong>
-                  <span>
-                    Continue organisation and assignment workflows
-                  </span>
+                  <span>Manage organisations and staff assignments</span>
                 </div>
-
                 <ArrowRight size={16} />
               </Link>
             </div>
           </div>
         </motion.section>
       )}
+
+      {lastUpdated && (
+        <div className="dashboard-metrics-header">
+          <span>Live system statistics</span>
+          <span className="dashboard-last-updated">
+            Updated: {lastUpdated.toLocaleTimeString()}
+          </span>
+        </div>
+      )}
+
+      <DashboardSummaryCards
+        summary={summary}
+        loading={loading}
+        error={error}
+      />
 
       {dashboardPreferences.statistics && (
         <section className="stats-grid">
@@ -102,7 +140,6 @@ export default function DashboardHome() {
             transition={{ duration: 0.45, delay: 0.05 }}
           >
             <h3>Shell layout progress</h3>
-
             <ul className="activity-list">
               <li>Login and OTP flow UI created</li>
               <li>Protected admin routing structure prepared</li>
@@ -118,23 +155,19 @@ export default function DashboardHome() {
             transition={{ duration: 0.45, delay: 0.12 }}
           >
             <h3>Upcoming modules</h3>
-
             <div className="mini-module-list">
               <div className="mini-module-item">
                 <ShieldAlert size={18} />
                 <span>Alerts & Monitoring</span>
               </div>
-
               <div className="mini-module-item">
                 <Users size={18} />
                 <span>Staff Administration</span>
               </div>
-
               <div className="mini-module-item">
                 <Building2 size={18} />
                 <span>Organisation Workflows</span>
               </div>
-
               <div className="mini-module-item">
                 <FileBarChart2 size={18} />
                 <span>Reports & Analytics</span>

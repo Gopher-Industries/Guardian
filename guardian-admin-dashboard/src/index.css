@@ -2363,3 +2363,11 @@ a {
   cursor: not-allowed;
   transform: none !important;
 }
+
+/* Dashboard real-time update status */
+.dashboard-last-updated {
+  margin: 4px 0 0;
+  padding: 0 2px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}

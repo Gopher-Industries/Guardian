@@ -128,9 +128,6 @@ export const NURSE_DASHBOARD_STATS = [
 export const STORAGE_KEYS = {
   token: "guardian_admin_token",
   user: "guardian_admin_user",
-  email: "guardian_admin_email",
-  pendingToken: "guardian_admin_pending_token",
-  pendingUser: "guardian_admin_pending_user",
 };
 
 export const ROLE_OPTIONS = [

@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import OtpPage from "./pages/OtpPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import DashboardHome from "./pages/DashboardHome";
 import AdminLayout from "./layout/AdminLayout";
 import { getAuthToken, getAdminUser } from "./utils/storage";
@@ -37,7 +37,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/otp" element={<OtpPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
       <Route
         path="/dashboard"
@@ -133,6 +133,8 @@ export default function App() {
 
         {/* Catches unmatched paths WITHIN /dashboard, e.g. /dashboard/staffmanagement */}
         <Route path="*" element={<StatusPage type={404} />} />
+        <Route path="task-management" element={<TaskManagementPage />} />
+
       </Route>
 
       {/* Catches everything outside /dashboard entirely, e.g. /staffmanagement */}

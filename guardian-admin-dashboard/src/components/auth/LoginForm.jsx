@@ -3,12 +3,8 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import InputField from "../common/InputField";
 import Button from "../common/Button";
-import { loginAdmin, sendPin } from "../../services/authService";
-import {
-  setPendingEmail,
-  setPendingToken,
-  setPendingUser,
-} from "../../utils/storage";
+import { loginAdmin } from "../../services/authService";
+import { setAuthToken, setAdminUser } from "../../utils/storage";
 
 export default function LoginForm() {
   const [form, setForm] = useState({
@@ -39,16 +35,10 @@ export default function LoginForm() {
         throw new Error("Login response is missing token or user.");
       }
 
-      setPendingEmail(form.email);
-      setPendingToken(token);
-      setPendingUser(user);
+      setAuthToken(token);
+      setAdminUser(user);
 
-      if (user?.twoFactorRequired) {
-        await sendPin(form.email);
-        navigate("/otp", { state: { email: form.email } });
-      } else {
-        navigate("/dashboard");
-      }
+      navigate("/dashboard");
     } catch (err) {
       const status = err?.response?.status;
       const backendMessage = err?.response?.data?.message;
@@ -102,15 +92,18 @@ export default function LoginForm() {
         {error ? <p className="form-error">{error}</p> : null}
 
         <div className="auth-card-helper">
-          <span>Two-step verification enabled</span>
-          <button type="button" className="text-link">
+          <button
+            type="button"
+            className="text-link"
+            onClick={() => navigate("/forgot-password")}
+          >
             Forgot password?
           </button>
         </div>
       </div>
 
       <Button type="submit" fullWidth disabled={submitting}>
-        {submitting ? "Signing in..." : "Continue to OTP"}
+        {submitting ? "Signing in..." : "Sign In"}
       </Button>
     </motion.form>
   );
