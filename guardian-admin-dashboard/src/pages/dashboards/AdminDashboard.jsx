@@ -8,11 +8,11 @@ import {
   FileBarChart2,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import api from "../services/api";
-import DashboardSummaryCards from "../components/dashboard/DashboardSummaryCards";
-import StatCard from "../components/dashboard/StatCard";
-import { DASHBOARD_STATS } from "../utils/constants";
-import { getAdminUser } from "../utils/storage";
+import api from "../../services/api";
+import DashboardSummaryCards from "../../components/dashboard/DashboardSummaryCards";
+import StatCard from "../../components/dashboard/StatCard";
+import { DASHBOARD_STATS } from "../../utils/constants";
+import { getAdminUser } from "../../utils/storage";
 
 export default function AdminDashboard() {
   const [summary, setSummary] = useState(null);
