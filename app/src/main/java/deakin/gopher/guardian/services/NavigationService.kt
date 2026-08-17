@@ -9,7 +9,6 @@ import deakin.gopher.guardian.view.general.Homepage4doctor
 import deakin.gopher.guardian.view.general.Homepage4nurse
 import deakin.gopher.guardian.view.general.LoginActivity
 import deakin.gopher.guardian.view.general.PatientListActivity
-import deakin.gopher.guardian.view.general.PinCodeActivity
 import deakin.gopher.guardian.view.general.RegisterActivity
 import deakin.gopher.guardian.view.general.Setting
 import deakin.gopher.guardian.view.general.TaskAddActivity
@@ -98,14 +97,5 @@ class NavigationService(val activity: Activity) {
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         activity.startActivity(intent)
         activity.finish()
-    }
-
-    fun toPinCodeActivity(role: Role) {
-        val intent = Intent(activity, PinCodeActivity::class.java)
-        intent.putExtra("role", role)
-        activity.startActivity(intent)
-        // We keep LoginActivity in the stack in case user wants to go back from PIN screen?
-        // Actually, usually you'd want to finish() it too if PIN is mandatory.
-        // If we want the back button on PIN screen to go back to Login, we don't finish() here.
     }
 }
