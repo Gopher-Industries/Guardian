@@ -1,7 +1,13 @@
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Modal({ open, onClose, title, children }) {
+export default function Modal({
+  open,
+  onClose,
+  title,
+  children,
+  footer
+}) {
   return (
     <AnimatePresence>
       {open && (
@@ -13,6 +19,7 @@ export default function Modal({ open, onClose, title, children }) {
             exit={{ opacity: 0 }}
             onClick={onClose}
           />
+
           <div className="modal-container">
             <motion.div
               className="modal"
@@ -23,11 +30,25 @@ export default function Modal({ open, onClose, title, children }) {
             >
               <div className="modal-header">
                 <h3 className="modal-title">{title}</h3>
-                <button className="modal-close" onClick={onClose} aria-label="Close">
+
+                <button
+                  className="modal-close"
+                  onClick={onClose}
+                  aria-label="Close"
+                >
                   <X size={18} />
                 </button>
               </div>
-              <div className="modal-body">{children}</div>
+
+              <div className="modal-body">
+                {children}
+              </div>
+
+              {footer && (
+                <div className="modal-footer">
+                  {footer}
+                </div>
+              )}
             </motion.div>
           </div>
         </>

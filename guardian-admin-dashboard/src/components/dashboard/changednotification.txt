@@ -1,0 +1,113 @@
+import { useState } from "react";
+
+function NotificationCenter({ notifications }) {
+  const [selectedNotification, setSelectedNotification] = useState(null);
+
+  const handleNotificationClick = (notification) => {
+    setSelectedNotification(notification);
+  };
+
+  const closeNotificationDetails = () => {
+    setSelectedNotification(null);
+  };
+
+  const handleDelete = (event, notificationId) => {
+    // Prevent the card click from opening the modal
+    event.stopPropagation();
+
+    console.log("Delete notification:", notificationId);
+
+    // Existing deleteNotification(notificationId)
+    // can be called here.
+  };
+
+  return (
+    <>
+      <div className="notification-list">
+        {notifications.map((notification) => (
+          <div
+            key={notification._id}
+            className="notification-card"
+            onClick={() => handleNotificationClick(notification)}
+            role="button"
+            tabIndex={0}
+          >
+            <div className="notification-header">
+              <h3>{notification.title}</h3>
+
+              <span>
+                {new Date(notification.createdAt).toLocaleString()}
+              </span>
+            </div>
+
+            <p>{notification.message}</p>
+
+            <div className="notification-footer">
+              <span className="notification-type">
+                INFO
+              </span>
+
+              <button
+                type="button"
+                onClick={(event) =>
+                  handleDelete(event, notification._id)
+                }
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {selectedNotification && (
+        <div
+          className="notification-modal-overlay"
+          onClick={closeNotificationDetails}
+        >
+          <div
+            className="notification-modal"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="modal-close"
+              onClick={closeNotificationDetails}
+            >
+              ×
+            </button>
+
+            <h2>{selectedNotification.title}</h2>
+
+            <p>{selectedNotification.message}</p>
+
+            <div className="notification-details">
+              <p>
+                <strong>Status:</strong>{" "}
+                {selectedNotification.isRead ? "Read" : "Unread"}
+              </p>
+
+              <p>
+                <strong>Created:</strong>{" "}
+                {new Date(
+                  selectedNotification.createdAt
+                ).toLocaleString()}
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                console.log("Navigate to related module");
+              }}
+            >
+              View Related Item
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default NotificationCenter;
