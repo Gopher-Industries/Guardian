@@ -1,0 +1,10 @@
+field_name,type,required,description,example,range
+alert_id,string,yes,Unique alert ID,A-0001,
+patient_id,string,yes,Patient this alert is about,P001,
+timestamp,datetime,yes,Alert creation time,2025-08-22T10:00:00Z,
+alert_type,string,yes,Type of alert,tachycardia,tachycardia|hypoxia|fever|bradycardia|hypertension|hypotension|emotion_risk
+severity,string,yes,How serious it is,medium,low|medium|high|critical
+trigger_fields,string,no,Fields that triggered alert,"heart_rate,spo2",
+rule_id,string,no,Rule that caused alert,R-HEART-01,
+ack_status,string,no,If alert has been acknowledged,unread,unread|acknowledged|resolved
+notes,string,no,Free text for reviewer,Short run post-exercise,

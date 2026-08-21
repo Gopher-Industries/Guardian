@@ -1,0 +1,11 @@
+field_name,type,required,description,example,range
+patient_id,string,yes,Unique ID for the patient,P001,
+timestamp,datetime,yes,Time recorded in UTC,2025-08-22T09:30:00Z,
+step_count,int,no,Steps counted in interval,120,0-50000
+activity_level,string,no,Activity intensity,light,sedentary|light|moderate|intense
+accel_x,float,no,Acceleration X-axis,0.12,
+accel_y,float,no,Acceleration Y-axis,-0.03,
+accel_z,float,no,Acceleration Z-axis,9.81,
+calories,float,no,Calories burned in interval,4.5,0-10000
+device,string,no,Device that logged the data,Apple Watch,
+quality_flag,string,no,Data quality status,ok,ok|suspect|missing
