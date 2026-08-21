@@ -1,0 +1,408 @@
+
+# Patient Vitals — Risk Scoring, Anomalies & Short-Term Forecasts ✅
+
+## 0) Parameters
+
+# ---- Paths & columns ----
+DATA_PATH   = "New AI spreadsheet - Sheet1.csv"
+DATE_COLUMN = "observationStart"
+PATIENT_ID_COLUMN = "P0001"       # set to prefrred patient ID column; if None, use none to aggregate all rows into one pseudo-patient
+
+# ---- Weekly settings ----
+WEEK_FREQ = "W-SUN"                   # or "W-MON"
+ASSUME_TEMP_UNIT = "C"                # fallback if we can't infer
+
+# ---- Forecast & anomaly settings ----
+FORECAST_HORIZON_WEEKS = 4
+MIN_POINTS_TO_FORECAST = 6
+EWMA_SPAN = 4
+ANOMALY_LOOKBACK_WEEKS = 8
+ROBUST_Z_THRESHOLD = 3.0              # |robust z| above this is flagged as anomaly
+
+# ---- Safe/reference ranges ----
+SAFE = {
+    # within-range -> low risk
+    "heart_rate_bpm":  (60, 100),          # resting range
+    "spo2_pct_min":    95,                 # values below raise risk
+    "temp_c_ok":       (36.1, 37.2),       # typical
+    "temp_c_fever":    38.0,               # fever threshold
+    "temp_c_hypo":     35.0,               # hypothermia-ish threshold
+    "sbp_ok_max":      120,                # systolic
+    "dbp_ok_max":      80,                 # diastolic
+    "sleep_hours":     (7, 9),             # recommended per night
+    "exercise_min_week": 150               # guideline target (moderate); we'll treat below this as higher risk
+}
+
+# ---- Risk weights (sum to ~1 ideal; we normalize internally) ----
+WEIGHTS = {
+    "spo2": 0.22,
+    "temperature": 0.18,
+    "bp": 0.22,
+    "heart_rate": 0.18,
+    "sleep": 0.12,
+    "exercise": 0.08
+}
+
+# ---- Column mapping (headers) ----
+VITAL_MAP = {
+    "heart_rate": "heartRate",
+    "spo2": "spo2",
+    "temperature": "temperature",
+    "bp_pair": "bloodPressure",     # expects "120/80"
+    "steps": "stepsTaken",
+    "calories": "calorieIntake",
+    "sleep_hours": "sleepHours",
+    "water_intake": "waterIntakeMl",
+    "meals_skipped": "mealsSkipped",
+    "exercise_minutes": "exerciseMinutes",
+    "bathroom_visits": "bathroomVisits",
+}
+
+## 1) Setup & helpers
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from sklearn.linear_model import LinearRegression
+
+pd.set_option("display.max_columns", 200)
+pd.set_option("display.width", 140)
+
+def to_numeric_clean(s: pd.Series) -> pd.Series:
+    if s.dtype.kind in "biufc":
+        return pd.to_numeric(s, errors="coerce")
+    return pd.to_numeric(
+        s.astype(str).str.replace(",", "", regex=False).str.replace("%", "", regex=False)
+         .str.extract(r"([-+]?\d*\.?\d+)")[0],
+        errors="coerce"
+    )
+
+def parse_bp_pair(s: pd.Series):
+    txt = s.astype(str).str.replace(",", "", regex=False).str.lower()
+    sys = txt.str.extract(r"([-+]?\d+\.?\d*)\s*(?:/|-| over )")[0]
+    dia = txt.str.extract(r"(?:/|-| over )\s*([-+]?\d+\.?\d*)")[0]
+    return pd.to_numeric(sys, errors="coerce"), pd.to_numeric(dia, errors="coerce")
+
+def auto_detect_temp_unit(series: pd.Series, assume="C"):
+    vals = to_numeric_clean(series)
+    med = vals.median()
+    if pd.notna(med) and med > 80:
+        return "F"
+    return assume
+
+def to_celsius(series: pd.Series, unit_hint="C"):
+    vals = to_numeric_clean(series)
+    return (vals - 32.0) * (5.0/9.0) if unit_hint.upper() == "F" else vals
+
+def parse_dates(s: pd.Series) -> pd.Series:
+    s_obj = s.dropna()
+    as_num = pd.to_numeric(s_obj, errors="coerce")
+    if as_num.notna().mean() > 0.8:
+        q95 = as_num.quantile(0.95)
+        if q95 > 1e11:
+            return pd.to_datetime(pd.to_numeric(s, errors="coerce"), unit="ms", utc=True).dt.tz_localize(None)
+        if q95 > 1e9:
+            return pd.to_datetime(pd.to_numeric(s, errors="coerce"), unit="s",  utc=True).dt.tz_localize(None)
+    dt = pd.to_datetime(s, errors="coerce")
+    try:
+        return dt.dt.tz_localize(None)
+    except Exception:
+        return dt
+
+def weekly_bucket(dt, week_freq="W-SUN"):
+    return dt.dt.to_period(week_freq).dt.start_time
+
+def robust_z(x: pd.Series) -> pd.Series:
+    med = x.median()
+    mad = (np.abs(x - med)).median()
+    if mad == 0 or np.isnan(mad):
+        return pd.Series(index=x.index, dtype=float)
+    return 0.6745 * (x - med) / mad
+
+def linear_trend_forecast(y: pd.Series, horizon=4, min_points=6):
+    y = y.dropna().astype(float)
+    n = len(y)
+    if n < min_points:
+        return None
+    x = np.arange(n).reshape(-1,1)
+    m = LinearRegression().fit(x, y.values)
+    preds = m.predict(np.arange(n, n+horizon).reshape(-1,1))
+    resid = y.values - m.predict(x)
+    sigma = np.std(resid) if len(resid)>1 else 0.0
+    return preds, sigma
+
+## 2) Load & assemble weekly per-patient vitals
+
+df = pd.read_csv(DATA_PATH, low_memory=False)
+if DATE_COLUMN not in df.columns:
+    raise ValueError(f"DATE_COLUMN '{DATE_COLUMN}' not found.")
+
+dt = parse_dates(df[DATE_COLUMN])
+week = weekly_bucket(dt, WEEK_FREQ)
+
+if PATIENT_ID_COLUMN and PATIENT_ID_COLUMN in df.columns:
+    pid = df[PATIENT_ID_COLUMN].astype(str)
+else:
+    pid = pd.Series(["ALL"]*len(df))
+    PATIENT_ID_COLUMN = "P0001"
+
+# Build numeric vitals
+vitals = {}
+if VITAL_MAP.get("heart_rate") in df.columns:
+    vitals["heart_rate"] = to_numeric_clean(df[VITAL_MAP["heart_rate"]])
+if VITAL_MAP.get("spo2") in df.columns:
+    vitals["spo2"] = to_numeric_clean(df[VITAL_MAP["spo2"]])
+if VITAL_MAP.get("temperature") in df.columns:
+    unit = auto_detect_temp_unit(df[VITAL_MAP["temperature"]], assume=ASSUME_TEMP_UNIT)
+    vitals["temperature"] = to_celsius(df[VITAL_MAP["temperature"]], unit_hint=unit)
+if VITAL_MAP.get("bp_pair") in df.columns:
+    sys, dia = parse_bp_pair(df[VITAL_MAP["bp_pair"]])
+    vitals["bp_systolic"] = sys; vitals["bp_diastolic"] = dia
+for key in ["steps","calories","sleep_hours","water_intake","meals_skipped","exercise_minutes","bathroom_visits"]:
+    col = VITAL_MAP.get(key)
+    if col in df.columns:
+        vitals[key] = to_numeric_clean(df[col])
+
+# Aggregate weekly per patient
+agg_kind = {
+    "heart_rate":"mean","spo2":"mean","temperature":"mean",
+    "bp_systolic":"mean","bp_diastolic":"mean",
+    "steps":"sum","calories":"sum","sleep_hours":"mean",
+    "water_intake":"sum","meals_skipped":"sum","exercise_minutes":"sum","bathroom_visits":"sum"
+}
+
+weekly_frames = []
+for vname, series in vitals.items():
+    tmp = pd.DataFrame({PATIENT_ID_COLUMN: pid, "week": week, vname: series})
+    tmp = tmp.dropna(subset=["week", vname])
+    g = tmp.groupby([PATIENT_ID_COLUMN, "week"])[vname].agg(agg_kind.get(vname, "mean"))
+    weekly_frames.append(g)
+
+if not weekly_frames:
+    raise ValueError("No vitals available to aggregate. Check VITAL_MAP.")
+
+weekly = pd.concat(weekly_frames, axis=1).sort_index()
+weekly.head()
+
+## 3) Risk components (per week, per patient)
+
+def risk_hr(hr):
+    if pd.isna(hr): return np.nan
+    lo, hi = SAFE["heart_rate_bpm"]
+    if lo <= hr <= hi: return 0.0
+    # normalize distance: 20 bpm beyond -> ~1 risk
+    dist = (lo - hr) if hr < lo else (hr - hi)
+    return min(abs(dist) / 20.0, 2.0)  # cap at 2
+
+def risk_spo2(sp):
+    if pd.isna(sp): return np.nan
+    if sp >= SAFE["spo2_pct_min"]: return 0.0
+    # 5% below min -> ~1
+    return min((SAFE["spo2_pct_min"] - sp) / 5.0, 2.0)
+
+def risk_temp(tc):
+    if pd.isna(tc): return np.nan
+    lo, hi = SAFE["temp_c_ok"]
+    if lo <= tc <= hi: return 0.0
+    if tc >= SAFE["temp_c_fever"]:
+        return min((tc - SAFE["temp_c_fever"]) / 1.0, 2.0)  # each +1C above fever raises risk
+    if tc <= SAFE["temp_c_hypo"]:
+        return min((SAFE["temp_c_hypo"] - tc) / 1.0, 2.0)
+    # mildly out of typical range
+    dist = min(abs(tc - lo), abs(tc - hi))
+    return min(dist / 0.5, 1.0)
+
+def risk_bp(sys, dia):
+    # normal <120/<80; elevated 120-129/<80; stage1 130-139 or 80-89; stage2 >=140 or >=90
+    if pd.isna(sys) and pd.isna(dia): return np.nan
+    r = 0.0
+    if pd.notna(sys):
+        if sys < SAFE["sbp_ok_max"]:
+            pass
+        elif 120 <= sys < 130:
+            r += 0.5
+        elif 130 <= sys < 140:
+            r += 1.0
+        elif 140 <= sys < 180:
+            r += 1.5
+        else:
+            r += 2.0
+    if pd.notna(dia):
+        if dia < SAFE["dbp_ok_max"]:
+            pass
+        elif 80 <= dia < 90:
+            r += 1.0
+        elif 90 <= dia < 120:
+            r += 1.5
+        else:
+            r += 2.0
+    # Scale to 0..2
+    return min(r, 2.0)
+
+def risk_sleep(h):
+    if pd.isna(h): return np.nan
+    lo, hi = SAFE["sleep_hours"]
+    if lo <= h <= hi: return 0.0
+    dist = min(abs(h - lo), abs(h - hi))
+    return min(dist / 1.0, 2.0)
+
+def risk_exercise(mins_week):
+    if pd.isna(mins_week): return np.nan
+    if mins_week >= SAFE["exercise_min_week"]: return 0.0
+    gap = SAFE["exercise_min_week"] - mins_week
+    return min(gap / 150.0, 2.0)
+
+def combine_risk(row):
+    parts = {}
+    parts["heart_rate"] = risk_hr(row.get("heart_rate"))
+    parts["spo2"] = risk_spo2(row.get("spo2"))
+    parts["temperature"] = risk_temp(row.get("temperature"))
+    parts["bp"] = risk_bp(row.get("bp_systolic"), row.get("bp_diastolic"))
+    parts["sleep"] = risk_sleep(row.get("sleep_hours"))
+    parts["exercise"] = risk_exercise(row.get("exercise_minutes"))
+    # normalize weights over available parts
+    available = {k:v for k,v in parts.items() if pd.notna(v)}
+    if not available:
+        return np.nan, parts
+    total_w = sum(WEIGHTS[k] for k in available.keys())
+    score = sum(WEIGHTS[k]*available[k] for k in available.keys()) / (total_w if total_w>0 else 1.0)
+    return score, parts
+
+# Compute weekly risk scores
+scores = []
+for (pid, wk), row in weekly.iterrows():
+    sc, parts = combine_risk(row)
+    scores.append({"patientId": pid, "week": wk, "risk_score": sc, **{f"risk_{k}": v for k,v in parts.items()}})
+
+risk_df = pd.DataFrame(scores).set_index(["patientId","week"]).sort_index()
+risk_df.head()
+
+## 4) Anomaly detection (robust z over last N weeks, per patient)
+
+def mark_anomalies(weekly_df, lookback=ANOMALY_LOOKBACK_WEEKS, threshold=ROBUST_Z_THRESHOLD):
+    marks = []
+    for pid, sub in weekly_df.groupby(level=0):
+        sub = sub.droplevel(0).sort_index()
+        sub = sub.copy()
+        for col in sub.columns:
+            z = robust_z(sub[col].tail(lookback))
+            if z.empty: 
+                continue
+            last_week = z.index[-1]
+            val = z.iloc[-1]
+            marks.append({"patientId": pid, "week": last_week, "vital": col, "robust_z": val, "is_anom": abs(val) >= threshold})
+    return pd.DataFrame(marks).set_index(["patientId","week","vital"]) if marks else pd.DataFrame(columns=["robust_z","is_anom"])
+
+anom = mark_anomalies(weekly, lookback=ANOMALY_LOOKBACK_WEEKS, threshold=ROBUST_Z_THRESHOLD)
+anom.head()
+
+## 5) Forecast next few weeks & categorize patients
+
+def will_cross_threshold(series, vital_name, horizon=FORECAST_HORIZON_WEEKS):
+    out = linear_trend_forecast(series, horizon=horizon, min_points=MIN_POINTS_TO_FORECAST)
+    if out is None:
+        return False
+    yhat, sigma = out
+    # Check mid forecast value against safe thresholds (simple heuristic)
+    mid = yhat[min(len(yhat)-1, 1)]  # within next 1-2 weeks
+    if vital_name == "spo2":
+        return mid < SAFE["spo2_pct_min"]
+    if vital_name == "temperature":
+        return (mid >= SAFE["temp_c_fever"]) or (mid <= SAFE["temp_c_hypo"]) or not (SAFE["temp_c_ok"][0] <= mid <= SAFE["temp_c_ok"][1])
+    if vital_name == "heart_rate":
+        lo, hi = SAFE["heart_rate_bpm"]; return not (lo <= mid <= hi)
+    if vital_name == "bp_systolic":
+        return mid >= 130  # stage 1 boundary
+    if vital_name == "bp_diastolic":
+        return mid >= 80
+    if vital_name == "sleep_hours":
+        lo, hi = SAFE["sleep_hours"]; return not (lo <= mid <= hi)
+    if vital_name == "exercise_minutes":
+        return mid < SAFE["exercise_min_week"]
+    return False
+
+summ_rows = []
+for pid, sub in weekly.groupby(level=0):
+    sub = sub.droplevel(0).sort_index()
+    latest = sub.tail(1)
+    latest_wk = latest.index[-1]
+    # current risk (composite)
+    rrow = risk_df.loc[(pid, latest_wk)]
+    risk_score = rrow["risk_score"]
+    # classify
+    if pd.isna(risk_score):
+        category = "Insufficient Data"
+    elif risk_score < 0.35:
+        category = "Stable"
+    elif risk_score < 0.75:
+        category = "Borderline"
+    else:
+        category = "Risky"
+    # forecast check: may become risky?
+    may_become = False
+    for v in ["spo2","temperature","heart_rate","bp_systolic","bp_diastolic","sleep_hours","exercise_minutes"]:
+        if v in sub.columns and sub[v].notna().sum() >= MIN_POINTS_TO_FORECAST:
+            if will_cross_threshold(sub[v], v):
+                may_become = True
+                break
+    if category == "Stable" and may_become:
+        category = "May Become Risky"
+    # anomaly note
+    an_note = []
+    try:
+        a_sub = anom.xs(pid, level=0)
+        a_sub = a_sub.xs(latest_wk, level=0, drop_level=False)
+        flagged = a_sub[a_sub["is_anom"] == True]
+        if not flagged.empty:
+            an_note = list(flagged.index.get_level_values("vital"))
+    except Exception:
+        pass
+    summ_rows.append({"patientId": pid, "week": latest_wk, "risk_score": float(risk_score) if pd.notna(risk_score) else np.nan,
+                      "category": category, "anomalies": ", ".join(an_note)})
+summary = pd.DataFrame(summ_rows).set_index(["patientId","week"]).sort_values("risk_score", ascending=False)
+summary.head()
+
+## 6) Plots — top N highest risk patients (with safe bands & forecasts)
+
+TOP_N = 5
+targets = list(summary.reset_index().sort_values("risk_score", ascending=False)["patientId"].head(TOP_N))
+
+def plot_with_band(x, y, vname, title=""):
+    plt.figure()
+    plt.plot(x, y.values, label="weekly")
+    # Safe bands
+    if vname == "spo2":
+        plt.axhline(SAFE["spo2_pct_min"])
+    if vname == "temperature":
+        plt.axhspan(SAFE["temp_c_ok"][0], SAFE["temp_c_ok"][1], alpha=0.2)
+        plt.axhline(SAFE["temp_c_fever"])
+        plt.axhline(SAFE["temp_c_hypo"])
+    if vname == "heart_rate":
+        lo, hi = SAFE["heart_rate_bpm"]; plt.axhspan(lo, hi, alpha=0.2)
+    if vname == "bp_systolic":
+        plt.axhline(120); plt.axhline(130); plt.axhline(140)
+    if vname == "bp_diastolic":
+        plt.axhline(80); plt.axhline(90)
+    if vname == "sleep_hours":
+        lo, hi = SAFE["sleep_hours"]; plt.axhspan(lo, hi, alpha=0.2)
+    if vname == "exercise_minutes":
+        plt.axhline(SAFE["exercise_min_week"])
+    # Forecast
+    out = linear_trend_forecast(y, horizon=FORECAST_HORIZON_WEEKS, min_points=MIN_POINTS_TO_FORECAST)
+    if out is not None:
+        yhat, sigma = out
+        future_weeks = pd.date_range(x[-1] + pd.Timedelta(days=7), periods=len(yhat), freq="W")
+        plt.plot(future_weeks, yhat, label="forecast")
+        if sigma is not None:
+            upper = yhat + 1.28*sigma
+            lower = yhat - 1.28*sigma
+            plt.fill_between(future_weeks, lower, upper, alpha=0.2)
+    plt.title(title); plt.xlabel("Week"); plt.ylabel(vname)
+    plt.xticks(rotation=45); plt.legend(); plt.tight_layout(); plt.show()
+
+for pid in targets:
+    sub = weekly.xs(pid, level=0, drop_level=False).droplevel(0)
+    for v in ["spo2","temperature","heart_rate","bp_systolic","bp_diastolic","sleep_hours","exercise_minutes"]:
+        if v in sub.columns and sub[v].notna().sum() >= 2:
+            plot_with_band(sub.index, sub[v], v, title=f"{pid} — {v}")
