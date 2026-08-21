@@ -1,0 +1,85 @@
+Sample nonzero features for first test doc
+
+--- BoW (1-gram) ---
+patient: 3.0000
+oxygen: 2.0000
+20mg: 1.0000
+2l: 1.0000
+85: 1.0000
+92: 1.0000
+administered: 1.0000
+alert: 1.0000
+bpm: 1.0000
+breathing: 1.0000
+cannula: 1.0000
+currently: 1.0000
+drink: 1.0000
+encouraged: 1.0000
+furosemide: 1.0000
+heart: 1.0000
+nasal: 1.0000
+rate: 1.0000
+remains: 1.0000
+responsive: 1.0000
+reveal: 1.0000
+saturation: 1.0000
+signs: 1.0000
+supplemental: 1.0000
+tolerated: 1.0000
+Vocab size: 242
+
+--- TF-IDF (1–2) ---
+currently breathing: 0.2249
+responsive encouraged: 0.2249
+2l nasal: 0.2119
+85 bpm: 0.2119
+administered patient: 0.2119
+rate 85: 0.2119
+breathing: 0.2019
+saturation 92: 0.2019
+85: 0.1936
+92: 0.1807
+alert responsive: 0.1807
+responsive: 0.1807
+furosemide 20mg: 0.1706
+oxygen 2l: 0.1623
+20mg administered: 0.1554
+cannula: 0.1554
+drink water: 0.1554
+encouraged drink: 0.1554
+nasal: 0.1554
+nasal cannula: 0.1554
+supplemental: 0.1554
+supplemental oxygen: 0.1554
+2l: 0.1523
+drink: 0.1466
+encouraged: 0.1371
+Vocab size: 745
+
+--- TF-IDF (1–3) ---
+alert responsive encouraged: 0.1876
+currently breathing: 0.1876
+responsive encouraged: 0.1876
+2l nasal: 0.1767
+2l nasal cannula: 0.1767
+85 bpm: 0.1767
+administered patient: 0.1767
+heart rate 85: 0.1767
+oxygen 2l nasal: 0.1767
+patient alert responsive: 0.1767
+rate 85: 0.1767
+rate 85 bpm: 0.1767
+breathing: 0.1683
+oxygen saturation 92: 0.1683
+saturation 92: 0.1683
+85: 0.1615
+92: 0.1506
+alert responsive: 0.1506
+furosemide 20mg administered: 0.1506
+responsive: 0.1506
+furosemide 20mg: 0.1422
+oxygen 2l: 0.1354
+supplemental oxygen 2l: 0.1354
+20mg administered: 0.1296
+cannula: 0.1296
+Vocab size: 1331

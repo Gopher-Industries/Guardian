@@ -1,0 +1,7 @@
+Features,Model,Accuracy,F1_macro
+BoW(1) + lex,LogReg,1.0,1.0
+BoW(1) + lex,LinearSVM,1.0,1.0
+TFIDF(1–2) + lex,LinearSVM,0.95,0.906020066889632
+TFIDF(1–3) + lex,LinearSVM,0.95,0.906020066889632
+TFIDF(1–3) + lex,LogReg,0.925,0.8841623785020012
+TFIDF(1–2) + lex,LogReg,0.9,0.8224019167415394
