@@ -4,12 +4,14 @@
   { "text": "DOSAGE", "suffix_key": "", "background_color": "#90EE90", "text_color": "#000000" },
   { "text": "ROUTE", "suffix_key": "", "background_color": "#FFD700", "text_color": "#000000" },
   { "text": "FREQUENCY", "suffix_key": "", "background_color": "#FFA07A", "text_color": "#000000" },
+  { "text": "COMPLIANCE_STATUS", "suffix_key": "", "background_color": "#C0C0C0", "text_color": "#000000" },
   { "text": "VITAL_TYPE", "suffix_key": "", "background_color": "#9370DB", "text_color": "#FFFFFF" },
   { "text": "VITAL_VALUE", "suffix_key": "", "background_color": "#00CED1", "text_color": "#000000" },
+  { "text": "ADL_METRIC", "suffix_key": "", "background_color": "#7FFFD4", "text_color": "#000000" },
   { "text": "DIET_ITEM", "suffix_key": "", "background_color": "#FA8072", "text_color": "#FFFFFF" },
   { "text": "MEAL_TYPE", "suffix_key": "", "background_color": "#8B4513", "text_color": "#FFFFFF" },
-  { "text": "ADL_ACTIVITY", "suffix_key": "", "background_color": "#7FFFD4", "text_color": "#000000" },
-  { "text": "ADL_STATUS", "suffix_key": "", "background_color": "#D2691E", "text_color": "#FFFFFF" },
+  { "text": "BEHAVIOUR", "suffix_key": "", "background_color": "#708090", "text_color": "#FFFFFF" },
+  { "text": "EMOTION", "suffix_key": "", "background_color": "#FF8C00", "text_color": "#000000" },
   { "text": "TIMEX", "suffix_key": "", "background_color": "#FF69B4", "text_color": "#FFFFFF" },
   { "text": "NOTE_EVENT", "suffix_key": "", "background_color": "#1E90FF", "text_color": "#FFFFFF" }
 ]
