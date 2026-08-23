@@ -359,6 +359,10 @@
     <string name="validation_invalid_email_address">Invalid Email Address</string>
     <string name="validation_empty_password">Password is Required.</string>
     <string name="validation_password_weak">Please use a stronger password</string>
+    <string name="forgot_password_email_hint">Enter your email address</string>
+    <string name="send_reset_email">Send reset email</string>
+    <string name="sending_reset_email">Sending password reset email...</string>
+    <string name="reset_request_in_progress">A password reset request is already in progress.</string>
     <string name="text_reset_password">Reset Password</string>
     <string name="text_enter_your_email_to_received_reset_link">Enter Your Email To Received Reset Link.</string>
     <string name="tasks_label">Tasks</string>
