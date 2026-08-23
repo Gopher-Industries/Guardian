@@ -3,6 +3,7 @@ package deakin.gopher.guardian.view.general
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -37,11 +38,11 @@ import deakin.gopher.guardian.view.show
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.text.InputType
 
 class LoginActivity : BaseActivity() {
     private lateinit var gsoClient: GoogleSignInClient
     private var isPasswordResetInProgress = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -126,12 +127,13 @@ class LoginActivity : BaseActivity() {
         }
 
         forgotTextLink.setOnClickListener { v: View ->
-            val resetMail = EditText(v.context).apply {
-                inputType =
-                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+            val resetMail =
+                EditText(v.context).apply {
+                    inputType =
+                        InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
 
-                hint = getString(R.string.forgot_password_email_hint)
-            }
+                    hint = getString(R.string.forgot_password_email_hint)
+                }
             val passwordResetDialog = AlertDialog.Builder(v.context)
 
             with(passwordResetDialog) {
@@ -148,13 +150,13 @@ class LoginActivity : BaseActivity() {
                 when {
                     mail.isEmpty() -> {
                         showMessage(
-                            getString(R.string.validation_empty_email)
+                            getString(R.string.validation_empty_email),
                         )
                     }
 
                     !EmailAddress(mail).isValid() -> {
                         showMessage(
-                            getString(R.string.validation_invalid_email_address)
+                            getString(R.string.validation_invalid_email_address),
                         )
                     }
 
@@ -220,7 +222,7 @@ class LoginActivity : BaseActivity() {
     private fun sendResetPasswordEmail(userEmail: String) {
         if (isPasswordResetInProgress) {
             showMessage(
-                getString(R.string.reset_request_in_progress)
+                getString(R.string.reset_request_in_progress),
             )
             return
         }
@@ -228,7 +230,7 @@ class LoginActivity : BaseActivity() {
         isPasswordResetInProgress = true
 
         showMessage(
-            getString(R.string.sending_reset_email)
+            getString(R.string.sending_reset_email),
         )
 
         val call = ApiClient.apiService.requestPasswordReset(userEmail)
