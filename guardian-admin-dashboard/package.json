@@ -13,11 +13,14 @@
     "axios": "^1.13.6",
     "cors": "^2.8.6",
     "framer-motion": "^12.38.0",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.8",
     "lucide-react": "^1.6.0",
     "react": "^19.1.0",
     "react-data-table-component": "^7.7.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.13.2",
+    "recharts": "^3.10.0",
     "styled-components": "^6.3.12"
   },
   "devDependencies": {
