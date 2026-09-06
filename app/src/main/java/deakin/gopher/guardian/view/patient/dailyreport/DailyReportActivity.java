@@ -63,15 +63,23 @@ public class DailyReportActivity extends AppCompatActivity {
     navigationView.setNavigationItemSelectedListener(
         menuItem -> {
           final int id = menuItem.getItemId();
-          if (R.id.nav_home == id) {
-            navigationService.toHomeScreenForRole(
-                SessionManager.INSTANCE.getCurrentUser().getRole());
-          } else if (R.id.add_task == id && canAddTasks) {
-            navigationService.onLaunchTaskCreator();
-          } else if (R.id.nav_signout == id) {
-            navigationService.onSignOut();
-            finish();
-          }
+            if (R.id.nav_home == id) {
+                navigationService.toHomeScreenForRole(
+                        SessionManager.INSTANCE.getCurrentUser().getRole());
+
+            } else if (R.id.nav_patients == id) {
+                navigationService.onLaunchPatientList();
+
+            } else if (R.id.nav_settings == id) {
+                navigationService.onSettings();
+
+            } else if (R.id.add_task == id && canAddTasks) {
+                navigationService.onLaunchTaskCreator();
+
+            } else if (R.id.nav_signout == id) {
+                navigationService.onSignOut();
+                finish();
+            }
           drawerLayout.closeDrawer(GravityCompat.START);
           return true;
         });

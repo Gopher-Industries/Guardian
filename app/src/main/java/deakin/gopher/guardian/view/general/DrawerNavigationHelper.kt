@@ -50,9 +50,21 @@ object DrawerNavigationHelper {
                     }
                 }
 
+                R.id.nav_patients -> {
+                    if (activity !is PatientListActivity) {
+                        navigationService.onLaunchPatientList()
+                    }
+                }
+
                 R.id.add_task -> {
                     if (canAddTasks) {
                         navigationService.onLaunchTaskCreator()
+                    }
+                }
+
+                R.id.nav_settings -> {
+                    if (activity !is Setting) {
+                        navigationService.onSettings()
                     }
                 }
 

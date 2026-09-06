@@ -54,16 +54,33 @@ class TaskAddActivity : AppCompatActivity() {
         customHeader.setHeaderTopImageVisibility(View.VISIBLE)
         customHeader.setHeaderTopImage(R.drawable.add_image_button)
         navigationView.setItemIconTintList(null)
-        navigationView.menu.findItem(R.id.add_task).isVisible = false
+        navigationView.menu.findItem(R.id.add_task).isVisible = true
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_home -> navigationService.toHomeScreenForRole(SessionManager.getCurrentUser().role)
+
+                R.id.nav_home -> {
+                    navigationService.toHomeScreenForRole(SessionManager.getCurrentUser().role)
+                }
+
+                R.id.nav_patients -> {
+                    navigationService.onLaunchPatientList()
+                }
+
+                R.id.add_task -> {
+                    // Already on Add Task screen
+                }
+
+                R.id.nav_settings -> {
+                    navigationService.onSettings()
+                }
+
                 R.id.nav_signout -> {
                     navigationService.onSignOut()
                     finish()
                 }
             }
+
             drawerLayout.closeDrawer(GravityCompat.START)
             true
         }

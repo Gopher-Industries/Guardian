@@ -75,6 +75,9 @@ class FallDetectionActivity : AppCompatActivity(), Player.Listener {
 
         binding = ActivityFallDetectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.backButton.setOnClickListener {
+            finish()
+        }
         setPlayer()
         loadAndPrepareVideo()
         initClearButton()

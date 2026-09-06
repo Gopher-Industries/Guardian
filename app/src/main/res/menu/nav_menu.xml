@@ -8,12 +8,22 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/menu_home"
-            android:title="Home"
-            />
+            android:title="Home" />
+
+        <item
+            android:id="@+id/nav_patients"
+            android:icon="@drawable/patient_list_icon"
+            android:title="Patients" />
+
         <item
             android:id="@+id/add_task"
             android:icon="@drawable/menu_data_entry"
             android:title="Add Task" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/menu_settings"
+            android:title="Settings" />
 
         <item
             android:id="@+id/nav_signout"
@@ -21,4 +31,5 @@
             android:title="Sign Out" />
 
     </group>
+
 </menu>
