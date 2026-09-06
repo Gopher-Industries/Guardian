@@ -14,6 +14,7 @@ import deakin.gopher.guardian.model.PatientLog
 import deakin.gopher.guardian.model.PatientOverviewResponse
 import deakin.gopher.guardian.model.ReassignPatientRequest
 import deakin.gopher.guardian.model.UpdatePatientRequest
+import deakin.gopher.guardian.model.login.ChangePasswordRequest
 import deakin.gopher.guardian.model.register.AuthResponse
 import deakin.gopher.guardian.model.register.NurseListResponse
 import deakin.gopher.guardian.model.register.RegisterRequest
@@ -51,6 +52,12 @@ interface ApiService {
     @POST("auth/reset-password-request")
     fun requestPasswordReset(
         @Field("email") email: String,
+    ): Call<BaseModel>
+
+    @POST("auth/change-password")
+    fun changePassword(
+        @Header("Authorization") token: String,
+        @Body request: ChangePasswordRequest,
     ): Call<BaseModel>
 
     @GET("patients/assigned-patients")
