@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -17,7 +18,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
-import android.widget.Button;
 import deakin.gopher.guardian.model.BaseModel;
 import deakin.gopher.guardian.model.login.ChangePasswordRequest;
 import deakin.gopher.guardian.model.login.SessionManager;
@@ -85,17 +85,13 @@ public class Setting extends BaseActivity implements View.OnClickListener {
   }
 
   private void showChangePasswordDialog() {
-    final View dialogView =
-        getLayoutInflater().inflate(R.layout.dialog_change_password, null);
+    final View dialogView = getLayoutInflater().inflate(R.layout.dialog_change_password, null);
 
-    final EditText currentPasswordInput =
-        dialogView.findViewById(R.id.current_password_input);
+    final EditText currentPasswordInput = dialogView.findViewById(R.id.current_password_input);
 
-    final EditText newPasswordInput =
-        dialogView.findViewById(R.id.new_password_input);
+    final EditText newPasswordInput = dialogView.findViewById(R.id.new_password_input);
 
-    final EditText confirmPasswordInput =
-        dialogView.findViewById(R.id.confirm_password_input);
+    final EditText confirmPasswordInput = dialogView.findViewById(R.id.confirm_password_input);
 
     final AlertDialog dialog =
         new AlertDialog.Builder(this)
@@ -107,153 +103,129 @@ public class Setting extends BaseActivity implements View.OnClickListener {
 
     dialog.show();
 
-    final Button updateButton =
-     dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+    final Button updateButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
     updateButton.setOnClickListener(
         button -> {
-          final String currentPassword =
-              currentPasswordInput.getText().toString();
+          final String currentPassword = currentPasswordInput.getText().toString();
 
-          final String newPassword =
-              newPasswordInput.getText().toString();
+          final String newPassword = newPasswordInput.getText().toString();
 
-          final String confirmPassword =
-              confirmPasswordInput.getText().toString();
+          final String confirmPassword = confirmPasswordInput.getText().toString();
 
-          if (currentPassword.isEmpty()
-              || newPassword.isEmpty()
-              || confirmPassword.isEmpty()) {
-            showToast(
-                getString(R.string.validation_password_fields_required));
+          if (currentPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
+            showToast(getString(R.string.validation_password_fields_required));
             return;
           }
 
           if (newPassword.length() < 8) {
-            newPasswordInput.setError(
-                getString(R.string.validation_new_password_length));
+            newPasswordInput.setError(getString(R.string.validation_new_password_length));
             newPasswordInput.requestFocus();
             return;
           }
 
           if (!newPassword.equals(confirmPassword)) {
             confirmPasswordInput.setError(
-                getString(
-                    R.string.validation_error_passwords_do_not_match));
+                getString(R.string.validation_error_passwords_do_not_match));
             confirmPasswordInput.requestFocus();
             return;
           }
 
           if (newPassword.equals(currentPassword)) {
-            newPasswordInput.setError(
-                getString(R.string.validation_new_password_same));
+            newPasswordInput.setError(getString(R.string.validation_new_password_same));
             newPasswordInput.requestFocus();
             return;
           }
 
-          submitChangePassword(
-            currentPassword,
-            newPassword,
-            confirmPassword,
-            dialog,
-            updateButton);
+          submitChangePassword(currentPassword, newPassword, confirmPassword, dialog, updateButton);
         });
   }
-private void submitChangePassword(
-    final String currentPassword,
-    final String newPassword,
-    final String confirmPassword,
-    final AlertDialog dialog,
-    final Button updateButton) {
 
-  final String token;
+  private void submitChangePassword(
+      final String currentPassword,
+      final String newPassword,
+      final String confirmPassword,
+      final AlertDialog dialog,
+      final Button updateButton) {
 
-  try {
-    token = "Bearer " + SessionManager.INSTANCE.getToken();
-  } catch (RuntimeException exception) {
-    showToast(getString(R.string.session_expired));
-    SessionManager.INSTANCE.logoutUser();
-    new NavigationService(this).onSignOut();
-    return;
-  }
+    final String token;
 
-  final ChangePasswordRequest request =
-      new ChangePasswordRequest(
-          currentPassword,
-          newPassword,
-          confirmPassword);
-
-  updateButton.setEnabled(false);
-  updateButton.setText(R.string.changing_password);
-
-  ApiClient.INSTANCE
-      .getApiService()
-      .changePassword(token, request)
-      .enqueue(
-          new Callback<BaseModel>() {
-            @Override
-            public void onResponse(
-                final Call<BaseModel> call,
-                final Response<BaseModel> response) {
-
-              if (response.isSuccessful()) {
-                dialog.dismiss();
-                SessionManager.INSTANCE.logoutUser();
-
-                showToast(
-                    getString(
-                        R.string.password_changed_sign_in_again));
-
-                new NavigationService(Setting.this).onSignOut();
-                return;
-              }
-
-              if (response.code() == 401) {
-                SessionManager.INSTANCE.logoutUser();
-                showToast(getString(R.string.session_expired));
-                new NavigationService(Setting.this).onSignOut();
-                return;
-              }
-
-              updateButton.setEnabled(true);
-              updateButton.setText(R.string.update_password);
-              showToast(readApiError(response));
-            }
-
-            @Override
-            public void onFailure(
-                final Call<BaseModel> call,
-                final Throwable throwable) {
-
-              updateButton.setEnabled(true);
-              updateButton.setText(R.string.update_password);
-              showToast(
-                  getString(R.string.change_password_network_error));
-            }
-          });
-}
-
-private String readApiError(final Response<?> response) {
-  try {
-    if (response.errorBody() != null) {
-      final JSONObject error =
-          new JSONObject(response.errorBody().string());
-
-      final String errorMessage = error.optString("error");
-      if (!errorMessage.isEmpty()) {
-        return errorMessage;
-      }
-
-      final String message = error.optString("message");
-      if (!message.isEmpty()) {
-        return message;
-      }
+    try {
+      token = "Bearer " + SessionManager.INSTANCE.getToken();
+    } catch (RuntimeException exception) {
+      showToast(getString(R.string.session_expired));
+      SessionManager.INSTANCE.logoutUser();
+      new NavigationService(this).onSignOut();
+      return;
     }
-  } catch (Exception ignored) {
-    // Use the general message below.
+
+    final ChangePasswordRequest request =
+        new ChangePasswordRequest(currentPassword, newPassword, confirmPassword);
+
+    updateButton.setEnabled(false);
+    updateButton.setText(R.string.changing_password);
+
+    ApiClient.INSTANCE
+        .getApiService()
+        .changePassword(token, request)
+        .enqueue(
+            new Callback<BaseModel>() {
+              @Override
+              public void onResponse(
+                  final Call<BaseModel> call, final Response<BaseModel> response) {
+
+                if (response.isSuccessful()) {
+                  dialog.dismiss();
+                  SessionManager.INSTANCE.logoutUser();
+
+                  showToast(getString(R.string.password_changed_sign_in_again));
+
+                  new NavigationService(Setting.this).onSignOut();
+                  return;
+                }
+
+                if (response.code() == 401) {
+                  SessionManager.INSTANCE.logoutUser();
+                  showToast(getString(R.string.session_expired));
+                  new NavigationService(Setting.this).onSignOut();
+                  return;
+                }
+
+                updateButton.setEnabled(true);
+                updateButton.setText(R.string.update_password);
+                showToast(readApiError(response));
+              }
+
+              @Override
+              public void onFailure(final Call<BaseModel> call, final Throwable throwable) {
+
+                updateButton.setEnabled(true);
+                updateButton.setText(R.string.update_password);
+                showToast(getString(R.string.change_password_network_error));
+              }
+            });
   }
 
-  return getString(R.string.change_password_failed);
-}
+  private String readApiError(final Response<?> response) {
+    try {
+      if (response.errorBody() != null) {
+        final JSONObject error = new JSONObject(response.errorBody().string());
+
+        final String errorMessage = error.optString("error");
+        if (!errorMessage.isEmpty()) {
+          return errorMessage;
+        }
+
+        final String message = error.optString("message");
+        if (!message.isEmpty()) {
+          return message;
+        }
+      }
+    } catch (Exception ignored) {
+      // Use the general message below.
+    }
+
+    return getString(R.string.change_password_failed);
+  }
 
   private void initializeSwitchStates() {
     final SharedPreferences sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
