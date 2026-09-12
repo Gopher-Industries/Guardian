@@ -38,7 +38,7 @@ export const ADMIN_NAV_ITEMS = [
   roles: ["admin"],
 },
   
-  { id: "nurse-roster", label: "Nurse Roster", path: "/dashboard/nurse-roster",roles: ["admin", "doctor", "nurse","caretaker"] },
+  { id: "nurse-roster", label: "Staff Roster", path: "/dashboard/nurse-roster",roles: ["admin", "doctor", "nurse","caretaker"] },
   { id: "support-ticket", label: "Support Ticket", path: "/dashboard/support-ticket", roles: ["admin", "doctor", "nurse","caretaker"] },
   { id: "reports", label: "Reports", path: "/dashboard/reports", roles: ["admin"]  },
   { id: "settings", label: "Settings", path: "/dashboard/settings", roles: ["admin", "doctor", "nurse","caretaker"] },
@@ -133,6 +133,7 @@ export const STORAGE_KEYS = {
 export const ROLE_OPTIONS = [
   { value: 'doctor', label: 'Doctor' },
   { value: 'nurse', label: 'Nurse' },
+  { value: 'caretaker', label: 'Caretaker' },
 ];
 
 export const TICKET_ISSUE_TYPE_OPTIONS = [
