@@ -16,17 +16,26 @@ import DoctorAssignmentsPage from "./pages/DoctorAssignmentsPage";
 import PatientOverviewPage from "./pages/PatientOverviewPage";
 import StatusPage from "./pages/StatusPage";
 import PendingApprovalsPage from "./pages/PendingApprovalsPage";
+import EmailTemplatesPage from "./pages/EmailTemplatesPage";
 import "./App.css";
 
 function RequireAuth({ children }) {
   const token = getAuthToken();
-  if (!token) return <Navigate to="/login" replace />;
+
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
   return children;
 }
 
 function RequireRole({ allowed, children }) {
   const role = getAdminUser()?.role;
-  if (!allowed.includes(role)) return <StatusPage type={403} />;
+
+  if (!allowed.includes(role)) {
+    return <StatusPage type={403} />;
+  }
+
   return children;
 }
 
@@ -57,6 +66,7 @@ export default function App() {
             </RequireRole>
           }
         />
+
         <Route
           path="org-assignment"
           element={
@@ -65,6 +75,7 @@ export default function App() {
             </RequireRole>
           }
         />
+
         <Route
           path="patients"
           element={
@@ -73,6 +84,7 @@ export default function App() {
             </RequireRole>
           }
         />
+
         <Route
           path="patient-overview"
           element={
@@ -81,6 +93,7 @@ export default function App() {
             </RequireRole>
           }
         />
+
         <Route
           path="task-management"
           element={
@@ -89,6 +102,7 @@ export default function App() {
             </RequireRole>
           }
         />
+
         <Route
           path="nurse-roster"
           element={
@@ -97,6 +111,7 @@ export default function App() {
             </RequireRole>
           }
         />
+
         <Route
           path="support-ticket"
           element={
@@ -105,6 +120,7 @@ export default function App() {
             </RequireRole>
           }
         />
+
         <Route
           path="doctor-assignments"
           element={
@@ -113,6 +129,7 @@ export default function App() {
             </RequireRole>
           }
         />
+
         <Route
           path="reports"
           element={
@@ -121,6 +138,7 @@ export default function App() {
             </RequireRole>
           }
         />
+
         <Route
           path="pending-approvals"
           element={
@@ -129,15 +147,23 @@ export default function App() {
             </RequireRole>
           }
         />
+
+        <Route
+          path="email-templates"
+          element={
+            <RequireRole allowed={["admin"]}>
+              <EmailTemplatesPage />
+            </RequireRole>
+          }
+        />
+
         <Route path="settings" element={<SettingsPage />} />
 
-        {/* Catches unmatched paths WITHIN /dashboard, e.g. /dashboard/staffmanagement */}
+        {/* Catches unmatched paths within /dashboard */}
         <Route path="*" element={<StatusPage type={404} />} />
-        <Route path="task-management" element={<TaskManagementPage />} />
-
       </Route>
 
-      {/* Catches everything outside /dashboard entirely, e.g. /staffmanagement */}
+      {/* Catches everything outside /dashboard */}
       <Route
         path="*"
         element={
