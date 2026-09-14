@@ -15,6 +15,8 @@ import SettingsPage from "./pages/SettingsPage";
 import DoctorAssignmentsPage from "./pages/DoctorAssignmentsPage";
 import "./App.css";
 import PatientOverviewPage from "./pages/PatientOverviewPage";
+import EmotionRecognitionPage from "./pages/EmotionRecognitionPage";
+
 
 function ProtectedRoute({ children }) {
   const token = getAuthToken();
@@ -44,6 +46,7 @@ export default function App() {
         <Route path="patient-overview" element={<PatientOverviewPage />} />
         <Route path="nurse-roster" element={<NurseRosterPage />} />
         <Route path="support-ticket" element={<SupportTicketPage />} />
+        <Route path="emotion-recognition" element={<EmotionRecognitionPage />} />
         <Route path="reports" element={<ReportsPage />} />
         <Route path="settings" element={<SettingsPage />} />
         <Route path="task-management" element={<TaskManagementPage />} />
