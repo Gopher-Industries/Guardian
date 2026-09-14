@@ -28,6 +28,7 @@ export const ADMIN_NAV_ITEMS = [
   },
   
   { id: "nurse-roster", label: "Nurse Roster", path: "/dashboard/nurse-roster" },
+  { id: "receptionist", label: "Receptionist", path: "/dashboard/receptionist" },
   { id: "support-ticket", label: "Support Ticket", path: "/dashboard/support-ticket" },
   { id: "reports", label: "Reports", path: "/dashboard/reports" },
   { id: "settings", label: "Settings", path: "/dashboard/settings" },

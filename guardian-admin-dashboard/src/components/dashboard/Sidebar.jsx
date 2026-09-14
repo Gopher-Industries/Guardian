@@ -11,6 +11,7 @@ import {
   ListTodo,
   X,
   Stethoscope,
+  CalendarCheck,
 } from "lucide-react";
 import Logo from "../common/Logo";
 import { ADMIN_NAV_ITEMS } from "../../utils/constants";
@@ -28,6 +29,7 @@ const iconMap = {
   reports: Bell,
   settings: Settings,
   "nurse-roster": ClipboardList,
+  receptionist: CalendarCheck,
 };
 
 export default function Sidebar({
