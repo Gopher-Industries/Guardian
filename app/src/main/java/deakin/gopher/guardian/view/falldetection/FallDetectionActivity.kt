@@ -17,11 +17,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
+import com.google.android.material.navigation.NavigationView
 import com.google.mlkit.vision.pose.Pose
 import com.google.mlkit.vision.pose.PoseDetection
 import com.google.mlkit.vision.pose.PoseDetector
@@ -32,6 +34,7 @@ import deakin.gopher.guardian.databinding.ActivityFallDetectionBinding
 import deakin.gopher.guardian.view.falldetection.ui.PoseGraphic
 import deakin.gopher.guardian.view.falldetection.util.classification.PoseClassifierProcessor
 import deakin.gopher.guardian.view.falldetection.util.getInputImageFrom
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -69,12 +72,28 @@ class FallDetectionActivity : AppCompatActivity(), Player.Listener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_fall_detection)
+
+        binding =
+            ActivityFallDetectionBinding.inflate(
+                layoutInflater,
+            )
+
+        setContentView(binding.root)
+
+        val drawerLayout: DrawerLayout =
+            findViewById(R.id.drawer_layout)
+
+        val navigationView: NavigationView =
+            findViewById(R.id.nav_view)
+
+        DrawerNavigationHelper.bindStandardDrawer(
+            this,
+            drawerLayout,
+            navigationView,
+            binding.monitorMenuButton,
+        )
 
         createNotificationChannel()
-
-        binding = ActivityFallDetectionBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         setPlayer()
         loadAndPrepareVideo()
         initClearButton()
