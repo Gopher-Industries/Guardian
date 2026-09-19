@@ -1,10 +1,15 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+
 import LoginPage from "./pages/LoginPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import DashboardHome from "./pages/DashboardHome";
+
 import AdminLayout from "./layout/AdminLayout";
+
 import { getAuthToken } from "./utils/storage";
+
 import StaffManagementPage from "./pages/StaffManagementPage";
+import LocationPage from "./pages/LocationPage";
 import OrgAssignmentPage from "./pages/OrgAssignmentPage";
 import PatientsPage from "./pages/PatientsPage";
 import NurseRosterPage from "./pages/NurseRosterPage";
@@ -13,11 +18,13 @@ import TaskManagementPage from "./pages/TaskManagementPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
 import DoctorAssignmentsPage from "./pages/DoctorAssignmentsPage";
-import "./App.css";
 import PatientOverviewPage from "./pages/PatientOverviewPage";
+
+import "./App.css";
 
 function ProtectedRoute({ children }) {
   const token = getAuthToken();
+
   return token ? children : <Navigate to="/login" replace />;
 }
 
@@ -25,7 +32,9 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
+
       <Route path="/login" element={<LoginPage />} />
+
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
       <Route
@@ -37,17 +46,61 @@ export default function App() {
         }
       >
         <Route index element={<DashboardHome />} />
-        <Route path="staff-management" element={<StaffManagementPage />} />
-        <Route path="org-assignment" element={<OrgAssignmentPage />} />
-        <Route path="patients" element={<PatientsPage />} />
-        <Route path="doctor-assignments" element={<DoctorAssignmentsPage />} />
-        <Route path="patient-overview" element={<PatientOverviewPage />} />
-        <Route path="nurse-roster" element={<NurseRosterPage />} />
-        <Route path="support-ticket" element={<SupportTicketPage />} />
-        <Route path="reports" element={<ReportsPage />} />
-        <Route path="settings" element={<SettingsPage />} />
-        <Route path="task-management" element={<TaskManagementPage />} />
 
+        <Route
+          path="staff-management"
+          element={<StaffManagementPage />}
+        />
+
+        <Route
+          path="locations"
+          element={<LocationPage />}
+        />
+
+        <Route
+          path="org-assignment"
+          element={<OrgAssignmentPage />}
+        />
+
+        <Route
+          path="patients"
+          element={<PatientsPage />}
+        />
+
+        <Route
+          path="doctor-assignments"
+          element={<DoctorAssignmentsPage />}
+        />
+
+        <Route
+          path="patient-overview"
+          element={<PatientOverviewPage />}
+        />
+
+        <Route
+          path="nurse-roster"
+          element={<NurseRosterPage />}
+        />
+
+        <Route
+          path="support-ticket"
+          element={<SupportTicketPage />}
+        />
+
+        <Route
+          path="reports"
+          element={<ReportsPage />}
+        />
+
+        <Route
+          path="settings"
+          element={<SettingsPage />}
+        />
+
+        <Route
+          path="task-management"
+          element={<TaskManagementPage />}
+        />
       </Route>
 
       <Route path="*" element={<Navigate to="/login" replace />} />
