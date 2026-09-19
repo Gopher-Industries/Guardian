@@ -41,6 +41,12 @@ export const ADMIN_NAV_ITEMS = [
   { id: "nurse-roster", label: "Staff Roster", path: "/dashboard/nurse-roster",roles: ["admin", "doctor", "nurse","caretaker"] },
   { id: "support-ticket", label: "Support Ticket", path: "/dashboard/support-ticket", roles: ["admin", "doctor", "nurse","caretaker"] },
   { id: "reports", label: "Reports", path: "/dashboard/reports", roles: ["admin"]  },
+  {
+  id: "email-templates",
+  label: "Email Templates",
+  path: "/dashboard/email-templates",
+  roles: ["admin"]
+  },
   { id: "settings", label: "Settings", path: "/dashboard/settings", roles: ["admin", "doctor", "nurse","caretaker"] },
   
 ];
