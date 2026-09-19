@@ -1,10 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
 import {
+  Mail,
+  Eye,
+  Send,
+  FlaskConical,
+  CheckCircle2,
+  AlertCircle,
+} from "lucide-react";
+import {
   getEmailTemplates,
   getEmailTemplateSample,
   previewEmail,
   sendEmail,
 } from "../services/emailService";
+import "./EmailTemplatesPage.css";
 
 export default function EmailTemplatesPage() {
   const [templates, setTemplates] = useState([]);
@@ -73,6 +82,8 @@ export default function EmailTemplatesPage() {
       ...previous,
       [fieldName]: value,
     }));
+
+    setSuccess("");
   }
 
   async function handleLoadSample() {
@@ -136,14 +147,16 @@ export default function EmailTemplatesPage() {
       setError("");
       setSuccess("");
 
-      await sendEmail(selectedTemplateKey, formData);
+      await sendEmail(selectedTemplateKey, formData, {
+        dryRun: false,
+      });
 
-      setSuccess("Email accepted for delivery.");
+      setSuccess("Email Delivered Successfully.");
     } catch (err) {
       console.error("Failed to send email:", err);
       setError(
         err?.response?.data?.message ||
-          "Unable to send this email.",
+          "Unable to process this email.",
       );
     } finally {
       setSending(false);
@@ -156,7 +169,10 @@ export default function EmailTemplatesPage() {
     if (field.choices?.length) {
       return (
         <select
+          id={`email-field-${field.name}`}
+          className="email-form-control"
           value={value}
+          required={field.required}
           onChange={(event) =>
             handleFieldChange(field.name, event.target.value)
           }
@@ -175,7 +191,11 @@ export default function EmailTemplatesPage() {
     if (field.type === "textarea") {
       return (
         <textarea
+          id={`email-field-${field.name}`}
+          className="email-form-control email-textarea"
           value={value}
+          required={field.required}
+          placeholder={field.sample ? `Example: ${field.sample}` : ""}
           onChange={(event) =>
             handleFieldChange(field.name, event.target.value)
           }
@@ -186,8 +206,12 @@ export default function EmailTemplatesPage() {
 
     return (
       <input
+        id={`email-field-${field.name}`}
+        className="email-form-control"
         type={field.type || "text"}
         value={value}
+        required={field.required}
+        placeholder={field.sample ? `Example: ${field.sample}` : ""}
         onChange={(event) =>
           handleFieldChange(field.name, event.target.value)
         }
@@ -196,114 +220,233 @@ export default function EmailTemplatesPage() {
   }
 
   if (loading) {
-    return <div>Loading email templates...</div>;
+    return (
+      <div className="email-page-state">
+        <div className="email-loading-spinner" />
+        <p>Loading email templates...</p>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h1>Email Templates</h1>
-
-      <p>
-        Select an email template, enter the required information,
-        preview it, and send it.
-      </p>
-
-      {error ? <p>{error}</p> : null}
-      {success ? <p>{success}</p> : null}
-
-      <div>
-        <label htmlFor="template-select">
-          Email Template
-        </label>
-
-        <select
-          id="template-select"
-          value={selectedTemplateKey}
-          onChange={(event) =>
-            setSelectedTemplateKey(event.target.value)
-          }
-        >
-          {templates.map((template) => (
-            <option key={template.key} value={template.key}>
-              {template.category} — {template.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {selectedTemplate ? (
-        <>
-          <div>
-            <h2>{selectedTemplate.name}</h2>
-            <p>{selectedTemplate.description}</p>
-          </div>
-
-          <div>
-            {selectedTemplate.fields?.map((field) => (
-              <div key={field.name}>
-                <label>
-                  {field.label}
-                  {field.required ? " *" : ""}
-                </label>
-
-                {renderField(field)}
-
-                {field.help ? (
-                  <small>{field.help}</small>
-                ) : null}
-              </div>
-            ))}
-          </div>
-
-          <div>
-            <button
-              type="button"
-              onClick={handleLoadSample}
-              disabled={loadingSample}
-            >
-              {loadingSample ? "Loading..." : "Load Sample"}
-            </button>
-
-            <button
-              type="button"
-              onClick={handlePreview}
-              disabled={previewing}
-            >
-              {previewing ? "Previewing..." : "Preview Email"}
-            </button>
-
-            <button
-              type="button"
-              onClick={handleSend}
-              disabled={sending}
-            >
-              {sending ? "Sending..." : "Send Email"}
-            </button>
-          </div>
-        </>
-      ) : null}
-
-      {preview ? (
+    <div className="email-templates-page">
+      <div className="email-page-header">
         <div>
-          <h2>Preview</h2>
+          <div className="email-page-eyebrow">
+            <Mail size={16} />
+            Guardian Communications
+          </div>
+
+          <h1>Email Templates</h1>
 
           <p>
-            <strong>Subject:</strong> {preview.subject}
+            Select a Guardian email template, complete the required
+            information and preview the message before sending.
           </p>
+        </div>
 
-          {preview.html ? (
-            <iframe
-              title="Email preview"
-              srcDoc={preview.html}
-              style={{
-                width: "100%",
-                minHeight: "600px",
-                border: "1px solid #ddd",
-              }}
-            />
-          ) : null}
+        <div className="email-template-count">
+          <span>{templates.length}</span>
+          <small>Templates available</small>
+        </div>
+      </div>
+
+      {error ? (
+        <div className="email-alert email-alert-error">
+          <AlertCircle size={19} />
+          <span>{error}</span>
         </div>
       ) : null}
+
+      {success ? (
+        <div className="email-alert email-alert-success">
+          <CheckCircle2 size={19} />
+          <span>{success}</span>
+        </div>
+      ) : null}
+
+      <div className="email-workspace">
+        <section className="email-compose-card">
+          <div className="email-card-header">
+            <div>
+              <h2>Compose Email</h2>
+              <p>Choose a template and provide the message details.</p>
+            </div>
+          </div>
+
+          <div className="email-template-selector">
+            <label htmlFor="template-select">
+              Email Template
+            </label>
+
+            <select
+              id="template-select"
+              className="email-form-control email-template-select"
+              value={selectedTemplateKey}
+              onChange={(event) =>
+                setSelectedTemplateKey(event.target.value)
+              }
+            >
+              {templates.map((template) => (
+                <option key={template.key} value={template.key}>
+                  {template.category} — {template.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {selectedTemplate ? (
+            <>
+              <div className="email-selected-template">
+                <div className="email-template-icon">
+                  <Mail size={21} />
+                </div>
+
+                <div>
+                  <div className="email-template-meta">
+                    {selectedTemplate.category}
+                  </div>
+
+                  <h3>{selectedTemplate.name}</h3>
+
+                  <p>{selectedTemplate.description}</p>
+                </div>
+              </div>
+
+              <div className="email-divider" />
+
+              <div className="email-form-grid">
+                {selectedTemplate.fields?.map((field) => (
+                  <div
+                    className={`email-field ${
+                      field.type === "textarea"
+                        ? "email-field-full"
+                        : ""
+                    }`}
+                    key={field.name}
+                  >
+                    <label htmlFor={`email-field-${field.name}`}>
+                      {field.label}
+
+                      {field.required ? (
+                        <span className="email-required">*</span>
+                      ) : (
+                        <span className="email-optional">
+                          Optional
+                        </span>
+                      )}
+                    </label>
+
+                    {renderField(field)}
+
+                    {field.help ? (
+                      <small className="email-field-help">
+                        {field.help}
+                      </small>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+
+              <div className="email-actions">
+                <button
+                  className="email-button email-button-secondary"
+                  type="button"
+                  onClick={handleLoadSample}
+                  disabled={loadingSample}
+                >
+                  <FlaskConical size={17} />
+
+                  {loadingSample ? "Loading..." : "Load Sample"}
+                </button>
+
+                <button
+                  className="email-button email-button-secondary"
+                  type="button"
+                  onClick={handlePreview}
+                  disabled={previewing}
+                >
+                  <Eye size={17} />
+
+                  {previewing ? "Previewing..." : "Preview Email"}
+                </button>
+
+                <button
+                    className="email-button email-button-primary"
+                    type="button"
+                    onClick={handleSend}
+                    disabled={sending}
+                >
+                    <Send size={17} />
+
+                    {sending ? "Sending..." : "Send Email"}
+                </button>
+              </div>
+
+              
+            </>
+          ) : (
+            <div className="email-empty-state">
+              No email templates are available.
+            </div>
+          )}
+        </section>
+
+        <section className="email-preview-card">
+          <div className="email-card-header email-preview-header">
+            <div>
+              <h2>Email Preview</h2>
+              <p>
+                Preview the rendered email before sending.
+              </p>
+            </div>
+
+            {preview ? (
+              <span className="email-preview-ready">
+                <CheckCircle2 size={15} />
+                Ready
+              </span>
+            ) : null}
+          </div>
+
+          {preview ? (
+            <>
+              <div className="email-preview-subject">
+                <span>Subject</span>
+                <strong>{preview.subject}</strong>
+              </div>
+
+              {preview.html ? (
+                <div className="email-preview-frame-wrapper">
+                  <iframe
+                    className="email-preview-frame"
+                    title="Email preview"
+                    srcDoc={preview.html}
+                  />
+                </div>
+              ) : (
+                <div className="email-empty-state">
+                  No HTML preview is available for this template.
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="email-preview-placeholder">
+              <div className="email-preview-placeholder-icon">
+                <Eye size={28} />
+              </div>
+
+              <h3>No preview yet</h3>
+
+              <p>
+                Complete the template fields and select
+                <strong> Preview Email</strong> to see the rendered
+                message here.
+              </p>
+            </div>
+          )}
+        </section>
+      </div>
     </div>
   );
 }
