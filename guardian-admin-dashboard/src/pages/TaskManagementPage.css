@@ -662,3 +662,30 @@
   white-space: nowrap;
   vertical-align: middle;
 }
+/* --- Addition: inline status dropdown in the task table --- */
+
+.task-status-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.task-status-select:hover {
+  border-color: var(--border);
+}
+
+.task-status-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.task-status-saving {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
