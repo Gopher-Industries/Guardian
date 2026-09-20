@@ -16,6 +16,7 @@ import DoctorAssignmentsPage from "./pages/DoctorAssignmentsPage";
 import PatientOverviewPage from "./pages/PatientOverviewPage";
 import StatusPage from "./pages/StatusPage";
 import PendingApprovalsPage from "./pages/PendingApprovalsPage";
+import RegisterPage from "./pages/RegisterPage";
 import "./App.css";
 
 function RequireAuth({ children }) {
@@ -38,6 +39,7 @@ export default function App() {
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/register" element={<RegisterPage />} />
 
       <Route
         path="/dashboard"
@@ -129,11 +131,13 @@ export default function App() {
             </RequireRole>
           }
         />
+   
         <Route path="settings" element={<SettingsPage />} />
 
         {/* Catches unmatched paths WITHIN /dashboard, e.g. /dashboard/staffmanagement */}
         <Route path="*" element={<StatusPage type={404} />} />
         <Route path="task-management" element={<TaskManagementPage />} />
+        
 
       </Route>
 

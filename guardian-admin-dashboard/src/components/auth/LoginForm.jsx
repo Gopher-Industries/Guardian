@@ -105,6 +105,16 @@ export default function LoginForm() {
       <Button type="submit" fullWidth disabled={submitting}>
         {submitting ? "Signing in..." : "Sign In"}
       </Button>
+      <p className="auth-card-footer">
+        Don't have an account?{" "}
+        <button
+          type="button"
+          className="text-link"
+          onClick={() => navigate("/register")}
+        >
+          Register
+        </button>
+      </p>
     </motion.form>
   );
 }
