@@ -10,7 +10,8 @@ import {
   Building2,
   ListTodo,
   X,
-  Stethoscope,
+Stethoscope,
+BrainCircuit,
 } from "lucide-react";
 import Logo from "../common/Logo";
 import { ADMIN_NAV_ITEMS } from "../../utils/constants";
@@ -28,6 +29,7 @@ const iconMap = {
   reports: Bell,
   settings: Settings,
   "nurse-roster": ClipboardList,
+  "emotion-recognition": BrainCircuit,
 };
 
 export default function Sidebar({
