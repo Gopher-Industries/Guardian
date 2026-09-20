@@ -48,6 +48,7 @@ export default function DataTable({
       style: {
         backgroundColor: 'var(--surface)',
         borderRadius: '18px',
+        overflowX: 'auto',
       },
     },
     header: {
@@ -152,6 +153,31 @@ export default function DataTable({
       style: {
         backgroundColor: 'var(--surface)',
         color: 'var(--text)',
+      },
+    },
+    expanderRow: {
+      style: {
+        backgroundColor: 'var(--surface-soft)',
+        color: 'var(--text)',
+      },
+    },
+    expanderCell: {
+      style: {
+        backgroundColor: 'var(--surface)',
+        fill: 'var(--primary)',
+      },
+    },
+    expanderButton: {
+      style: {
+        backgroundColor: 'transparent',
+        fill: 'var(--primary)',
+        '&:hover:not(:disabled)': {
+          backgroundColor: 'var(--surface-soft)',
+        },
+        '&:focus': {
+          outline: 'none',
+          backgroundColor: 'var(--surface-soft)',
+        },
       },
     },
   };
