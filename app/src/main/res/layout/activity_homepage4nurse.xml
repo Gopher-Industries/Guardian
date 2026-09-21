@@ -151,6 +151,44 @@
         app:layout_constraintStart_toStartOf="@+id/logsButton_nurse"
         app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
 
+    <!-- Tasks Button Background -->
+    <Button
+        android:id="@+id/tasksButton_nurse"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="392dp"
+        android:background="@drawable/homepage_button_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <View
+        android:id="@+id/tasksIcon_nurse"
+        android:layout_width="42dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="420dp"
+        android:background="@drawable/ic_assignment_indicator"
+        android:elevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+    <TextView
+        android:id="@+id/tasksTxt_nurse"
+        android:layout_width="100dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="472dp"
+        android:elevation="4dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Task List"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/tasksButton_nurse"
+        app:layout_constraintStart_toStartOf="@+id/tasksButton_nurse"
+        app:layout_constraintTop_toBottomOf="@+id/medicalDiaganosticsHeaderCardView" />
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/medicalDiaganosticsHeaderCardView"
         android:layout_width="0dp"
