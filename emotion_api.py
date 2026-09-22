@@ -4,6 +4,7 @@ from flask_cors import CORS
 import os
 import tempfile
 from collections import Counter
+from emotion_history import create_analysis_record
 
 import cv2
 import torch
@@ -179,10 +180,10 @@ def analyse_video():
 
     print("Patient ID received:", patient_id, flush=True)
 
-    #if patient_id is None or patient_id == "":
-        #return jsonify({
-           # "error": "No patient was selected"
-        #}), 400
+    if not patient_id or not patient_id.strip():
+        return jsonify({
+            "error": "No patient was selected"
+        }), 400
 
 
     # Save the video temporarily
@@ -290,9 +291,14 @@ def analyse_video():
             flush=True
         )
 
+        analysis_record = create_analysis_record(
+            patient_id,
+            {"timeline": timeline}
+        )
 
         return jsonify({
             "status": "completed",
+            "analysis_id": analysis_record["analysis_id"],
             "patient_id": patient_id,
             "filename": video.filename,
             "message": "Video analysed successfully",
