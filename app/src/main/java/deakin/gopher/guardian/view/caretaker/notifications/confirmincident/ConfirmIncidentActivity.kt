@@ -16,6 +16,7 @@ import com.google.android.material.navigation.NavigationView
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.view.falldetection.FallAlertActivity
 import deakin.gopher.guardian.view.general.BaseActivity
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper
 
 class ConfirmIncidentActivity : BaseActivity() {
     var hospitalSpinner: Spinner? = null
@@ -35,6 +36,7 @@ class ConfirmIncidentActivity : BaseActivity() {
             button.setOnClickListener {
                 drawerLayout.openDrawer(GravityCompat.START)
             }
+            DrawerNavigationHelper.bindStandardDrawer(this, drawerLayout, navigationView, button)
         }
 
         hospitalSpinner = findViewById(R.id.hospitalSpinner)

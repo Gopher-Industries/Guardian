@@ -2,12 +2,11 @@ package deakin.gopher.guardian.view.general;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -18,14 +17,23 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 import deakin.gopher.guardian.R;
+import deakin.gopher.guardian.model.BaseModel;
+import deakin.gopher.guardian.model.login.ChangePasswordRequest;
+import deakin.gopher.guardian.model.login.SessionManager;
+import deakin.gopher.guardian.services.NavigationService;
+import deakin.gopher.guardian.services.api.ApiClient;
+import org.json.JSONObject;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Setting extends BaseActivity implements View.OnClickListener {
   ConstraintLayout settingsThemeButton;
   ConstraintLayout settingsNotificationButton;
   ConstraintLayout settingsAppUpdateButton;
   ConstraintLayout settingsFeedbackButton;
+  ConstraintLayout settingsChangePasswordButton;
   Switch notificationSwitch;
   Switch themeSwitch;
   ImageView settingsMenuButton;
@@ -34,15 +42,16 @@ public class Setting extends BaseActivity implements View.OnClickListener {
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_setting);
-    String userType = getIntent().getStringExtra("userType");
 
     settingsThemeButton = findViewById(R.id.settings_theme_button);
     settingsNotificationButton = findViewById(R.id.settings_notification_button);
     settingsAppUpdateButton = findViewById(R.id.settings_app_update_button);
     settingsFeedbackButton = findViewById(R.id.settings_feedback_button);
+    settingsChangePasswordButton = findViewById(R.id.settings_change_password_button);
 
     settingsAppUpdateButton.setOnClickListener(this);
     settingsFeedbackButton.setOnClickListener(this);
+    settingsChangePasswordButton.setOnClickListener(this);
     final NavigationView navigationView = findViewById(R.id.nav_view);
     settingsMenuButton = findViewById(R.id.settings_menu_button);
     final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
@@ -53,6 +62,9 @@ public class Setting extends BaseActivity implements View.OnClickListener {
           drawerLayout.openDrawer(GravityCompat.START);
         });
 
+    DrawerNavigationHelper.bindStandardDrawer(
+        this, drawerLayout, navigationView, settingsMenuButton);
+
     final ConstraintLayout settingsThemeButton = findViewById(R.id.settings_theme_button);
 
     notificationSwitch = findViewById(R.id.notification_switch);
@@ -61,14 +73,158 @@ public class Setting extends BaseActivity implements View.OnClickListener {
 
     themeSwitch = findViewById(R.id.theme_switch);
     themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> handleThemeSwitch(isChecked));
-    configureNavigationDrawer(userType);
   }
 
   @Override
   public void onClick(final View v) {
-    if (R.id.settings_feedback_button == v.getId()) {
+    if (R.id.settings_change_password_button == v.getId()) {
+      showChangePasswordDialog();
+    } else if (R.id.settings_feedback_button == v.getId()) {
       showFeedbackDialog();
     }
+  }
+
+  private void showChangePasswordDialog() {
+    final View dialogView = getLayoutInflater().inflate(R.layout.dialog_change_password, null);
+
+    final EditText currentPasswordInput = dialogView.findViewById(R.id.current_password_input);
+
+    final EditText newPasswordInput = dialogView.findViewById(R.id.new_password_input);
+
+    final EditText confirmPasswordInput = dialogView.findViewById(R.id.confirm_password_input);
+
+    final AlertDialog dialog =
+        new AlertDialog.Builder(this)
+            .setTitle(R.string.change_password)
+            .setView(dialogView)
+            .setPositiveButton(R.string.update_password, null)
+            .setNegativeButton(R.string.cancel, null)
+            .create();
+
+    dialog.show();
+
+    final Button updateButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+    updateButton.setOnClickListener(
+        button -> {
+          final String currentPassword = currentPasswordInput.getText().toString();
+
+          final String newPassword = newPasswordInput.getText().toString();
+
+          final String confirmPassword = confirmPasswordInput.getText().toString();
+
+          if (currentPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
+            showToast(getString(R.string.validation_password_fields_required));
+            return;
+          }
+
+          if (newPassword.length() < 8) {
+            newPasswordInput.setError(getString(R.string.validation_new_password_length));
+            newPasswordInput.requestFocus();
+            return;
+          }
+
+          if (!newPassword.equals(confirmPassword)) {
+            confirmPasswordInput.setError(
+                getString(R.string.validation_error_passwords_do_not_match));
+            confirmPasswordInput.requestFocus();
+            return;
+          }
+
+          if (newPassword.equals(currentPassword)) {
+            newPasswordInput.setError(getString(R.string.validation_new_password_same));
+            newPasswordInput.requestFocus();
+            return;
+          }
+
+          submitChangePassword(currentPassword, newPassword, confirmPassword, dialog, updateButton);
+        });
+  }
+
+  private void submitChangePassword(
+      final String currentPassword,
+      final String newPassword,
+      final String confirmPassword,
+      final AlertDialog dialog,
+      final Button updateButton) {
+
+    final String token;
+
+    try {
+      token = "Bearer " + SessionManager.INSTANCE.getToken();
+    } catch (RuntimeException exception) {
+      showToast(getString(R.string.session_expired));
+      SessionManager.INSTANCE.logoutUser();
+      new NavigationService(this).onSignOut();
+      return;
+    }
+
+    final ChangePasswordRequest request =
+        new ChangePasswordRequest(currentPassword, newPassword, confirmPassword);
+
+    updateButton.setEnabled(false);
+    updateButton.setText(R.string.changing_password);
+
+    ApiClient.INSTANCE
+        .getApiService()
+        .changePassword(token, request)
+        .enqueue(
+            new Callback<BaseModel>() {
+              @Override
+              public void onResponse(
+                  final Call<BaseModel> call, final Response<BaseModel> response) {
+
+                if (response.isSuccessful()) {
+                  dialog.dismiss();
+                  SessionManager.INSTANCE.logoutUser();
+
+                  showToast(getString(R.string.password_changed_sign_in_again));
+
+                  new NavigationService(Setting.this).onSignOut();
+                  return;
+                }
+
+                if (response.code() == 401) {
+                  SessionManager.INSTANCE.logoutUser();
+                  showToast(getString(R.string.session_expired));
+                  new NavigationService(Setting.this).onSignOut();
+                  return;
+                }
+
+                updateButton.setEnabled(true);
+                updateButton.setText(R.string.update_password);
+                showToast(readApiError(response));
+              }
+
+              @Override
+              public void onFailure(final Call<BaseModel> call, final Throwable throwable) {
+
+                updateButton.setEnabled(true);
+                updateButton.setText(R.string.update_password);
+                showToast(getString(R.string.change_password_network_error));
+              }
+            });
+  }
+
+  private String readApiError(final Response<?> response) {
+    try {
+      if (response.errorBody() != null) {
+        final JSONObject error = new JSONObject(response.errorBody().string());
+
+        final String errorMessage = error.optString("error");
+        if (!errorMessage.isEmpty()) {
+          return errorMessage;
+        }
+
+        final String message = error.optString("message");
+        if (!message.isEmpty()) {
+          return message;
+        }
+      }
+    } catch (Exception ignored) {
+      // Use the general message below.
+    }
+
+    return getString(R.string.change_password_failed);
   }
 
   private void initializeSwitchStates() {
@@ -84,38 +240,6 @@ public class Setting extends BaseActivity implements View.OnClickListener {
     } else {
       showToast("Notifications turned off");
     }
-  }
-
-  private void configureNavigationDrawer(String userType) {
-    NavigationView navigationView = findViewById(R.id.nav_view);
-    Menu menu = navigationView.getMenu();
-    menu.clear();
-
-    navigationView.inflateMenu(R.menu.nav_menu);
-    navigationView.setNavigationItemSelectedListener(
-        menuItem -> {
-          Intent intent = null;
-          switch (menuItem.getItemId()) {
-            case R.id.nav_home:
-              intent =
-                  new Intent(
-                      Setting.this,
-                      userType.equals("admin") ? Homepage4admin.class : Homepage4caretaker.class);
-              break;
-            case R.id.nav_signout:
-              FirebaseAuth.getInstance().signOut();
-              startActivity(new Intent(Setting.this, LoginActivity.class));
-              finish();
-          }
-
-          if (intent != null) {
-            startActivity(intent);
-          }
-
-          DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-          drawerLayout.closeDrawer(GravityCompat.START);
-          return true;
-        });
   }
 
   private void handleThemeSwitch(final boolean isChecked) {

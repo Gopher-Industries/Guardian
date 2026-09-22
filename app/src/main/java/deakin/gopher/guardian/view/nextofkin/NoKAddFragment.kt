@@ -45,8 +45,6 @@ class NoKAddFragment : Fragment {
     ): View? {
         viewPager2 = requireActivity().findViewById(R.id.dataForViewViewPager)
         val rootView = inflater.inflate(R.layout.fragment_nok_add, container, false)
-        val leftButton = rootView.findViewById<Button>(R.id.nok_add_polygon_left)
-        val rightButton = rootView.findViewById<Button>(R.id.nok_add_polygon_right)
         val nextButton = rootView.findViewById<Button>(R.id.nok_add_NextButton)
         val prevButton = rootView.findViewById<Button>(R.id.nok_add_PrevButton)
         firstNameInput = rootView.findViewById(R.id.input_nok_FirstName)
@@ -118,31 +116,6 @@ class NoKAddFragment : Fragment {
             }
         }
 
-        if (2 == status) {
-            leftButton.setBackgroundResource(R.drawable.polygon_3)
-            rightButton.setBackgroundResource(R.drawable.polygon_4)
-        }
-        rightButton.setOnClickListener { view: View? ->
-            if (1 == status) {
-                // for now I keep 2 next of kins and 2 gps waiting to be add
-                // but default adding 1 nok and 1gp, after alick right arrow the second one shows up
-                // is better
-                if (dataChecker()) {
-                    saveNextofKin()
-                    scrollPage(true)
-                }
-            }
-        }
-
-        leftButton.setOnClickListener { view: View? ->
-            if (2 == status) {
-                if (dataChecker()) {
-                    saveNextofKin()
-                    scrollPage(false)
-                }
-            }
-        }
-
         nextButton.setOnClickListener { view: View? ->
             if (dataChecker()) {
                 saveNextofKin()
@@ -151,10 +124,8 @@ class NoKAddFragment : Fragment {
         }
 
         prevButton.setOnClickListener { view: View? ->
-            if (dataChecker()) {
-                saveNextofKin()
-                scrollPage(false)
-            }
+            // Allow navigating to the previous step even if required fields are empty
+            scrollPage(false)
         }
 
         return rootView
@@ -205,24 +176,26 @@ class NoKAddFragment : Fragment {
         phoneNumber = phoneInput!!.text.toString()
         email = emailInput!!.text.toString()
 
+        var isValid = true
+
         if (TextUtils.isEmpty(firstName)) {
             setErrorAndReturn(firstNameInput, "First name is Required.")
-            return false
+            isValid = false
         }
         if (TextUtils.isEmpty(lastName)) {
             setErrorAndReturn(lastNameInput, "Last name is Required.")
-            return false
+            isValid = false
         }
         if (TextUtils.isEmpty(address)) {
             setErrorAndReturn(addressInput, "Address is Required.")
-            return false
+            isValid = false
         }
         if (TextUtils.isEmpty(phoneNumber)) {
             setErrorAndReturn(phoneInput, "Phone number is Required.")
-            return false
+            isValid = false
         }
 
-        return true
+        return isValid
     }
 
     private fun setErrorAndReturn(

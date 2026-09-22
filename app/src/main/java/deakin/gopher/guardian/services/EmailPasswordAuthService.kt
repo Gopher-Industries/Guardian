@@ -50,6 +50,7 @@ class EmailPasswordAuthService(
     }
 
     companion object {
+        @JvmStatic
         fun resetPassword(emailAddress: EmailAddress): Task<Void>? {
             return try {
                 FirebaseAuth.getInstance().sendPasswordResetEmail(emailAddress.emailAddress)
@@ -59,11 +60,16 @@ class EmailPasswordAuthService(
             }
         }
 
+        @JvmStatic
         fun signOut(context: Context) {
             try {
                 SessionManager.logoutUser()
                 FirebaseAuth.getInstance().signOut()
-                context.startActivity(Intent(context, LoginActivity::class.java))
+                context.startActivity(
+                    Intent(context, LoginActivity::class.java).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    },
+                )
             } catch (e: Exception) {
                 e.printStackTrace()
             }

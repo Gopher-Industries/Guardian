@@ -1,16 +1,17 @@
 package deakin.gopher.guardian.view.general
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.view.isVisible
-import com.google.android.material.button.MaterialButton
+import androidx.core.widget.addTextChangedListener
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.Gson
 import deakin.gopher.guardian.R
-import deakin.gopher.guardian.model.RegistrationStatusMessage
+import deakin.gopher.guardian.model.ApiErrorResponse
 import deakin.gopher.guardian.model.login.EmailAddress
 import deakin.gopher.guardian.model.login.Password
 import deakin.gopher.guardian.model.register.AuthResponse
@@ -26,21 +27,35 @@ class RegisterActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.account_creation)
+
         val mFullName: EditText = findViewById(R.id.Fullname)
         val mEmail: EditText = findViewById(R.id.Email)
         val mPassword: EditText = findViewById(R.id.password)
         val passwordConfirmation: EditText = findViewById(R.id.passwordConfirm)
+        val nameLayout: TextInputLayout = findViewById(R.id.nameTextInputLayout)
+        val emailLayout: TextInputLayout = findViewById(R.id.emailTextInputLayout)
+        val passwordLayout: TextInputLayout = findViewById(R.id.passwordTextInputLayout)
+        val confirmPasswordLayout: TextInputLayout =
+            findViewById(R.id.confirmPasswordTextInputLayout)
         val roleButton: MaterialButtonToggleGroup = findViewById(R.id.role_toggle_group)
         val backToLoginButton: Button = findViewById(R.id.backToLoginButton)
         val mRegisterBtn: Button = findViewById(R.id.registerBtn)
         val progressBar: ProgressBar = findViewById(R.id.progressBar)
+
+        mFullName.addTextChangedListener { nameLayout.error = null }
+        mEmail.addTextChangedListener { emailLayout.error = null }
+        mPassword.addTextChangedListener { passwordLayout.error = null }
+        passwordConfirmation.addTextChangedListener { confirmPasswordLayout.error = null }
+        roleButton.addOnButtonCheckedListener { _, _, _ ->
+            // Optional: clear role error if you add one to the layout
+        }
 
         mRegisterBtn.setOnClickListener {
             val emailInput = mEmail.text.toString().trim { it <= ' ' }
             val passwordInput = mPassword.text.toString().trim { it <= ' ' }
             val passwordConfirmInput = passwordConfirmation.text.toString().trim { it <= ' ' }
             val nameInput = mFullName.text.toString().trim { it <= ' ' }
-            val roleInput = roleButton.checkedButtonId
+            val roleId = roleButton.checkedButtonId
 
             val registrationError =
                 validateInputs(
@@ -48,28 +63,54 @@ class RegisterActivity : BaseActivity() {
                     passwordInput,
                     passwordConfirmInput,
                     nameInput,
-                    roleInput,
+                    roleId,
                 )
 
             if (registrationError != null) {
-                Toast.makeText(
-                    applicationContext,
-                    registrationError.messageResourceId,
-                    Toast.LENGTH_LONG,
-                ).show()
+                when (registrationError) {
+                    RegistrationError.EmptyName -> {
+                        nameLayout.error = getString(registrationError.messageResourceId)
+                    }
+
+                    RegistrationError.EmptyEmail,
+                    RegistrationError.InvalidEmail,
+                    -> {
+                        emailLayout.error = getString(registrationError.messageResourceId)
+                    }
+
+                    RegistrationError.EmptyPassword,
+                    RegistrationError.PasswordTooShort,
+                    -> {
+                        passwordLayout.error = getString(registrationError.messageResourceId)
+                    }
+
+                    RegistrationError.EmptyConfirmedPassword,
+                    RegistrationError.PasswordsFailConfirmation,
+                    -> {
+                        confirmPasswordLayout.error =
+                            getString(registrationError.messageResourceId)
+                    }
+
+                    RegistrationError.EmptyRole -> {
+                        showMessage(getString(registrationError.messageResourceId))
+                    }
+                }
                 return@setOnClickListener
             }
 
-            progressBar.visibility = View.VISIBLE
+            setLoading(true, mRegisterBtn, progressBar)
 
-            val emailAddress = EmailAddress(emailInput)
-            val password = Password(passwordInput)
-            val role = findViewById<MaterialButton>(roleInput).text.toString().lowercase()
+            val role =
+                when (roleId) {
+                    R.id.button_caretaker -> "caretaker"
+                    R.id.button_nurse -> "nurse"
+                    else -> ""
+                }
 
             val request =
                 RegisterRequest(
-                    email = emailAddress.emailAddress,
-                    password = password.password,
+                    email = emailInput,
+                    password = passwordInput,
                     name = nameInput,
                     role = role,
                 )
@@ -82,17 +123,15 @@ class RegisterActivity : BaseActivity() {
                         call: Call<AuthResponse>,
                         response: Response<AuthResponse>,
                     ) {
-                        progressBar.isVisible = false
+                        setLoading(false, mRegisterBtn, progressBar)
                         if (response.isSuccessful) {
-                            // Handle successful registration
-                            showMessage(RegistrationStatusMessage.Success.toString())
+                            showMessage(getString(R.string.registration_success))
                             NavigationService(this@RegisterActivity).toLogin()
                         } else {
-                            // Handle error
+                            val errorMsg = parseError(response)
                             showMessage(
-                                RegistrationStatusMessage.Failure.toString() + " : ${
-                                    response.errorBody()
-                                }",
+                                getString(R.string.registration_failure) +
+                                    (if (errorMsg != null) ": $errorMsg" else ""),
                             )
                         }
                     }
@@ -101,9 +140,11 @@ class RegisterActivity : BaseActivity() {
                         call: Call<AuthResponse>,
                         t: Throwable,
                     ) {
-                        // Handle failure
-                        progressBar.isVisible = false
-                        showMessage(RegistrationStatusMessage.Failure.toString() + ": ${t.message}")
+                        setLoading(false, mRegisterBtn, progressBar)
+                        showMessage(
+                            getString(R.string.registration_failure) +
+                                ": ${t.localizedMessage}",
+                        )
                     }
                 },
             )
@@ -114,6 +155,28 @@ class RegisterActivity : BaseActivity() {
         }
     }
 
+    private fun setLoading(
+        isLoading: Boolean,
+        button: Button,
+        progressBar: ProgressBar,
+    ) {
+        button.isEnabled = !isLoading
+        progressBar.isVisible = isLoading
+    }
+
+    private fun parseError(response: Response<*>): String? {
+        return try {
+            val errorResponse =
+                Gson().fromJson(
+                    response.errorBody()?.string(),
+                    ApiErrorResponse::class.java,
+                )
+            errorResponse.apiError
+        } catch (e: Exception) {
+            null
+        }
+    }
+
     private fun validateInputs(
         rawEmail: String?,
         rawPassword: String?,
@@ -121,6 +184,9 @@ class RegisterActivity : BaseActivity() {
         rawName: String?,
         roleInput: Int,
     ): RegistrationError? {
+        if (rawName.isNullOrEmpty()) {
+            return RegistrationError.EmptyName
+        }
         if (rawEmail.isNullOrEmpty()) {
             return RegistrationError.EmptyEmail
         }
@@ -147,11 +213,7 @@ class RegisterActivity : BaseActivity() {
             return RegistrationError.PasswordsFailConfirmation
         }
 
-        if (rawName.isNullOrEmpty()) {
-            return RegistrationError.EmptyName
-        }
-
-        if (roleInput == View.NO_ID) {
+        if (roleInput == android.view.View.NO_ID) {
             return RegistrationError.EmptyRole
         }
 

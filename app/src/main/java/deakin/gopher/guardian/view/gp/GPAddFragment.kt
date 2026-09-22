@@ -42,9 +42,6 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
     ): View? {
         viewPager2 = requireActivity().findViewById(R.id.dataForViewViewPager)
         val rootView = inflater.inflate(R.layout.fragment_gp_add, container, false)
-
-        val leftButton: Button = rootView.findViewById(R.id.gp_add_polygon_left)
-        val rightButton: Button = rootView.findViewById(R.id.gp_add_polygon_right)
         val nextButton: Button = rootView.findViewById(R.id.gp_add_NextButton)
         val prevButton: Button = rootView.findViewById(R.id.gp_add_PrevButton)
 
@@ -106,29 +103,8 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
             }
         }
 
-        if (status == 2) {
-            leftButton.setBackgroundResource(R.drawable.polygon_3)
-            rightButton.setBackgroundResource(R.drawable.polygon_4)
-        } else {
+        if (status != 2) {
             nextButton.setText(R.string.next)
-        }
-
-        rightButton.setOnClickListener {
-            if (status == 1) {
-                if (dataChecker()) {
-                    saveGp()
-                    scrollPage(true)
-                }
-            }
-        }
-
-        leftButton.setOnClickListener {
-            if (status == 2) {
-                if (dataChecker()) {
-                    saveGp()
-                    scrollPage(false)
-                }
-            }
         }
 
         nextButton.setOnClickListener {
@@ -157,10 +133,8 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
         }
 
         prevButton.setOnClickListener {
-            if (dataChecker()) {
-                saveGp()
-                scrollPage(false)
-            }
+            // Allow navigating to the previous step even if required fields are empty
+            scrollPage(false)
         }
 
         return rootView
@@ -209,29 +183,26 @@ class GPAddFragment(private var status: Int = 0) : Fragment() {
         email = emailInput.text.toString()
         fax = faxInput.text.toString()
 
-        return when {
-            firstName.isNullOrEmpty() -> {
-                setErrorAndReturn(firstNameInput, "First name is Required.")
-                false
-            }
+        var isValid = true
 
-            lastName.isNullOrEmpty() -> {
-                setErrorAndReturn(lastNameInput, "Last name is Required.")
-                false
-            }
-
-            clinicAddress.isNullOrEmpty() -> {
-                setErrorAndReturn(clinicAddressInput, "Clinic address is Required.")
-                false
-            }
-
-            phoneNumber.isNullOrEmpty() -> {
-                setErrorAndReturn(phoneNumberInput, "Phone number is Required.")
-                false
-            }
-
-            else -> true
+        if (firstName.isNullOrEmpty()) {
+            setErrorAndReturn(firstNameInput, "First name is Required.")
+            isValid = false
         }
+        if (lastName.isNullOrEmpty()) {
+            setErrorAndReturn(lastNameInput, "Last name is Required.")
+            isValid = false
+        }
+        if (clinicAddress.isNullOrEmpty()) {
+            setErrorAndReturn(clinicAddressInput, "Clinic address is Required.")
+            isValid = false
+        }
+        if (phoneNumber.isNullOrEmpty()) {
+            setErrorAndReturn(phoneNumberInput, "Phone number is Required.")
+            isValid = false
+        }
+
+        return isValid
     }
 
     private fun setErrorAndReturn(

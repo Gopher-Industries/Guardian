@@ -2,18 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- For reading images -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <!-- For reading videos -->
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
 
     <!-- For reading audio -->
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
 
     <!-- Add WRITE permissions only if necessary -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
     <!-- Add the permission here -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -29,9 +36,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
+        tools:ignore="ExtraText"
         tools:replace="android:allowBackup,android:label"
-        tools:targetApi="31"
-        tools:ignore="ExtraText">
+        tools:targetApi="31">
         <activity
             android:name=".WelcomeActivity"
             android:exported="false" />
@@ -65,7 +72,13 @@
             android:name=".view.general.Homepage4nurse"
             android:exported="false" />
         <activity
+            android:name=".view.general.Homepage4doctor"
+            android:exported="false" />
+        <activity
             android:name=".view.general.TaskDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.general.AssignNurseActivity"
             android:exported="false" />
         <activity
             android:name=".view.general.TaskAddActivity"
@@ -85,6 +98,7 @@
         <activity
             android:name=".view.caretaker.CaretakerProfileActivity"
             android:exported="false" />
+        <activity android:name=".view.general.EditPatientActivity" />
         <activity
             android:name=".view.caretaker.EditCaretakerProfileActivity"
             android:exported="false" />
@@ -153,8 +167,6 @@
         <activity
             android:name=".view.general.LoginActivity"
             android:exported="false" />
-        <activity android:name=".view.general.PinCodeActivity"
-            android:exported="false" />
         <activity
             android:name=".view.general.AddNewPatientActivity"
             android:exported="false" /> <!-- Kussay: may we need to change the start up page into login page -->
@@ -179,6 +191,7 @@
         <activity
             android:name=".view.general.TasksListActivity"
             android:exported="false" />
+        <activity android:name=".view.patient.PatientLogsActivity"/>
 
         <activity android:name=".ModulesActivity" />
 
@@ -192,6 +205,7 @@
         <activity android:name=".Module2CoursesActivity" />
         <activity android:name=".MedicationTechniqueActivity" />
         <activity android:name=".MedicationSafetyActivity" />
+
 
         <activity android:name=".Module3CoursesActivity" />
         <activity android:name=".InspiringLeadershipEIActivity" />
@@ -219,7 +233,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".view.general.DashboardActivity"/>
+        <activity android:name=".view.general.DashboardActivity" />
     </application>
 
 </manifest>

@@ -7,11 +7,11 @@ import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.util.Util;
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Locale;
@@ -31,22 +31,24 @@ public class DailyReportSummaryActivity extends AppCompatActivity {
     final NavigationView navigationView = findViewById(R.id.nav_view);
     dailyReportSummaryMenuButton = findViewById(R.id.menuButton101);
     final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-    navigationView.setItemIconTintList(null);
 
-    dailyReportSummaryMenuButton.setOnClickListener(
-        v -> {
-          drawerLayout.openDrawer(GravityCompat.START);
-        });
+    DrawerNavigationHelper.bindStandardDrawer(
+        this, drawerLayout, navigationView, dailyReportSummaryMenuButton);
 
     final TextView currentStatusSummary = findViewById(R.id.currentStatusSummary);
     final TextView progressNotesSummary = findViewById(R.id.progressNotesSummary);
+    final TextView patientDailyReportSummaryTitle = findViewById(R.id.patientDailyReportSumTV);
     final CalendarView patientReportSummaryCalendarView =
         findViewById(R.id.patientReportSummaryCalendarView);
 
     final Intent intent = getIntent();
     final String date = intent.getStringExtra(Util.DAILY_REPORT_DATE);
     final String notes = intent.getStringExtra(Util.DAILY_REPORT_STATUS_NOTES);
+    final String patientName = intent.getStringExtra("patientName");
     final String[] statusList = intent.getStringArrayExtra(Util.DAILY_REPORT_STATUS_LIST);
+    if (patientName != null && !patientName.trim().isEmpty()) {
+      patientDailyReportSummaryTitle.setText(patientName + " Daily Report");
+    }
     if (null != statusList && 0 != statusList.length) {
       for (int i = 0; i < statusList.length - 1; i++) {
         statuses.append(statusList[i]).append("\n");
@@ -54,7 +56,7 @@ public class DailyReportSummaryActivity extends AppCompatActivity {
       statuses.append(statusList[statusList.length - 1]);
     }
 
-    if (android.os.Build.VERSION_CODES.N <= android.os.Build.VERSION.SDK_INT) {
+    if (date != null && android.os.Build.VERSION_CODES.N <= android.os.Build.VERSION.SDK_INT) {
       final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
       try {
@@ -66,8 +68,10 @@ public class DailyReportSummaryActivity extends AppCompatActivity {
       }
     }
 
-    progressNotesSummary.setText(notes);
+    progressNotesSummary.setText(notes != null ? notes : "");
     currentStatusSummary.setText(statuses);
-    patientReportSummaryCalendarView.setDate(dateMs);
+    if (dateMs > 0) {
+      patientReportSummaryCalendarView.setDate(dateMs);
+    }
   }
 }

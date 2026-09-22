@@ -181,23 +181,25 @@ public class PatientAddFragment extends Fragment {
     lastName = last_name.getText().toString();
     medicareNo = medicare_no.getText().toString();
     westernAffairsNo = western_affairs_no.getText().toString();
+    boolean isValid = true;
+
     if (TextUtils.isEmpty(firstName)) {
       setErrorAndReturn(first_name, "First name is Required.");
-      return false;
+      isValid = false;
     }
     if (TextUtils.isEmpty(lastName)) {
       setErrorAndReturn(last_name, "Last name is Required.");
-      return false;
+      isValid = false;
     }
     if (TextUtils.isEmpty(dateOfBirth)) {
       setErrorAndReturn(date_of_birth, "Date of Birth is Required.");
-      return false;
+      isValid = false;
     }
     if (TextUtils.isEmpty(medicareNo)) {
       setErrorAndReturn(medicare_no, "Medicare number is Required.");
-      return false;
+      isValid = false;
     }
-    return true;
+    return isValid;
   }
 
   private void setErrorAndReturn(final EditText editText, final String s) {

@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.view.general.BaseActivity
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper
 import deakin.gopher.guardian.view.general.Homepage4caretaker
 
 class FalseAlertConfirmedActivity : BaseActivity() {
@@ -34,6 +35,10 @@ class FalseAlertConfirmedActivity : BaseActivity() {
                 drawerLayout.openDrawer(GravityCompat.START)
             },
         )
+
+        falseAlertMenuButton?.let { menuButton ->
+            DrawerNavigationHelper.bindStandardDrawer(this, drawerLayout, navigationView, menuButton)
+        }
     }
 
     private fun showDialog() {

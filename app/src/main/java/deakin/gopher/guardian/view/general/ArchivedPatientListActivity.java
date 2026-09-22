@@ -40,8 +40,6 @@ public class ArchivedPatientListActivity extends BaseActivity {
     recyclerView = findViewById(R.id.archived_patient_recycler_view);
 
     final List<PatientOldArchive> archivedPatients = new ArrayList<>();
-    archivedPatients.add(new PatientOldArchive("1", "John", "Doe"));
-    archivedPatients.add(new PatientOldArchive("2", "Jane", "Doe"));
 
     DatabaseReference patientRef = FirebaseDatabase.getInstance().getReference().child("patients");
     Query archivedQuery = patientRef.orderByChild("is_Archived").equalTo(true);
@@ -87,23 +85,8 @@ public class ArchivedPatientListActivity extends BaseActivity {
     findViewById(R.id.patient_list_menu_button)
         .setOnClickListener(view -> drawerLayout.openDrawer(GravityCompat.START));
 
-    navigationView.setNavigationItemSelectedListener(
-        item -> {
-          int id = item.getItemId();
-          //
-          //      if (id == R.id.nav_home) {
-          //      }
-          //
-          //      if (id == R.id.nav_admin) {
-          //      }
-          //      if (id == R.id.nav_settings) {
-          //      }
-          //      if (id == R.id.nav_signout) {
-          //      }
-
-          drawerLayout.closeDrawer(GravityCompat.START);
-          return true;
-        });
+    DrawerNavigationHelper.bindStandardDrawer(
+        this, drawerLayout, navigationView, findViewById(R.id.patient_list_menu_button));
   }
 
   @Override

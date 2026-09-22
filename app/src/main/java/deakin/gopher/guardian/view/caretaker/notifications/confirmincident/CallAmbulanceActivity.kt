@@ -13,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.view.general.BaseActivity
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper
 import deakin.gopher.guardian.view.general.Homepage4caretaker
 
 class CallAmbulanceActivity : BaseActivity() {
@@ -33,6 +34,7 @@ class CallAmbulanceActivity : BaseActivity() {
             button.setOnClickListener {
                 drawerLayout.openDrawer(GravityCompat.START)
             }
+            DrawerNavigationHelper.bindStandardDrawer(this, drawerLayout, navigationView, button)
         }
 
         hospitalSpinner = findViewById(R.id.hospitalSpinner)

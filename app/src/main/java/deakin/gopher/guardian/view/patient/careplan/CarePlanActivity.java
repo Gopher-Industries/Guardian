@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import deakin.gopher.guardian.R;
 import deakin.gopher.guardian.model.CarePlan;
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper;
 import java.util.HashMap;
 
 public class CarePlanActivity extends AppCompatActivity {
@@ -64,6 +65,9 @@ public class CarePlanActivity extends AppCompatActivity {
         v -> {
           drawerLayout.openDrawer(GravityCompat.START);
         });
+
+    DrawerNavigationHelper.bindStandardDrawer(
+        this, drawerLayout, navigationView, carePlanMenuButton);
 
     // careplan type
     carePlanTypeRadioGroup = findViewById(R.id.carePlanTypeRGroup);

@@ -47,6 +47,9 @@ class MainActivity : BaseActivity() {
                 Role.Nurse -> {
                     startActivity(Intent(this@MainActivity, Homepage4nurse::class.java))
                 }
+                Role.Doctor -> {
+                    startActivity(Intent(this@MainActivity, Homepage4doctor::class.java))
+                }
             }
         }
     }

@@ -57,6 +57,11 @@ public class PatientProfileAddActivity extends BaseActivity implements DataListe
           });
     }
 
+    if (customHeader != null) {
+      DrawerNavigationHelper.bindStandardDrawer(
+          this, drawerLayout, navigationView, customHeader.menuButton);
+    }
+
     viewPager2.registerOnPageChangeCallback(
         new ViewPager2.OnPageChangeCallback() {
           @Override

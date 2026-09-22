@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Navigate, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import DashboardHome from "./pages/DashboardHome";
+import AdminLayout from "./layout/AdminLayout";
+import { getAuthToken } from "./utils/storage";
+import StaffManagementPage from "./pages/StaffManagementPage";
+import OrgAssignmentPage from "./pages/OrgAssignmentPage";
+import PatientsPage from "./pages/PatientsPage";
+import NurseRosterPage from "./pages/NurseRosterPage";
+import SupportTicketPage from "./pages/SupportTicketPage";
+import TaskManagementPage from "./pages/TaskManagementPage";
+import ReportsPage from "./pages/ReportsPage";
+import SettingsPage from "./pages/SettingsPage";
+import DoctorAssignmentsPage from "./pages/DoctorAssignmentsPage";
+import "./App.css";
+import PatientOverviewPage from "./pages/PatientOverviewPage";
+import EmotionRecognitionPage from "./pages/EmotionRecognitionPage";
 
-function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+function ProtectedRoute({ children }) {
+  const token = getAuthToken();
+  return token ? children : <Navigate to="/login" replace />;
 }
 
-export default App
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <AdminLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<DashboardHome />} />
+        <Route path="staff-management" element={<StaffManagementPage />} />
+        <Route path="org-assignment" element={<OrgAssignmentPage />} />
+        <Route path="patients" element={<PatientsPage />} />
+        <Route path="doctor-assignments" element={<DoctorAssignmentsPage />} />
+        <Route path="patient-overview" element={<PatientOverviewPage />} />
+        <Route path="nurse-roster" element={<NurseRosterPage />} />
+        <Route path="support-ticket" element={<SupportTicketPage />} />
+        <Route path="emotion-recognition" element={<EmotionRecognitionPage />} />
+        <Route path="reports" element={<ReportsPage />} />
+        <Route path="settings" element={<SettingsPage />} />
+        <Route path="task-management" element={<TaskManagementPage />} />
+
+      </Route>
+
+      <Route path="*" element={<Navigate to="/login" replace />} />
+    </Routes>
+  );
+}
