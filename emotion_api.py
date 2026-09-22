@@ -5,6 +5,7 @@ import os
 import tempfile
 from collections import Counter
 from emotion_history import create_analysis_record
+from emotion_store import save_analysis
 
 import cv2
 import torch
@@ -255,10 +256,18 @@ def analyse_video():
 
 
         # If no face was detected
+        # Save an analysis record even when no faces are detected.
         if len(timeline) == 0:
+            analysis_record = create_analysis_record(
+                patient_id,
+                {"timeline": timeline}
+            )
+            save_analysis(analysis_record)
+
             return jsonify({
                 "status": "completed",
-                "patient_id": patient_id,
+                "analysis_id": analysis_record["analysis_id"],
+                "patient_id": analysis_record["patient_id"],
                 "filename": video.filename,
                 "message": "No faces were detected in the video",
                 "dominant_emotion": None,
@@ -295,6 +304,7 @@ def analyse_video():
             patient_id,
             {"timeline": timeline}
         )
+        save_analysis(analysis_record)
 
         return jsonify({
             "status": "completed",

@@ -8,6 +8,7 @@ from pathlib import Path
 from flask import Flask, jsonify, request
 
 from emotion_history import create_analysis_record
+from emotion_store import save_analysis
 
 
 def create_test_app():
@@ -29,6 +30,7 @@ def create_test_app():
         "request": request,
         "jsonify": jsonify,
         "create_analysis_record": create_analysis_record,
+        "save_analysis": save_analysis,
     }
 
     route_module = ast.Module(body=[route], type_ignores=[])
@@ -105,6 +107,7 @@ class EmotionApiTests(unittest.TestCase):
         with patch.dict(
             namespace,
             {
+                "save_analysis": lambda record: record["analysis_id"],
                 "cv2": FakeCV2,
                 "detect_face": lambda frame: object(),
                 "predict_emotion": lambda face: ("happy", 0.8),
