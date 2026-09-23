@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { HeartPulse, ShieldCheck, UserRoundPlus } from "lucide-react";
-import LoginForm from "../components/auth/LoginForm";
+import RegisterForm from "../components/auth/RegisterForm";
 import AnimatedHeading from "../components/common/AnimatedHeading";
 import Logo from "../components/common/Logo";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   return (
     <section className="auth-page">
       <div className="auth-background">
@@ -24,39 +24,38 @@ export default function LoginPage() {
 
           <AnimatedHeading
             eyebrow="Healthcare Administration"
-            title="Welcome to Guardian Admin"
-            subtitle="A modern care coordination workspace for alerts, monitoring, staff and patient administration."
+            title="Join Guardian Admin"
+            subtitle="Register for Doctor or Nurse access to the care coordination workspace."
           />
 
           <div className="hero-feature-list">
             <div className="hero-feature-card">
               <ShieldCheck size={20} />
               <div>
-                <strong>Coordinated care oversight</strong>
-                <p>Strengthen administrative decision-making with clearer oversight of staff workflows, patients and support actions.</p>
+                <strong>Secure onboarding</strong>
+                <p>Your account is reviewed by an administrator before access is granted.</p>
               </div>
             </div>
 
             <div className="hero-feature-card">
               <HeartPulse size={20} />
               <div>
-                <strong>Care-first monitoring</strong>
-                <p>Support safer and more responsive care through better visibility into patient activity and wellbeing.</p>
+                <strong>Built for care teams</strong>
+                <p>Purpose-built tools for doctors and nurses coordinating patient care.</p>
               </div>
             </div>
 
             <div className="hero-feature-card">
               <UserRoundPlus size={20} />
               <div>
-                <strong>Early risk awareness</strong>
-                <p>Help identify unusual patterns, changing behaviours and possible concerns before they escalate.</p>
+                <strong>Quick setup</strong>
+                <p>Fill in your details and you'll be notified as soon as you're approved.</p>
               </div>
             </div>
           </div>
         </motion.div>
 
-        <LoginForm />
-        
+        <RegisterForm />
       </div>
     </section>
   );

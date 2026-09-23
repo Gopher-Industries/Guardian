@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.navigation.NavigationView
 import com.google.gson.Gson
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.adapter.PatientListAdapter
@@ -145,9 +147,18 @@ class PatientListActivity : BaseActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        binding.toolbar.setNavigationOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
+        val drawerLayout: DrawerLayout =
+            findViewById(R.id.drawer_layout)
+
+        val navigationView: NavigationView =
+            findViewById(R.id.nav_view)
+
+        DrawerNavigationHelper.bindStandardDrawer(
+            this,
+            drawerLayout,
+            navigationView,
+            binding.toolbar,
+        )
 
         binding.toolbar.menu
             .findItem(R.id.action_add_patient)

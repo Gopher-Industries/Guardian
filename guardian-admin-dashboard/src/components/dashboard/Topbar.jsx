@@ -1,13 +1,16 @@
 import { useState, useEffect, useCallback } from "react";
+import { useLocation } from "react-router-dom";
 import { Bell, Search, UserCircle2 } from "lucide-react";
 import { getAdminUser } from "../../utils/storage";
 import NotificationPanel from "./NotificationPanel";
-import { 
+import 
+{ 
   getNotifications, 
   deleteNotification 
 } from "../../services/notificationService";
 
-export default function Topbar({ 
+export default function Topbar
+({ 
   notifications, 
   onRefreshNotifications, 
   onDeleteRequest, 
@@ -16,6 +19,12 @@ export default function Topbar({
   onViewNotification
 }) {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const location = useLocation();
+  
+  const pageTitle =
+  location.pathname.includes("/emotion-recognition")
+    ? "Emotion Recognition"
+    : "Dashboard Overview";
   
   const admin = getAdminUser() || {
     fullname: "Guardian Admin",
@@ -29,7 +38,7 @@ export default function Topbar({
       <div className="topbar-left">
         <div>
           <p className="topbar-eyebrow">Administrator Workspace</p>
-          <h2 className="topbar-title">Dashboard Overview</h2>
+          <h2 className="topbar-title">{pageTitle}</h2>
         </div>
       </div>
 
@@ -80,4 +89,4 @@ export default function Topbar({
     </header>
   );
 }
-
+

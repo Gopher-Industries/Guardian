@@ -9,7 +9,6 @@ import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,37 +44,13 @@ class TasksListActivity : AppCompatActivity() {
 
         plusButton = findViewById(R.id.imageView62)
         progressTextView = findViewById(R.id.task_progress_text)
-        navigationView.setItemIconTintList(null)
-        navigationView.menu.findItem(R.id.add_task).isVisible = canAddTasks
 
-        // Setup side menu listener
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_home -> {
-                    try {
-                        val role = SessionManager.getCurrentUser().role
-                        navigationService.toHomeScreenForRole(role)
-                    } catch (e: Exception) {
-                        navigationService.toLogin()
-                    }
-                }
-                R.id.add_task -> {
-                    if (canAddTasks) {
-                        navigationService.onLaunchTaskCreator()
-                    }
-                }
-                R.id.nav_signout -> {
-                    navigationService.onSignOut()
-                    finish()
-                }
-            }
-            drawerLayout.closeDrawer(GravityCompat.START)
-            true
-        }
-
-        taskListMenuBtn.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
+        DrawerNavigationHelper.bindStandardDrawer(
+            this,
+            drawerLayout,
+            navigationView,
+            taskListMenuBtn,
+        )
 
         plusButton.setOnClickListener {
             if (canAddTasks) {
