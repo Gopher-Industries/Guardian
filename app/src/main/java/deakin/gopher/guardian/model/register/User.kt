@@ -17,6 +17,35 @@ data class User(
         get() = Role.create(roleName ?: "")
 }
 
+class UserDeserializer : com.google.gson.JsonDeserializer<User?> {
+    override fun deserialize(
+        json: com.google.gson.JsonElement?,
+        typeOfT: java.lang.reflect.Type?,
+        context: com.google.gson.JsonDeserializationContext?,
+    ): User? {
+        if (json == null || json.isJsonNull) return null
+        return if (json.isJsonPrimitive) {
+            User(id = json.asString)
+        } else if (json.isJsonObject) {
+            val obj = json.asJsonObject
+            val id = obj.get("id")?.asString ?: obj.get("_id")?.asString ?: ""
+            val name = obj.get("fullname")?.asString ?: obj.get("fullName")?.asString ?: obj.get("name")?.asString ?: ""
+            val email = obj.get("email")?.asString ?: ""
+            val roleName =
+                if (obj.get("role")?.isJsonObject == true) {
+                    obj.getAsJsonObject("role")?.get("name")?.asString
+                } else {
+                    obj.get("role")?.asString
+                }
+            val photoUrl = obj.get("photoUrl")?.asString
+            val organization = obj.get("organization")?.asString
+            User(id = id, name = name, email = email, roleName = roleName, photoUrl = photoUrl, organization = organization)
+        } else {
+            null
+        }
+    }
+}
+
 data class NurseListResponse(
     @SerializedName("nurses") val nurses: List<NurseListItem>,
 )

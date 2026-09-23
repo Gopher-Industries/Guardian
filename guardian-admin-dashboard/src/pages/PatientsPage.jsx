@@ -5,6 +5,8 @@ import {
   createPatient,
   deactivatePatient,
 } from '../services/patientService';
+import { getStaff } from '../services/staffService';
+import Dropdown from '../components/common/Dropdown';
 
 const initialFormData = {
   fullname: '',
@@ -45,6 +47,9 @@ function PatientsPage() {
   const [successMessage, setSuccessMessage] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
+  const [doctorOptions, setDoctorOptions] = useState([]);
+  const [nurseOptions, setNurseOptions] = useState([]);
+  const [caretakerOptions, setCaretakerOptions] = useState([]);
 
   const loadPatients = async (page = 1) => {
     try {
@@ -77,6 +82,40 @@ function PatientsPage() {
 
   useEffect(() => {
     loadPatients();
+  }, []);
+
+  useEffect(() => {
+    const loadStaffOptions = async () => {
+      try {
+        const doctorsData = await getStaff({ role: 'doctor', limit: 100 });
+        setDoctorOptions(
+          (doctorsData.staff ?? []).map((s) => ({
+            value: s._id,
+            label: s.fullname,
+          }))
+        );
+
+        const nursesData = await getStaff({ role: 'nurse', limit: 100 });
+        setNurseOptions(
+          (nursesData.staff ?? []).map((s) => ({
+            value: s._id,
+            label: s.fullname,
+          }))
+        );
+
+        const caretakersData = await getStaff({ role: 'caretaker', limit: 100 });
+        setCaretakerOptions(
+          (caretakersData.staff ?? []).map((s) => ({
+            value: s._id,
+            label: s.fullname,
+          }))
+        );
+      } catch (err) {
+        console.error('Failed to load staff options:', err);
+      }
+    };
+
+    loadStaffOptions();
   }, []);
 
   const handleInputChange = (e) => {
@@ -388,6 +427,7 @@ function PatientsPage() {
                   name="dateOfBirth"
                   value={formData.dateOfBirth}
                   onChange={handleInputChange}
+                  max={new Date().toISOString().split('T')[0]}
                   style={{
                     height: '44px',
                     padding: '0 14px',
@@ -515,6 +555,41 @@ function PatientsPage() {
                     color: 'var(--text)',
                   }}
                 >
+              <Dropdown
+                label="Caretaker"
+                name="caretakerId"
+                value={formData.caretakerId}
+                onChange={handleInputChange}
+                options={caretakerOptions}
+                placeholder="Select caretaker"
+                searchable
+                searchPlaceholder="Search caretakers..."
+              />
+
+              <Dropdown
+                label="Nurse"
+                name="nurseId"
+                value={formData.nurseId}
+                onChange={handleInputChange}
+                options={nurseOptions}
+                placeholder="Select nurse"
+                searchable
+                searchPlaceholder="Search nurses..."
+              />
+
+              <Dropdown
+                label="Doctor"
+                name="doctorId"
+                value={formData.doctorId}
+                onChange={handleInputChange}
+                options={doctorOptions}
+                placeholder="Select doctor"
+                searchable
+                searchPlaceholder="Search doctors..."
+              />
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
                   Image URL
                 </label>
 
