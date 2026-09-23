@@ -10,7 +10,7 @@
         android:layout_width="164dp"
         android:layout_height="47dp"
         android:layout_marginTop="20dp"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/content_description_gopher_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,9 +20,9 @@
         android:id="@+id/headerMenuIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/navigation_drawer_open"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu_button" />
@@ -31,10 +31,10 @@
         android:id="@+id/headerProfileIcon"
         android:layout_width="36dp"
         android:layout_height="42dp"
-        android:layout_marginStart="350dp"
         android:layout_marginTop="40dp"
-        android:contentDescription="TODO"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="24dp"
+        android:contentDescription="@string/profile"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/avatar_icon" />
 
@@ -60,7 +60,7 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:layout_marginTop="-40dp"
-        android:contentDescription="TODO"
+        android:contentDescription="@null"
         android:src="@drawable/avatar_icon"
         android:translationZ="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +69,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/headerCard"
-        android:layout_width="410dp"
+        android:layout_width="0dp"
         android:layout_height="160dp"
         android:layout_marginTop="-20dp"
         android:translationZ="-10dp"

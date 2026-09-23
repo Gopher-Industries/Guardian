@@ -12,14 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
-import deakin.gopher.guardian.model.login.Role;
 import deakin.gopher.guardian.model.login.SessionManager;
-import deakin.gopher.guardian.services.NavigationService;
 import deakin.gopher.guardian.util.Util;
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedHashSet;
@@ -53,33 +51,9 @@ public class DailyReportActivity extends AppCompatActivity {
     final NavigationView navigationView = findViewById(R.id.nav_view);
     dailyReportMenuButton = findViewById(R.id.menuButton11);
     final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-    navigationView.setItemIconTintList(null);
 
-    final NavigationService navigationService = new NavigationService(this);
-    final boolean canAddTasks =
-        SessionManager.INSTANCE.getCurrentUser().getRole() instanceof Role.Caretaker;
-    navigationView.getMenu().findItem(R.id.add_task).setVisible(canAddTasks);
-
-    navigationView.setNavigationItemSelectedListener(
-        menuItem -> {
-          final int id = menuItem.getItemId();
-          if (R.id.nav_home == id) {
-            navigationService.toHomeScreenForRole(
-                SessionManager.INSTANCE.getCurrentUser().getRole());
-          } else if (R.id.add_task == id && canAddTasks) {
-            navigationService.onLaunchTaskCreator();
-          } else if (R.id.nav_signout == id) {
-            navigationService.onSignOut();
-            finish();
-          }
-          drawerLayout.closeDrawer(GravityCompat.START);
-          return true;
-        });
-
-    dailyReportMenuButton.setOnClickListener(
-        v -> {
-          drawerLayout.openDrawer(GravityCompat.START);
-        });
+    DrawerNavigationHelper.bindStandardDrawer(
+        this, drawerLayout, navigationView, dailyReportMenuButton);
 
     final String patientNameExtra = getIntent().getStringExtra("patientName");
     patientName =
