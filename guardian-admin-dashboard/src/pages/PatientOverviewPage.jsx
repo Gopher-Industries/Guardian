@@ -193,7 +193,7 @@ export default function PatientOverviewPage() {
 
             <Section title="Records" items={records} />
             <Section title="Care Plans" items={carePlans} />
-            <Section title="Tasks" items={tasks} />
+            <TasksSection tasks={tasks} />
             <Section title="Logs" items={logs} />
           </>
         ) : null}
@@ -221,6 +221,83 @@ function Section({ title, items }) {
               >
                 {JSON.stringify(item, null, 2)}
               </pre>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TasksSection({ tasks }) {
+  return (
+    <div style={{ marginTop: "24px" }}>
+      <h2 style={{ color: "var(--primary-dark)" }}>
+        Tasks
+      </h2>
+
+      {!tasks?.length ? (
+        <div style={styles.emptyBox}>
+          No tasks available.
+        </div>
+      ) : (
+        <div style={{ display: "grid", gap: "12px", marginTop: "12px" }}>
+          {tasks.map((task) => (
+            <div key={task._id} style={styles.itemBox}>
+
+              <p style={styles.infoText}>
+                <strong>ID:</strong> {task._id}
+              </p>
+
+              <p style={styles.infoText}>
+                <strong>Title:</strong> {task.title}
+              </p>
+
+              <p style={styles.infoText}>
+                <strong>Description:</strong> {task.description}
+              </p>
+
+              <p style={styles.infoText}>
+                <strong>Due Date:</strong>{" "}
+                {task.dueDate
+                  ? new Date(task.dueDate).toLocaleDateString()
+                  : "-"}
+              </p>
+
+              <p style={styles.infoText}>
+                <strong>Priority:</strong> {task.priority}
+              </p>
+
+              <p style={styles.infoText}>
+                <strong>Status:</strong> {task.status}
+              </p>
+
+              <p style={styles.infoText}>
+                <strong>Patient ID:</strong> {task.patient}
+              </p>
+
+              <p style={styles.infoText}>
+                <strong>Assignee ID:</strong> {task.assignee}
+              </p>
+
+              <p style={styles.infoText}>
+                <strong>Created:</strong>{" "}
+                {task.created_at
+                  ? new Date(task.created_at).toLocaleDateString()
+                  : "-"}
+              </p>
+
+              <p style={styles.infoText}>
+                <strong>Updated:</strong>{" "}
+                {task.updated_at
+                  ? new Date(task.updated_at).toLocaleDateString()
+                  : "-"}
+              </p>
+
+              <p style={styles.infoText}>
+                <strong>Version:</strong> {task.__v}
+              </p>
+
             </div>
           ))}
         </div>

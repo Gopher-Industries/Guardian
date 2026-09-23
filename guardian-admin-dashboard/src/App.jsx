@@ -18,6 +18,8 @@ import StatusPage from "./pages/StatusPage";
 import PendingApprovalsPage from "./pages/PendingApprovalsPage";
 import RegisterPage from "./pages/RegisterPage";
 import "./App.css";
+import EmotionRecognitionPage from "./pages/EmotionRecognitionPage";
+
 
 function RequireAuth({ children }) {
   const token = getAuthToken();
@@ -104,6 +106,14 @@ export default function App() {
           element={
             <RequireRole allowed={["admin", "doctor", "nurse"]}>
               <SupportTicketPage />
+            </RequireRole>
+          }
+        />
+        <Route
+          path="emotion-recognition"
+          element={
+            <RequireRole allowed={["admin", "doctor", "nurse", "caretaker"]}>
+              <EmotionRecognitionPage />
             </RequireRole>
           }
         />

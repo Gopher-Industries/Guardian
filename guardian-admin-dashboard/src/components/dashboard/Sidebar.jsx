@@ -12,6 +12,7 @@ import {
   X,
   Stethoscope,
   UserCheck,
+BrainCircuit,
 } from "lucide-react";
 import Logo from "../common/Logo";
 import { ADMIN_NAV_ITEMS } from "../../utils/constants";
@@ -32,6 +33,7 @@ const iconMap = {
   settings: Settings,
   "pending-approvals": UserCheck,
   "nurse-roster": ClipboardList,
+  "emotion-recognition": BrainCircuit,
 };
 
 export default function Sidebar({
