@@ -1,10 +1,13 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+
 import LoginPage from "./pages/LoginPage";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import DashboardHome from "./pages/DashboardHome";
+
 import AdminLayout from "./layout/AdminLayout";
 import { getAuthToken, getAdminUser } from "./utils/storage";
 import StaffManagementPage from "./pages/StaffManagementPage";
+import LocationPage from "./pages/LocationPage";
 import OrgAssignmentPage from "./pages/OrgAssignmentPage";
 import PatientsPage from "./pages/PatientsPage";
 import NurseRosterPage from "./pages/NurseRosterPage";
@@ -19,8 +22,7 @@ import PendingApprovalsPage from "./pages/PendingApprovalsPage";
 import RegisterPage from "./pages/RegisterPage";
 import "./App.css";
 import EmotionRecognitionPage from "./pages/EmotionRecognitionPage";
-
-
+  
 function RequireAuth({ children }) {
   const token = getAuthToken();
   if (!token) return <Navigate to="/login" replace />;
@@ -39,7 +41,9 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
+
       <Route path="/login" element={<LoginPage />} />
+
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/register" element={<RegisterPage />} />
 
@@ -60,7 +64,16 @@ export default function App() {
               <StaffManagementPage />
             </RequireRole>
           }
+         />
+           <Route
+          path="locations"
+          element={
+            <RequireRole allowed={["admin"]}>
+              <LocationPage />
+            </RequireRole>
+          }
         />
+ 
         <Route
           path="org-assignment"
           element={
@@ -146,10 +159,7 @@ export default function App() {
 
         {/* Catches unmatched paths WITHIN /dashboard, e.g. /dashboard/staffmanagement */}
         <Route path="*" element={<StatusPage type={404} />} />
-        <Route path="task-management" element={<TaskManagementPage />} />
-        
-
-      </Route>
+           </Route>
 
       {/* Catches everything outside /dashboard entirely, e.g. /staffmanagement */}
       <Route
