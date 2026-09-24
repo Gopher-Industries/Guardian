@@ -17,6 +17,7 @@ import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
 import DoctorAssignmentsPage from "./pages/DoctorAssignmentsPage";
 import PatientOverviewPage from "./pages/PatientOverviewPage";
+import DoctorConsultationPage from "./pages/DoctorConsultationPage";
 import StatusPage from "./pages/StatusPage";
 import PendingApprovalsPage from "./pages/PendingApprovalsPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -98,6 +99,13 @@ export default function App() {
             </RequireRole>
           }
         />
+ <Route
+path="patients/:patientId/consultation" 
+element={
+  <RequireRole allowed={["admin", "doctor", "nurse"]}>
+  <DoctorConsultationPage />
+</RequireRole>}
+/>
         <Route
           path="task-management"
           element={
