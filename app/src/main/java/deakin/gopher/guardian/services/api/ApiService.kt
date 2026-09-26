@@ -7,12 +7,14 @@ import deakin.gopher.guardian.model.AdminPatientListResponse
 import deakin.gopher.guardian.model.AssignNurseRequest
 import deakin.gopher.guardian.model.BaseModel
 import deakin.gopher.guardian.model.CreatePatientLogRequest
+import deakin.gopher.guardian.model.DoctorPatientsResponse
 import deakin.gopher.guardian.model.Patient
 import deakin.gopher.guardian.model.PatientActivity
 import deakin.gopher.guardian.model.PatientLog
 import deakin.gopher.guardian.model.PatientOverviewResponse
 import deakin.gopher.guardian.model.ReassignPatientRequest
 import deakin.gopher.guardian.model.UpdatePatientRequest
+import deakin.gopher.guardian.model.login.ChangePasswordRequest
 import deakin.gopher.guardian.model.register.AuthResponse
 import deakin.gopher.guardian.model.register.NurseListResponse
 import deakin.gopher.guardian.model.register.RegisterRequest
@@ -47,22 +49,15 @@ interface ApiService {
     ): Call<AuthResponse>
 
     @FormUrlEncoded
-    @POST("auth/send-pin")
-    fun sendPin(
-        @Field("email") email: String,
-    ): Call<BaseModel>
-
-    @FormUrlEncoded
-    @POST("auth/verify-pin")
-    fun verifyPin(
-        @Field("email") email: String,
-        @Field("otp") pin: String,
-    ): Call<BaseModel>
-
-    @FormUrlEncoded
     @POST("auth/reset-password-request")
     fun requestPasswordReset(
         @Field("email") email: String,
+    ): Call<BaseModel>
+
+    @POST("auth/change-password")
+    fun changePassword(
+        @Header("Authorization") token: String,
+        @Body request: ChangePasswordRequest,
     ): Call<BaseModel>
 
     @GET("patients/assigned-patients")
@@ -188,4 +183,36 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("id") id: String,
     ): Response<BaseModel>
+
+    @GET("doctors/{doctorId}/patients")
+    suspend fun getDoctorPatients(
+        @Header("Authorization") token: String,
+        @Path("doctorId") doctorId: String,
+    ): Response<DoctorPatientsResponse>
+
+    @GET("patients/{patientId}/medications")
+    suspend fun getPatientMedications(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+    ): Response<List<deakin.gopher.guardian.model.Medication>>
+
+    @GET("tasks/assignee/{assigneeId}")
+    suspend fun getTasksByAssignee(
+        @Header("Authorization") token: String,
+        @Path("assigneeId") assigneeId: String,
+    ): Response<List<deakin.gopher.guardian.model.Task>>
+
+    @GET("tasks/patient/{patientId}")
+    suspend fun getTasksByPatient(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+    ): Response<List<deakin.gopher.guardian.model.Task>>
+
+    @Multipart
+    @PUT("tasks/{taskId}")
+    suspend fun updateTaskStatus(
+        @Header("Authorization") token: String,
+        @Path("taskId") taskId: String,
+        @Part("status") status: RequestBody,
+    ): Response<deakin.gopher.guardian.model.Task>
 }

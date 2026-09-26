@@ -11,10 +11,14 @@ import {
   ListTodo,
   X,
   Stethoscope,
+  UserCheck,
+BrainCircuit,
 } from "lucide-react";
 import Logo from "../common/Logo";
 import { ADMIN_NAV_ITEMS } from "../../utils/constants";
 import { clearAuthStorage } from "../../utils/storage";
+import { getAdminUser } from "../../utils/storage";
+
 
 
 const iconMap = {
@@ -25,9 +29,12 @@ const iconMap = {
  "doctor-assignments": Stethoscope,
   "patient-overview": ClipboardList,
   "task-management": ListTodo,
+  "logs-management": ClipboardList,
   reports: Bell,
   settings: Settings,
+  "pending-approvals": UserCheck,
   "nurse-roster": ClipboardList,
+  "emotion-recognition": BrainCircuit,
 };
 
 export default function Sidebar({
@@ -38,6 +45,10 @@ export default function Sidebar({
   onCloseMobile,
 }) {
   const navigate = useNavigate();
+
+  const role = getAdminUser()?.role;
+const visibleItems = ADMIN_NAV_ITEMS.filter((item) => item.roles.includes(role));
+
 
   const handleLogout = () => {
     clearAuthStorage();
@@ -92,7 +103,7 @@ export default function Sidebar({
         </div>
 
         <nav className="sidebar-nav">
-          {ADMIN_NAV_ITEMS.map((item) => {
+          {visibleItems.map((item) => {
             const Icon = iconMap[item.id] || LayoutDashboard;
 
             return (

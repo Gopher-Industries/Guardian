@@ -12,11 +12,16 @@ import {
   deleteNotification 
 } from "../services/notificationService";
 import { getSupportTickets } from "../services/supportTicketService";
+import { getAdminUser } from "../utils/storage";
 
 export default function AdminLayout() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1100);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+
+  // User Role
+  const user = getAdminUser();
+  const role = user?.role;
 
   // Notifications State
   const [notifications, setNotifications] = useState([]);

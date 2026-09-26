@@ -8,380 +8,367 @@
     android:layout_height="match_parent"
     tools:context="deakin.gopher.guardian.view.patient.dailyreport.DailyReportActivity">
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="393dp"
-    android:layout_height="851dp"
-    android:textAlignment="center">
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/headerCard"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="-20dp"
-        android:translationZ="-20dp"
-        app:cardBackgroundColor="@color/TG_blue"
-        app:cardCornerRadius="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/headerCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-24dp"
+            app:cardBackgroundColor="@color/TG_blue"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingTop="96dp"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/patient_daily_report"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="12dp"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/avatar_icon" />
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    tools:text="Patient" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginLeft="140dp"
-            android:layout_marginTop="135dp"
-            android:contentDescription="TODO"
-            app:srcCompat="@drawable/avatar_icon" />
+            android:id="@+id/imageView11"
+            android:layout_width="43dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="28dp"
+            android:contentDescription="@string/content_description_gopher_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/gopher_logo" />
 
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="99dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="250dp"
-            android:fontFamily="sans-serif-medium"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/menuButton11"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="24dp"
+            android:contentDescription="@string/navigation_drawer_open"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView11"
+            app:srcCompat="@drawable/menu_button" />
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="106dp"
-            android:layout_marginTop="100dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/patient_daily_report"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headerCard">
 
-    </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="24dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="32dp">
 
-    <ImageView
-        android:id="@+id/menuButton11"
-        android:layout_width="33dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
-        android:contentDescription="TODO"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/menu_button" />
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/reported_by"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="43dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="35dp"
-        android:contentDescription="TODO"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/gopher_logo" />
+                <TextView
+                    android:id="@+id/save"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/careplan_button"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="@color/white"
+                    android:textIsSelectable="true"
+                    android:textSize="14sp"
+                    tools:text="Jane Smith" />
 
-    <ScrollView
-        android:layout_width="389dp"
-        android:layout_height="519dp"
-        android:fillViewport="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headerCard">
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/report_date"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:baselineAligned="false"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="133dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/reported_by"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                    <Spinner
+                        android:id="@+id/day"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_weight="1"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:spinnerMode="dropdown" />
 
-            <TextView
-                android:id="@+id/save"
-                android:layout_width="325dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/careplan_button"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/white"
-                android:textIsSelectable="true"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView1" />
+                    <Spinner
+                        android:id="@+id/month"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:spinnerMode="dropdown" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="133dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/report_date"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/save" />
+                    <Spinner
+                        android:id="@+id/year"
+                        android:layout_width="0dp"
+                        android:layout_height="42dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:spinnerMode="dropdown" />
 
+                    <Button
+                        android:id="@+id/today_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:layout_marginStart="8dp"
+                        android:backgroundTint="@color/TG_blue"
+                        android:fontFamily="@font/poppins_bold"
+                        android:minWidth="0dp"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:singleLine="true"
+                        android:text="@string/today"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        app:cornerRadius="8dp" />
 
-            <Button
-                android:id="@+id/today_button"
-                android:layout_width="50dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="33dp"
-                android:layout_marginEnd="32dp"
-                android:backgroundTint="@color/TG_blue"
-                android:fontFamily="@font/poppins_bold"
-                android:text="@string/today"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/white"
-                android:textSize="8sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/year"
-                app:layout_constraintTop_toBottomOf="@+id/save" />
+                </LinearLayout>
 
-            <Spinner
-                android:id="@+id/day"
-                android:layout_width="90dp"
-                android:layout_height="34dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:background="@android:drawable/btn_dropdown"
-                android:paddingRight="20dp"
-                android:spinnerMode="dropdown"
-                app:layout_constraintEnd_toStartOf="@+id/month"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-black"
+                    android:labelFor="@+id/patientNnormal"
+                    android:text="@string/progress_notes"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
 
-            <Spinner
-                android:id="@+id/month"
-                android:layout_width="90dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="1dp"
-                android:background="@android:drawable/btn_dropdown"
-                android:paddingRight="20dp"
-                android:spinnerMode="dropdown"
-                app:layout_constraintEnd_toStartOf="@+id/year"
-                app:layout_constraintStart_toEndOf="@+id/day"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                <EditText
+                    android:id="@+id/patientNnormal"
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_marginTop="8dp"
+                    android:autofillHints=""
+                    android:background="@drawable/rectangle"
+                    android:gravity="top|start"
+                    android:hint="@string/patient_normal_daily_visit"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:padding="12dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black_overlay"
+                    android:textSize="14sp" />
 
-            <Spinner
-                android:id="@+id/year"
-                android:layout_width="90dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="12dp"
-                android:background="@android:drawable/btn_dropdown"
-                android:paddingRight="20dp"
-                android:spinnerMode="dropdown"
-                app:layout_constraintEnd_toStartOf="@+id/today_button"
-                app:layout_constraintStart_toEndOf="@+id/month"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="0dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="164dp"
-                android:layout_marginBottom="111dp"
-                android:fontFamily="sans-serif-black"
-                android:text="@string/progress_notes"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView4"
-                app:layout_constraintEnd_toEndOf="@+id/textView4"
-                app:layout_constraintStart_toStartOf="@+id/textView4"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/patientNnormal"
-                android:layout_width="330dp"
-                android:layout_height="94dp"
-                android:layout_marginTop="4dp"
-                android:autofillHints=""
-                android:background="@drawable/rectangle"
-                android:gravity="left"
-                android:inputType="text"
-                android:text="@string/patient_normal_daily_visit"
-                android:textColor="@color/black_overlay"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
-      
                 <TextView
                     android:id="@+id/textView4"
-                    android:layout_width="133dp"
-                    android:layout_height="34dp"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="sans-serif-black"
                     android:text="@string/alert_word"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@+id/urgentMedicalAttentionTextView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                    android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/urgentMedicalAttentionTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="7dp"
-                    android:background="@drawable/button_shadow_bg"
-                    android:gravity="center"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:text="@string/urgent_medical_attention"
-                    android:textColor="#595656"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/requiresHospitalisationTextView"
-                    app:layout_constraintEnd_toEndOf="@+id/requiresHospitalisationTextView"
-                    app:layout_constraintStart_toStartOf="@+id/requiresHospitalisationTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:baselineAligned="false"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
-                    android:contentDescription="TODO"
-                    android:src="@drawable/urgent_patient_status"
-                    app:layout_constraintBottom_toBottomOf="@+id/urgentMedicalAttentionTextView"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView2"
-                    app:layout_constraintStart_toStartOf="@+id/imageView2"
-                    app:layout_constraintTop_toTopOf="@+id/urgentMedicalAttentionTextView" />
+                    <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/urgent_patient_status" />
 
-                <TextView
-                    android:id="@+id/requiresHospitalisationTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="9dp"
-                    android:background="@drawable/button_shadow_bg"
-                    android:gravity="center"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:text="@string/requires_hospitalisation"
-                    android:textColor="#595656"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/notApplicableTextView"
-                    app:layout_constraintEnd_toEndOf="@+id/notApplicableTextView"
-                    app:layout_constraintStart_toStartOf="@+id/notApplicableTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/urgentMedicalAttentionTextView" />
+                    <TextView
+                        android:id="@+id/urgentMedicalAttentionTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_shadow_bg"
+                        android:gravity="center_vertical"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="@string/urgent_medical_attention"
+                        android:textColor="@color/default_text"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
-                    android:contentDescription="TODO"
-                    android:src="@drawable/hospital_patient_status"
-                    app:layout_constraintBottom_toBottomOf="@+id/requiresHospitalisationTextView"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView3"
-                    app:layout_constraintStart_toStartOf="@+id/imageView3" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/notApplicableTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginBottom="9dp"
-                    android:background="@drawable/button_shadow_bg"
-                    android:gravity="center"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:text="@string/not_applicable"
-                    android:textColor="#595656"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/requiresHourlyAttentionTextView"
-                    app:layout_constraintEnd_toEndOf="@+id/requiresHourlyAttentionTextView"
-                    app:layout_constraintStart_toStartOf="@+id/requiresHourlyAttentionTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/requiresHospitalisationTextView" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:baselineAligned="false"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
-                    android:contentDescription="TODO"
-                    android:src="@drawable/forbidden_patient_status"
-                    app:layout_constraintBottom_toBottomOf="@+id/notApplicableTextView"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView4"
-                    app:layout_constraintStart_toStartOf="@+id/imageView4"
-                    app:layout_constraintTop_toTopOf="@+id/notApplicableTextView" />
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/hospital_patient_status" />
 
-                <TextView
-                    android:id="@+id/requiresHourlyAttentionTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="22dp"
-                    android:layout_marginEnd="22dp"
-                    android:layout_marginBottom="14dp"
-                    android:background="@drawable/button_shadow_bg"
-                    android:gravity="center"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:text="@string/requires_hourly_attention"
-                    android:textColor="#595656"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/loginBtn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/notApplicableTextView" />
+                    <TextView
+                        android:id="@+id/requiresHospitalisationTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_shadow_bg"
+                        android:gravity="center_vertical"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="@string/requires_hospitalisation"
+                        android:textColor="@color/default_text"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="40dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="14dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
-                    android:contentDescription="TODO"
-                    android:src="@drawable/time_patient_status"
-                    app:layout_constraintBottom_toBottomOf="@+id/requiresHourlyAttentionTextView"
-                    app:layout_constraintEnd_toStartOf="@+id/loginBtn"
-                    app:layout_constraintStart_toStartOf="@+id/requiresHourlyAttentionTextView"
-                    app:layout_constraintTop_toTopOf="@+id/requiresHourlyAttentionTextView" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:baselineAligned="false"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/forbidden_patient_status" />
+
+                    <TextView
+                        android:id="@+id/notApplicableTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_shadow_bg"
+                        android:gravity="center_vertical"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="@string/not_applicable"
+                        android:textColor="@color/default_text"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:baselineAligned="false"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/time_patient_status" />
+
+                    <TextView
+                        android:id="@+id/requiresHourlyAttentionTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_shadow_bg"
+                        android:gravity="center_vertical"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:text="@string/requires_hourly_attention"
+                        android:textColor="@color/default_text"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/loginBtn"
                     android:layout_width="200dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="78dp"
-                    android:layout_marginEnd="78dp"
-                    android:layout_marginBottom="40dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="28dp"
                     android:backgroundTint="@color/TG_blue"
                     android:fontFamily="@font/poppins_bold"
                     android:text="@string/submit_caps"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    app:cornerRadius="24dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/day"
-                    app:layout_constraintTop_toBottomOf="@+id/requiresHourlyAttentionTextView" />
+                    app:cornerRadius="24dp" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
         </ScrollView>
 
@@ -390,4 +377,5 @@
     <include
         android:id="@id/nav_view"
         layout="@layout/navigation_view" />
+
 </androidx.drawerlayout.widget.DrawerLayout>
