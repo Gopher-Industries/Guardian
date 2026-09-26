@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   getPatients,
   createPatient,
   deactivatePatient,
 } from '../services/patientService';
+import { getStaff } from '../services/staffService';
+import Dropdown from '../components/common/Dropdown';
 
 const initialFormData = {
   fullname: '',
@@ -27,6 +30,8 @@ function formatDate(dateString) {
 }
 
 function PatientsPage() {
+  const navigate = useNavigate();
+
   const [patients, setPatients] = useState([]);
   const [pagination, setPagination] = useState({
     total: 0,
@@ -42,6 +47,9 @@ function PatientsPage() {
   const [successMessage, setSuccessMessage] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
+  const [doctorOptions, setDoctorOptions] = useState([]);
+  const [nurseOptions, setNurseOptions] = useState([]);
+  const [caretakerOptions, setCaretakerOptions] = useState([]);
 
   const loadPatients = async (page = 1) => {
     try {
@@ -51,6 +59,7 @@ function PatientsPage() {
       const data = await getPatients({ page, limit: 10 });
 
       setPatients(data?.patients || []);
+
       setPagination(
         data?.pagination || {
           total: 0,
@@ -73,6 +82,40 @@ function PatientsPage() {
 
   useEffect(() => {
     loadPatients();
+  }, []);
+
+  useEffect(() => {
+    const loadStaffOptions = async () => {
+      try {
+        const doctorsData = await getStaff({ role: 'doctor', limit: 100 });
+        setDoctorOptions(
+          (doctorsData.staff ?? []).map((s) => ({
+            value: s._id,
+            label: s.fullname,
+          }))
+        );
+
+        const nursesData = await getStaff({ role: 'nurse', limit: 100 });
+        setNurseOptions(
+          (nursesData.staff ?? []).map((s) => ({
+            value: s._id,
+            label: s.fullname,
+          }))
+        );
+
+        const caretakersData = await getStaff({ role: 'caretaker', limit: 100 });
+        setCaretakerOptions(
+          (caretakersData.staff ?? []).map((s) => ({
+            value: s._id,
+            label: s.fullname,
+          }))
+        );
+      } catch (err) {
+        console.error('Failed to load staff options:', err);
+      }
+    };
+
+    loadStaffOptions();
   }, []);
 
   const handleInputChange = (e) => {
@@ -168,7 +211,10 @@ function PatientsPage() {
 
       const response = await deactivatePatient(id);
 
-      setSuccessMessage(response?.message || 'Patient deactivated successfully.');
+      setSuccessMessage(
+        response?.message || 'Patient deactivated successfully.'
+      );
+
       await loadPatients(pagination.page || 1);
     } catch (err) {
       console.error('Deactivate patient error:', err);
@@ -217,8 +263,21 @@ function PatientsPage() {
           }}
         >
           <div>
-            <h2 style={{ margin: 0, color: 'var(--primary-dark)' }}>Patients</h2>
-            <p style={{ marginTop: '6px', color: 'var(--text-muted)' }}>
+            <h2
+              style={{
+                margin: 0,
+                color: 'var(--primary-dark)',
+              }}
+            >
+              Patients
+            </h2>
+
+            <p
+              style={{
+                marginTop: '6px',
+                color: 'var(--text-muted)',
+              }}
+            >
               Manage patients under your organisation.
             </p>
           </div>
@@ -231,7 +290,8 @@ function PatientsPage() {
               padding: '10px 16px',
               fontWeight: 600,
               cursor: 'pointer',
-              background: 'linear-gradient(135deg, var(--primary), #3d92bf)',
+              background:
+                'linear-gradient(135deg, var(--primary), #3d92bf)',
               color: '#ffffff',
               boxShadow: 'var(--shadow-sm)',
             }}
@@ -270,14 +330,27 @@ function PatientsPage() {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+                gridTemplateColumns:
+                  'repeat(auto-fit, minmax(220px, 1fr))',
                 gap: '16px',
               }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                }}
+              >
+                <label
+                  style={{
+                    fontWeight: 600,
+                    color: 'var(--text)',
+                  }}
+                >
                   Full Name
                 </label>
+
                 <input
                   type="text"
                   name="fullname"
@@ -296,10 +369,22 @@ function PatientsPage() {
                 />
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                }}
+              >
+                <label
+                  style={{
+                    fontWeight: 600,
+                    color: 'var(--text)',
+                  }}
+                >
                   Gender
                 </label>
+
                 <select
                   name="gender"
                   value={formData.gender}
@@ -321,15 +406,28 @@ function PatientsPage() {
                 </select>
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                }}
+              >
+                <label
+                  style={{
+                    fontWeight: 600,
+                    color: 'var(--text)',
+                  }}
+                >
                   Date of Birth
                 </label>
+
                 <input
                   type="date"
                   name="dateOfBirth"
                   value={formData.dateOfBirth}
                   onChange={handleInputChange}
+                  max={new Date().toISOString().split('T')[0]}
                   style={{
                     height: '44px',
                     padding: '0 14px',
@@ -342,10 +440,22 @@ function PatientsPage() {
                 />
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                }}
+              >
+                <label
+                  style={{
+                    fontWeight: 600,
+                    color: 'var(--text)',
+                  }}
+                >
                   Caretaker ID
                 </label>
+
                 <input
                   type="text"
                   name="caretakerId"
@@ -364,10 +474,22 @@ function PatientsPage() {
                 />
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                }}
+              >
+                <label
+                  style={{
+                    fontWeight: 600,
+                    color: 'var(--text)',
+                  }}
+                >
                   Nurse ID
                 </label>
+
                 <input
                   type="text"
                   name="nurseId"
@@ -386,10 +508,22 @@ function PatientsPage() {
                 />
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                }}
+              >
+                <label
+                  style={{
+                    fontWeight: 600,
+                    color: 'var(--text)',
+                  }}
+                >
                   Doctor ID
                 </label>
+
                 <input
                   type="text"
                   name="doctorId"
@@ -408,10 +542,57 @@ function PatientsPage() {
                 />
               </div>
 
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                }}
+              >
+                <label
+                  style={{
+                    fontWeight: 600,
+                    color: 'var(--text)',
+                  }}
+                >
+              <Dropdown
+                label="Caretaker"
+                name="caretakerId"
+                value={formData.caretakerId}
+                onChange={handleInputChange}
+                options={caretakerOptions}
+                placeholder="Select caretaker"
+                searchable
+                searchPlaceholder="Search caretakers..."
+              />
+
+              <Dropdown
+                label="Nurse"
+                name="nurseId"
+                value={formData.nurseId}
+                onChange={handleInputChange}
+                options={nurseOptions}
+                placeholder="Select nurse"
+                searchable
+                searchPlaceholder="Search nurses..."
+              />
+
+              <Dropdown
+                label="Doctor"
+                name="doctorId"
+                value={formData.doctorId}
+                onChange={handleInputChange}
+                options={doctorOptions}
+                placeholder="Select doctor"
+                searchable
+                searchPlaceholder="Search doctors..."
+              />
+              
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <label style={{ fontWeight: 600, color: 'var(--text)' }}>
                   Image URL
                 </label>
+
                 <input
                   type="text"
                   name="image"
@@ -430,10 +611,22 @@ function PatientsPage() {
                 />
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: 600, color: 'var(--text)' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                }}
+              >
+                <label
+                  style={{
+                    fontWeight: 600,
+                    color: 'var(--text)',
+                  }}
+                >
                   Date of Admitting
                 </label>
+
                 <input
                   type="date"
                   name="dateOfAdmitting"
@@ -460,9 +653,15 @@ function PatientsPage() {
                 marginTop: '16px',
               }}
             >
-              <label style={{ fontWeight: 600, color: 'var(--text)' }}>
+              <label
+                style={{
+                  fontWeight: 600,
+                  color: 'var(--text)',
+                }}
+              >
                 Description
               </label>
+
               <textarea
                 name="description"
                 value={formData.description}
@@ -521,7 +720,8 @@ function PatientsPage() {
                   padding: '10px 16px',
                   fontWeight: 600,
                   cursor: submitting ? 'not-allowed' : 'pointer',
-                  background: 'linear-gradient(135deg, var(--primary), #3d92bf)',
+                  background:
+                    'linear-gradient(135deg, var(--primary), #3d92bf)',
                   color: '#ffffff',
                   opacity: submitting ? 0.7 : 1,
                 }}
@@ -621,6 +821,7 @@ function PatientsPage() {
                       >
                         {patient.fullname || 'N/A'}
                       </td>
+
                       <td
                         style={{
                           padding: '14px 12px',
@@ -631,6 +832,7 @@ function PatientsPage() {
                       >
                         {patient.gender || 'N/A'}
                       </td>
+
                       <td
                         style={{
                           padding: '14px 12px',
@@ -640,6 +842,7 @@ function PatientsPage() {
                       >
                         {formatDate(patient.dateOfBirth)}
                       </td>
+
                       <td
                         style={{
                           padding: '14px 12px',
@@ -649,6 +852,7 @@ function PatientsPage() {
                       >
                         {patient.age ?? 'N/A'}
                       </td>
+
                       <td
                         style={{
                           padding: '14px 12px',
@@ -658,6 +862,7 @@ function PatientsPage() {
                       >
                         {patient.caretaker?.fullname || 'N/A'}
                       </td>
+
                       <td
                         style={{
                           padding: '14px 12px',
@@ -667,6 +872,7 @@ function PatientsPage() {
                       >
                         {patient.assignedDoctor?.fullname || 'N/A'}
                       </td>
+
                       <td
                         style={{
                           padding: '14px 12px',
@@ -680,6 +886,7 @@ function PatientsPage() {
                               .join(', ')
                           : 'N/A'}
                       </td>
+
                       <td
                         style={{
                           padding: '14px 12px',
@@ -687,8 +894,35 @@ function PatientsPage() {
                         }}
                       >
                         <button
-                          onClick={() => handleDeactivate(patient._id)}
-                          disabled={deactivatingId === patient._id}
+                          onClick={() =>
+                            navigate(
+                              `/dashboard/patients/${patient._id}/consultation`,
+                              {
+                                state: { patient },
+                              }
+                            )
+                          }
+                          style={{
+                            border: 'none',
+                            borderRadius: '12px',
+                            padding: '10px 14px',
+                            fontWeight: 600,
+                            cursor: 'pointer',
+                            background: 'var(--surface-accent-3)',
+                            color: 'var(--primary-dark)',
+                            marginRight: '8px',
+                          }}
+                        >
+                          Consultation
+                        </button>
+
+                        <button
+                          onClick={() =>
+                            handleDeactivate(patient._id)
+                          }
+                          disabled={
+                            deactivatingId === patient._id
+                          }
                           style={{
                             border: 'none',
                             borderRadius: '12px',
@@ -698,9 +932,13 @@ function PatientsPage() {
                               deactivatingId === patient._id
                                 ? 'not-allowed'
                                 : 'pointer',
-                            background: 'rgba(228, 98, 111, 0.12)',
+                            background:
+                              'rgba(228, 98, 111, 0.12)',
                             color: 'var(--danger)',
-                            opacity: deactivatingId === patient._id ? 0.7 : 1,
+                            opacity:
+                              deactivatingId === patient._id
+                                ? 0.7
+                                : 1,
                           }}
                         >
                           {deactivatingId === patient._id
@@ -724,12 +962,22 @@ function PatientsPage() {
                 flexWrap: 'wrap',
               }}
             >
-              <div style={{ color: 'var(--text-muted)', fontSize: '14px' }}>
+              <div
+                style={{
+                  color: 'var(--text-muted)',
+                  fontSize: '14px',
+                }}
+              >
                 Total Patients: {pagination.total || 0} | Page{' '}
                 {pagination.page || 1} of {pagination.pages || 1}
               </div>
 
-              <div style={{ display: 'flex', gap: '10px' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '10px',
+                }}
+              >
                 <button
                   onClick={handlePreviousPage}
                   disabled={pagination.page <= 1}
@@ -738,10 +986,14 @@ function PatientsPage() {
                     borderRadius: '12px',
                     padding: '10px 14px',
                     fontWeight: 600,
-                    cursor: pagination.page <= 1 ? 'not-allowed' : 'pointer',
+                    cursor:
+                      pagination.page <= 1
+                        ? 'not-allowed'
+                        : 'pointer',
                     background: 'var(--surface-accent-3)',
                     color: 'var(--primary-dark)',
-                    opacity: pagination.page <= 1 ? 0.6 : 1,
+                    opacity:
+                      pagination.page <= 1 ? 0.6 : 1,
                   }}
                 >
                   Previous
@@ -749,7 +1001,9 @@ function PatientsPage() {
 
                 <button
                   onClick={handleNextPage}
-                  disabled={pagination.page >= pagination.pages}
+                  disabled={
+                    pagination.page >= pagination.pages
+                  }
                   style={{
                     border: 'none',
                     borderRadius: '12px',
@@ -759,9 +1013,13 @@ function PatientsPage() {
                       pagination.page >= pagination.pages
                         ? 'not-allowed'
                         : 'pointer',
-                    background: 'linear-gradient(135deg, var(--primary), #3d92bf)',
+                    background:
+                      'linear-gradient(135deg, var(--primary), #3d92bf)',
                     color: '#ffffff',
-                    opacity: pagination.page >= pagination.pages ? 0.6 : 1,
+                    opacity:
+                      pagination.page >= pagination.pages
+                        ? 0.6
+                        : 1,
                   }}
                 >
                   Next

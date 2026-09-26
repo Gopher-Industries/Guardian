@@ -4,66 +4,49 @@ import { Check, X, Clock, UserCheck } from "lucide-react";
 import Loader from "../components/common/Loader";
 import ConfirmationModal from "../components/common/ConfirmationModal";
 import Modal from "../components/common/Modal";
-
-// TEMP MOCK — Swap for real API call once backend is ready
-const MOCK_PENDING_USERS = [
-  {
-    _id: "6a3f79a95974c96e54527287",
-    fullname: "Joe Doe",
-    email: "joe.doe@guardianmonitor.com",
-    role: { name: "caretaker" },
-    approvalStatus: "pending",
-    created_at: "2026-06-27T07:20:09.968Z",
-  },
-  {
-    _id: "6a3f79a95974c96e54527288",
-    fullname: "Amara Singh",
-    email: "amara.singh@guardianmonitor.com",
-    role: { name: "doctor" },
-    approvalStatus: "pending",
-    created_at: "2026-07-01T09:12:00.000Z",
-  },
-  {
-    _id: "6a3f79a95974c96e54527289",
-    fullname: "Leo Martins",
-    email: "leo.martins@guardianmonitor.com",
-    role: { name: "nurse" },
-    approvalStatus: "pending",
-    created_at: "2026-07-15T14:45:00.000Z",
-  },
-];
+import { getPendingStaff, approveStaff, rejectStaff } from "../services/staffService";
 
 export default function PendingApprovalsPage() {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const [confirmModal, setConfirmModal] = useState({
-    isOpen: false,
-    request: null,
-  });
-  const [rejectModal, setRejectModal] = useState({
-    isOpen: false,
-    request: null,
-  });
+  const [confirmModal, setConfirmModal] = useState({ isOpen: false, request: null });
+  const [rejectModal, setRejectModal] = useState({ isOpen: false, request: null });
   const [rejectionReason, setRejectionReason] = useState("");
 
+  const fetchPending = async () => {
+  setLoading(true);
+  setError(null);
+  try {
+    const data = await getPendingStaff();
+    console.log("PENDING STAFF RAW RESPONSE:", data); // TEMP — remove after checking
+    setRequests(Array.isArray(data) ? data : data?.staff || data?.data || []);
+  } catch (err) {
+    console.error("Failed to fetch pending staff", err);
+    setError("Couldn't load pending requests. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
   useEffect(() => {
-    // TEMP: mock fetch. Replace with API once ready
-    const timer = setTimeout(() => {
-      setRequests(MOCK_PENDING_USERS);
-      setLoading(false);
-    }, 400);
-    return () => clearTimeout(timer);
+    fetchPending();
   }, []);
 
   const handleApprove = (request) => {
     setConfirmModal({ isOpen: true, request });
   };
 
-  const confirmApprove = () => {
+  const confirmApprove = async () => {
     const { request } = confirmModal;
-    // TEMP: replace with real call, e.g. approveUser(request._id)
-    setRequests((prev) => prev.filter((r) => r._id !== request._id));
+    try {
+      await approveStaff(request._id);
+      setRequests((prev) => prev.filter((r) => r._id !== request._id));
+    } catch (err) {
+      console.error("Failed to approve staff", err);
+      // TODO: surface a toast error here
+    }
     setConfirmModal({ isOpen: false, request: null });
   };
 
@@ -72,10 +55,15 @@ export default function PendingApprovalsPage() {
     setRejectModal({ isOpen: true, request });
   };
 
-  const confirmReject = () => {
+  const confirmReject = async () => {
     const { request } = rejectModal;
-    // TEMP: replace with real call
-    setRequests((prev) => prev.filter((r) => r._id !== request._id));
+    try {
+      await rejectStaff(request._id, rejectionReason);
+      setRequests((prev) => prev.filter((r) => r._id !== request._id));
+    } catch (err) {
+      console.error("Failed to reject staff", err);
+      // TODO: surface a toast error here
+    }
     setRejectModal({ isOpen: false, request: null });
     setRejectionReason("");
   };
@@ -107,6 +95,13 @@ export default function PendingApprovalsPage() {
       >
         {loading ? (
           <Loader />
+        ) : error ? (
+          <div className="empty-state">
+            <p>{error}</p>
+            <button className="ui-button secondary" onClick={fetchPending}>
+              Retry
+            </button>
+          </div>
         ) : requests.length === 0 ? (
           <div className="empty-state">
             <UserCheck size={40} />
@@ -126,40 +121,24 @@ export default function PendingApprovalsPage() {
             <tbody>
               {requests.map((req) => (
                 <tr key={req._id}>
-                  <td>{req.fullname}</td>
+                  <td>{req.name}</td>
                   <td>{req.email}</td>
                   <td>
-                    <span className="type-tag color-info">
-                      {req.role?.name}
-                    </span>
+                    <span className="type-tag color-info">{req.role?.name || req.role}</span>
                   </td>
                   <td>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "16px",
-                        color: "var(--text-muted)",
-                        fontSize: "0.85rem",
-                      }}
-                    >
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px", color: "var(--text-muted)", fontSize: "0.85rem" }}>
                       <Clock size={14} />
                       {new Date(req.created_at).toLocaleDateString()}
                     </div>
                   </td>
                   <td>
-                    <div style={{ display: "flex", gap: "18px" }}>
-                      <button
-                        className="ui-button primary"
-                        onClick={() => handleApprove(req)}
-                      >
+                    <div style={{ display: "flex", gap: "8px" }}>
+                      <button type="button" className="ui-button primary" onClick={() => handleApprove(req)}>
                         <Check size={16} />
                         Approve
                       </button>
-                      <button
-                        className="ui-button danger-btn"
-                        onClick={() => handleRejectOpen(req)}
-                      >
+                      <button type="button" className="ui-button danger-btn" onClick={() => handleRejectOpen(req)}>
                         <X size={16} />
                         Reject
                       </button>
@@ -177,7 +156,7 @@ export default function PendingApprovalsPage() {
         onClose={() => setConfirmModal({ isOpen: false, request: null })}
         onConfirm={confirmApprove}
         title="Approve Account Request"
-        message={`Approve ${confirmModal.request?.fullname}'s account as ${confirmModal.request?.role?.name}?`}
+        message={`Approve ${confirmModal.request?.name}'s account as ${confirmModal.request?.role?.name || confirmModal.request?.role}?`}
         confirmText="Approve"
         type="success"
       />
@@ -188,8 +167,7 @@ export default function PendingApprovalsPage() {
         title="Reject Account Request"
       >
         <p className="modal-subtitle" style={{ marginBottom: "12px" }}>
-          Please provide a reason for rejecting {rejectModal.request?.fullname}
-          's request.
+          Please provide a reason for rejecting {rejectModal.request?.name}'s request.
         </p>
         <textarea
           className="ui-textarea"
@@ -199,20 +177,8 @@ export default function PendingApprovalsPage() {
           placeholder="e.g. Unable to verify employment details"
           style={{ width: "100%" }}
         />
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            gap: "8px",
-            marginTop: "20px",
-          }}
-        >
-          <button
-            type="button"
-            className="ui-button secondary"
-            onClick={() => setRejectModal({ isOpen: false, request: null })}
-          >
+        <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px", marginTop: "20px" }}>
+          <button type="button" className="ui-button secondary" onClick={() => setRejectModal({ isOpen: false, request: null })}>
             Cancel
           </button>
           <button

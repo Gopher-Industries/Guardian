@@ -25,6 +25,13 @@ export const ADMIN_NAV_ITEMS = [
     path: "/dashboard/task-management",
     roles: ["admin", "doctor", "nurse","caretaker"]
   },
+
+  {
+    id: "logs-management",
+    label: "Logs Management",
+    path: "/dashboard/logs-management",
+  },
+
   {
   id: "doctor-assignments",
   label: "Doctor Assignments",
@@ -48,7 +55,12 @@ export const ADMIN_NAV_ITEMS = [
   roles: ["admin"]
   },
   { id: "settings", label: "Settings", path: "/dashboard/settings", roles: ["admin", "doctor", "nurse","caretaker"] },
-  
+  {
+    id: "emotion-recognition",
+    label: "Emotion Recognition",
+    path: "/dashboard/emotion-recognition",
+    roles: ["admin", "doctor", "nurse", "caretaker"],
+  },
 ];
 export const DASHBOARD_STATS = [
   {

@@ -13,6 +13,7 @@ import {
   Stethoscope,
   UserCheck,
   Mail,
+BrainCircuit,
 } from "lucide-react";
 import Logo from "../common/Logo";
 import { ADMIN_NAV_ITEMS } from "../../utils/constants";
@@ -27,11 +28,13 @@ const iconMap = {
   "doctor-assignments": Stethoscope,
   "patient-overview": ClipboardList,
   "task-management": ListTodo,
+  "logs-management": ClipboardList,
   reports: Bell,
   "email-templates": Mail,
   settings: Settings,
   "pending-approvals": UserCheck,
   "nurse-roster": ClipboardList,
+  "emotion-recognition": BrainCircuit,
 };
 
 export default function Sidebar({
