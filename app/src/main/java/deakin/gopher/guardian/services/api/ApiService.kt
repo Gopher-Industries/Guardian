@@ -195,4 +195,24 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("patientId") patientId: String,
     ): Response<List<deakin.gopher.guardian.model.Medication>>
+
+    @GET("tasks/assignee/{assigneeId}")
+    suspend fun getTasksByAssignee(
+        @Header("Authorization") token: String,
+        @Path("assigneeId") assigneeId: String,
+    ): Response<List<deakin.gopher.guardian.model.Task>>
+
+    @GET("tasks/patient/{patientId}")
+    suspend fun getTasksByPatient(
+        @Header("Authorization") token: String,
+        @Path("patientId") patientId: String,
+    ): Response<List<deakin.gopher.guardian.model.Task>>
+
+    @Multipart
+    @PUT("tasks/{taskId}")
+    suspend fun updateTaskStatus(
+        @Header("Authorization") token: String,
+        @Path("taskId") taskId: String,
+        @Part("status") status: RequestBody,
+    ): Response<deakin.gopher.guardian.model.Task>
 }
