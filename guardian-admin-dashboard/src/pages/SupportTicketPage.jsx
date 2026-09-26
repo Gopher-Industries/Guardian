@@ -12,23 +12,15 @@ import {
   updateSupportTicket,
   addSupportTicketAction,
 } from '../services/supportTicketService';
-import {
-  TICKET_ISSUE_TYPE_OPTIONS,
-  TICKET_PRIORITY_OPTIONS,
-  TICKET_STATUS_OPTIONS,
-} from '../utils/constants';
+import { TICKET_STATUS_OPTIONS } from '../utils/constants';
 
 const emptyCreateForm = {
   subject: '',
   description: '',
-  issue_type: '',
-  priority: '',
 };
 const emptyCreateErrors = {
   subject: '',
   description: '',
-  issue_type: '',
-  priority: '',
 };
 const emptyEditForm = {
   status: '',
@@ -255,8 +247,6 @@ export default function SupportTicketPage() {
     const errs = { ...emptyCreateErrors };
     if (!fields.subject.trim()) errs.subject = 'Subject is required.';
     if (!fields.description.trim()) errs.description = 'Description is required.';
-    if (!fields.issue_type) errs.issue_type = 'Issue type is required.';
-    if (!fields.priority) errs.priority = 'Priority is required.';
     return errs;
   }
 
@@ -286,8 +276,6 @@ export default function SupportTicketPage() {
       await createSupportTicket({
         subject: createForm.subject.trim(),
         description: createForm.description.trim(),
-        issue_type: createForm.issue_type,
-        priority: createForm.priority,
       });
       handleCreateClose();
       setSuccessMessage('Support ticket has been successfully created.');
@@ -579,26 +567,6 @@ export default function SupportTicketPage() {
           placeholder='Brief summary of the issue'
           error={createErrors.subject}
         />
-        <div className='ticket-modal-row'>
-          <Dropdown
-            label='Issue Type'
-            name='issue_type'
-            value={createForm.issue_type}
-            onChange={handleCreateChange}
-            options={TICKET_ISSUE_TYPE_OPTIONS}
-            placeholder='Select issue type'
-            error={createErrors.issue_type}
-          />
-          <Dropdown
-            label='Priority'
-            name='priority'
-            value={createForm.priority}
-            onChange={handleCreateChange}
-            options={TICKET_PRIORITY_OPTIONS}
-            placeholder='Select priority'
-            error={createErrors.priority}
-          />
-        </div>
         <label className='field'>
           <span className='field-label'>Description</span>
           <textarea
