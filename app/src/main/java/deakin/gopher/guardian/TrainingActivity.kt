@@ -2,11 +2,16 @@ package deakin.gopher.guardian
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.navigation.NavigationView
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper
 
 class TrainingActivity : AppCompatActivity() {
 
@@ -16,84 +21,70 @@ class TrainingActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_training2)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { view, insets ->
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        val toolbar: MaterialToolbar = findViewById(R.id.training_toolbar)
 
-            val systemBars =
-                insets.getInsets(WindowInsetsCompat.Type.systemBars())
+        setSupportActionBar(toolbar)
+
+        DrawerNavigationHelper.bindStandardDrawer(
+            this,
+            drawerLayout,
+            navigationView,
+            toolbar,
+        )
+
+        ViewCompat.setOnApplyWindowInsetsListener(
+            findViewById(R.id.main),
+        ) { view, insets ->
+            val systemBars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars(),
+            )
 
             view.setPadding(
                 systemBars.left,
                 systemBars.top,
                 systemBars.right,
-                systemBars.bottom
+                systemBars.bottom,
             )
-
             insets
         }
 
-        val btnBack = findViewById<TextView>(R.id.btnBack)
-
-        val btnModule1 = findViewById<TextView>(R.id.btnModule1)
-        val btnModule2 = findViewById<TextView>(R.id.btnModule2)
-        val btnModule3 = findViewById<TextView>(R.id.btnModule3)
-
-        val cardModule1 = findViewById<android.view.View>(R.id.cardModule1)
-        val cardModule2 = findViewById<android.view.View>(R.id.cardModule2)
-        val cardModule3 = findViewById<android.view.View>(R.id.cardModule3)
-
-        btnBack.setOnClickListener {
+        findViewById<TextView>(R.id.btnBack).setOnClickListener {
             finish()
         }
 
-        btnModule1.setOnClickListener {
+        findViewById<TextView>(R.id.btnModule1).setOnClickListener {
+            openModule1()
+        }
+        findViewById<View>(R.id.cardModule1).setOnClickListener {
             openModule1()
         }
 
-        cardModule1.setOnClickListener {
-            openModule1()
+        findViewById<TextView>(R.id.btnModule2).setOnClickListener {
+            openModule2()
         }
-
-        btnModule2.setOnClickListener {
+        findViewById<View>(R.id.cardModule2).setOnClickListener {
             openModule2()
         }
 
-        cardModule2.setOnClickListener {
-            openModule2()
-        }
-
-        btnModule3.setOnClickListener {
+        findViewById<TextView>(R.id.btnModule3).setOnClickListener {
             openModule3()
         }
-
-        cardModule3.setOnClickListener {
+        findViewById<View>(R.id.cardModule3).setOnClickListener {
             openModule3()
         }
     }
 
     private fun openModule1() {
-        val intent = Intent(
-            this,
-            Module1CoursesActivity::class.java
-        )
-
-        startActivity(intent)
+        startActivity(Intent(this, Module1CoursesActivity::class.java))
     }
 
     private fun openModule2() {
-        val intent = Intent(
-            this,
-            Module2CoursesActivity::class.java
-        )
-
-        startActivity(intent)
+        startActivity(Intent(this, Module2CoursesActivity::class.java))
     }
 
     private fun openModule3() {
-        val intent = Intent(
-            this,
-            Module3CoursesActivity::class.java
-        )
-
-        startActivity(intent)
+        startActivity(Intent(this, Module3CoursesActivity::class.java))
     }
 }

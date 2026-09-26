@@ -38,3 +38,8 @@ export async function createOrganization(orgData) {
   console.log('POST create organization response:', response.data);
   return response.data;
 }
+
+export async function getPublicOrganizations() {
+  const response = await api.get("/orgs/public");
+  return response.data;
+}

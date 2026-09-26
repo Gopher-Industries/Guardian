@@ -614,3 +614,78 @@
     justify-content: center;
   }
 }
+
+/* --- Additions: sortable columns + overdue task highlighting --- */
+
+.task-sortable-th {
+  cursor: pointer;
+  user-select: none;
+}
+
+.task-sortable-th:hover {
+  background: var(--surface-soft-2, var(--surface-soft));
+}
+
+.task-th-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.task-sort-idle {
+  opacity: 0.4;
+}
+
+/* Overdue row highlighting — reuses the same red used elsewhere for
+   high-priority/danger states, kept subtle so it doesn't fight with the
+   priority/status pills already in the row. */
+.task-row-overdue {
+  background: rgba(228, 98, 111, 0.06);
+}
+
+.task-due-date-overdue {
+  color: #b03b49;
+  font-weight: 700;
+}
+
+.task-overdue-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(228, 98, 111, 0.14);
+  color: #b03b49;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+/* --- Addition: inline status dropdown in the task table --- */
+
+.task-status-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.task-status-select:hover {
+  border-color: var(--border);
+}
+
+.task-status-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.task-status-saving {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}

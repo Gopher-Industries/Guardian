@@ -5,10 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationView
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper
 
 /**
  * Fragment that handles both the exercise portal and detail views
@@ -66,6 +70,28 @@ class PatientExercisePortalFragment : Fragment() {
 
     private fun setupPortalView(view: View) {
         try {
+            val drawerLayout: DrawerLayout =
+                requireActivity().findViewById(
+                    R.id.drawer_layout,
+                )
+
+            val navigationView: NavigationView =
+                requireActivity().findViewById(
+                    R.id.nav_view,
+                )
+
+            val menuButton: ImageView =
+                view.findViewById(
+                    R.id.exercise_portal_menu_button,
+                )
+
+            DrawerNavigationHelper.bindStandardDrawer(
+                requireActivity(),
+                drawerLayout,
+                navigationView,
+                menuButton,
+            )
+
             currentTabState = TabState.TO_DO
 
             view.findViewById<CardView>(R.id.flexibilityCard)?.setOnClickListener {
@@ -104,10 +130,6 @@ class PatientExercisePortalFragment : Fragment() {
                 setActiveTab(view, it as TextView)
                 currentTabState = TabState.COMPLETED
                 updateExerciseVisibility(view, TabState.COMPLETED)
-            }
-
-            view.findViewById<Button>(R.id.backButton)?.setOnClickListener {
-                activity?.finish()
             }
 
             setActiveTab(view, view.findViewById(R.id.tabToDo)!!)
