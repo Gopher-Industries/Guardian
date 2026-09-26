@@ -5,12 +5,15 @@ import {
   getPatientsByDoctor,
   unassignDoctorFromPatient,
 } from "../services/doctorAssignmentService";
+import { getPatients } from "../services/patientService";
 import "./DoctorAssignmentsPage.css";
 
 export default function DoctorAssignmentsPage() {
   const [doctors, setDoctors] = useState([]);
   const [selectedDoctorId, setSelectedDoctorId] = useState("");
   const [patients, setPatients] = useState([]);
+
+  const [allPatients, setAllPatients] = useState([]);
 
   const [patientId, setPatientId] = useState("");
   const [newDoctorId, setNewDoctorId] = useState("");
@@ -27,8 +30,9 @@ export default function DoctorAssignmentsPage() {
   }, [doctors, selectedDoctorId]);
 
   useEffect(() => {
-    loadDoctors();
-  }, []);
+  loadDoctors();
+  loadAllPatients();
+}, []);
 
   useEffect(() => {
     if (selectedDoctorId) {
@@ -61,6 +65,26 @@ export default function DoctorAssignmentsPage() {
     }
   }
 
+  async function loadAllPatients() {
+  try {
+    const data = await getPatients({
+      page: 1,
+      limit: 1000,
+    });
+
+    const patientList =
+      data?.patients ||
+      data?.data ||
+      data?.items ||
+      data?.results ||
+      [];
+
+    setAllPatients(patientList);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
   async function loadPatientsForDoctor(doctorId) {
     try {
       setLoadingPatients(true);
@@ -89,7 +113,7 @@ export default function DoctorAssignmentsPage() {
     event.preventDefault();
 
     if (!patientId || !newDoctorId) {
-      setError("Please enter/select a patient and doctor before assigning.");
+      setError("Please select both a patient and a doctor.");
       return;
     }
 
@@ -217,21 +241,30 @@ export default function DoctorAssignmentsPage() {
         <div className="dashboard-card">
           <h2>Assign / Change Doctor</h2>
           <p className="card-muted">
-            Enter the patient ID and select the doctor to assign or change the
-            doctor assignment.
+            
+            Select a patient and choose a doctor to create or update the doctor assignment.
           </p>
 
           <form onSubmit={handleAssignDoctor} className="assignment-form">
-            <label>
-              Patient ID
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Enter patient ID"
-                value={patientId}
-                onChange={(event) => setPatientId(event.target.value)}
-              />
-            </label>
+           <label>
+  Patient
+  <select
+    className="form-control"
+    value={patientId}
+    onChange={(event) => setPatientId(event.target.value)}
+  >
+    <option value="">Select Patient</option>
+
+    {allPatients.map((patient) => (
+      <option
+        key={getId(patient)}
+        value={getId(patient)}
+      >
+        {getPatientName(patient)}
+      </option>
+    ))}
+  </select>
+</label>
 
             <label>
               Doctor
@@ -249,9 +282,13 @@ export default function DoctorAssignmentsPage() {
               </select>
             </label>
 
-            <button className="primary-button" type="submit" disabled={actionLoading}>
-              {actionLoading ? "Saving..." : "Assign Doctor"}
-            </button>
+            <button
+  className="primary-button"
+  type="submit"
+  disabled={actionLoading || !patientId || !newDoctorId}
+>
+  {actionLoading ? "Saving..." : "Assign Doctor"}
+</button>
           </form>
         </div>
       </div>
@@ -259,7 +296,7 @@ export default function DoctorAssignmentsPage() {
       <div className="dashboard-card full-width-card">
         <div className="section-header">
           <div>
-            <h2>Assigned Patients</h2>
+            <h2>Assigned Patients ({patients.length})</h2>
             <p className="card-muted">
               Patients assigned to the selected doctor will appear here.
             </p>

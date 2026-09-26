@@ -16,3 +16,15 @@ export async function requestPasswordReset(email) {
 
   return response.data;
 }
+
+export async function registerUser({ name, email, password, role, phone, organizationId }) {
+  const response = await api.post("/auth/register", {
+    fullname: name,
+    email,
+    password,
+    role,
+    phone,
+    organizationId,
+  });
+  return response.data;
+}

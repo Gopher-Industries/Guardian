@@ -10,53 +10,33 @@ import {
   Stethoscope,
   HeartHandshake,
   CalendarDays,
+  ArrowUp,
+  ArrowDown,
+  ArrowUpDown,
+  AlertTriangle,
 } from "lucide-react";
-import { createTask, updateTask, deleteTask } from "../services/taskService";
+import {
+  createTask,
+  updateTask,
+  deleteTask,
+  getAdminTasks,
+} from "../services/taskService";
 import {
   getAdminPatients,
   getCaretakers,
   getNurses,
 } from "../services/taskLookupService";
 import SuccessCelebrationOverlay from "../components/common/SuccessCelebrationOverlay";
+import AlertDemoTrigger from "../components/common/alerts/AlertDemoTrigger";
 import "./TaskManagementPage.css";
 
-// Temporary mock task records used for UI display
-// TODO: Replace this with real backend task list fetching
-// once a proper GET /api/v1/admin/tasks endpoint is available
-const initialTasks = [
-  {
-    _id: "task-1",
-    description: "Review daily patient observations",
-    dueDate: "2026-05-20",
-    priority: "high",
-    status: "pending",
-    patient: "Aarav Sharma",
-    patientDob: "1958-03-12",
-    caretaker: "Rahul Verma",
-    caretakerEmail: "rahul@example.com",
-    nurse_id: "Emily Stone",
-    nurseEmail: "emily@example.com",
-    report: "",
-    created_at: "",
-    updated_at: "",
-  },
-  {
-    _id: "task-2",
-    description: "Update medication reminder schedule",
-    dueDate: "2026-05-22",
-    priority: "medium",
-    status: "in-progress",
-    patient: "Sophia Brown",
-    patientDob: "1961-07-08",
-    caretaker: "Olivia James",
-    caretakerEmail: "olivia@example.com",
-    nurse_id: "Ava Lee",
-    nurseEmail: "ava@example.com",
-    report: "",
-    created_at: "",
-    updated_at: "",
-  },
-];
+// Backend status values use a space ("in progress"); the frontend UI/CSS
+// classes use a hyphen ("in-progress"). These two helpers convert between
+// them so nothing else in this file has to worry about the mismatch.
+function toFrontendStatus(status) {
+  if (status === "in progress") return "in-progress";
+  return status || "pending";
+}
 
 const emptyForm = {
   description: "",
@@ -167,7 +147,7 @@ function normalizeNurse(raw) {
 }
 
 export default function TaskManagementPage() {
-  const [tasks, setTasks] = useState(initialTasks);
+  const [tasks, setTasks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -180,14 +160,76 @@ export default function TaskManagementPage() {
 
   const [loading, setLoading] = useState(false);
   const [lookupLoading, setLookupLoading] = useState(false);
+  const [tasksLoading, setTasksLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successOverlayOpen, setSuccessOverlayOpen] = useState(false);
   const [successOverlayMessage, setSuccessOverlayMessage] = useState("");
 
+  // --- Filter state ---
+  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [statusFilter, setStatusFilter] = useState("");
+  const [priorityFilter, setPriorityFilter] = useState("");
+  const [assigneeFilter, setAssigneeFilter] = useState("");
+
+  // --- Sort state ---
+  // sortField is one of: "" (no sort), "dueDate", "priority"
+  const [sortField, setSortField] = useState("");
+  const [sortDirection, setSortDirection] = useState("asc");
+
   const todayDate = getTodayDateString();
 
+  // Maps a task record from GET /api/v1/tasks into the shape the table/form
+  // use. `patientList` is passed in explicitly (rather than read from state)
+  // because the backend's task list only returns the patient's fullname —
+  // not their date of birth — so DOB is cross-referenced from the patient
+  // lookup list we already fetch for the form dropdown.
+  function mapTaskFromApi(item, patientList) {
+    const patientMatch = patientList.find((p) => p.id === item.patient?._id);
+    // NOTE: the backend Task model only has a single `assignee` field —
+    // there's no separate caretaker/nurse on the API side. Until that's
+    // resolved with the backend team, the same assignee is shown in both
+    // the "Caretaker" and "Nurse" slots so the existing table/column logic
+    // (which falls back from nurse -> caretaker) keeps working.
+    const assigneeName = item.assignee?.fullname || "-";
+
+    return {
+      _id: item._id,
+      description: item.description || "",
+      dueDate: item.dueDate ? item.dueDate.slice(0, 10) : "",
+      priority: item.priority || "medium",
+      status: toFrontendStatus(item.status),
+      patient: item.patient?.fullname || "-",
+      patientId: item.patient?._id || "",
+      patientDob: patientMatch?.dob || "",
+      caretaker: assigneeName,
+      caretakerId: item.assignee?._id || "",
+      caretakerEmail: item.assignee?.email || "",
+      nurse_id: assigneeName,
+      nurseId: item.assignee?._id || "",
+      nurseEmail: item.assignee?.email || "",
+      report: item.report || "",
+      created_at: item.created_at || "",
+      updated_at: item.updated_at || "",
+    };
+  }
+
+  const loadTasks = async (patientList) => {
+    setTasksLoading(true);
+    try {
+      const result = await getAdminTasks();
+      const items = result?.items || [];
+      setTasks(items.map((item) => mapTaskFromApi(item, patientList || patients)));
+    } catch (err) {
+      setErrorMessage(
+        err?.response?.data?.message || err?.message || "Failed to load tasks."
+      );
+    } finally {
+      setTasksLoading(false);
+    }
+  };
+
   useEffect(() => {
-    async function loadLookups() {
+    async function loadLookupsAndTasks() {
       setLookupLoading(true);
       try {
         const [patientsRes, caretakersRes, nursesRes] = await Promise.all([
@@ -206,9 +248,15 @@ export default function TaskManagementPage() {
           ? nursesRes
           : nursesRes?.nurses || nursesRes?.data || [];
 
-        setPatients(patientList.map(normalizePatient));
+        const normalizedPatients = patientList.map(normalizePatient);
+
+        setPatients(normalizedPatients);
         setCaretakers(caretakerList.map(normalizeCaretaker));
         setNurses(nurseList.map(normalizeNurse));
+
+        // Pass the freshly-fetched patient list directly since setPatients()
+        // above won't have updated state yet on this render.
+        await loadTasks(normalizedPatients);
       } catch (err) {
         setErrorMessage(
           err?.response?.data?.message ||
@@ -219,16 +267,89 @@ export default function TaskManagementPage() {
       }
     }
 
-    loadLookups();
+    loadLookupsAndTasks();
   }, []);
+
+  // Assignee shown in the "Assigned Staff" column: nurse if present, else caretaker.
+  const getAssigneeLabel = (task) =>
+    task.nurse_id && task.nurse_id !== "-" ? task.nurse_id : task.caretaker;
+
+  // Unique list of assignees currently present in the task list, used to populate the filter.
+  const assigneeOptions = useMemo(() => {
+    const set = new Set();
+    tasks.forEach((task) => {
+      const assignee = getAssigneeLabel(task);
+      if (assignee && assignee !== "-") set.add(assignee);
+    });
+    return Array.from(set).sort();
+  }, [tasks]);
+
+  const hasActiveFilters = Boolean(
+    statusFilter || priorityFilter || assigneeFilter
+  );
 
   const filteredTasks = useMemo(() => {
     return tasks.filter((task) => {
       const combined =
         `${task.description} ${task.patient} ${task.patientDob} ${task.caretaker} ${task.nurse_id} ${task.priority} ${task.status}`.toLowerCase();
-      return combined.includes(searchTerm.toLowerCase());
+      const matchesSearch = combined.includes(searchTerm.toLowerCase());
+      const matchesStatus = !statusFilter || task.status === statusFilter;
+      const matchesPriority =
+        !priorityFilter || task.priority === priorityFilter;
+      const matchesAssignee =
+        !assigneeFilter || getAssigneeLabel(task) === assigneeFilter;
+
+      return (
+        matchesSearch && matchesStatus && matchesPriority && matchesAssignee
+      );
     });
-  }, [tasks, searchTerm]);
+  }, [tasks, searchTerm, statusFilter, priorityFilter, assigneeFilter]);
+
+  // A task is overdue if its due date has passed and it hasn't been completed.
+  const isTaskOverdue = (task) =>
+    Boolean(task.dueDate) &&
+    task.dueDate < todayDate &&
+    task.status !== "completed";
+
+  const PRIORITY_RANK = { high: 0, medium: 1, low: 2 };
+
+  const sortedTasks = useMemo(() => {
+    if (!sortField) return filteredTasks;
+
+    const sorted = [...filteredTasks].sort((a, b) => {
+      let result = 0;
+
+      if (sortField === "dueDate") {
+        // Empty due dates sort to the end regardless of direction.
+        if (!a.dueDate && !b.dueDate) result = 0;
+        else if (!a.dueDate) result = 1;
+        else if (!b.dueDate) result = -1;
+        else result = a.dueDate.localeCompare(b.dueDate);
+      } else if (sortField === "priority") {
+        result =
+          (PRIORITY_RANK[a.priority] ?? 3) - (PRIORITY_RANK[b.priority] ?? 3);
+      }
+
+      return sortDirection === "asc" ? result : -result;
+    });
+
+    return sorted;
+  }, [filteredTasks, sortField, sortDirection]);
+
+  const handleSortClick = (field) => {
+    if (sortField !== field) {
+      setSortField(field);
+      setSortDirection("asc");
+      return;
+    }
+    // Clicking the same column again flips direction; a third click clears the sort.
+    if (sortDirection === "asc") {
+      setSortDirection("desc");
+    } else {
+      setSortField("");
+      setSortDirection("asc");
+    }
+  };
 
   const selectedPatient = patients.find((item) => item.id === form.patientId);
   const selectedCaretaker = caretakers.find(
@@ -256,6 +377,12 @@ export default function TaskManagementPage() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  const clearFilters = () => {
+    setStatusFilter("");
+    setPriorityFilter("");
+    setAssigneeFilter("");
+  };
+
   const handleCreateTask = async (e) => {
     e.preventDefault();
 
@@ -268,36 +395,21 @@ export default function TaskManagementPage() {
     setErrorMessage("");
 
     try {
+      // Backend requires `title` and a single `assigneeId` (see Task.js —
+      // there's no separate caretaker/nurse field). Until that's resolved
+      // with the backend team, whichever of Nurse/Caretaker is picked is
+      // sent as the assignee, preferring Nurse if both are set.
       const payload = {
+        title: form.description,
         description: form.description,
         patientId: form.patientId,
         dueDate: form.dueDate,
-        caretakerId: form.caretakerId || undefined,
-        nurseId: form.nurseId || undefined,
+        assigneeId: form.nurseId || form.caretakerId || undefined,
         priority: form.priority,
       };
 
       const result = await createTask(payload);
-      const createdTask = result?.task;
-
-      const normalizedTask = {
-        _id: createdTask?._id || Date.now().toString(),
-        description: createdTask?.description || form.description,
-        dueDate: createdTask?.dueDate?.slice(0, 10) || form.dueDate,
-        priority: createdTask?.priority || form.priority,
-        status: createdTask?.status || "pending",
-        patient: selectedPatient?.name || "-",
-        patientDob: selectedPatient?.dob || "",
-        caretaker: selectedCaretaker?.name || "-",
-        caretakerEmail: selectedCaretaker?.email || "",
-        nurse_id: selectedNurse?.name || "-",
-        nurseEmail: selectedNurse?.email || "",
-        report: createdTask?.report || "",
-        created_at: createdTask?.created_at || "",
-        updated_at: createdTask?.updated_at || "",
-      };
-
-      setTasks((prev) => [normalizedTask, ...prev]);
+      await loadTasks();
       resetFormState();
       showSuccessOverlay(result?.message || "Task created successfully.");
     } catch (err) {
@@ -312,9 +424,20 @@ export default function TaskManagementPage() {
   };
 
   const handleEditClick = (task) => {
-    const matchedPatient = patients.find((p) => p.name === task.patient);
-    const matchedCaretaker = caretakers.find((c) => c.name === task.caretaker);
-    const matchedNurse = nurses.find((n) => n.name === task.nurse_id);
+    // Prefer matching by the ID stored on the task record. Falling back to
+    // matching by display name only covers legacy/mock records that predate
+    // storing IDs — name matching alone is what caused the dropdowns to
+    // come up empty/unselected whenever a name didn't line up exactly or
+    // the lookup lists hadn't loaded yet.
+    const matchedPatient =
+      patients.find((p) => p.id === task.patientId) ||
+      patients.find((p) => p.name === task.patient);
+    const matchedCaretaker =
+      caretakers.find((c) => c.id === task.caretakerId) ||
+      caretakers.find((c) => c.name === task.caretaker);
+    const matchedNurse =
+      nurses.find((n) => n.id === task.nurseId) ||
+      nurses.find((n) => n.name === task.nurse_id);
 
     setSelectedTask(task);
     setForm({
@@ -343,37 +466,15 @@ export default function TaskManagementPage() {
 
     try {
       const payload = {
+        title: form.description,
         description: form.description,
         dueDate: form.dueDate,
-        caretakerId: form.caretakerId || undefined,
-        nurseId: form.nurseId || undefined,
+        assigneeId: form.nurseId || form.caretakerId || undefined,
         priority: form.priority,
       };
 
       const result = await updateTask(selectedTask._id, payload);
-      const updatedTask = result?.task;
-
-      setTasks((prev) =>
-        prev.map((task) =>
-          task._id === selectedTask._id
-            ? {
-                ...task,
-                description: updatedTask?.description || form.description,
-                dueDate: updatedTask?.dueDate?.slice(0, 10) || form.dueDate,
-                priority: updatedTask?.priority || form.priority,
-                status: updatedTask?.status || task.status,
-                patient: selectedPatient?.name || task.patient,
-                patientDob: selectedPatient?.dob || task.patientDob,
-                caretaker: selectedCaretaker?.name || "-",
-                caretakerEmail: selectedCaretaker?.email || "",
-                nurse_id: selectedNurse?.name || "-",
-                nurseEmail: selectedNurse?.email || "",
-                updated_at: updatedTask?.updated_at || "",
-              }
-            : task
-        )
-      );
-
+      await loadTasks();
       resetFormState();
       showSuccessOverlay(result?.message || "Task updated successfully.");
     } catch (err) {
@@ -401,7 +502,7 @@ export default function TaskManagementPage() {
 
     try {
       const result = await deleteTask(selectedTask._id);
-      setTasks((prev) => prev.filter((task) => task._id !== selectedTask._id));
+      await loadTasks();
       setSelectedTask(null);
       setShowDeleteModal(false);
       showSuccessOverlay(result?.message || "Task deleted successfully.");
@@ -434,6 +535,10 @@ export default function TaskManagementPage() {
         open={successOverlayOpen}
         message={successOverlayMessage}
       />
+
+      {/* TEMPORARY demo — remove once Kartik's real alert-detection service
+          sends the actual Socket.IO event to trigger these automatically. */}
+      <AlertDemoTrigger />
 
       <div className="task-page-header">
         <div>
@@ -499,11 +604,98 @@ export default function TaskManagementPage() {
           />
         </div>
 
-        <button className="task-filter-btn" type="button">
+        <button
+          className="task-filter-btn"
+          type="button"
+          onClick={() => setShowFilterModal(true)}
+        >
           <Filter size={16} />
-          Filter
+          {hasActiveFilters
+            ? `Filter (${
+                [statusFilter, priorityFilter, assigneeFilter].filter(Boolean)
+                  .length
+              })`
+            : "Filter"}
         </button>
       </div>
+
+      {showFilterModal && (
+        <div className="task-modal-backdrop">
+          <div className="task-modal">
+            <h3>Filter Tasks</h3>
+
+            <div className="task-form-grid" style={{ marginTop: 18 }}>
+              <div className="task-form-field">
+                <label>Status</label>
+                <div className="task-select-shell">
+                  <ClipboardList size={16} />
+                  <select
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                  >
+                    <option value="">All statuses</option>
+                    <option value="pending">Pending</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="task-form-field">
+                <label>Priority</label>
+                <div className="task-select-shell">
+                  <ClipboardList size={16} />
+                  <select
+                    value={priorityFilter}
+                    onChange={(e) => setPriorityFilter(e.target.value)}
+                  >
+                    <option value="">All priorities</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="task-form-field">
+                <label>Assignee</label>
+                <div className="task-select-shell">
+                  <UserRound size={16} />
+                  <select
+                    value={assigneeFilter}
+                    onChange={(e) => setAssigneeFilter(e.target.value)}
+                  >
+                    <option value="">All assignees</option>
+                    {assigneeOptions.map((name) => (
+                      <option key={name} value={name}>
+                        {name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div className="task-modal-actions">
+              <button
+                type="button"
+                className="task-secondary-btn"
+                onClick={clearFilters}
+                disabled={!hasActiveFilters}
+              >
+                Clear filters
+              </button>
+              <button
+                type="button"
+                className="task-primary-btn"
+                onClick={() => setShowFilterModal(false)}
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="task-table-card">
         <div className="task-table-header">
@@ -519,54 +711,99 @@ export default function TaskManagementPage() {
                 <th>Patient Name</th>
                 <th>DOB</th>
                 <th>Assigned Staff</th>
-                <th>Due Date</th>
-                <th>Priority</th>
+                <th
+                  className="task-sortable-th"
+                  onClick={() => handleSortClick("dueDate")}
+                >
+                  <span className="task-th-label">
+                    Due Date
+                    {sortField === "dueDate" ? (
+                      sortDirection === "asc" ? (
+                        <ArrowUp size={13} />
+                      ) : (
+                        <ArrowDown size={13} />
+                      )
+                    ) : (
+                      <ArrowUpDown size={13} className="task-sort-idle" />
+                    )}
+                  </span>
+                </th>
+                <th
+                  className="task-sortable-th"
+                  onClick={() => handleSortClick("priority")}
+                >
+                  <span className="task-th-label">
+                    Priority
+                    {sortField === "priority" ? (
+                      sortDirection === "asc" ? (
+                        <ArrowUp size={13} />
+                      ) : (
+                        <ArrowDown size={13} />
+                      )
+                    ) : (
+                      <ArrowUpDown size={13} className="task-sort-idle" />
+                    )}
+                  </span>
+                </th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
 
             <tbody>
-              {filteredTasks.length > 0 ? (
-                filteredTasks.map((task) => (
-                  <tr key={task._id}>
-                    <td>{task.description}</td>
-                    <td>{task.patient}</td>
-                    <td>{formatDateOfBirth(task.patientDob)}</td>
-                    <td>{task.nurse_id !== "-" ? task.nurse_id : task.caretaker}</td>
-                    <td>{formatTableDate(task.dueDate)}</td>
-                    <td>
-                      <span className={`task-pill ${getPriorityClass(task.priority)}`}>
-                        {formatPriorityLabel(task.priority)}
-                      </span>
-                    </td>
-                    <td>
-                      <span className={`task-pill ${getStatusClass(task.status)}`}>
-                        {formatStatusLabel(task.status)}
-                      </span>
-                    </td>
-                    <td>
-                      <div className="task-actions">
-                        <button
-                          className="task-icon-btn"
-                          onClick={() => handleEditClick(task)}
-                          disabled={loading}
-                          type="button"
-                        >
-                          <Pencil size={16} />
-                        </button>
-                        <button
-                          className="task-icon-btn delete"
-                          onClick={() => handleDeleteClick(task)}
-                          disabled={loading}
-                          type="button"
-                        >
-                          <Trash2 size={16} />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))
+              {sortedTasks.length > 0 ? (
+                sortedTasks.map((task) => {
+                  const overdue = isTaskOverdue(task);
+                  return (
+                    <tr key={task._id} className={overdue ? "task-row-overdue" : ""}>
+                      <td>{task.description}</td>
+                      <td>{task.patient}</td>
+                      <td>{formatDateOfBirth(task.patientDob)}</td>
+                      <td>{getAssigneeLabel(task)}</td>
+                      <td>
+                        <span className={overdue ? "task-due-date-overdue" : ""}>
+                          {formatTableDate(task.dueDate)}
+                        </span>
+                        {overdue ? (
+                          <span className="task-overdue-badge">
+                            <AlertTriangle size={12} />
+                            Overdue
+                          </span>
+                        ) : null}
+                      </td>
+                      <td>
+                        <span className={`task-pill ${getPriorityClass(task.priority)}`}>
+                          {formatPriorityLabel(task.priority)}
+                        </span>
+                      </td>
+                      <td>
+                        <span className={`task-pill ${getStatusClass(task.status)}`}>
+                          {formatStatusLabel(task.status)}
+                        </span>
+                      </td>
+                      <td>
+                        <div className="task-actions">
+                          <button
+                            className="task-icon-btn"
+                            onClick={() => handleEditClick(task)}
+                            disabled={loading}
+                            type="button"
+                          >
+                            <Pencil size={16} />
+                          </button>
+                          <button
+                            className="task-icon-btn delete"
+                            onClick={() => handleDeleteClick(task)}
+                            disabled={loading}
+                            type="button"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
               ) : (
                 <tr>
                   <td colSpan="8" className="task-empty-state">

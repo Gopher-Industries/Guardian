@@ -7,45 +7,43 @@ import Button from '../components/common/Button';
 import InputField from '../components/common/InputField';
 import Dropdown from '../components/common/Dropdown';
 import {
-  // getSupportTickets,
+  getSupportTickets,
   createSupportTicket,
   updateSupportTicket,
 } from '../services/supportTicketService';
-
-// TODO: remove sample data when backend is ready
-const SAMPLE_TICKETS = [
-  { _id: 'TKT-001', title: 'Login page not loading', issueType: 'technical', status: 'open', priority: 'high', createdAt: '2026-04-01', assignedTo: { fullname: 'Alice Johnson' }, description: 'Users are unable to load the login page on Safari.' },
-  { _id: 'TKT-002', title: 'Incorrect billing amount', issueType: 'billing', status: 'in_progress', priority: 'critical', createdAt: '2026-04-02', assignedTo: { fullname: 'Bob Smith' }, description: 'Patient was charged twice for the same service.' },
-  { _id: 'TKT-003', title: 'Dashboard charts not rendering', issueType: 'technical', status: 'resolved', priority: 'medium', createdAt: '2026-04-03', assignedTo: null, description: '' },
-  { _id: 'TKT-004', title: 'Add export to CSV feature', issueType: 'feature_request', status: 'open', priority: 'low', createdAt: '2026-04-04', assignedTo: { fullname: 'Carol White' }, description: 'Ability to export patient records to CSV.' },
-  { _id: 'TKT-005', title: 'Password reset email not received', issueType: 'technical', status: 'closed', priority: 'high', createdAt: '2026-04-05', assignedTo: { fullname: 'David Lee' }, description: '' },
-  { _id: 'TKT-006', title: 'General enquiry about system limits', issueType: 'general', status: 'open', priority: 'low', createdAt: '2026-04-06', assignedTo: null, description: 'How many users can be active at the same time?' },
-  { _id: 'TKT-007', title: 'Nurse roster not saving changes', issueType: 'technical', status: 'in_progress', priority: 'high', createdAt: '2026-04-07', assignedTo: { fullname: 'Emma Davis' }, description: 'Changes to roster are lost after page refresh.' },
-  { _id: 'TKT-008', title: 'Subscription renewal failed', issueType: 'billing', status: 'open', priority: 'critical', createdAt: '2026-04-08', assignedTo: { fullname: 'Frank Moore' }, description: '' },
-  { _id: 'TKT-009', title: 'Dark mode request', issueType: 'feature_request', status: 'closed', priority: 'low', createdAt: '2026-04-09', assignedTo: null, description: 'Would like a dark mode option in settings.' },
-  { _id: 'TKT-010', title: 'Patient records missing after migration', issueType: 'technical', status: 'in_progress', priority: 'critical', createdAt: '2026-04-10', assignedTo: { fullname: 'Grace Kim' }, description: 'Several patient records were not migrated.' },
-  { _id: 'TKT-011', title: 'Invoice PDF download broken', issueType: 'billing', status: 'resolved', priority: 'medium', createdAt: '2026-04-11', assignedTo: { fullname: 'Henry Clark' }, description: 'PDF download returns a 404 error.' },
-  { _id: 'TKT-012', title: 'Add bulk user import', issueType: 'feature_request', status: 'open', priority: 'medium', createdAt: '2026-04-12', assignedTo: null, description: 'Support CSV upload to add multiple users at once.' },
-  { _id: 'TKT-013', title: 'MFA not working for some accounts', issueType: 'technical', status: 'in_progress', priority: 'high', createdAt: '2026-04-13', assignedTo: { fullname: 'Isla Turner' }, description: '' },
-  { _id: 'TKT-014', title: 'Billing cycle dates incorrect', issueType: 'billing', status: 'open', priority: 'medium', createdAt: '2026-04-14', assignedTo: null, description: 'Billing date shows previous month.' },
-  { _id: 'TKT-015', title: 'Support for SSO integration', issueType: 'feature_request', status: 'resolved', priority: 'high', createdAt: '2026-04-15', assignedTo: { fullname: 'Jack Wilson' }, description: 'Request to integrate with Okta SSO.' },
-  { _id: 'TKT-016', title: 'Notification emails going to spam', issueType: 'technical', status: 'open', priority: 'medium', createdAt: '2026-04-16', assignedTo: { fullname: 'Karen Hall' }, description: '' },
-  { _id: 'TKT-017', title: 'Account access for new admin', issueType: 'general', status: 'closed', priority: 'low', createdAt: '2026-04-17', assignedTo: null, description: 'How do I grant admin access to a new user?' },
-  { _id: 'TKT-018', title: 'Reports page timeout error', issueType: 'technical', status: 'in_progress', priority: 'high', createdAt: '2026-04-18', assignedTo: { fullname: 'Liam Young' }, description: 'Report generation times out for large date ranges.' },
-  { _id: 'TKT-019', title: 'Refund request for duplicate charge', issueType: 'billing', status: 'resolved', priority: 'critical', createdAt: '2026-04-19', assignedTo: { fullname: 'Mia Scott' }, description: 'Customer was charged twice in March.' },
-  { _id: 'TKT-020', title: 'Mobile responsive layout issues', issueType: 'technical', status: 'open', priority: 'medium', createdAt: '2026-04-20', assignedTo: { fullname: 'Noah Adams' }, description: 'Several panels overflow on small screens.' },
-];
-
 import {
   TICKET_ISSUE_TYPE_OPTIONS,
   TICKET_PRIORITY_OPTIONS,
   TICKET_STATUS_OPTIONS,
 } from '../utils/constants';
 
-const emptyCreateForm = { title: '', issueType: '', priority: '', description: '' };
-const emptyCreateErrors = { title: '', issueType: '', priority: '' };
-const emptyEditForm = { title: '', issueType: '', priority: '', status: '', description: '' };
-const emptyEditErrors = { title: '', issueType: '', priority: '', status: '' };
+const emptyCreateForm = {
+  subject: '',
+  description: '',
+  issue_type: '',
+  priority: '',
+};
+const emptyCreateErrors = {
+  subject: '',
+  description: '',
+  issue_type: '',
+  priority: '',
+};
+const emptyEditForm = {
+  subject: '',
+  description: '',
+  issue_type: '',
+  priority: '',
+  status: '',
+  adminResponse: '',
+};
+const emptyEditErrors = {
+  subject: '',
+  description: '',
+  issue_type: '',
+  priority: '',
+  status: '',
+};
 
 const STATUS_FILTER_OPTIONS = [{ value: '', label: 'All Statuses' }, ...TICKET_STATUS_OPTIONS];
 const PRIORITY_FILTER_OPTIONS = [{ value: '', label: 'All Priorities' }, ...TICKET_PRIORITY_OPTIONS];
@@ -104,21 +102,101 @@ function PriorityBadge({ value }) {
   );
 }
 
+function pickFirst(...values) {
+  for (const value of values) {
+    if (value !== undefined && value !== null && value !== '') return value;
+  }
+  return undefined;
+}
+
+function normalizeOptionValue(value, options) {
+  if (value === undefined || value === null || value === '') return '';
+  const str = String(value).trim();
+  const exact = options.find((o) => o.value === str);
+  if (exact) return exact.value;
+
+  const lower = str.toLowerCase();
+  const byValue = options.find((o) => o.value.toLowerCase() === lower);
+  if (byValue) return byValue.value;
+
+  const byLabel = options.find((o) => o.label.toLowerCase() === lower);
+  if (byLabel) return byLabel.value;
+
+  const underscored = lower.replace(/[\s-]+/g, '_');
+  return options.find((o) => o.value === underscored)?.value ?? str;
+}
+
+function extractTicketsResponse(data) {
+  if (Array.isArray(data)) {
+    return { tickets: data, total: data.length };
+  }
+
+  const nested = data?.data;
+  const tickets =
+    pickFirst(
+      Array.isArray(data?.tickets) ? data.tickets : undefined,
+      Array.isArray(nested) ? nested : undefined,
+      Array.isArray(nested?.tickets) ? nested.tickets : undefined,
+    ) ?? [];
+
+  const total =
+    pickFirst(
+      data?.total,
+      data?.pagination?.total,
+      nested?.total,
+      nested?.pagination?.total,
+      Array.isArray(tickets) ? tickets.length : undefined,
+    ) ?? 0;
+
+  return { tickets, total };
+}
+
 function formatTickets(raw) {
-  return raw.map((t) => ({
-    id: t._id,
-    title: t.title ?? '-',
-    issueType:
-      TICKET_ISSUE_TYPE_OPTIONS.find((o) => o.value === t.issueType)?.label ??
-      t.issueType ??
-      '-',
-    issueTypeRaw: t.issueType ?? '',
-    status: t.status ?? '',
-    priority: t.priority ?? '',
-    createdAt: t.createdAt ? new Date(t.createdAt).toLocaleDateString() : '-',
-    assignedTo: t.assignedTo?.fullname ?? '-',
-    description: t.description ?? '',
-  }));
+  return raw.map((t) => {
+    const issueTypeRaw = normalizeOptionValue(
+      pickFirst(t.issue_type, t.issueType, t.type, t.category),
+      TICKET_ISSUE_TYPE_OPTIONS,
+    );
+    const priority = normalizeOptionValue(
+      pickFirst(t.priority, t.Priority),
+      TICKET_PRIORITY_OPTIONS,
+    );
+    const status = normalizeOptionValue(
+      pickFirst(t.status, t.Status),
+      TICKET_STATUS_OPTIONS,
+    );
+    const user = t.user;
+    const submittedBy =
+      typeof user === 'string'
+        ? user
+        : pickFirst(user?.fullname, user?.name, user?.email) ?? '-';
+    const createdRaw = pickFirst(t.created_at, t.createdAt, t.created);
+
+    return {
+      id: pickFirst(t._id, t.id),
+      subject: pickFirst(t.subject, t.title) ?? '-',
+      description: pickFirst(t.description, t.details) ?? '',
+      issueType:
+        TICKET_ISSUE_TYPE_OPTIONS.find((o) => o.value === issueTypeRaw)?.label ??
+        issueTypeRaw ??
+        '-',
+      issueTypeRaw,
+      status,
+      priority,
+      adminResponse: t.adminResponse ?? '',
+      createdAt: createdRaw ? new Date(createdRaw).toLocaleDateString() : '-',
+      submittedBy,
+    };
+  });
+}
+
+function getErrorMessage(err, fallback) {
+  return (
+    err?.response?.data?.message ||
+    err?.response?.data?.error ||
+    err?.message ||
+    fallback
+  );
 }
 
 export default function SupportTicketPage() {
@@ -129,34 +207,45 @@ export default function SupportTicketPage() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [priorityFilter, setPriorityFilter] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [createOpen, setCreateOpen] = useState(false);
   const [createForm, setCreateForm] = useState(emptyCreateForm);
   const [createErrors, setCreateErrors] = useState(emptyCreateErrors);
   const [createLoading, setCreateLoading] = useState(false);
+  const [createSubmitError, setCreateSubmitError] = useState('');
 
   const [selectedTicket, setSelectedTicket] = useState(null);
   const [editForm, setEditForm] = useState(emptyEditForm);
   const [editErrors, setEditErrors] = useState(emptyEditErrors);
   const [editLoading, setEditLoading] = useState(false);
+  const [editSubmitError, setEditSubmitError] = useState('');
 
   const [successOpen, setSuccessOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
 
-  const fetchTickets = useCallback(() => {
+  const fetchTickets = useCallback(async () => {
     setLoading(true);
-    // TODO: replace with API call when backend is ready
-    // const data = await getSupportTickets({ page, limit: 10, search, status: statusFilter, priority: priorityFilter });
-    // setTickets(formatTickets(data.tickets ?? data.data ?? []));
-    // setTotalRows(data.pagination?.total ?? 0);
-    let filtered = formatTickets(SAMPLE_TICKETS);
-    if (search) filtered = filtered.filter((t) => t.title.toLowerCase().includes(search.toLowerCase()));
-    if (statusFilter) filtered = filtered.filter((t) => t.status === statusFilter);
-    if (priorityFilter) filtered = filtered.filter((t) => t.priority === priorityFilter);
-    const start = (page - 1) * 10;
-    setTotalRows(filtered.length);
-    setTickets(filtered.slice(start, start + 10));
-    setLoading(false);
+    setErrorMessage('');
+    try {
+      const data = await getSupportTickets({
+        page,
+        limit: 10,
+        search,
+        status: statusFilter,
+        priority: priorityFilter,
+      });
+      const { tickets: rawTickets, total } = extractTicketsResponse(data);
+      setTickets(formatTickets(rawTickets));
+      setTotalRows(total);
+    } catch (err) {
+      console.error('Failed to load support tickets:', err);
+      setTickets([]);
+      setTotalRows(0);
+      setErrorMessage(getErrorMessage(err, 'Failed to load support tickets.'));
+    } finally {
+      setLoading(false);
+    }
   }, [page, search, statusFilter, priorityFilter]);
 
   useEffect(() => {
@@ -165,8 +254,9 @@ export default function SupportTicketPage() {
 
   function validateCreate(fields) {
     const errs = { ...emptyCreateErrors };
-    if (!fields.title.trim()) errs.title = 'Title is required.';
-    if (!fields.issueType) errs.issueType = 'Issue type is required.';
+    if (!fields.subject.trim()) errs.subject = 'Subject is required.';
+    if (!fields.description.trim()) errs.description = 'Description is required.';
+    if (!fields.issue_type) errs.issue_type = 'Issue type is required.';
     if (!fields.priority) errs.priority = 'Priority is required.';
     return errs;
   }
@@ -175,12 +265,14 @@ export default function SupportTicketPage() {
     const { name, value } = e.target;
     setCreateForm((prev) => ({ ...prev, [name]: value }));
     setCreateErrors((prev) => ({ ...prev, [name]: '' }));
+    setCreateSubmitError('');
   }
 
   function handleCreateClose() {
     setCreateOpen(false);
     setCreateForm(emptyCreateForm);
     setCreateErrors(emptyCreateErrors);
+    setCreateSubmitError('');
   }
 
   async function handleCreateSave() {
@@ -190,14 +282,13 @@ export default function SupportTicketPage() {
       return;
     }
     setCreateLoading(true);
+    setCreateSubmitError('');
     try {
       await createSupportTicket({
-        title: createForm.title.trim(),
-        issueType: createForm.issueType,
+        subject: createForm.subject.trim(),
+        description: createForm.description.trim(),
+        issue_type: createForm.issue_type,
         priority: createForm.priority,
-        ...(createForm.description.trim() && {
-          description: createForm.description.trim(),
-        }),
       });
       handleCreateClose();
       setSuccessMessage('Support ticket has been successfully created.');
@@ -205,6 +296,7 @@ export default function SupportTicketPage() {
       fetchTickets();
     } catch (err) {
       console.error('Failed to create support ticket:', err);
+      setCreateSubmitError(getErrorMessage(err, 'Failed to create support ticket.'));
     } finally {
       setCreateLoading(false);
     }
@@ -213,20 +305,22 @@ export default function SupportTicketPage() {
   function openEdit(row) {
     setSelectedTicket(row);
     setEditForm({
-      title: row.title === '-' ? '' : row.title,
-      issueType: row.issueTypeRaw,
+      subject: row.subject === '-' ? '' : row.subject,
+      description: row.description,
+      issue_type: row.issueTypeRaw,
       priority: row.priority,
       status: row.status,
-      description: row.description,
+      adminResponse: row.adminResponse ?? '',
     });
     setEditErrors(emptyEditErrors);
+    setEditSubmitError('');
   }
 
   function validateEdit(fields) {
     const errs = { ...emptyEditErrors };
-    if (!fields.title.trim()) errs.title = 'Title is required.';
-    if (!fields.issueType) errs.issueType = 'Issue type is required.';
-    if (!fields.priority) errs.priority = 'Priority is required.';
+    if (!fields.subject.trim()) errs.subject = 'Subject is required.';
+    if (!fields.description.trim()) errs.description = 'Description is required.';
+    // issue_type / priority not returned by API yet — required on create only
     if (!fields.status) errs.status = 'Status is required.';
     return errs;
   }
@@ -235,12 +329,14 @@ export default function SupportTicketPage() {
     const { name, value } = e.target;
     setEditForm((prev) => ({ ...prev, [name]: value }));
     setEditErrors((prev) => ({ ...prev, [name]: '' }));
+    setEditSubmitError('');
   }
 
   function handleEditClose() {
     setSelectedTicket(null);
     setEditForm(emptyEditForm);
     setEditErrors(emptyEditErrors);
+    setEditSubmitError('');
   }
 
   async function handleEditSave() {
@@ -250,15 +346,15 @@ export default function SupportTicketPage() {
       return;
     }
     setEditLoading(true);
+    setEditSubmitError('');
     try {
       await updateSupportTicket(selectedTicket.id, {
-        title: editForm.title.trim(),
-        issueType: editForm.issueType,
+        subject: editForm.subject.trim(),
+        description: editForm.description.trim(),
+        issue_type: editForm.issue_type,
         priority: editForm.priority,
         status: editForm.status,
-        ...(editForm.description.trim() && {
-          description: editForm.description.trim(),
-        }),
+        adminResponse: editForm.adminResponse.trim(),
       });
       handleEditClose();
       setSuccessMessage('Support ticket has been successfully updated.');
@@ -266,6 +362,7 @@ export default function SupportTicketPage() {
       fetchTickets();
     } catch (err) {
       console.error('Failed to update support ticket:', err);
+      setEditSubmitError(getErrorMessage(err, 'Failed to update support ticket.'));
     } finally {
       setEditLoading(false);
     }
@@ -273,8 +370,8 @@ export default function SupportTicketPage() {
 
   const columns = [
     {
-      name: 'Title',
-      selector: (row) => row.title,
+      name: 'Subject',
+      selector: (row) => row.subject,
       sortable: true,
       grow: 2,
     },
@@ -294,13 +391,13 @@ export default function SupportTicketPage() {
       sortable: true,
     },
     {
+      name: 'Submitted By',
+      selector: (row) => row.submittedBy,
+    },
+    {
       name: 'Created',
       selector: (row) => row.createdAt,
       sortable: true,
-    },
-    {
-      name: 'Assigned To',
-      selector: (row) => row.assignedTo,
     },
     {
       name: 'Actions',
@@ -309,6 +406,7 @@ export default function SupportTicketPage() {
           className='btn-deactivate'
           onClick={() => openEdit(row)}
           style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+          type='button'
         >
           <Pencil size={13} />
           Edit
@@ -319,14 +417,7 @@ export default function SupportTicketPage() {
 
   return (
     <div className='panel'>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '28px',
-        }}
-      >
+      <div className='ticket-page-header'>
         <h3 style={{ margin: 0 }}>Support Tickets</h3>
         <Button onClick={() => setCreateOpen(true)}>
           <TicketPlus size={18} />
@@ -334,16 +425,14 @@ export default function SupportTicketPage() {
         </Button>
       </div>
 
-      <div
-        style={{
-          display: 'flex',
-          gap: '16px',
-          marginBottom: '12px',
-          alignItems: 'flex-end',
-          justifyContent: 'space-between',
-        }}
-      >
-        <div style={{ maxWidth: '240px' }}>
+      {errorMessage ? (
+        <p className='ticket-error-message' role='alert'>
+          {errorMessage}
+        </p>
+      ) : null}
+
+      <div className='ticket-toolbar'>
+        <div className='ticket-toolbar-search'>
           <InputField
             label='Search'
             name='search'
@@ -352,11 +441,11 @@ export default function SupportTicketPage() {
               setSearch(e.target.value);
               setPage(1);
             }}
-            placeholder='Search by title...'
+            placeholder='Search by subject...'
           />
         </div>
-        <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-end' }}>
-          <div style={{ width: '180px' }}>
+        <div className='ticket-toolbar-filters'>
+          <div className='ticket-toolbar-filter'>
             <Dropdown
               label='Filter by Status'
               name='statusFilter'
@@ -368,7 +457,7 @@ export default function SupportTicketPage() {
               options={STATUS_FILTER_OPTIONS}
             />
           </div>
-          <div style={{ width: '180px' }}>
+          <div className='ticket-toolbar-filter'>
             <Dropdown
               label='Filter by Priority'
               name='priorityFilter'
@@ -392,50 +481,65 @@ export default function SupportTicketPage() {
         onChangePage={(newPage) => setPage(newPage)}
       />
 
-      <Modal open={createOpen} onClose={handleCreateClose} title='Create Support Ticket'>
+      <Modal
+        open={createOpen}
+        onClose={handleCreateClose}
+        title='Create Support Ticket'
+        className='ticket-modal'
+      >
+        {createSubmitError ? (
+          <p className='ticket-error-message' role='alert'>
+            {createSubmitError}
+          </p>
+        ) : null}
         <InputField
-          label='Title'
-          name='title'
-          value={createForm.title}
+          label='Subject'
+          name='subject'
+          value={createForm.subject}
           onChange={handleCreateChange}
           placeholder='Brief summary of the issue'
-          error={createErrors.title}
+          error={createErrors.subject}
         />
-        <Dropdown
-          label='Issue Type'
-          name='issueType'
-          value={createForm.issueType}
-          onChange={handleCreateChange}
-          options={TICKET_ISSUE_TYPE_OPTIONS}
-          placeholder='Select issue type'
-          error={createErrors.issueType}
-        />
-        <Dropdown
-          label='Priority'
-          name='priority'
-          value={createForm.priority}
-          onChange={handleCreateChange}
-          options={TICKET_PRIORITY_OPTIONS}
-          placeholder='Select priority'
-          error={createErrors.priority}
-        />
+        <div className='ticket-modal-row'>
+          <Dropdown
+            label='Issue Type'
+            name='issue_type'
+            value={createForm.issue_type}
+            onChange={handleCreateChange}
+            options={TICKET_ISSUE_TYPE_OPTIONS}
+            placeholder='Select issue type'
+            error={createErrors.issue_type}
+          />
+          <Dropdown
+            label='Priority'
+            name='priority'
+            value={createForm.priority}
+            onChange={handleCreateChange}
+            options={TICKET_PRIORITY_OPTIONS}
+            placeholder='Select priority'
+            error={createErrors.priority}
+          />
+        </div>
         <label className='field'>
           <span className='field-label'>Description</span>
           <textarea
-            className='field-input'
+            className={`field-input ticket-description${createErrors.description ? ' field-input--error' : ''}`}
             name='description'
             value={createForm.description}
             onChange={handleCreateChange}
-            placeholder='Optional: describe the issue in detail'
+            placeholder='Describe the issue in detail'
             rows={4}
-            style={{ resize: 'vertical', minHeight: '80px' }}
           />
+          {createErrors.description ? (
+            <span className='field-error'>{createErrors.description}</span>
+          ) : null}
         </label>
         <div className='modal-footer'>
           <button
             className='btn-secondary'
             style={{ padding: '12px 18px' }}
             onClick={handleCreateClose}
+            type='button'
           >
             Cancel
           </button>
@@ -453,33 +557,41 @@ export default function SupportTicketPage() {
         open={selectedTicket !== null}
         onClose={handleEditClose}
         title='Edit Support Ticket'
+        className='ticket-modal'
       >
+        {editSubmitError ? (
+          <p className='ticket-error-message' role='alert'>
+            {editSubmitError}
+          </p>
+        ) : null}
         <InputField
-          label='Title'
-          name='title'
-          value={editForm.title}
+          label='Subject'
+          name='subject'
+          value={editForm.subject}
           onChange={handleEditChange}
           placeholder='Brief summary of the issue'
-          error={editErrors.title}
+          error={editErrors.subject}
         />
-        <Dropdown
-          label='Issue Type'
-          name='issueType'
-          value={editForm.issueType}
-          onChange={handleEditChange}
-          options={TICKET_ISSUE_TYPE_OPTIONS}
-          placeholder='Select issue type'
-          error={editErrors.issueType}
-        />
-        <Dropdown
-          label='Priority'
-          name='priority'
-          value={editForm.priority}
-          onChange={handleEditChange}
-          options={TICKET_PRIORITY_OPTIONS}
-          placeholder='Select priority'
-          error={editErrors.priority}
-        />
+        <div className='ticket-modal-row'>
+          <Dropdown
+            label='Issue Type'
+            name='issue_type'
+            value={editForm.issue_type}
+            onChange={handleEditChange}
+            options={TICKET_ISSUE_TYPE_OPTIONS}
+            placeholder='Select issue type'
+            error={editErrors.issue_type}
+          />
+          <Dropdown
+            label='Priority'
+            name='priority'
+            value={editForm.priority}
+            onChange={handleEditChange}
+            options={TICKET_PRIORITY_OPTIONS}
+            placeholder='Select priority'
+            error={editErrors.priority}
+          />
+        </div>
         <Dropdown
           label='Status'
           name='status'
@@ -492,13 +604,26 @@ export default function SupportTicketPage() {
         <label className='field'>
           <span className='field-label'>Description</span>
           <textarea
-            className='field-input'
+            className={`field-input ticket-description${editErrors.description ? ' field-input--error' : ''}`}
             name='description'
             value={editForm.description}
             onChange={handleEditChange}
-            placeholder='Optional: describe the issue in detail'
+            placeholder='Describe the issue in detail'
             rows={4}
-            style={{ resize: 'vertical', minHeight: '80px' }}
+          />
+          {editErrors.description ? (
+            <span className='field-error'>{editErrors.description}</span>
+          ) : null}
+        </label>
+        <label className='field'>
+          <span className='field-label'>Admin Response</span>
+          <textarea
+            className='field-input ticket-description'
+            name='adminResponse'
+            value={editForm.adminResponse}
+            onChange={handleEditChange}
+            placeholder='Add a response for this ticket'
+            rows={3}
           />
         </label>
         <div className='modal-footer'>
@@ -506,6 +631,7 @@ export default function SupportTicketPage() {
             className='btn-secondary'
             style={{ padding: '12px 18px' }}
             onClick={handleEditClose}
+            type='button'
           >
             Cancel
           </button>
