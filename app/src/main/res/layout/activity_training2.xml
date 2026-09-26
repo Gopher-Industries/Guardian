@@ -11,7 +11,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#F7F9FC">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/training_toolbar"
@@ -30,6 +31,7 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,63 +40,179 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/module1Title"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@drawable/training_header_background"
+                    android:orientation="vertical"
+                    android:padding="24dp">
+
+                    <TextView
+                        android:id="@+id/btnBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:gravity="center_vertical"
+                        android:text="‹  Back"
+                        android:textColor="@android:color/white"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:text="Keep learning, keep improving."
+                        android:textColor="@android:color/white"
+                        android:textSize="26sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Select a module to continue your training journey."
+                        android:textColor="#EAF2FF"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Module 1: Basic Caregiving Skills"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical"
+                    android:padding="18dp">
 
-                <TextView
-                    android:id="@+id/module1Description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="This foundational module is designed to introduce caregivers to the essential skills required for day-to-day caregiving. It covers the basics of client care, hygiene, nutrition, and safety."
-                    android:textSize="16sp" />
+                    <LinearLayout
+                        android:id="@+id/cardModule1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/training_card_background"
+                        android:clickable="true"
+                        android:elevation="5dp"
+                        android:focusable="true"
+                        android:orientation="vertical"
+                        android:padding="18dp">
 
-                <TextView
-                    android:id="@+id/module2Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Module 2: Advanced Medical Procedures"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="01  Basic Caregiving Skills"
+                            android:textColor="#165DDB"
+                            android:textSize="19sp"
+                            android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/module2Description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="This module provides in-depth training on more complex medical procedures that caregivers may need to perform. It includes topics like medication administration, wound care, and monitoring vital signs."
-                    android:textSize="16sp" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Understand client care, hygiene, nutrition and safety."
+                            android:textColor="#5F6368"
+                            android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/module3Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Module 3: Emotional Support and Communication"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/btnModule1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="14dp"
+                            android:background="@drawable/module_blue_button"
+                            android:gravity="center"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:text="Start Module"
+                            android:textColor="#165DDB"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/module3Description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="This module focuses on the emotional and psychological aspects of caregiving. It teaches caregivers how to provide emotional support to clients, communicate effectively, and manage stress."
-                    android:textSize="16sp" />
+                    <LinearLayout
+                        android:id="@+id/cardModule2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:background="@drawable/training_card_background"
+                        android:clickable="true"
+                        android:elevation="5dp"
+                        android:focusable="true"
+                        android:orientation="vertical"
+                        android:padding="18dp">
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="02  Advanced Medical Procedures"
+                            android:textColor="#0A875B"
+                            android:textSize="19sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Learn medication administration, wound care and monitoring vital signs."
+                            android:textColor="#5F6368"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/btnModule2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="14dp"
+                            android:background="@drawable/module_green_button"
+                            android:gravity="center"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:text="Start Module"
+                            android:textColor="#0A875B"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/cardModule3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:background="@drawable/training_card_background"
+                        android:clickable="true"
+                        android:elevation="5dp"
+                        android:focusable="true"
+                        android:orientation="vertical"
+                        android:padding="18dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="03  Emotional Support &amp; Communication"
+                            android:textColor="#7145D6"
+                            android:textSize="19sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Learn active listening, communication and emotional support."
+                            android:textColor="#5F6368"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/btnModule3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="14dp"
+                            android:background="@drawable/module_purple_button"
+                            android:gravity="center"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
+                            android:text="Start Module"
+                            android:textColor="#7145D6"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
