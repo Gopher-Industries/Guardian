@@ -16,6 +16,7 @@ import DoctorAssignmentsPage from "./pages/DoctorAssignmentsPage";
 import PatientOverviewPage from "./pages/PatientOverviewPage";
 import StatusPage from "./pages/StatusPage";
 import PendingApprovalsPage from "./pages/PendingApprovalsPage";
+import RegistrationDashboard from "./pages/dashboards/RegistrationDashboard";
 import EmailTemplatesPage from "./pages/EmailTemplatesPage";
 import "./App.css";
 
@@ -45,8 +46,13 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
+
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+
+      <Route
+        path="/forgot-password"
+        element={<ForgotPasswordPage />}
+      />
 
       <Route
         path="/dashboard"
@@ -149,6 +155,10 @@ export default function App() {
         />
 
         <Route
+          path="registration-dashboard"
+          element={
+            <RequireRole allowed={["admin"]}>
+              <RegistrationDashboard />
           path="email-templates"
           element={
             <RequireRole allowed={["admin"]}>
