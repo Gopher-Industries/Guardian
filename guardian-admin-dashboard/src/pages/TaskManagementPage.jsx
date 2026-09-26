@@ -38,6 +38,13 @@ function toFrontendStatus(status) {
   return status || "pending";
 }
 
+// Reverse of toFrontendStatus — the backend expects "in progress" with a
+// space, while the frontend UI/CSS classes use "in-progress" with a hyphen.
+function toBackendStatus(status) {
+  if (status === "in-progress") return "in progress";
+  return status || "pending";
+}
+
 const emptyForm = {
   description: "",
   patientId: "",
@@ -161,6 +168,10 @@ export default function TaskManagementPage() {
   const [loading, setLoading] = useState(false);
   const [lookupLoading, setLookupLoading] = useState(false);
   const [tasksLoading, setTasksLoading] = useState(false);
+  // Tracks the _id of the task whose status dropdown is currently saving,
+  // so only that row shows a "Saving..." state instead of disabling the
+  // whole table like the create/edit `loading` flag does.
+  const [statusUpdatingId, setStatusUpdatingId] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [successOverlayOpen, setSuccessOverlayOpen] = useState(false);
   const [successOverlayMessage, setSuccessOverlayMessage] = useState("");
@@ -488,6 +499,33 @@ export default function TaskManagementPage() {
     }
   };
 
+  // Quick one-click status change directly from the table row, so marking
+  // a task "Completed" (or any other status) doesn't require opening the
+  // full Edit modal. Sends only { status } — the backend applies a partial
+  // update and leaves every other field on the task untouched.
+  const handleStatusChange = async (task, newFrontendStatus) => {
+    if (newFrontendStatus === task.status) return;
+
+    setStatusUpdatingId(task._id);
+    setErrorMessage("");
+
+    try {
+      const result = await updateTask(task._id, {
+        status: toBackendStatus(newFrontendStatus),
+      });
+      await loadTasks();
+      showSuccessOverlay(result?.message || "Task status updated.");
+    } catch (err) {
+      setErrorMessage(
+        err?.response?.data?.message ||
+          err?.message ||
+          "Failed to update task status."
+      );
+    } finally {
+      setStatusUpdatingId(null);
+    }
+  };
+
   const handleDeleteClick = (task) => {
     setSelectedTask(task);
     setShowDeleteModal(true);
@@ -777,9 +815,20 @@ export default function TaskManagementPage() {
                         </span>
                       </td>
                       <td>
-                        <span className={`task-pill ${getStatusClass(task.status)}`}>
-                          {formatStatusLabel(task.status)}
-                        </span>
+                        <select
+                          className={`task-pill task-status-select ${getStatusClass(task.status)}`}
+                          value={task.status}
+                          onChange={(e) => handleStatusChange(task, e.target.value)}
+                          disabled={statusUpdatingId === task._id}
+                          aria-label={`Change status for ${task.description}`}
+                        >
+                          <option value="pending">Pending</option>
+                          <option value="in-progress">In Progress</option>
+                          <option value="completed">Completed</option>
+                        </select>
+                        {statusUpdatingId === task._id ? (
+                          <span className="task-status-saving">Saving...</span>
+                        ) : null}
                       </td>
                       <td>
                         <div className="task-actions">
