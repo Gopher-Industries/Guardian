@@ -29,6 +29,7 @@ const iconMap = {
  "doctor-assignments": Stethoscope,
   "patient-overview": ClipboardList,
   "task-management": ListTodo,
+  "logs-management": ClipboardList,
   reports: Bell,
   settings: Settings,
   "pending-approvals": UserCheck,

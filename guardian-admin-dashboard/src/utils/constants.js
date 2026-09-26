@@ -25,6 +25,13 @@ export const ADMIN_NAV_ITEMS = [
     path: "/dashboard/task-management",
     roles: ["admin", "doctor", "nurse","caretaker"]
   },
+
+  {
+    id: "logs-management",
+    label: "Logs Management",
+    path: "/dashboard/logs-management",
+  },
+
   {
   id: "doctor-assignments",
   label: "Doctor Assignments",

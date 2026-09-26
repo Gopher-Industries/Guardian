@@ -13,6 +13,7 @@ import PatientsPage from "./pages/PatientsPage";
 import NurseRosterPage from "./pages/NurseRosterPage";
 import SupportTicketPage from "./pages/SupportTicketPage";
 import TaskManagementPage from "./pages/TaskManagementPage";
+import LogsManagementPage from "./pages/LogsManagementPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
 import DoctorAssignmentsPage from "./pages/DoctorAssignmentsPage";
@@ -164,6 +165,8 @@ element={
         />
    
         <Route path="settings" element={<SettingsPage />} />
+        <Route path="task-management" element={<TaskManagementPage />} />
+        <Route path="logs-management" element={<LogsManagementPage />} />
 
         {/* Catches unmatched paths WITHIN /dashboard, e.g. /dashboard/staffmanagement */}
         <Route path="*" element={<StatusPage type={404} />} />
