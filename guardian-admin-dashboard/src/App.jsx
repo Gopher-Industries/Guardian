@@ -21,19 +21,29 @@ import PatientOverviewPage from "./pages/PatientOverviewPage";
 import DoctorConsultationPage from "./pages/DoctorConsultationPage";
 import StatusPage from "./pages/StatusPage";
 import PendingApprovalsPage from "./pages/PendingApprovalsPage";
+import RegistrationDashboard from "./pages/dashboards/RegistrationDashboard";
+import EmailTemplatesPage from "./pages/EmailTemplatesPage";
 import RegisterPage from "./pages/RegisterPage";
 import "./App.css";
 import EmotionRecognitionPage from "./pages/EmotionRecognitionPage";
   
 function RequireAuth({ children }) {
   const token = getAuthToken();
-  if (!token) return <Navigate to="/login" replace />;
+
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
   return children;
 }
 
 function RequireRole({ allowed, children }) {
   const role = getAdminUser()?.role;
-  if (!allowed.includes(role)) return <StatusPage type={403} />;
+
+  if (!allowed.includes(role)) {
+    return <StatusPage type={403} />;
+  }
+
   return children;
 }
 
@@ -46,7 +56,10 @@ export default function App() {
 
       <Route path="/login" element={<LoginPage />} />
 
-      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route
+        path="/forgot-password"
+        element={<ForgotPasswordPage />}
+      />
       <Route path="/register" element={<RegisterPage />} />
 
       <Route
@@ -75,6 +88,7 @@ export default function App() {
             </RequireRole>
           }
         />
+
  
         <Route
           path="org-assignment"
@@ -84,6 +98,7 @@ export default function App() {
             </RequireRole>
           }
         />
+
         <Route
           path="patients"
           element={
@@ -92,6 +107,7 @@ export default function App() {
             </RequireRole>
           }
         />
+
         <Route
           path="patient-overview"
           element={
@@ -100,6 +116,7 @@ export default function App() {
             </RequireRole>
           }
         />
+
  <Route
 path="patients/:patientId/consultation" 
 element={
@@ -115,6 +132,7 @@ element={
             </RequireRole>
           }
         />
+
         <Route
           path="nurse-roster"
           element={
@@ -123,6 +141,7 @@ element={
             </RequireRole>
           }
         />
+
         <Route
           path="support-ticket"
           element={
@@ -131,6 +150,7 @@ element={
             </RequireRole>
           }
         />
+
         <Route
           path="emotion-recognition"
           element={
@@ -147,6 +167,7 @@ element={
             </RequireRole>
           }
         />
+
         <Route
           path="reports"
           element={
@@ -155,6 +176,7 @@ element={
             </RequireRole>
           }
         />
+
         <Route
           path="pending-approvals"
           element={
@@ -163,16 +185,33 @@ element={
             </RequireRole>
           }
         />
+
+        <Route
+  path="registration-dashboard"
+  element={
+    <RequireRole allowed={["admin"]}>
+      <RegistrationDashboard />
+    </RequireRole>
+  }
+/>
+          <Route
+          path="email-templates"
+          element={
+            <RequireRole allowed={["admin"]}>
+              <EmailTemplatesPage />
+            </RequireRole>
+          }
+        />
+
    
         <Route path="settings" element={<SettingsPage />} />
-        <Route path="task-management" element={<TaskManagementPage />} />
         <Route path="logs-management" element={<LogsManagementPage />} />
 
-        {/* Catches unmatched paths WITHIN /dashboard, e.g. /dashboard/staffmanagement */}
+        {/* Catches unmatched paths within /dashboard */}
         <Route path="*" element={<StatusPage type={404} />} />
-           </Route>
+      </Route>
 
-      {/* Catches everything outside /dashboard entirely, e.g. /staffmanagement */}
+      {/* Catches everything outside /dashboard */}
       <Route
         path="*"
         element={

@@ -12,6 +12,7 @@ import {
   X,
   Stethoscope,
   UserCheck,
+  Mail,
 BrainCircuit,
 } from "lucide-react";
 import Logo from "../common/Logo";
@@ -19,18 +20,17 @@ import { ADMIN_NAV_ITEMS } from "../../utils/constants";
 import { clearAuthStorage } from "../../utils/storage";
 import { getAdminUser } from "../../utils/storage";
 
-
-
 const iconMap = {
   dashboard: LayoutDashboard,
   "staff-management": Users,
   "org-assignment": Building2,
   patients: ShieldPlus,
- "doctor-assignments": Stethoscope,
+  "doctor-assignments": Stethoscope,
   "patient-overview": ClipboardList,
   "task-management": ListTodo,
   "logs-management": ClipboardList,
   reports: Bell,
+  "email-templates": Mail,
   settings: Settings,
   "pending-approvals": UserCheck,
   "nurse-roster": ClipboardList,
@@ -47,8 +47,9 @@ export default function Sidebar({
   const navigate = useNavigate();
 
   const role = getAdminUser()?.role;
-const visibleItems = ADMIN_NAV_ITEMS.filter((item) => item.roles.includes(role));
-
+  const visibleItems = ADMIN_NAV_ITEMS.filter((item) =>
+    item.roles.includes(role),
+  );
 
   const handleLogout = () => {
     clearAuthStorage();
@@ -111,9 +112,9 @@ const visibleItems = ADMIN_NAV_ITEMS.filter((item) => item.roles.includes(role))
                 key={item.id}
                 to={item.path}
                 end={
-                      item.path === "/dashboard" ||
-                      item.path === "/dashboard/patients"
-                    }
+                  item.path === "/dashboard" ||
+                  item.path === "/dashboard/patients"
+                }
                 className={({ isActive }) =>
                   `sidebar-link ${isActive ? "active" : ""} ${
                     collapsed && !isMobile ? "icon-only" : ""
