@@ -20,10 +20,17 @@ export async function getSupportTickets({
   return extractTicketsResponse(response.data);
 }
 
-export async function createSupportTicket({ subject, description }) {
+export async function createSupportTicket({
+  subject,
+  description,
+  issue_type,
+  priority,
+}) {
   const response = await api.post('/admin/support-tickets', {
     subject,
     description,
+    issue_type,
+    priority,
   });
   return response.data;
 }
