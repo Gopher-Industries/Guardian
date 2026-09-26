@@ -17,6 +17,7 @@ import PatientOverviewPage from "./pages/PatientOverviewPage";
 import StatusPage from "./pages/StatusPage";
 import PendingApprovalsPage from "./pages/PendingApprovalsPage";
 import RegistrationDashboard from "./pages/dashboards/RegistrationDashboard";
+import EmailTemplatesPage from "./pages/EmailTemplatesPage";
 import "./App.css";
 
 function RequireAuth({ children }) {
@@ -158,6 +159,10 @@ export default function App() {
           element={
             <RequireRole allowed={["admin"]}>
               <RegistrationDashboard />
+          path="email-templates"
+          element={
+            <RequireRole allowed={["admin"]}>
+              <EmailTemplatesPage />
             </RequireRole>
           }
         />

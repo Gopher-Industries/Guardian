@@ -1,7 +1,7 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import StatCard from "../../components/dashboard/StatCard";
-import { NURSE_DASHBOARD_STATS } from "../../utils/constants";
+import { getNurseDashboardSummary } from "../../services/nurseDashboardService";
 import {
   ArrowRight,
   ListTodo,
@@ -26,6 +26,108 @@ export default function NurseDashboard() {
 
   const user = getAdminUser();
   const firstName = user?.fullname?.split(" ")[0] || "";
+
+  const [summary, setSummary] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadSummary() {
+      setLoading(true);
+      setError("");
+
+      try {
+        const data = await getNurseDashboardSummary();
+        if (isMounted) setSummary(data);
+      } catch (err) {
+        if (isMounted) {
+          setError(
+            err?.response?.data?.error ||
+              "Could not load your dashboard summary right now."
+          );
+        }
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    }
+
+    loadSummary();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const stats = useMemo(() => {
+    if (!summary) {
+      const fallbackDescription = error ? "No data available" : "Loading...";
+      return [
+        { title: "Assigned Patients", value: "--", description: fallbackDescription, tone: "primary" },
+        { title: "Pending Tasks", value: "--", description: fallbackDescription, tone: "warning" },
+        { title: "Task Completion Rate", value: "--", description: fallbackDescription, tone: "success" },
+        { title: "Recent Patient Logs", value: "--", description: fallbackDescription, tone: "danger" },
+      ];
+    }
+
+    return [
+      {
+        title: "Assigned Patients",
+        value: summary.totalPatients ?? "--",
+        description: `${summary.totalActivePatients ?? 0} currently active`,
+        tone: "primary",
+      },
+      {
+        title: "Pending Tasks",
+        value: summary.pendingTasks ?? "--",
+        description: `${summary.overdueTasks ?? 0} overdue`,
+        tone: "warning",
+      },
+      {
+        title: "Task Completion Rate",
+        value: `${summary.taskCompletionRate ?? 0}%`,
+        description: `${summary.completedTasks ?? 0} of ${summary.totalTasks ?? 0} tasks completed`,
+        tone: "success",
+      },
+      {
+        title: "Recent Patient Logs",
+        value: summary.recentLogsCount ?? "--",
+        description: "In the last 7 days",
+        tone: "danger",
+      },
+    ];
+  }, [summary, error]);
+
+  const activityItems = useMemo(() => {
+    if (!summary) return [];
+
+    const items = [];
+
+    if (summary.overdueTasks > 0) {
+      items.push(
+        `You have ${summary.overdueTasks} overdue task${summary.overdueTasks === 1 ? "" : "s"}.`
+      );
+    }
+
+    if (summary.pendingTasks > 0) {
+      items.push(
+        `${summary.pendingTasks} task${summary.pendingTasks === 1 ? " is" : "s are"} still pending.`
+      );
+    }
+
+    if (summary.recentLogsCount > 0) {
+      items.push(
+        `${summary.recentLogsCount} patient log${summary.recentLogsCount === 1 ? "" : "s"} added in the last 7 days.`
+      );
+    }
+
+    if (items.length === 0) {
+      items.push("No recent activity to show right now.");
+    }
+
+    return items;
+  }, [summary]);
 
   return (
     <div className="dashboard-home">
@@ -77,7 +179,7 @@ export default function NurseDashboard() {
 
       {dashboardPreferences.statistics && (
         <section className="stats-grid">
-          {NURSE_DASHBOARD_STATS.map((item) => (
+          {stats.map((item) => (
             <StatCard key={item.title} {...item} />
           ))}
         </section>
@@ -93,9 +195,13 @@ export default function NurseDashboard() {
           >
             <h3>Recent activity</h3>
             <ul className="activity-list">
-              <li>Tasks assigned to you will appear here</li>
-              <li>Patient overview updates will appear here</li>
-              <li>Roster changes will appear here</li>
+              {loading ? (
+                <li>Loading recent activity...</li>
+              ) : error ? (
+                <li>Recent activity will appear here once this is connected.</li>
+              ) : (
+                activityItems.map((item, index) => <li key={index}>{item}</li>)
+              )}
             </ul>
           </motion.article>
 
