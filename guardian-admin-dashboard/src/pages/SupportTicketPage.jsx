@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { TicketPlus, Pencil } from 'lucide-react';
+import { TicketPlus, Pencil, Plus } from 'lucide-react';
 import DataTable from '../components/common/DataTable';
 import Modal from '../components/common/Modal';
 import Toast from '../components/common/Toast';
@@ -10,43 +10,39 @@ import {
   getSupportTickets,
   createSupportTicket,
   updateSupportTicket,
+  addSupportTicketAction,
 } from '../services/supportTicketService';
-import {
-  TICKET_ISSUE_TYPE_OPTIONS,
-  TICKET_PRIORITY_OPTIONS,
-  TICKET_STATUS_OPTIONS,
-} from '../utils/constants';
+import { TICKET_STATUS_OPTIONS } from '../utils/constants';
 
 const emptyCreateForm = {
   subject: '',
   description: '',
-  issue_type: '',
-  priority: '',
 };
 const emptyCreateErrors = {
   subject: '',
   description: '',
-  issue_type: '',
-  priority: '',
 };
 const emptyEditForm = {
-  subject: '',
-  description: '',
-  issue_type: '',
-  priority: '',
   status: '',
   adminResponse: '',
 };
 const emptyEditErrors = {
-  subject: '',
-  description: '',
-  issue_type: '',
-  priority: '',
   status: '',
+};
+const emptyActivityForm = {
+  actionTaken: '',
+  outcome: '',
+  recommendation: '',
+  notes: '',
+};
+const emptyActivityErrors = {
+  actionTaken: '',
+  outcome: '',
+  recommendation: '',
+  notes: '',
 };
 
 const STATUS_FILTER_OPTIONS = [{ value: '', label: 'All Statuses' }, ...TICKET_STATUS_OPTIONS];
-const PRIORITY_FILTER_OPTIONS = [{ value: '', label: 'All Priorities' }, ...TICKET_PRIORITY_OPTIONS];
 
 const STATUS_COLORS = {
   open: { background: '#e8f4fd', color: '#1a6fa8' },
@@ -55,139 +51,131 @@ const STATUS_COLORS = {
   closed: { background: '#f3f4f6', color: '#6b7280' },
 };
 
-const PRIORITY_COLORS = {
-  low: { background: '#e6f4ea', color: '#2e7d32' },
-  medium: { background: '#fff3e0', color: '#b45309' },
-  high: { background: '#fde8e8', color: '#b91c1c' },
-  critical: { background: '#fce7f3', color: '#9d174d' },
+const DATE_TIME_OPTIONS = {
+  day: '2-digit',
+  month: 'short',
+  year: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
 };
 
 function StatusBadge({ value }) {
   const style = STATUS_COLORS[value] ?? {};
   const label =
-    TICKET_STATUS_OPTIONS.find((o) => o.value === value)?.label ?? value ?? '-';
+    TICKET_STATUS_OPTIONS.find((o) => o.value === value)?.label ?? value ?? '—';
   return (
-    <span
-      style={{
-        display: 'inline-block',
-        padding: '3px 10px',
-        borderRadius: '12px',
-        fontSize: '12px',
-        fontWeight: 500,
-        ...style,
-      }}
-    >
+    <span className='ticket-status-badge' style={style}>
       {label}
     </span>
   );
 }
 
-function PriorityBadge({ value }) {
-  const style = PRIORITY_COLORS[value] ?? {};
-  const label =
-    TICKET_PRIORITY_OPTIONS.find((o) => o.value === value)?.label ?? value ?? '-';
-  return (
-    <span
-      style={{
-        display: 'inline-block',
-        padding: '3px 10px',
-        borderRadius: '12px',
-        fontSize: '12px',
-        fontWeight: 500,
-        ...style,
-      }}
-    >
-      {label}
-    </span>
-  );
+function formatDateTime(value) {
+  if (!value) return '—';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '—';
+  return date.toLocaleString(undefined, DATE_TIME_OPTIONS);
 }
 
-function pickFirst(...values) {
-  for (const value of values) {
-    if (value !== undefined && value !== null && value !== '') return value;
-  }
-  return undefined;
-}
-
-function normalizeOptionValue(value, options) {
-  if (value === undefined || value === null || value === '') return '';
+function normalizeStatus(value) {
+  if (!value) return '';
   const str = String(value).trim();
-  const exact = options.find((o) => o.value === str);
+  const exact = TICKET_STATUS_OPTIONS.find((o) => o.value === str);
   if (exact) return exact.value;
 
-  const lower = str.toLowerCase();
-  const byValue = options.find((o) => o.value.toLowerCase() === lower);
-  if (byValue) return byValue.value;
-
-  const byLabel = options.find((o) => o.label.toLowerCase() === lower);
-  if (byLabel) return byLabel.value;
-
-  const underscored = lower.replace(/[\s-]+/g, '_');
-  return options.find((o) => o.value === underscored)?.value ?? str;
-}
-
-function extractTicketsResponse(data) {
-  if (Array.isArray(data)) {
-    return { tickets: data, total: data.length };
-  }
-
-  const nested = data?.data;
-  const tickets =
-    pickFirst(
-      Array.isArray(data?.tickets) ? data.tickets : undefined,
-      Array.isArray(nested) ? nested : undefined,
-      Array.isArray(nested?.tickets) ? nested.tickets : undefined,
-    ) ?? [];
-
-  const total =
-    pickFirst(
-      data?.total,
-      data?.pagination?.total,
-      nested?.total,
-      nested?.pagination?.total,
-      Array.isArray(tickets) ? tickets.length : undefined,
-    ) ?? 0;
-
-  return { tickets, total };
+  const lower = str.toLowerCase().replace(/[\s-]+/g, '_');
+  return TICKET_STATUS_OPTIONS.find((o) => o.value === lower)?.value ?? str;
 }
 
 function formatTickets(raw) {
-  return raw.map((t) => {
-    const issueTypeRaw = normalizeOptionValue(
-      pickFirst(t.issue_type, t.issueType, t.type, t.category),
-      TICKET_ISSUE_TYPE_OPTIONS,
-    );
-    const priority = normalizeOptionValue(
-      pickFirst(t.priority, t.Priority),
-      TICKET_PRIORITY_OPTIONS,
-    );
-    const status = normalizeOptionValue(
-      pickFirst(t.status, t.Status),
-      TICKET_STATUS_OPTIONS,
-    );
-    const user = t.user;
-    const submittedBy =
-      typeof user === 'string'
-        ? user
-        : pickFirst(user?.fullname, user?.name, user?.email) ?? '-';
-    const createdRaw = pickFirst(t.created_at, t.createdAt, t.created);
+  return raw.map((ticket) => {
+    const user = ticket.user ?? {};
+    const submittedBy = user.fullname || user.email || '—';
+    const userId = user._id || user.id || '';
+    const actions = Array.isArray(ticket.actions)
+      ? [...ticket.actions].sort(
+          (a, b) => new Date(b.dateTime) - new Date(a.dateTime),
+        )
+      : [];
 
     return {
-      id: pickFirst(t._id, t.id),
-      subject: pickFirst(t.subject, t.title) ?? '-',
-      description: pickFirst(t.description, t.details) ?? '',
-      issueType:
-        TICKET_ISSUE_TYPE_OPTIONS.find((o) => o.value === issueTypeRaw)?.label ??
-        issueTypeRaw ??
-        '-',
-      issueTypeRaw,
-      status,
-      priority,
-      adminResponse: t.adminResponse ?? '',
-      createdAt: createdRaw ? new Date(createdRaw).toLocaleDateString() : '-',
+      id: ticket._id,
+      subject: ticket.subject || '—',
+      description: ticket.description || '—',
       submittedBy,
+      userId,
+      status: normalizeStatus(ticket.status),
+      adminResponse: ticket.adminResponse || '',
+      createdAt: ticket.created_at,
+      updatedAt: ticket.updated_at,
+      actions,
     };
   });
+}
+
+function actionActorName(action, ticket) {
+  if (action.userId && ticket.userId && action.userId === ticket.userId) {
+    return ticket.submittedBy;
+  }
+  return action.userId || '—';
+}
+
+function TicketActionsExpand({ data, onAddActivity }) {
+  const actions = data?.actions ?? [];
+
+  return (
+    <div className='ticket-actions-expand'>
+      <div className='ticket-actions-header'>
+        <h4 className='ticket-actions-heading'>Activity</h4>
+        <button
+          className='ticket-add-activity-btn'
+          type='button'
+          onClick={(e) => {
+            e.stopPropagation();
+            onAddActivity?.(data);
+          }}
+        >
+          <Plus size={14} />
+          Add activity
+        </button>
+      </div>
+      {!actions.length ? (
+        <p className='ticket-actions-empty'>No activity recorded yet.</p>
+      ) : (
+        <ul className='ticket-actions-list'>
+          {actions.map((action) => (
+            <li
+              key={action._id || `${action.userId}-${action.dateTime}`}
+              className='ticket-action-item'
+            >
+              <div className='ticket-action-meta'>
+                <span className='ticket-action-time'>{formatDateTime(action.dateTime)}</span>
+                <span className='ticket-action-actor'>{actionActorName(action, data)}</span>
+              </div>
+              <dl className='ticket-action-fields'>
+                <div>
+                  <dt>Action taken</dt>
+                  <dd>{action.actionTaken || '—'}</dd>
+                </div>
+                <div>
+                  <dt>Outcome</dt>
+                  <dd>{action.outcome || '—'}</dd>
+                </div>
+                <div>
+                  <dt>Recommendation</dt>
+                  <dd>{action.recommendation || '—'}</dd>
+                </div>
+                <div>
+                  <dt>Notes</dt>
+                  <dd>{action.notes || '—'}</dd>
+                </div>
+              </dl>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 }
 
 function getErrorMessage(err, fallback) {
@@ -206,7 +194,6 @@ export default function SupportTicketPage() {
   const [totalRows, setTotalRows] = useState(0);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
-  const [priorityFilter, setPriorityFilter] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const [createOpen, setCreateOpen] = useState(false);
@@ -224,18 +211,22 @@ export default function SupportTicketPage() {
   const [successOpen, setSuccessOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
 
+  const [activityTicket, setActivityTicket] = useState(null);
+  const [activityForm, setActivityForm] = useState(emptyActivityForm);
+  const [activityErrors, setActivityErrors] = useState(emptyActivityErrors);
+  const [activityLoading, setActivityLoading] = useState(false);
+  const [activitySubmitError, setActivitySubmitError] = useState('');
+
   const fetchTickets = useCallback(async () => {
     setLoading(true);
     setErrorMessage('');
     try {
-      const data = await getSupportTickets({
+      const { tickets: rawTickets, total } = await getSupportTickets({
         page,
         limit: 10,
         search,
         status: statusFilter,
-        priority: priorityFilter,
       });
-      const { tickets: rawTickets, total } = extractTicketsResponse(data);
       setTickets(formatTickets(rawTickets));
       setTotalRows(total);
     } catch (err) {
@@ -246,7 +237,7 @@ export default function SupportTicketPage() {
     } finally {
       setLoading(false);
     }
-  }, [page, search, statusFilter, priorityFilter]);
+  }, [page, search, statusFilter]);
 
   useEffect(() => {
     fetchTickets();
@@ -256,8 +247,6 @@ export default function SupportTicketPage() {
     const errs = { ...emptyCreateErrors };
     if (!fields.subject.trim()) errs.subject = 'Subject is required.';
     if (!fields.description.trim()) errs.description = 'Description is required.';
-    if (!fields.issue_type) errs.issue_type = 'Issue type is required.';
-    if (!fields.priority) errs.priority = 'Priority is required.';
     return errs;
   }
 
@@ -287,8 +276,6 @@ export default function SupportTicketPage() {
       await createSupportTicket({
         subject: createForm.subject.trim(),
         description: createForm.description.trim(),
-        issue_type: createForm.issue_type,
-        priority: createForm.priority,
       });
       handleCreateClose();
       setSuccessMessage('Support ticket has been successfully created.');
@@ -305,10 +292,6 @@ export default function SupportTicketPage() {
   function openEdit(row) {
     setSelectedTicket(row);
     setEditForm({
-      subject: row.subject === '-' ? '' : row.subject,
-      description: row.description,
-      issue_type: row.issueTypeRaw,
-      priority: row.priority,
       status: row.status,
       adminResponse: row.adminResponse ?? '',
     });
@@ -318,9 +301,6 @@ export default function SupportTicketPage() {
 
   function validateEdit(fields) {
     const errs = { ...emptyEditErrors };
-    if (!fields.subject.trim()) errs.subject = 'Subject is required.';
-    if (!fields.description.trim()) errs.description = 'Description is required.';
-    // issue_type / priority not returned by API yet — required on create only
     if (!fields.status) errs.status = 'Status is required.';
     return errs;
   }
@@ -349,10 +329,6 @@ export default function SupportTicketPage() {
     setEditSubmitError('');
     try {
       await updateSupportTicket(selectedTicket.id, {
-        subject: editForm.subject.trim(),
-        description: editForm.description.trim(),
-        issue_type: editForm.issue_type,
-        priority: editForm.priority,
         status: editForm.status,
         adminResponse: editForm.adminResponse.trim(),
       });
@@ -368,49 +344,144 @@ export default function SupportTicketPage() {
     }
   }
 
+  function openAddActivity(ticket) {
+    setActivityTicket(ticket);
+    setActivityForm(emptyActivityForm);
+    setActivityErrors(emptyActivityErrors);
+    setActivitySubmitError('');
+  }
+
+  function handleActivityChange(e) {
+    const { name, value } = e.target;
+    setActivityForm((prev) => ({ ...prev, [name]: value }));
+    setActivityErrors((prev) => ({ ...prev, [name]: '' }));
+    setActivitySubmitError('');
+  }
+
+  function handleActivityClose() {
+    setActivityTicket(null);
+    setActivityForm(emptyActivityForm);
+    setActivityErrors(emptyActivityErrors);
+    setActivitySubmitError('');
+  }
+
+  function validateActivity(fields) {
+    const errs = { ...emptyActivityErrors };
+    if (!fields.actionTaken.trim()) errs.actionTaken = 'Action taken is required.';
+    if (!fields.outcome.trim()) errs.outcome = 'Outcome is required.';
+    if (!fields.recommendation.trim()) errs.recommendation = 'Recommendation is required.';
+    if (!fields.notes.trim()) errs.notes = 'Notes are required.';
+    return errs;
+  }
+
+  async function handleActivitySave() {
+    const errs = validateActivity(activityForm);
+    if (Object.values(errs).some(Boolean)) {
+      setActivityErrors(errs);
+      return;
+    }
+    setActivityLoading(true);
+    setActivitySubmitError('');
+    try {
+      await addSupportTicketAction(activityTicket.id, {
+        actionTaken: activityForm.actionTaken.trim(),
+        outcome: activityForm.outcome.trim(),
+        recommendation: activityForm.recommendation.trim(),
+        notes: activityForm.notes.trim(),
+      });
+      handleActivityClose();
+      setSuccessMessage('Activity has been added to the ticket.');
+      setSuccessOpen(true);
+      fetchTickets();
+    } catch (err) {
+      console.error('Failed to add ticket activity:', err);
+      const status = err?.response?.status;
+      setActivitySubmitError(
+        status === 404
+          ? 'The API does not have an add-activity route yet. Status and admin comments can still be saved from Edit.'
+          : getErrorMessage(err, 'Failed to add activity to this ticket.'),
+      );
+    } finally {
+      setActivityLoading(false);
+    }
+  }
+
   const columns = [
     {
-      name: 'Subject',
-      selector: (row) => row.subject,
-      sortable: true,
+      name: 'Description',
       grow: 2,
+      minWidth: '180px',
+      cell: (row) => (
+        <div className='ticket-description-cell'>
+          <span className='ticket-subject-line'>{row.subject}</span>
+          <span className='ticket-description-line'>{row.description}</span>
+        </div>
+      ),
     },
     {
-      name: 'Issue Type',
-      selector: (row) => row.issueType,
+      name: 'Submitted by',
+      selector: (row) => row.submittedBy,
+      minWidth: '110px',
+      wrap: true,
+    },
+    {
+      name: 'Submitted',
+      selector: (row) => formatDateTime(row.createdAt),
       sortable: true,
+      minWidth: '140px',
+      wrap: true,
     },
     {
       name: 'Status',
       cell: (row) => <StatusBadge value={row.status} />,
       sortable: true,
+      minWidth: '110px',
     },
     {
-      name: 'Priority',
-      cell: (row) => <PriorityBadge value={row.priority} />,
-      sortable: true,
-    },
-    {
-      name: 'Submitted By',
-      selector: (row) => row.submittedBy,
-    },
-    {
-      name: 'Created',
-      selector: (row) => row.createdAt,
-      sortable: true,
-    },
-    {
-      name: 'Actions',
+      name: 'Admin comments',
+      minWidth: '140px',
+      grow: 1,
+      wrap: true,
       cell: (row) => (
-        <button
-          className='btn-deactivate'
-          onClick={() => openEdit(row)}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}
-          type='button'
-        >
-          <Pencil size={13} />
-          Edit
-        </button>
+        <span className='ticket-admin-comment'>
+          {row.adminResponse.trim() ? row.adminResponse : '—'}
+        </span>
+      ),
+    },
+    {
+      name: 'Last updated',
+      selector: (row) => formatDateTime(row.updatedAt),
+      sortable: true,
+      minWidth: '140px',
+      wrap: true,
+    },
+    {
+      name: 'Edit',
+      width: '118px',
+      minWidth: '118px',
+      wrap: false,
+      ignoreRowClick: true,
+      button: true,
+      style: {
+        paddingTop: '10px',
+        paddingBottom: '10px',
+        paddingLeft: '8px',
+        paddingRight: '12px',
+      },
+      cell: (row) => (
+        <div className='ticket-edit-cell'>
+          <button
+            className='btn-deactivate ticket-edit-btn'
+            onClick={(e) => {
+              e.stopPropagation();
+              openEdit(row);
+            }}
+            type='button'
+          >
+            <Pencil size={13} />
+            Edit
+          </button>
+        </div>
       ),
     },
   ];
@@ -457,29 +528,25 @@ export default function SupportTicketPage() {
               options={STATUS_FILTER_OPTIONS}
             />
           </div>
-          <div className='ticket-toolbar-filter'>
-            <Dropdown
-              label='Filter by Priority'
-              name='priorityFilter'
-              value={priorityFilter}
-              onChange={(e) => {
-                setPriorityFilter(e.target.value);
-                setPage(1);
-              }}
-              options={PRIORITY_FILTER_OPTIONS}
-            />
-          </div>
         </div>
       </div>
 
-      <DataTable
-        columns={columns}
-        data={tickets}
-        loading={loading}
-        loadingMessage='Loading support tickets...'
-        totalRows={totalRows}
-        onChangePage={(newPage) => setPage(newPage)}
-      />
+      <div className='ticket-table-wrap'>
+        <DataTable
+          columns={columns}
+          data={tickets}
+          loading={loading}
+          loadingMessage='Loading support tickets...'
+          totalRows={totalRows}
+          onChangePage={(newPage) => setPage(newPage)}
+          expandableRows
+          expandableRowsComponent={(rowProps) => (
+            <TicketActionsExpand {...rowProps} onAddActivity={openAddActivity} />
+          )}
+          expandOnRowClicked
+          expandableRowsHideExpander={false}
+        />
+      </div>
 
       <Modal
         open={createOpen}
@@ -500,26 +567,6 @@ export default function SupportTicketPage() {
           placeholder='Brief summary of the issue'
           error={createErrors.subject}
         />
-        <div className='ticket-modal-row'>
-          <Dropdown
-            label='Issue Type'
-            name='issue_type'
-            value={createForm.issue_type}
-            onChange={handleCreateChange}
-            options={TICKET_ISSUE_TYPE_OPTIONS}
-            placeholder='Select issue type'
-            error={createErrors.issue_type}
-          />
-          <Dropdown
-            label='Priority'
-            name='priority'
-            value={createForm.priority}
-            onChange={handleCreateChange}
-            options={TICKET_PRIORITY_OPTIONS}
-            placeholder='Select priority'
-            error={createErrors.priority}
-          />
-        </div>
         <label className='field'>
           <span className='field-label'>Description</span>
           <textarea
@@ -564,34 +611,14 @@ export default function SupportTicketPage() {
             {editSubmitError}
           </p>
         ) : null}
-        <InputField
-          label='Subject'
-          name='subject'
-          value={editForm.subject}
-          onChange={handleEditChange}
-          placeholder='Brief summary of the issue'
-          error={editErrors.subject}
-        />
-        <div className='ticket-modal-row'>
-          <Dropdown
-            label='Issue Type'
-            name='issue_type'
-            value={editForm.issue_type}
-            onChange={handleEditChange}
-            options={TICKET_ISSUE_TYPE_OPTIONS}
-            placeholder='Select issue type'
-            error={editErrors.issue_type}
-          />
-          <Dropdown
-            label='Priority'
-            name='priority'
-            value={editForm.priority}
-            onChange={handleEditChange}
-            options={TICKET_PRIORITY_OPTIONS}
-            placeholder='Select priority'
-            error={editErrors.priority}
-          />
-        </div>
+        {selectedTicket ? (
+          <div className='ticket-readonly-block'>
+            <p className='ticket-readonly-text'>
+              <strong>{selectedTicket.subject}</strong>
+            </p>
+            <p className='ticket-readonly-text'>{selectedTicket.description}</p>
+          </div>
+        ) : null}
         <Dropdown
           label='Status'
           name='status'
@@ -602,21 +629,7 @@ export default function SupportTicketPage() {
           error={editErrors.status}
         />
         <label className='field'>
-          <span className='field-label'>Description</span>
-          <textarea
-            className={`field-input ticket-description${editErrors.description ? ' field-input--error' : ''}`}
-            name='description'
-            value={editForm.description}
-            onChange={handleEditChange}
-            placeholder='Describe the issue in detail'
-            rows={4}
-          />
-          {editErrors.description ? (
-            <span className='field-error'>{editErrors.description}</span>
-          ) : null}
-        </label>
-        <label className='field'>
-          <span className='field-label'>Admin Response</span>
+          <span className='field-label'>Admin comments</span>
           <textarea
             className='field-input ticket-description'
             name='adminResponse'
@@ -641,6 +654,100 @@ export default function SupportTicketPage() {
             style={{ padding: '12px 18px' }}
           >
             {editLoading ? 'Saving...' : 'Update'}
+          </Button>
+        </div>
+      </Modal>
+
+      <Modal
+        open={activityTicket !== null}
+        onClose={handleActivityClose}
+        title='Add activity'
+        className='ticket-modal'
+      >
+        {activitySubmitError ? (
+          <p className='ticket-error-message' role='alert'>
+            {activitySubmitError}
+          </p>
+        ) : null}
+        {activityTicket ? (
+          <div className='ticket-readonly-block'>
+            <p className='ticket-readonly-text'>
+              <strong>{activityTicket.subject}</strong>
+            </p>
+            <p className='ticket-readonly-text'>{activityTicket.description}</p>
+          </div>
+        ) : null}
+        <label className='field'>
+          <span className='field-label'>Action taken</span>
+          <textarea
+            className={`field-input ticket-description${activityErrors.actionTaken ? ' field-input--error' : ''}`}
+            name='actionTaken'
+            value={activityForm.actionTaken}
+            onChange={handleActivityChange}
+            placeholder='What action did you take?'
+            rows={2}
+          />
+          {activityErrors.actionTaken ? (
+            <span className='field-error'>{activityErrors.actionTaken}</span>
+          ) : null}
+        </label>
+        <label className='field'>
+          <span className='field-label'>Outcome</span>
+          <textarea
+            className={`field-input ticket-description${activityErrors.outcome ? ' field-input--error' : ''}`}
+            name='outcome'
+            value={activityForm.outcome}
+            onChange={handleActivityChange}
+            placeholder='What was the result?'
+            rows={2}
+          />
+          {activityErrors.outcome ? (
+            <span className='field-error'>{activityErrors.outcome}</span>
+          ) : null}
+        </label>
+        <label className='field'>
+          <span className='field-label'>Recommendation</span>
+          <textarea
+            className={`field-input ticket-description${activityErrors.recommendation ? ' field-input--error' : ''}`}
+            name='recommendation'
+            value={activityForm.recommendation}
+            onChange={handleActivityChange}
+            placeholder='What do you recommend next?'
+            rows={2}
+          />
+          {activityErrors.recommendation ? (
+            <span className='field-error'>{activityErrors.recommendation}</span>
+          ) : null}
+        </label>
+        <label className='field'>
+          <span className='field-label'>Notes</span>
+          <textarea
+            className={`field-input ticket-description${activityErrors.notes ? ' field-input--error' : ''}`}
+            name='notes'
+            value={activityForm.notes}
+            onChange={handleActivityChange}
+            placeholder='Any additional notes'
+            rows={2}
+          />
+          {activityErrors.notes ? (
+            <span className='field-error'>{activityErrors.notes}</span>
+          ) : null}
+        </label>
+        <div className='modal-footer'>
+          <button
+            className='btn-secondary'
+            style={{ padding: '12px 18px' }}
+            onClick={handleActivityClose}
+            type='button'
+          >
+            Cancel
+          </button>
+          <Button
+            onClick={handleActivitySave}
+            disabled={activityLoading}
+            style={{ padding: '12px 18px' }}
+          >
+            {activityLoading ? 'Saving...' : 'Add activity'}
           </Button>
         </div>
       </Modal>
