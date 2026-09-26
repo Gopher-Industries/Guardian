@@ -484,14 +484,6 @@ export default function PatientOverviewPage() {
 }
 
 
-/* =====================================================
-   PATIENT INFORMATION COMPONENT
-      </div>
-
-    </div>
-  );
-}
-
 
 /* =====================================================
    MEDICAL SECTION
@@ -811,21 +803,15 @@ function VitalCard({ vital }) {
 
 /* =====================================================
    VITAL VALUE
-
-function VitalValue({
-  label,
-  value,
-}) {
+===================================================== */
+function VitalValue({ label, value }) {
   return (
     <div style={styles.vitalValue}>
-
-      <span style={styles.vitalLabel}>
-        {label}
-      </span>
-
-      <strong style={styles.vitalNumber}>
-        {value}
-      </strong>
+      <span style={styles.vitalLabel}>{label}</span>
+      <strong style={styles.vitalNumber}>{value}</strong>
+    </div>
+  );
+}
 
 function TasksSection({ tasks }) {
   return (
@@ -907,6 +893,7 @@ function TasksSection({ tasks }) {
 
 /* =====================================================
    STYLES
+   ===================================================== */
 
 const styles = {
   page: {
