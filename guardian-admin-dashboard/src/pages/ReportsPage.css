@@ -1,3 +1,7 @@
+/* ==========================================================================
+   Base Layout & Theme Variables
+   ========================================================================== */
+
 .reports-page {
   padding: 40px;
   background: #f5f7fb;
@@ -5,6 +9,10 @@
   color: #374151;
   transition: background 0.25s ease, color 0.25s ease;
 }
+
+/* ==========================================================================
+   Header Section
+   ========================================================================== */
 
 .reports-header {
   display: flex;
@@ -67,6 +75,32 @@
   background: #f3f4f6;
 }
 
+/* ==========================================================================
+   Tabs & Filters
+   ========================================================================== */
+
+.report-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 16px 0 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.report-tab {
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  font-weight: 600;
+  color: #888;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.report-tab.active {
+  color: #2f80ed;
+  border-bottom-color: #2f80ed;
+}
+
 .reports-filters {
   display: flex;
   gap: 12px;
@@ -96,6 +130,10 @@ input.filter-input {
 select.filter-input {
   width: 140px;
 }
+
+/* ==========================================================================
+   Summary Cards
+   ========================================================================== */
 
 .reports-summary {
   display: grid;
@@ -131,6 +169,10 @@ select.filter-input {
   font-size: 14px;
 }
 
+/* ==========================================================================
+   Chart Section
+   ========================================================================== */
+
 .reports-chart {
   background: white;
   border-radius: 18px;
@@ -146,10 +188,21 @@ select.filter-input {
   margin-bottom: 20px;
 }
 
+.chart-note {
+  font-size: 12px;
+  color: var(--text-muted, #888);
+  margin-top: -8px;
+  margin-bottom: 12px;
+}
+
 .chart-container {
   width: 100%;
   height: 320px;
 }
+
+/* ==========================================================================
+   Table Section
+   ========================================================================== */
 
 .reports-table-section {
   background: white;
@@ -239,6 +292,7 @@ select.filter-input {
   font-size: 14px;
 }
 
+/* Badges & Tags */
 .status-badge {
   display: inline-block;
   padding: 6px 10px;
@@ -262,6 +316,35 @@ select.filter-input {
   color: #1e40af;
 }
 
+.status-badge.flagged {
+  background-color: #fdecea;
+  color: #eb5757;
+}
+
+.status-badge.watch {
+  background-color: #fff8e1;
+  color: #b8860b;
+}
+
+.source-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.source-tag.live {
+  background-color: #e6f4ea;
+  color: #1e7e34;
+}
+
+.source-tag.mock {
+  background-color: #f0f0f0;
+  color: #777;
+}
+
 .table-export-btn {
   padding: 7px 12px;
   border: 1px solid #d1d5db;
@@ -277,6 +360,7 @@ select.filter-input {
   background: #f3f4f6;
 }
 
+/* Pagination */
 .table-pagination {
   display: flex;
   justify-content: space-between;
@@ -328,25 +412,9 @@ select.filter-input {
   cursor: not-allowed;
 }
 
-@media (max-width: 768px) {
-  .table-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .table-sort {
-    width: 100%;
-  }
-
-  .table-sort select {
-    flex: 1;
-  }
-
-  .table-pagination {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
 
 @media (max-width: 900px) {
   .reports-page {
@@ -368,6 +436,26 @@ select.filter-input {
 
   .reports-summary {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .table-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .table-sort {
+    width: 100%;
+  }
+
+  .table-sort select {
+    flex: 1;
+  }
+
+  .table-pagination {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
@@ -447,11 +535,6 @@ select.filter-input {
     -webkit-overflow-scrolling: touch;
   }
 
-  .table-pagination {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .pagination-buttons {
     width: 100%;
   }
@@ -461,6 +544,10 @@ select.filter-input {
     min-width: 0;
   }
 }
+
+/* ==========================================================================
+   Dark Theme Overrides
+   ========================================================================== */
 
 body.dark-theme .reports-page {
   background: #111827;
@@ -518,6 +605,16 @@ body.dark-theme .summary-card p {
   color: #9ca3af;
 }
 
+body.dark-theme .reports-chart {
+  background: #1f2937;
+  border-color: #374151;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+body.dark-theme .reports-chart h2 {
+  color: #f3f4f6;
+}
+
 body.dark-theme .reports-table-section {
   background: #1f2937;
   border-color: #374151;
@@ -550,11 +647,6 @@ body.dark-theme .reports-table th {
 
 body.dark-theme .reports-table td {
   color: #e5e7eb;
-  border-bottom-color: #374151;
-}
-
-body.dark-theme .reports-table th,
-body.dark-theme .reports-table td {
   border-bottom-color: #374151;
 }
 
@@ -599,16 +691,7 @@ body.dark-theme .pagination-buttons button:disabled {
   border-color: #374151;
 }
 
-body.dark-theme .reports-chart {
-  background: #1f2937;
-  border-color: #374151;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-}
-
-body.dark-theme .reports-chart h2 {
-  color: #f3f4f6;
-}
-
+/* Dark Theme Recharts Adjustments */
 body.dark-theme .recharts-cartesian-axis-tick-value {
   fill: #d1d5db;
 }

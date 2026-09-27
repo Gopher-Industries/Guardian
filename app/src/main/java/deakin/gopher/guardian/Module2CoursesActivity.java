@@ -10,15 +10,16 @@ public class Module2CoursesActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_module2_courses); // Link to the layout file
+    setContentView(R.layout.activity_module2_courses);
 
-    // Find TextViews for each course
+    TextView btnBack = findViewById(R.id.btnBack);
     TextView medicationTechnique = findViewById(R.id.medicationTechnique);
     TextView medicationSafety = findViewById(R.id.medicationSafety);
 
-    // Set onClickListeners for each course
+    if (btnBack != null) {
+      btnBack.setOnClickListener(v -> finish());
+    }
 
-    // Introduction to Medication Administration Technique
     medicationTechnique.setOnClickListener(
         v -> {
           Intent intent =
@@ -26,10 +27,10 @@ public class Module2CoursesActivity extends AppCompatActivity {
           startActivity(intent);
         });
 
-    // Medication Safety and Special Consideration
     medicationSafety.setOnClickListener(
         v -> {
-          Intent intent = new Intent(Module2CoursesActivity.this, MedicationSafetyActivity.class);
+          Intent intent =
+              new Intent(Module2CoursesActivity.this, MedicationSafetyActivity.class);
           startActivity(intent);
         });
   }

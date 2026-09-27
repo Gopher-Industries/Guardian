@@ -10,16 +10,17 @@ public class Module3CoursesActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_module3_courses); // Link to the layout file
+    setContentView(R.layout.activity_module3_courses);
 
-    // Find TextViews for each course
+    TextView btnBack = findViewById(R.id.btnBack);
     TextView inspiringLeadershipEI = findViewById(R.id.inspiringLeadershipEI);
     TextView emotionalIntelligenceCommunication =
         findViewById(R.id.emotionalIntelligenceCommunication);
 
-    // Set onClickListeners for each course
+    if (btnBack != null) {
+      btnBack.setOnClickListener(v -> finish());
+    }
 
-    // Inspiring Leadership through Emotional Intelligence
     inspiringLeadershipEI.setOnClickListener(
         v -> {
           Intent intent =
@@ -27,7 +28,6 @@ public class Module3CoursesActivity extends AppCompatActivity {
           startActivity(intent);
         });
 
-    // Emotional Intelligence and Communication
     emotionalIntelligenceCommunication.setOnClickListener(
         v -> {
           Intent intent =
