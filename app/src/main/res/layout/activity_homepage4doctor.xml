@@ -44,6 +44,7 @@
 
     <!-- DOCTORS LIST -->
     <Button
+        android:id="@+id/doctorsListButton_doctor"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginStart="52dp"
@@ -56,6 +57,7 @@
 
     <!-- ASSIGN PATIENT -->
     <Button
+        android:id="@+id/assignPatientButton_doctor"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginStart="204dp"
@@ -68,6 +70,7 @@
 
     <!-- MY PATIENTS -->
     <Button
+        android:id="@+id/myPatientsButton_doctor"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginStart="52dp"
@@ -80,6 +83,7 @@
 
     <!-- HEALTH RECORDS -->
     <Button
+        android:id="@+id/healthRecordsButton_doctor"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginStart="204dp"
@@ -98,6 +102,7 @@
         android:layout_marginTop="300dp"
         android:backgroundTint="#156A80"
         android:text="Profile"
+        android:id="@+id/profileButton_doctor"
         android:textColor="#FFFFFF"
         app:layout_constraintTop_toBottomOf="@id/headerCard"
         app:layout_constraintStart_toStartOf="parent"/>

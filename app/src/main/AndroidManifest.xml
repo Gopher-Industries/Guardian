@@ -52,6 +52,9 @@
             android:name=".Training"
             android:exported="false" />
         <activity
+            android:name=".view.general.DoctorProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.patient.patientdata.heartrate.HeartRateActivity"
             android:exported="false"
             android:label="@string/title_activity_heart_rate"
@@ -67,6 +70,12 @@
             android:exported="false" />
         <activity
             android:name=".view.general.Homepage4caretaker"
+            android:exported="false" />
+        <activity
+            android:name=".view.general.DoctorListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.general.MedicalSummaryActivity"
             android:exported="false" />
         <activity
             android:name=".view.general.Homepage4nurse"

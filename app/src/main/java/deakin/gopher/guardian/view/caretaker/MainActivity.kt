@@ -43,9 +43,25 @@ class MainActivity : ComponentActivity() {
                             PatientReportScreen(navController)
                         }
 
+                        composable("doctor_profile") {
+                            DoctorProfileScreen(
+                                onBack = {
+                                    navController.popBackStack()
+                                }
+                            )
+                        }
                         // 6. Medical summary for William S
-                        composable("medical_summary") {
-                            MedicalSummaryScreen(navController, patientName = "William S")
+                        composable(route = "medical_summary") {
+                            MedicalSummaryScreen(
+                                patientId = "",
+                                patientName = "William S",
+                                onAssignNurse = {
+                                    navController.navigate("assign_nurse")
+                                },
+                                onViewActivityLog = {
+                                    navController.navigate("patient_report")
+                                }
+                            )
                         }
 
                         // 7. Assign nurse

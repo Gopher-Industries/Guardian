@@ -149,62 +149,59 @@ class PatientListActivity : BaseActivity() {
     }
 
     private fun fetchPatients() {
-        val token = "Bearer ${SessionManager.getToken()}"
+        val storedToken = SessionManager.getToken()
+
+        val token = if (storedToken.startsWith("Bearer ", ignoreCase = true)) {
+            storedToken
+        } else {
+            "Bearer $storedToken"
+        }
 
         CoroutineScope(Dispatchers.IO).launch {
-            withContext(Dispatchers.Main) {
-                if (patientListAdapter.itemCount <= 0) {
-                    binding.progressBar.show()
-                }
-                binding.tvEmptyMessage.visibility = View.GONE
-                binding.recyclerViewPatients.visibility = View.VISIBLE
-            }
+            try {
+                val response = ApiClient.apiService.getAssignedPatients(token)
 
-            val adminResponse =
-                if (canReassignPatients) {
-                    try {
-                        ApiClient.apiService.getAdminPatients(token)
-                    } catch (exception: Exception) {
-                        null
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        val patients = response.body().orEmpty()
+
+                        if (patients.isNotEmpty()) {
+                            patientListAdapter.updateData(patients)
+                            binding.recyclerViewPatients.visibility = View.VISIBLE
+                            binding.tvEmptyMessage.visibility = View.GONE
+                        } else {
+                            patientListAdapter.updateData(emptyList())
+                            binding.recyclerViewPatients.visibility = View.GONE
+                            binding.tvEmptyMessage.visibility = View.VISIBLE
+                            binding.tvEmptyMessage.text = "No patients found"
+                        }
+
+                    } else {
+                        patientListAdapter.updateData(emptyList())
+                        binding.recyclerViewPatients.visibility = View.GONE
+                        binding.tvEmptyMessage.visibility = View.VISIBLE
+                        binding.tvEmptyMessage.text = "Unable to load patients"
+
+                        Toast.makeText(
+                            this@PatientListActivity,
+                            "Unable to load patients (${response.code()})",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
-                } else {
-                    null
-                }
-            val assignedResponse =
-                if (adminResponse?.isSuccessful == true) {
-                    null
-                } else {
-                    try {
-                        ApiClient.apiService.getAssignedPatients(token)
-                    } catch (exception: Exception) {
-                        null
-                    }
                 }
 
-            withContext(Dispatchers.Main) {
-                binding.progressBar.hide()
-
-                val patients = adminResponse?.body()?.patients ?: assignedResponse?.body()
-
-                if (!patients.isNullOrEmpty()) {
-                    patientListAdapter.updateData(patients)
-                    binding.recyclerViewPatients.visibility = View.VISIBLE
-                    binding.tvEmptyMessage.visibility = View.GONE
-                } else {
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
                     patientListAdapter.updateData(emptyList())
                     binding.recyclerViewPatients.visibility = View.GONE
                     binding.tvEmptyMessage.visibility = View.VISIBLE
-                    binding.tvEmptyMessage.text =
-                        if (patients != null) "No patients found" else "Unable to load patients"
+                    binding.tvEmptyMessage.text = "Network error"
 
-                    if (patients == null) {
-                        val errorResponse =
-                            readError(
-                                adminResponse?.errorBody()?.string()
-                                    ?: assignedResponse?.errorBody()?.string(),
-                            )
-                        showMessage(errorResponse ?: "Failed to load patients")
-                    }
+                    Toast.makeText(
+                        this@PatientListActivity,
+                        "Network error: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }

@@ -1,5 +1,6 @@
 package deakin.gopher.guardian
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,17 +27,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import android.app.Activity
 import androidx.navigation.NavHostController
+import deakin.gopher.guardian.view.general.AssignNurseActivity
+import deakin.gopher.guardian.view.patient.PatientLogsActivity
+
 
 @Composable
 fun MedicalSummaryScreen(
-    navController: NavHostController,
     patientName: String,
+    patientId: String,
+    onAssignNurse: () -> Unit,
+    onViewActivityLog: () -> Unit,
 ) {
+    val context = LocalContext.current
     Column(
         modifier =
             Modifier
@@ -129,7 +138,7 @@ fun MedicalSummaryScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Button(
-                onClick = { navController.navigate("assign_nurse") },
+                onClick = onAssignNurse,
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text("Assign Nurse")
@@ -138,7 +147,7 @@ fun MedicalSummaryScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Button(
-                onClick = { navController.navigate("activity_log") },
+                onClick = onViewActivityLog,
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text("View Activity Log")
@@ -161,8 +170,9 @@ fun MedicalSummaryScreen(
                 modifier =
                     Modifier
                         .size(28.dp)
-                        .clickable { navController.navigate("patient_report") },
-            )
+                        .clickable {
+                            (context as? Activity)?.finish()
+                        }            )
         }
     }
 }
