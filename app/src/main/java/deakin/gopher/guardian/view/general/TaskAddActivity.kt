@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.FirebaseDatabase
@@ -17,7 +16,6 @@ import deakin.gopher.guardian.model.Priority
 import deakin.gopher.guardian.model.Task
 import deakin.gopher.guardian.model.login.Role
 import deakin.gopher.guardian.model.login.SessionManager
-import deakin.gopher.guardian.services.NavigationService
 
 class TaskAddActivity : AppCompatActivity() {
     private lateinit var taskDescriptionEditText: EditText
@@ -47,30 +45,18 @@ class TaskAddActivity : AppCompatActivity() {
         val customHeader: CustomHeader = findViewById(R.id.taskCustomHeader)
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navigationView: NavigationView = findViewById(R.id.nav_view)
-        val navigationService = NavigationService(this)
 
         customHeader.setHeaderHeight(450)
         customHeader.setHeaderText(getString(R.string.add_task))
         customHeader.setHeaderTopImageVisibility(View.VISIBLE)
         customHeader.setHeaderTopImage(R.drawable.add_image_button)
-        navigationView.setItemIconTintList(null)
-        navigationView.menu.findItem(R.id.add_task).isVisible = false
 
-        navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_home -> navigationService.toHomeScreenForRole(SessionManager.getCurrentUser().role)
-                R.id.nav_signout -> {
-                    navigationService.onSignOut()
-                    finish()
-                }
-            }
-            drawerLayout.closeDrawer(GravityCompat.START)
-            true
-        }
-
-        customHeader.menuButton.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
+        DrawerNavigationHelper.bindStandardDrawer(
+            this,
+            drawerLayout,
+            navigationView,
+            customHeader.menuButton,
+        )
     }
 
     private fun showSaveDialog() {

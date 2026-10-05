@@ -15,3 +15,18 @@
 .cxx
 local.properties
 app/google-services.json
+
+
+# Python virtual environment and generated files
+.venv/
+__pycache__/
+*.py[cod]
+
+# Local environment variables
+.env
+.env.*
+!.env.example
+
+# Local emotion-analysis development database
+emotion_history.sqlite3
+emotion_history.sqlite3-*

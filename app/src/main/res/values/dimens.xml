@@ -9,4 +9,22 @@
     <dimen name="text_size_description">16sp</dimen>
     <dimen name="text_size_caption">14sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
+
+    <!-- Login screen -->
+    <dimen name="login_header_height">180dp</dimen>
+    <dimen name="login_welcome_spacing">10dp</dimen>
+
+    <dimen name="login_form_padding_top">8dp</dimen>
+    <dimen name="login_form_padding_bottom">8dp</dimen>
+    <dimen name="login_field_spacing">4dp</dimen>
+
+    <dimen name="login_button_width">190dp</dimen>
+    <dimen name="login_button_height">48dp</dimen>
+    <dimen name="login_button_spacing">4dp</dimen>
+    <dimen name="login_button_text_size">12sp</dimen>
+
+    <dimen name="login_forgot_margin_top">6dp</dimen>
+    <dimen name="login_forgot_margin_bottom">6dp</dimen>
+    <dimen name="login_forgot_text_size">12sp</dimen>
+
 </resources>

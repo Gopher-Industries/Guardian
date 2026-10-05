@@ -1,24 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group>
+    <group android:checkableBehavior="single">
 
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/menu_home"
-            android:title="Home"
-            />
+            android:title="@string/home" />
+
+        <item
+            android:id="@+id/nav_patient_list"
+            android:icon="@drawable/menu_patient_list"
+            android:title="@string/patient_list"
+            android:visible="false" />
+
+        <item
+            android:id="@+id/nav_patient_logs"
+            android:icon="@drawable/ic_patientlogs"
+            android:title="@string/patient_logs"
+            android:visible="false" />
+
+        <item
+            android:id="@+id/nav_add_patient"
+            android:icon="@drawable/menu_new_user"
+            android:title="@string/new_patient"
+            android:visible="false" />
+
+        <item
+            android:id="@+id/nav_daily_report"
+            android:icon="@drawable/menu_daily_report"
+            android:title="@string/daily_report"
+            android:visible="false" />
+
+        <item
+            android:id="@+id/nav_nurse_roster"
+            android:icon="@drawable/nurse_roster"
+            android:title="@string/nurse_roster"
+            android:visible="false" />
+
+        <item
+            android:id="@+id/nav_task_list"
+            android:icon="@drawable/menu_data_entry"
+            android:title="@string/task_list"
+            android:visible="false" />
+
         <item
             android:id="@+id/add_task"
             android:icon="@drawable/menu_data_entry"
-            android:title="Add Task" />
+            android:title="@string/add_task"
+            android:visible="false" />
 
         <item
-            android:id="@+id/nav_signout"
-            android:icon="@drawable/menu_signout"
-            android:title="Sign Out" />
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/menu_my_profile"
+            android:title="@string/profile"
+            android:visible="false" />
+
+        <item
+            android:id="@+id/nav_monitoring"
+            android:icon="@drawable/baseline_camera_indoor_24"
+            android:title="@string/monitor_patient"
+            android:visible="false" />
+
+        <item
+            android:id="@+id/nav_training"
+            android:icon="@drawable/menu_data_entry"
+            android:title="@string/training"
+            android:visible="false" />
+
+        <item
+            android:id="@+id/nav_exercise_portal"
+            android:icon="@drawable/dumbbell"
+            android:title="@string/exercise_portal"
+            android:visible="false" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/menu_settings"
+            android:title="@string/settings"
+            android:visible="false" />
 
     </group>
+
+    <item
+        android:id="@+id/nav_signout"
+        android:icon="@drawable/menu_signout"
+        android:title="@string/sign_out" />
+
 </menu>

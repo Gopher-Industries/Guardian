@@ -9,12 +9,12 @@ import java.time.Period
 import java.time.ZoneId
 
 data class Patient(
-    @SerializedName("_id") val id: String,
-    @SerializedName("fullname") val fullname: String,
+    @SerializedName("_id") val id: String = "",
+    @SerializedName("fullname") val fullname: String = "",
     @SerializedName("photoUrl") val photoUrl: String? = null,
     @SerializedName("dateOfBirth") val dateOfBirth: String? = null,
-    @SerializedName("age") val _age: Int,
-    @SerializedName("gender") val gender: String,
+    @SerializedName("age") val _age: Int = 0,
+    @SerializedName("gender") val gender: String = "",
     @SerializedName("healthConditions") val healthConditions: List<String> = emptyList(),
     @SerializedName("caretaker") val caretaker: User? = null,
     @SerializedName("assignedNurses") val assignedNurses: List<User> = emptyList(),

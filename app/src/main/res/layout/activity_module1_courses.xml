@@ -1,69 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Module1CoursesActivity"
-    android:padding="16dp">
+    android:background="#F4F7FA">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#07539A"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="18dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Back button -->
+        <TextView
+            android:id="@+id/btnBack"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="‹"
+            android:textColor="#FFFFFF"
+            android:textSize="38sp"
+            android:textStyle="bold" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp">
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <!-- Homecare Induction Course -->
             <TextView
-                android:id="@+id/homecareInduction"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/homecare_induction"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_marginBottom="16dp"
-                android:padding="16dp" />
+                android:text="Basic Caregiving Skills"
+                android:textColor="#FFFFFF"
+                android:textSize="21sp"
+                android:textStyle="bold" />
 
-            <!-- Infection Control Course -->
             <TextView
-                android:id="@+id/infectionControl"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/infection_control"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_marginBottom="16dp"
-                android:padding="16dp" />
-
-            <!-- Supporting Mealtimes Course -->
-            <TextView
-                android:id="@+id/supportingMealtimes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/supporting_mealtimes"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_marginBottom="16dp"
-                android:padding="16dp" />
+                android:layout_marginTop="5dp"
+                android:text="Select a training course to continue"
+                android:textColor="#D9EAF7"
+                android:textSize="14sp" />
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Scrollable course section -->
+    <ScrollView
+        android:id="@+id/courseScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        android:overScrollMode="always"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Training 1 -->
+            <TextView
+                android:id="@+id/homecareInduction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:focusable="true"
+                android:minHeight="95dp"
+                android:padding="18dp"
+                android:text="Training 1&#10;Homecare Induction"
+                android:textColor="#1F2937"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <!-- Training 2 -->
+            <TextView
+                android:id="@+id/infectionControl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="#FFFFFF"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:focusable="true"
+                android:minHeight="95dp"
+                android:padding="18dp"
+                android:text="Training 2&#10;Infection Control"
+                android:textColor="#1F2937"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <!-- Training 3 -->
+            <TextView
+                android:id="@+id/supportingMealtimes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="20dp"
+                android:background="#FFFFFF"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:focusable="true"
+                android:minHeight="95dp"
+                android:padding="18dp"
+                android:text="Training 3&#10;Supporting Mealtimes"
+                android:textColor="#1F2937"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

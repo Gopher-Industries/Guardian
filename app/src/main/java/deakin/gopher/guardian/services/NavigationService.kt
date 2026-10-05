@@ -2,19 +2,27 @@ package deakin.gopher.guardian.services
 
 import android.app.Activity
 import android.content.Intent
+import androidx.annotation.OptIn
+import androidx.media3.common.util.UnstableApi
+import deakin.gopher.guardian.PatientExerciseModules
+import deakin.gopher.guardian.TrainingActivity
 import deakin.gopher.guardian.model.login.Role
+import deakin.gopher.guardian.view.caretaker.CaretakerProfileActivity
+import deakin.gopher.guardian.view.falldetection.FallDetectionActivity
 import deakin.gopher.guardian.view.general.Homepage4admin
 import deakin.gopher.guardian.view.general.Homepage4caretaker
 import deakin.gopher.guardian.view.general.Homepage4doctor
 import deakin.gopher.guardian.view.general.Homepage4nurse
 import deakin.gopher.guardian.view.general.LoginActivity
+import deakin.gopher.guardian.view.general.NurseRosterActivity
 import deakin.gopher.guardian.view.general.PatientListActivity
-import deakin.gopher.guardian.view.general.PinCodeActivity
+import deakin.gopher.guardian.view.general.PatientProfileAddActivity
 import deakin.gopher.guardian.view.general.RegisterActivity
 import deakin.gopher.guardian.view.general.Setting
 import deakin.gopher.guardian.view.general.TaskAddActivity
 import deakin.gopher.guardian.view.general.TasksListActivity
 import deakin.gopher.guardian.view.patient.PatientLogsActivity
+import deakin.gopher.guardian.view.patient.dailyreport.DailyReportActivity
 
 class NavigationService(val activity: Activity) {
     fun toHomeScreenForRole(role: Role) {
@@ -74,6 +82,70 @@ class NavigationService(val activity: Activity) {
         )
     }
 
+    fun onLaunchAddPatient() {
+        activity.startActivity(
+            Intent(
+                activity,
+                PatientProfileAddActivity::class.java,
+            ),
+        )
+    }
+
+    fun onLaunchDailyReport() {
+        activity.startActivity(
+            Intent(
+                activity,
+                DailyReportActivity::class.java,
+            ),
+        )
+    }
+
+    fun onLaunchNurseRoster() {
+        activity.startActivity(
+            Intent(
+                activity,
+                NurseRosterActivity::class.java,
+            ),
+        )
+    }
+
+    fun onLaunchCaretakerProfile() {
+        activity.startActivity(
+            Intent(
+                activity,
+                CaretakerProfileActivity::class.java,
+            ),
+        )
+    }
+
+    @OptIn(UnstableApi::class)
+    fun onLaunchMonitoring() {
+        activity.startActivity(
+            Intent(
+                activity,
+                FallDetectionActivity::class.java,
+            ),
+        )
+    }
+
+    fun onLaunchTraining() {
+        activity.startActivity(
+            Intent(
+                activity,
+                TrainingActivity::class.java,
+            ),
+        )
+    }
+
+    fun onLaunchExercisePortal() {
+        activity.startActivity(
+            Intent(
+                activity,
+                PatientExerciseModules::class.java,
+            ),
+        )
+    }
+
     fun onLaunchTasks() {
         activity.startActivity(
             Intent(
@@ -98,14 +170,5 @@ class NavigationService(val activity: Activity) {
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         activity.startActivity(intent)
         activity.finish()
-    }
-
-    fun toPinCodeActivity(role: Role) {
-        val intent = Intent(activity, PinCodeActivity::class.java)
-        intent.putExtra("role", role)
-        activity.startActivity(intent)
-        // We keep LoginActivity in the stack in case user wants to go back from PIN screen?
-        // Actually, usually you'd want to finish() it too if PIN is mandatory.
-        // If we want the back button on PIN screen to go back to Login, we don't finish() here.
     }
 }

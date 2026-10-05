@@ -7,14 +7,11 @@ import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.navigation.NavigationView;
 import deakin.gopher.guardian.R;
-import deakin.gopher.guardian.model.login.Role;
-import deakin.gopher.guardian.model.login.SessionManager;
-import deakin.gopher.guardian.services.NavigationService;
 import deakin.gopher.guardian.util.Util;
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Locale;
@@ -34,32 +31,9 @@ public class DailyReportSummaryActivity extends AppCompatActivity {
     final NavigationView navigationView = findViewById(R.id.nav_view);
     dailyReportSummaryMenuButton = findViewById(R.id.menuButton101);
     final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-    navigationView.setItemIconTintList(null);
-    final NavigationService navigationService = new NavigationService(this);
-    final boolean canAddTasks =
-        SessionManager.INSTANCE.getCurrentUser().getRole() instanceof Role.Caretaker;
-    navigationView.getMenu().findItem(R.id.add_task).setVisible(canAddTasks);
 
-    navigationView.setNavigationItemSelectedListener(
-        menuItem -> {
-          final int id = menuItem.getItemId();
-          if (R.id.nav_home == id) {
-            navigationService.toHomeScreenForRole(
-                SessionManager.INSTANCE.getCurrentUser().getRole());
-          } else if (R.id.add_task == id && canAddTasks) {
-            navigationService.onLaunchTaskCreator();
-          } else if (R.id.nav_signout == id) {
-            navigationService.onSignOut();
-            finish();
-          }
-          drawerLayout.closeDrawer(GravityCompat.START);
-          return true;
-        });
-
-    dailyReportSummaryMenuButton.setOnClickListener(
-        v -> {
-          drawerLayout.openDrawer(GravityCompat.START);
-        });
+    DrawerNavigationHelper.bindStandardDrawer(
+        this, drawerLayout, navigationView, dailyReportSummaryMenuButton);
 
     final TextView currentStatusSummary = findViewById(R.id.currentStatusSummary);
     final TextView progressNotesSummary = findViewById(R.id.progressNotesSummary);

@@ -1,0 +1,172 @@
+.emergency-alert-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(20, 10, 10, 0.72);
+  animation: emergency-backdrop-in 0.15s ease-out;
+}
+
+@keyframes emergency-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.emergency-alert-card {
+  position: relative;
+  width: min(100%, 460px);
+  background: var(--surface);
+  border-radius: 24px;
+  padding: 36px 32px 32px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  border: 3px solid transparent;
+  animation: emergency-card-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes emergency-card-in {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.emergency-alert-dismiss {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.emergency-alert-dismiss:hover {
+  background: var(--surface-soft);
+}
+
+.emergency-alert-icon-ring {
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: emergency-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes emergency-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.emergency-alert-eyebrow {
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.emergency-alert-title {
+  margin: 0 0 14px;
+  font-size: 1.5rem;
+  color: var(--primary-dark);
+}
+
+.emergency-alert-patient {
+  margin: 0 0 8px;
+  color: var(--text);
+  font-size: 0.98rem;
+}
+
+.emergency-alert-message {
+  margin: 0 0 24px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.emergency-alert-acknowledge {
+  border: 0;
+  border-radius: 14px;
+  padding: 14px 28px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+  width: 100%;
+}
+
+/* --- Alert type color themes --- */
+
+.alert-type-fall .emergency-alert-card {
+  border-color: #e4626f;
+}
+.alert-type-fall .emergency-alert-icon-ring {
+  background: rgba(228, 98, 111, 0.14);
+  color: #b03b49;
+}
+.alert-type-fall .emergency-alert-eyebrow {
+  color: #b03b49;
+}
+.alert-type-fall .emergency-alert-acknowledge {
+  background: #e4626f;
+}
+
+.alert-type-vitals .emergency-alert-card {
+  border-color: #d9822b;
+}
+.alert-type-vitals .emergency-alert-icon-ring {
+  background: rgba(232, 163, 23, 0.16);
+  color: #a5670f;
+}
+.alert-type-vitals .emergency-alert-eyebrow {
+  color: #a5670f;
+}
+.alert-type-vitals .emergency-alert-acknowledge {
+  background: #d9822b;
+}
+
+.alert-type-unauthorized .emergency-alert-card {
+  border-color: #7c3aed;
+}
+.alert-type-unauthorized .emergency-alert-icon-ring {
+  background: rgba(124, 58, 237, 0.14);
+  color: #6d28d9;
+}
+.alert-type-unauthorized .emergency-alert-eyebrow {
+  color: #6d28d9;
+}
+.alert-type-unauthorized .emergency-alert-acknowledge {
+  background: #7c3aed;
+}
+
+@media (max-width: 520px) {
+  .emergency-alert-card {
+    padding: 28px 20px 24px;
+  }
+}

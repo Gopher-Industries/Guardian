@@ -38,6 +38,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGreen">#32CD32</color>
     <color name="colorRed">#FF0000</color>
+    <color name="colorOrange">#FF9800</color>
 
     <color name="homepageButtonsEnd">#FF2F83AA</color>
     <color name="homepageButtonsStart">#FF54C5F4</color>

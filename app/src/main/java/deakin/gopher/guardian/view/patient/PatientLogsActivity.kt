@@ -7,8 +7,11 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.navigation.NavigationView
+import deakin.gopher.guardian.R
 import deakin.gopher.guardian.adapter.PatientLogAdapter
 import deakin.gopher.guardian.databinding.ActivityPatientLogsBinding
 import deakin.gopher.guardian.model.Patient
@@ -16,6 +19,7 @@ import deakin.gopher.guardian.model.PatientLog
 import deakin.gopher.guardian.model.login.SessionManager
 import deakin.gopher.guardian.services.api.ApiClient
 import deakin.gopher.guardian.view.general.AddPatientLogActivity
+import deakin.gopher.guardian.view.general.DrawerNavigationHelper
 import kotlinx.coroutines.launch
 
 class PatientLogsActivity : AppCompatActivity() {
@@ -32,8 +36,21 @@ class PatientLogsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.title = "Patient Logs"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title =
+            getString(R.string.patient_logs)
+
+        val drawerLayout: DrawerLayout =
+            findViewById(R.id.drawer_layout)
+
+        val navigationView: NavigationView =
+            findViewById(R.id.nav_view)
+
+        DrawerNavigationHelper.bindStandardDrawer(
+            this,
+            drawerLayout,
+            navigationView,
+            binding.toolbar,
+        )
 
         adapter =
             PatientLogAdapter(emptyList()) { log ->
@@ -120,11 +137,6 @@ class PatientLogsActivity : AppCompatActivity() {
         if (patientId.isNotEmpty()) {
             fetchLogs()
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return true
     }
 
     private fun fetchLogs() {

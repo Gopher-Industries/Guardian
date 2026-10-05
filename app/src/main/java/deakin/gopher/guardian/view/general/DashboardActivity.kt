@@ -16,8 +16,7 @@ class DashboardActivity : AppCompatActivity() {
         val taskSummary: TextView = findViewById(R.id.taskSummary)
         val viewTasksBtn: Button = findViewById(R.id.buttonViewTasks)
 
-        // Dummy data clearly showing task summary
-        taskSummary.text = "Total Tasks: 5\nPending: 2 | In Progress: 2 | Completed: 1"
+        taskSummary.text = "Task summary is available from the Tasks screen."
 
         // Button click clearly navigates to existing TasksListActivity
         viewTasksBtn.setOnClickListener {

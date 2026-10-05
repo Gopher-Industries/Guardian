@@ -16,12 +16,34 @@ export async function getSupportTickets({
   return response.data;
 }
 
-export async function createSupportTicket(payload) {
-  const response = await api.post('/admin/support-ticket', payload);
+export async function createSupportTicket({
+  subject,
+  description,
+  issue_type,
+  priority,
+}) {
+  const response = await api.post('/admin/support-tickets', {
+    subject,
+    description,
+    issue_type,
+    priority,
+  });
   return response.data;
 }
 
-export async function updateSupportTicket(ticketId, payload) {
-  const response = await api.put(`/admin/support-ticket/${ticketId}`, payload);
+export async function updateSupportTicket(
+  ticketId,
+  { subject, description, issue_type, priority, status, adminResponse },
+) {
+  const payload = {
+    subject,
+    description,
+    issue_type,
+    priority,
+    status,
+    adminResponse,
+  };
+
+  const response = await api.put(`/admin/support-tickets/${ticketId}`, payload);
   return response.data;
 }

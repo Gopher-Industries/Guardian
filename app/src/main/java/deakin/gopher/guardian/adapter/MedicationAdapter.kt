@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import deakin.gopher.guardian.R
 import deakin.gopher.guardian.model.Medication
 
-class MedicationAdapter(private val medications: List<Medication>) : RecyclerView.Adapter<MedicationAdapter.MedicationViewHolder>() {
+class MedicationAdapter(private var medications: List<Medication>) : RecyclerView.Adapter<MedicationAdapter.MedicationViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -26,6 +26,11 @@ class MedicationAdapter(private val medications: List<Medication>) : RecyclerVie
     }
 
     override fun getItemCount(): Int = medications.size
+
+    fun updateData(newMedications: List<Medication>) {
+        medications = newMedications
+        notifyDataSetChanged()
+    }
 
     inner class MedicationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val medicationNameTextView: TextView = itemView.findViewById(R.id.medicineNameTextView)

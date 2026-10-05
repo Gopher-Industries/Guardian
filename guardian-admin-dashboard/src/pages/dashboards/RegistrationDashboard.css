@@ -1,0 +1,291 @@
+.registration-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.registration-header,
+.registration-section,
+.registration-card {
+  background: #ffffff;
+  border: 1px solid #dce7ef;
+  border-radius: 22px;
+  padding: 24px;
+}
+
+.registration-header h1 {
+  margin: 6px 0 8px;
+}
+
+.registration-header p {
+  margin: 0;
+}
+
+.registration-section h2,
+.registration-card h2 {
+  margin: 0;
+}
+
+.quick-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.quick-tool {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 17px;
+  background: #f8fbfd;
+  border: 1px solid #dce7ef;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.registration-main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+  gap: 20px;
+}
+
+.registration-left-column,
+.registration-right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.registration-card-header,
+.registration-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.registration-card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.primary-registration-button,
+.secondary-registration-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary-registration-button {
+  background: #43a2cf;
+  color: white;
+}
+
+.secondary-registration-button {
+  background: #eef6fa;
+  color: #173f73;
+}
+
+.visitor-table-wrapper {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.visitor-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.visitor-table th,
+.visitor-table td {
+  padding: 13px;
+  text-align: left;
+  border-bottom: 1px solid #e5edf3;
+}
+
+.visitor-table th {
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.visitor-status {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.visitor-status.signed-in {
+  background: #e5f7ed;
+}
+
+.visitor-status.pending {
+  background: #fff4d8;
+}
+
+.visitor-status.signed-out {
+  background: #edf0f3;
+}
+
+.visitor-action {
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.registration-notes-list {
+  padding-left: 20px;
+  margin: 18px 0 0;
+}
+
+.registration-notes-list li {
+  margin-bottom: 12px;
+}
+
+.contact-list,
+.doctor-shift-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-list div,
+.doctor-shift-list div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 12px;
+  background: #f8fbfd;
+  border-radius: 10px;
+}
+
+.doctor-shift-list small {
+  width: 100%;
+}
+
+.doctor-busy {
+  color: #c84b4b;
+}
+
+.doctor-available {
+  color: #238c58;
+}
+
+.doctor-off {
+  color: #737d88;
+}
+
+.visitor-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.visitor-summary div {
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  background: #f8fbfd;
+  border-radius: 12px;
+}
+
+.visitor-summary strong {
+  font-size: 28px;
+}
+
+.registration-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 40, 60, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.registration-modal {
+  width: min(520px, 100%);
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+}
+
+.modal-close-button {
+  border: none;
+  background: #f2f6f8;
+  border-radius: 9px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.registration-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.registration-modal-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-weight: 600;
+}
+
+.registration-modal-form input,
+.registration-modal-form select,
+.registration-modal-form textarea {
+  border: 1px solid #cfdae2;
+  border-radius: 10px;
+  padding: 12px;
+  font: inherit;
+}
+
+.registration-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-cancel-button {
+  padding: 11px 16px;
+  border: 1px solid #d5e0e7;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+  .registration-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .quick-tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .registration-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

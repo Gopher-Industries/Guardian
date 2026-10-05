@@ -22,6 +22,17 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/exercise_portal_menu_button"
+                android:layout_width="33dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="56dp"
+                android:contentDescription="@string/open_navigation_menu"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/menu_button" />
+
+            <ImageView
                 android:id="@+id/gopherLogoImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -377,21 +388,6 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </GridLayout>
-
-            <Button
-                android:id="@+id/backButton"
-                android:layout_width="120dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:backgroundTint="@color/TG_blue"
-                android:fontFamily="@font/poppins_bold"
-                android:text="@string/back"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:cornerRadius="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

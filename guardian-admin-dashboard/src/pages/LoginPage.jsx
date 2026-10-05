@@ -56,6 +56,7 @@ export default function LoginPage() {
         </motion.div>
 
         <LoginForm />
+        
       </div>
     </section>
   );
