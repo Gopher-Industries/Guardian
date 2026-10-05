@@ -11,6 +11,7 @@ import LocationPage from "./pages/LocationPage";
 import OrgAssignmentPage from "./pages/OrgAssignmentPage";
 import PatientsPage from "./pages/PatientsPage";
 import NurseRosterPage from "./pages/NurseRosterPage";
+import ReceptionistPage from "./pages/ReceptionistPage";
 import SupportTicketPage from "./pages/SupportTicketPage";
 import TaskManagementPage from "./pages/TaskManagementPage";
 import LogsManagementPage from "./pages/LogsManagementPage";

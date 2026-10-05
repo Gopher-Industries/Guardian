@@ -1,0 +1,334 @@
+.receptionist-page {
+  display: grid;
+  gap: 22px;
+}
+
+.receptionist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.receptionist-eyebrow {
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.receptionist-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--primary-dark);
+}
+
+.receptionist-subtitle {
+  margin: 10px 0 0;
+  color: var(--text-muted);
+  max-width: 720px;
+}
+
+.receptionist-privacy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  background: rgba(232, 163, 23, 0.14);
+  color: #a57514;
+  border: 1px solid rgba(232, 163, 23, 0.3);
+}
+
+.receptionist-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.receptionist-summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.receptionist-summary-card strong {
+  display: block;
+  font-size: 1.4rem;
+  color: var(--primary-dark);
+}
+
+.receptionist-summary-card span {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+.receptionist-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.receptionist-search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 340px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+
+.receptionist-search-box input {
+  border: 0;
+  outline: none;
+  width: 100%;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+}
+
+.receptionist-filter-group {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.receptionist-filter-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+.receptionist-filter-select select {
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  color: var(--primary-dark);
+  cursor: pointer;
+}
+
+.receptionist-refresh-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 14px;
+  background: var(--surface);
+  color: var(--primary-dark);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.receptionist-refresh-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.receptionist-refresh-button .spin {
+  animation: receptionist-spin 0.8s linear infinite;
+}
+
+@keyframes receptionist-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.receptionist-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.receptionist-card-header {
+  padding: 22px 22px 10px;
+}
+
+.receptionist-card-header h3 {
+  margin: 0;
+  color: var(--primary-dark);
+}
+
+.receptionist-card-header p {
+  margin: 6px 0 0;
+  color: var(--text-muted);
+}
+
+.receptionist-table-wrap {
+  overflow-x: auto;
+}
+
+.receptionist-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.receptionist-table th,
+.receptionist-table td {
+  padding: 16px 18px;
+  text-align: left;
+  border-top: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.receptionist-table th {
+  font-size: 0.9rem;
+  color: var(--primary-dark);
+  background: var(--surface-soft);
+  white-space: nowrap;
+}
+
+.receptionist-table td {
+  color: var(--text);
+  font-size: 0.94rem;
+}
+
+.receptionist-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.receptionist-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--surface-accent), var(--surface-accent-2));
+  color: var(--primary-dark);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.receptionist-name-cell strong {
+  display: block;
+  color: var(--primary-dark);
+}
+
+.receptionist-name-cell span {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.receptionist-datetime-cell {
+  display: grid;
+  gap: 4px;
+}
+
+.receptionist-datetime-cell span {
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.receptionist-datetime-cell span:last-child {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.receptionist-room-cell,
+.receptionist-contact-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.receptionist-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.receptionist-status.scheduled {
+  background: rgba(79, 160, 200, 0.14);
+  color: #2f7ca2;
+}
+
+.receptionist-status.checked-in {
+  background: rgba(23, 166, 115, 0.14);
+  color: #158b61;
+}
+
+.receptionist-status.completed {
+  background: rgba(120, 120, 120, 0.14);
+  color: #5b5b5b;
+}
+
+.receptionist-status.cancelled {
+  background: rgba(220, 53, 69, 0.14);
+  color: #c0293a;
+}
+
+.receptionist-empty-state {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 28px !important;
+}
+
+@media (max-width: 1100px) {
+  .receptionist-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .receptionist-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .receptionist-search-box {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .receptionist-filter-group {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 720px) {
+  .receptionist-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .receptionist-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,13 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import {
-  getAllPatients,
-  getPatientOverview,
-} from "../services/patientService";
+import { useSearchParams } from "react-router-dom";
+import { getAllPatients, getPatientOverview } from "../services/patientService";
 
 export default function PatientOverviewPage() {
+  const [searchParams] = useSearchParams();
   const [patients, setPatients] = useState([]);
   const [selectedPatientId, setSelectedPatientId] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(searchParams.get("q") || "");
   const [overview, setOverview] = useState(null);
   const [loadingPatients, setLoadingPatients] = useState(true);
   const [loadingOverview, setLoadingOverview] = useState(false);

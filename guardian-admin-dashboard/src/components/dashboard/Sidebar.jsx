@@ -11,6 +11,7 @@ import {
   ListTodo,
   X,
   Stethoscope,
+  CalendarCheck,
   UserCheck,
   Mail,
 BrainCircuit,
@@ -34,6 +35,7 @@ const iconMap = {
   settings: Settings,
   "pending-approvals": UserCheck,
   "nurse-roster": ClipboardList,
+  receptionist: CalendarCheck,
   "emotion-recognition": BrainCircuit,
 };
 
@@ -48,7 +50,7 @@ export default function Sidebar({
 
   const role = getAdminUser()?.role;
   const visibleItems = ADMIN_NAV_ITEMS.filter((item) =>
-    item.roles.includes(role),
+    item.roles?.includes(role),
   );
 
   const handleLogout = () => {
