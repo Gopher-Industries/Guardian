@@ -2,7 +2,14 @@ import { useEffect } from 'react';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Modal({ open, onClose, title, children, className = '' }) {
+export default function Modal({
+  open,
+  onClose,
+  title,
+  children,
+  footer,
+  className = ''
+}) {
   useEffect(() => {
     if (!open) return undefined;
 
@@ -45,7 +52,16 @@ export default function Modal({ open, onClose, title, children, className = '' }
                   <X size={18} />
                 </button>
               </div>
-              <div className="modal-body">{children}</div>
+
+              <div className="modal-body">
+                {children}
+              </div>
+
+              {footer && (
+                <div className="modal-footer">
+                  {footer}
+                </div>
+              )}
             </motion.div>
           </div>
         </>
