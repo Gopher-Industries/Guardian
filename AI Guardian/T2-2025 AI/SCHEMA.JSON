@@ -1,0 +1,69 @@
+{
+  "patientId": "string",             // [MANDATORY] Unique patient identifier
+  "age": "integer",                  // [MANDATORY] Patient age in years
+  "gender": "string",                // [MANDATORY] Patient gender (e.g., "Female")
+
+  "observationStart": "string",     // [MANDATORY] ISO 8601 UTC timestamp start
+  "observationEnd": "string",       // [MANDATORY] ISO 8601 UTC timestamp end
+
+  "nursingNote": "string",           // [MANDATORY] Free-text nursing note
+
+  "medications": [                   // [MANDATORY] Array of meds during observation
+    {
+      "name": "string",             // Medication name
+      "dose": "string",             // Dose with units, e.g. "75mg"
+      "scheduledTime": "string",    // ISO timestamp med was scheduled
+      "complianceStatus": "string"  // "Taken", "Missed", "Delayed"
+    }
+  ],
+
+  "vitals": {                       // [MANDATORY] Vital signs snapshot
+    "heartRate": { "value": "integer", "unit": "string" },
+    "spo2": { "value": "integer", "unit": "string" },
+    "temperature": { "value": "number", "unit": "string" },
+    "bloodPressure": {
+      "systolic": "integer",
+      "diastolic": "integer",
+      "unit": "string"
+    }
+  },
+
+  "adls": {                        // [MANDATORY] Reduced ADLs: 6 key metrics
+    "stepsTaken": "integer",
+    "calorieIntake": "integer",
+    "sleepHours": "number",
+    "waterIntakeMl": "integer",
+    "mealsSkipped": "integer",
+    "exerciseMinutes": "integer"
+  },
+
+  "behaviourTags": [ "string" ],  // [OPTIONAL] Behaviour labels, e.g. ["refusedActivity"]
+
+  "emotionAnalysis": {             // [OPTIONAL] Emotion detection results
+    "tags": [ "string" ],          // Emotion labels
+    "confidenceScores": {          // Map tag → confidence score (0-1)
+      "frustrated": "number"
+    }
+  },
+
+  "clinicalSummary": "string",    // [MANDATORY] Brief clinical summary text
+
+  "entitiesExtracted": {          // [OPTIONAL] NLP-extracted entities
+    "symptoms": [ "string" ],
+    "vitals": [ "string" ],
+    "procedures": [ "string" ],
+    "medications": [ "string" ]
+  },
+
+  "baselineStats": {              // [OPTIONAL] Historical averages, can be null
+    "avgHeartRate": "number|null",
+    "avgSpo2": "number|null",
+    "avgSleepHours": "number|null",
+    "avgCalorieIntake": "number|null",
+    "avgScreenTimeMinutes": "number|null",
+    "avgBathroomVisits": "number|null",
+    "usualDietCompliance": "number|null"
+  },
+
+  "alerts": [ ]                  // [OPTIONAL] Array of alert codes or empty
+}

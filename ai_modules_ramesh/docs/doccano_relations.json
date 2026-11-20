@@ -1,8 +1,0 @@
-[
-    { "text": "HAS_DOSAGE",   "suffix_key": "", "background_color": "#4CAF50", "text_color": "#FFFFFF" },
-    { "text": "HAS_ROUTE",    "suffix_key": "", "background_color": "#2196F3", "text_color": "#FFFFFF" },
-    { "text": "HAS_FREQUENCY","suffix_key": "", "background_color": "#FF9800", "text_color": "#000000" },
-    { "text": "HAS_VALUE",    "suffix_key": "", "background_color": "#9C27B0", "text_color": "#FFFFFF" },
-    { "text": "HAS_STATUS",   "suffix_key": "", "background_color": "#795548", "text_color": "#FFFFFF" }
-  ]
-  
